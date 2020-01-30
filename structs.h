@@ -5,6 +5,7 @@
 #elif defined(__unix)
     #define PAUSE system("pause");
     #define CLEAR system("clear");
+#endif
 
 /**
  * 

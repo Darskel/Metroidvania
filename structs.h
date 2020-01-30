@@ -1,3 +1,11 @@
+#include <stdio.h>
+#if defined(_WIN32)
+    #define PAUSE system("PAUSE");
+    #define CLEAR system("CLS");
+#elif defined(__unix)
+    #define PAUSE system("pause");
+    #define CLEAR system("clear");
+
 /**
  * 
 */

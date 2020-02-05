@@ -27,4 +27,4 @@ clean:
 	$(if $(OS) == Windows_NT, del /s *.o, rm -rf *.o)
 
 mrproper: clean
-	$(if $(OS) == Windows_NT, del /s *.exe)
+	$(if $(OS) == Windows_NT, del /s *.exe, find . -type f -executable -delete)

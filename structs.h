@@ -10,6 +10,9 @@
     #define CLEAR
 #endif
 
+typedef struct {
+    int x,y;
+} position_t;
 
 /**
  * 
@@ -63,7 +66,7 @@ typedef struct type_monstre_s{
     int pv_base;
     int vit_dep;
 
-    int spriteActuel; /**< Indice du sprite à afficher */
+    char* sprites; /**< Chemin d'accès aux sprites qui seront utilisés*/
 
     int largeur;
     int haunteur;
@@ -74,6 +77,7 @@ typedef struct type_monstre_s{
 typedef struct monstre_s{
     type_monstre_t * type;
     int pv;
+    int spritesActuel; /**< Indice du sprite à afficher */
     position_t pos;
     fraction_t delta; /**< Différence de position à ajouter à la position entière (valeur comprise -1 et 1) */
 
@@ -85,3 +89,11 @@ typedef struct bloc_s{
     position_t pos;
 
 } bloc_t;
+
+typedef struct porte_s{
+    position_t pos;
+    char* salleSuivante;
+    position_t pos_arrivee;
+    char* listeSprites;
+    int spritesActuel;
+} porte_t;

@@ -3,11 +3,9 @@
 #include "structs.h"
 
 int nettoyerSalle(salle_t** salle){
-    for(int i = 0; i < (*salle)->hauteur; i++){
-        for(int j = 0; j < (*salle)->largeur; j++)
-            free((*salle)->mat[i][j]);
+    for(int i = 0; i < (*salle)->hauteur; i++)
         free((*salle)->mat[i]);
-    }
+    
     free((*salle)->mat);
     free((*salle)->nomFichier);
     free(*salle);
@@ -16,6 +14,11 @@ int nettoyerSalle(salle_t** salle){
 }
 
 int lireSalle(char* nomFichier, salle_t* salle){
+    FILE * monDoc = NULL;
+    char mot[50];
+    int lon, larg, val;
+    int cx1, cx2, cy1, cy2;
+
     if(salle)
         nettoyerSalle(&salle);
     
@@ -24,6 +27,28 @@ int lireSalle(char* nomFichier, salle_t* salle){
     strcpy(salle->nomFichier, nomFichier);
 
     //creation des variables dans le tas
-    //lecture fichier et ajustement des variables
+    monDoc = fopen(nomFichier, "r");
+
+    //taille matrice
+    fscanf(monDoc, "%d %d", &lon, &larg);
+
+    //Création matrice
+    salle->mat = malloc(sizeof(int*) * lon);
+    for(int i = 0; i < lon; i++)
+        salle->mat[i] = malloc(sizeof(int) * larg);
+
+    //Remplissage matrice
+    for(int i = 0; i < lon*larg; i++){
+        fscanf(monDoc, "%d", &val);
+        salle->mat[i/larg][i%larg] = val;
+    }
+
+    //Création et remplissage des portes
+    /*fscanf(monDoc, "%s %d %d %d %d", mot, &cx1, &cy1, &cx2, &cy2);
+    while(!feof(monDoc)){
+
+        fscanf(monDoc, "%s %d %d %d %d", mot, &cx1, &cy1, &cx2, &cy2);
+    }*/
     //fermeture fichier
+    fclose(monDoc);
 }

@@ -2,7 +2,7 @@
 #include "structs.h"
 
 typedef struct elemListe{
-    porte_t porte;
+    porte_t *porte;
     struct elemListe *pred, *succ;
 } elemListe;
 

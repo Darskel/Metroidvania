@@ -5,6 +5,9 @@
 #elif defined(__unix)
     #define PAUSE system("read -rsp $'Press any key to continue...\n' -n 1");
     #define CLEAR system("clear");
+#else
+    #define PAUSE
+    #define CLEAR
 #endif
 
 

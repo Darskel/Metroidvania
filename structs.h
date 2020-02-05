@@ -14,6 +14,11 @@ typedef struct {
     int x,y;
 } position_t;
 
+typedef enum {
+    FALSE,
+    TRUE
+} boolean_t;
+
 /**
  * 
 */
@@ -70,6 +75,9 @@ typedef struct type_monstre_s{
 
     int largeur;
     int haunteur;
+
+    boolean_t passeEntites;
+    boolean_t passeBlocs;
 
     //comportement (pointeur sur fonction)
 } type_monstre_t;

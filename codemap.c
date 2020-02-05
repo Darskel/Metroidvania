@@ -6,7 +6,7 @@
     #define PAUSE system("PAUSE");
     #define CLEAR system("CLS");
 #elif defined(__unix)
-    #define PAUSE system("read -rsp $'Press any key to continue...\n' -n 1");
+    #define PAUSE system("read -rp $'Press any key to continue...\n' -n 1");
     #define CLEAR system("clear");
 #endif
 
@@ -34,7 +34,7 @@ char * changerExt(char * nomDoc){
 
     for(i = strlen(nomDoc); i >= 0 && nomDoc[i] != '.'; i--);
 
-    nom = malloc(sizeof (*nom) * (i + 1 + strlen(EXT)));
+    nom = malloc(sizeof (char) * (i + 1 + strlen(EXT)));
     for(int j = 0; j <= i; j++)
         nom[j] = nomDoc[j];
 

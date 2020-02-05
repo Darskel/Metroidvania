@@ -12,6 +12,8 @@ else
 	endif
 endif
 
+all: map
+
 map: codemap decodemap
 
 codemap: codemap.c

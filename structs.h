@@ -3,7 +3,7 @@
     #define PAUSE system("PAUSE");
     #define CLEAR system("CLS");
 #elif defined(__unix)
-    #define PAUSE system("read -rsp $'Press any key to continue...\n' -n 1");
+    #define PAUSE system("read -rsp $'Press any key to continue...\n' -n 1"); //Peut ne pas fonctionner parfois (PC de l'université par exemple)
     #define CLEAR system("clear");
 #else
     #define PAUSE
@@ -57,19 +57,33 @@ typedef struct salle_s{
     //liste des portes
 } salle_t;
 
-typedef struct fraction_s{ //pourra peut être servir
+typedef struct fraction_s{
     int numerateur;
     int denominateur;
 }fraction_t;
 
+typedef struct fracPos_s{
+    fraction_t delta_x; /**< Différence de position sur l'axe x à ajouter à la position entière (valeur comprise -1 et 1) */
+    fraction_t delta_y; /**< Différence de position sur l'axe y à ajouter à la position entière (valeur comprise -1 et 1) */
+} fracPos_t;
+
 typedef struct personnage_s{
     int pv;
+    int vit_dep;
+    int vit_att;
+    position_t pos;
+    fracPos_t delta; /**< Différence de position à ajouter à la position entière */
+    int spriteActuel; /**< Indice du sprite à afficher */
+
+    char forme; /**< Forme du personnage H = humain, F = renard */
+    //hitbox en dur possible
 
 } personnage_t;
 
 typedef struct type_monstre_s{
     int pv_base;
     int vit_dep;
+    int vit_att;
 
     char* sprites; /**< Chemin d'accès aux sprites qui seront utilisés*/
 
@@ -87,7 +101,7 @@ typedef struct monstre_s{
     int pv;
     int spritesActuel; /**< Indice du sprite à afficher */
     position_t pos;
-    fraction_t delta; /**< Différence de position à ajouter à la position entière (valeur comprise -1 et 1) */
+    fracPos_t delta; /**< Différence de position à ajouter à la position entière */
 
 } monstre_t;
 

@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "structs.h"
 
 typedef struct elemListe{
@@ -10,16 +9,16 @@ typedef struct liste{
     elemListe *drapeau, *ec;
 } liste;
 
-void initListe(liste *maListe);
+liste* creerListe();
 int listeVide(liste *maListe);
 int horsListe(liste *maListe);
 void enTete(liste *maListe);
 void enQueue(liste *maListe);
 void suivant(liste *maListe);
 void precedent(liste *maListe);
-void valeurElm(liste *maListe, porte_t* v);
-void modifElm(liste *maListe, porte_t v);
+void valeurElm(liste *maListe, porte_t *v);
+void modifElm(liste *maListe, porte_t *v);
 void oterElm(liste *maListe);
-void ajoutDroit(liste *maListe, porte_t v);
-void ajoutGauche(liste *maListe, porte_t v);
-void supListe(liste *maListe);
+void ajoutDroit(liste *maListe, porte_t *v);
+void ajoutGauche(liste *maListe, porte_t *v);
+void supListe(liste **maListe);

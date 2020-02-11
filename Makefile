@@ -16,6 +16,9 @@ all: map
 
 map: codemap decodemap
 
+testListe: liste.o testListe.o
+	${CC} $^ -o $@ ${CFLAGS}
+
 codemap: codemap.c
 	${CC} $^ -o $@ ${CFLAGS}
 

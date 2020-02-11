@@ -1,8 +1,15 @@
+#include <stdlib.h>
 #include "liste.h"
 
-void initListe(liste *maListe){
+static void initListe(liste *maListe){
     maListe->drapeau = malloc(sizeof (*(maListe->drapeau)));
     maListe->ec = maListe->drapeau->pred = maListe->drapeau->succ = maListe->drapeau;
+}
+
+liste* creerListe(){
+    liste* maListe = malloc(sizeof(*maListe));
+    initListe(maListe);
+    return maListe;
 }
 
 int listeVide(liste *maListe){
@@ -33,14 +40,14 @@ void precedent(liste *maListe){
         maListe->ec = maListe->ec->pred;
 }
 
-void valeurElm(liste *maListe, porte_t* v){
+void valeurElm(liste *maListe, porte_t *v){
     if(!horsListe(maListe))
         *v = *(maListe->ec->porte);
 }
 
-void modifElm(liste *maListe, porte_t v){
+void modifElm(liste *maListe, porte_t *v){
     if(!horsListe(maListe))
-        *(maListe->ec->porte) = v;
+        *(maListe->ec->porte) = *v;
 }
 
 void oterElm(liste *maListe){
@@ -52,10 +59,10 @@ void oterElm(liste *maListe){
     }
 }
 
-void ajoutDroit(liste *maListe, porte_t v){
+void ajoutDroit(liste *maListe, porte_t *v){
     if(listeVide(maListe) || !horsListe(maListe)){
         elemListe *nouv = malloc(sizeof (*nouv));
-        *(nouv->porte) = v;
+        nouv->porte = v;
         nouv->succ = maListe->ec->succ;
         maListe->ec->succ = nouv;
         nouv->pred = maListe->ec;
@@ -64,10 +71,10 @@ void ajoutDroit(liste *maListe, porte_t v){
     }
 }
 
-void ajoutGauche(liste *maListe, porte_t v){
+void ajoutGauche(liste *maListe, porte_t *v){
     if(listeVide(maListe) || !horsListe(maListe)){
         elemListe *nouv = malloc(sizeof (*nouv));
-        *(nouv->porte) = v;
+        nouv->porte = v;
         nouv->pred = maListe->ec->pred;
         maListe->ec->pred = nouv;
         nouv->succ = maListe->ec;
@@ -76,11 +83,11 @@ void ajoutGauche(liste *maListe, porte_t v){
     }
 }
 
-void supListe(liste *maListe){
-    enQueue(maListe);
-    while(!listeVide(maListe))
-        oterElm(maListe);
-    free(maListe->drapeau);
-    free(maListe);
-    maListe = NULL;
+void supListe(liste **maListe){
+    enQueue(*maListe);
+    while(!listeVide(*maListe))
+        oterElm(*maListe);
+    free((*maListe)->drapeau);
+    free(*maListe);
+    (*maListe) = NULL;
 }

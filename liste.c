@@ -54,6 +54,7 @@ void oterElm(liste *maListe){
     if(!horsListe(maListe)){
         maListe->ec->pred->succ = maListe->ec->succ;
         elemListe *tmp = maListe->ec->succ->pred = maListe->ec->pred;
+        free(maListe->ec->porte);
         free(maListe->ec);
         maListe->ec = tmp;
     }

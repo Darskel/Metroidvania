@@ -20,7 +20,7 @@ else
 	endif
 endif
 
-all: map
+all: map testListe testsdl
 
 map: codemap decodemap
 

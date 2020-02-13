@@ -1,0 +1,69 @@
+\hypertarget{source_8c}{}\doxysection{Référence du fichier source.\+c}
+\label{source_8c}\index{source.c@{source.c}}
+
+
+Fonctions de lecture d\textquotesingle{}une salle.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}structs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}liste.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{source_8c_ad5237d1625ec6ab16ef2c4f0690bbfb8}{nettoyer\+Salle}} (\mbox{\hyperlink{structsalle__s}{salle\+\_\+t}} $\ast$$\ast$salle)
+\begin{DoxyCompactList}\small\item\em Nettoie et supprime la structure salle donnée. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{source_8c_aefc148eb203f3f1e27c3dd7a8f5a2333}{lire\+Salle}} (char $\ast$nom\+Fichier, \mbox{\hyperlink{structsalle__s}{salle\+\_\+t}} $\ast$salle)
+\begin{DoxyCompactList}\small\item\em Modifie la structure salle pour la nouvelle salle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fonctions de lecture d\textquotesingle{}une salle. 
+
+\begin{DoxyAuthor}{Auteur}
+Thomas D\+I\+D\+I\+ER L2 Info Le Mans 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+13/02/2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{source_8c_aefc148eb203f3f1e27c3dd7a8f5a2333}\label{source_8c_aefc148eb203f3f1e27c3dd7a8f5a2333}} 
+\index{source.c@{source.c}!lireSalle@{lireSalle}}
+\index{lireSalle@{lireSalle}!source.c@{source.c}}
+\doxysubsubsection{\texorpdfstring{lireSalle()}{lireSalle()}}
+{\footnotesize\ttfamily int lire\+Salle (\begin{DoxyParamCaption}\item[{char $\ast$}]{nom\+Fichier,  }\item[{\mbox{\hyperlink{structsalle__s}{salle\+\_\+t}} $\ast$}]{salle }\end{DoxyParamCaption})}
+
+
+
+Modifie la structure salle pour la nouvelle salle. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em nom\+Fichier} & nom du fichier de la salle à lire \\
+\hline
+{\em salle} & structure salle du programme \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{source_8c_ad5237d1625ec6ab16ef2c4f0690bbfb8}\label{source_8c_ad5237d1625ec6ab16ef2c4f0690bbfb8}} 
+\index{source.c@{source.c}!nettoyerSalle@{nettoyerSalle}}
+\index{nettoyerSalle@{nettoyerSalle}!source.c@{source.c}}
+\doxysubsubsection{\texorpdfstring{nettoyerSalle()}{nettoyerSalle()}}
+{\footnotesize\ttfamily int nettoyer\+Salle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structsalle__s}{salle\+\_\+t}} $\ast$$\ast$}]{salle }\end{DoxyParamCaption})}
+
+
+
+Nettoie et supprime la structure salle donnée. 
+
+libère toute la mémoire utiliser et prépare le pointeur à être de nouveau utilisé
+
+
+\begin{DoxyParams}{Paramètres}
+{\em salle} & structure salle à traiter \\
+\hline
+\end{DoxyParams}

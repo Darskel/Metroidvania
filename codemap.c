@@ -50,6 +50,7 @@ char * changerExt(char * nomDoc){
  * \brief 
  * 
  * @param argv argument du main(facultatif): nom du document à traiter
+ * @return code erreur: 0 si tout s'est bien passé.
 */
 int main(int argc, char *argv[]){
     

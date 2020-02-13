@@ -1,24 +1,43 @@
 #include "structs.h"
 
-typedef struct elemListe{
-    porte_t *porte;
-    struct elemListe *pred, *succ;
-} elemListe;
+/**
+ * \file liste.h
+ * \brief Header pour la librairie de fonctions pour des listes de \a monstre_t ou \a porte_t
+ * \author Thomas DIDIER L2 Info Le Mans
+ * \version 2.0
+ * \date 13/02/2020
+*/
 
-typedef struct liste{
-    elemListe *drapeau, *ec;
-} liste;
+/**
+ * \struct elemListe_s
+ * \brief Un élément d'une liste (pouvant aussi être le drapeau de la liste)
+*/
+typedef struct elemListe_s{
+    void *entite; /**< Objet de la liste */
+    struct elemListe_s *pred; /**< Element précédent dans la liste */
+    struct elemListe_s *succ; /**< Element suivant dans la liste */
+} elemListe_t;
 
-liste* creerListe();
-int listeVide(liste *maListe);
-int horsListe(liste *maListe);
-void enTete(liste *maListe);
-void enQueue(liste *maListe);
-void suivant(liste *maListe);
-void precedent(liste *maListe);
-void valeurElm(liste *maListe, porte_t *v);
-void modifElm(liste *maListe, porte_t *v);
-void oterElm(liste *maListe);
-void ajoutDroit(liste *maListe, porte_t *v);
-void ajoutGauche(liste *maListe, porte_t *v);
-void supListe(liste **maListe);
+/**
+ * \struct liste_s
+ * \brief Une liste d'élément inconnu dans le type est donné en chaine de caractère
+*/
+typedef struct liste_s{
+    char* type; /**< Nom du type de l'objet présent dans la liste (monstre ou porte) */
+    elemListe_t *drapeau; /**< Drapeau de la liste */
+    elemListe_t *ec; /**< Element courant de la liste */
+} liste_t;
+
+liste_t* creerListe(char* type);
+int listeVide(liste_t *maListe);
+int horsListe(liste_t *maListe);
+void enTete(liste_t *maListe);
+void enQueue(liste_t *maListe);
+void suivant(liste_t *maListe);
+void precedent(liste_t *maListe);
+char* valeurElm(liste_t *maListe, void *v);
+void modifElm(liste_t *maListe, void *v);
+void oterElm(liste_t *maListe);
+void ajoutDroit(liste_t *maListe, void *v);
+void ajoutGauche(liste_t *maListe, void *v);
+void supListe(liste_t **maListe);

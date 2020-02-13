@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "structs.h"
+#include "liste.h"
 
 int nettoyerSalle(salle_t** salle){
     for(int i = 0; i < (*salle)->hauteur; i++)
@@ -13,7 +14,7 @@ int nettoyerSalle(salle_t** salle){
 
 }
 
-int lireSalle(char* nomFichier, salle_t* salle){
+liste_t* lireSalle(char* nomFichier, salle_t* salle){
     FILE * monDoc = NULL;
     char mot[50];
     int lon, larg, val;
@@ -43,12 +44,27 @@ int lireSalle(char* nomFichier, salle_t* salle){
         salle->mat[i/larg][i%larg] = val;
     }
 
-    //Création et remplissage des portes
-    /*fscanf(monDoc, "%s %d %d %d %d", mot, &cx1, &cy1, &cx2, &cy2);
-    while(!feof(monDoc)){
+    liste_t* liste = creerListe("porte");
+    porte_t* p;
 
+    //Création et remplissage des portes
+    fscanf(monDoc, "%s %d %d %d %d", mot, &cx1, &cy1, &cx2, &cy2);
+    while(!feof(monDoc)){
+        p = malloc(sizeof(*p));
+        p->pos.x = cx1;
+        p->pos.y = cy1;
+        p->pos_arrivee.x = cx2;
+        p->pos_arrivee.y = cy2;
+        p->salleSuivante = malloc(sizeof(char) * (strlen(mot) + 1));
+        strcpy(p->salleSuivante, mot);
+        //Gestion des sprites de portes potentiellement à modifier
+        p->spritesActuel = -1;
+        p->listeSprites = NULL;
+        ajoutDroit(liste, p);
         fscanf(monDoc, "%s %d %d %d %d", mot, &cx1, &cy1, &cx2, &cy2);
-    }*/
+    }
     //fermeture fichier
     fclose(monDoc);
+
+    return liste;
 }

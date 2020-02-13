@@ -76,7 +76,7 @@ typedef struct salle_s{
 
     int spriteActuel; /**< Indice du sprite à afficher */
 
-    //liste des portes
+    liste_t * listePorte;
 } salle_t;
 
 /**

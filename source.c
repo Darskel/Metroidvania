@@ -3,10 +3,25 @@
 #include "structs.h"
 #include "liste.h"
 
+/**
+ * \file source.c
+ * \brief Fonctions de lecture d'une salle
+ * \author Thomas DIDIER L2 Info Le Mans
+ * \version 1.0
+ * \date 13/02/2020
+*/
+
+/**
+ * \brief Nettoie et supprime la structure salle donnée
+ * \details libère toute la mémoire utiliser et prépare le pointeur à être de nouveau utilisé
+ * 
+ * @param salle structure salle à traiter
+*/
 int nettoyerSalle(salle_t** salle){
     for(int i = 0; i < (*salle)->hauteur; i++)
         free((*salle)->mat[i]);
-    
+
+    supListe(&((*salle)->listePorte));
     free((*salle)->mat);
     free((*salle)->nomFichier);
     free(*salle);
@@ -14,7 +29,13 @@ int nettoyerSalle(salle_t** salle){
 
 }
 
-liste_t* lireSalle(char* nomFichier, salle_t* salle){
+/**
+ * \brief Modifie la structure salle pour la nouvelle salle
+ * 
+ * @param nomFichier nom du fichier de la salle à lire
+ * @param salle structure salle du programme
+*/
+int lireSalle(char* nomFichier, salle_t* salle){
     FILE * monDoc = NULL;
     char mot[50];
     int lon, larg, val;
@@ -44,7 +65,7 @@ liste_t* lireSalle(char* nomFichier, salle_t* salle){
         salle->mat[i/larg][i%larg] = val;
     }
 
-    liste_t* liste = creerListe("porte");
+    salle->listePorte = creerListe("porte");
     porte_t* p;
 
     //Création et remplissage des portes
@@ -60,11 +81,9 @@ liste_t* lireSalle(char* nomFichier, salle_t* salle){
         //Gestion des sprites de portes potentiellement à modifier
         p->spritesActuel = -1;
         p->listeSprites = NULL;
-        ajoutDroit(liste, p);
+        ajoutDroit(salle->listePorte, p);
         fscanf(monDoc, "%s %d %d %d %d", mot, &cx1, &cy1, &cx2, &cy2);
     }
     //fermeture fichier
     fclose(monDoc);
-
-    return liste;
 }

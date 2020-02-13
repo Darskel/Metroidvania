@@ -11,8 +11,12 @@
 #endif
 
 typedef struct {
-    int x,y;
+  int x,y;
 } position_t;
+
+typedef struct {
+  int h,v;
+}taille_t;
 
 typedef enum {
     FALSE,
@@ -20,8 +24,9 @@ typedef enum {
 } boolean_t;
 
 /**
- * 
+ *
 */
+
 typedef enum {
     SU, /**< Sprite de non déplacement (Stand-Up) */
     DEP1, /**< Sprite de déplacement n°1 */
@@ -42,8 +47,10 @@ typedef enum {
     JP8 /**< Sprite de saut (Jump) n°8 */
 } indSpritePer;
 
+
+
 /**
- * 
+ *
 */
 typedef struct salle_s{
     char * nomFichier; /**< Nom du fichier qui a généré la salle (utile pour les sauvegardes) */

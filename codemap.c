@@ -34,7 +34,7 @@ char * changerExt(char * nomDoc){
 
     for(i = strlen(nomDoc); i >= 0 && nomDoc[i] != '.'; i--);
 
-    nom = malloc(sizeof (*nom) * (i + 1 + strlen(EXT)));
+    nom = malloc(sizeof (char) * (i + 1 + strlen(EXT)));
     for(int j = 0; j <= i; j++)
         nom[j] = nomDoc[j];
 
@@ -50,6 +50,7 @@ char * changerExt(char * nomDoc){
  * \brief 
  * 
  * @param argv argument du main(facultatif): nom du document à traiter
+ * @return code erreur: 0 si tout s'est bien passé.
 */
 int main(int argc, char *argv[]){
     

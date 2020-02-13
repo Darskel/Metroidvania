@@ -24,7 +24,6 @@ all: map
 
 map: codemap decodemap
 
-sdl: sdl testsdl
 
 testListe: liste.o testListe.o
 	${CC} $^ -o $@ ${CFLAGS}

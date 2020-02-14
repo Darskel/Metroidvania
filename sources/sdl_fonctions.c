@@ -88,7 +88,7 @@ int evenements(SDL_Window * fenetre){
   SDL_Surface * joueur[NBSPRITES];
   initialiser_sprites_personnages(joueur, NBSPRITES, "joueur");
   position_t position={50,50};
-  indSpritePer sprite_actuel=SU;
+  indSpritePer_t sprite_actuel=SU;
   int fullscreen=0;
   int terminer=0;
   while(1){

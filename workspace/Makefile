@@ -20,7 +20,7 @@ else
 	endif
 endif
 
-all: map testListe testsdl
+all: map testListe testsdl deplacement dep_matrice
 
 map: codemap decodemap
 
@@ -35,6 +35,12 @@ decodemap: decodemap.c
 
 testsdl: sdl_fonctions.o test_SDL.o
 	${CC} $^ -o $@ ${LIBS} ${INCS} ${CFLAGS}
+
+deplacement: deplacement.o
+	${CC} $^ -o $@ ${CFLAGS}
+
+dep_matrice: dep_matrice.o
+	${CC} $^ -o $@ ${CFLAGS}
 
 %.o: %.c
 	${CC} $< -c -o $@ ${LIBS} ${INCS} ${CFLAGS}

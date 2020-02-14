@@ -36,10 +36,10 @@ decodemap: decodemap.c
 testsdl: sdl_fonctions.o test_SDL.o
 	${CC} $^ -o $@ ${LIBS} ${INCS} ${CFLAGS}
 
-deplacement: deplacement.o
+deplacement: deplacement.c
 	${CC} $^ -o $@ ${CFLAGS}
 
-dep_matrice: dep_matrice.o
+dep_matrice: dep_matrice.c
 	${CC} $^ -o $@ ${CFLAGS}
 
 %.o: %.c

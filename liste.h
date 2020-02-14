@@ -1,5 +1,3 @@
-#include "structs.h"
-
 /**
  * \file liste.h
  * \brief Header pour la librairie de fonctions pour des listes de \a monstre_t ou \a porte_t

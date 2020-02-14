@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "liste.h"
+#include <string.h>
+#include "structs.h"
 
 /**
  * \file testListe.c

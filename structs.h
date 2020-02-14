@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include "liste.h"
+
 #if defined(_WIN32)
     #define PAUSE system("PAUSE");
     #define CLEAR system("CLS");

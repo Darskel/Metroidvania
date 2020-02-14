@@ -2,22 +2,26 @@ CFLAGS = -Wall
 CC = gcc
 
 
-SDL_DIR=${HOME}/SDL2
-SDL_LIB_DIR=${SDL_DIR}/lib
-SDL_INC_DIR=${SDL_DIR}/include
-LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
-INCS=-I${SDL_INC_DIR}
-
+#SDL_DIR=${HOME}/SDL2
+#SDL_LIB_DIR=${SDL_DIR}/lib
+#SDL_INC_DIR=${SDL_DIR}/include
+#LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
+#INCS=-I${SDL_INC_DIR}
 
 ifeq ($(OS),Windows_NT)
 	CFLAGS += -D WIN32
+	SDL_DIR=C:/TDM-GCC-64
+	SDL_LIB_DIR=${SDL_DIR}/lib/SDL2
+	SDL_INC_DIR=${SDL_DIR}/include/SDL2
+	LIBS=-L${SDL_LIB_DIR} -lmingw32 -lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf
+	INCS=-I${SDL_INC_DIR}
 else
-	ifeq ($(UNAME), Linux)
-		CFLAGS += -D unix
-	endif
-	ifeq ($(UNAME), Linux)
-		CFLAGS += -D unix
-	endif
+	CFLAGS += -D unix
+	SDL_DIR=${HOME}/SDL2
+	SDL_LIB_DIR=${SDL_DIR}/lib
+	SDL_INC_DIR=${SDL_DIR}/include
+	LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
+	INCS=-I${SDL_INC_DIR}
 endif
 
 all: map testListe testsdl deplacement dep_matrice

@@ -10,17 +10,17 @@ CC = gcc
 
 ifeq ($(OS),Windows_NT)
 	CFLAGS += -D WIN32
-	SDL_DIR=C:/TDM-GCC-64
-	SDL_LIB_DIR=${SDL_DIR}/lib/SDL2
-	SDL_INC_DIR=${SDL_DIR}/include/SDL2
-	LIBS=-L${SDL_LIB_DIR} -lmingw32 -lSDL2 -lSDL2main -lSDL2_image -lSDL2_ttf
+	SDL_DIR="C:\SDLib\SDL2
+	SDL_LIB_DIR=${SDL_DIR}\lib"
+	SDL_INC_DIR=${SDL_DIR}\include"
+	LIBS=-L${SDL_LIB_DIR} -lmingw32 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2
 	INCS=-I${SDL_INC_DIR}
 else
 	CFLAGS += -D unix
 	SDL_DIR=${HOME}/SDL2
 	SDL_LIB_DIR=${SDL_DIR}/lib
 	SDL_INC_DIR=${SDL_DIR}/include
-	LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
+	LIBS=-L${SDL_LIB_DIR} -lSDL2_image -lSDL2_ttf -lSDL2
 	INCS=-I${SDL_INC_DIR}
 endif
 
@@ -38,7 +38,7 @@ decodemap: decodemap.c
 	${CC} $^ -o $@ ${CFLAGS}
 
 testsdl: sdl_fonctions.o test_SDL.o
-	${CC} $^ -o $@ ${LIBS} ${INCS} ${CFLAGS}
+	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
 deplacement: deplacement.c
 	${CC} $^ -o $@ ${CFLAGS}
@@ -47,7 +47,7 @@ dep_matrice: dep_matrice.c
 	${CC} $^ -o $@ ${CFLAGS}
 
 %.o: %.c
-	${CC} $< -c -o $@ ${LIBS} ${INCS} ${CFLAGS}
+	${CC} $< -c -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
 clean:
 	$(if $(OS) == Windows_NT, del /s *.o, rm -rf *.o)

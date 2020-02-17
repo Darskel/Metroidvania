@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "sdl_fonctions.h"
+#include "../headers/sdl_fonctions.h"
 
 int main(int argc, char* argv[]){
   int erreur;

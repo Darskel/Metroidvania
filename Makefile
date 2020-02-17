@@ -43,8 +43,8 @@ deplacement: ${c}deplacement.c
 dep_matrice: ${c}dep_matrice.c
 	${CC} $^ -o $@ ${CFLAGS}
 
-%.o: %.c
-	${CC} ${o}$< -c -o ${c}$@ ${INCS} ${LIBS} ${CFLAGS}
+${o}%.o: ${c}%.c
+	${CC} $< -c -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
 clean:
 	$(if $(OS) == Windows_NT, del /s *.o, rm -rf *.o)

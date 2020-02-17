@@ -4,8 +4,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
-#include "constantes_SDL.h"
-#include "structs.h"
+#include "../headers/constantes_SDL.h"
+#include "../headers/structs.h"
 
 #define NBSPRITES 17
 
@@ -62,7 +62,7 @@ SDL_Surface ** initialiser_sprites_personnages(SDL_Surface ** tab, int taille, c
   }
   free(dir);
   free(spr);*/
-  tab[0]=IMG_Load("sprites/entite/joueur/SU.png");
+  tab[0]=IMG_Load("./sprites/entite/joueur/fixe.png");
   return tab;
 }
 

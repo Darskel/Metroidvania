@@ -1,6 +1,9 @@
 CFLAGS = -Wall
 CC = gcc
 
+h = ./headers/
+c = ./sources/
+o = ./o/
 
 #SDL_DIR=${HOME}/SDL2
 #SDL_LIB_DIR=${SDL_DIR}/lib
@@ -28,26 +31,26 @@ all: map testListe testsdl deplacement dep_matrice
 
 map: codemap decodemap
 
-testListe: liste.o testListe.o
+testListe: ${o}liste.o ${o}testListe.o
 	${CC} $^ -o $@ ${CFLAGS}
 
-codemap: codemap.c
+codemap: ${c}codemap.c
 	${CC} $^ -o $@ ${CFLAGS}
 
-decodemap: decodemap.c
+decodemap: ${c}decodemap.c
 	${CC} $^ -o $@ ${CFLAGS}
 
-testsdl: sdl_fonctions.o test_SDL.o
+testsdl: ${o}sdl_fonctions.o ${o}test_SDL.o
 	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
-deplacement: deplacement.c
+deplacement: ${c}deplacement.c
 	${CC} $^ -o $@ ${CFLAGS}
 
-dep_matrice: dep_matrice.c
+dep_matrice: ${c}dep_matrice.c
 	${CC} $^ -o $@ ${CFLAGS}
 
 %.o: %.c
-	${CC} $< -c -o $@ ${INCS} ${LIBS} ${CFLAGS}
+	${CC} ${o}$< -c -o ${c}$@ ${INCS} ${LIBS} ${CFLAGS}
 
 clean:
 	$(if $(OS) == Windows_NT, del /s *.o, rm -rf *.o)

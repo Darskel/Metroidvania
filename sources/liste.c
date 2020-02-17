@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-#include "structs.h"
+#include "../headers/structs.h"
 
 /**
  * \file liste.c

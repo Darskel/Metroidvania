@@ -186,7 +186,7 @@ int evenements(SDL_Window * fenetre){
           }
         }
       }
-      if(saut_en_cours){
+      if(saut_en_cours && montee){
         if(mouvement==-1){
           if(position.x - VITESSE > 50)
             (position.x)-=VITESSE;

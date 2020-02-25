@@ -47,7 +47,7 @@ int fullscreen_switch(SDL_Window * fenetre, int state){
     }
 }
 
-SDL_Surface ** initialiser_sprites_personnages(SDL_Surface ** tab, int taille, char* nom){
+void initialiser_sprites_personnages(SDL_Surface ** tabD, SDL_Surface ** tabG, int taille){
   /*char * dir = malloc(sizeof(char)*(16+strlen(nom)+1));
   char * spr = malloc(sizeof(char)*(20+strlen(nom)+1));
   dir= "sprites/entite/";
@@ -63,25 +63,42 @@ SDL_Surface ** initialiser_sprites_personnages(SDL_Surface ** tab, int taille, c
   }
   free(dir);
   free(spr);*/
-  tab[SU]=IMG_Load("./sprites/entite/joueur/fixe.png");
-  tab[DEP1]=IMG_Load("./sprites/entite/joueur/course1.png");
-  tab[DEP2]=IMG_Load("./sprites/entite/joueur/course2.png");
-  tab[DEP3]=IMG_Load("./sprites/entite/joueur/course3.png");
-  tab[DEP4]=IMG_Load("./sprites/entite/joueur/course4.png");
-  tab[DEP5]=IMG_Load("./sprites/entite/joueur/course5.png");
-  tab[DEP6]=IMG_Load("./sprites/entite/joueur/course6.png");
-  tab[DEP7]=IMG_Load("./sprites/entite/joueur/course7.png");
-  tab[DEP8]=IMG_Load("./sprites/entite/joueur/course8.png");
-  tab[JP1]=IMG_Load("./sprites/entite/joueur/saut1.png");
-  tab[JP2]=IMG_Load("./sprites/entite/joueur/saut2.png");
-  tab[JP3]=IMG_Load("./sprites/entite/joueur/saut3.png");
-  tab[JP4]=IMG_Load("./sprites/entite/joueur/saut4.png");
-  tab[JP5]=IMG_Load("./sprites/entite/joueur/saut5.png");
-  tab[JP6]=IMG_Load("./sprites/entite/joueur/saut6.png");
-  tab[JP7]=IMG_Load("./sprites/entite/joueur/saut7.png");
-  tab[JP8]=IMG_Load("./sprites/entite/joueur/saut8.png");
+  tabD[SU]=IMG_Load("./sprites/entite/joueur/fixe.png");
+  tabD[DEP1]=IMG_Load("./sprites/entite/joueur/course1.png");
+  tabD[DEP2]=IMG_Load("./sprites/entite/joueur/course2.png");
+  tabD[DEP3]=IMG_Load("./sprites/entite/joueur/course3.png");
+  tabD[DEP4]=IMG_Load("./sprites/entite/joueur/course4.png");
+  tabD[DEP5]=IMG_Load("./sprites/entite/joueur/course5.png");
+  tabD[DEP6]=IMG_Load("./sprites/entite/joueur/course6.png");
+  tabD[DEP7]=IMG_Load("./sprites/entite/joueur/course7.png");
+  tabD[DEP8]=IMG_Load("./sprites/entite/joueur/course8.png");
+  tabD[JP1]=IMG_Load("./sprites/entite/joueur/saut1.png");
+  tabD[JP2]=IMG_Load("./sprites/entite/joueur/saut2.png");
+  tabD[JP3]=IMG_Load("./sprites/entite/joueur/saut3.png");
+  tabD[JP4]=IMG_Load("./sprites/entite/joueur/saut4.png");
+  tabD[JP5]=IMG_Load("./sprites/entite/joueur/saut5.png");
+  tabD[JP6]=IMG_Load("./sprites/entite/joueur/saut6.png");
+  tabD[JP7]=IMG_Load("./sprites/entite/joueur/saut7.png");
+  tabD[JP8]=IMG_Load("./sprites/entite/joueur/saut8.png");
 
-  return tab;
+  tabG[SU]=IMG_Load("./sprites/entite/joueur/fixe_gauche.png");
+  tabG[DEP1]=IMG_Load("./sprites/entite/joueur/course1_gauche.png");
+  tabG[DEP2]=IMG_Load("./sprites/entite/joueur/course2_gauche.png");
+  tabG[DEP3]=IMG_Load("./sprites/entite/joueur/course3_gauche.png");
+  tabG[DEP4]=IMG_Load("./sprites/entite/joueur/course4_gauche.png");
+  tabG[DEP5]=IMG_Load("./sprites/entite/joueur/course5_gauche.png");
+  tabG[DEP6]=IMG_Load("./sprites/entite/joueur/course6_gauche.png");
+  tabG[DEP7]=IMG_Load("./sprites/entite/joueur/course7_gauche.png");
+  tabG[DEP8]=IMG_Load("./sprites/entite/joueur/course8_gauche.png");
+  tabG[JP1]=IMG_Load("./sprites/entite/joueur/saut1_gauche.png");
+  tabG[JP2]=IMG_Load("./sprites/entite/joueur/saut2_gauche.png");
+  tabG[JP3]=IMG_Load("./sprites/entite/joueur/saut3_gauche.png");
+  tabG[JP4]=IMG_Load("./sprites/entite/joueur/saut4_gauche.png");
+  tabG[JP5]=IMG_Load("./sprites/entite/joueur/saut5_gauche.png");
+  tabG[JP6]=IMG_Load("./sprites/entite/joueur/saut6_gauche.png");
+  tabG[JP7]=IMG_Load("./sprites/entite/joueur/saut7_gauche.png");
+  tabG[JP8]=IMG_Load("./sprites/entite/joueur/saut8_gauche.png");
+
 }
 
 void afficher_surface(SDL_Surface * zone, SDL_Surface * sprite, position_t position){
@@ -103,14 +120,16 @@ void supprimer_sprites(SDL_Surface ** tab, int nb_sprites){
 int evenements(SDL_Window * fenetre){
   SDL_Surface * surfaceFenetre = SDL_GetWindowSurface(fenetre);
   SDL_Event event;
-  SDL_Surface * joueur[NBSPRITES];
-  initialiser_sprites_personnages(joueur, NBSPRITES, "joueur");
+  SDL_Surface * joueurD[NBSPRITES];
+  SDL_Surface * joueurG[NBSPRITES];
+  initialiser_sprites_personnages(joueurD, joueurG, NBSPRITES);
   position_t position={50,500};
   indSpritePer_t sprite_actuel=SU;
   int fullscreen=0;
   int saut_en_cours=0;
   int montee=0;
   int mouvement=0;
+  int orientation=1;
   int terminer=0;
   while(!terminer){
     nettoyage_zone(surfaceFenetre);
@@ -131,6 +150,7 @@ int evenements(SDL_Window * fenetre){
           else if(event.key.keysym.sym == SDLK_RIGHT || event.key.keysym.sym == SDLK_LEFT){
             if(!saut_en_cours)
               sprite_actuel=SU;
+            orientation=mouvement;
             mouvement=0;
             break;
           }
@@ -154,12 +174,14 @@ int evenements(SDL_Window * fenetre){
             if(position.x - VITESSE > 50)
               (position.x)-=VITESSE;
             mouvement=-1;
+            orientation=mouvement;
             break;
           }
           else if(event.key.keysym.sym == SDLK_RIGHT){
             if(position.x + VITESSE < RES_H -50)
               (position.x)+=VITESSE;
             mouvement=1;
+            orientation=mouvement;
             break;
           }
         }
@@ -207,12 +229,14 @@ int evenements(SDL_Window * fenetre){
             (position.y)+=VITESSE;
         }
       }
-
-
-      afficher_surface(surfaceFenetre, joueur[sprite_actuel], position);
+      if(orientation==1)
+        afficher_surface(surfaceFenetre, joueurD[sprite_actuel], position);
+      else if(orientation==-1)
+        afficher_surface(surfaceFenetre, joueurG[sprite_actuel], position);
       SDL_UpdateWindowSurface(fenetre);
     }
-    supprimer_sprites(joueur, NBSPRITES);
+    supprimer_sprites(joueurD, NBSPRITES);
+    supprimer_sprites(joueurG, NBSPRITES);
     SDL_FreeSurface(surfaceFenetre);
     quitter_SDL(fenetre);
     return 0;

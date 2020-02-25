@@ -36,6 +36,52 @@ void quitter_SDL(SDL_Window * fenetre){
   SDL_Quit();
 }
 
+/*
+  Peut être que pour cette fonction tu pourrais utiliser la fonction
+  SDL_SetWindowFullscreen : https://wiki.libsdl.org/SDL_SetWindowFullscreen
+  avec les flags qui vont avec : https://wiki.libsdl.org/SDL_WindowFlags
+  et ici la def d'une struct SDL_Window:
+  struct SDL_Window
+  {
+    const void *magic;
+    Uint32 id;
+    char *title;
+    SDL_Surface *icon;
+    int x, y;
+    int w, h;
+    int min_w, min_h;
+    int max_w, max_h;
+    Uint32 flags;
+    Uint32 last_fullscreen_flags;
+
+    /* Stored position and size for windowed mode *//*
+    SDL_Rect windowed;
+
+    SDL_DisplayMode fullscreen_mode;
+
+    float brightness;
+    Uint16 *gamma;
+    Uint16 *saved_gamma;        /* (just offset into gamma) *//*
+
+    SDL_Surface *surface;
+    SDL_bool surface_valid;
+
+    SDL_bool is_hiding;
+    SDL_bool is_destroying;
+
+    SDL_WindowShaper *shaper;
+
+    SDL_HitTest hit_test;
+    void *hit_test_data;
+
+    SDL_WindowUserData *data;
+
+    void *driverdata;
+
+    SDL_Window *prev;
+    SDL_Window *next;
+  };
+*/
 int fullscreen_switch(SDL_Window * fenetre, int state){
   if (state){
     SDL_SetWindowFullscreen(fenetre,0);
@@ -63,6 +109,58 @@ void initialiser_sprites_personnages(SDL_Surface ** tabD, SDL_Surface ** tabG, i
   }
   free(dir);
   free(spr);*/
+
+  /*
+    Pourquoi ne pas faire comme au dessus ?
+
+    char spr[50];
+    char dir[] = "./sprites/entite/joueur/";
+    strcat(spr,dir);
+    char images[NBSPRITES*2][] = {
+      "fixe.png",
+      "course1.png",
+      "course2.png",
+      "course3.png",
+      "course4.png",
+      "course5.png",
+      "course6.png",
+      "course7.png",
+      "course8.png",
+      "saut1.png",
+      "saut2.png",
+      "saut3.png",
+      "saut4.png",
+      "saut5.png",
+      "saut6.png",
+      "saut7.png",
+      "saut8.png",
+      "fixe_gauche.png",
+      "course1_gauche.png",
+      "course2_gauche.png",
+      "course3_gauche.png",
+      "course4_gauche.png",
+      "course5_gauche.png",
+      "course6_gauche.png",
+      "course7_gauche.png",
+      "course8_gauche.png",
+      "saut1_gauche.png",
+      "saut2_gauche.png",
+      "saut3_gauche.png",
+      "saut4_gauche.png",
+      "saut5_gauche.png",
+      "saut6_gauche.png",
+      "saut7_gauche.png",
+      "saut8_gauche.png",
+    }
+    for(int i = 0; i < NBSPRITES*2; i++){
+      strcat(spr,images[i]);
+      tab[i]=IMG_Load(spr);
+    }
+
+    Sinon laisse comme ça mais fais un seul tableau, c'est plus efficace et tu pourras
+    faire orientation = LEFT (0) et orientation = RIGHT (1) puis quand tu choisis le
+    sprite tu fais tab[sprite_actuel + orientation * NBSPRITES] pour avoir le bon sprite
+  */
   tabD[SU]=IMG_Load("./sprites/entite/joueur/fixe.png");
   tabD[DEP1]=IMG_Load("./sprites/entite/joueur/course1.png");
   tabD[DEP2]=IMG_Load("./sprites/entite/joueur/course2.png");
@@ -111,6 +209,9 @@ void nettoyage_zone(SDL_Surface * zone){
   SDL_FillRect(zone,NULL, noir);
 }
 
+/*
+  Tu as défini une constante pour le nombre de sprites, pourquoi tu ne l'utilises pas ?
+*/
 void supprimer_sprites(SDL_Surface ** tab, int nb_sprites){
   for(int i=0; i<nb_sprites; i++)
     SDL_FreeSurface(tab[i]);
@@ -124,13 +225,14 @@ int evenements(SDL_Window * fenetre){
   SDL_Surface * joueurG[NBSPRITES];
   initialiser_sprites_personnages(joueurD, joueurG, NBSPRITES);
   position_t position={50,500};
+  //Pourquoi utilises tu la définition de indSpritePer_t et pas la structure joueur ?
   indSpritePer_t sprite_actuel=SU;
-  int fullscreen=0;
-  int saut_en_cours=0;
-  int montee=0;
-  int mouvement=0;
-  int orientation=1;
-  int terminer=0;
+  int fullscreen=0; // doit pouvoir être géré directement avec SDL_Window (voir dit précédemment)
+  int saut_en_cours=0; // Un saut est en cour si sprite_actuel >= JP1 && sprite_actuel <= JP8
+  int montee=0; 
+  int mouvement=0; 
+  int orientation=1; //existe déjà dans la structure joueur du coup
+  int terminer=0; //on préfère utiliser un nom plutot qu'un verbe pour une variable (Alive est le plus courrant dans ces conditions)
   while(!terminer){
     nettoyage_zone(surfaceFenetre);
     while(SDL_PollEvent(&event)){
@@ -139,6 +241,18 @@ int evenements(SDL_Window * fenetre){
           terminer=1;
           break;
         case SDL_KEYUP:
+          /*
+            Pourquoi des if-elseif ? pourquoi pas un switch encore une fois ?
+            switch(event.key.keysym.sym){
+              case SDLK_f: //code
+                break;
+              case SDLK_ESCAPE: terminer = 1;
+                brea;
+              case SDLK_RIGHT: //ici est géré le ou (||)
+              case SDLK_LEFT: //code
+                break;
+            }
+          */
           if(event.key.keysym.sym == SDLK_f){ //Appui sur F switch du mode plein écran au mode fenetré
             fullscreen=fullscreen_switch(fenetre,fullscreen);
             break;
@@ -155,6 +269,9 @@ int evenements(SDL_Window * fenetre){
             break;
           }
         case SDL_KEYDOWN:
+          /*
+            Pareil que pour keyup
+          */
           if(event.key.keysym.sym == SDLK_RIGHT || event.key.keysym.sym == SDLK_LEFT){
             if(!saut_en_cours){
               sprite_actuel++;
@@ -186,6 +303,9 @@ int evenements(SDL_Window * fenetre){
           }
         }
       }
+      /*
+        Je comprends plus rien à partir d'ici
+      */
       if(saut_en_cours && montee){
         if(mouvement==-1){
           if(position.x - VITESSE > 50)
@@ -229,6 +349,7 @@ int evenements(SDL_Window * fenetre){
             (position.y)+=VITESSE;
         }
       }
+      //peut être simplier avec un seul tableau (voir dit précédemment)
       if(orientation==1)
         afficher_surface(surfaceFenetre, joueurD[sprite_actuel], position);
       else if(orientation==-1)

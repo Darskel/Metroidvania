@@ -8,7 +8,7 @@
 #include "../headers/structs.h"
 
 #define NBSPRITES 17
-#define VITESSE 2
+#define VITESSE 1
 
 SDL_Window * initialisation_SDL(){
   SDL_Window * fenetre = NULL;
@@ -93,8 +93,8 @@ int fullscreen_switch(SDL_Window * fenetre, int state){
     }
 }
 
-void initialiser_sprites_personnages(SDL_Surface ** tabD, SDL_Surface ** tabG, int taille){
-  /*char * dir = malloc(sizeof(char)*(16+strlen(nom)+1));
+void initialiser_sprites_personnages(SDL_Surface ** tab, int taille){
+  /*char * dir = malloc(sizeof(char)*(15+strlen(nom)+1));
   char * spr = malloc(sizeof(char)*(20+strlen(nom)+1));
   dir= "sprites/entite/";
   strcat(dir, nom);
@@ -161,41 +161,42 @@ void initialiser_sprites_personnages(SDL_Surface ** tabD, SDL_Surface ** tabG, i
     faire orientation = LEFT (0) et orientation = RIGHT (1) puis quand tu choisis le
     sprite tu fais tab[sprite_actuel + orientation * NBSPRITES] pour avoir le bon sprite
   */
-  tabD[SU]=IMG_Load("./sprites/entite/joueur/fixe.png");
-  tabD[DEP1]=IMG_Load("./sprites/entite/joueur/course1.png");
-  tabD[DEP2]=IMG_Load("./sprites/entite/joueur/course2.png");
-  tabD[DEP3]=IMG_Load("./sprites/entite/joueur/course3.png");
-  tabD[DEP4]=IMG_Load("./sprites/entite/joueur/course4.png");
-  tabD[DEP5]=IMG_Load("./sprites/entite/joueur/course5.png");
-  tabD[DEP6]=IMG_Load("./sprites/entite/joueur/course6.png");
-  tabD[DEP7]=IMG_Load("./sprites/entite/joueur/course7.png");
-  tabD[DEP8]=IMG_Load("./sprites/entite/joueur/course8.png");
-  tabD[JP1]=IMG_Load("./sprites/entite/joueur/saut1.png");
-  tabD[JP2]=IMG_Load("./sprites/entite/joueur/saut2.png");
-  tabD[JP3]=IMG_Load("./sprites/entite/joueur/saut3.png");
-  tabD[JP4]=IMG_Load("./sprites/entite/joueur/saut4.png");
-  tabD[JP5]=IMG_Load("./sprites/entite/joueur/saut5.png");
-  tabD[JP6]=IMG_Load("./sprites/entite/joueur/saut6.png");
-  tabD[JP7]=IMG_Load("./sprites/entite/joueur/saut7.png");
-  tabD[JP8]=IMG_Load("./sprites/entite/joueur/saut8.png");
 
-  tabG[SU]=IMG_Load("./sprites/entite/joueur/fixe_gauche.png");
-  tabG[DEP1]=IMG_Load("./sprites/entite/joueur/course1_gauche.png");
-  tabG[DEP2]=IMG_Load("./sprites/entite/joueur/course2_gauche.png");
-  tabG[DEP3]=IMG_Load("./sprites/entite/joueur/course3_gauche.png");
-  tabG[DEP4]=IMG_Load("./sprites/entite/joueur/course4_gauche.png");
-  tabG[DEP5]=IMG_Load("./sprites/entite/joueur/course5_gauche.png");
-  tabG[DEP6]=IMG_Load("./sprites/entite/joueur/course6_gauche.png");
-  tabG[DEP7]=IMG_Load("./sprites/entite/joueur/course7_gauche.png");
-  tabG[DEP8]=IMG_Load("./sprites/entite/joueur/course8_gauche.png");
-  tabG[JP1]=IMG_Load("./sprites/entite/joueur/saut1_gauche.png");
-  tabG[JP2]=IMG_Load("./sprites/entite/joueur/saut2_gauche.png");
-  tabG[JP3]=IMG_Load("./sprites/entite/joueur/saut3_gauche.png");
-  tabG[JP4]=IMG_Load("./sprites/entite/joueur/saut4_gauche.png");
-  tabG[JP5]=IMG_Load("./sprites/entite/joueur/saut5_gauche.png");
-  tabG[JP6]=IMG_Load("./sprites/entite/joueur/saut6_gauche.png");
-  tabG[JP7]=IMG_Load("./sprites/entite/joueur/saut7_gauche.png");
-  tabG[JP8]=IMG_Load("./sprites/entite/joueur/saut8_gauche.png");
+  tab[SU]=IMG_Load("./sprites/entite/joueur/fixe_gauche.png");
+  tab[DEP1]=IMG_Load("./sprites/entite/joueur/course1_gauche.png");
+  tab[DEP2]=IMG_Load("./sprites/entite/joueur/course2_gauche.png");
+  tab[DEP3]=IMG_Load("./sprites/entite/joueur/course3_gauche.png");
+  tab[DEP4]=IMG_Load("./sprites/entite/joueur/course4_gauche.png");
+  tab[DEP5]=IMG_Load("./sprites/entite/joueur/course5_gauche.png");
+  tab[DEP6]=IMG_Load("./sprites/entite/joueur/course6_gauche.png");
+  tab[DEP7]=IMG_Load("./sprites/entite/joueur/course7_gauche.png");
+  tab[DEP8]=IMG_Load("./sprites/entite/joueur/course8_gauche.png");
+  tab[JP1]=IMG_Load("./sprites/entite/joueur/saut1_gauche.png");
+  tab[JP2]=IMG_Load("./sprites/entite/joueur/saut2_gauche.png");
+  tab[JP3]=IMG_Load("./sprites/entite/joueur/saut3_gauche.png");
+  tab[JP4]=IMG_Load("./sprites/entite/joueur/saut4_gauche.png");
+  tab[JP5]=IMG_Load("./sprites/entite/joueur/saut5_gauche.png");
+  tab[JP6]=IMG_Load("./sprites/entite/joueur/saut6_gauche.png");
+  tab[JP7]=IMG_Load("./sprites/entite/joueur/saut7_gauche.png");
+  tab[JP8]=IMG_Load("./sprites/entite/joueur/saut8_gauche.png");
+
+  tab[NBSPRITES + SU]=IMG_Load("./sprites/entite/joueur/fixe.png");
+  tab[NBSPRITES + DEP1]=IMG_Load("./sprites/entite/joueur/course1.png");
+  tab[NBSPRITES + DEP2]=IMG_Load("./sprites/entite/joueur/course2.png");
+  tab[NBSPRITES + DEP3]=IMG_Load("./sprites/entite/joueur/course3.png");
+  tab[NBSPRITES + DEP4]=IMG_Load("./sprites/entite/joueur/course4.png");
+  tab[NBSPRITES + DEP5]=IMG_Load("./sprites/entite/joueur/course5.png");
+  tab[NBSPRITES + DEP6]=IMG_Load("./sprites/entite/joueur/course6.png");
+  tab[NBSPRITES + DEP7]=IMG_Load("./sprites/entite/joueur/course7.png");
+  tab[NBSPRITES + DEP8]=IMG_Load("./sprites/entite/joueur/course8.png");
+  tab[NBSPRITES + JP1]=IMG_Load("./sprites/entite/joueur/saut1.png");
+  tab[NBSPRITES + JP2]=IMG_Load("./sprites/entite/joueur/saut2.png");
+  tab[NBSPRITES + JP3]=IMG_Load("./sprites/entite/joueur/saut3.png");
+  tab[NBSPRITES + JP4]=IMG_Load("./sprites/entite/joueur/saut4.png");
+  tab[NBSPRITES + JP5]=IMG_Load("./sprites/entite/joueur/saut5.png");
+  tab[NBSPRITES + JP6]=IMG_Load("./sprites/entite/joueur/saut6.png");
+  tab[NBSPRITES + JP7]=IMG_Load("./sprites/entite/joueur/saut7.png");
+  tab[NBSPRITES + JP8]=IMG_Load("./sprites/entite/joueur/saut8.png");
 
 }
 
@@ -221,16 +222,15 @@ void supprimer_sprites(SDL_Surface ** tab, int nb_sprites){
 int evenements(SDL_Window * fenetre){
   SDL_Surface * surfaceFenetre = SDL_GetWindowSurface(fenetre);
   SDL_Event event;
-  SDL_Surface * joueurD[NBSPRITES];
-  SDL_Surface * joueurG[NBSPRITES];
-  initialiser_sprites_personnages(joueurD, joueurG, NBSPRITES);
+  SDL_Surface * joueur[NBSPRITES*2];
+  initialiser_sprites_personnages(joueur, NBSPRITES);
   position_t position={50,500};
   //Pourquoi utilises tu la définition de indSpritePer_t et pas la structure joueur ?
   indSpritePer_t sprite_actuel=SU;
   int fullscreen=0; // doit pouvoir être géré directement avec SDL_Window (voir dit précédemment)
   int saut_en_cours=0; // Un saut est en cour si sprite_actuel >= JP1 && sprite_actuel <= JP8
-  int montee=0; 
-  int mouvement=0; 
+  int montee=0;
+  int mouvement=0;
   int orientation=1; //existe déjà dans la structure joueur du coup
   int terminer=0; //on préfère utiliser un nom plutot qu'un verbe pour une variable (Alive est le plus courrant dans ces conditions)
   while(!terminer){

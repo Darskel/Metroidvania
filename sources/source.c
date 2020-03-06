@@ -1,3 +1,8 @@
+//opendir
+#include <dirent.h>
+#include <errno.h>
+//stat
+#include <sys/stat.h>
 #include <stdlib.h>
 #include <string.h>
 #include "../headers/structs.h"
@@ -9,6 +14,125 @@
  * \version 1.0
  * \date 13/02/2020
 */
+
+#define DIR_SAUV "./" //"./sauvegardes/"
+
+/**
+ * \brief Sauvegarde l'état de la partie
+ * 
+ * @param numSauv numéro de la sauvegarde (entre 1 et 3)
+ * @param hp nombre de point de vies du personnage principal
+ * @param salle nom de la dernière salle visité par le personnage principal
+ * @param dep position(position_t) d'arrivé dans la salle (position de départ après chargement)
+ * @param inventaire tableau contenant l'état de l'inventaire du personnage
+ * @param nomObjs tableau contenant le nom des objets de l'inventaire dans l'ordre
+ * 
+ * @return un code erreur en fonction de l'erreur: -1 = Mauvais numéro de sauvegarde, -2 = impossible d'ouvrir ou créer le fichier; ou le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès)
+*/
+int sauvegarder(int numSauv, int hp, char* salle, position_t* dep, int inventaire[], char* nomObjs[]){
+    if(numSauv < 1 || numSauv > 3)
+        return -1; // Mauvais numéro de sauvegarde
+
+    //avec opendir
+    DIR* dir = opendir(DIR_SAUV);
+    if(dir)
+        closedir(dir);
+    else
+        if(ENOENT == errno)
+            CREATE_DIR(DIR_SAUV);
+    
+    //avec stat
+    /*
+    struct stat s = {0};
+    if(!stat(DIR_SAUV,&s))
+        if(!S_ISDIR(s.st_mode))
+            CREATE_DIR(DIR_SAUV);
+    */
+
+    char* nomFichier = malloc(sizeof(char) * (6 + strlen(DIR_SAUV)));
+    strcpy(nomFichier, DIR_SAUV);
+    strcpy(nomFichier, itoa(numSauv,nomFichier,10));
+    strcat(nomFichier, ".txt");
+    FILE * file = fopen(nomFichier,"w");
+    free(nomFichier);
+    if(!file)
+        return -2; // Le fichier n'a pas pû être ouvert ou créé
+
+    //Ecrit les hp, la salle et la position de réaparition
+    fprintf(file, "Health Point: %d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", hp, salle, dep->x, dep->y);
+    
+    for(int i = 0; i < TAILLE_INVENTAIRE; i++)
+        fprintf(file, "\t%s: %d\n",nomObjs[i], inventaire[i] ? 1 : 0);
+
+    fclose(file);
+    return numSauv;
+}
+
+/**
+ * \brief Sauvegarde l'état de la partie
+ * \details Les paramètres numSauv et nomObjs doivent être définis avant, les autres paramètres seront remplis par cette fonction
+ * 
+ * @param numSauv numéro de la sauvegarde (entre 1 et 3)
+ * @param salle nom de la salle à charger
+ * @param perso personnage (structure personnage_t) à remplir
+ * @param inventaire tableau contenant l'état de l'inventaire du personnage
+ * @param nomObjs tableau contenant le nom des objets de l'inventaire dans l'ordre
+ * 
+ * @return un code erreur en fonction de l'erreur: -1 = Mauvais numéro de sauvegarde, -2 = impossible d'ouvrir ou créer le fichier; le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès), ou 0 si le fichier de sauvegarde est vide
+*/
+
+int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventaire[], char* nomObjs[]){
+    if(numSauv < 1 || numSauv > 3)
+        return -1; // Mauvais numéro de sauvegarde
+
+    //avec opendir
+    DIR* dir = opendir(DIR_SAUV);
+    if(dir)
+        closedir(dir);
+    else
+        if(ENOENT == errno)
+            CREATE_DIR(DIR_SAUV);
+    
+    //avec stat
+    /*
+    struct stat s = {0};
+    if(!stat(DIR_SAUV,&s))
+        if(!S_ISDIR(s.st_mode))
+            CREATE_DIR(DIR_SAUV);
+    */
+
+    char tmp[100];
+    char* nomFichier = malloc(sizeof(char) * (6 + strlen(DIR_SAUV)));
+    strcpy(nomFichier, DIR_SAUV);
+    strcpy(nomFichier, itoa(numSauv,nomFichier,10));
+    strcat(nomFichier, ".txt");
+    FILE * file = fopen(nomFichier,"r");
+    free(nomFichier);
+    if(!file)
+        return -2; // Le fichier n'a pas pû être ouvert
+
+    fscanf(file, "%c", &tmp[0]);
+    if(feof(file)){
+        fclose(file);
+        return 0; //Le fichier de sauvegarde est vide
+    }
+
+    fscanf(file, "ealth Point: %d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", &(perso->pv), salle, &(perso->pos.x), &(perso->pos.y));
+    for(int i = 0; i < TAILLE_INVENTAIRE; i++){
+        fscanf(file,"%s: ", tmp);
+        if(!strcmp(tmp,nomObjs[i]))
+            fscanf("%d\n", inventaire[i]);
+        else{
+            while(strcmp(tmp,nomObjs[i])){
+                inventaire[i] = 0;
+                i++;
+            }
+        }
+    }
+
+    fclose(file);
+    return numSauv;
+}
 
 /**
  * \brief Nettoie et supprime la structure salle donnée

@@ -1,15 +1,22 @@
 #include <stdio.h>
 #include "liste.h"
 
-#if defined(_WIN32)
-    #define PAUSE system("PAUSE");
-    #define CLEAR system("CLS");
-#elif defined(__unix)
-    #define PAUSE system("read -rsp $'Press any key to continue...\n' -n 1"); //Peut ne pas fonctionner parfois (PC de l'université par exemple)
-    #define CLEAR system("clear");
-#else
-    #define PAUSE
-    #define CLEAR
+#ifndef SYSTEM_INCLUDED
+#define SYSTEM_INCLUDED
+
+    #if defined(_WIN32)
+        #define PAUSE system("PAUSE");
+        #define CLEAR system("CLS");
+    #elif defined(__unix)
+        #define PAUSE system("read -rsp $'Press any key to continue...\n' -n 1"); //Peut ne pas fonctionner parfois (PC de l'université par exemple)
+        #define CLEAR system("clear");
+    #else
+        #define PAUSE
+        #define CLEAR
+    #endif
+
+    #define CREATE_DIR(X) char Y[20] = "mkdir "; strcat(Y, X); system(Y);
+
 #endif
 
 /**
@@ -20,8 +27,12 @@
  * \date 13/02/2020
 */
 
+#ifndef STRUCTS_INCLUDED
+#define STRUCTS_INCLUDED
+
 #define RIGHT 0
 #define LEFT 1
+#define TAILLE_INVENTAIRE 6
 
 typedef struct {
   int h,v;
@@ -178,3 +189,5 @@ typedef struct porte_s{
     char* listeSprites; /**< Chemin vers les sprites de la porte */
     int spritesActuel; /**< Indice du sprite à afficher */
 } porte_t;
+
+#endif

@@ -53,15 +53,20 @@ void quitter_SDL(SDL_Window * fenetre){
     int max_w, max_h;
     Uint32 flags;
     Uint32 last_fullscreen_flags;
-
-    /* Stored position and size for windowed mode *//*
+    */
+    /* Stored position and size for windowed mode */
+    /*
     SDL_Rect windowed;
 
     SDL_DisplayMode fullscreen_mode;
 
     float brightness;
     Uint16 *gamma;
-    Uint16 *saved_gamma;        /* (just offset into gamma) *//*
+    Uint16 *saved_gamma;        */
+
+    /* (just offset into gamma) */
+
+    /*
 
     SDL_Surface *surface;
     SDL_bool surface_valid;
@@ -231,7 +236,7 @@ int evenements(SDL_Window * fenetre){
   int saut_en_cours=0; // Un saut est en cour si sprite_actuel >= JP1 && sprite_actuel <= JP8
   int montee=0;
   int mouvement=0;
-  int orientation=1; //existe déjà dans la structure joueur du coup
+  int orientation=LEFT; //existe déjà dans la structure joueur du coup
   int terminer=0; //on préfère utiliser un nom plutot qu'un verbe pour une variable (Alive est le plus courrant dans ces conditions)
   while(!terminer){
     nettoyage_zone(surfaceFenetre);
@@ -261,10 +266,17 @@ int evenements(SDL_Window * fenetre){
             terminer=1;
             break;
           }
-          else if(event.key.keysym.sym == SDLK_RIGHT || event.key.keysym.sym == SDLK_LEFT){
+          else if(event.key.keysym.sym == SDLK_RIGHT){
             if(!saut_en_cours)
               sprite_actuel=SU;
-            orientation=mouvement;
+            orientation=RIGHT;
+            mouvement=0;
+            break;
+          }
+          else if(event.key.keysym.sym == SDLK_LEFT){
+            if(!saut_en_cours)
+              sprite_actuel=SU;
+            orientation=LEFT;
             mouvement=0;
             break;
           }
@@ -291,14 +303,14 @@ int evenements(SDL_Window * fenetre){
             if(position.x - VITESSE > 50)
               (position.x)-=VITESSE;
             mouvement=-1;
-            orientation=mouvement;
+            orientation=LEFT;
             break;
           }
           else if(event.key.keysym.sym == SDLK_RIGHT){
             if(position.x + VITESSE < RES_H -50)
               (position.x)+=VITESSE;
             mouvement=1;
-            orientation=mouvement;
+            orientation=RIGHT;
             break;
           }
         }
@@ -350,14 +362,10 @@ int evenements(SDL_Window * fenetre){
         }
       }
       //peut être simplier avec un seul tableau (voir dit précédemment)
-      if(orientation==1)
-        afficher_surface(surfaceFenetre, joueurD[sprite_actuel], position);
-      else if(orientation==-1)
-        afficher_surface(surfaceFenetre, joueurG[sprite_actuel], position);
+      afficher_surface(surfaceFenetre, joueur[sprite_actuel+orientation*NBSPRITES], position);
       SDL_UpdateWindowSurface(fenetre);
     }
-    supprimer_sprites(joueurD, NBSPRITES);
-    supprimer_sprites(joueurG, NBSPRITES);
+    supprimer_sprites(joueur, NBSPRITES*2);
     SDL_FreeSurface(surfaceFenetre);
     quitter_SDL(fenetre);
     return 0;

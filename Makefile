@@ -3,6 +3,7 @@ CC = gcc
 
 h = ./headers/
 c = ./sources/
+o = ./o/
 
 ifeq ($(OS),Windows_NT)
 	CFLAGS += -D WIN32
@@ -16,15 +17,15 @@ else
 	SDL_DIR=${HOME}/SDL2
 	SDL_LIB_DIR=${SDL_DIR}/lib
 	SDL_INC_DIR=${SDL_DIR}/include
-	LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2_image -lSDL2_ttf
+	LIBS=-L${SDL_LIB_DIR} -lSDL2_image -lSDL2_ttf -lSDL2
 	INCS=-I${SDL_INC_DIR}
 endif
 
-all: map testListe testsdl dep_matrice
+all: map testListe testsdl deplacement dep_matrice
 
 map: codemap decodemap
 
-testListe: liste.o testListe.o
+testListe: ${o}liste.o ${o}testListe.o
 	${CC} $^ -o $@ ${CFLAGS}
 
 codemap: ${c}codemap.c
@@ -33,14 +34,17 @@ codemap: ${c}codemap.c
 decodemap: ${c}decodemap.c
 	${CC} $^ -o $@ ${CFLAGS}
 
-testsdl: sdl_fonctions.o test_SDL.o
-	${CC} $^ -o $@ ${LIBS} ${INCS} ${CFLAGS}
+testsdl: ${o}sdl_fonctions.o ${o}test_SDL.o
+	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
+
+deplacement: ${c}deplacement.c
+	${CC} $^ -o $@ ${CFLAGS}
 
 dep_matrice: ${c}dep_matrice.c
 	${CC} $^ -o $@ ${CFLAGS}
 
-%.o: ${c}%.c
-	${CC} -c $< ${LIBS} ${INCS} ${CFLAGS}
+${o}%.o: ${c}%.c
+	${CC} $< -c -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
 clean:
 	$(if $(OS) == Windows_NT, del /s *.o, rm -rf *.o)

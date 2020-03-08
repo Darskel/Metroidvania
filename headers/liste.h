@@ -6,6 +6,9 @@
  * \date 13/02/2020
 */
 
+#ifndef LISTE_INCLUDED
+#define LISTE_INCLUDED
+
 /**
  * \struct elemListe_s
  * \brief Un élément d'une liste (pouvant aussi être le drapeau de la liste)
@@ -39,3 +42,5 @@ void oterElm(liste_t *maListe);
 void ajoutDroit(liste_t *maListe, void *v);
 void ajoutGauche(liste_t *maListe, void *v);
 void supListe(liste_t **maListe);
+
+#endif

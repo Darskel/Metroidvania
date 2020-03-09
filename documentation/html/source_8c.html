@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Metroidvania: Référence du fichier source.c</title>
+<title>Metroidvania: Référence du fichier sources/source.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,21 +30,18 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.17 -->
+<!-- Généré par Doxygen 1.8.13 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
-/* @license-end */
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(function() {
   initMenu('',true,false,'search.php','Recherche');
   $(document).ready(function() { init_search(); });
 });
-/* @license-end */</script>
+</script>
 <div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -60,9 +57,14 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_08d237fc27d4ecd563f71c5d52f2fecc.html">sources</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Fonctions</a>  </div>
   <div class="headertitle">
 <div class="title">Référence du fichier source.c</div>  </div>
@@ -71,18 +73,32 @@ $(function() {
 
 <p>Fonctions de lecture d'une salle.  
 <a href="#details">Plus de détails...</a></p>
-<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;dirent.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="structs_8h_source.html">structs.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="liste_8h_source.html">liste.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="structs_8h_source.html">../headers/structs.h</a>&quot;</code><br />
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ab146d4d97ad31f63e0e77b770cfb08a8"><td class="memItemLeft" align="right" valign="top"><a id="ab146d4d97ad31f63e0e77b770cfb08a8"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>DIR_SAUV</b>&#160;&#160;&#160;&quot;./&quot;</td></tr>
+<tr class="separator:ab146d4d97ad31f63e0e77b770cfb08a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
+<tr class="memitem:af7916edbfbb9a2021f0a9802369c76d7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#af7916edbfbb9a2021f0a9802369c76d7">sauvegarder</a> (int numSauv, int hp, char *salle, <a class="el" href="structposition__s.html">position_t</a> *dep, int inventaire[], char *nomObjs[])</td></tr>
+<tr class="memdesc:af7916edbfbb9a2021f0a9802369c76d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sauvegarde l'état de la partie.  <a href="#af7916edbfbb9a2021f0a9802369c76d7">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af7916edbfbb9a2021f0a9802369c76d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae552ae3538b4ad44354aa761534d1116"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#ae552ae3538b4ad44354aa761534d1116">chargerSauvegarde</a> (int numSauv, char *salle, <a class="el" href="structpersonnage__s.html">personnage_t</a> *perso, int inventaire[], char *nomObjs[])</td></tr>
+<tr class="memdesc:ae552ae3538b4ad44354aa761534d1116"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sauvegarde l'état de la partie.  <a href="#ae552ae3538b4ad44354aa761534d1116">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae552ae3538b4ad44354aa761534d1116"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5237d1625ec6ab16ef2c4f0690bbfb8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#ad5237d1625ec6ab16ef2c4f0690bbfb8">nettoyerSalle</a> (<a class="el" href="structsalle__s.html">salle_t</a> **salle)</td></tr>
-<tr class="memdesc:ad5237d1625ec6ab16ef2c4f0690bbfb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nettoie et supprime la structure salle donnée.  <a href="source_8c.html#ad5237d1625ec6ab16ef2c4f0690bbfb8">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:ad5237d1625ec6ab16ef2c4f0690bbfb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nettoie et supprime la structure salle donnée.  <a href="#ad5237d1625ec6ab16ef2c4f0690bbfb8">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ad5237d1625ec6ab16ef2c4f0690bbfb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefc148eb203f3f1e27c3dd7a8f5a2333"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#aefc148eb203f3f1e27c3dd7a8f5a2333">lireSalle</a> (char *nomFichier, <a class="el" href="structsalle__s.html">salle_t</a> *salle)</td></tr>
-<tr class="memdesc:aefc148eb203f3f1e27c3dd7a8f5a2333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie la structure salle pour la nouvelle salle.  <a href="source_8c.html#aefc148eb203f3f1e27c3dd7a8f5a2333">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:aefc148eb203f3f1e27c3dd7a8f5a2333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie la structure salle pour la nouvelle salle.  <a href="#aefc148eb203f3f1e27c3dd7a8f5a2333">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aefc148eb203f3f1e27c3dd7a8f5a2333"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
@@ -91,6 +107,66 @@ Fonctions</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>13/02/2020 </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="ae552ae3538b4ad44354aa761534d1116"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae552ae3538b4ad44354aa761534d1116">&#9670;&nbsp;</a></span>chargerSauvegarde()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int chargerSauvegarde </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numSauv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>salle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td>
+          <td class="paramname"><em>perso</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>inventaire</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomObjs</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sauvegarde l'état de la partie. </p>
+<p>Les paramètres numSauv et nomObjs doivent être définis avant, les autres paramètres seront remplis par cette fonction</p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numSauv</td><td>numéro de la sauvegarde (entre 1 et 3) </td></tr>
+    <tr><td class="paramname">salle</td><td>nom de la salle à charger </td></tr>
+    <tr><td class="paramname">perso</td><td>personnage (structure personnage_t) à remplir </td></tr>
+    <tr><td class="paramname">inventaire</td><td>tableau contenant l'état de l'inventaire du personnage </td></tr>
+    <tr><td class="paramname">nomObjs</td><td>tableau contenant le nom des objets de l'inventaire dans l'ordre</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>un code erreur en fonction de l'erreur: -1 = Mauvais numéro de sauvegarde, -2 = impossible d'ouvrir ou créer le fichier; le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès), ou 0 si le fichier de sauvegarde est vide </dd></dl>
+
+</div>
+</div>
 <a id="aefc148eb203f3f1e27c3dd7a8f5a2333"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aefc148eb203f3f1e27c3dd7a8f5a2333">&#9670;&nbsp;</a></span>lireSalle()</h2>
 
@@ -155,12 +231,78 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
+<a id="af7916edbfbb9a2021f0a9802369c76d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7916edbfbb9a2021f0a9802369c76d7">&#9670;&nbsp;</a></span>sauvegarder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sauvegarder </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numSauv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>hp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>salle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structposition__s.html">position_t</a> *&#160;</td>
+          <td class="paramname"><em>dep</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>inventaire</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomObjs</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sauvegarde l'état de la partie. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numSauv</td><td>numéro de la sauvegarde (entre 1 et 3) </td></tr>
+    <tr><td class="paramname">hp</td><td>nombre de point de vies du personnage principal </td></tr>
+    <tr><td class="paramname">salle</td><td>nom de la dernière salle visité par le personnage principal </td></tr>
+    <tr><td class="paramname">dep</td><td>position(position_t) d'arrivé dans la salle (position de départ après chargement) </td></tr>
+    <tr><td class="paramname">inventaire</td><td>tableau contenant l'état de l'inventaire du personnage </td></tr>
+    <tr><td class="paramname">nomObjs</td><td>tableau contenant le nom des objets de l'inventaire dans l'ordre</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>un code erreur en fonction de l'erreur: -1 = Mauvais numéro de sauvegarde, -2 = impossible d'ouvrir ou créer le fichier; ou le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès) </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Généré par &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
+</a> 1.8.13
 </small></address>
 </body>
 </html>

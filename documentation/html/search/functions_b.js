@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['valeurelm_127',['valeurElm',['../liste_8c.html#a3b8be3ec8bdf89c1edc35490a6228515',1,'valeurElm(liste_t *maListe, void *v):&#160;liste.c'],['../liste_8h.html#a3b8be3ec8bdf89c1edc35490a6228515',1,'valeurElm(liste_t *maListe, void *v):&#160;liste.c']]]
+  ['quitter_5fsdl',['quitter_SDL',['../sdl__fonctions_8h.html#ae6d762efc12860f009555b28b7a9b34e',1,'quitter_SDL(SDL_Window *fenetre):&#160;sdl_fonctions.c'],['../sdl__fonctions_8c.html#ae6d762efc12860f009555b28b7a9b34e',1,'quitter_SDL(SDL_Window *fenetre):&#160;sdl_fonctions.c']]]
 ];

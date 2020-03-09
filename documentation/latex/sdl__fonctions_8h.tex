@@ -1,0 +1,210 @@
+\hypertarget{sdl__fonctions_8h}{}\section{Référence du fichier headers/sdl\+\_\+fonctions.h}
+\label{sdl__fonctions_8h}\index{headers/sdl\+\_\+fonctions.\+h@{headers/sdl\+\_\+fonctions.\+h}}
+
+
+Header pour la librairie de fonctions et les constantes liées à l\textquotesingle{}usage de la S\+D\+L2.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}structs.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{sdl__fonctions_8h_a83462e274779baaec00383d7487c44bf}\label{sdl__fonctions_8h_a83462e274779baaec00383d7487c44bf}} 
+\#define {\bfseries N\+B\+S\+P\+R\+I\+T\+ES}~17
+\item 
+\mbox{\Hypertarget{sdl__fonctions_8h_a01bb5f060b3487835f42c74e5267e498}\label{sdl__fonctions_8h_a01bb5f060b3487835f42c74e5267e498}} 
+\#define {\bfseries V\+I\+T\+E\+S\+SE}~1
+\item 
+\mbox{\Hypertarget{sdl__fonctions_8h_a35c315000bd7afc77afef827715d9eb3}\label{sdl__fonctions_8h_a35c315000bd7afc77afef827715d9eb3}} 
+\#define {\bfseries R\+E\+S\+\_\+H}~1280
+\item 
+\mbox{\Hypertarget{sdl__fonctions_8h_af188d83fb630729c0baf032cea48d27f}\label{sdl__fonctions_8h_af188d83fb630729c0baf032cea48d27f}} 
+\#define {\bfseries R\+E\+S\+\_\+V}~720
+\item 
+\mbox{\Hypertarget{sdl__fonctions_8h_ac92ca5ab87034a348decad7ee8d4bd1b}\label{sdl__fonctions_8h_ac92ca5ab87034a348decad7ee8d4bd1b}} 
+\#define {\bfseries F\+PS}~60
+\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+S\+D\+L\+\_\+\+Window $\ast$ \hyperlink{sdl__fonctions_8h_aef9e4b5ba212589eec22d7a659b28192}{initialisation\+\_\+\+S\+DL} ()
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}initalisation de la S\+DL et de création de la fenetre. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_ae6d762efc12860f009555b28b7a9b34e}{quitter\+\_\+\+S\+DL} (S\+D\+L\+\_\+\+Window $\ast$fenetre)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet de détruire la fenetre et quitter la S\+DL. \end{DoxyCompactList}\item 
+int \hyperlink{sdl__fonctions_8h_a2bbddb87a40194682f4546c6230de631}{evenements} (S\+D\+L\+\_\+\+Window $\ast$fenetre)
+\begin{DoxyCompactList}\small\item\em Fonction de gestions des evenements. \end{DoxyCompactList}\item 
+int \hyperlink{sdl__fonctions_8h_ace268ecb7ed08ec8ebb0739aa30334b4}{fullscreen\+\_\+switch} (S\+D\+L\+\_\+\+Window $\ast$fenetre, int state)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet de basculer du plein écran au fenetré \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a2911b01eac3be334c8b85f94839fa637}{initialiser\+\_\+sprites\+\_\+personnages} (S\+D\+L\+\_\+\+Surface $\ast$$\ast$tab, int taille)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet d\textquotesingle{}initialiser un tableau de sprites. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_aaee8c2c8487108abf9321d7cf1e7342e}{afficher\+\_\+surface} (S\+D\+L\+\_\+\+Surface $\ast$zone, S\+D\+L\+\_\+\+Surface $\ast$sprite, \hyperlink{structposition__s}{position\+\_\+t} position)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}affichage d\textquotesingle{}un sprite sur une zone. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_aedf70766ecc6ce21d9d58fd9726de935}{nettoyage\+\_\+zone} (S\+D\+L\+\_\+\+Surface $\ast$zone)
+\begin{DoxyCompactList}\small\item\em Fonction de nettoyage d\textquotesingle{}une zone. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a416f82b1fd7f6724728aaa8fd2ef2d8c}{supprimer\+\_\+sprites} (S\+D\+L\+\_\+\+Surface $\ast$$\ast$tab, int nb\+\_\+sprites)
+\begin{DoxyCompactList}\small\item\em Fonction de suppression d\textquotesingle{}un tableau de sprites. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Header pour la librairie de fonctions et les constantes liées à l\textquotesingle{}usage de la S\+D\+L2. 
+
+\begin{DoxyAuthor}{Auteur}
+Marie-\/\+Nina M\+U\+N\+AR L2 Info Le Mans 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+09/03/2020
+\end{DoxyDate}
+\begin{DoxyAuthor}{Auteur}
+Marie-\/\+Nina M\+U\+N\+AR L2 Info Le Mans 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+2.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+25/02/2020 
+\end{DoxyDate}
+
+
+\subsection{Documentation des fonctions}
+\mbox{\Hypertarget{sdl__fonctions_8h_aaee8c2c8487108abf9321d7cf1e7342e}\label{sdl__fonctions_8h_aaee8c2c8487108abf9321d7cf1e7342e}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!afficher\+\_\+surface@{afficher\+\_\+surface}}
+\index{afficher\+\_\+surface@{afficher\+\_\+surface}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{afficher\+\_\+surface()}{afficher\_surface()}}
+{\footnotesize\ttfamily void afficher\+\_\+surface (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{zone,  }\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{sprite,  }\item[{\hyperlink{structposition__s}{position\+\_\+t}}]{position }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}affichage d\textquotesingle{}un sprite sur une zone. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em zone} & la surface de destination pour l\textquotesingle{}affichage \\
+\hline
+{\em sprite} & le sprite à afficher\+\_\+surface \\
+\hline
+{\em position} & les coordonnées de destination du sprite sur la zone \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a2bbddb87a40194682f4546c6230de631}\label{sdl__fonctions_8h_a2bbddb87a40194682f4546c6230de631}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!evenements@{evenements}}
+\index{evenements@{evenements}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{evenements()}{evenements()}}
+{\footnotesize\ttfamily int evenements (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Window $\ast$}]{fenetre }\end{DoxyParamCaption})}
+
+
+
+Fonction de gestions des evenements. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em fenetre} & la fenetre d\textquotesingle{}action \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+0 si tout s\textquotesingle{}est bien déroulé (arrêt du programme) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_ace268ecb7ed08ec8ebb0739aa30334b4}\label{sdl__fonctions_8h_ace268ecb7ed08ec8ebb0739aa30334b4}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!fullscreen\+\_\+switch@{fullscreen\+\_\+switch}}
+\index{fullscreen\+\_\+switch@{fullscreen\+\_\+switch}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{fullscreen\+\_\+switch()}{fullscreen\_switch()}}
+{\footnotesize\ttfamily int fullscreen\+\_\+switch (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Window $\ast$}]{fenetre,  }\item[{int}]{state }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet de basculer du plein écran au fenetré 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em fenetre} & le pointeur sur la fenetre S\+D\+L\+\_\+\+Window utilisée \\
+\hline
+{\em state} & l\textquotesingle{}état actuel de la fenetre (plein ecran ou fenetré) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+l\textquotesingle{}entier indiquant le nouvel état de la fenetre 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_aef9e4b5ba212589eec22d7a659b28192}\label{sdl__fonctions_8h_aef9e4b5ba212589eec22d7a659b28192}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!initialisation\+\_\+\+S\+DL@{initialisation\+\_\+\+S\+DL}}
+\index{initialisation\+\_\+\+S\+DL@{initialisation\+\_\+\+S\+DL}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{initialisation\+\_\+\+S\+D\+L()}{initialisation\_SDL()}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Window$\ast$ initialisation\+\_\+\+S\+DL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}initalisation de la S\+DL et de création de la fenetre. 
+
+\begin{DoxyReturn}{Renvoie}
+le pointeur sur la fenetre S\+D\+L\+\_\+\+Window créée 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_a2911b01eac3be334c8b85f94839fa637}\label{sdl__fonctions_8h_a2911b01eac3be334c8b85f94839fa637}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!initialiser\+\_\+sprites\+\_\+personnages@{initialiser\+\_\+sprites\+\_\+personnages}}
+\index{initialiser\+\_\+sprites\+\_\+personnages@{initialiser\+\_\+sprites\+\_\+personnages}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{initialiser\+\_\+sprites\+\_\+personnages()}{initialiser\_sprites\_personnages()}}
+{\footnotesize\ttfamily void initialiser\+\_\+sprites\+\_\+personnages (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Surface $\ast$$\ast$}]{tab,  }\item[{int}]{taille }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet d\textquotesingle{}initialiser un tableau de sprites. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em tab} & tableau de sprites à intialiser \\
+\hline
+{\em taille} & la taille du tableau à initialiser \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_aedf70766ecc6ce21d9d58fd9726de935}\label{sdl__fonctions_8h_aedf70766ecc6ce21d9d58fd9726de935}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!nettoyage\+\_\+zone@{nettoyage\+\_\+zone}}
+\index{nettoyage\+\_\+zone@{nettoyage\+\_\+zone}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{nettoyage\+\_\+zone()}{nettoyage\_zone()}}
+{\footnotesize\ttfamily void nettoyage\+\_\+zone (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{zone }\end{DoxyParamCaption})}
+
+
+
+Fonction de nettoyage d\textquotesingle{}une zone. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em zone} & la surface à nettoyer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_ae6d762efc12860f009555b28b7a9b34e}\label{sdl__fonctions_8h_ae6d762efc12860f009555b28b7a9b34e}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!quitter\+\_\+\+S\+DL@{quitter\+\_\+\+S\+DL}}
+\index{quitter\+\_\+\+S\+DL@{quitter\+\_\+\+S\+DL}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{quitter\+\_\+\+S\+D\+L()}{quitter\_SDL()}}
+{\footnotesize\ttfamily void quitter\+\_\+\+S\+DL (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Window $\ast$}]{fenetre }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet de détruire la fenetre et quitter la S\+DL. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em fenetre} & le pointeur sur la fenetre S\+D\+L\+\_\+\+Window utilisée \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a416f82b1fd7f6724728aaa8fd2ef2d8c}\label{sdl__fonctions_8h_a416f82b1fd7f6724728aaa8fd2ef2d8c}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!supprimer\+\_\+sprites@{supprimer\+\_\+sprites}}
+\index{supprimer\+\_\+sprites@{supprimer\+\_\+sprites}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{supprimer\+\_\+sprites()}{supprimer\_sprites()}}
+{\footnotesize\ttfamily void supprimer\+\_\+sprites (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Surface $\ast$$\ast$}]{tab,  }\item[{int}]{nb\+\_\+sprites }\end{DoxyParamCaption})}
+
+
+
+Fonction de suppression d\textquotesingle{}un tableau de sprites. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em tab} & tableau de sprites \\
+\hline
+{\em nb\+\_\+sprites} & nombre de sprites dans le tableau \\
+\hline
+\end{DoxyParams}

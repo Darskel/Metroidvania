@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Metroidvania: Référence du fichier liste.c</title>
+<title>Metroidvania: Référence du fichier sources/liste.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,21 +30,18 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.17 -->
+<!-- Généré par Doxygen 1.8.13 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
-/* @license-end */
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(function() {
   initMenu('',true,false,'search.php','Recherche');
   $(document).ready(function() { init_search(); });
 });
-/* @license-end */</script>
+</script>
 <div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -60,6 +57,10 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_08d237fc27d4ecd563f71c5d52f2fecc.html">sources</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -73,48 +74,48 @@ $(function() {
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="liste_8h_source.html">liste.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="structs_8h_source.html">../headers/structs.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
 <tr class="memitem:a7439a021fe740a427e51831efbf44a7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structliste__s.html">liste_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_8c.html#a7439a021fe740a427e51831efbf44a7a">creerListe</a> (char *type)</td></tr>
-<tr class="memdesc:a7439a021fe740a427e51831efbf44a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creer une liste du type demandé ( <em>monstre_t</em> ou <em>porte_t</em> )  <a href="liste_8c.html#a7439a021fe740a427e51831efbf44a7a">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a7439a021fe740a427e51831efbf44a7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creer une liste du type demandé ( <em>monstre_t</em> ou <em>porte_t</em> )  <a href="#a7439a021fe740a427e51831efbf44a7a">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a7439a021fe740a427e51831efbf44a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff61901bdffe0594ba1e1571fa6620d0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_8c.html#aff61901bdffe0594ba1e1571fa6620d0">listeVide</a> (<a class="el" href="structliste__s.html">liste_t</a> *maListe)</td></tr>
-<tr class="memdesc:aff61901bdffe0594ba1e1571fa6620d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indique si la liste est vide ou non.  <a href="liste_8c.html#aff61901bdffe0594ba1e1571fa6620d0">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:aff61901bdffe0594ba1e1571fa6620d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indique si la liste est vide ou non.  <a href="#aff61901bdffe0594ba1e1571fa6620d0">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aff61901bdffe0594ba1e1571fa6620d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a28644c1964d291e68300494d2a97f9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_8c.html#a2a28644c1964d291e68300494d2a97f9">horsListe</a> (<a class="el" href="structliste__s.html">liste_t</a> *maListe)</td></tr>
-<tr class="memdesc:a2a28644c1964d291e68300494d2a97f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indique si l'élément courant est hors liste.  <a href="liste_8c.html#a2a28644c1964d291e68300494d2a97f9">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a2a28644c1964d291e68300494d2a97f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indique si l'élément courant est hors liste.  <a href="#a2a28644c1964d291e68300494d2a97f9">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a2a28644c1964d291e68300494d2a97f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeee5a6a9341a983ee0933dab7ff2d364"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_8c.html#aeee5a6a9341a983ee0933dab7ff2d364">enTete</a> (<a class="el" href="structliste__s.html">liste_t</a> *maListe)</td></tr>
-<tr class="memdesc:aeee5a6a9341a983ee0933dab7ff2d364"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met en tête de liste.  <a href="liste_8c.html#aeee5a6a9341a983ee0933dab7ff2d364">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:aeee5a6a9341a983ee0933dab7ff2d364"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met en tête de liste.  <a href="#aeee5a6a9341a983ee0933dab7ff2d364">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aeee5a6a9341a983ee0933dab7ff2d364"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad543085983cbe0a6bd1c7be80c6e0459"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_8c.html#ad543085983cbe0a6bd1c7be80c6e0459">enQueue</a> (<a class="el" href="structliste__s.html">liste_t</a> *maListe)</td></tr>
-<tr class="memdesc:ad543085983cbe0a6bd1c7be80c6e0459"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met en queue de liste.  <a href="liste_8c.html#ad543085983cbe0a6bd1c7be80c6e0459">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:ad543085983cbe0a6bd1c7be80c6e0459"><td class="mdescLeft">&#160;</td><td class="mdescRight">Met en queue de liste.  <a href="#ad543085983cbe0a6bd1c7be80c6e0459">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ad543085983cbe0a6bd1c7be80c6e0459"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10b3e8967207aed77f0fe2c087c79782"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_8c.html#a10b3e8967207aed77f0fe2c087c79782">suivant</a> (<a class="el" href="structliste__s.html">liste_t</a> *maListe)</td></tr>
-<tr class="memdesc:a10b3e8967207aed77f0fe2c087c79782"><td class="mdescLeft">&#160;</td><td class="mdescRight">Passe à l'élément suivant de la liste.  <a href="liste_8c.html#a10b3e8967207aed77f0fe2c087c79782">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a10b3e8967207aed77f0fe2c087c79782"><td class="mdescLeft">&#160;</td><td class="mdescRight">Passe à l'élément suivant de la liste.  <a href="#a10b3e8967207aed77f0fe2c087c79782">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a10b3e8967207aed77f0fe2c087c79782"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d633040067cf4ba37700d6e96c09372"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_8c.html#a5d633040067cf4ba37700d6e96c09372">precedent</a> (<a class="el" href="structliste__s.html">liste_t</a> *maListe)</td></tr>
-<tr class="memdesc:a5d633040067cf4ba37700d6e96c09372"><td class="mdescLeft">&#160;</td><td class="mdescRight">Revient à l'élément précédent de la liste.  <a href="liste_8c.html#a5d633040067cf4ba37700d6e96c09372">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a5d633040067cf4ba37700d6e96c09372"><td class="mdescLeft">&#160;</td><td class="mdescRight">Revient à l'élément précédent de la liste.  <a href="#a5d633040067cf4ba37700d6e96c09372">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a5d633040067cf4ba37700d6e96c09372"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b8be3ec8bdf89c1edc35490a6228515"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_8c.html#a3b8be3ec8bdf89c1edc35490a6228515">valeurElm</a> (<a class="el" href="structliste__s.html">liste_t</a> *maListe, void *v)</td></tr>
-<tr class="memdesc:a3b8be3ec8bdf89c1edc35490a6228515"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère la valeur de l'élément courant de la liste.  <a href="liste_8c.html#a3b8be3ec8bdf89c1edc35490a6228515">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a3b8be3ec8bdf89c1edc35490a6228515"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère la valeur de l'élément courant de la liste.  <a href="#a3b8be3ec8bdf89c1edc35490a6228515">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a3b8be3ec8bdf89c1edc35490a6228515"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb04638007419308b859463894f42467"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_8c.html#abb04638007419308b859463894f42467">modifElm</a> (<a class="el" href="structliste__s.html">liste_t</a> *maListe, void *v)</td></tr>
-<tr class="memdesc:abb04638007419308b859463894f42467"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie l'élément courant de la liste.  <a href="liste_8c.html#abb04638007419308b859463894f42467">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:abb04638007419308b859463894f42467"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie l'élément courant de la liste.  <a href="#abb04638007419308b859463894f42467">Plus de détails...</a><br /></td></tr>
 <tr class="separator:abb04638007419308b859463894f42467"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5aabab457aa0d19d4fc5ca67dc2d375f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_8c.html#a5aabab457aa0d19d4fc5ca67dc2d375f">oterElm</a> (<a class="el" href="structliste__s.html">liste_t</a> *maListe)</td></tr>
-<tr class="memdesc:a5aabab457aa0d19d4fc5ca67dc2d375f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ote l'élément courant de la liste.  <a href="liste_8c.html#a5aabab457aa0d19d4fc5ca67dc2d375f">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a5aabab457aa0d19d4fc5ca67dc2d375f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ote l'élément courant de la liste.  <a href="#a5aabab457aa0d19d4fc5ca67dc2d375f">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a5aabab457aa0d19d4fc5ca67dc2d375f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad44b96d15cce6e1f3b56467199212c5e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_8c.html#ad44b96d15cce6e1f3b56467199212c5e">ajoutDroit</a> (<a class="el" href="structliste__s.html">liste_t</a> *maListe, void *v)</td></tr>
-<tr class="memdesc:ad44b96d15cce6e1f3b56467199212c5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute un élément dans la liste à droite de l'élément courrant.  <a href="liste_8c.html#ad44b96d15cce6e1f3b56467199212c5e">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:ad44b96d15cce6e1f3b56467199212c5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute un élément dans la liste à droite de l'élément courrant.  <a href="#ad44b96d15cce6e1f3b56467199212c5e">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ad44b96d15cce6e1f3b56467199212c5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52b4b3081e828982d4ad60daafd45cd8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_8c.html#a52b4b3081e828982d4ad60daafd45cd8">ajoutGauche</a> (<a class="el" href="structliste__s.html">liste_t</a> *maListe, void *v)</td></tr>
-<tr class="memdesc:a52b4b3081e828982d4ad60daafd45cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute un élément dans la liste à gauche de l'élément courrant.  <a href="liste_8c.html#a52b4b3081e828982d4ad60daafd45cd8">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a52b4b3081e828982d4ad60daafd45cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute un élément dans la liste à gauche de l'élément courrant.  <a href="#a52b4b3081e828982d4ad60daafd45cd8">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a52b4b3081e828982d4ad60daafd45cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a201de64dd6910a0e8fc5a46c386bdd46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="liste_8c.html#a201de64dd6910a0e8fc5a46c386bdd46">supListe</a> (<a class="el" href="structliste__s.html">liste_t</a> **maListe)</td></tr>
-<tr class="memdesc:a201de64dd6910a0e8fc5a46c386bdd46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supprime la liste donné  <a href="liste_8c.html#a201de64dd6910a0e8fc5a46c386bdd46">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a201de64dd6910a0e8fc5a46c386bdd46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supprime la liste donné  <a href="#a201de64dd6910a0e8fc5a46c386bdd46">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a201de64dd6910a0e8fc5a46c386bdd46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
@@ -519,7 +520,7 @@ Fonctions</h2></td></tr>
 <hr class="footer"/><address class="footer"><small>
 Généré par &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
+</a> 1.8.13
 </small></address>
 </body>
 </html>

@@ -1,5 +1,5 @@
-\hypertarget{test_liste_8c}{}\doxysection{Référence du fichier test\+Liste.\+c}
-\label{test_liste_8c}\index{testListe.c@{testListe.c}}
+\hypertarget{test_liste_8c}{}\section{Référence du fichier sources/test\+Liste.c}
+\label{test_liste_8c}\index{sources/test\+Liste.\+c@{sources/test\+Liste.\+c}}
 
 
 Programme permettant de tester la librairie de liste.  
@@ -7,17 +7,18 @@ Programme permettant de tester la librairie de liste.
 
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
-{\ttfamily \#include \char`\"{}liste.\+h\char`\"{}}\newline
-\doxysubsection*{Fonctions}
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../headers/structs.\+h\char`\"{}}\newline
+\subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{test_liste_8c_af580b31dde12f824d7897804edb18be3}{test\+Elem}} (\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$l, int n)
+int \hyperlink{test_liste_8c_af580b31dde12f824d7897804edb18be3}{test\+Elem} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$l, int n)
 \begin{DoxyCompactList}\small\item\em Test si les éléments sont dans l\textquotesingle{}ordre. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{test_liste_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+int \hyperlink{test_liste_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
 \end{DoxyCompactItemize}
 
 
-\doxysubsection{Description détaillée}
+\subsection{Description détaillée}
 Programme permettant de tester la librairie de liste. 
 
 \begin{DoxyAuthor}{Auteur}
@@ -31,11 +32,11 @@ Thomas D\+I\+D\+I\+ER L2 Info Le Mans
 \end{DoxyDate}
 
 
-\doxysubsection{Documentation des fonctions}
+\subsection{Documentation des fonctions}
 \mbox{\Hypertarget{test_liste_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test_liste_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
-\index{testListe.c@{testListe.c}!main@{main}}
-\index{main@{main}!testListe.c@{testListe.c}}
-\doxysubsubsection{\texorpdfstring{main()}{main()}}
+\index{test\+Liste.\+c@{test\+Liste.\+c}!main@{main}}
+\index{main@{main}!test\+Liste.\+c@{test\+Liste.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 $<$ liste principale
@@ -44,11 +45,11 @@ $<$ structure pour importer dans la liste
 
 $<$ structure pour importer dans la liste
 
-$<$ Tableau pour faire le traitement sur les deux types de liste\mbox{\Hypertarget{test_liste_8c_af580b31dde12f824d7897804edb18be3}\label{test_liste_8c_af580b31dde12f824d7897804edb18be3}} 
-\index{testListe.c@{testListe.c}!testElem@{testElem}}
-\index{testElem@{testElem}!testListe.c@{testListe.c}}
-\doxysubsubsection{\texorpdfstring{testElem()}{testElem()}}
-{\footnotesize\ttfamily int test\+Elem (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$}]{l,  }\item[{int}]{n }\end{DoxyParamCaption})}
+$<$ Tableau pour faire le traitement sur les deux types de liste \mbox{\Hypertarget{test_liste_8c_af580b31dde12f824d7897804edb18be3}\label{test_liste_8c_af580b31dde12f824d7897804edb18be3}} 
+\index{test\+Liste.\+c@{test\+Liste.\+c}!test\+Elem@{test\+Elem}}
+\index{test\+Elem@{test\+Elem}!test\+Liste.\+c@{test\+Liste.\+c}}
+\subsubsection{\texorpdfstring{test\+Elem()}{testElem()}}
+{\footnotesize\ttfamily int test\+Elem (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$}]{l,  }\item[{int}]{n }\end{DoxyParamCaption})}
 
 
 
@@ -68,4 +69,4 @@ Ce test est pour une liste de 2 éléments dont le premier contient 1 dans sprit
 \end{DoxyReturn}
 $<$ structure temporaire pour tester les valeurs
 
-$<$ structure temporaire pour tester les valeurs
+$<$ structure temporaire pour tester les valeurs 

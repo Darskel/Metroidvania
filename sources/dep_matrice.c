@@ -4,7 +4,29 @@
 #define X 5
 #define Y 5
 
+/**
+ * \file sdl_fonctions.h
+ * \brief Header pour la librairie de fonctions et les constantes liées à l'usage de la SDL2
+ * \author Marie-Nina MUNAR L2 Info Le Mans
+ * \version 2.0
+ * \date 25/02/2020
+*/
+
+/**
+ * \enum direction
+ * \brief Premet l'utilisation des 4 directions dans les fonctions
+*/
 typedef enum {BAS, HAUT, GAUCHE, DROITE} direction;
+
+
+/**
+ * \brief Deplace le joueur depuis sa position selon la direction
+ *
+ * @param tab tableau où se trouve le point à déplacer
+ * @param x indice d'abscisse où se trouve l'element
+ * @param y indice d'ordonnée où se trouve l'element
+ * @param direction direction vers laquelle bouge l'element (type enum)
+ */
 
 void deplacer(int * tab, int x, int y, direction direction){
   switch(direction){
@@ -35,6 +57,12 @@ void deplacer(int * tab, int x, int y, direction direction){
   }
 }
 
+/**
+ * \brief Affiche la matrice
+ *
+ * @param tab matrice à afficher
+ */
+
 void afficher_mat(int * tab){
   for(int x=0; x<X; x++){
     for(int y=0; y<Y; y++){
@@ -44,6 +72,12 @@ void afficher_mat(int * tab){
   }
 }
 
+/**
+ * \brief Reinitialise la matrice à 0
+ *
+ * @param tab matrice à reinitialiser
+ */
+
 void clean_mat(int * tab){
   for(int x=0; x<X; x++){
     for(int y=0; y<Y; y++){
@@ -51,6 +85,14 @@ void clean_mat(int * tab){
     }
   }
 }
+
+/**
+ * \brief Fait se déplacer un point dans toutes les directions
+ *
+ * @param tab tableau où se trouve le point à déplacer
+ * @param x indice d'abscisse où se trouve l'element
+ * @param y indice d'ordonnée où se trouve l'element
+ */
 
 void test_direction(int * tab, int x, int y){
   for(int dir=BAS; dir<=DROITE; dir++){
@@ -64,6 +106,11 @@ void test_direction(int * tab, int x, int y){
   }
 }
 
+/**
+ * \brief Test de déplacement dans toutes les directions à plusieurs endroits clés
+ *
+ * @return 0 si tout s'est bien déroulé
+ */
 int main(){
   //Programme de test de la fonction de déplacement
   int x=0;
@@ -115,4 +162,5 @@ int main(){
   test_direction(tab, x, y);
   printf("\n\n");
   free(tab);
+  return 0;
 }

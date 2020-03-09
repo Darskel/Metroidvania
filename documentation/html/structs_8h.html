@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Metroidvania: Référence du fichier structs.h</title>
+<title>Metroidvania: Référence du fichier headers/structs.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,21 +30,18 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.17 -->
+<!-- Généré par Doxygen 1.8.13 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
-/* @license-end */
 </script>
 <script type="text/javascript" src="menudata.js"></script>
 <script type="text/javascript" src="menu.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(function() {
   initMenu('',true,false,'search.php','Recherche');
   $(document).ready(function() { init_search(); });
 });
-/* @license-end */</script>
+</script>
 <div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -60,6 +57,10 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html">headers</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -75,11 +76,14 @@ $(function() {
 <p>Ensemble de structures utilisées dans le projets.  
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="liste_8h_source.html">liste.h</a>&quot;</code><br />
 </div>
 <p><a href="structs_8h_source.html">Aller au code source de ce fichier.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtaille__t.html">taille_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structposition__s.html">position_s</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Une position représentée par deux valeurs entières.  <a href="structposition__s.html#details">Plus de détails...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,55 +120,64 @@ Macros</h2></td></tr>
 <tr class="memitem:a611cc9b5f655508482f3d7a9751c182a"><td class="memItemLeft" align="right" valign="top"><a id="a611cc9b5f655508482f3d7a9751c182a"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>CLEAR</b></td></tr>
 <tr class="separator:a611cc9b5f655508482f3d7a9751c182a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80fb826a684cf3f0d306b22aa100ddac"><td class="memItemLeft" align="right" valign="top"><a id="a80fb826a684cf3f0d306b22aa100ddac"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>RIGHT</b>&#160;&#160;&#160;0</td></tr>
-<tr class="separator:a80fb826a684cf3f0d306b22aa100ddac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1af6db5f19bb8f04997f5d53b2e3226e"><td class="memItemLeft" align="right" valign="top"><a id="a1af6db5f19bb8f04997f5d53b2e3226e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CREATE_DIR</b>(X)&#160;&#160;&#160;char Y[20] = &quot;mkdir &quot;; strcat(Y, X); system(Y);</td></tr>
+<tr class="separator:a1af6db5f19bb8f04997f5d53b2e3226e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14862d1ea290aaf4ce47601ceb2830ad"><td class="memItemLeft" align="right" valign="top"><a id="a14862d1ea290aaf4ce47601ceb2830ad"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>STRUCTS_INCLUDED</b></td></tr>
+<tr class="separator:a14862d1ea290aaf4ce47601ceb2830ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a437ef08681e7210d6678427030446a54"><td class="memItemLeft" align="right" valign="top"><a id="a437ef08681e7210d6678427030446a54"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>LEFT</b>&#160;&#160;&#160;1</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LEFT</b>&#160;&#160;&#160;0</td></tr>
 <tr class="separator:a437ef08681e7210d6678427030446a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80fb826a684cf3f0d306b22aa100ddac"><td class="memItemLeft" align="right" valign="top"><a id="a80fb826a684cf3f0d306b22aa100ddac"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RIGHT</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a80fb826a684cf3f0d306b22aa100ddac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fdcc1659ee790f8bdd196e7745ab403"><td class="memItemLeft" align="right" valign="top"><a id="a5fdcc1659ee790f8bdd196e7745ab403"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TAILLE_INVENTAIRE</b>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:a5fdcc1659ee790f8bdd196e7745ab403"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Définitions de type</h2></td></tr>
-<tr class="memitem:ae91e9d371efd32526f59e97a74a0e04b"><td class="memItemLeft" align="right" valign="top"><a id="ae91e9d371efd32526f59e97a74a0e04b"></a>
+<tr class="memitem:ad0edf461c60578ea071dc06a4b3a57b1"><td class="memItemLeft" align="right" valign="top"><a id="ad0edf461c60578ea071dc06a4b3a57b1"></a>
 typedef struct <a class="el" href="structposition__s.html">position_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>position_t</b></td></tr>
-<tr class="separator:ae91e9d371efd32526f59e97a74a0e04b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49a02de4e7eebe39d23e8a061fd9ef92"><td class="memItemLeft" align="right" valign="top"><a id="a49a02de4e7eebe39d23e8a061fd9ef92"></a>
+<tr class="separator:ad0edf461c60578ea071dc06a4b3a57b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54882e7c5a50e83d169b020d314a5d76"><td class="memItemLeft" align="right" valign="top"><a id="a54882e7c5a50e83d169b020d314a5d76"></a>
 typedef enum <a class="el" href="structs_8h.html#a81fbe2bfb808675f1d63cbfe1335c271">boulean_e</a>&#160;</td><td class="memItemRight" valign="bottom"><b>boolean_t</b></td></tr>
-<tr class="separator:a49a02de4e7eebe39d23e8a061fd9ef92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22760965d7fa9eefd589acc65326f8cd"><td class="memItemLeft" align="right" valign="top"><a id="a22760965d7fa9eefd589acc65326f8cd"></a>
+<tr class="separator:a54882e7c5a50e83d169b020d314a5d76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa774ec09009f9aca26a1f991980cc01d"><td class="memItemLeft" align="right" valign="top"><a id="aa774ec09009f9aca26a1f991980cc01d"></a>
 typedef enum <a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1e">indSprite_e</a>&#160;</td><td class="memItemRight" valign="bottom"><b>indSpritePer_t</b></td></tr>
-<tr class="separator:a22760965d7fa9eefd589acc65326f8cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a496ace1950a1d2f3aed4b9288e19c05b"><td class="memItemLeft" align="right" valign="top"><a id="a496ace1950a1d2f3aed4b9288e19c05b"></a>
+<tr class="separator:aa774ec09009f9aca26a1f991980cc01d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada6d98da4b79a612ca12f1778d890b4b"><td class="memItemLeft" align="right" valign="top"><a id="ada6d98da4b79a612ca12f1778d890b4b"></a>
 typedef struct <a class="el" href="structsalle__s.html">salle_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>salle_t</b></td></tr>
-<tr class="separator:a496ace1950a1d2f3aed4b9288e19c05b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ada6d98da4b79a612ca12f1778d890b4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22dc742b27da5ef525dc878fb8895311"><td class="memItemLeft" align="right" valign="top"><a id="a22dc742b27da5ef525dc878fb8895311"></a>
 typedef struct <a class="el" href="structfraction__s.html">fraction_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fraction_t</b></td></tr>
 <tr class="separator:a22dc742b27da5ef525dc878fb8895311"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30ebe87907585f4b427b0430b8e06965"><td class="memItemLeft" align="right" valign="top"><a id="a30ebe87907585f4b427b0430b8e06965"></a>
+<tr class="memitem:adf439d737c92b655ab850b476d7d4159"><td class="memItemLeft" align="right" valign="top"><a id="adf439d737c92b655ab850b476d7d4159"></a>
 typedef struct <a class="el" href="structfrac_pos__s.html">fracPos_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fracPos_t</b></td></tr>
-<tr class="separator:a30ebe87907585f4b427b0430b8e06965"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd108f1352454683c5a5580df44a5fd0"><td class="memItemLeft" align="right" valign="top"><a id="acd108f1352454683c5a5580df44a5fd0"></a>
+<tr class="separator:adf439d737c92b655ab850b476d7d4159"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeca7e7adc19e924d5fade8ea3c6937ac"><td class="memItemLeft" align="right" valign="top"><a id="aeca7e7adc19e924d5fade8ea3c6937ac"></a>
 typedef struct <a class="el" href="structpersonnage__s.html">personnage_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>personnage_t</b></td></tr>
-<tr class="separator:acd108f1352454683c5a5580df44a5fd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee1e74d8f0f281b05be2da2eb6e86bf6"><td class="memItemLeft" align="right" valign="top"><a id="aee1e74d8f0f281b05be2da2eb6e86bf6"></a>
+<tr class="separator:aeca7e7adc19e924d5fade8ea3c6937ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8de222b245924a766b375a60f04b3b8"><td class="memItemLeft" align="right" valign="top"><a id="af8de222b245924a766b375a60f04b3b8"></a>
 typedef struct <a class="el" href="structtype__monstre__s.html">type_monstre_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>type_monstre_t</b></td></tr>
-<tr class="separator:aee1e74d8f0f281b05be2da2eb6e86bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2475165f3195b53d2ffa1bbf1f5272b4"><td class="memItemLeft" align="right" valign="top"><a id="a2475165f3195b53d2ffa1bbf1f5272b4"></a>
+<tr class="separator:af8de222b245924a766b375a60f04b3b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a648a84f0c56bf2d963706cbea150092e"><td class="memItemLeft" align="right" valign="top"><a id="a648a84f0c56bf2d963706cbea150092e"></a>
 typedef struct <a class="el" href="structmonstre__s.html">monstre_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>monstre_t</b></td></tr>
-<tr class="separator:a2475165f3195b53d2ffa1bbf1f5272b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9113f25dcecc533b22963edfff207a0"><td class="memItemLeft" align="right" valign="top"><a id="ab9113f25dcecc533b22963edfff207a0"></a>
+<tr class="separator:a648a84f0c56bf2d963706cbea150092e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e64a39dbfabc75ff76144f2cfaf28e5"><td class="memItemLeft" align="right" valign="top"><a id="a6e64a39dbfabc75ff76144f2cfaf28e5"></a>
 typedef struct <a class="el" href="structbloc__s.html">bloc_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>bloc_t</b></td></tr>
-<tr class="separator:ab9113f25dcecc533b22963edfff207a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cceac2c7b4859dd4d68e5de6b7a8f70"><td class="memItemLeft" align="right" valign="top"><a id="a3cceac2c7b4859dd4d68e5de6b7a8f70"></a>
+<tr class="separator:a6e64a39dbfabc75ff76144f2cfaf28e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80cfff8fa904c28ac9883e5657918c3e"><td class="memItemLeft" align="right" valign="top"><a id="a80cfff8fa904c28ac9883e5657918c3e"></a>
 typedef struct <a class="el" href="structporte__s.html">porte_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>porte_t</b></td></tr>
-<tr class="separator:a3cceac2c7b4859dd4d68e5de6b7a8f70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a80cfff8fa904c28ac9883e5657918c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Énumérations</h2></td></tr>
 <tr class="memitem:a81fbe2bfb808675f1d63cbfe1335c271"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a81fbe2bfb808675f1d63cbfe1335c271">boulean_e</a> { <a class="el" href="structs_8h.html#a81fbe2bfb808675f1d63cbfe1335c271aa1e095cc966dbecf6a0d8aad75348d1a">FALSE</a>, 
 <a class="el" href="structs_8h.html#a81fbe2bfb808675f1d63cbfe1335c271aa82764c3079aea4e60c80e45befbb839">TRUE</a>
- }</td></tr>
-<tr class="memdesc:a81fbe2bfb808675f1d63cbfe1335c271"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet d'utiliser <em>TRUE</em> et <em>FALSE</em>.  <a href="structs_8h.html#a81fbe2bfb808675f1d63cbfe1335c271">Plus de détails...</a><br /></td></tr>
+ }<tr class="memdesc:a81fbe2bfb808675f1d63cbfe1335c271"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet d'utiliser <em>TRUE</em> et <em>FALSE</em>.  <a href="structs_8h.html#a81fbe2bfb808675f1d63cbfe1335c271">Plus de détails...</a><br /></td></tr>
+</td></tr>
 <tr class="separator:a81fbe2bfb808675f1d63cbfe1335c271"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc92dae96c834a587153fcb1fb87df1e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1e">indSprite_e</a> { <br />
 &#160;&#160;<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea7911229e7fd613f96aeaf9413c8251bc">SU</a>, 
@@ -189,8 +202,8 @@ typedef struct <a class="el" href="structporte__s.html">porte_s</a>&#160;</td><t
 <br />
 &#160;&#160;<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea7cf7aee82a1ca557ea9c8a1037f9eebc">JP8</a>
 <br />
- }</td></tr>
-<tr class="memdesc:acc92dae96c834a587153fcb1fb87df1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nom des indices des sprites.  <a href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1e">Plus de détails...</a><br /></td></tr>
+ }<tr class="memdesc:acc92dae96c834a587153fcb1fb87df1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nom des indices des sprites.  <a href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1e">Plus de détails...</a><br /></td></tr>
+</td></tr>
 <tr class="separator:acc92dae96c834a587153fcb1fb87df1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
@@ -278,7 +291,7 @@ typedef struct <a class="el" href="structporte__s.html">porte_s</a>&#160;</td><t
 <hr class="footer"/><address class="footer"><small>
 Généré par &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
+</a> 1.8.13
 </small></address>
 </body>
 </html>

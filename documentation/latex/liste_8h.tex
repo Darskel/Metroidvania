@@ -1,59 +1,58 @@
-\hypertarget{liste_8h}{}\doxysection{Référence du fichier liste.\+h}
-\label{liste_8h}\index{liste.h@{liste.h}}
+\hypertarget{liste_8h}{}\section{Référence du fichier headers/liste.h}
+\label{liste_8h}\index{headers/liste.\+h@{headers/liste.\+h}}
 
 
 Header pour la librairie de fonctions pour des listes de {\itshape monstre\+\_\+t} ou {\itshape porte\+\_\+t}.  
 
 
-{\ttfamily \#include \char`\"{}structs.\+h\char`\"{}}\newline
-\doxysubsection*{Classes}
+\subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structelem_liste__s}{elem\+Liste\+\_\+s}}
+struct \hyperlink{structelem_liste__s}{elem\+Liste\+\_\+s}
 \begin{DoxyCompactList}\small\item\em Un élément d\textquotesingle{}une liste (pouvant aussi être le drapeau de la liste) \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structliste__s}{liste\+\_\+s}}
+struct \hyperlink{structliste__s}{liste\+\_\+s}
 \begin{DoxyCompactList}\small\item\em Une liste d\textquotesingle{}élément inconnu dans le type est donné en chaine de caractère. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Définitions de type}
+\subsection*{Définitions de type}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{liste_8h_a1e6af2fe0223a92ad3f41fe17eaa08af}\label{liste_8h_a1e6af2fe0223a92ad3f41fe17eaa08af}} 
-typedef struct \mbox{\hyperlink{structelem_liste__s}{elem\+Liste\+\_\+s}} {\bfseries elem\+Liste\+\_\+t}
+\mbox{\Hypertarget{liste_8h_aef7fd5f157cf8fcd17fb631c7a60eb2d}\label{liste_8h_aef7fd5f157cf8fcd17fb631c7a60eb2d}} 
+typedef struct \hyperlink{structelem_liste__s}{elem\+Liste\+\_\+s} {\bfseries elem\+Liste\+\_\+t}
 \item 
-\mbox{\Hypertarget{liste_8h_a5d455e94dc5102bec23ba406625bfa00}\label{liste_8h_a5d455e94dc5102bec23ba406625bfa00}} 
-typedef struct \mbox{\hyperlink{structliste__s}{liste\+\_\+s}} {\bfseries liste\+\_\+t}
+\mbox{\Hypertarget{liste_8h_aad8490a9479435719b44df9ed6210531}\label{liste_8h_aad8490a9479435719b44df9ed6210531}} 
+typedef struct \hyperlink{structliste__s}{liste\+\_\+s} {\bfseries liste\+\_\+t}
 \end{DoxyCompactItemize}
-\doxysubsection*{Fonctions}
+\subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$ \mbox{\hyperlink{liste_8h_a7439a021fe740a427e51831efbf44a7a}{creer\+Liste}} (char $\ast$type)
+\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ \hyperlink{liste_8h_a7439a021fe740a427e51831efbf44a7a}{creer\+Liste} (char $\ast$type)
 \begin{DoxyCompactList}\small\item\em Creer une liste du type demandé ( {\itshape monstre\+\_\+t} ou {\itshape porte\+\_\+t} ) \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{liste_8h_aff61901bdffe0594ba1e1571fa6620d0}{liste\+Vide}} (\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$ma\+Liste)
+int \hyperlink{liste_8h_aff61901bdffe0594ba1e1571fa6620d0}{liste\+Vide} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste)
 \begin{DoxyCompactList}\small\item\em Indique si la liste est vide ou non. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{liste_8h_a2a28644c1964d291e68300494d2a97f9}{hors\+Liste}} (\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$ma\+Liste)
+int \hyperlink{liste_8h_a2a28644c1964d291e68300494d2a97f9}{hors\+Liste} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste)
 \begin{DoxyCompactList}\small\item\em Indique si l\textquotesingle{}élément courant est hors liste. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{liste_8h_aeee5a6a9341a983ee0933dab7ff2d364}{en\+Tete}} (\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$ma\+Liste)
+void \hyperlink{liste_8h_aeee5a6a9341a983ee0933dab7ff2d364}{en\+Tete} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste)
 \begin{DoxyCompactList}\small\item\em Met en tête de liste. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{liste_8h_ad543085983cbe0a6bd1c7be80c6e0459}{en\+Queue}} (\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$ma\+Liste)
+void \hyperlink{liste_8h_ad543085983cbe0a6bd1c7be80c6e0459}{en\+Queue} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste)
 \begin{DoxyCompactList}\small\item\em Met en queue de liste. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{liste_8h_a10b3e8967207aed77f0fe2c087c79782}{suivant}} (\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$ma\+Liste)
+void \hyperlink{liste_8h_a10b3e8967207aed77f0fe2c087c79782}{suivant} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste)
 \begin{DoxyCompactList}\small\item\em Passe à l\textquotesingle{}élément suivant de la liste. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{liste_8h_a5d633040067cf4ba37700d6e96c09372}{precedent}} (\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$ma\+Liste)
+void \hyperlink{liste_8h_a5d633040067cf4ba37700d6e96c09372}{precedent} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste)
 \begin{DoxyCompactList}\small\item\em Revient à l\textquotesingle{}élément précédent de la liste. \end{DoxyCompactList}\item 
-char $\ast$ \mbox{\hyperlink{liste_8h_a3b8be3ec8bdf89c1edc35490a6228515}{valeur\+Elm}} (\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$ma\+Liste, void $\ast$v)
+char $\ast$ \hyperlink{liste_8h_a3b8be3ec8bdf89c1edc35490a6228515}{valeur\+Elm} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste, void $\ast$v)
 \begin{DoxyCompactList}\small\item\em Récupère la valeur de l\textquotesingle{}élément courant de la liste. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{liste_8h_abb04638007419308b859463894f42467}{modif\+Elm}} (\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$ma\+Liste, void $\ast$v)
+void \hyperlink{liste_8h_abb04638007419308b859463894f42467}{modif\+Elm} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste, void $\ast$v)
 \begin{DoxyCompactList}\small\item\em Modifie l\textquotesingle{}élément courant de la liste. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{liste_8h_a5aabab457aa0d19d4fc5ca67dc2d375f}{oter\+Elm}} (\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$ma\+Liste)
+void \hyperlink{liste_8h_a5aabab457aa0d19d4fc5ca67dc2d375f}{oter\+Elm} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste)
 \begin{DoxyCompactList}\small\item\em Ote l\textquotesingle{}élément courant de la liste. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{liste_8h_ad44b96d15cce6e1f3b56467199212c5e}{ajout\+Droit}} (\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$ma\+Liste, void $\ast$v)
+void \hyperlink{liste_8h_ad44b96d15cce6e1f3b56467199212c5e}{ajout\+Droit} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste, void $\ast$v)
 \begin{DoxyCompactList}\small\item\em Ajoute un élément dans la liste à droite de l\textquotesingle{}élément courrant. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{liste_8h_a52b4b3081e828982d4ad60daafd45cd8}{ajout\+Gauche}} (\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$ma\+Liste, void $\ast$v)
+void \hyperlink{liste_8h_a52b4b3081e828982d4ad60daafd45cd8}{ajout\+Gauche} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste, void $\ast$v)
 \begin{DoxyCompactList}\small\item\em Ajoute un élément dans la liste à gauche de l\textquotesingle{}élément courrant. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{liste_8h_a201de64dd6910a0e8fc5a46c386bdd46}{sup\+Liste}} (\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$$\ast$ma\+Liste)
+void \hyperlink{liste_8h_a201de64dd6910a0e8fc5a46c386bdd46}{sup\+Liste} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$$\ast$ma\+Liste)
 \begin{DoxyCompactList}\small\item\em Supprime la liste donné \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Description détaillée}
+\subsection{Description détaillée}
 Header pour la librairie de fonctions pour des listes de {\itshape monstre\+\_\+t} ou {\itshape porte\+\_\+t}. 
 
 \begin{DoxyAuthor}{Auteur}
@@ -67,19 +66,19 @@ Thomas D\+I\+D\+I\+ER L2 Info Le Mans
 \end{DoxyDate}
 
 
-\doxysubsection{Documentation des fonctions}
+\subsection{Documentation des fonctions}
 \mbox{\Hypertarget{liste_8h_ad44b96d15cce6e1f3b56467199212c5e}\label{liste_8h_ad44b96d15cce6e1f3b56467199212c5e}} 
-\index{liste.h@{liste.h}!ajoutDroit@{ajoutDroit}}
-\index{ajoutDroit@{ajoutDroit}!liste.h@{liste.h}}
-\doxysubsubsection{\texorpdfstring{ajoutDroit()}{ajoutDroit()}}
-{\footnotesize\ttfamily void ajout\+Droit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$}]{ma\+Liste,  }\item[{void $\ast$}]{v }\end{DoxyParamCaption})}
+\index{liste.\+h@{liste.\+h}!ajout\+Droit@{ajout\+Droit}}
+\index{ajout\+Droit@{ajout\+Droit}!liste.\+h@{liste.\+h}}
+\subsubsection{\texorpdfstring{ajout\+Droit()}{ajoutDroit()}}
+{\footnotesize\ttfamily void ajout\+Droit (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$}]{ma\+Liste,  }\item[{void $\ast$}]{v }\end{DoxyParamCaption})}
 
 
 
 Ajoute un élément dans la liste à droite de l\textquotesingle{}élément courrant. 
 
 L\textquotesingle{}élément est ajouté par copie de son adresse. Tout élément ajouté doit impérativement être alloué dans le tas. \begin{DoxyWarning}{Avertissement}
-Tout élément donné pour ajout {\bfseries{D\+O\+IT}} {\bfseries{I\+M\+P\+E\+R\+A\+T\+I\+V\+E\+M\+E\+NT}} être alloué dans le tas
+Tout élément donné pour ajout {\bfseries D\+O\+IT} {\bfseries I\+M\+P\+E\+R\+A\+T\+I\+V\+E\+M\+E\+NT} être alloué dans le tas
 \end{DoxyWarning}
 
 \begin{DoxyParams}{Paramètres}
@@ -89,17 +88,17 @@ Tout élément donné pour ajout {\bfseries{D\+O\+IT}} {\bfseries{I\+M\+P\+E\+R\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{liste_8h_a52b4b3081e828982d4ad60daafd45cd8}\label{liste_8h_a52b4b3081e828982d4ad60daafd45cd8}} 
-\index{liste.h@{liste.h}!ajoutGauche@{ajoutGauche}}
-\index{ajoutGauche@{ajoutGauche}!liste.h@{liste.h}}
-\doxysubsubsection{\texorpdfstring{ajoutGauche()}{ajoutGauche()}}
-{\footnotesize\ttfamily void ajout\+Gauche (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$}]{ma\+Liste,  }\item[{void $\ast$}]{v }\end{DoxyParamCaption})}
+\index{liste.\+h@{liste.\+h}!ajout\+Gauche@{ajout\+Gauche}}
+\index{ajout\+Gauche@{ajout\+Gauche}!liste.\+h@{liste.\+h}}
+\subsubsection{\texorpdfstring{ajout\+Gauche()}{ajoutGauche()}}
+{\footnotesize\ttfamily void ajout\+Gauche (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$}]{ma\+Liste,  }\item[{void $\ast$}]{v }\end{DoxyParamCaption})}
 
 
 
 Ajoute un élément dans la liste à gauche de l\textquotesingle{}élément courrant. 
 
 L\textquotesingle{}élément est ajouté par copie de son adresse. Tout élément ajouté doit impérativement être alloué dans le tas. \begin{DoxyWarning}{Avertissement}
-Tout élément donné pour ajout {\bfseries{D\+O\+IT}} {\bfseries{I\+M\+P\+E\+R\+A\+T\+I\+V\+E\+M\+E\+NT}} être alloué dans le tas
+Tout élément donné pour ajout {\bfseries D\+O\+IT} {\bfseries I\+M\+P\+E\+R\+A\+T\+I\+V\+E\+M\+E\+NT} être alloué dans le tas
 \end{DoxyWarning}
 
 \begin{DoxyParams}{Paramètres}
@@ -109,10 +108,10 @@ Tout élément donné pour ajout {\bfseries{D\+O\+IT}} {\bfseries{I\+M\+P\+E\+R\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{liste_8h_a7439a021fe740a427e51831efbf44a7a}\label{liste_8h_a7439a021fe740a427e51831efbf44a7a}} 
-\index{liste.h@{liste.h}!creerListe@{creerListe}}
-\index{creerListe@{creerListe}!liste.h@{liste.h}}
-\doxysubsubsection{\texorpdfstring{creerListe()}{creerListe()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structliste__s}{liste\+\_\+t}}$\ast$ creer\+Liste (\begin{DoxyParamCaption}\item[{char $\ast$}]{type }\end{DoxyParamCaption})}
+\index{liste.\+h@{liste.\+h}!creer\+Liste@{creer\+Liste}}
+\index{creer\+Liste@{creer\+Liste}!liste.\+h@{liste.\+h}}
+\subsubsection{\texorpdfstring{creer\+Liste()}{creerListe()}}
+{\footnotesize\ttfamily \hyperlink{structliste__s}{liste\+\_\+t}$\ast$ creer\+Liste (\begin{DoxyParamCaption}\item[{char $\ast$}]{type }\end{DoxyParamCaption})}
 
 
 
@@ -127,10 +126,10 @@ Creer une liste du type demandé ( {\itshape monstre\+\_\+t} ou {\itshape porte\
 adresse de la liste créée 
 \end{DoxyReturn}
 \mbox{\Hypertarget{liste_8h_ad543085983cbe0a6bd1c7be80c6e0459}\label{liste_8h_ad543085983cbe0a6bd1c7be80c6e0459}} 
-\index{liste.h@{liste.h}!enQueue@{enQueue}}
-\index{enQueue@{enQueue}!liste.h@{liste.h}}
-\doxysubsubsection{\texorpdfstring{enQueue()}{enQueue()}}
-{\footnotesize\ttfamily void en\+Queue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
+\index{liste.\+h@{liste.\+h}!en\+Queue@{en\+Queue}}
+\index{en\+Queue@{en\+Queue}!liste.\+h@{liste.\+h}}
+\subsubsection{\texorpdfstring{en\+Queue()}{enQueue()}}
+{\footnotesize\ttfamily void en\+Queue (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
 
 
 
@@ -142,10 +141,10 @@ Met en queue de liste.
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{liste_8h_aeee5a6a9341a983ee0933dab7ff2d364}\label{liste_8h_aeee5a6a9341a983ee0933dab7ff2d364}} 
-\index{liste.h@{liste.h}!enTete@{enTete}}
-\index{enTete@{enTete}!liste.h@{liste.h}}
-\doxysubsubsection{\texorpdfstring{enTete()}{enTete()}}
-{\footnotesize\ttfamily void en\+Tete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
+\index{liste.\+h@{liste.\+h}!en\+Tete@{en\+Tete}}
+\index{en\+Tete@{en\+Tete}!liste.\+h@{liste.\+h}}
+\subsubsection{\texorpdfstring{en\+Tete()}{enTete()}}
+{\footnotesize\ttfamily void en\+Tete (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
 
 
 
@@ -157,10 +156,10 @@ Met en tête de liste.
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{liste_8h_a2a28644c1964d291e68300494d2a97f9}\label{liste_8h_a2a28644c1964d291e68300494d2a97f9}} 
-\index{liste.h@{liste.h}!horsListe@{horsListe}}
-\index{horsListe@{horsListe}!liste.h@{liste.h}}
-\doxysubsubsection{\texorpdfstring{horsListe()}{horsListe()}}
-{\footnotesize\ttfamily int hors\+Liste (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
+\index{liste.\+h@{liste.\+h}!hors\+Liste@{hors\+Liste}}
+\index{hors\+Liste@{hors\+Liste}!liste.\+h@{liste.\+h}}
+\subsubsection{\texorpdfstring{hors\+Liste()}{horsListe()}}
+{\footnotesize\ttfamily int hors\+Liste (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
 
 
 
@@ -175,10 +174,10 @@ Indique si l\textquotesingle{}élément courant est hors liste.
 1 si l\textquotesingle{}élément est hors liste, 0 sinon 
 \end{DoxyReturn}
 \mbox{\Hypertarget{liste_8h_aff61901bdffe0594ba1e1571fa6620d0}\label{liste_8h_aff61901bdffe0594ba1e1571fa6620d0}} 
-\index{liste.h@{liste.h}!listeVide@{listeVide}}
-\index{listeVide@{listeVide}!liste.h@{liste.h}}
-\doxysubsubsection{\texorpdfstring{listeVide()}{listeVide()}}
-{\footnotesize\ttfamily int liste\+Vide (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
+\index{liste.\+h@{liste.\+h}!liste\+Vide@{liste\+Vide}}
+\index{liste\+Vide@{liste\+Vide}!liste.\+h@{liste.\+h}}
+\subsubsection{\texorpdfstring{liste\+Vide()}{listeVide()}}
+{\footnotesize\ttfamily int liste\+Vide (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
 
 
 
@@ -193,10 +192,10 @@ Indique si la liste est vide ou non.
 1 si la liste est vide, 0 sinon 
 \end{DoxyReturn}
 \mbox{\Hypertarget{liste_8h_abb04638007419308b859463894f42467}\label{liste_8h_abb04638007419308b859463894f42467}} 
-\index{liste.h@{liste.h}!modifElm@{modifElm}}
-\index{modifElm@{modifElm}!liste.h@{liste.h}}
-\doxysubsubsection{\texorpdfstring{modifElm()}{modifElm()}}
-{\footnotesize\ttfamily void modif\+Elm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$}]{ma\+Liste,  }\item[{void $\ast$}]{v }\end{DoxyParamCaption})}
+\index{liste.\+h@{liste.\+h}!modif\+Elm@{modif\+Elm}}
+\index{modif\+Elm@{modif\+Elm}!liste.\+h@{liste.\+h}}
+\subsubsection{\texorpdfstring{modif\+Elm()}{modifElm()}}
+{\footnotesize\ttfamily void modif\+Elm (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$}]{ma\+Liste,  }\item[{void $\ast$}]{v }\end{DoxyParamCaption})}
 
 
 
@@ -212,10 +211,10 @@ Copie l\textquotesingle{}élément donné dans l\textquotesingle{}élément cour
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{liste_8h_a5aabab457aa0d19d4fc5ca67dc2d375f}\label{liste_8h_a5aabab457aa0d19d4fc5ca67dc2d375f}} 
-\index{liste.h@{liste.h}!oterElm@{oterElm}}
-\index{oterElm@{oterElm}!liste.h@{liste.h}}
-\doxysubsubsection{\texorpdfstring{oterElm()}{oterElm()}}
-{\footnotesize\ttfamily void oter\+Elm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
+\index{liste.\+h@{liste.\+h}!oter\+Elm@{oter\+Elm}}
+\index{oter\+Elm@{oter\+Elm}!liste.\+h@{liste.\+h}}
+\subsubsection{\texorpdfstring{oter\+Elm()}{oterElm()}}
+{\footnotesize\ttfamily void oter\+Elm (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
 
 
 
@@ -227,10 +226,10 @@ Ote l\textquotesingle{}élément courant de la liste.
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{liste_8h_a5d633040067cf4ba37700d6e96c09372}\label{liste_8h_a5d633040067cf4ba37700d6e96c09372}} 
-\index{liste.h@{liste.h}!precedent@{precedent}}
-\index{precedent@{precedent}!liste.h@{liste.h}}
-\doxysubsubsection{\texorpdfstring{precedent()}{precedent()}}
-{\footnotesize\ttfamily void precedent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
+\index{liste.\+h@{liste.\+h}!precedent@{precedent}}
+\index{precedent@{precedent}!liste.\+h@{liste.\+h}}
+\subsubsection{\texorpdfstring{precedent()}{precedent()}}
+{\footnotesize\ttfamily void precedent (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
 
 
 
@@ -242,10 +241,10 @@ Revient à l\textquotesingle{}élément précédent de la liste.
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{liste_8h_a10b3e8967207aed77f0fe2c087c79782}\label{liste_8h_a10b3e8967207aed77f0fe2c087c79782}} 
-\index{liste.h@{liste.h}!suivant@{suivant}}
-\index{suivant@{suivant}!liste.h@{liste.h}}
-\doxysubsubsection{\texorpdfstring{suivant()}{suivant()}}
-{\footnotesize\ttfamily void suivant (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
+\index{liste.\+h@{liste.\+h}!suivant@{suivant}}
+\index{suivant@{suivant}!liste.\+h@{liste.\+h}}
+\subsubsection{\texorpdfstring{suivant()}{suivant()}}
+{\footnotesize\ttfamily void suivant (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
 
 
 
@@ -257,10 +256,10 @@ Passe à l\textquotesingle{}élément suivant de la liste.
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{liste_8h_a201de64dd6910a0e8fc5a46c386bdd46}\label{liste_8h_a201de64dd6910a0e8fc5a46c386bdd46}} 
-\index{liste.h@{liste.h}!supListe@{supListe}}
-\index{supListe@{supListe}!liste.h@{liste.h}}
-\doxysubsubsection{\texorpdfstring{supListe()}{supListe()}}
-{\footnotesize\ttfamily void sup\+Liste (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$$\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
+\index{liste.\+h@{liste.\+h}!sup\+Liste@{sup\+Liste}}
+\index{sup\+Liste@{sup\+Liste}!liste.\+h@{liste.\+h}}
+\subsubsection{\texorpdfstring{sup\+Liste()}{supListe()}}
+{\footnotesize\ttfamily void sup\+Liste (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$$\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
 
 
 
@@ -274,10 +273,10 @@ La fonction met aussi la valeur du pointeur de la liste à N\+U\+LL
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{liste_8h_a3b8be3ec8bdf89c1edc35490a6228515}\label{liste_8h_a3b8be3ec8bdf89c1edc35490a6228515}} 
-\index{liste.h@{liste.h}!valeurElm@{valeurElm}}
-\index{valeurElm@{valeurElm}!liste.h@{liste.h}}
-\doxysubsubsection{\texorpdfstring{valeurElm()}{valeurElm()}}
-{\footnotesize\ttfamily char$\ast$ valeur\+Elm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structliste__s}{liste\+\_\+t}} $\ast$}]{ma\+Liste,  }\item[{void $\ast$}]{v }\end{DoxyParamCaption})}
+\index{liste.\+h@{liste.\+h}!valeur\+Elm@{valeur\+Elm}}
+\index{valeur\+Elm@{valeur\+Elm}!liste.\+h@{liste.\+h}}
+\subsubsection{\texorpdfstring{valeur\+Elm()}{valeurElm()}}
+{\footnotesize\ttfamily char$\ast$ valeur\+Elm (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$}]{ma\+Liste,  }\item[{void $\ast$}]{v }\end{DoxyParamCaption})}
 
 
 

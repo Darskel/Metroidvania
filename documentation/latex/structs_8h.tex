@@ -1,33 +1,36 @@
-\hypertarget{structs_8h}{}\doxysection{Référence du fichier structs.\+h}
-\label{structs_8h}\index{structs.h@{structs.h}}
+\hypertarget{structs_8h}{}\section{Référence du fichier headers/structs.h}
+\label{structs_8h}\index{headers/structs.\+h@{headers/structs.\+h}}
 
 
 Ensemble de structures utilisées dans le projets.  
 
 
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
-\doxysubsection*{Classes}
+{\ttfamily \#include \char`\"{}liste.\+h\char`\"{}}\newline
+\subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structposition__s}{position\+\_\+s}}
+struct \hyperlink{structtaille__t}{taille\+\_\+t}
+\item 
+struct \hyperlink{structposition__s}{position\+\_\+s}
 \begin{DoxyCompactList}\small\item\em Une position représentée par deux valeurs entières. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structsalle__s}{salle\+\_\+s}}
+struct \hyperlink{structsalle__s}{salle\+\_\+s}
 \begin{DoxyCompactList}\small\item\em Structure représentant les salles. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structfraction__s}{fraction\+\_\+s}}
+struct \hyperlink{structfraction__s}{fraction\+\_\+s}
 \begin{DoxyCompactList}\small\item\em Une fration représenter par deux entier. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structfrac_pos__s}{frac\+Pos\+\_\+s}}
+struct \hyperlink{structfrac_pos__s}{frac\+Pos\+\_\+s}
 \begin{DoxyCompactList}\small\item\em Structure représentant la différence de position en fraction. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structpersonnage__s}{personnage\+\_\+s}}
+struct \hyperlink{structpersonnage__s}{personnage\+\_\+s}
 \begin{DoxyCompactList}\small\item\em Structure représentant le personnage. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+s}}
+struct \hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+s}
 \begin{DoxyCompactList}\small\item\em Structure représentant le type d\textquotesingle{}un monstre. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structmonstre__s}{monstre\+\_\+s}}
+struct \hyperlink{structmonstre__s}{monstre\+\_\+s}
 \begin{DoxyCompactList}\small\item\em Structure représentant un monstre. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structbloc__s}{bloc\+\_\+s}}
+struct \hyperlink{structbloc__s}{bloc\+\_\+s}
 \begin{DoxyCompactList}\small\item\em Structure représentant un bloc. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structporte__s}{porte\+\_\+s}}
+struct \hyperlink{structporte__s}{porte\+\_\+s}
 \begin{DoxyCompactList}\small\item\em Structure représentant une porte. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Macros}
+\subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{structs_8h_a5666ac5930c9f903698073ab1fa694f7}\label{structs_8h_a5666ac5930c9f903698073ab1fa694f7}} 
@@ -36,82 +39,91 @@ struct \mbox{\hyperlink{structporte__s}{porte\+\_\+s}}
 \mbox{\Hypertarget{structs_8h_a611cc9b5f655508482f3d7a9751c182a}\label{structs_8h_a611cc9b5f655508482f3d7a9751c182a}} 
 \#define {\bfseries C\+L\+E\+AR}
 \item 
-\mbox{\Hypertarget{structs_8h_a80fb826a684cf3f0d306b22aa100ddac}\label{structs_8h_a80fb826a684cf3f0d306b22aa100ddac}} 
-\#define {\bfseries R\+I\+G\+HT}~0
+\mbox{\Hypertarget{structs_8h_a1af6db5f19bb8f04997f5d53b2e3226e}\label{structs_8h_a1af6db5f19bb8f04997f5d53b2e3226e}} 
+\#define {\bfseries C\+R\+E\+A\+T\+E\+\_\+\+D\+IR}(X)~char Y\mbox{[}20\mbox{]} = \char`\"{}mkdir \char`\"{}; strcat(Y, X); system(Y);
+\item 
+\mbox{\Hypertarget{structs_8h_a14862d1ea290aaf4ce47601ceb2830ad}\label{structs_8h_a14862d1ea290aaf4ce47601ceb2830ad}} 
+\#define {\bfseries S\+T\+R\+U\+C\+T\+S\+\_\+\+I\+N\+C\+L\+U\+D\+ED}
 \item 
 \mbox{\Hypertarget{structs_8h_a437ef08681e7210d6678427030446a54}\label{structs_8h_a437ef08681e7210d6678427030446a54}} 
-\#define {\bfseries L\+E\+FT}~1
+\#define {\bfseries L\+E\+FT}~0
+\item 
+\mbox{\Hypertarget{structs_8h_a80fb826a684cf3f0d306b22aa100ddac}\label{structs_8h_a80fb826a684cf3f0d306b22aa100ddac}} 
+\#define {\bfseries R\+I\+G\+HT}~1
+\item 
+\mbox{\Hypertarget{structs_8h_a5fdcc1659ee790f8bdd196e7745ab403}\label{structs_8h_a5fdcc1659ee790f8bdd196e7745ab403}} 
+\#define {\bfseries T\+A\+I\+L\+L\+E\+\_\+\+I\+N\+V\+E\+N\+T\+A\+I\+RE}~6
 \end{DoxyCompactItemize}
-\doxysubsection*{Définitions de type}
+\subsection*{Définitions de type}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structs_8h_ae91e9d371efd32526f59e97a74a0e04b}\label{structs_8h_ae91e9d371efd32526f59e97a74a0e04b}} 
-typedef struct \mbox{\hyperlink{structposition__s}{position\+\_\+s}} {\bfseries position\+\_\+t}
+\mbox{\Hypertarget{structs_8h_ad0edf461c60578ea071dc06a4b3a57b1}\label{structs_8h_ad0edf461c60578ea071dc06a4b3a57b1}} 
+typedef struct \hyperlink{structposition__s}{position\+\_\+s} {\bfseries position\+\_\+t}
 \item 
-\mbox{\Hypertarget{structs_8h_a49a02de4e7eebe39d23e8a061fd9ef92}\label{structs_8h_a49a02de4e7eebe39d23e8a061fd9ef92}} 
-typedef enum \mbox{\hyperlink{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271}{boulean\+\_\+e}} {\bfseries boolean\+\_\+t}
+\mbox{\Hypertarget{structs_8h_a54882e7c5a50e83d169b020d314a5d76}\label{structs_8h_a54882e7c5a50e83d169b020d314a5d76}} 
+typedef enum \hyperlink{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271}{boulean\+\_\+e} {\bfseries boolean\+\_\+t}
 \item 
-\mbox{\Hypertarget{structs_8h_a22760965d7fa9eefd589acc65326f8cd}\label{structs_8h_a22760965d7fa9eefd589acc65326f8cd}} 
-typedef enum \mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1e}{ind\+Sprite\+\_\+e}} {\bfseries ind\+Sprite\+Per\+\_\+t}
+\mbox{\Hypertarget{structs_8h_aa774ec09009f9aca26a1f991980cc01d}\label{structs_8h_aa774ec09009f9aca26a1f991980cc01d}} 
+typedef enum \hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1e}{ind\+Sprite\+\_\+e} {\bfseries ind\+Sprite\+Per\+\_\+t}
 \item 
-\mbox{\Hypertarget{structs_8h_a496ace1950a1d2f3aed4b9288e19c05b}\label{structs_8h_a496ace1950a1d2f3aed4b9288e19c05b}} 
-typedef struct \mbox{\hyperlink{structsalle__s}{salle\+\_\+s}} {\bfseries salle\+\_\+t}
+\mbox{\Hypertarget{structs_8h_ada6d98da4b79a612ca12f1778d890b4b}\label{structs_8h_ada6d98da4b79a612ca12f1778d890b4b}} 
+typedef struct \hyperlink{structsalle__s}{salle\+\_\+s} {\bfseries salle\+\_\+t}
 \item 
 \mbox{\Hypertarget{structs_8h_a22dc742b27da5ef525dc878fb8895311}\label{structs_8h_a22dc742b27da5ef525dc878fb8895311}} 
-typedef struct \mbox{\hyperlink{structfraction__s}{fraction\+\_\+s}} {\bfseries fraction\+\_\+t}
+typedef struct \hyperlink{structfraction__s}{fraction\+\_\+s} {\bfseries fraction\+\_\+t}
 \item 
-\mbox{\Hypertarget{structs_8h_a30ebe87907585f4b427b0430b8e06965}\label{structs_8h_a30ebe87907585f4b427b0430b8e06965}} 
-typedef struct \mbox{\hyperlink{structfrac_pos__s}{frac\+Pos\+\_\+s}} {\bfseries frac\+Pos\+\_\+t}
+\mbox{\Hypertarget{structs_8h_adf439d737c92b655ab850b476d7d4159}\label{structs_8h_adf439d737c92b655ab850b476d7d4159}} 
+typedef struct \hyperlink{structfrac_pos__s}{frac\+Pos\+\_\+s} {\bfseries frac\+Pos\+\_\+t}
 \item 
-\mbox{\Hypertarget{structs_8h_acd108f1352454683c5a5580df44a5fd0}\label{structs_8h_acd108f1352454683c5a5580df44a5fd0}} 
-typedef struct \mbox{\hyperlink{structpersonnage__s}{personnage\+\_\+s}} {\bfseries personnage\+\_\+t}
+\mbox{\Hypertarget{structs_8h_aeca7e7adc19e924d5fade8ea3c6937ac}\label{structs_8h_aeca7e7adc19e924d5fade8ea3c6937ac}} 
+typedef struct \hyperlink{structpersonnage__s}{personnage\+\_\+s} {\bfseries personnage\+\_\+t}
 \item 
-\mbox{\Hypertarget{structs_8h_aee1e74d8f0f281b05be2da2eb6e86bf6}\label{structs_8h_aee1e74d8f0f281b05be2da2eb6e86bf6}} 
-typedef struct \mbox{\hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+s}} {\bfseries type\+\_\+monstre\+\_\+t}
+\mbox{\Hypertarget{structs_8h_af8de222b245924a766b375a60f04b3b8}\label{structs_8h_af8de222b245924a766b375a60f04b3b8}} 
+typedef struct \hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+s} {\bfseries type\+\_\+monstre\+\_\+t}
 \item 
-\mbox{\Hypertarget{structs_8h_a2475165f3195b53d2ffa1bbf1f5272b4}\label{structs_8h_a2475165f3195b53d2ffa1bbf1f5272b4}} 
-typedef struct \mbox{\hyperlink{structmonstre__s}{monstre\+\_\+s}} {\bfseries monstre\+\_\+t}
+\mbox{\Hypertarget{structs_8h_a648a84f0c56bf2d963706cbea150092e}\label{structs_8h_a648a84f0c56bf2d963706cbea150092e}} 
+typedef struct \hyperlink{structmonstre__s}{monstre\+\_\+s} {\bfseries monstre\+\_\+t}
 \item 
-\mbox{\Hypertarget{structs_8h_ab9113f25dcecc533b22963edfff207a0}\label{structs_8h_ab9113f25dcecc533b22963edfff207a0}} 
-typedef struct \mbox{\hyperlink{structbloc__s}{bloc\+\_\+s}} {\bfseries bloc\+\_\+t}
+\mbox{\Hypertarget{structs_8h_a6e64a39dbfabc75ff76144f2cfaf28e5}\label{structs_8h_a6e64a39dbfabc75ff76144f2cfaf28e5}} 
+typedef struct \hyperlink{structbloc__s}{bloc\+\_\+s} {\bfseries bloc\+\_\+t}
 \item 
-\mbox{\Hypertarget{structs_8h_a3cceac2c7b4859dd4d68e5de6b7a8f70}\label{structs_8h_a3cceac2c7b4859dd4d68e5de6b7a8f70}} 
-typedef struct \mbox{\hyperlink{structporte__s}{porte\+\_\+s}} {\bfseries porte\+\_\+t}
+\mbox{\Hypertarget{structs_8h_a80cfff8fa904c28ac9883e5657918c3e}\label{structs_8h_a80cfff8fa904c28ac9883e5657918c3e}} 
+typedef struct \hyperlink{structporte__s}{porte\+\_\+s} {\bfseries porte\+\_\+t}
 \end{DoxyCompactItemize}
-\doxysubsection*{Énumérations}
+\subsection*{Énumérations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271}{boulean\+\_\+e}} \{ \mbox{\hyperlink{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271aa1e095cc966dbecf6a0d8aad75348d1a}{F\+A\+L\+SE}}, 
-\mbox{\hyperlink{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271aa82764c3079aea4e60c80e45befbb839}{T\+R\+UE}}
- \}
-\begin{DoxyCompactList}\small\item\em Permet d\textquotesingle{}utiliser {\itshape T\+R\+UE} et {\itshape F\+A\+L\+SE}. \end{DoxyCompactList}\item 
-enum \mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1e}{ind\+Sprite\+\_\+e}} \{ \newline
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea7911229e7fd613f96aeaf9413c8251bc}{SU}}, 
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea0be47f0b04acb232d923e709fa894bb2}{D\+E\+P1}}, 
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea89e919aa18342c5ac61acfad301d2fa3}{D\+E\+P2}}, 
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea9915ae810af5d2414989b1b8da181819}{D\+E\+P3}}, 
+enum \hyperlink{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271}{boulean\+\_\+e} \{ \hyperlink{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271aa1e095cc966dbecf6a0d8aad75348d1a}{F\+A\+L\+SE}, 
+\hyperlink{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271aa82764c3079aea4e60c80e45befbb839}{T\+R\+UE}
+ \}\begin{DoxyCompactList}\small\item\em Permet d\textquotesingle{}utiliser {\itshape T\+R\+UE} et {\itshape F\+A\+L\+SE}. \end{DoxyCompactList}
+\item 
+enum \hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1e}{ind\+Sprite\+\_\+e} \{ \newline
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea7911229e7fd613f96aeaf9413c8251bc}{SU}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea0be47f0b04acb232d923e709fa894bb2}{D\+E\+P1}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea89e919aa18342c5ac61acfad301d2fa3}{D\+E\+P2}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea9915ae810af5d2414989b1b8da181819}{D\+E\+P3}, 
 \newline
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea48c8ff9158c2e520d1ac043e0782e146}{D\+E\+P4}}, 
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1eaba6603f4d77cb0d36d164f1b10b85476}{D\+E\+P5}}, 
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea23c524f1921055449d2fa639448ecdb8}{D\+E\+P6}}, 
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1eaf96ce696d487f6a941d7c42d80e9bdcc}{D\+E\+P7}}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea48c8ff9158c2e520d1ac043e0782e146}{D\+E\+P4}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1eaba6603f4d77cb0d36d164f1b10b85476}{D\+E\+P5}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea23c524f1921055449d2fa639448ecdb8}{D\+E\+P6}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1eaf96ce696d487f6a941d7c42d80e9bdcc}{D\+E\+P7}, 
 \newline
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ead9718755aea697e4b5ffd9e2b6e3e7d1}{D\+E\+P8}}, 
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1eaca24f796340bb8bf3ea89af1f858d13c}{J\+P1}}, 
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea876188282a95ccb4c239ba10a9b7d4c4}{J\+P2}}, 
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1eab277d3e4d540960a818de52825e64add}{J\+P3}}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ead9718755aea697e4b5ffd9e2b6e3e7d1}{D\+E\+P8}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1eaca24f796340bb8bf3ea89af1f858d13c}{J\+P1}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea876188282a95ccb4c239ba10a9b7d4c4}{J\+P2}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1eab277d3e4d540960a818de52825e64add}{J\+P3}, 
 \newline
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea39b78adf09688e56f7aa4c7bcbcc9786}{J\+P4}}, 
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1eae793d5968204651d96b7d0c933bfe51e}{J\+P5}}, 
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ead4c49849aed1803d35d7e1937c9e180b}{J\+P6}}, 
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea04a9327a3a1dde259800007956b6d482}{J\+P7}}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea39b78adf09688e56f7aa4c7bcbcc9786}{J\+P4}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1eae793d5968204651d96b7d0c933bfe51e}{J\+P5}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ead4c49849aed1803d35d7e1937c9e180b}{J\+P6}, 
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea04a9327a3a1dde259800007956b6d482}{J\+P7}, 
 \newline
-\mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea7cf7aee82a1ca557ea9c8a1037f9eebc}{J\+P8}}
- \}
-\begin{DoxyCompactList}\small\item\em Nom des indices des sprites. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1ea7cf7aee82a1ca557ea9c8a1037f9eebc}{J\+P8}
+ \}\begin{DoxyCompactList}\small\item\em Nom des indices des sprites. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
 
 
-\doxysubsection{Description détaillée}
+\subsection{Description détaillée}
 Ensemble de structures utilisées dans le projets. 
 
 \begin{DoxyAuthor}{Auteur}
@@ -125,103 +137,103 @@ Thomas D\+I\+D\+I\+ER L2 Info Le Mans
 \end{DoxyDate}
 
 
-\doxysubsection{Documentation du type de l\textquotesingle{}énumération}
+\subsection{Documentation du type de l\textquotesingle{}énumération}
 \mbox{\Hypertarget{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271}\label{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271}} 
-\index{structs.h@{structs.h}!boulean\_e@{boulean\_e}}
-\index{boulean\_e@{boulean\_e}!structs.h@{structs.h}}
-\doxysubsubsection{\texorpdfstring{boulean\_e}{boulean\_e}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271}{boulean\+\_\+e}}}
+\index{structs.\+h@{structs.\+h}!boulean\+\_\+e@{boulean\+\_\+e}}
+\index{boulean\+\_\+e@{boulean\+\_\+e}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{boulean\+\_\+e}{boulean\_e}}
+{\footnotesize\ttfamily enum \hyperlink{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271}{boulean\+\_\+e}}
 
 
 
 Permet d\textquotesingle{}utiliser {\itshape T\+R\+UE} et {\itshape F\+A\+L\+SE}. 
 
 \begin{DoxyEnumFields}{Valeurs énumérées}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{FALSE@{FALSE}!structs.h@{structs.h}}\index{structs.h@{structs.h}!FALSE@{FALSE}}}\mbox{\Hypertarget{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271aa1e095cc966dbecf6a0d8aad75348d1a}\label{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271aa1e095cc966dbecf6a0d8aad75348d1a}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+A\+L\+SE@{F\+A\+L\+SE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!F\+A\+L\+SE@{F\+A\+L\+SE}}}\mbox{\Hypertarget{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271aa1e095cc966dbecf6a0d8aad75348d1a}\label{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271aa1e095cc966dbecf6a0d8aad75348d1a}} 
 F\+A\+L\+SE&Valeur de F\+A\+L\+SE\+: 0 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{TRUE@{TRUE}!structs.h@{structs.h}}\index{structs.h@{structs.h}!TRUE@{TRUE}}}\mbox{\Hypertarget{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271aa82764c3079aea4e60c80e45befbb839}\label{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271aa82764c3079aea4e60c80e45befbb839}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+R\+UE@{T\+R\+UE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!T\+R\+UE@{T\+R\+UE}}}\mbox{\Hypertarget{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271aa82764c3079aea4e60c80e45befbb839}\label{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271aa82764c3079aea4e60c80e45befbb839}} 
 T\+R\+UE&Valeur de T\+R\+UE\+: 1 \\
 \hline
 
 \end{DoxyEnumFields}
 \mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1e}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1e}} 
-\index{structs.h@{structs.h}!indSprite\_e@{indSprite\_e}}
-\index{indSprite\_e@{indSprite\_e}!structs.h@{structs.h}}
-\doxysubsubsection{\texorpdfstring{indSprite\_e}{indSprite\_e}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1e}{ind\+Sprite\+\_\+e}}}
+\index{structs.\+h@{structs.\+h}!ind\+Sprite\+\_\+e@{ind\+Sprite\+\_\+e}}
+\index{ind\+Sprite\+\_\+e@{ind\+Sprite\+\_\+e}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{ind\+Sprite\+\_\+e}{indSprite\_e}}
+{\footnotesize\ttfamily enum \hyperlink{structs_8h_acc92dae96c834a587153fcb1fb87df1e}{ind\+Sprite\+\_\+e}}
 
 
 
 Nom des indices des sprites. 
 
 \begin{DoxyEnumFields}{Valeurs énumérées}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{SU@{SU}!structs.h@{structs.h}}\index{structs.h@{structs.h}!SU@{SU}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea7911229e7fd613f96aeaf9413c8251bc}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea7911229e7fd613f96aeaf9413c8251bc}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SU@{SU}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!SU@{SU}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea7911229e7fd613f96aeaf9413c8251bc}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea7911229e7fd613f96aeaf9413c8251bc}} 
 SU&Sprite de non déplacement (Stand-\/\+Up) \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{DEP1@{DEP1}!structs.h@{structs.h}}\index{structs.h@{structs.h}!DEP1@{DEP1}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea0be47f0b04acb232d923e709fa894bb2}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea0be47f0b04acb232d923e709fa894bb2}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+P1@{D\+E\+P1}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!D\+E\+P1@{D\+E\+P1}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea0be47f0b04acb232d923e709fa894bb2}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea0be47f0b04acb232d923e709fa894bb2}} 
 D\+E\+P1&Sprite de déplacement n°1 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{DEP2@{DEP2}!structs.h@{structs.h}}\index{structs.h@{structs.h}!DEP2@{DEP2}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea89e919aa18342c5ac61acfad301d2fa3}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea89e919aa18342c5ac61acfad301d2fa3}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+P2@{D\+E\+P2}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!D\+E\+P2@{D\+E\+P2}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea89e919aa18342c5ac61acfad301d2fa3}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea89e919aa18342c5ac61acfad301d2fa3}} 
 D\+E\+P2&Sprite de déplacement n°2 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{DEP3@{DEP3}!structs.h@{structs.h}}\index{structs.h@{structs.h}!DEP3@{DEP3}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea9915ae810af5d2414989b1b8da181819}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea9915ae810af5d2414989b1b8da181819}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+P3@{D\+E\+P3}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!D\+E\+P3@{D\+E\+P3}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea9915ae810af5d2414989b1b8da181819}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea9915ae810af5d2414989b1b8da181819}} 
 D\+E\+P3&Sprite de déplacement n°3 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{DEP4@{DEP4}!structs.h@{structs.h}}\index{structs.h@{structs.h}!DEP4@{DEP4}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea48c8ff9158c2e520d1ac043e0782e146}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea48c8ff9158c2e520d1ac043e0782e146}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+P4@{D\+E\+P4}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!D\+E\+P4@{D\+E\+P4}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea48c8ff9158c2e520d1ac043e0782e146}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea48c8ff9158c2e520d1ac043e0782e146}} 
 D\+E\+P4&Sprite de déplacement n°4 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{DEP5@{DEP5}!structs.h@{structs.h}}\index{structs.h@{structs.h}!DEP5@{DEP5}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1eaba6603f4d77cb0d36d164f1b10b85476}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1eaba6603f4d77cb0d36d164f1b10b85476}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+P5@{D\+E\+P5}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!D\+E\+P5@{D\+E\+P5}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1eaba6603f4d77cb0d36d164f1b10b85476}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1eaba6603f4d77cb0d36d164f1b10b85476}} 
 D\+E\+P5&Sprite de déplacement n°5 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{DEP6@{DEP6}!structs.h@{structs.h}}\index{structs.h@{structs.h}!DEP6@{DEP6}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea23c524f1921055449d2fa639448ecdb8}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea23c524f1921055449d2fa639448ecdb8}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+P6@{D\+E\+P6}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!D\+E\+P6@{D\+E\+P6}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea23c524f1921055449d2fa639448ecdb8}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea23c524f1921055449d2fa639448ecdb8}} 
 D\+E\+P6&Sprite de déplacement n°6 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{DEP7@{DEP7}!structs.h@{structs.h}}\index{structs.h@{structs.h}!DEP7@{DEP7}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1eaf96ce696d487f6a941d7c42d80e9bdcc}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1eaf96ce696d487f6a941d7c42d80e9bdcc}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+P7@{D\+E\+P7}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!D\+E\+P7@{D\+E\+P7}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1eaf96ce696d487f6a941d7c42d80e9bdcc}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1eaf96ce696d487f6a941d7c42d80e9bdcc}} 
 D\+E\+P7&Sprite de déplacement n°7 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{DEP8@{DEP8}!structs.h@{structs.h}}\index{structs.h@{structs.h}!DEP8@{DEP8}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ead9718755aea697e4b5ffd9e2b6e3e7d1}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ead9718755aea697e4b5ffd9e2b6e3e7d1}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+E\+P8@{D\+E\+P8}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!D\+E\+P8@{D\+E\+P8}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ead9718755aea697e4b5ffd9e2b6e3e7d1}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ead9718755aea697e4b5ffd9e2b6e3e7d1}} 
 D\+E\+P8&Sprite de déplacement n°8 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{JP1@{JP1}!structs.h@{structs.h}}\index{structs.h@{structs.h}!JP1@{JP1}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1eaca24f796340bb8bf3ea89af1f858d13c}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1eaca24f796340bb8bf3ea89af1f858d13c}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+P1@{J\+P1}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!J\+P1@{J\+P1}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1eaca24f796340bb8bf3ea89af1f858d13c}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1eaca24f796340bb8bf3ea89af1f858d13c}} 
 J\+P1&Sprite de saut (Jump) n°1 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{JP2@{JP2}!structs.h@{structs.h}}\index{structs.h@{structs.h}!JP2@{JP2}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea876188282a95ccb4c239ba10a9b7d4c4}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea876188282a95ccb4c239ba10a9b7d4c4}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+P2@{J\+P2}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!J\+P2@{J\+P2}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea876188282a95ccb4c239ba10a9b7d4c4}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea876188282a95ccb4c239ba10a9b7d4c4}} 
 J\+P2&Sprite de saut (Jump) n°2 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{JP3@{JP3}!structs.h@{structs.h}}\index{structs.h@{structs.h}!JP3@{JP3}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1eab277d3e4d540960a818de52825e64add}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1eab277d3e4d540960a818de52825e64add}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+P3@{J\+P3}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!J\+P3@{J\+P3}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1eab277d3e4d540960a818de52825e64add}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1eab277d3e4d540960a818de52825e64add}} 
 J\+P3&Sprite de saut (Jump) n°3 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{JP4@{JP4}!structs.h@{structs.h}}\index{structs.h@{structs.h}!JP4@{JP4}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea39b78adf09688e56f7aa4c7bcbcc9786}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea39b78adf09688e56f7aa4c7bcbcc9786}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+P4@{J\+P4}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!J\+P4@{J\+P4}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea39b78adf09688e56f7aa4c7bcbcc9786}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea39b78adf09688e56f7aa4c7bcbcc9786}} 
 J\+P4&Sprite de saut (Jump) n°4 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{JP5@{JP5}!structs.h@{structs.h}}\index{structs.h@{structs.h}!JP5@{JP5}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1eae793d5968204651d96b7d0c933bfe51e}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1eae793d5968204651d96b7d0c933bfe51e}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+P5@{J\+P5}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!J\+P5@{J\+P5}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1eae793d5968204651d96b7d0c933bfe51e}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1eae793d5968204651d96b7d0c933bfe51e}} 
 J\+P5&Sprite de saut (Jump) n°5 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{JP6@{JP6}!structs.h@{structs.h}}\index{structs.h@{structs.h}!JP6@{JP6}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ead4c49849aed1803d35d7e1937c9e180b}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ead4c49849aed1803d35d7e1937c9e180b}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+P6@{J\+P6}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!J\+P6@{J\+P6}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ead4c49849aed1803d35d7e1937c9e180b}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ead4c49849aed1803d35d7e1937c9e180b}} 
 J\+P6&Sprite de saut (Jump) n°6 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{JP7@{JP7}!structs.h@{structs.h}}\index{structs.h@{structs.h}!JP7@{JP7}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea04a9327a3a1dde259800007956b6d482}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea04a9327a3a1dde259800007956b6d482}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+P7@{J\+P7}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!J\+P7@{J\+P7}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea04a9327a3a1dde259800007956b6d482}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea04a9327a3a1dde259800007956b6d482}} 
 J\+P7&Sprite de saut (Jump) n°7 \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{JP8@{JP8}!structs.h@{structs.h}}\index{structs.h@{structs.h}!JP8@{JP8}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea7cf7aee82a1ca557ea9c8a1037f9eebc}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea7cf7aee82a1ca557ea9c8a1037f9eebc}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+P8@{J\+P8}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!J\+P8@{J\+P8}}}\mbox{\Hypertarget{structs_8h_acc92dae96c834a587153fcb1fb87df1ea7cf7aee82a1ca557ea9c8a1037f9eebc}\label{structs_8h_acc92dae96c834a587153fcb1fb87df1ea7cf7aee82a1ca557ea9c8a1037f9eebc}} 
 J\+P8&Sprite de saut (Jump) n°8 \\
 \hline
 

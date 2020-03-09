@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['main_119',['main',['../codemap_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;codemap.c'],['../decodemap_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;decodemap.c'],['../test_liste_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;testListe.c']]],
-  ['modifelm_120',['modifElm',['../liste_8c.html#abb04638007419308b859463894f42467',1,'modifElm(liste_t *maListe, void *v):&#160;liste.c'],['../liste_8h.html#abb04638007419308b859463894f42467',1,'modifElm(liste_t *maListe, void *v):&#160;liste.c']]]
+  ['initialisation_5fsdl',['initialisation_SDL',['../sdl__fonctions_8h.html#aef9e4b5ba212589eec22d7a659b28192',1,'initialisation_SDL():&#160;sdl_fonctions.c'],['../sdl__fonctions_8c.html#aef9e4b5ba212589eec22d7a659b28192',1,'initialisation_SDL():&#160;sdl_fonctions.c']]],
+  ['initialiser_5fsprites_5fpersonnages',['initialiser_sprites_personnages',['../sdl__fonctions_8h.html#a2911b01eac3be334c8b85f94839fa637',1,'initialiser_sprites_personnages(SDL_Surface **tab, int taille):&#160;sdl_fonctions.c'],['../sdl__fonctions_8c.html#a2911b01eac3be334c8b85f94839fa637',1,'initialiser_sprites_personnages(SDL_Surface **tab, int taille):&#160;sdl_fonctions.c']]]
 ];

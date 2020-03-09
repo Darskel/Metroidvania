@@ -37,9 +37,6 @@ decodemap: ${c}decodemap.c
 testsdl: ${o}sdl_fonctions.o ${o}test_SDL.o
 	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
-dep_matrice: ${c}dep_matrice.c
-	${CC} $^ -o $@ ${CFLAGS}
-
 ${o}%.o: ${c}%.c
 	${CC} $< -c -o $@ ${INCS} ${LIBS} ${CFLAGS}
 

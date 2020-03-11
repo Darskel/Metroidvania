@@ -10,13 +10,14 @@
 #define RES_H 1280
 #define RES_V 720
 #define FPS 60
+#define NOM_JEU "Metroidvania"
 
 /**
  * \file sdl_fonctions.h
  * \brief Header pour la librairie de fonctions et les constantes liées à l'usage de la SDL2
  * \author Marie-Nina MUNAR L2 Info Le Mans
- * \version 1.1
- * \date 09/03/2020
+ * \version 1.2
+ * \date 11/03/2020
 */
 
 SDL_Window * initialisation_SDL();

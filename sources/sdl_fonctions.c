@@ -11,8 +11,8 @@
  * \file sdl_fonctions.c
  * \brief Fichier qui regroupent les fonctions utilisées pour la gestion des graphismes (SDL2)
  * \author Marie-Nina MUNAR L2 Info Le Mans
- * \version 1.3
- * \date 09/03/2020
+ * \version 1.4
+ * \date 11/03/2020
 */
 
 /**
@@ -32,7 +32,7 @@ SDL_Window * initialisation_SDL(){
     exit(EXIT_FAILURE);
   }
 
-  fenetre = SDL_CreateWindow("Metroidvania", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, RES_H, RES_V, SDL_WINDOW_SHOWN);
+  fenetre = SDL_CreateWindow(NOM_JEU, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, RES_H, RES_V, SDL_WINDOW_SHOWN);
   if(!fenetre){
     fprintf(stderr, "Erreur de creation de la fenetre : %s\n", SDL_GetError());
     exit(EXIT_FAILURE);

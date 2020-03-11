@@ -5,7 +5,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../headers/structs.h"
+#include "../headers/source.h"
 
 /**
  * \file source.c
@@ -14,8 +14,6 @@
  * \version 1.0
  * \date 13/02/2020
 */
-
-#define DIR_SAUV "./" //"./sauvegardes/"
 
 /**
  * \brief Sauvegarde l'état de la partie
@@ -33,13 +31,18 @@ int sauvegarder(int numSauv, int hp, char* salle, position_t* dep, int inventair
     if(numSauv < 1 || numSauv > 3)
         return -1; // Mauvais numéro de sauvegarde
 
+    char cmd[20] = "mkdir ";
+
     //avec opendir
     DIR* dir = opendir(DIR_SAUV);
     if(dir)
         closedir(dir);
     else
-        if(ENOENT == errno)
-            CREATE_DIR(DIR_SAUV);
+        if(ENOENT == errno){
+            //CREATE_DIR(DIR_SAUV);
+            strcat(cmd, DIR_SAUV);
+            system(cmd);
+        }
     
     //avec stat
     /*
@@ -49,10 +52,14 @@ int sauvegarder(int numSauv, int hp, char* salle, position_t* dep, int inventair
             CREATE_DIR(DIR_SAUV);
     */
 
-    char* nomFichier = malloc(sizeof(char) * (6 + strlen(DIR_SAUV)));
-    strcpy(nomFichier, DIR_SAUV);
-    strcpy(nomFichier, itoa(numSauv,nomFichier,10));
+    char* nomFichier = malloc(sizeof(char) * (6 + strlen(DIR_SAUV) + 3));
+    strcpy(nomFichier, "./");
+    strcat(nomFichier, DIR_SAUV);
+    strcat(nomFichier, "/");
+    itoa(numSauv, cmd, 10);
+    strcat(nomFichier, cmd);
     strcat(nomFichier, ".txt");
+
     FILE * file = fopen(nomFichier,"w");
     free(nomFichier);
     if(!file)
@@ -62,7 +69,7 @@ int sauvegarder(int numSauv, int hp, char* salle, position_t* dep, int inventair
     fprintf(file, "Health Point: %d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", hp, salle, dep->x, dep->y);
     
     for(int i = 0; i < TAILLE_INVENTAIRE; i++)
-        fprintf(file, "\t%s: %d\n",nomObjs[i], inventaire[i] ? 1 : 0);
+        fprintf(file, "\t%s: %d\n", nomObjs[i], inventaire[i] ? 1 : 0);
 
     fclose(file);
     return numSauv;
@@ -91,7 +98,7 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
         closedir(dir);
     else
         if(ENOENT == errno)
-            CREATE_DIR(DIR_SAUV);
+            return -3; // Le dossier n'existe pas (et donc aucune sauvegarde n'existe)
     
     //avec stat
     /*
@@ -101,29 +108,36 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
             CREATE_DIR(DIR_SAUV);
     */
 
-    char tmp[100];
-    char* nomFichier = malloc(sizeof(char) * (6 + strlen(DIR_SAUV)));
-    strcpy(nomFichier, DIR_SAUV);
-    strcpy(nomFichier, itoa(numSauv,nomFichier,10));
+    char tmp[20];
+    char* nomFichier = malloc(sizeof(char) * (6 + strlen(DIR_SAUV) + 3));
+    strcpy(nomFichier, "./");
+    strcat(nomFichier, DIR_SAUV);
+    strcat(nomFichier, "/");
+    itoa(numSauv, tmp, 10);
+    strcat(nomFichier, tmp);
     strcat(nomFichier, ".txt");
+
     FILE * file = fopen(nomFichier,"r");
     free(nomFichier);
     if(!file)
         return -2; // Le fichier n'a pas pû être ouvert
 
-    fscanf(file, "%c", &tmp[0]);
+    fscanf(file, "%c", tmp);
+
     if(feof(file)){
         fclose(file);
         return 0; //Le fichier de sauvegarde est vide
     }
 
     fscanf(file, "ealth Point: %d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", &(perso->pv), salle, &(perso->pos.x), &(perso->pos.y));
+    printf("ok\n");
     for(int i = 0; i < TAILLE_INVENTAIRE; i++){
-        fscanf(file,"%s: ", tmp);
+        fscanf(file,"%[^:]: ", tmp);
+        printf("%s - %s\n", nomObjs[i], tmp);
         if(!strcmp(tmp,nomObjs[i]))
-            fscanf("%d\n", inventaire[i]);
+            fscanf(file,"%d\n", inventaire + i);
         else{
-            while(strcmp(tmp,nomObjs[i])){
+            while(strcmp(tmp,nomObjs[i])){//opti ici pour chercher l'indice correct (si indice non trouvé -> indice actuel inchangé)
                 inventaire[i] = 0;
                 i++;
             }
@@ -140,7 +154,7 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
  * 
  * @param salle structure salle à traiter
 */
-int nettoyerSalle(salle_t** salle){
+static int nettoyerSalle(salle_t** salle){
     for(int i = 0; i < (*salle)->hauteur; i++)
         free((*salle)->mat[i]);
 
@@ -150,6 +164,7 @@ int nettoyerSalle(salle_t** salle){
     free(*salle);
     *salle = NULL;
 
+    return 0;
 }
 
 /**
@@ -158,37 +173,42 @@ int nettoyerSalle(salle_t** salle){
  * @param nomFichier nom du fichier de la salle à lire
  * @param salle structure salle du programme
 */
-int lireSalle(char* nomFichier, salle_t* salle){
+int lireSalle(char* nomFichier, salle_t** salle){
     FILE * monDoc = NULL;
     char mot[50];
     int lon, larg, val;
     int cx1, cx2, cy1, cy2;
 
-    if(salle)
-        nettoyerSalle(&salle);
+    if(*salle)
+        nettoyerSalle(salle);
     
-    salle = malloc(sizeof(*salle));
-    salle->nomFichier = malloc(sizeof(char) * (strlen(nomFichier)+1));
-    strcpy(salle->nomFichier, nomFichier);
+    *salle = malloc(sizeof(salle_t));
+    (*salle)->nomFichier = malloc(sizeof(char) * (strlen(nomFichier)+1));
+    strcpy((*salle)->nomFichier, nomFichier);
 
     //creation des variables dans le tas
     monDoc = fopen(nomFichier, "r");
+    if(!monDoc)
+        return 1;
 
     //taille matrice
     fscanf(monDoc, "%d %d", &lon, &larg);
 
+    (*salle)->largeur = lon;
+    (*salle)->hauteur = larg;
+
     //Création matrice
-    salle->mat = malloc(sizeof(int*) * lon);
+    (*salle)->mat = malloc(sizeof(int*) * lon);
     for(int i = 0; i < lon; i++)
-        salle->mat[i] = malloc(sizeof(int) * larg);
+        (*salle)->mat[i] = malloc(sizeof(int) * larg);
 
     //Remplissage matrice
     for(int i = 0; i < lon*larg; i++){
         fscanf(monDoc, "%d", &val);
-        salle->mat[i/larg][i%larg] = val;
+        (*salle)->mat[i/larg][i%larg] = val;
     }
 
-    salle->listePorte = creerListe("porte");
+    (*salle)->listePorte = creerListe("porte");
     porte_t* p;
 
     //Création et remplissage des portes
@@ -204,9 +224,10 @@ int lireSalle(char* nomFichier, salle_t* salle){
         //Gestion des sprites de portes potentiellement à modifier
         p->spritesActuel = -1;
         p->listeSprites = NULL;
-        ajoutDroit(salle->listePorte, p);
+        ajoutDroit((*salle)->listePorte, p);
         fscanf(monDoc, "%s %d %d %d %d", mot, &cx1, &cy1, &cx2, &cy2);
     }
     //fermeture fichier
     fclose(monDoc);
+    return 0;
 }

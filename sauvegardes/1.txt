@@ -1,0 +1,10 @@
+Health Point: 20
+Nom de la salle: ./1.txt
+Position: 1 1
+Inventaire:
+	arc: 1
+	cle: 0
+	fleche: 1
+	fleche feu: 0
+	pioche: 0
+	zoo: 1

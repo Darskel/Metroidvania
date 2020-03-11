@@ -15,7 +15,7 @@
         #define CLEAR
     #endif
 
-    #define CREATE_DIR(X) char Y[20] = "mkdir "; strcat(Y, X); system(Y);
+    //#define CREATE_DIR(X) system(strcat("mkdir ",X));
 
 #endif
 

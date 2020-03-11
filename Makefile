@@ -21,7 +21,7 @@ else
 	INCS=-I${SDL_INC_DIR}
 endif
 
-all: map testListe testsdl dep_matrice
+all: map testListe testsdl dep_matrice testSource
 
 map: codemap decodemap
 
@@ -36,6 +36,9 @@ decodemap: ${c}decodemap.c
 
 testsdl: ${o}sdl_fonctions.o ${o}test_SDL.o
 	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
+
+testSource: ${o}source.o ${o}testSource.o ${o}liste.o
+	${CC} $^ -o $@ ${CFLAGS}
 
 ${o}%.o: ${c}%.c
 	${CC} $< -c -o $@ ${INCS} ${LIBS} ${CFLAGS}

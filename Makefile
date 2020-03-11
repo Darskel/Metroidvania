@@ -41,7 +41,15 @@ ${o}%.o: ${c}%.c
 	${CC} $< -c -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
 clean:
-	$(if $(OS) == Windows_NT, del /s *.o, rm -rf *.o)
+ifeq ($(OS),Windows_NT)
+	del /s ${o}*.o
+else
+	rm -rf ${o}*.o
+endif
 
 mrproper: clean
-	$(if $(OS) == Windows_NT, del /s *.exe, find . -type f -executable -delete)
+ifeq ($(OS),Windows_NT)
+	del /s *.exe
+else
+	find . -type f -executable -delete
+endif

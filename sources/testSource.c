@@ -44,8 +44,6 @@ int main(){
 
     free(salle->nomFichier);
     free(salle);
-    for(int i = 0; i < TAILLE_INVENTAIRE; i++)
-        free(nomObj[i]);
 
     return 0;
 }

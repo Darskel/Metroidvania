@@ -56,7 +56,9 @@ int sauvegarder(int numSauv, int hp, char* salle, position_t* dep, int inventair
     strcpy(nomFichier, "./");
     strcat(nomFichier, DIR_SAUV);
     strcat(nomFichier, "/");
-    itoa(numSauv, cmd, 10);
+    //itoa(numSauv, cmd, 10);
+    cmd[0] = numSauv + '0';
+    cmd[1] = '\0';
     strcat(nomFichier, cmd);
     strcat(nomFichier, ".txt");
 
@@ -113,7 +115,9 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
     strcpy(nomFichier, "./");
     strcat(nomFichier, DIR_SAUV);
     strcat(nomFichier, "/");
-    itoa(numSauv, tmp, 10);
+    //itoa(numSauv, tmp, 10);
+    tmp[0] = numSauv + '0';
+    tmp[1] = '\0';
     strcat(nomFichier, tmp);
     strcat(nomFichier, ".txt");
 
@@ -130,7 +134,7 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
     }
 
     fscanf(file, "ealth Point: %d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", &(perso->pv), salle, &(perso->pos.x), &(perso->pos.y));
-    printf("ok\n");
+    
     for(int i = 0; i < TAILLE_INVENTAIRE; i++){
         fscanf(file,"%[^:]: ", tmp);
         printf("%s - %s\n", nomObjs[i], tmp);

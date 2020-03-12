@@ -1,5 +1,5 @@
 Health Point: 20
-Nom de la salle: ./1.txt
+Nom de la salle: 1.txt
 Position: 1 1
 Inventaire:
 	arc: 1

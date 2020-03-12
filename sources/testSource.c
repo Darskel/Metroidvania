@@ -11,7 +11,7 @@ int main(){
 
     perso.pv = 20;
 
-    lireSalle("./1.txt",&salle);
+    lireSalle("1.txt",&salle);
 
     for(int i = 0; i < salle->hauteur; i++){
         for(int j = 0; j < salle->largeur; j++)

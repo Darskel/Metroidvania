@@ -5,6 +5,7 @@
 #define DIR_SAUV "sauvegardes"
 #define DIR_SALLE "./salles/"
 
+extern char* chercherSprite(int id);
 extern int sauvegarder(int, int, char*, position_t*, int[], char* []);
 extern int chargerSauvegarde(int, char*, personnage_t*, int[], char*[]);
 extern int lireSalle(char*, salle_t**);

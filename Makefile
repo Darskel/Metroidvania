@@ -25,7 +25,7 @@ else
 	propre=find . -type f -executable -delete
 endif
 
-all: map testListe testsdl dep_matrice testSource
+all: map testListe testsdl dep_matrice testSource testSprite
 
 map: codemap decodemap
 
@@ -42,6 +42,9 @@ testsdl: ${o}sdl_fonctions.o ${o}test_SDL.o
 	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
 testSource: ${o}source.o ${o}testSource.o ${o}liste.o
+	${CC} $^ -o $@ ${CFLAGS}
+
+testSprite: ${o}source.o ${o}testSprite.o ${o}liste.o
 	${CC} $^ -o $@ ${CFLAGS}
 
 ${o}%.o: ${c}%.c

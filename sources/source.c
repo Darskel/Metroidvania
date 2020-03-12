@@ -15,6 +15,23 @@
  * \date 13/02/2020
 */
 
+char* chercherSprite(int id){
+    /* tout sur dirent ici: http://sdz.tdct.org/sdz/arcourir-les-dossiers-avec-dirent-h.html */
+    if(!id)
+        return NULL;
+
+    DIR* dir = opendir("./sprites/");
+    struct dirent* file;
+    if(!dir)
+        return NULL; //dossier de sprites non trouvé ou inaccessible
+    
+    while((file = readdir(dir)))
+        printf("Nom fichier: %s\n", file->d_name);
+
+    closedir(dir);
+    return NULL;
+}
+
 /**
  * \brief Sauvegarde l'état de la partie
  * 

@@ -4,6 +4,7 @@
 
 #define DIR_SAUV "sauvegardes"
 #define DIR_SALLE "./salles/"
+#define BASE 100
 
 extern char* chercherSprite(int, char*);
 extern int sauvegarder(int, int, char*, position_t*, int[], char* []);

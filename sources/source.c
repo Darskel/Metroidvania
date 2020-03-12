@@ -15,25 +15,56 @@
  * \date 13/02/2020
 */
 
+int findVal(int val){
+    int r;
+    while(val){
+        r = val % BASE;
+        val = val / BASE;
+    }
+
+    return r;
+}
+
+int filecmp(struct dirent f1, struct dirent f2){
+    if(f1.d_type != f2.d_type){
+        return f1.d_type ? -1 : 1;
+    }
+
+    return strcmp(f1.d_name,f2.d_name);
+}
+
 char* chercherSprite(int id, char* dirName){
     /* tout sur dirent ici: http://sdz.tdct.org/sdz/arcourir-les-dossiers-avec-dirent-h.html */
     if(!id)
         return NULL;
 
-    char newName[50] = dirName;
+    char newName[50] = "";
+    strcpy(newName, dirName);
     DIR* dir = opendir(dirName);
     struct dirent* file;
     if(!dir)
         return NULL; //dossier de sprites non trouvé ou inaccessible
-    
+
+    int val = findVal(id) - 1;
+    int nbVal = 0;
+    struct dirent * fileListe = malloc(sizeof(struct dirent*) * BASE);
+
     while((file = readdir(dir))){
-        printf("Nom fichier: %s\ntype: %s\n\n", file->d_name, file->d_type ? "dossier" : "fichier");
-        if(file->d_type && file->d_name[0] != '.'){
-            strcat(newName,file->d_name);
-            chercherSprite(id,newName);
+        if(file->d_name[0] != '.'){
+            printf("[%d]%d - fichier: %s\n",nbVal, file->d_type, file->d_name);
+            fileListe[nbVal++] = *file;
         }
     }
 
+    for(int i = 0; i < nbVal; i++)
+        printf("[%d]%s\n",i,fileListe[i].d_name);
+
+    qsort(fileListe, nbVal, sizeof(struct dirent), filecmp);
+
+    for(int i = 0; i < nbVal; i++)
+        printf("%s\n",fileListe[i].d_name);
+
+    free(fileListe);
     closedir(dir);
     return NULL;
 }

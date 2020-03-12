@@ -5,7 +5,11 @@
 
 int main(){
 
-    chercherSprite(1,"./sprites/");
+    char* res = chercherSprite(301,"./sprites/");
+
+    printf("%s\n",res);
+
+    free(res);
 
     return 0;
 }

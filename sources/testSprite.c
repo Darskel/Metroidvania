@@ -5,7 +5,7 @@
 
 int main(){
 
-    chercherSprite(1);
+    chercherSprite(1,"./sprites/");
 
     return 0;
 }

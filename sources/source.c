@@ -15,18 +15,24 @@
  * \date 13/02/2020
 */
 
-char* chercherSprite(int id){
+char* chercherSprite(int id, char* dirName){
     /* tout sur dirent ici: http://sdz.tdct.org/sdz/arcourir-les-dossiers-avec-dirent-h.html */
     if(!id)
         return NULL;
 
-    DIR* dir = opendir("./sprites/");
+    char newName[50] = dirName;
+    DIR* dir = opendir(dirName);
     struct dirent* file;
     if(!dir)
         return NULL; //dossier de sprites non trouvé ou inaccessible
     
-    while((file = readdir(dir)))
-        printf("Nom fichier: %s\n", file->d_name);
+    while((file = readdir(dir))){
+        printf("Nom fichier: %s\ntype: %s\n\n", file->d_name, file->d_type ? "dossier" : "fichier");
+        if(file->d_type && file->d_name[0] != '.'){
+            strcat(newName,file->d_name);
+            chercherSprite(id,newName);
+        }
+    }
 
     closedir(dir);
     return NULL;

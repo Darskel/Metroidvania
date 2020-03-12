@@ -43,14 +43,6 @@ int sauvegarder(int numSauv, int hp, char* salle, position_t* dep, int inventair
             strcat(cmd, DIR_SAUV);
             system(cmd);
         }
-    
-    //avec stat
-    /*
-    struct stat s = {0};
-    if(!stat(DIR_SAUV,&s))
-        if(!S_ISDIR(s.st_mode))
-            CREATE_DIR(DIR_SAUV);
-    */
 
     char* nomFichier = malloc(sizeof(char) * (6 + strlen(DIR_SAUV) + 3));
     strcpy(nomFichier, "./");
@@ -100,15 +92,7 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
         closedir(dir);
     else
         if(ENOENT == errno)
-            return -3; // Le dossier n'existe pas (et donc aucune sauvegarde n'existe)
-    
-    //avec stat
-    /*
-    struct stat s = {0};
-    if(!stat(DIR_SAUV,&s))
-        if(!S_ISDIR(s.st_mode))
-            CREATE_DIR(DIR_SAUV);
-    */
+            return 0; // Le dossier n'existe pas (et donc aucune sauvegarde n'existe pas)
 
     char tmp[20];
     char* nomFichier = malloc(sizeof(char) * (6 + strlen(DIR_SAUV) + 3));
@@ -189,9 +173,11 @@ int lireSalle(char* nomFichier, salle_t** salle){
     *salle = malloc(sizeof(salle_t));
     (*salle)->nomFichier = malloc(sizeof(char) * (strlen(nomFichier)+1));
     strcpy((*salle)->nomFichier, nomFichier);
+    char tmp[20] = DIR_SALLE;
+    strcat(tmp,nomFichier);
 
     //creation des variables dans le tas
-    monDoc = fopen(nomFichier, "r");
+    monDoc = fopen(tmp, "r");
     if(!monDoc)
         return 1;
 

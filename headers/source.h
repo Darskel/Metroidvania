@@ -4,6 +4,7 @@
 
 #define DIR_SAUV "sauvegardes"
 #define DIR_SALLE "./salles/"
+#define BLOC_ERR "./autre/erreur.png"
 #define BASE 100
 
 extern char* chercherSprite(int, char*);

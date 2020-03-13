@@ -3,13 +3,19 @@
 #include <string.h>
 #include "../headers/source.h"
 
-int main(){
+int main(int argc, char* argv[]){
 
-    char* res = chercherSprite(301,"./sprites/");
+    if(argc != 2)
+      return 1;
 
-    printf("%s\n",res);
+    int nb = atoi(argv[1]);
 
-    free(res);
+    char* res = chercherSprite(nb,"./sprites/");
+
+    printf("Resultat: %s\n", res ? res : "air");
+
+    if(res && strcmp(res,BLOC_ERR))
+      free(res);
 
     return 0;
 }

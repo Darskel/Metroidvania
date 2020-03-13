@@ -15,22 +15,12 @@
  * \date 13/02/2020
 */
 
-int findVal(int val){
-    int r;
-    while(val){
-        r = val % BASE;
-        val = val / BASE;
+int filecmp(struct dirent* f1, struct dirent* f2){
+    if(f1->d_type != f2->d_type){
+        return f1->d_type == DT_DIR ? -1 : 1;
     }
 
-    return r;
-}
-
-int filecmp(struct dirent f1, struct dirent f2){
-    if(f1.d_type != f2.d_type){
-        return f1.d_type ? -1 : 1;
-    }
-
-    return strcmp(f1.d_name,f2.d_name);
+    return strcmp(f1->d_name,f2->d_name);
 }
 
 char* chercherSprite(int id, char* dirName){
@@ -38,47 +28,56 @@ char* chercherSprite(int id, char* dirName){
     if(!id)
         return NULL;
 
-    char newName[50] = "";
-    strcpy(newName, dirName);
+    char newName[200] = "";
     DIR* dir = opendir(dirName);
     struct dirent* file;
     if(!dir)
-        return NULL; //dossier de sprites non trouvé ou inaccessible
+        return BLOC_ERR; //dossier de sprites non trouvé ou inaccessible
 
-    int val = findVal(id) - 1;
+    int val = id%BASE - 1;
     int nbVal = 0;
-    struct dirent * fileListe = malloc(sizeof(struct dirent*) * BASE);
+    struct dirent* fileListe = malloc(sizeof(struct dirent) * BASE);
 
     while((file = readdir(dir))){
         if(file->d_name[0] != '.'){
-            printf("[%d]%d - fichier: %s\n",nbVal, file->d_type, file->d_name);
             fileListe[nbVal++] = *file;
         }
     }
 
-    for(int i = 0; i < nbVal; i++)
-        printf("[%d]%s\n",i,fileListe[i].d_name);
+    if(val >= nbVal || val < 0){
+      free(fileListe);
+      closedir(dir);
+      return BLOC_ERR; //En dehors de tous les dossiers/fichiers trouvés
+    }
 
     qsort(fileListe, nbVal, sizeof(struct dirent), filecmp);
 
-    for(int i = 0; i < nbVal; i++)
-        printf("%s\n",fileListe[i].d_name);
-
-    free(fileListe);
+    strcpy(newName, dirName);
+    strcat(newName, fileListe[val].d_name);
     closedir(dir);
-    return NULL;
+    free(fileListe);
+
+    if(fileListe[val].d_type == DT_DIR){
+      strcat(newName, "/");
+      return chercherSprite(id/BASE,newName);
+    }
+
+    char* res = malloc(sizeof(char) * (strlen(newName)+1));
+    strcpy(res,newName);
+
+    return res;
 }
 
 /**
  * \brief Sauvegarde l'état de la partie
- * 
+ *
  * @param numSauv numéro de la sauvegarde (entre 1 et 3)
  * @param hp nombre de point de vies du personnage principal
  * @param salle nom de la dernière salle visité par le personnage principal
  * @param dep position(position_t) d'arrivé dans la salle (position de départ après chargement)
  * @param inventaire tableau contenant l'état de l'inventaire du personnage
  * @param nomObjs tableau contenant le nom des objets de l'inventaire dans l'ordre
- * 
+ *
  * @return un code erreur en fonction de l'erreur: -1 = Mauvais numéro de sauvegarde, -2 = impossible d'ouvrir ou créer le fichier; ou le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès)
 */
 int sauvegarder(int numSauv, int hp, char* salle, position_t* dep, int inventaire[], char* nomObjs[]){
@@ -115,7 +114,7 @@ int sauvegarder(int numSauv, int hp, char* salle, position_t* dep, int inventair
 
     //Ecrit les hp, la salle et la position de réaparition
     fprintf(file, "Health Point: %d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", hp, salle, dep->x, dep->y);
-    
+
     for(int i = 0; i < TAILLE_INVENTAIRE; i++)
         fprintf(file, "\t%s: %d\n", nomObjs[i], inventaire[i] ? 1 : 0);
 
@@ -126,13 +125,13 @@ int sauvegarder(int numSauv, int hp, char* salle, position_t* dep, int inventair
 /**
  * \brief Sauvegarde l'état de la partie
  * \details Les paramètres numSauv et nomObjs doivent être définis avant, les autres paramètres seront remplis par cette fonction
- * 
+ *
  * @param numSauv numéro de la sauvegarde (entre 1 et 3)
  * @param salle nom de la salle à charger
  * @param perso personnage (structure personnage_t) à remplir
  * @param inventaire tableau contenant l'état de l'inventaire du personnage
  * @param nomObjs tableau contenant le nom des objets de l'inventaire dans l'ordre
- * 
+ *
  * @return un code erreur en fonction de l'erreur: -1 = Mauvais numéro de sauvegarde, -2 = impossible d'ouvrir ou créer le fichier; le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès), ou 0 si le fichier de sauvegarde est vide
 */
 
@@ -172,7 +171,7 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
     }
 
     fscanf(file, "ealth Point: %d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", &(perso->pv), salle, &(perso->pos.x), &(perso->pos.y));
-    
+
     for(int i = 0; i < TAILLE_INVENTAIRE; i++){
         fscanf(file,"%[^:]: ", tmp);
         printf("%s - %s\n", nomObjs[i], tmp);
@@ -193,7 +192,7 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
 /**
  * \brief Nettoie et supprime la structure salle donnée
  * \details libère toute la mémoire utiliser et prépare le pointeur à être de nouveau utilisé
- * 
+ *
  * @param salle structure salle à traiter
 */
 static int nettoyerSalle(salle_t** salle){
@@ -211,7 +210,7 @@ static int nettoyerSalle(salle_t** salle){
 
 /**
  * \brief Modifie la structure salle pour la nouvelle salle
- * 
+ *
  * @param nomFichier nom du fichier de la salle à lire
  * @param salle structure salle du programme
 */
@@ -223,7 +222,7 @@ int lireSalle(char* nomFichier, salle_t** salle){
 
     if(*salle)
         nettoyerSalle(salle);
-    
+
     *salle = malloc(sizeof(salle_t));
     (*salle)->nomFichier = malloc(sizeof(char) * (strlen(nomFichier)+1));
     strcpy((*salle)->nomFichier, nomFichier);

@@ -199,7 +199,7 @@ static int nettoyerSalle(salle_t** salle){
     for(int i = 0; i < (*salle)->hauteur; i++)
         free((*salle)->mat[i]);
 
-    supListe(&((*salle)->listePorte));
+    supListe(&((*salle)->listePorte),supPorte);
     free((*salle)->mat);
     free((*salle)->nomFichier);
     free(*salle);

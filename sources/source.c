@@ -15,56 +15,19 @@
  * \date 13/02/2020
 */
 
-int findVal(int val){
-    int r;
-    while(val){
-        r = val % BASE;
-        val = val / BASE;
-    }
-
-    return r;
-}
-
-int filecmp(struct dirent f1, struct dirent f2){
-    if(f1.d_type != f2.d_type){
-        return f1.d_type ? -1 : 1;
-    }
-
-    return strcmp(f1.d_name,f2.d_name);
-}
-
-char* chercherSprite(int id, char* dirName){
+char* chercherSprite(int id){
     /* tout sur dirent ici: http://sdz.tdct.org/sdz/arcourir-les-dossiers-avec-dirent-h.html */
     if(!id)
         return NULL;
 
-    char newName[50] = "";
-    strcpy(newName, dirName);
-    DIR* dir = opendir(dirName);
+    DIR* dir = opendir("./sprites/");
     struct dirent* file;
     if(!dir)
         return NULL; //dossier de sprites non trouvé ou inaccessible
+    
+    while((file = readdir(dir)))
+        printf("Nom fichier: %s\n", file->d_name);
 
-    int val = findVal(id) - 1;
-    int nbVal = 0;
-    struct dirent * fileListe = malloc(sizeof(struct dirent*) * BASE);
-
-    while((file = readdir(dir))){
-        if(file->d_name[0] != '.'){
-            printf("[%d]%d - fichier: %s\n",nbVal, file->d_type, file->d_name);
-            fileListe[nbVal++] = *file;
-        }
-    }
-
-    for(int i = 0; i < nbVal; i++)
-        printf("[%d]%s\n",i,fileListe[i].d_name);
-
-    qsort(fileListe, nbVal, sizeof(struct dirent), filecmp);
-
-    for(int i = 0; i < nbVal; i++)
-        printf("%s\n",fileListe[i].d_name);
-
-    free(fileListe);
     closedir(dir);
     return NULL;
 }
@@ -223,10 +186,7 @@ int lireSalle(char* nomFichier, salle_t** salle){
 
     if(*salle)
         nettoyerSalle(salle);
-    
-    *salle = malloc(sizeof(salle_t));
-    (*salle)->nomFichier = malloc(sizeof(char) * (strlen(nomFichier)+1));
-    strcpy((*salle)->nomFichier, nomFichier);
+
     char tmp[20] = DIR_SALLE;
     strcat(tmp,nomFichier);
 
@@ -235,21 +195,27 @@ int lireSalle(char* nomFichier, salle_t** salle){
     if(!monDoc)
         return 1;
 
+    *salle = malloc(sizeof(salle_t));
+    (*salle)->nomFichier = malloc(sizeof(char) * (strlen(nomFichier)+1));
+    strcpy((*salle)->nomFichier, nomFichier);
+
     //taille matrice
     fscanf(monDoc, "%d %d", &lon, &larg);
+    printf ("%d, %d \n", lon, larg);
 
     (*salle)->largeur = lon;
     (*salle)->hauteur = larg;
 
     //Création matrice
-    (*salle)->mat = malloc(sizeof(int*) * lon);
-    for(int i = 0; i < lon; i++)
-        (*salle)->mat[i] = malloc(sizeof(int) * larg);
+    (*salle)->mat = malloc(sizeof(int*) * larg);
+    for(int i = 0; i < larg; i++)
+        (*salle)->mat[i] = malloc(sizeof(int) * lon);
 
     //Remplissage matrice
     for(int i = 0; i < lon*larg; i++){
         fscanf(monDoc, "%d", &val);
-        (*salle)->mat[i/larg][i%larg] = val;
+        (*salle)->mat[i/lon][i%lon] = val;
+        //printf("\n %d %d \n", i/lon,i%lon);
     }
 
     (*salle)->listePorte = creerListe("porte");

@@ -190,4 +190,6 @@ typedef struct porte_s{
     int spritesActuel; /**< Indice du sprite à afficher */
 } porte_t;
 
+void supPorte(porte_t**);
+
 #endif

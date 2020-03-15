@@ -11,7 +11,7 @@ int main(){
 
     perso.pv = 20;
 
-    lireSalle("1.txt",&salle);
+    lireSalle("salle_test1.txt",&salle);
 
     for(int i = 0; i < salle->hauteur; i++){
         for(int j = 0; j < salle->largeur; j++)
@@ -24,7 +24,7 @@ int main(){
     for(int i = 0; i < salle->hauteur; i++)
         free(salle->mat[i]);
     free(salle->mat);
-    supListe(&salle->listePorte);
+    supListe(&salle->listePorte,supPorte);
 
     strcpy(salle->nomFichier,"");
     perso.pv = 0;

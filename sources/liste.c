@@ -139,11 +139,11 @@ void modifElm(liste_t *maListe, void *v){
  *
  * @param maListe liste dont il faut oter l'élément courant
 */
-void oterElm(liste_t *maListe){
+void oterElm(liste_t *maListe, void (*delete)(void**)){
     if(!horsListe(maListe)){
         maListe->ec->pred->succ = maListe->ec->succ;
         elemListe_t *tmp = maListe->ec->succ->pred = maListe->ec->pred;
-        free(maListe->ec->entite);
+        delete(&(maListe->ec->entite));
         free(maListe->ec);
         maListe->ec = tmp;
     }
@@ -195,12 +195,19 @@ void ajoutGauche(liste_t *maListe, void *v){
  *
  * @param maListe adresse vers la liste à supprimer
 */
-void supListe(liste_t **maListe){
+void supListe(liste_t **maListe, void (*delete)(void**)){
     enQueue(*maListe);
     while(!listeVide(*maListe))
-        oterElm(*maListe);
+        oterElm(*maListe,delete);
     free((*maListe)->type);
     free((*maListe)->drapeau);
     free(*maListe);
     (*maListe) = NULL;
+}
+
+void supPorte(porte_t** p){
+  free((*p)->salleSuivante);
+  free((*p)->listeSprites);
+  free(*p);
+  *p = NULL;
 }

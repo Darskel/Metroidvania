@@ -223,9 +223,6 @@ int lireSalle(char* nomFichier, salle_t** salle){
     if(*salle)
         nettoyerSalle(salle);
 
-    *salle = malloc(sizeof(salle_t));
-    (*salle)->nomFichier = malloc(sizeof(char) * (strlen(nomFichier)+1));
-    strcpy((*salle)->nomFichier, nomFichier);
     char tmp[20] = DIR_SALLE;
     strcat(tmp,nomFichier);
 
@@ -234,21 +231,27 @@ int lireSalle(char* nomFichier, salle_t** salle){
     if(!monDoc)
         return 1;
 
+    *salle = malloc(sizeof(salle_t));
+    (*salle)->nomFichier = malloc(sizeof(char) * (strlen(nomFichier)+1));
+    strcpy((*salle)->nomFichier, nomFichier);
+
     //taille matrice
     fscanf(monDoc, "%d %d", &lon, &larg);
+    printf ("%d, %d \n", lon, larg);
 
     (*salle)->largeur = lon;
     (*salle)->hauteur = larg;
 
     //Création matrice
-    (*salle)->mat = malloc(sizeof(int*) * lon);
-    for(int i = 0; i < lon; i++)
-        (*salle)->mat[i] = malloc(sizeof(int) * larg);
+    (*salle)->mat = malloc(sizeof(int*) * larg);
+    for(int i = 0; i < larg; i++)
+        (*salle)->mat[i] = malloc(sizeof(int) * lon);
 
     //Remplissage matrice
     for(int i = 0; i < lon*larg; i++){
         fscanf(monDoc, "%d", &val);
-        (*salle)->mat[i/larg][i%larg] = val;
+        (*salle)->mat[i/lon][i%lon] = val;
+        //printf("\n %d %d \n", i/lon,i%lon);
     }
 
     (*salle)->listePorte = creerListe("porte");

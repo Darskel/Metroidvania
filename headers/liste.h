@@ -38,9 +38,9 @@ void suivant(liste_t *maListe);
 void precedent(liste_t *maListe);
 char* valeurElm(liste_t *maListe, void *v);
 void modifElm(liste_t *maListe, void *v);
-void oterElm(liste_t *maListe);
+void oterElm(liste_t *maListe, void (*delete)(void**));
 void ajoutDroit(liste_t *maListe, void *v);
 void ajoutGauche(liste_t *maListe, void *v);
-void supListe(liste_t **maListe);
+void supListe(liste_t **maListe, void (*delete)(void**));
 
 #endif

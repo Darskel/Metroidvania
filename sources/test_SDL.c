@@ -14,7 +14,7 @@
  *
  * @return 0 si tout s'est bien déroulé
  */
-int main(){
+int main(int argc, char *argv[]){
   int erreur;
   SDL_Window * fenetre;
   fenetre = initialisation_SDL();

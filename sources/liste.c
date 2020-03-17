@@ -17,7 +17,7 @@
  * @param type type de la liste (valeurs disponibles: \e monstre et \e porte )
 */
 static void initListe(liste_t *maListe, char *type){
-    maListe->drapeau = malloc(sizeof (*(maListe->drapeau)));
+    maListe->drapeau = malloc(sizeof (elemListe_t));
     maListe->ec = maListe->drapeau->pred = maListe->drapeau->succ = maListe->drapeau;
     maListe->type = malloc(sizeof(char) * (strlen(type) + 1));
     strcpy(maListe->type, type);
@@ -30,7 +30,7 @@ static void initListe(liste_t *maListe, char *type){
  * @return adresse de la liste créée
 */
 liste_t* creerListe(char* type){
-    liste_t* maListe = malloc(sizeof(*maListe));
+    liste_t* maListe = malloc(sizeof(elemListe_t*));
     initListe(maListe, type);
     return maListe;
 }
@@ -106,13 +106,13 @@ void precedent(liste_t *maListe){
 char* valeurElm(liste_t *maListe, void *v){
     if(!horsListe(maListe)){
         if(!strcmp(maListe->type,"monstre")){
-          *(monstre_t *)v = *(monstre_t *)(maListe->ec->entite);
-        }
-    }
-    else{
+            *(monstre_t *)v = *(monstre_t *)(maListe->ec->entite);
+        }else{
             *(porte_t *)v = *(porte_t *)(maListe->ec->entite);
         }
         return maListe->type;
+    }
+
     return "\0";
 }
 
@@ -128,10 +128,10 @@ void modifElm(liste_t *maListe, void *v){
         if(!strcmp(maListe->type,"monstre")){
             *(monstre_t *)(maListe->ec->entite) = *(monstre_t *)v;
         }
-    }
-    else{
+        else{
             *(porte_t *)(maListe->ec->entite) = *(porte_t *)v;
         }
+    }
 }
 
 /**
@@ -206,8 +206,13 @@ void supListe(liste_t **maListe, void (*delete)(void**)){
 }
 
 void supPorte(porte_t** p){
-  free((*p)->salleSuivante);
-  free((*p)->listeSprites);
-  free(*p);
-  *p = NULL;
+    free((*p)->salleSuivante);
+    free((*p)->listeSprites);
+    free(*p);
+    *p = NULL;
+}
+
+void supMonstre(monstre_t** m){
+    free(*m);
+    *m = NULL;
 }

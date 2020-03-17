@@ -191,5 +191,6 @@ typedef struct porte_s{
 } porte_t;
 
 void supPorte(porte_t**);
+void supMonstre(monstre_t** m);
 
 #endif

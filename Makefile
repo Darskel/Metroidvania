@@ -25,18 +25,19 @@ else
 	propre=find . -type f -executable -delete
 endif
 
-all: map testListe testsdl dep_matrice testSource testSprite
+all: testListe testsdl testSource testSprite
 
-map: codemap decodemap
+#map: codemap decodemap outdated/deprecated
 
 testListe: ${o}liste.o ${o}testListe.o
 	${CC} $^ -o $@ ${CFLAGS}
 
-codemap: ${c}codemap.c
-	${CC} $^ -o $@ ${CFLAGS}
+# outdated/deprecated programs
+#codemap: ${c}codemap.c
+#	${CC} $^ -o $@ ${CFLAGS}
 
-decodemap: ${c}decodemap.c
-	${CC} $^ -o $@ ${CFLAGS}
+#decodemap: ${c}decodemap.c
+#	${CC} $^ -o $@ ${CFLAGS}
 
 testsdl: ${o}sdl_fonctions.o ${o}test_SDL.o
 	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}

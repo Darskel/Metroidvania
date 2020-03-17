@@ -15,7 +15,7 @@
  * \date 13/02/2020
 */
 
-int filecmp(struct dirent* f1, struct dirent* f2){
+static int filecmp(struct dirent* f1, struct dirent* f2){
     if(f1->d_type != f2->d_type){
         return f1->d_type == DT_DIR ? -1 : 1;
     }
@@ -195,7 +195,7 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
  *
  * @param salle structure salle à traiter
 */
-static int nettoyerSalle(salle_t** salle){
+int nettoyerSalle(salle_t** salle){
     for(int i = 0; i < (*salle)->hauteur; i++)
         free((*salle)->mat[i]);
 

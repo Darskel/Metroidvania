@@ -14,12 +14,6 @@ Header pour la librairie de fonctions et les constantes liées à l\textquotesin
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{sdl__fonctions_8h_a83462e274779baaec00383d7487c44bf}\label{sdl__fonctions_8h_a83462e274779baaec00383d7487c44bf}} 
-\#define {\bfseries N\+B\+S\+P\+R\+I\+T\+ES}~17
-\item 
-\mbox{\Hypertarget{sdl__fonctions_8h_a01bb5f060b3487835f42c74e5267e498}\label{sdl__fonctions_8h_a01bb5f060b3487835f42c74e5267e498}} 
-\#define {\bfseries V\+I\+T\+E\+S\+SE}~1
-\item 
 \mbox{\Hypertarget{sdl__fonctions_8h_a35c315000bd7afc77afef827715d9eb3}\label{sdl__fonctions_8h_a35c315000bd7afc77afef827715d9eb3}} 
 \#define {\bfseries R\+E\+S\+\_\+H}~1280
 \item 
@@ -28,6 +22,12 @@ Header pour la librairie de fonctions et les constantes liées à l\textquotesin
 \item 
 \mbox{\Hypertarget{sdl__fonctions_8h_ac92ca5ab87034a348decad7ee8d4bd1b}\label{sdl__fonctions_8h_ac92ca5ab87034a348decad7ee8d4bd1b}} 
 \#define {\bfseries F\+PS}~60
+\item 
+\mbox{\Hypertarget{sdl__fonctions_8h_ae91dfbf90fa4acb9c8e44fcfd8021210}\label{sdl__fonctions_8h_ae91dfbf90fa4acb9c8e44fcfd8021210}} 
+\#define {\bfseries L\+I\+M\+I\+TS}~30
+\item 
+\mbox{\Hypertarget{sdl__fonctions_8h_a73b3bbc51c65bf165939cc7b57e9eb4b}\label{sdl__fonctions_8h_a73b3bbc51c65bf165939cc7b57e9eb4b}} 
+\#define {\bfseries N\+O\+M\+\_\+\+J\+EU}~\char`\"{}Metroidvania\char`\"{}
 \end{DoxyCompactItemize}
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
@@ -38,10 +38,10 @@ void \hyperlink{sdl__fonctions_8h_ae6d762efc12860f009555b28b7a9b34e}{quitter\+\_
 \begin{DoxyCompactList}\small\item\em Fonction qui permet de détruire la fenetre et quitter la S\+DL. \end{DoxyCompactList}\item 
 int \hyperlink{sdl__fonctions_8h_a2bbddb87a40194682f4546c6230de631}{evenements} (S\+D\+L\+\_\+\+Window $\ast$fenetre)
 \begin{DoxyCompactList}\small\item\em Fonction de gestions des evenements. \end{DoxyCompactList}\item 
-int \hyperlink{sdl__fonctions_8h_ace268ecb7ed08ec8ebb0739aa30334b4}{fullscreen\+\_\+switch} (S\+D\+L\+\_\+\+Window $\ast$fenetre, int state)
-\begin{DoxyCompactList}\small\item\em Fonction qui permet de basculer du plein écran au fenetré \end{DoxyCompactList}\item 
-void \hyperlink{sdl__fonctions_8h_a2911b01eac3be334c8b85f94839fa637}{initialiser\+\_\+sprites\+\_\+personnages} (S\+D\+L\+\_\+\+Surface $\ast$$\ast$tab, int taille)
+void \hyperlink{sdl__fonctions_8h_a6001a8cbe57ba9c7ff4bf29b5dde77ba}{initialiser\+\_\+sprites\+\_\+personnages} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$p)
 \begin{DoxyCompactList}\small\item\em Fonction qui permet d\textquotesingle{}initialiser un tableau de sprites. \end{DoxyCompactList}\item 
+\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$ \hyperlink{sdl__fonctions_8h_acae2b6d92a774f54166f1e1c167f0ff3}{initialisation\+\_\+personnage} ()
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}initialisation de la structure personnage. \end{DoxyCompactList}\item 
 void \hyperlink{sdl__fonctions_8h_aaee8c2c8487108abf9321d7cf1e7342e}{afficher\+\_\+surface} (S\+D\+L\+\_\+\+Surface $\ast$zone, S\+D\+L\+\_\+\+Surface $\ast$sprite, \hyperlink{structposition__s}{position\+\_\+t} position)
 \begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}affichage d\textquotesingle{}un sprite sur une zone. \end{DoxyCompactList}\item 
 void \hyperlink{sdl__fonctions_8h_aedf70766ecc6ce21d9d58fd9726de935}{nettoyage\+\_\+zone} (S\+D\+L\+\_\+\+Surface $\ast$zone)
@@ -57,10 +57,10 @@ Header pour la librairie de fonctions et les constantes liées à l\textquotesin
 Marie-\/\+Nina M\+U\+N\+AR L2 Info Le Mans 
 \end{DoxyAuthor}
 \begin{DoxyVersion}{Version}
-1.\+1 
+2.\+0 
 \end{DoxyVersion}
 \begin{DoxyDate}{Date}
-09/03/2020
+11/03/2020
 \end{DoxyDate}
 \begin{DoxyAuthor}{Auteur}
 Marie-\/\+Nina M\+U\+N\+AR L2 Info Le Mans 
@@ -111,25 +111,23 @@ Fonction de gestions des evenements.
 \begin{DoxyReturn}{Renvoie}
 0 si tout s\textquotesingle{}est bien déroulé (arrêt du programme) 
 \end{DoxyReturn}
-\mbox{\Hypertarget{sdl__fonctions_8h_ace268ecb7ed08ec8ebb0739aa30334b4}\label{sdl__fonctions_8h_ace268ecb7ed08ec8ebb0739aa30334b4}} 
-\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!fullscreen\+\_\+switch@{fullscreen\+\_\+switch}}
-\index{fullscreen\+\_\+switch@{fullscreen\+\_\+switch}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
-\subsubsection{\texorpdfstring{fullscreen\+\_\+switch()}{fullscreen\_switch()}}
-{\footnotesize\ttfamily int fullscreen\+\_\+switch (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Window $\ast$}]{fenetre,  }\item[{int}]{state }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{sdl__fonctions_8h_acae2b6d92a774f54166f1e1c167f0ff3}\label{sdl__fonctions_8h_acae2b6d92a774f54166f1e1c167f0ff3}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!initialisation\+\_\+personnage@{initialisation\+\_\+personnage}}
+\index{initialisation\+\_\+personnage@{initialisation\+\_\+personnage}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{initialisation\+\_\+personnage()}{initialisation\_personnage()}}
+{\footnotesize\ttfamily \hyperlink{structpersonnage__s}{personnage\+\_\+t}$\ast$ initialisation\+\_\+personnage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
-Fonction qui permet de basculer du plein écran au fenetré 
+Fonction d\textquotesingle{}initialisation de la structure personnage. 
 
 
 \begin{DoxyParams}{Paramètres}
-{\em fenetre} & le pointeur sur la fenetre S\+D\+L\+\_\+\+Window utilisée \\
-\hline
-{\em state} & l\textquotesingle{}état actuel de la fenetre (plein ecran ou fenetré) \\
+{\em personnage} & pointeur sur la structure à initialiser \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Renvoie}
-l\textquotesingle{}entier indiquant le nouvel état de la fenetre 
+le pointeur sur la structure initialisée 
 \end{DoxyReturn}
 \mbox{\Hypertarget{sdl__fonctions_8h_aef9e4b5ba212589eec22d7a659b28192}\label{sdl__fonctions_8h_aef9e4b5ba212589eec22d7a659b28192}} 
 \index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!initialisation\+\_\+\+S\+DL@{initialisation\+\_\+\+S\+DL}}
@@ -144,11 +142,11 @@ Fonction d\textquotesingle{}initalisation de la S\+DL et de création de la fene
 \begin{DoxyReturn}{Renvoie}
 le pointeur sur la fenetre S\+D\+L\+\_\+\+Window créée 
 \end{DoxyReturn}
-\mbox{\Hypertarget{sdl__fonctions_8h_a2911b01eac3be334c8b85f94839fa637}\label{sdl__fonctions_8h_a2911b01eac3be334c8b85f94839fa637}} 
+\mbox{\Hypertarget{sdl__fonctions_8h_a6001a8cbe57ba9c7ff4bf29b5dde77ba}\label{sdl__fonctions_8h_a6001a8cbe57ba9c7ff4bf29b5dde77ba}} 
 \index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!initialiser\+\_\+sprites\+\_\+personnages@{initialiser\+\_\+sprites\+\_\+personnages}}
 \index{initialiser\+\_\+sprites\+\_\+personnages@{initialiser\+\_\+sprites\+\_\+personnages}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
 \subsubsection{\texorpdfstring{initialiser\+\_\+sprites\+\_\+personnages()}{initialiser\_sprites\_personnages()}}
-{\footnotesize\ttfamily void initialiser\+\_\+sprites\+\_\+personnages (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Surface $\ast$$\ast$}]{tab,  }\item[{int}]{taille }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void initialiser\+\_\+sprites\+\_\+personnages (\begin{DoxyParamCaption}\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{p }\end{DoxyParamCaption})}
 
 
 

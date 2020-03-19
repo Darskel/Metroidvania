@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['initialisation_5fsdl',['initialisation_SDL',['../sdl__fonctions_8h.html#aef9e4b5ba212589eec22d7a659b28192',1,'initialisation_SDL():&#160;sdl_fonctions.c'],['../sdl__fonctions_8c.html#aef9e4b5ba212589eec22d7a659b28192',1,'initialisation_SDL():&#160;sdl_fonctions.c']]],
-  ['initialiser_5fsprites_5fpersonnages',['initialiser_sprites_personnages',['../sdl__fonctions_8h.html#a2911b01eac3be334c8b85f94839fa637',1,'initialiser_sprites_personnages(SDL_Surface **tab, int taille):&#160;sdl_fonctions.c'],['../sdl__fonctions_8c.html#a2911b01eac3be334c8b85f94839fa637',1,'initialiser_sprites_personnages(SDL_Surface **tab, int taille):&#160;sdl_fonctions.c']]]
+  ['liresalle',['lireSalle',['../source_8c.html#acfe782df62b56721f4f3aaa311f6e3e6',1,'source.c']]],
+  ['listevide',['listeVide',['../liste_8h.html#aff61901bdffe0594ba1e1571fa6620d0',1,'listeVide(liste_t *maListe):&#160;liste.c'],['../liste_8c.html#aff61901bdffe0594ba1e1571fa6620d0',1,'listeVide(liste_t *maListe):&#160;liste.c']]]
 ];

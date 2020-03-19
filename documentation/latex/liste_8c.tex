@@ -29,14 +29,20 @@ char $\ast$ \hyperlink{liste_8c_a3b8be3ec8bdf89c1edc35490a6228515}{valeur\+Elm} 
 \begin{DoxyCompactList}\small\item\em Récupère la valeur de l\textquotesingle{}élément courant de la liste. \end{DoxyCompactList}\item 
 void \hyperlink{liste_8c_abb04638007419308b859463894f42467}{modif\+Elm} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste, void $\ast$v)
 \begin{DoxyCompactList}\small\item\em Modifie l\textquotesingle{}élément courant de la liste. \end{DoxyCompactList}\item 
-void \hyperlink{liste_8c_a5aabab457aa0d19d4fc5ca67dc2d375f}{oter\+Elm} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste)
+void \hyperlink{liste_8c_a0d2921c095f4dea2e01c21eb8520284b}{oter\+Elm} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste, void($\ast$delete)(void $\ast$$\ast$))
 \begin{DoxyCompactList}\small\item\em Ote l\textquotesingle{}élément courant de la liste. \end{DoxyCompactList}\item 
 void \hyperlink{liste_8c_ad44b96d15cce6e1f3b56467199212c5e}{ajout\+Droit} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste, void $\ast$v)
 \begin{DoxyCompactList}\small\item\em Ajoute un élément dans la liste à droite de l\textquotesingle{}élément courrant. \end{DoxyCompactList}\item 
 void \hyperlink{liste_8c_a52b4b3081e828982d4ad60daafd45cd8}{ajout\+Gauche} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ma\+Liste, void $\ast$v)
 \begin{DoxyCompactList}\small\item\em Ajoute un élément dans la liste à gauche de l\textquotesingle{}élément courrant. \end{DoxyCompactList}\item 
-void \hyperlink{liste_8c_a201de64dd6910a0e8fc5a46c386bdd46}{sup\+Liste} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$$\ast$ma\+Liste)
-\begin{DoxyCompactList}\small\item\em Supprime la liste donné \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \hyperlink{liste_8c_adefa48de4f9f943350d21ee07dd55e19}{sup\+Liste} (\hyperlink{structliste__s}{liste\+\_\+t} $\ast$$\ast$ma\+Liste, void($\ast$delete)(void $\ast$$\ast$))
+\begin{DoxyCompactList}\small\item\em Supprime la liste donné \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{liste_8c_a7b91fc179cc8255c6e00b5234507b4b1}\label{liste_8c_a7b91fc179cc8255c6e00b5234507b4b1}} 
+void {\bfseries sup\+Porte} (\hyperlink{structporte__s}{porte\+\_\+t} $\ast$$\ast$p)
+\item 
+\mbox{\Hypertarget{liste_8c_ac7f22ce7d8e2944ec9d141c24c75fbd6}\label{liste_8c_ac7f22ce7d8e2944ec9d141c24c75fbd6}} 
+void {\bfseries sup\+Monstre} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$$\ast$m)
+\end{DoxyCompactItemize}
 
 
 \subsection{Description détaillée}
@@ -197,11 +203,11 @@ Copie l\textquotesingle{}élément donné dans l\textquotesingle{}élément cour
 {\em v} & adresse vers l\textquotesingle{}élément à copier \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{liste_8c_a5aabab457aa0d19d4fc5ca67dc2d375f}\label{liste_8c_a5aabab457aa0d19d4fc5ca67dc2d375f}} 
+\mbox{\Hypertarget{liste_8c_a0d2921c095f4dea2e01c21eb8520284b}\label{liste_8c_a0d2921c095f4dea2e01c21eb8520284b}} 
 \index{liste.\+c@{liste.\+c}!oter\+Elm@{oter\+Elm}}
 \index{oter\+Elm@{oter\+Elm}!liste.\+c@{liste.\+c}}
 \subsubsection{\texorpdfstring{oter\+Elm()}{oterElm()}}
-{\footnotesize\ttfamily void oter\+Elm (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void oter\+Elm (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$}]{ma\+Liste,  }\item[{void($\ast$)(void $\ast$$\ast$)}]{delete }\end{DoxyParamCaption})}
 
 
 
@@ -242,11 +248,11 @@ Passe à l\textquotesingle{}élément suivant de la liste.
 {\em ma\+Liste} & liste dont il faut passer à l\textquotesingle{}élément suivant \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{liste_8c_a201de64dd6910a0e8fc5a46c386bdd46}\label{liste_8c_a201de64dd6910a0e8fc5a46c386bdd46}} 
+\mbox{\Hypertarget{liste_8c_adefa48de4f9f943350d21ee07dd55e19}\label{liste_8c_adefa48de4f9f943350d21ee07dd55e19}} 
 \index{liste.\+c@{liste.\+c}!sup\+Liste@{sup\+Liste}}
 \index{sup\+Liste@{sup\+Liste}!liste.\+c@{liste.\+c}}
 \subsubsection{\texorpdfstring{sup\+Liste()}{supListe()}}
-{\footnotesize\ttfamily void sup\+Liste (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$$\ast$}]{ma\+Liste }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void sup\+Liste (\begin{DoxyParamCaption}\item[{\hyperlink{structliste__s}{liste\+\_\+t} $\ast$$\ast$}]{ma\+Liste,  }\item[{void($\ast$)(void $\ast$$\ast$)}]{delete }\end{DoxyParamCaption})}
 
 
 

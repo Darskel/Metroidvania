@@ -139,7 +139,7 @@ void supprimer_sprites(SDL_Surface ** tab, int nb_sprites){
  */
 personnage_t * initialisation_personnage(){
   personnage_t * personnage=malloc(sizeof(personnage_t));
-  personnage->vit_dep=1;
+  personnage->vit_dep=2;
   personnage->pos.x=100;
   personnage->pos.y=500;
   personnage->delta.delta_x.numerateur=0;
@@ -164,7 +164,10 @@ int evenements(SDL_Window * fenetre){
   SDL_Surface * surfaceFenetre = SDL_GetWindowSurface(fenetre);
   SDL_Event event;
   personnage_t * personnage=initialisation_personnage();
-  int nbspritestemp;
+  int nbspritestemp=0;
+	Uint32 frameStart;
+	int frameTime;
+	int tempsSprite = 0;
   boolean_t Gauche=FALSE;
   boolean_t Droite=FALSE;
   boolean_t Saut=FALSE;
@@ -173,94 +176,118 @@ int evenements(SDL_Window * fenetre){
 
   int fin=0;
   while(!fin){
-    nettoyage_zone(surfaceFenetre);
-    while(SDL_PollEvent(&event)){
-      switch(event.type){
-        case SDL_QUIT: //Appui sur la croix quitte le programme
-          fin=1;
-          break;
-        case SDL_KEYUP:
-          switch(event.key.keysym.sym){
-            case SDLK_ESCAPE://Appui sur Echap quitte le programme
-              fin=1;
-              break;
-            case SDLK_RIGHT:
-              Droite=FALSE;
-              if(!Saut&&!Tombe)
-                personnage->spriteActuel=SU+personnage->nb_sprites;
-              break;
-            case SDLK_LEFT:
-              Gauche=FALSE;
-              if(!Saut&&!Tombe)
-                personnage->spriteActuel=SU;
-              break;
-          }
-          break;
-        case SDL_KEYDOWN:
-          switch(event.key.keysym.sym){
-            case SDLK_UP:
-              if(!Saut&&!Tombe)
-                Saut=TRUE;
-              break;
-            case SDLK_LEFT:
-              Gauche=TRUE;
-              break;
-            case SDLK_RIGHT:
-              Droite=TRUE;
-              break;
-          }
-          break;
-        }
-      }
+		frameStart = SDL_GetTicks();
+		nettoyage_zone(surfaceFenetre);
+		  while(SDL_PollEvent(&event)){
+		    switch(event.type){
+		      case SDL_QUIT: //Appui sur la croix quitte le programme
+		        fin=1;
+		        break;
+		      case SDL_KEYUP:
+		        switch(event.key.keysym.sym){
+		          case SDLK_ESCAPE://Appui sur Echap quitte le programme
+		            fin=1;
+		            break;
+							case SDLK_LEFT:
+		            Gauche=FALSE;
+								nbspritestemp=0;
+		            if(!Saut&&!Tombe){
+		              personnage->spriteActuel=SU;
+									tempsSprite=0;
+								}
+		            break;
+		          case SDLK_RIGHT:
+		            Droite=FALSE;
+								nbspritestemp=personnage->nb_sprites;
+		            if(!Saut&&!Tombe){
+		              personnage->spriteActuel=SU+personnage->nb_sprites;
+									tempsSprite=0;
+								}
+		            break;
+		        }
+		        break;
+		      case SDL_KEYDOWN:
+		        switch(event.key.keysym.sym){
+		          case SDLK_UP:
+		            if(!Saut&&!Tombe)
+		              Saut=TRUE;
+									tempsSprite=0;
+		            break;
+		          case SDLK_LEFT:
+		            Gauche=TRUE;
+								nbspritestemp=0;
+		            break;
+		          case SDLK_RIGHT:
+		            Droite=TRUE;
+								nbspritestemp=personnage->nb_sprites;
+		            break;
+		        }
+		        break;
+		      }
+		    }
+				if((Gauche||Droite) && !Saut && !Tombe){
+					if(tempsSprite==0){
+		      	if(personnage->spriteActuel<DEP1+nbspritestemp||personnage->spriteActuel==DEP8+nbspritestemp)
+		        	personnage->spriteActuel=DEP1+nbspritestemp;
+		      	else if (personnage->spriteActuel>=DEP1+nbspritestemp && personnage->spriteActuel<=DEP8+nbspritestemp) 		
+							personnage->spriteActuel++;
+					}
+		    }
+		    if(Droite){
+		      if(personnage->pos.x + personnage->vit_dep < RES_H - LIMITS){
+		        (personnage->pos.x)+=personnage->vit_dep;
+		      }
+		    }
 
-      if(Droite){
-        nbspritestemp=personnage->nb_sprites;
-        if(personnage->pos.x + personnage->vit_dep < RES_H - LIMITS){
-          (personnage->pos.x)+=personnage->vit_dep;
-        }
-      }
+		    else if(Gauche){
+		      if(personnage->pos.x - personnage->vit_dep > LIMITS){
+		        (personnage->pos.x)-=personnage->vit_dep;
+		      }
+		    }
 
-      else if(Gauche){
-        nbspritestemp=0;
-        if(personnage->pos.x - personnage->vit_dep > LIMITS){
-          (personnage->pos.x)-=personnage->vit_dep;
-        }
-      }
+		    if(Tombe){
+					if(personnage->pos.y + personnage->vit_dep < RES_V - LIMITS){
+				    (personnage->pos.y)+=personnage->vit_dep;
+					}
+					if(tempsSprite==0){
+				    if(personnage->spriteActuel==JP1+nbspritestemp){
+							Saut=FALSE;
+				      Tombe=FALSE;
+				      personnage->spriteActuel=SU+nbspritestemp;
+				    }
+				    else if(personnage->spriteActuel>JP1+nbspritestemp && personnage->spriteActuel<JP8+nbspritestemp)
+				      personnage->spriteActuel--;
+					}
+		    }
 
-      if(Tombe){
-        if(personnage->pos.y + personnage->vit_dep < RES_V - LIMITS)
-          (personnage->pos.y)+=personnage->vit_dep;
-        if(personnage->spriteActuel<=JP1+nbspritestemp){
-          Tombe=FALSE;
-          personnage->spriteActuel=SU+nbspritestemp;
-        }
-        else if(personnage->spriteActuel>JP1+nbspritestemp && personnage->spriteActuel<JP8+nbspritestemp)
-          personnage->spriteActuel--;
-      }
+		    else if(Saut){
+					if(personnage->pos.y - personnage->vit_dep > LIMITS){
+						(personnage->pos.y)-=personnage->vit_dep;
+					}
+					if(tempsSprite==0){
+						if(personnage->spriteActuel==JP8+nbspritestemp){
+		        Saut=FALSE;
+		        Tombe=TRUE;
+		      	}
+						if(personnage->spriteActuel==JP8+nbspritestemp)
+									personnage->spriteActuel--;
+						else if(personnage->spriteActuel>=JP1+nbspritestemp && personnage->spriteActuel<JP8+nbspritestemp)
+									personnage->spriteActuel++;
+						else if(!(personnage->spriteActuel>=JP1+nbspritestemp && personnage->spriteActuel<JP8+nbspritestemp))
+						      personnage->spriteActuel=JP1+nbspritestemp;
+					}
+		     }
 
-      else if(Saut){
-        if(personnage->spriteActuel>=JP8+nbspritestemp){
-          Saut=FALSE;
-          Tombe=TRUE;
-          personnage->spriteActuel--;
-        }
-        else{
-          if(personnage->pos.y - personnage->vit_dep > LIMITS)
-            (personnage->pos.y)-=personnage->vit_dep;
-          if(personnage->spriteActuel<JP1+nbspritestemp || personnage->spriteActuel>JP8+nbspritestemp)
-            personnage->spriteActuel=JP1+nbspritestemp;
-          else personnage->spriteActuel++;
-        }
-      }
-
-      else if(Gauche||Droite){
-        if(personnage->spriteActuel<DEP1+nbspritestemp||personnage->spriteActuel>=DEP8+nbspritestemp)
-          personnage->spriteActuel=DEP1+nbspritestemp;
-        else personnage->spriteActuel++;
-      }
-
-      afficher_surface(surfaceFenetre, personnage->sprites[personnage->spriteActuel], personnage->pos);
-      SDL_UpdateWindowSurface(fenetre);
+				if(tempsSprite>=TEMPSSPRITE)
+					tempsSprite=0;
+				else tempsSprite++;
+				fprintf(stdout,"%d\n",personnage->spriteActuel);
+		    afficher_surface(surfaceFenetre, personnage->sprites[personnage->spriteActuel], personnage->pos);
+		    SDL_UpdateWindowSurface(fenetre);
+				frameTime = SDL_GetTicks() - frameStart;
+				if(frameTime < FRAMEDELAY){
+					SDL_Delay(FRAMEDELAY - frameTime);
+				}
     }
     supprimer_sprites(personnage->sprites, personnage->nb_sprites*2);
     free(personnage->sprites);

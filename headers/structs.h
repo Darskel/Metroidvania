@@ -16,7 +16,7 @@
         #define CLEAR
     #endif
 
-    //#define CREATE_DIR(X) system(strcat("mkdir ",X));
+    #define CREATE_DIR(X) char Y[20] = "mkdir "; strcat(Y, X); system(Y);
 
 #endif
 
@@ -191,8 +191,5 @@ typedef struct porte_s{
     char* listeSprites; /**< Chemin vers les sprites de la porte */
     int spritesActuel; /**< Indice du sprite à afficher */
 } porte_t;
-
-void supPorte(porte_t**);
-void supMonstre(monstre_t** m);
 
 #endif

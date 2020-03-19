@@ -8,6 +8,7 @@
 #define RES_H 1280
 #define RES_V 720
 #define TEMPSSPRITE 2
+#define TEMPSSAUT 25
 #define FPS 50
 #define FRAMEDELAY 1000/FPS
 #define LIMITS 30

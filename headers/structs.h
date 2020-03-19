@@ -39,9 +39,6 @@ typedef struct {
   int h,v;
 }taille_t;
 
-void supPorte(porte_t);
-void supMonstre(monstre_t m);
-
 /**
  * \struct position_s
  * \brief Une position représentée par deux valeurs entières
@@ -194,5 +191,8 @@ typedef struct porte_s{
     char* listeSprites; /**< Chemin vers les sprites de la porte */
     int spritesActuel; /**< Indice du sprite à afficher */
 } porte_t;
+
+void supPorte(porte_t);
+void supMonstre(monstre_t m);
 
 #endif

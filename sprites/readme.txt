@@ -1,1 +1,0 @@
-Ici mettre les sprites rangés

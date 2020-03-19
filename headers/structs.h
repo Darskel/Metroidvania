@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <SDL2/SDL.h>
 #include "liste.h"
 
 #ifndef SYSTEM_INCLUDED
@@ -127,11 +126,12 @@ typedef struct personnage_s{
     int vit_att; /**< Vitesse d'attaque du personnage (en nombre de frame) */
     position_t pos; /**< Position actuel du personnage (position entière) */
     fracPos_t delta; /**< Différence de position à ajouter à la position entière */
-    SDL_Surface ** sprites; /**Pointeur vers le tableau de sprites du personnage */
+    void ** sprites; /**Pointeur vers le tableau de sprites du personnage */
     indSpritePer_t spriteActuel; /**< Indice du sprite à afficher */
     int nb_sprites;/**< Nombre de sprites du personnage (sans orientation)*/
     char forme; /**< Forme du personnage H = humain, F = renard */
-    //hitbox en dur possible
+    int inventaire[TAILLE_INVENTAIRE];
+    char* nomObj[TAILLE_INVENTAIRE];
 
 } personnage_t;
 
@@ -144,10 +144,12 @@ typedef struct type_monstre_s{
     int vit_dep; /**< Vitesse de déplacement du monstre (facteur/indicateur) */
     int vit_att; /**< Vitesse d'attaque du monstre (en nombre de frame) */
 
+    char* nom;
     char* sprites; /**< Chemin d'accès aux sprites qui seront utilisés*/
     int nb_sprites;/**< Nombre de sprites du monstre (sans orientation)*/
     int largeur; /**< Largeur du monstre en unité de case (taille d'une case) */
-    int haunteur; /**< Hauteur du monstre en unité de case (taille d'une case) */
+    int hauteur; /**< Hauteur du monstre en unité de case (taille d'une case) */
+    int degat;
 
     boolean_t passeEntites; /**< Indique si le monstre peut passer à travers les entités (autres monstres/joueur) */
     boolean_t passeBlocs; /**< Indique si le monstre peut passer à travers les blocs */

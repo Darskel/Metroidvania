@@ -39,6 +39,9 @@ typedef struct {
   int h,v;
 }taille_t;
 
+void supPorte(porte_t);
+void supMonstre(monstre_t m);
+
 /**
  * \struct position_s
  * \brief Une position représentée par deux valeurs entières

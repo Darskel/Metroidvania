@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <SDL2/SDL.h>
 #include "liste.h"
 
 #ifndef SYSTEM_INCLUDED
@@ -122,12 +123,13 @@ typedef struct fracPos_s{
 */
 typedef struct personnage_s{
     int pv; /**< PV(points de vie) actuel du personnage */
-    int vit_dep; /**< Vitesse de déplacement du personnage (facteur/indicateur) */
+    int vit_dep; /**< Vitesse de déplacement du personnage (pixel par tick) */
     int vit_att; /**< Vitesse d'attaque du personnage (en nombre de frame) */
     position_t pos; /**< Position actuel du personnage (position entière) */
     fracPos_t delta; /**< Différence de position à ajouter à la position entière */
-    int spriteActuel; /**< Indice du sprite à afficher */
-
+    SDL_Surface ** sprites; /**Pointeur vers le tableau de sprites du personnage */
+    indSpritePer_t spriteActuel; /**< Indice du sprite à afficher */
+    int nb_sprites;/**< Nombre de sprites du personnage (sans orientation)*/
     char forme; /**< Forme du personnage H = humain, F = renard */
     //hitbox en dur possible
 
@@ -143,7 +145,7 @@ typedef struct type_monstre_s{
     int vit_att; /**< Vitesse d'attaque du monstre (en nombre de frame) */
 
     char* sprites; /**< Chemin d'accès aux sprites qui seront utilisés*/
-
+    int nb_sprites;/**< Nombre de sprites du monstre (sans orientation)*/
     int largeur; /**< Largeur du monstre en unité de case (taille d'une case) */
     int haunteur; /**< Hauteur du monstre en unité de case (taille d'une case) */
 

@@ -11,8 +11,8 @@
  * \file sdl_fonctions.c
  * \brief Fichier qui regroupent les fonctions utilisées pour la gestion des graphismes (SDL2)
  * \author Marie-Nina MUNAR L2 Info Le Mans
- * \version 1.3
- * \date 09/03/2020
+ * \version 2.0
+ * \date 11/03/2020
 */
 
 /**
@@ -32,7 +32,7 @@ SDL_Window * initialisation_SDL(){
     exit(EXIT_FAILURE);
   }
 
-  fenetre = SDL_CreateWindow("Metroidvania", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, RES_H, RES_V, SDL_WINDOW_SHOWN);
+  fenetre = SDL_CreateWindow(NOM_JEU, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, RES_H, RES_V, SDL_WINDOW_SHOWN);
   if(!fenetre){
     fprintf(stderr, "Erreur de creation de la fenetre : %s\n", SDL_GetError());
     exit(EXIT_FAILURE);
@@ -51,23 +51,6 @@ void quitter_SDL(SDL_Window * fenetre){
   SDL_Quit();
 }
 
-/**
- * \brief Fonction qui permet de basculer du plein écran au fenetré
- *
- * @param fenetre le pointeur sur la fenetre SDL_Window utilisée
- * @param state l'état actuel de la fenetre (plein ecran ou fenetré)
- * @return l'entier indiquant le nouvel état de la fenetre
- */
-int fullscreen_switch(SDL_Window * fenetre, int state){
-  if (state){
-    SDL_SetWindowFullscreen(fenetre,0);
-    return 0;
-    }
-  else{
-    SDL_SetWindowFullscreen(fenetre,SDL_WINDOW_FULLSCREEN);
-    return 1;
-    }
-}
 
 /**
  * \brief Fonction qui permet d'initialiser un tableau de sprites
@@ -75,43 +58,43 @@ int fullscreen_switch(SDL_Window * fenetre, int state){
  * @param tab tableau de sprites à intialiser
  * @param taille la taille du tableau à initialiser
  */
-void initialiser_sprites_personnages(SDL_Surface ** tab, int taille){
+void initialiser_sprites_personnages(personnage_t * p){
 
-  tab[SU]=IMG_Load("./sprites/entite/joueur/fixe_gauche.png");
-  tab[DEP1]=IMG_Load("./sprites/entite/joueur/course1_gauche.png");
-  tab[DEP2]=IMG_Load("./sprites/entite/joueur/course2_gauche.png");
-  tab[DEP3]=IMG_Load("./sprites/entite/joueur/course3_gauche.png");
-  tab[DEP4]=IMG_Load("./sprites/entite/joueur/course4_gauche.png");
-  tab[DEP5]=IMG_Load("./sprites/entite/joueur/course5_gauche.png");
-  tab[DEP6]=IMG_Load("./sprites/entite/joueur/course6_gauche.png");
-  tab[DEP7]=IMG_Load("./sprites/entite/joueur/course7_gauche.png");
-  tab[DEP8]=IMG_Load("./sprites/entite/joueur/course8_gauche.png");
-  tab[JP1]=IMG_Load("./sprites/entite/joueur/saut1_gauche.png");
-  tab[JP2]=IMG_Load("./sprites/entite/joueur/saut2_gauche.png");
-  tab[JP3]=IMG_Load("./sprites/entite/joueur/saut3_gauche.png");
-  tab[JP4]=IMG_Load("./sprites/entite/joueur/saut4_gauche.png");
-  tab[JP5]=IMG_Load("./sprites/entite/joueur/saut5_gauche.png");
-  tab[JP6]=IMG_Load("./sprites/entite/joueur/saut6_gauche.png");
-  tab[JP7]=IMG_Load("./sprites/entite/joueur/saut7_gauche.png");
-  tab[JP8]=IMG_Load("./sprites/entite/joueur/saut8_gauche.png");
+  p->sprites[SU]=IMG_Load("./sprites/entite/joueur/fixe_gauche.png");
+  p->sprites[DEP1]=IMG_Load("./sprites/entite/joueur/course1_gauche.png");
+  p->sprites[DEP2]=IMG_Load("./sprites/entite/joueur/course2_gauche.png");
+  p->sprites[DEP3]=IMG_Load("./sprites/entite/joueur/course3_gauche.png");
+  p->sprites[DEP4]=IMG_Load("./sprites/entite/joueur/course4_gauche.png");
+  p->sprites[DEP5]=IMG_Load("./sprites/entite/joueur/course5_gauche.png");
+  p->sprites[DEP6]=IMG_Load("./sprites/entite/joueur/course6_gauche.png");
+  p->sprites[DEP7]=IMG_Load("./sprites/entite/joueur/course7_gauche.png");
+  p->sprites[DEP8]=IMG_Load("./sprites/entite/joueur/course8_gauche.png");
+  p->sprites[JP1]=IMG_Load("./sprites/entite/joueur/saut1_gauche.png");
+  p->sprites[JP2]=IMG_Load("./sprites/entite/joueur/saut2_gauche.png");
+  p->sprites[JP3]=IMG_Load("./sprites/entite/joueur/saut3_gauche.png");
+  p->sprites[JP4]=IMG_Load("./sprites/entite/joueur/saut4_gauche.png");
+  p->sprites[JP5]=IMG_Load("./sprites/entite/joueur/saut5_gauche.png");
+  p->sprites[JP6]=IMG_Load("./sprites/entite/joueur/saut6_gauche.png");
+  p->sprites[JP7]=IMG_Load("./sprites/entite/joueur/saut7_gauche.png");
+  p->sprites[JP8]=IMG_Load("./sprites/entite/joueur/saut8_gauche.png");
 
-  tab[NBSPRITES + SU]=IMG_Load("./sprites/entite/joueur/fixe.png");
-  tab[NBSPRITES + DEP1]=IMG_Load("./sprites/entite/joueur/course1.png");
-  tab[NBSPRITES + DEP2]=IMG_Load("./sprites/entite/joueur/course2.png");
-  tab[NBSPRITES + DEP3]=IMG_Load("./sprites/entite/joueur/course3.png");
-  tab[NBSPRITES + DEP4]=IMG_Load("./sprites/entite/joueur/course4.png");
-  tab[NBSPRITES + DEP5]=IMG_Load("./sprites/entite/joueur/course5.png");
-  tab[NBSPRITES + DEP6]=IMG_Load("./sprites/entite/joueur/course6.png");
-  tab[NBSPRITES + DEP7]=IMG_Load("./sprites/entite/joueur/course7.png");
-  tab[NBSPRITES + DEP8]=IMG_Load("./sprites/entite/joueur/course8.png");
-  tab[NBSPRITES + JP1]=IMG_Load("./sprites/entite/joueur/saut1.png");
-  tab[NBSPRITES + JP2]=IMG_Load("./sprites/entite/joueur/saut2.png");
-  tab[NBSPRITES + JP3]=IMG_Load("./sprites/entite/joueur/saut3.png");
-  tab[NBSPRITES + JP4]=IMG_Load("./sprites/entite/joueur/saut4.png");
-  tab[NBSPRITES + JP5]=IMG_Load("./sprites/entite/joueur/saut5.png");
-  tab[NBSPRITES + JP6]=IMG_Load("./sprites/entite/joueur/saut6.png");
-  tab[NBSPRITES + JP7]=IMG_Load("./sprites/entite/joueur/saut7.png");
-  tab[NBSPRITES + JP8]=IMG_Load("./sprites/entite/joueur/saut8.png");
+  p->sprites[p->nb_sprites + SU]=IMG_Load("./sprites/entite/joueur/fixe.png");
+  p->sprites[p->nb_sprites + DEP1]=IMG_Load("./sprites/entite/joueur/course1.png");
+  p->sprites[p->nb_sprites + DEP2]=IMG_Load("./sprites/entite/joueur/course2.png");
+  p->sprites[p->nb_sprites + DEP3]=IMG_Load("./sprites/entite/joueur/course3.png");
+  p->sprites[p->nb_sprites + DEP4]=IMG_Load("./sprites/entite/joueur/course4.png");
+  p->sprites[p->nb_sprites + DEP5]=IMG_Load("./sprites/entite/joueur/course5.png");
+  p->sprites[p->nb_sprites + DEP6]=IMG_Load("./sprites/entite/joueur/course6.png");
+  p->sprites[p->nb_sprites + DEP7]=IMG_Load("./sprites/entite/joueur/course7.png");
+  p->sprites[p->nb_sprites + DEP8]=IMG_Load("./sprites/entite/joueur/course8.png");
+  p->sprites[p->nb_sprites + JP1]=IMG_Load("./sprites/entite/joueur/saut1.png");
+  p->sprites[p->nb_sprites + JP2]=IMG_Load("./sprites/entite/joueur/saut2.png");
+  p->sprites[p->nb_sprites + JP3]=IMG_Load("./sprites/entite/joueur/saut3.png");
+  p->sprites[p->nb_sprites + JP4]=IMG_Load("./sprites/entite/joueur/saut4.png");
+  p->sprites[p->nb_sprites + JP5]=IMG_Load("./sprites/entite/joueur/saut5.png");
+  p->sprites[p->nb_sprites + JP6]=IMG_Load("./sprites/entite/joueur/saut6.png");
+  p->sprites[p->nb_sprites + JP7]=IMG_Load("./sprites/entite/joueur/saut7.png");
+  p->sprites[p->nb_sprites + JP8]=IMG_Load("./sprites/entite/joueur/saut8.png");
 
 }
 
@@ -149,6 +132,29 @@ void supprimer_sprites(SDL_Surface ** tab, int nb_sprites){
 }
 
 /**
+ * \brief Fonction d'initialisation de la structure personnage
+ *
+ * @param personnage pointeur sur la structure à initialiser
+ * @return le pointeur sur la structure initialisée
+ */
+personnage_t * initialisation_personnage(){
+  personnage_t * personnage=malloc(sizeof(personnage_t));
+  personnage->vit_dep=1;
+  personnage->pos.x=100;
+  personnage->pos.y=500;
+  personnage->delta.delta_x.numerateur=0;
+  personnage->delta.delta_x.denominateur=1;
+  personnage->delta.delta_y.numerateur=0;
+  personnage->delta.delta_y.denominateur=1;
+  personnage->spriteActuel=SU;
+  personnage->nb_sprites=17;
+  SDL_Surface ** sprites=malloc(sizeof(SDL_Surface *)*(personnage->nb_sprites*2));
+  personnage->sprites=sprites;
+  initialiser_sprites_personnages(personnage);
+  return personnage;
+}
+
+/**
  * \brief Fonction de gestions des evenements
  *
  * @param fenetre la fenetre d'action
@@ -157,125 +163,108 @@ void supprimer_sprites(SDL_Surface ** tab, int nb_sprites){
 int evenements(SDL_Window * fenetre){
   SDL_Surface * surfaceFenetre = SDL_GetWindowSurface(fenetre);
   SDL_Event event;
-  SDL_Surface * joueur[NBSPRITES*2];
-  initialiser_sprites_personnages(joueur, NBSPRITES);
-  position_t position={50,500};
-  indSpritePer_t sprite_actuel=SU;
-  int fullscreen=0;
-  int saut_en_cours=0;
-  int montee=0;
-  int mouvement=0;
-  int orientation=LEFT;
-  int terminer=0;
-  while(!terminer){
+  personnage_t * personnage=initialisation_personnage();
+  int nbspritestemp;
+  boolean_t Gauche=FALSE;
+  boolean_t Droite=FALSE;
+  boolean_t Saut=FALSE;
+  boolean_t Tombe=FALSE;
+  //boolean_t Tire=FALSE;
+
+  int fin=0;
+  while(!fin){
     nettoyage_zone(surfaceFenetre);
     while(SDL_PollEvent(&event)){
       switch(event.type){
         case SDL_QUIT: //Appui sur la croix quitte le programme
-          terminer=1;
+          fin=1;
           break;
         case SDL_KEYUP:
-          if(event.key.keysym.sym == SDLK_f){ //Appui sur F switch du mode plein écran au mode fenetré
-            fullscreen=fullscreen_switch(fenetre,fullscreen);
-            break;
+          switch(event.key.keysym.sym){
+            case SDLK_ESCAPE://Appui sur Echap quitte le programme
+              fin=1;
+              break;
+            case SDLK_RIGHT:
+              Droite=FALSE;
+              if(!Saut&&!Tombe)
+                personnage->spriteActuel=SU+personnage->nb_sprites;
+              break;
+            case SDLK_LEFT:
+              Gauche=FALSE;
+              if(!Saut&&!Tombe)
+                personnage->spriteActuel=SU;
+              break;
           }
-          else if(event.key.keysym.sym == SDLK_ESCAPE){//Appui sur Echap quitte le programme
-            terminer=1;
-            break;
-          }
-          else if(event.key.keysym.sym == SDLK_RIGHT){
-            if(!saut_en_cours)
-              sprite_actuel=SU;
-            orientation=RIGHT;
-            mouvement=0;
-            break;
-          }
-          else if(event.key.keysym.sym == SDLK_LEFT){
-            if(!saut_en_cours)
-              sprite_actuel=SU;
-            orientation=LEFT;
-            mouvement=0;
-            break;
-          }
+          break;
         case SDL_KEYDOWN:
-          if(event.key.keysym.sym == SDLK_RIGHT || event.key.keysym.sym == SDLK_LEFT){
-            if(!saut_en_cours){
-              sprite_actuel++;
-              if(sprite_actuel > DEP8)
-                sprite_actuel=DEP1;
-            }
+          switch(event.key.keysym.sym){
+            case SDLK_UP:
+              if(!Saut&&!Tombe)
+                Saut=TRUE;
+              break;
+            case SDLK_LEFT:
+              Gauche=TRUE;
+              break;
+            case SDLK_RIGHT:
+              Droite=TRUE;
+              break;
           }
-          if(event.key.keysym.sym == SDLK_UP){
-            if(!saut_en_cours){
-              saut_en_cours=1;
-              montee=2;
-              sprite_actuel=DEP8;
-            }
-            break;
-          }
-          if(event.key.keysym.sym == SDLK_LEFT){
-            if(position.x - VITESSE > 50)
-              (position.x)-=VITESSE;
-            mouvement=-1;
-            orientation=LEFT;
-            break;
-          }
-          else if(event.key.keysym.sym == SDLK_RIGHT){
-            if(position.x + VITESSE < RES_H -50)
-              (position.x)+=VITESSE;
-            mouvement=1;
-            orientation=RIGHT;
-            break;
-          }
+          break;
         }
       }
-      if(saut_en_cours && montee){
-        if(mouvement==-1){
-          if(position.x - VITESSE > 50)
-            (position.x)-=VITESSE;
-        }
-        else if(mouvement==1){
-          if(position.x + VITESSE < RES_H -50)
-            (position.x)+=VITESSE;
+
+      if(Droite){
+        nbspritestemp=personnage->nb_sprites;
+        if(personnage->pos.x + personnage->vit_dep < RES_H - LIMITS){
+          (personnage->pos.x)+=personnage->vit_dep;
         }
       }
-      if(saut_en_cours==-1){
-        if(montee==2){
-          montee=0;
-          sprite_actuel--;
-        }
-        else
-          montee++;
-        if(sprite_actuel==DEP8){
-            saut_en_cours=0;
-            sprite_actuel=SU;
-            if (position.y + VITESSE < RES_V -50)
-                (position.y)+=VITESSE;
-        }
-      if (position.y + VITESSE < RES_V -50)
-          (position.y)+=VITESSE;
-      }
-      if(saut_en_cours==1){
-        if(montee==2){
-          montee=0;
-          sprite_actuel++;
-        }
-        else
-          montee++;
-        if(position.y - VITESSE > 50)
-          (position.y)-=VITESSE;
-        if(sprite_actuel>JP8){
-          sprite_actuel=JP8;
-          saut_en_cours=-1;
-          montee=2;
-          if(position.y + VITESSE < RES_V -50)
-            (position.y)+=VITESSE;
+
+      else if(Gauche){
+        nbspritestemp=0;
+        if(personnage->pos.x - personnage->vit_dep > LIMITS){
+          (personnage->pos.x)-=personnage->vit_dep;
         }
       }
-      afficher_surface(surfaceFenetre, joueur[sprite_actuel+orientation*NBSPRITES], position);
+
+      if(Tombe){
+        if(personnage->pos.y + personnage->vit_dep < RES_V - LIMITS)
+          (personnage->pos.y)+=personnage->vit_dep;
+        if(personnage->spriteActuel<=JP1+nbspritestemp){
+          Tombe=FALSE;
+          personnage->spriteActuel=SU+nbspritestemp;
+        }
+        else if(personnage->spriteActuel>JP1+nbspritestemp && personnage->spriteActuel<JP8+nbspritestemp)
+          personnage->spriteActuel--;
+      }
+
+      else if(Saut){
+        if(personnage->spriteActuel>=JP8+nbspritestemp){
+          Saut=FALSE;
+          Tombe=TRUE;
+          personnage->spriteActuel--;
+        }
+        else{
+          if(personnage->pos.y - personnage->vit_dep > LIMITS)
+            (personnage->pos.y)-=personnage->vit_dep;
+          if(personnage->spriteActuel<JP1+nbspritestemp || personnage->spriteActuel>JP8+nbspritestemp)
+            personnage->spriteActuel=JP1+nbspritestemp;
+          else personnage->spriteActuel++;
+        }
+      }
+
+      else if(Gauche||Droite){
+        if(personnage->spriteActuel<DEP1+nbspritestemp||personnage->spriteActuel>=DEP8+nbspritestemp)
+          personnage->spriteActuel=DEP1+nbspritestemp;
+        else personnage->spriteActuel++;
+      }
+
+      afficher_surface(surfaceFenetre, personnage->sprites[personnage->spriteActuel], personnage->pos);
       SDL_UpdateWindowSurface(fenetre);
     }
-    supprimer_sprites(joueur, NBSPRITES*2);
+    supprimer_sprites(personnage->sprites, personnage->nb_sprites*2);
+    free(personnage->sprites);
+    free(personnage);
     SDL_FreeSurface(surfaceFenetre);
     quitter_SDL(fenetre);
     return 0;

@@ -67,19 +67,19 @@ int main(){
 
         //Remplissage
         if(i){
-            p = malloc(sizeof(*p));
-            p->spritesActuel = 1;
-            ajoutDroit(l,p);
-            p = malloc(sizeof(*p));
-            p->spritesActuel = 2;
-            ajoutGauche(l,p);
-        }else{
             m = malloc(sizeof(*m));
             m->spritesActuel = 1;
             ajoutDroit(l,m);
             m = malloc(sizeof(*m));
             m->spritesActuel = 2;
             ajoutGauche(l,m);
+        }else{
+            p = malloc(sizeof(*p));
+            p->spritesActuel = 1;
+            ajoutDroit(l,p);
+            p = malloc(sizeof(*p));
+            p->spritesActuel = 2;
+            ajoutGauche(l,p);
         }
 
         printf("Test liste vide apres ajout d'elements: %s\n", listeVide(l) ? "erreur" : "OK");
@@ -91,23 +91,23 @@ int main(){
         enTete(l);
         suivant(l);
         if(i){
+            m = malloc(sizeof(*m));
+            m->spritesActuel = 3;
+            modifElm(l,m);
+            free(m);
+            m = NULL;            
+        }else{
             p = malloc(sizeof(*p));
             p->spritesActuel = 3;
             modifElm(l,p);
             free(p);
             p = NULL;
-        }else{
-            m = malloc(sizeof(*m));
-            m->spritesActuel = 3;
-            modifElm(l,m);
-            free(m);
-            m = NULL;
         }
 
         printf("Test de modification d'un element: %s\n", testElem(l,3) ? "OK" : "erreur");
 
         //Suppression
-        supListe(&l);
+        supListe(&l, i ? supMonstre : supPorte);
         printf("Etat de la liste apres suppression: %s\n", l ? "erreur" : "OK");
     }
 

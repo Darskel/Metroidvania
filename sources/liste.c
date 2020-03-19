@@ -17,7 +17,7 @@
  * @param type type de la liste (valeurs disponibles: \e monstre et \e porte )
 */
 static void initListe(liste_t *maListe, char *type){
-    maListe->drapeau = malloc(sizeof (*(maListe->drapeau)));
+    maListe->drapeau = malloc(sizeof (elemListe_t));
     maListe->ec = maListe->drapeau->pred = maListe->drapeau->succ = maListe->drapeau;
     maListe->type = malloc(sizeof(char) * (strlen(type) + 1));
     strcpy(maListe->type, type);
@@ -30,7 +30,7 @@ static void initListe(liste_t *maListe, char *type){
  * @return adresse de la liste créée
 */
 liste_t* creerListe(char* type){
-    liste_t* maListe = malloc(sizeof(*maListe));
+    liste_t* maListe = malloc(sizeof(elemListe_t*));
     initListe(maListe, type);
     return maListe;
 }
@@ -106,13 +106,13 @@ void precedent(liste_t *maListe){
 char* valeurElm(liste_t *maListe, void *v){
     if(!horsListe(maListe)){
         if(!strcmp(maListe->type,"monstre")){
-          *(monstre_t *)v = *(monstre_t *)(maListe->ec->entite);
-        }
-    }
-    else{
+            *(monstre_t *)v = *(monstre_t *)(maListe->ec->entite);
+        }else{
             *(porte_t *)v = *(porte_t *)(maListe->ec->entite);
         }
         return maListe->type;
+    }
+
     return "\0";
 }
 
@@ -128,10 +128,10 @@ void modifElm(liste_t *maListe, void *v){
         if(!strcmp(maListe->type,"monstre")){
             *(monstre_t *)(maListe->ec->entite) = *(monstre_t *)v;
         }
-    }
-    else{
+        else{
             *(porte_t *)(maListe->ec->entite) = *(porte_t *)v;
         }
+    }
 }
 
 /**
@@ -139,11 +139,11 @@ void modifElm(liste_t *maListe, void *v){
  *
  * @param maListe liste dont il faut oter l'élément courant
 */
-void oterElm(liste_t *maListe){
+void oterElm(liste_t *maListe, void (*delete)(void**)){
     if(!horsListe(maListe)){
         maListe->ec->pred->succ = maListe->ec->succ;
         elemListe_t *tmp = maListe->ec->succ->pred = maListe->ec->pred;
-        free(maListe->ec->entite);
+        delete(&(maListe->ec->entite));
         free(maListe->ec);
         maListe->ec = tmp;
     }
@@ -195,12 +195,24 @@ void ajoutGauche(liste_t *maListe, void *v){
  *
  * @param maListe adresse vers la liste à supprimer
 */
-void supListe(liste_t **maListe){
+void supListe(liste_t **maListe, void (*delete)(void**)){
     enQueue(*maListe);
     while(!listeVide(*maListe))
-        oterElm(*maListe);
+        oterElm(*maListe,delete);
     free((*maListe)->type);
     free((*maListe)->drapeau);
     free(*maListe);
     (*maListe) = NULL;
+}
+
+void supPorte(porte_t** p){
+    free((*p)->salleSuivante);
+    free((*p)->listeSprites);
+    free(*p);
+    *p = NULL;
+}
+
+void supMonstre(monstre_t** m){
+    free(*m);
+    *m = NULL;
 }

@@ -195,7 +195,7 @@ void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle, lis
 }
 
 void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
-    if(!strcmp(lEntites->type, "monstre"))
+    if(strcmp(lEntites->type, "monstre"))
         return;
     monstre_t* tmp = malloc(sizeof(monstre_t));
     enTete(lEntites);
@@ -222,6 +222,12 @@ void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t
 void compMurGlace(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
     if(entite->pv)
         entite->pv = 2;
+    /*ou
+    if(entite->pv >= 10)
+        entite->pv = 11;
+    else
+        (entite->pv)--;
+    */
 }
 
 void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){

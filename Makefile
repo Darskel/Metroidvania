@@ -48,7 +48,7 @@ testSource: ${o}source.o ${o}testSource.o ${o}liste.o
 testSprite: ${o}source.o ${o}testSprite.o ${o}liste.o
 	${CC} $^ -o $@ ${CFLAGS}
 
-testaffsalle: ${o}liste.o ${o}source.o ${o}test_affichage_salle.o
+testaffsalle: ${o}liste.o ${o}source.o ${o}test_affichage_salle.o ${o}sdl_fonctions.o
 	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
 ${o}%.o: ${c}%.c

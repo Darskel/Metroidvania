@@ -13,6 +13,7 @@
 #define FRAMEDELAY 1000/FPS
 #define LIMITS 30
 #define NOM_JEU "Metroidvania"
+#define TAILLEBLOC 32
 
 /**
  * \file sdl_fonctions.h

@@ -227,35 +227,35 @@ int evenements(SDL_Window * fenetre){
 		    }
         if((!Droite&&!Gauche&&!Saut&&!Tombe))
           personnage->spriteActuel=SU+nbspritestemp;
-  		    if(Droite){
-  		      if(personnage->pos.x + personnage->vit_dep < RES_H - LIMITS){
-  		        (personnage->pos.x)+=personnage->vit_dep;
-  		      }
-            if(!Saut && !Tombe && !Gauche){
-              nbspritestemp=personnage->nb_sprites;
-              if(tempsSprite==0){
-    		      	if(personnage->spriteActuel<DEP1+nbspritestemp||personnage->spriteActuel>DEP8+nbspritestemp)
-    		        	personnage->spriteActuel=DEP1+nbspritestemp;
-    		      	else if (personnage->spriteActuel>=DEP1+nbspritestemp && personnage->spriteActuel<=DEP8+nbspritestemp)
-    							personnage->spriteActuel++;
-    					}
-            }
-  		    }
-
-  		   if(Gauche){
-  		      if(personnage->pos.x - personnage->vit_dep > LIMITS){
-  		        (personnage->pos.x)-=personnage->vit_dep;
-  		      }
-            if(!Saut && !Tombe && !Droite){
-              nbspritestemp=0;
-              if(tempsSprite==0){
-    		      	if(personnage->spriteActuel<DEP1||personnage->spriteActuel>DEP8)
-    		        	personnage->spriteActuel=DEP1;
-    		      	else if (personnage->spriteActuel>=DEP1 && personnage->spriteActuel<=DEP8)
-    							personnage->spriteActuel++;
-    					}
-  		      }
+		    if(Droite){
+		      if(personnage->pos.x + personnage->vit_dep < RES_H - LIMITS){
+		        (personnage->pos.x)+=personnage->vit_dep;
+		      }
+          if(!Saut && !Tombe && !Gauche){
+            nbspritestemp=personnage->nb_sprites;
+            if(tempsSprite==0){
+  		      	if(personnage->spriteActuel<DEP1+nbspritestemp||personnage->spriteActuel>DEP8+nbspritestemp)
+  		        	personnage->spriteActuel=DEP1+nbspritestemp;
+  		      	else if (personnage->spriteActuel>=DEP1+nbspritestemp && personnage->spriteActuel<=DEP8+nbspritestemp)
+  							personnage->spriteActuel++;
+  					}
           }
+		    }
+
+		   if(Gauche){
+		      if(personnage->pos.x - personnage->vit_dep > LIMITS){
+		        (personnage->pos.x)-=personnage->vit_dep;
+		      }
+          if(!Saut && !Tombe && !Droite){
+            nbspritestemp=0;
+            if(tempsSprite==0){
+  		      	if(personnage->spriteActuel<DEP1||personnage->spriteActuel>DEP8)
+  		        	personnage->spriteActuel=DEP1;
+  		      	else if (personnage->spriteActuel>=DEP1 && personnage->spriteActuel<=DEP8)
+  							personnage->spriteActuel++;
+  					}
+		      }
+        }
 
 		    if(Tombe){
 					if(personnage->pos.y + personnage->vit_dep < RES_V - LIMITS){

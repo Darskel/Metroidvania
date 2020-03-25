@@ -2,6 +2,14 @@
     "files.associations": {
         "string.h": "c",
         "stdlib.h": "c",
-        "sdl_fonctions.h": "c"
+        "sdl_fonctions.h": "c",
+        "cstddef": "c",
+        "limits": "c",
+        "memory": "c",
+        "system_error": "c",
+        "type_traits": "c",
+        "xiosbase": "c",
+        "xlocale": "c",
+        "xutility": "c"
     }
 }

@@ -178,9 +178,10 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
         if(!strcmp(tmp,nomObjs[i]))
             fscanf(file,"%d\n", inventaire + i);
         else{
-            while(strcmp(tmp,nomObjs[i])){//opti ici pour chercher l'indice correct (si indice non trouvé -> indice actuel inchangé)
-                inventaire[i] = 0;
-                i++;
+            int j;
+            for(j = 0; j < TAILLE_INVENTAIRE && strcmp(tmp,nomObjs[j]); j++);
+            if(j != TAILLE_INVENTAIRE){
+                fscanf(file,"%d\n", inventaire + j);
             }
         }
     }

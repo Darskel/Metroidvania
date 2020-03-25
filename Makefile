@@ -8,8 +8,8 @@ o = ./o/
 ifeq ($(OS),Windows_NT)
 	CFLAGS += -D WIN32
 	SDL_DIR="C:\SDLib\SDL2
-	SDL_LIB_DIR=${SDL_DIR}\lib"
-	SDL_INC_DIR=${SDL_DIR}\include"
+	SDL_LIB_DIR=${SDL_DIR}\lib
+	SDL_INC_DIR=${SDL_DIR}\include
 	LIBS=-L${SDL_LIB_DIR} -lmingw32 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2
 	INCS=-I${SDL_INC_DIR}
 	clr=del /s *.o

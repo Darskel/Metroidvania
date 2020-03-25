@@ -4,19 +4,7 @@
 #include "../headers/liste.h"
 #include "../headers/comportement.h"
 
-typedef enum{
-    POSEQ,
-    NORD,
-    NORD_EST,
-    EST,
-    SUD_EST,
-    SUD,
-    SUD_OUEST,
-    OUEST,
-    NORD_OUEST
-} test;
-
-test cmpPos(position_t* p1, position_t* p2){
+static test cmpPos(position_t* p1, position_t* p2){
     if(p1->x == p2->x && p1->y == p2->y)
         return POSEQ;
     if(p1->x > p2->x){
@@ -44,7 +32,7 @@ static void recupElem(monstre_t* entite, personnage_t* perso){
     }
 }
 
-int hitP(monstre_t* entite, personnage_t* perso){
+static int hitP(monstre_t* entite, personnage_t* perso){
     switch(cmpPos(&(entite->pos),&(perso->pos))){
         case POSEQ: return 1;
         case NORD:
@@ -80,7 +68,7 @@ int hitP(monstre_t* entite, personnage_t* perso){
     }
 }
 
-int hitE(monstre_t* entite, monstre_t* ent2){
+static int hitE(monstre_t* entite, monstre_t* ent2){
     switch(cmpPos(&(entite->pos),&(ent2->pos))){
         case POSEQ: return 1;
         case NORD:
@@ -116,7 +104,7 @@ int hitE(monstre_t* entite, monstre_t* ent2){
     }
 }
 
-int hitB(monstre_t* entite, salle_t* salle){
+static int hitB(monstre_t* entite, salle_t* salle){
     for(int i = 0; i < salle->hauteur; i++){
         for(int j = 0; j < salle->hauteur; j++){
             switch(cmpPos(&(entite->pos),&((position_t){i,j}))){
@@ -166,15 +154,7 @@ int hitB(monstre_t* entite, salle_t* salle){
     return 0;
 }
 
-void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
-    if(hitP(entite,perso))
-        recupElem(entite,perso);
-
-    //gestion des sprites
-    entite->spritesActuel = (entite->spritesActuel + 1)%(entite->type->nb_sprites);
-}
-
-void dep(monstre_t* entite){
+static void dep(monstre_t* entite){
     if(entite->pv)
         if(entite->direction){
             entite->delta.delta_x.numerateur += entite->type->vit_dep;
@@ -189,6 +169,29 @@ void dep(monstre_t* entite){
                 entite->delta.delta_x.numerateur = 0;
             }
         }
+}
+
+static inRange(monstre_t* entite, personnage_t* perso, int radius){
+    int delta = perso->pos.x - entite->pos.x;
+
+    if(delta < radius && delta > -radius)
+        return 1;
+    if(delta > radius || delta < -radius)
+        return 0;
+
+    int deltaF = perso->delta.delta_x.numerateur - entite->delta.delta_x.numerateur;
+
+    if((delta > 0 && deltaF < 0) || (delta < 0 && deltaF > 0))
+        return 1;
+    return 0;
+}
+
+void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
+    if(hitP(entite,perso))
+        recupElem(entite,perso);
+
+    //gestion des sprites
+    entite->spritesActuel = (entite->spritesActuel + 1)%(entite->type->nb_sprites);
 }
 
 void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
@@ -230,4 +233,48 @@ void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, lis
         dep(entite);
     }
     //gestion sprite
+}
+
+void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
+    if(hitP(entite,perso)){
+        perso->pv -= entite->type->degat;
+        entite->direction = 1 - entite->direction;
+        //sprite
+    }else{
+        if(hitB(entite,salle)){
+            entite->direction = 1 - entite->direction;
+            //sprite
+        }
+    }
+    //gestion sprite
+}
+
+void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
+    if(hitP(entite,perso)){
+        perso->pv -= entite->type->degat;
+        entite->direction = 1 - entite->direction;
+        //sprite
+    }else{
+        if(hitB(entite,salle)){
+            entite->direction = 1 - entite->direction;
+            //sprite
+        }else{
+            if(inRange(entite,perso,6)){
+                //attaquer
+            }
+        }
+    }
+    //gestion sprite
+}
+
+void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
+
+}
+
+void compVersGeant(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
+
+}
+
+void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
+
 }

@@ -2,9 +2,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
+#include "../headers/structs.h"
 #include "../headers/source.h"
 
-int main(){
+int main(int argc, char* argv[]){
     salle_t* salle = NULL;
     SDL_Surface*** sprites = NULL;
     char* tmp;

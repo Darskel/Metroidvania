@@ -7,7 +7,7 @@ o = ./o/
 
 ifeq ($(OS),Windows_NT)
 	CFLAGS += -D WIN32
-	SDL_DIR="C:\SDLib\SDL2
+	SDL_DIR=C:\SDLib\SDL2
 	SDL_LIB_DIR=${SDL_DIR}\lib
 	SDL_INC_DIR=${SDL_DIR}\include
 	LIBS=-L${SDL_LIB_DIR} -lmingw32 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2
@@ -25,7 +25,7 @@ else
 	propre=find . -type f -executable -delete
 endif
 
-all: testListe testsdl testSource testSprite
+all: testListe testsdl testSource testSprite testaffsalle
 
 #map: codemap decodemap outdated/deprecated
 
@@ -47,6 +47,9 @@ testSource: ${o}source.o ${o}testSource.o ${o}liste.o
 
 testSprite: ${o}source.o ${o}testSprite.o ${o}liste.o
 	${CC} $^ -o $@ ${CFLAGS}
+
+testaffsalle: ${o}liste.o ${o}source.o ${o}test_affichage_salle.o
+	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
 ${o}%.o: ${c}%.c
 	${CC} $< -c -o $@ ${INCS} ${LIBS} ${CFLAGS}

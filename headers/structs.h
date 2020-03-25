@@ -32,7 +32,29 @@
 
 #define LEFT 0
 #define RIGHT 1
-#define TAILLE_INVENTAIRE 6
+#define TAILLE_INVENTAIRE 8
+
+/*
+    INVENTAIRE:
+        objet n°1 : clé rouillé
+        objet n°2 : clé rouge
+        objet n°3 : clé verte
+        objet n°4 : fléche de feu
+        objet n°5 : clé bleu
+        objet n°6 : double saut
+        objet n°7 : renard
+        objet n°8 : champignon
+    >
+        champignon
+        cle bleue
+        cle rouille
+        cle rouge
+        cle verte
+        double saut
+        fleche de feu
+        renard
+
+*/
 
 typedef struct {
   int h,v;

@@ -172,6 +172,7 @@ static void dep(monstre_t* entite){
 }
 
 static inRange(monstre_t* entite, personnage_t* perso, int radius){
+    //verif si il n'y a pas de bloc bloquant entre
     int delta = perso->pos.x - entite->pos.x;
 
     if(delta < radius && delta > -radius)
@@ -274,7 +275,9 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle, lis
 }
 
 void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
-
+    if(inRange(entite,perso,4)){
+        //attaquer
+    }
 }
 
 void compVersGeant(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){

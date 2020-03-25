@@ -15,8 +15,6 @@
         #define CLEAR
     #endif
 
-    #define CREATE_DIR(X) char Y[20] = "mkdir "; strcat(Y, X); system(Y);
-
 #endif
 
 /**
@@ -147,6 +145,7 @@ typedef struct personnage_s{
     int vit_dep; /**< Vitesse de déplacement du personnage (pixel par tick) */
     int vit_att; /**< Vitesse d'attaque du personnage (en nombre de frame) */
     position_t pos; /**< Position actuel du personnage (position entière) */
+    //passage de fractPos à position
     fracPos_t delta; /**< Différence de position à ajouter à la position entière */
     void ** sprites; /**Pointeur vers le tableau de sprites du personnage */
     indSpritePer_t spriteActuel; /**< Indice du sprite à afficher */

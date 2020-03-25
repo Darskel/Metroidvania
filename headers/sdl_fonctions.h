@@ -12,7 +12,7 @@
 #define FPS 50
 #define FRAMEDELAY 1000/FPS
 #define LIMITS 30
-#define NOM_JEU "Metroidvania"
+#define NOM_JEU "Diskosieni"
 #define TAILLEBLOC 32
 
 /**
@@ -27,7 +27,9 @@ SDL_Window * initialisation_SDL();
 void quitter_SDL(SDL_Window * fenetre);
 int evenements(SDL_Window * fenetre);
 void initialiser_sprites_personnages(personnage_t * p);
+void initialiser_sprites_salle(salle_t * s);
 personnage_t * initialisation_personnage();
 void afficher_surface(SDL_Surface * zone, SDL_Surface * sprite, position_t position);
+void afficher_salle(SDL_Surface * zone, salle_t * salle);
 void nettoyage_zone(SDL_Surface * zone);
 void supprimer_sprites(SDL_Surface ** tab, int nb_sprites);

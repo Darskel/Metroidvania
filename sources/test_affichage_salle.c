@@ -17,9 +17,10 @@ int main(){
         sprites[i] = malloc(sizeof(SDL_Surface*) * salle->largeur);
         for(int j = 0; j < salle->largeur; j++){
             tmp = chercherSprite(salle->mat[i][j],"./sprites/");
-            if(tmp)
+            if(tmp){
                 sprites[i][j] = IMG_Load(tmp);
-            else
+                free(tmp);
+            }else
                 sprites[i][j] = NULL;
         }
     }

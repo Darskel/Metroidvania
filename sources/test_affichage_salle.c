@@ -37,11 +37,16 @@ int main(int argc, char* argv[]){
     for(int i = 0; i < salle->hauteur; i++){
         for(int j = 0; j < salle->largeur; j++)
             if(sprites[i][j])
-                free(sprites[i][j]);
+                SDL_FreeSurface(sprites[i][j]);
         free(sprites[i]);
     }
 
     free(sprites);
+
+    for(int i = 0; i < salle->hauteur; i++)
+        free(salle->mat[i]);
+    free(salle->mat);
+    supListe(&salle->listePorte,supPorte);
 
     free(salle->nomFichier);
     free(salle);

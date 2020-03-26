@@ -224,7 +224,7 @@ int lireSalle(char* nomFichier, salle_t** salle){
     if(*salle)
         nettoyerSalle(salle);
 
-    char tmp[20] = DIR_SALLE;
+    char tmp[100] = DIR_SALLE;
     strcat(tmp,nomFichier);
 
     //creation des variables dans le tas

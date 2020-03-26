@@ -5,9 +5,8 @@
 #include "../headers/structs.h"
 #include "../headers/source.h"
 
-void mainInit(personnage_t** perso, salle_t** salle, liste_t** entites){
+void mainInit(personnage_t** perso, liste_t** entites){
     *perso = malloc(sizeof(personnage_t));
-    *salle = malloc(sizeof(salle_t));
     *entites = creerListe("monstre");
 
     //init du perso
@@ -61,7 +60,7 @@ void freeSdlSalle(salle_t* salle){
     salle->sprites = NULL;
 }
 
-void initCreerPartie(personnage_t* perso, salle_t* salle){
+void initCreerPartie(personnage_t* perso, salle_t** salle){
     perso->pv = perso->pv_max = 4;
     perso->delta.delta_x.numerateur = perso->delta.delta_y.numerateur = 0;
     perso->delta.delta_x.denominateur = perso->delta.delta_y.denominateur = 8; //TAILLEBLOC;
@@ -69,8 +68,8 @@ void initCreerPartie(personnage_t* perso, salle_t* salle){
     perso->forme = 'H';
     perso->pos = (position_t){8,13};
 
-    lireSalle("salle_debut.txt",&salle);
-    initSdlSalle(salle);
+    lireSalle("salle_debut.txt",salle);
+    initSdlSalle(*salle);
 }
 
 void quitterPartie(salle_t* salle){

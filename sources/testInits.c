@@ -9,8 +9,16 @@ int main(){
     personnage_t* p = NULL;
     liste_t* e = NULL;
 
-    mainInit(&p,&s,&e);
-    initCreerPartie(p,s);
+    printf("Pointeurs:\n%p\n%p\n%p\n",s,p,e);
+
+    mainInit(&p,&e);
+
+    printf("Pointeurs:\n%p\n%p\n%p\n",s,p,e);
+
+    initCreerPartie(p,&s);
+
+    printf("Pointeurs:\n%p\n%p\n%p\n",s,p,e);
+
     quitterPartie(s);
 
     //liberation salle
@@ -27,6 +35,7 @@ int main(){
 
     //liberation perso
     //unload sprites
+    free(p);
 
     return 0;
 }

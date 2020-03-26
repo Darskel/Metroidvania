@@ -113,7 +113,7 @@ typedef struct salle_s{
     int largeur; /**< Longueur de la salle en blocks */
     int ** mat; /**< Matrice de positionnement des objets */
 
-    int spriteActuel; /**< Indice du sprite à afficher */
+    void*** sprites; /**< Indice du sprite à afficher */
 
     liste_t * listePorte;
 } salle_t;
@@ -142,6 +142,7 @@ typedef struct fracPos_s{
 */
 typedef struct personnage_s{
     int pv; /**< PV(points de vie) actuel du personnage */
+    int pv_max; /**< PV max du personnage */
     int vit_dep; /**< Vitesse de déplacement du personnage (pixel par tick) */
     int vit_att; /**< Vitesse d'attaque du personnage (en nombre de frame) */
     position_t pos; /**< Position actuel du personnage (position entière) */

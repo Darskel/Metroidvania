@@ -13,10 +13,10 @@
 
 /**
  * \brief Test si les éléments sont dans l'ordre
- * \details Ce test est pour une liste de 2 éléments dont le premier contient 1 dans spritesActuel et le second contient \a n dans spritesActuel
- * 
+ * \details Ce test est pour une liste de 2 éléments dont le premier contient 1 dans spriteActuel et le second contient \a n dans spriteActuel
+ *
  * @param l liste à tester
- * @param n valeur de spritesActuel dans le second élément de la liste
+ * @param n valeur de spriteActuel dans le second élément de la liste
  * @return 1 si le test est un succès, 0 sinon
 */
 int testElem(liste_t* l, int n){
@@ -28,20 +28,20 @@ int testElem(liste_t* l, int n){
     //traitement monstre
     if(!strcmp(l->type,"monstre")){
         valeurElm(l,&m);
-        if(m.spritesActuel != 2)
+        if(m.spriteActuel != 2)
             return 0;
         suivant(l);
         valeurElm(l,&m);
-        return m.spritesActuel == n;
+        return m.spriteActuel == n;
     }
 
     //traitement porte
     valeurElm(l,&p);
-    if(p.spritesActuel != 2)
+    if(p.spriteActuel != 2)
         return 0;
     suivant(l);
     valeurElm(l,&p);
-    return p.spritesActuel == n;
+    return p.spriteActuel == n;
 }
 
 int main(){
@@ -68,17 +68,17 @@ int main(){
         //Remplissage
         if(i){
             m = malloc(sizeof(*m));
-            m->spritesActuel = 1;
+            m->spriteActuel = 1;
             ajoutDroit(l,m);
             m = malloc(sizeof(*m));
-            m->spritesActuel = 2;
+            m->spriteActuel = 2;
             ajoutGauche(l,m);
         }else{
             p = malloc(sizeof(*p));
-            p->spritesActuel = 1;
+            p->spriteActuel = 1;
             ajoutDroit(l,p);
             p = malloc(sizeof(*p));
-            p->spritesActuel = 2;
+            p->spriteActuel = 2;
             ajoutGauche(l,p);
         }
 
@@ -92,13 +92,13 @@ int main(){
         suivant(l);
         if(i){
             m = malloc(sizeof(*m));
-            m->spritesActuel = 3;
+            m->spriteActuel = 3;
             modifElm(l,m);
             free(m);
-            m = NULL;            
+            m = NULL;
         }else{
             p = malloc(sizeof(*p));
-            p->spritesActuel = 3;
+            p->spriteActuel = 3;
             modifElm(l,p);
             free(p);
             p = NULL;

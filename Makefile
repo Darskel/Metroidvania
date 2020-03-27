@@ -39,7 +39,7 @@ testListe: ${o}liste.o ${o}testListe.o
 #decodemap: ${c}decodemap.c
 #	${CC} $^ -o $@ ${CFLAGS}
 
-testsdl: ${o}sdl_fonctions.o ${o}test_SDL.o
+testsdl: ${o}sdl_fonctions.o ${o}test_SDL.o ${o}source.o ${o}liste.o
 	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
 testSource: ${o}source.o ${o}testSource.o ${o}liste.o

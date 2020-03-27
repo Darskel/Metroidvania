@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "../headers/sdl_fonctions.h"
 
 /**
@@ -10,16 +9,36 @@
 */
 
 /**
- * \brief Programme de test qui initalise la sdl, lance la gestion d'évènements et gère les erreurs
+ * \brief Programme de test qui initalise la sdl
  *
  * @return 0 si tout s'est bien déroulé
  */
 int main(int argc, char *argv[]){
-  int erreur;
-  SDL_Window * fenetre;
-  fenetre = initialisation_SDL();
-  erreur=evenements(fenetre);
-  if(erreur) fprintf(stdout,"Programme quitté anormalement\n");
-  else fprintf(stdout, "Programme quitté normalement\n");
+  boolean_t fullscreen=FALSE;
+  SDL_DisplayMode mode;
+  SDL_Window * fenetre=NULL;
+  SDL_Renderer * renderer=NULL;
+  salle_t * salle;
+  personnage_t * perso;
+  if(argc>1){
+    if(!strcmp(argv[1], "-fullscreen"))
+      fullscreen=TRUE;
+    else{
+      fprintf(stdout, "Paramètre incorrect.\n Usage : %s -fullscreen\n", argv[0]);
+      exit(EXIT_FAILURE);
+    }
+  }
+  initialisation_SDL(&fenetre, &renderer, &mode, fullscreen);
+  SDL_SetRenderDrawColor(renderer,20,0,0,255);
+  SDL_RenderClear(renderer);
+  SDL_RenderPresent(renderer);
+  salle=initialiser_salle(renderer, "./salles/1.txt");
+  perso=initialisation_personnage(renderer);
+  evenements(fenetre,renderer,&mode);
+  nettoyerSalle(&salle);
+  quitter_SDL(&fenetre, &renderer);
+  renderer=NULL;
+  fenetre=NULL;
+  fprintf(stdout, "Programme quitté normalement\n");
   return 0;
 }

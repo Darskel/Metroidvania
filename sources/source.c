@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../headers/source.h"
+#include "../headers/liste.h"
 
 /**
  * \file source.c
@@ -123,7 +124,7 @@ int sauvegarder(int numSauv, int hp, char* salle, position_t* dep, int inventair
 }
 
 /**
- * \brief Sauvegarde l'état de la partie
+ * \brief Charge l'état de la partie
  * \details Les paramètres numSauv et nomObjs doivent être définis avant, les autres paramètres seront remplis par cette fonction
  *
  * @param numSauv numéro de la sauvegarde (entre 1 et 3)
@@ -269,7 +270,7 @@ int lireSalle(char* nomFichier, salle_t** salle){
         p->salleSuivante = malloc(sizeof(char) * (strlen(mot) + 1));
         strcpy(p->salleSuivante, mot);
         //Gestion des sprites de portes potentiellement à modifier
-        p->spritesActuel = -1;
+        p->spriteActuel = -1;
         p->listeSprites = NULL;
         ajoutDroit((*salle)->listePorte, p);
         fscanf(monDoc, "%s %d %d %d %d", mot, &cx1, &cy1, &cx2, &cy2);

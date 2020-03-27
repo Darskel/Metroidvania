@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include "liste.h"
 
+#ifndef SDL_H
+#define SDL_H
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
+
+#endif
+
 #ifndef SYSTEM_INCLUDED
 #define SYSTEM_INCLUDED
 
@@ -114,7 +123,9 @@ typedef struct salle_s{
     int hauteur; /**< Hauteur de la salle en blocks */
     int largeur; /**< Longueur de la salle en blocks */
     int ** mat; /**< Matrice de positionnement des objets */
-
+    SDL_Texture * background; /**< Image d'arrière-plan de la salle */
+    char * texture_path; /**< Chaîne de caractères qui contient l'emplacement de la tileset dans les fichiers du jeu */
+    SDL_Texture * tileset; /**< Image qui contient tout les sprites de la tileset associée à la salle */
     int spriteActuel; /**< Indice du sprite à afficher */
 
     liste_t * listePorte;
@@ -146,15 +157,15 @@ typedef struct personnage_s{
     int pv; /**< PV(points de vie) actuel du personnage */
     int vit_dep; /**< Vitesse de déplacement du personnage (pixel par tick) */
     int vit_att; /**< Vitesse d'attaque du personnage (en nombre de frame) */
-    position_t pos; /**< Position actuel du personnage (position entière) */
-    fracPos_t delta; /**< Différence de position à ajouter à la position entière */
-    void ** sprites; /**Pointeur vers le tableau de sprites du personnage */
-    indSpritePer_t spriteActuel; /**< Indice du sprite à afficher */
-    int nb_sprites;/**< Nombre de sprites du personnage (sans orientation)*/
+    position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
+    position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
+    SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du personnage */
+    position_t spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
+    int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du personage */
+    taille_t taille; /**< Taille d'un sprite de personnage en pixel */
     char forme; /**< Forme du personnage H = humain, F = renard */
-    int inventaire[TAILLE_INVENTAIRE];
-    char* nomObj[TAILLE_INVENTAIRE];
-
+    int inventaire[TAILLE_INVENTAIRE]; /**<Tableau qui contient les informations sur l'inventaire actuel du personnage */
+    char* nomObj[TAILLE_INVENTAIRE]; /**<Tableau qui contient les noms des objets de l'inventaire */
 } personnage_t;
 
 /**
@@ -167,12 +178,11 @@ typedef struct type_monstre_s{
     int vit_att; /**< Vitesse d'attaque du monstre (en nombre de frame) */
 
     char* nom;
-    char* sprites; /**< Chemin d'accès aux sprites qui seront utilisés*/
-    int nb_sprites;/**< Nombre de sprites du monstre (sans orientation)*/
-    int largeur; /**< Largeur du monstre en unité de case (taille d'une case) */
-    int hauteur; /**< Hauteur du monstre en unité de case (taille d'une case) */
+    char* path; /**< Chemin d'accès à l'image qui contient les sprites*/
+    SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du monstre */
+    int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du monstre */
     int degat;
-
+    taille_t taille; /**< Taille d'un sprite de monstre en cases */
     boolean_t passeEntites; /**< Indique si le monstre peut passer à travers les entités (autres monstres/joueur) */
     boolean_t passeBlocs; /**< Indique si le monstre peut passer à travers les blocs */
 
@@ -186,9 +196,9 @@ typedef struct type_monstre_s{
 typedef struct monstre_s{
     type_monstre_t * type; /**< Type de monstre */
     int pv; /**< PV actuels du monstre */
-    int spritesActuel; /**< Indice du sprite à afficher */
-    position_t pos; /**< Postition actuelle du monstre (position entière) */
-    fracPos_t delta; /**< Différence de position à ajouter à la position entière */
+    int spriteActuel; /**< Indice du sprite actuel */
+    position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
+    position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
     boolean_t direction; /**< Direction vers laquelle regarde le monstre (1: vers la gauche(LEFT), 0: vers la droite(RIGHT)) */
 
 } monstre_t;
@@ -213,7 +223,7 @@ typedef struct porte_s{
     char* salleSuivante; /**< Nom de la salle suivante (nom de la salle) */
     position_t pos_arrivee; /**< Postition d'apparition dans la salle d'arrivée */
     char* listeSprites; /**< Chemin vers les sprites de la porte */
-    int spritesActuel; /**< Indice du sprite à afficher */
+    int spriteActuel; /**< Indice du sprite à afficher */
 } porte_t;
 
 void supPorte(porte_t**);

@@ -30,7 +30,7 @@ static void initListe(liste_t *maListe, char *type){
  * @return adresse de la liste créée
 */
 liste_t* creerListe(char* type){
-    liste_t* maListe = malloc(sizeof(elemListe_t*));
+    liste_t* maListe = malloc(sizeof(liste_t));
     initListe(maListe, type);
     return maListe;
 }

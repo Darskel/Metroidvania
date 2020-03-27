@@ -44,7 +44,7 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
     exit(EXIT_FAILURE);
   }
 
-  icon=IMG_Load("./sprites/icon.png");
+  icon=IMG_Load("./sprites/autre/icon.png");
   SDL_SetWindowIcon(*fenetre,icon);
 
   *renderer = SDL_CreateRenderer(*fenetre, -1, SDL_RENDERER_ACCELERATED);
@@ -162,23 +162,34 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer){
   personnage->pos.y=0;
   personnage->delta.x=0;
   personnage->delta.y=0;
-  SDL_Texture * texture=initialiser_texture("./sprites/entite/joueur.png", renderer, SDL_TEXTUREACCESS_STREAMING);
+  SDL_Texture * texture=initialiser_texture(PLAYERSPRITESPATH, renderer, SDL_TEXTUREACCESS_STREAMING);
   personnage->sprites=texture;
   personnage->spriteActuel.x=0;
   personnage->spriteActuel.y=0;
+  personnage->spriteActuel.h=33;
+  personnage->spriteActuel.w=30;
   int * nbAnim = malloc(4*sizeof(int));
-  nbAnim[0]=9;
+  nbAnim[0]=1;
   nbAnim[1]=8;
   nbAnim[2]=8;
   nbAnim[3]=3;
   personnage->nbAnim=nbAnim;
-  personnage->taille.h=24;
-  personnage->taille.v=32;
   personnage->forme='h';
   return personnage;
 }
 
+/**
+ * \brief Fonction de destruction de la structure personnage
+ *
+ * @param personnage pointeur sur le pointeur de la structure à détruire
+ */
+void destroy_personnage(personnage_t ** personnage){
 
+  SDL_DestroyTexture((*personnage)->sprites);
+  free((*personnage)->nbAnim);
+  free(*personnage);
+  *personnage=NULL;
+}
 
 /**
  * \brief Fonction d'initialisation de la salle
@@ -186,13 +197,23 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer){
  * @param nomFichier une chaine de caracteres qui contient le nom du fichier de la salle
  * @return un pointeur sur la structure salle initalisée
  */
-salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier){
-  salle_t * salle = malloc(sizeof(salle_t));
-  lireSalle(nomFichier, &salle);
-  SDL_Texture * texture=initialiser_texture("./sprites/bloc/grotte.png", renderer, SDL_TEXTUREACCESS_STATIC);
-  salle->tileset=texture;
-  salle->background=initialiser_texture("./sprites/arriere_plan/grotte.png", renderer, SDL_TEXTUREACCESS_STATIC);
-  return salle;
+salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, SDL_Texture * tileset){
+  salle_t ** salle=malloc(sizeof(salle_t *));
+  *salle=NULL;
+  lireSalle(nomFichier, salle);
+  (*salle)->background=initialiser_texture("./sprites/salles/salle_entree_grotte.png", renderer, SDL_TEXTUREACCESS_STATIC);
+  (*salle)->tileset=tileset;
+  return (*salle);
+}
+
+/**
+ * \brief Fonction de destruction de la structure personnage
+ *
+ * @param salle pointeur sur le pointeur de la structure à détruire
+ */
+void destroy_salle(salle_t ** salle){
+  SDL_DestroyTexture((*salle)->background);
+  nettoyerSalle(salle);
 }
 
 /**

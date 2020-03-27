@@ -18,6 +18,7 @@ int main(int argc, char *argv[]){
   SDL_DisplayMode mode;
   SDL_Window * fenetre=NULL;
   SDL_Renderer * renderer=NULL;
+  SDL_Texture * tileset;
   salle_t * salle;
   personnage_t * perso;
   if(argc>1){
@@ -32,7 +33,8 @@ int main(int argc, char *argv[]){
   SDL_SetRenderDrawColor(renderer,20,0,0,255);
   SDL_RenderClear(renderer);
   SDL_RenderPresent(renderer);
-  salle=initialiser_salle(renderer, "./salles/1.txt");
+  tileset=initialiser_texture(TILESETPATH, renderer, SDL_TEXTUREACCESS_STATIC);
+  salle=initialiser_salle(renderer, "salle_entree_grotte.txt", tileset);
   perso=initialisation_personnage(renderer);
   evenements(fenetre,renderer,&mode);
   nettoyerSalle(&salle);

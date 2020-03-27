@@ -222,7 +222,7 @@ int lireSalle(char* nomFichier, salle_t** salle){
     int lon, larg, val;
     int cx1, cx2, cy1, cy2;
 
-    if(*salle)
+    if(*salle!=NULL)
         nettoyerSalle(salle);
 
     char tmp[20] = DIR_SALLE;

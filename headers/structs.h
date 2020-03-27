@@ -124,11 +124,9 @@ typedef struct salle_s{
     int largeur; /**< Longueur de la salle en blocks */
     int ** mat; /**< Matrice de positionnement des objets */
     SDL_Texture * background; /**< Image d'arrière-plan de la salle */
-    char * texture_path; /**< Chaîne de caractères qui contient l'emplacement de la tileset dans les fichiers du jeu */
     SDL_Texture * tileset; /**< Image qui contient tout les sprites de la tileset associée à la salle */
     int spriteActuel; /**< Indice du sprite à afficher */
-
-    liste_t * listePorte;
+    liste_t * listePorte; /**< Liste des portes de la salle */
 } salle_t;
 
 /**
@@ -160,9 +158,8 @@ typedef struct personnage_s{
     position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
     position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du personnage */
-    position_t spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
+    SDL_Rect spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du personage */
-    taille_t taille; /**< Taille d'un sprite de personnage en pixel */
     char forme; /**< Forme du personnage H = humain, F = renard */
     int inventaire[TAILLE_INVENTAIRE]; /**<Tableau qui contient les informations sur l'inventaire actuel du personnage */
     char* nomObj[TAILLE_INVENTAIRE]; /**<Tableau qui contient les noms des objets de l'inventaire */

@@ -113,7 +113,7 @@ static int hitB(monstre_t* e, salle_t* s){
     return FALSE;
 }
 
-int persValidDep(personnage_t* p, salle_t* s){
+static int persValidDep(personnage_t* p, salle_t* s){
     int leftP;
     int rightP;
     int topP;
@@ -178,7 +178,7 @@ void depGauche(personnage_t* p, salle_t* s){
     }
 }
 
-void dep(monstre_t* entite, salle_t* salle){
+static void dep(monstre_t* entite, salle_t* salle){
     if(entite->pv)
         if(entite->direction){
             entite->delta.x += entite->type->vit_dep;
@@ -205,7 +205,7 @@ void dep(monstre_t* entite, salle_t* salle){
         }
 }
 
-static inRange(monstre_t* entite, personnage_t* perso, int radius){
+static int inRange(monstre_t* entite, personnage_t* perso, int radius){
     //verif si il n'y a pas de bloc bloquant entre
     int delta = perso->pos.x - entite->pos.x;
 

@@ -31,8 +31,10 @@
 void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_DisplayMode * mode, boolean_t fullscreen);
 void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer);
 void evenements(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode * mode);
-SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer, SDL_TextureAccess access);
-personnage_t * initialisation_personnage(SDL_Renderer * renderer);
-salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, SDL_Texture * tileset);
+SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer);
+personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t positionDepart);
+salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, char * nomBG, SDL_Texture * tileset);
 void afficher_salle(SDL_Renderer * renderer, salle_t * salle);
 void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage);
+void destroy_salle(salle_t ** salle);
+void destroy_personnage(personnage_t ** personnage);

@@ -5,8 +5,10 @@
 #include "../headers/structs.h"
 #include "../headers/source.h"
 
+//Mis en commentaire des fonctions car les structures ont changé
+
 void mainInit(personnage_t** perso, liste_t** entites){
-    *perso = malloc(sizeof(personnage_t));
+    /**perso = malloc(sizeof(personnage_t));
     *entites = creerListe("monstre");
 
     //init du perso
@@ -25,13 +27,13 @@ void mainInit(personnage_t** perso, liste_t** entites){
     (*perso)->nomObj[5] = "double saut";
     (*perso)->nomObj[6] = "fleche de feu";
     (*perso)->nomObj[7] = "renard";
-
+    */
     //load sprites
 
 }
 
 void initSdlSalle(salle_t* salle){
-    SDL_Surface*** sprites = malloc(sizeof(SDL_Surface**) * salle->hauteur);
+    /*SDL_Surface*** sprites = malloc(sizeof(SDL_Surface**) * salle->hauteur);
     char* tmp = NULL;
 
     for(int i = 0; i < salle->hauteur; i++){
@@ -46,10 +48,11 @@ void initSdlSalle(salle_t* salle){
         }
     }
     salle->sprites = sprites;
+    */
 }
 
 void freeSdlSalle(salle_t* salle){
-    for(int i = 0; i < salle->hauteur; i++){
+    /*for(int i = 0; i < salle->hauteur; i++){
         for(int j = 0; j < salle->largeur; j++)
             if(salle->sprites[i][j])
                 SDL_FreeSurface(salle->sprites[i][j]);
@@ -58,10 +61,11 @@ void freeSdlSalle(salle_t* salle){
 
     free(salle->sprites);
     salle->sprites = NULL;
+    */
 }
 
 void initCreerPartie(personnage_t* perso, salle_t** salle){
-    perso->pv = perso->pv_max = 4;
+    /*perso->pv = perso->pv_max = 4;
     perso->delta.delta_x.numerateur = perso->delta.delta_y.numerateur = 0;
     perso->delta.delta_x.denominateur = perso->delta.delta_y.denominateur = 8; //TAILLEBLOC;
     perso->spriteActuel = SU;
@@ -70,6 +74,7 @@ void initCreerPartie(personnage_t* perso, salle_t** salle){
 
     lireSalle("salle_debut.txt",salle);
     initSdlSalle(*salle);
+    */
 }
 
 void quitterPartie(salle_t* salle){

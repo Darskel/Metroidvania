@@ -117,10 +117,9 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
  *
  * @param path chaine de caracteres qui correspond au chemin de l'image
  * @param renderer le pointeur sur SDL_Renderer
- * @param access le type d'accès à la texture
  * @return le pointeur sur la texture générée
  */
-SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer, SDL_TextureAccess access){
+SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer){
   SDL_Surface *surface = NULL;
   SDL_Texture *texture, *tmp = NULL;
   surface = IMG_Load(path);
@@ -134,7 +133,7 @@ SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer, SDL_Text
       exit(EXIT_FAILURE);
   }
   texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,
-                              access, surface->w, surface->h);
+                              SDL_TEXTUREACCESS_TARGET, surface->w, surface->h);
   if(texture==NULL){
       fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
       exit(EXIT_FAILURE);
@@ -153,16 +152,15 @@ SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer, SDL_Text
  * @param personnage pointeur sur la structure à initialiser
  * @return le pointeur sur la structure initialisée
  */
-personnage_t * initialisation_personnage(SDL_Renderer * renderer){
+personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t positionDepart){
   personnage_t * personnage=malloc(sizeof(personnage_t));
   personnage->pv=1;
   personnage->vit_dep=2;
   personnage->vit_att=1;
-  personnage->pos.x=0;
-  personnage->pos.y=0;
+  personnage->pos=positionDepart;
   personnage->delta.x=0;
   personnage->delta.y=0;
-  SDL_Texture * texture=initialiser_texture(PLAYERSPRITESPATH, renderer, SDL_TEXTUREACCESS_STREAMING);
+  SDL_Texture * texture=initialiser_texture(PLAYERSPRITESPATH, renderer);
   personnage->sprites=texture;
   personnage->spriteActuel.x=0;
   personnage->spriteActuel.y=0;
@@ -170,6 +168,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer){
   personnage->spriteActuel.w=LARGEURSPRITEPERS;
   personnage->hitbox.hauteur=HAUTEURHITBOXPERS;
   personnage->hitbox.largeur=LARGEURHITBOXPERS;
+  personnage->etat = IDLE;
   int * nbAnim = malloc(4*sizeof(int));
   nbAnim[0]=1;
   nbAnim[1]=8;
@@ -196,7 +195,6 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer){
  * @param personnage pointeur sur le pointeur de la structure à détruire
  */
 void destroy_personnage(personnage_t ** personnage){
-
   SDL_DestroyTexture((*personnage)->sprites);
   free((*personnage)->nbAnim);
   free(*personnage);
@@ -209,11 +207,11 @@ void destroy_personnage(personnage_t ** personnage){
  * @param nomFichier une chaine de caracteres qui contient le nom du fichier de la salle
  * @return un pointeur sur la structure salle initalisée
  */
-salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, SDL_Texture * tileset){
+salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, char * nomBG, SDL_Texture * tileset){
   salle_t ** salle=malloc(sizeof(salle_t *));
   *salle=NULL;
   lireSalle(nomFichier, salle);
-  (*salle)->background=initialiser_texture("./sprites/salles/salle_entree_grotte.png", renderer, SDL_TEXTUREACCESS_STATIC);
+  (*salle)->background=initialiser_texture(nomBG, renderer);
   (*salle)->tileset=tileset;
   return (*salle);
 }
@@ -229,7 +227,7 @@ void destroy_salle(salle_t ** salle){
 }
 
 /**
- * \brief Fonction d'affichage de la salle (fait par Yannis Allain)
+ * \brief Fonction d'affichage de la salle (fait en coop avec Yannis Allain)
  *
  * @param renderer le pointeur vers le SDL_Renderer à utiliser
  * @param salle la structure salle à afficher
@@ -238,21 +236,33 @@ void afficher_salle(SDL_Renderer * renderer, salle_t * salle){
     int i, j;
     SDL_Rect Rect_dest;
     SDL_Rect Rect_source;
+    SDL_Texture * textureSalle;
+    int posSprite;
     Rect_source.w = TAILLEBLOC;
-    Rect_dest.w   = TAILLEBLOC*3;
+    Rect_dest.w   = TAILLEBLOC;
     Rect_source.h = TAILLEBLOC;
-    Rect_dest.h   = TAILLEBLOC*3;
-    for(i = 0 ; i < salle->largeur; i++)
+    Rect_dest.h   = TAILLEBLOC;
+    textureSalle=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET, (salle->largeur)* TAILLEBLOC, (salle->hauteur) * TAILLEBLOC);
+    SDL_SetRenderTarget(renderer, textureSalle);
+    SDL_RenderCopy(renderer, salle->background, NULL, NULL);
+    for(i = 0 ; i < salle->hauteur; i++)
     {
-        for(j = 0 ; j < salle->hauteur; j++)
+        for(j = 0 ; j < salle->largeur; j++)
         {
-            Rect_dest.x = i * TAILLEBLOC*3;
-            Rect_dest.y = j * TAILLEBLOC*3;
-            Rect_source.x = (salle->mat[j][i] - '0') * TAILLEBLOC;
+          posSprite = (salle->mat[i][j]-1);
+          if(posSprite >= 0){
+            Rect_dest.y = i * TAILLEBLOC;
+            Rect_dest.x = j * TAILLEBLOC;
+            Rect_source.x = posSprite * TAILLEBLOC;
             Rect_source.y = 0;
             SDL_RenderCopy(renderer, salle->tileset, &Rect_source, &Rect_dest);
+            }
         }
     }
+    SDL_SetRenderTarget(renderer, NULL);
+    SDL_RenderCopy(renderer, textureSalle, NULL, NULL);
+    SDL_RenderPresent(renderer);
+    SDL_DestroyTexture(textureSalle);
 }
 
 

@@ -1,17 +1,19 @@
 #ifndef COMPORTEMENT_INCLUDED
 #define COMPORTEMENT_INCLUDED
 
-typedef enum{
-    POSEQ,
-    NORD,
-    NORD_EST,
-    EST,
-    SUD_EST,
-    SUD,
-    SUD_OUEST,
-    OUEST,
-    NORD_OUEST
-} test;
+/**
+ * \file structs.h
+ * \brief Ensemble de fonctions pour le comportement des mobs et du personnage
+ * \author Thomas DIDIER L2 Info Le Mans
+ * \version 1.0
+ * \date 01/04/2020
+*/
+
+int hitE(monstre_t* e1, monstre_t* e2);
+int hitP(monstre_t* e, personnage_t* p);
+
+void depDroite(personnage_t* p, salle_t* s);
+void depGauche(personnage_t* p, salle_t* s);
 
 void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);
 void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);

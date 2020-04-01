@@ -24,8 +24,6 @@
         #define CLEAR
     #endif
 
-    #define CREATE_DIR(X) char Y[20] = "mkdir "; strcat(Y, X); system(Y);
-
 #endif
 
 /**
@@ -142,29 +140,12 @@ typedef struct salle_s{
 } salle_t;
 
 /**
- * \struct fraction_s
- * \brief Une fration représenter par deux entier
-*/
-typedef struct fraction_s{
-    int numerateur; /**< Numérateur de la fraction */
-    int denominateur; /**< Denominateur de la fraction */
-}fraction_t;
-
-/**
- * \struct fracPos_s
- * \brief Structure représentant la différence de position en fraction
-*/
-typedef struct fracPos_s{
-    fraction_t delta_x; /**< Différence de position sur l'axe x à ajouter à la position entière (valeur comprise -1 et 1) */
-    fraction_t delta_y; /**< Différence de position sur l'axe y à ajouter à la position entière (valeur comprise -1 et 1) */
-} fracPos_t;
-
-/**
  * \struct personnage_s
  * \brief Structure représentant le personnage
 */
 typedef struct personnage_s{
     int pv; /**< PV(points de vie) actuel du personnage */
+    int pv_max; /**< PV max du personnage */
     int inv;
     int vit_dep; /**< Vitesse de déplacement du personnage (pixel par tick) */
     int vit_att; /**< Vitesse d'attaque du personnage (en nombre de frame) */
@@ -239,8 +220,5 @@ typedef struct porte_s{
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites de la porte */
     int spriteActuel; /**< Indice du sprite à afficher */
 } porte_t;
-
-void supPorte(porte_t**);
-void supMonstre(monstre_t**);
 
 #endif

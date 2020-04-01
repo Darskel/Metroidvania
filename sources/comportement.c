@@ -1,28 +1,34 @@
 #include <stdlib.h>
 #include <string.h>
+//#include <SDL2/SDL.h>
 #include "../headers/structs.h"
 #include "../headers/liste.h"
 #include "../headers/comportement.h"
 
-static test cmpPos(position_t* p1, position_t* p2){
-    if(p1->x == p2->x && p1->y == p2->y)
-        return POSEQ;
-    if(p1->x > p2->x){
-        if(p1->y == p2->y)
-            return SUD;
-        if(p1->y > p2->y)
-            return SUD_EST;
-        return SUD_OUEST;
-    }else{
-        if(p1->y == p2->y)
-            return NORD;
-        if(p1->y > p2->y)
-            return NORD_EST;
-        return NORD_OUEST;
-    }
-    return p1->y > p2->y ? EST : OUEST;
-}
+#define TAILLE_BLOCK 8
 
+/*static int toucher(monstre_t* e1, monstre_t* e2){
+    SDL_rect rect1, rect2;
+
+    rect1.x = TAILLE_BLOCK*e1->pos.x + e1->delta.x;
+    rect1.y = TAILLE_BLOCK*e1->pos.y + e1->delta.y;
+    rect1.w = e1->type->hitbox.largeur;
+    rect1.h = e1->type->hitbox.hauteur;
+
+    rect2.x = TAILLE_BLOCK*e2->pos.x + e2->delta.x;
+    rect2.y = TAILLE_BLOCK*e2->pos.y + e2->delta.y;
+    rect2.w = e2->type->hitbox.largeur;
+    rect2.h = e2->type->hitbox.hauteur;
+
+    return SDL_IntersectRect(&rect1,&rect2);
+}*/
+
+/**
+ * \brief Recupère l'élément récupérable (type monstre_t)
+ *
+ * @param entite pointeur vers l'élément à récupérer
+ * @param perso pointeur vers le personnage pour lui crediter l'objet
+*/
 static void recupElem(monstre_t* entite, personnage_t* perso){
     for(int i = 0; i < TAILLE_INVENTAIRE; i++){
         if(!strcmp(entite->type->nom,perso->nomObj[i])){
@@ -32,146 +38,231 @@ static void recupElem(monstre_t* entite, personnage_t* perso){
     }
 }
 
-static int hitP(monstre_t* entite, personnage_t* perso){
-    switch(cmpPos(&(entite->pos),&(perso->pos))){
-        case POSEQ: return 1;
-        case NORD:
-            if(((float) perso->delta.delta_x.numerateur)/perso->delta.delta_x.denominateur < -(1.0/entite->type->hauteur))
-                return 1;
-        case EST:
-            if(((float) perso->delta.delta_y.numerateur)/perso->delta.delta_y.denominateur < -(1.0/entite->type->largeur))
-                return 1;
-        case SUD:
-            if(((float) perso->delta.delta_x.numerateur)/perso->delta.delta_x.denominateur > 1.0/entite->type->hauteur)
-                return 1;
-        case OUEST:
-            if(((float) perso->delta.delta_y.numerateur)/perso->delta.delta_y.denominateur > 1.0/entite->type->largeur)
-                return 1;
-        case NORD_EST:
-            if(((float) perso->delta.delta_x.numerateur)/perso->delta.delta_x.denominateur < -(1.0/entite->type->hauteur))
-                if(((float) perso->delta.delta_y.numerateur)/perso->delta.delta_y.denominateur < -(1.0/entite->type->largeur))
-                    return 1;
-        case SUD_EST:
-            if(((float) perso->delta.delta_x.numerateur)/perso->delta.delta_x.denominateur > 1.0/entite->type->hauteur)
-                if(((float) perso->delta.delta_y.numerateur)/perso->delta.delta_y.denominateur < -(1.0/entite->type->largeur))
-                    return 1;
-        case SUD_OUEST:
-            if(((float) perso->delta.delta_x.numerateur)/perso->delta.delta_x.denominateur > 1.0/entite->type->hauteur)
-                if(((float) perso->delta.delta_y.numerateur)/perso->delta.delta_y.denominateur > 1.0/entite->type->largeur)
-                    return 1;
-        case NORD_OUEST:
-            if(((float) perso->delta.delta_x.numerateur)/perso->delta.delta_x.denominateur < -(1.0/entite->type->hauteur))
-                if(((float) perso->delta.delta_y.numerateur)/perso->delta.delta_y.denominateur > 1.0/entite->type->largeur)
-                    return 1;
-        default:
-            return 0;
-    }
+/**
+ * \brief Vérifie si une entité touche une autre entité
+ *
+ * @param e1 pointeur vers la première entité
+ * @param e2 pointeur vers la seconde entité
+ * 
+ * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
+*/
+int hitE(monstre_t* e1, monstre_t* e2){
+    int leftE1, leftE2;
+    int rightE1, rightE2;
+    int topE1, topE2;
+    int bottomE1, bottomE2;
+
+    leftE1 = e1->pos.x*TAILLE_BLOCK + e1->delta.x;
+    topE1 = e1->pos.y*TAILLE_BLOCK + e1->delta.y;
+    rightE1 = leftE1 + e1->type->hitbox.largeur;
+    bottomE1 = topE1 + e1->type->hitbox.hauteur;
+
+    leftE2 = e2->pos.x*TAILLE_BLOCK + e2->delta.x;
+    topE2 = e2->pos.y*TAILLE_BLOCK + e2->delta.y;
+    rightE2 = leftE2 + e2->type->hitbox.largeur;
+    bottomE2 = topE2 + e2->type->hitbox.hauteur;
+
+    if(bottomE1 <= topE2)
+        return FALSE;
+    
+    if(topE1 >= bottomE2)
+        return FALSE;
+    
+    if(rightE1 <= leftE2)
+        return FALSE;
+    
+    if(leftE1 >= rightE2)
+        return FALSE;
+
+    return TRUE;
 }
 
-static int hitE(monstre_t* entite, monstre_t* ent2){
-    switch(cmpPos(&(entite->pos),&(ent2->pos))){
-        case POSEQ: return 1;
-        case NORD:
-            if(((float) ent2->delta.delta_x.numerateur)/ent2->delta.delta_x.denominateur < -(1.0/entite->type->hauteur))
-                return 1;
-        case EST:
-            if(((float) ent2->delta.delta_y.numerateur)/ent2->delta.delta_y.denominateur < -(1.0/entite->type->largeur))
-                return 1;
-        case SUD:
-            if(((float) ent2->delta.delta_x.numerateur)/ent2->delta.delta_x.denominateur > 1.0/entite->type->hauteur)
-                return 1;
-        case OUEST:
-            if(((float) ent2->delta.delta_y.numerateur)/ent2->delta.delta_y.denominateur > 1.0/entite->type->largeur)
-                return 1;
-        case NORD_EST:
-            if(((float) ent2->delta.delta_x.numerateur)/ent2->delta.delta_x.denominateur < -(1.0/entite->type->hauteur))
-                if(((float) ent2->delta.delta_y.numerateur)/ent2->delta.delta_y.denominateur < -(1.0/entite->type->largeur))
-                    return 1;
-        case SUD_EST:
-            if(((float) ent2->delta.delta_x.numerateur)/ent2->delta.delta_x.denominateur > 1.0/entite->type->hauteur)
-                if(((float) ent2->delta.delta_y.numerateur)/ent2->delta.delta_y.denominateur < -(1.0/entite->type->largeur))
-                    return 1;
-        case SUD_OUEST:
-            if(((float) ent2->delta.delta_x.numerateur)/ent2->delta.delta_x.denominateur > 1.0/entite->type->hauteur)
-                if(((float) ent2->delta.delta_y.numerateur)/ent2->delta.delta_y.denominateur > 1.0/entite->type->largeur)
-                    return 1;
-        case NORD_OUEST:
-            if(((float) ent2->delta.delta_x.numerateur)/ent2->delta.delta_x.denominateur < -(1.0/entite->type->hauteur))
-                if(((float) ent2->delta.delta_y.numerateur)/ent2->delta.delta_y.denominateur > 1.0/entite->type->largeur)
-                    return 1;
-        default:
-            return 0;
-    }
+/**
+ * \brief Vérifie si une entité touche une autre entité
+ *
+ * @param e1 pointeur vers la première entité
+ * @param e2 pointeur vers la seconde entité
+ * 
+ * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
+*/
+int hitP(monstre_t* e, personnage_t* p){
+    int leftE, leftP;
+    int rightE, rightP;
+    int topE, topP;
+    int bottomE, bottomP;
+
+    leftE = e->pos.x*TAILLE_BLOCK + e->delta.x;
+    topE = e->pos.y*TAILLE_BLOCK + e->delta.y;
+    rightE = leftE + e->type->hitbox.largeur;
+    bottomE = topE + e->type->hitbox.hauteur;
+
+    leftP = p->pos.x*TAILLE_BLOCK + p->delta.x;
+    topP = p->pos.y*TAILLE_BLOCK + p->delta.y;
+    rightP = leftP + p->hitbox.largeur;
+    bottomP = topP + p->hitbox.hauteur;
+
+    if(bottomE <= topP)
+        return FALSE;
+    
+    if(topE >= bottomP)
+        return FALSE;
+    
+    if(rightE <= leftP)
+        return FALSE;
+    
+    if(leftE >= rightP)
+        return FALSE;
+
+    return TRUE;
 }
 
-static int hitB(monstre_t* entite, salle_t* salle){
-    for(int i = 0; i < salle->hauteur; i++){
-        for(int j = 0; j < salle->hauteur; j++){
-            switch(cmpPos(&(entite->pos),&((position_t){i,j}))){
-                case POSEQ: return 1;
-                    break;
-                case NORD:
-                    if(((float) entite->delta.delta_x.numerateur)/entite->delta.delta_x.denominateur < 0)
-                        return 1;
-                    break;
-                case EST:
-                    if(((float) entite->delta.delta_y.numerateur)/entite->delta.delta_y.denominateur < 0)
-                        return 1;
-                    break;
-                case SUD:
-                    if(((float) entite->delta.delta_x.numerateur)/entite->delta.delta_x.denominateur > 0)
-                        return 1;
-                    break;
-                case OUEST:
-                    if(((float) entite->delta.delta_y.numerateur)/entite->delta.delta_y.denominateur > 0)
-                        return 1;
-                    break;
-                case NORD_EST:
-                    if(((float) entite->delta.delta_x.numerateur)/entite->delta.delta_x.denominateur < 0)
-                        if(((float) entite->delta.delta_y.numerateur)/entite->delta.delta_y.denominateur < 0)
-                            return 1;
-                    break;
-                case SUD_EST:
-                    if(((float) entite->delta.delta_x.numerateur)/entite->delta.delta_x.denominateur > 0)
-                        if(((float) entite->delta.delta_y.numerateur)/entite->delta.delta_y.denominateur < 0)
-                            return 1;
-                    break;
-                case SUD_OUEST:
-                    if(((float) entite->delta.delta_x.numerateur)/entite->delta.delta_x.denominateur > 0)
-                        if(((float) entite->delta.delta_y.numerateur)/entite->delta.delta_y.denominateur > 0)
-                            return 1;
-                    break;
-                case NORD_OUEST:
-                    if(((float) entite->delta.delta_x.numerateur)/entite->delta.delta_x.denominateur < 0)
-                        if(((float) entite->delta.delta_y.numerateur)/entite->delta.delta_y.denominateur > 0)
-                            return 1;
-                    break;
-                default:
-                    break;
+/**
+ * \brief Vérifie si une entité est dans un bloc que la salle
+ *
+ * @param e pointeur vers l'entité
+ * @param s pointeur vers la salle
+ * 
+ * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
+*/
+static int hitB(monstre_t* e, salle_t* s){
+    int leftE;
+    int rightE;
+    int topE;
+    int bottomE;
+
+    leftE = e->pos.x;
+    rightE = e->pos.x + e->delta.x ? 1 : 0;
+    topE = e->pos.y;
+    bottomE = e->pos.y + e->delta.y ? 1 : 0;
+
+    if(leftE < 0 || topE < 0)
+        return FALSE;
+
+    for(int i = leftE; i <= rightE; i++)
+        for(int j = topE; j <= bottomE; j++)
+            if(j >= s->largeur || i >= s->hauteur || s->mat[i][j])
+                return TRUE;
+
+    return FALSE;
+}
+
+/**
+ * \brief Vérifie si le deplacement du personnage est valide
+ *
+ * @param p pointeur vers le personnage
+ * @param s pointeur vers la salle
+ * 
+ * @return 1 (TRUE) si le déplacement est valide, 0 (FALSE) sinon
+*/
+static int persValidDep(personnage_t* p, salle_t* s){
+    int leftP;
+    int rightP;
+    int topP;
+    int bottomP;
+
+    leftP = p->pos.x;
+    rightP = rightP + p->hitbox.largeur + p->delta.x ? 1 : 0;
+    topP = p->pos.y;
+    bottomP = topP + p->hitbox.hauteur + p->delta.y ? 1 : 0;
+
+    if(leftP < 0 || topP < 0)
+        return FALSE;
+
+    for(int i = leftP; i <= rightP; i++)
+        for(int j = topP; j <= bottomP; j++)
+            if(j >= s->largeur || i >= s->hauteur || s->mat[i][j])
+                return FALSE;
+
+    return TRUE;
+}
+
+/**
+ * \brief Gère le déplacement vers la droite du personnage quelque soit son état
+ *
+ * @param p pointeur vers le personnage
+ * @param s pointeur vers la salle
+*/
+void depDroite(personnage_t* p, salle_t* s){
+    switch(p->etat){
+        case IDLE:
+        case RUNNING:
+        case JUMPING:
+        case FALLING:
+            p->delta.x += p->vit_dep;
+            if(p->delta.x >= TAILLE_BLOCK){
+                (p->pos.x)++;
+                p->delta.x = 0;
             }
-        }
+            if(persValidDep(p,s))
+                p->etat = RUNNING;
+            else{
+                p->delta.x = TAILLE_BLOCK - 1;
+                (p->pos.x)--;
+            }
+            break;
+        default:
+            break;
     }
-    return 0;
 }
 
-static void dep(monstre_t* entite){
+/**
+ * \brief Gère le déplacement vers la gauche du personnage quelque soit son état
+ *
+ * @param p pointeur vers le personnage
+ * @param s pointeur vers la salle
+*/
+void depGauche(personnage_t* p, salle_t* s){
+    switch(p->etat){
+        case IDLE:
+        case RUNNING:
+        case JUMPING:
+        case FALLING:
+            p->delta.x -= p->vit_dep;
+            if(p->delta.x < 0){
+                (p->pos.x)--;
+                p->delta.x = 0;
+            }
+            if(persValidDep(p,s))
+                p->etat = RUNNING;
+            else{
+                p->delta.x = 0;
+                (p->pos.x)++;
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+static void dep(monstre_t* entite, salle_t* salle){
     if(entite->pv)
         if(entite->direction){
-            entite->delta.delta_x.numerateur += entite->type->vit_dep;
-            if(entite->delta.delta_x.numerateur == entite->delta.delta_x.denominateur){
+            entite->delta.x += entite->type->vit_dep;
+            if(entite->delta.x >= TAILLE_BLOCK){
                 (entite->pos.x)++;
-                entite->delta.delta_x.numerateur = 0;
+                entite->delta.x = 0;
+            }
+            if(hitB(entite,salle)){
+                entite->direction = LEFT;
+                (entite->pos.x)--;
+                entite->delta.x = TAILLE_BLOCK - 1;
             }
         }else{
-            entite->delta.delta_x.numerateur -= entite->type->vit_dep;
-            if(entite->delta.delta_x.numerateur == -entite->delta.delta_x.denominateur){
+            entite->delta.x -= entite->type->vit_dep;
+            if(entite->delta.x < 0){
                 (entite->pos.x)--;
-                entite->delta.delta_x.numerateur = 0;
+                entite->delta.x = 0;
+            }
+            if(hitB(entite,salle)){
+                entite->direction = RIGHT;
+                (entite->pos.x)++;
+                entite->delta.x = 0;
             }
         }
 }
 
-static inRange(monstre_t* entite, personnage_t* perso, int radius){
+static int inRange(monstre_t* entite, personnage_t* perso, int radius){
+    //verif si il n'y a pas de bloc bloquant entre
     int delta = perso->pos.x - entite->pos.x;
 
     if(delta < radius && delta > -radius)
@@ -244,15 +335,11 @@ void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, lis
 void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
     if(hitP(entite,perso)){
         perso->pv -= entite->type->degat;
+        perso->inv = 30;
         entite->direction = 1 - entite->direction;
-        //sprite
     }else{
-        if(hitB(entite,salle)){
-            entite->direction = 1 - entite->direction;
-            //sprite
-        }
+        dep(entite,salle);
     }
-    //gestion sprite
 }
 
 void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
@@ -274,7 +361,9 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle, lis
 }
 
 void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
-
+    if(inRange(entite,perso,4)){
+        //attaquer
+    }
 }
 
 void compVersGeant(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){

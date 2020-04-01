@@ -10,6 +10,7 @@
         "type_traits": "c",
         "xiosbase": "c",
         "xlocale": "c",
-        "xutility": "c"
+        "xutility": "c",
+        "stdio.h": "c"
     }
 }

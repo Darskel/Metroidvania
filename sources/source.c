@@ -26,7 +26,7 @@ static int filecmp(struct dirent* f1, struct dirent* f2){
 
 char* chercherSprite(int id, char* dirName){
     /* tout sur dirent ici: http://sdz.tdct.org/sdz/arcourir-les-dossiers-avec-dirent-h.html */
-    if(!id)
+    if(id <= 0)
         return NULL;
 
     char newName[200] = "";
@@ -225,7 +225,7 @@ int lireSalle(char* nomFichier, salle_t** salle){
     if(*salle!=NULL)
         nettoyerSalle(salle);
 
-    char tmp[20] = DIR_SALLE;
+    char tmp[100] = DIR_SALLE;
     strcat(tmp,nomFichier);
 
     //creation des variables dans le tas
@@ -252,6 +252,7 @@ int lireSalle(char* nomFichier, salle_t** salle){
     //Remplissage matrice
     for(int i = 0; i < lon*larg; i++){
         fscanf(monDoc, "%d", &val);
+        //gestion des entités !!!
         (*salle)->mat[i/lon][i%lon] = val;
         //printf("\n %d %d \n", i/lon,i%lon);
     }

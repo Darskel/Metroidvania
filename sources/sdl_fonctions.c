@@ -47,7 +47,7 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
   icon=IMG_Load("./sprites/autre/icon.png");
   SDL_SetWindowIcon(*fenetre,icon);
 
-  *renderer = SDL_CreateRenderer(*fenetre, -1, SDL_RENDERER_ACCELERATED);
+  *renderer = SDL_CreateRenderer(*fenetre, -1, SDL_RENDERER_ACCELERATED|SDL_RENDERER_PRESENTVSYNC|SDL_RENDERER_TARGETTEXTURE);
   if(!(*renderer)){
     fprintf(stderr, "Erreur de creation du renderer : %s\n", SDL_GetError());
     exit(EXIT_FAILURE);
@@ -75,29 +75,61 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
  * @param fenetre la fenetre d'action
  * @return 0 si tout s'est bien déroulé (arrêt du programme)
  */
-  void evenements(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode * mode){
+  void evenements(SDL_Renderer * renderer, SDL_DisplayMode * mode){
     SDL_Event event;
-  	Uint32 frameStart;
-  	int frameTime;
+  	/*Uint32 frameStart;
+  	int frameTime;*/
+    boolean_t Gauche = FALSE;
+    boolean_t Droite = FALSE;
     int mousex;
     int mousey;
-    int fin=0;
+    boolean_t fin=FALSE;
+    SDL_Texture * tileset;
+    salle_t * salle;
+    personnage_t * perso;
+    position_t positionDepart;
+    positionDepart.x = 0;
+    positionDepart.y = 10;
+    tileset=initialiser_texture(TILESETPATH, renderer);
+    salle=initialiser_salle(renderer, "salle_debut.txt", "./sprites/salles/salle_debut.png", tileset);
+    perso=initialisation_personnage(renderer, positionDepart);
+
     while(!fin){
-  		frameStart = SDL_GetTicks();
+  		//frameStart = SDL_GetTicks();
   	  while(SDL_PollEvent(&event)){
   	    switch(event.type){
   	      case SDL_QUIT: //Appui sur la croix quitte le programme
-  	        fin=1;
+  	        fin=TRUE;
   	        break;
   	      case SDL_KEYUP:
   	        switch(event.key.keysym.sym){
   	          case SDLK_ESCAPE://Appui sur Echap quitte le programme
-  	            fin=1;
+  	            fin=TRUE;
   	            break;
+              case SDLK_LEFT:
+                Gauche=FALSE;
+                break;
+              case SDLK_RIGHT:
+                Droite=FALSE;
+                break;
   	        }
   	        break;
   	      case SDL_KEYDOWN:
   	        switch(event.key.keysym.sym){
+              case SDLK_LEFT:
+                Gauche=TRUE;
+                if(!Droite){
+                  depGauche(perso, salle);
+                  perso->inv = LEFT;
+                }
+                break;
+              case SDLK_RIGHT:
+                Droite=TRUE;
+                if(!Gauche){
+                  depDroite(perso, salle);
+                  perso->inv = RIGHT;
+                }
+                break;
   	        }
   	        break;
           case SDL_MOUSEMOTION :
@@ -105,11 +137,17 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
             mousey=event.motion.y;
   	      }
   	    }
-  			frameTime = SDL_GetTicks() - frameStart;
+  			/*frameTime = SDL_GetTicks() - frameStart;
   			if(frameTime < FRAMEDELAY){
   				SDL_Delay(FRAMEDELAY - frameTime);
-  			}
+  			}*/
+        if((Gauche&&Droite) || (!Gauche&&!Droite))
+          perso->etat=IDLE;
+        miseAjourSprites(perso);
+        affichage_complet(renderer, salle, perso);
       }
+      destroy_salle(&salle);
+      destroy_personnage(&perso);
   }
 
 /**
@@ -132,12 +170,14 @@ SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer){
       fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
       exit(EXIT_FAILURE);
   }
+  SDL_SetTextureBlendMode(tmp, SDL_BLENDMODE_BLEND);
   texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,
                               SDL_TEXTUREACCESS_TARGET, surface->w, surface->h);
   if(texture==NULL){
       fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
       exit(EXIT_FAILURE);
   }
+  SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
   SDL_SetRenderTarget(renderer, texture); /* La cible de rendu est maintenant texture. */
   SDL_RenderCopy(renderer, tmp, NULL, NULL); /* On copie tmp sur texture */
   SDL_DestroyTexture(tmp);
@@ -155,6 +195,8 @@ SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer){
 personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t positionDepart){
   personnage_t * personnage=malloc(sizeof(personnage_t));
   personnage->pv=1;
+  personnage->pv_max=1;
+  personnage->inv=RIGHT;
   personnage->vit_dep=2;
   personnage->vit_att=1;
   personnage->pos=positionDepart;
@@ -169,6 +211,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->hitbox.hauteur=HAUTEURHITBOXPERS;
   personnage->hitbox.largeur=LARGEURHITBOXPERS;
   personnage->etat = IDLE;
+  personnage->newEtat = FALSE;
   int * nbAnim = malloc(4*sizeof(int));
   nbAnim[0]=1;
   nbAnim[1]=8;
@@ -236,14 +279,11 @@ void afficher_salle(SDL_Renderer * renderer, salle_t * salle){
     int i, j;
     SDL_Rect Rect_dest;
     SDL_Rect Rect_source;
-    SDL_Texture * textureSalle;
     int posSprite;
     Rect_source.w = TAILLEBLOC;
     Rect_dest.w   = TAILLEBLOC;
     Rect_source.h = TAILLEBLOC;
     Rect_dest.h   = TAILLEBLOC;
-    textureSalle=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET, (salle->largeur)* TAILLEBLOC, (salle->hauteur) * TAILLEBLOC);
-    SDL_SetRenderTarget(renderer, textureSalle);
     SDL_RenderCopy(renderer, salle->background, NULL, NULL);
     for(i = 0 ; i < salle->hauteur; i++)
     {
@@ -259,10 +299,6 @@ void afficher_salle(SDL_Renderer * renderer, salle_t * salle){
             }
         }
     }
-    SDL_SetRenderTarget(renderer, NULL);
-    SDL_RenderCopy(renderer, textureSalle, NULL, NULL);
-    SDL_RenderPresent(renderer);
-    SDL_DestroyTexture(textureSalle);
 }
 
 
@@ -271,7 +307,57 @@ void afficher_salle(SDL_Renderer * renderer, salle_t * salle){
  *
  * @param renderer le pointeur vers le SDL_Renderer à utiliser
  * @param personnage la structure personnage à afficher
+ * @param salle la salle où afficher le joueur
  */
-void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage){
+void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, salle_t * salle){
+  SDL_Rect Rect_dest;
+  SDL_RendererFlip flip=SDL_FLIP_NONE;
+  if(personnage->inv != RIGHT)
+    flip=SDL_FLIP_HORIZONTAL;
+  Rect_dest.x = personnage->pos.x * TAILLEBLOC + personnage->delta.x;
+  Rect_dest.y = personnage->pos.y * TAILLEBLOC + personnage->delta.y;
+  Rect_dest.h = HAUTEURSPRITEPERS;
+  Rect_dest.w = LARGEURSPRITEPERS;
+  SDL_RenderCopyEx(renderer, personnage->sprites, &(personnage->spriteActuel), &Rect_dest, 0, NULL, flip);
+}
+
+void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * personnage){
+  SDL_Texture * textureSalle;
+  textureSalle=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET, (salle->largeur)* TAILLEBLOC, (salle->hauteur) * TAILLEBLOC);
+  SDL_SetRenderTarget(renderer, textureSalle);
+  SDL_SetTextureBlendMode(textureSalle, SDL_BLENDMODE_BLEND);
+  SDL_SetRenderDrawColor(renderer, 0,0,0,0);
+  SDL_RenderClear(renderer);
+  afficher_salle(renderer,salle);
+  afficher_personnage(renderer, personnage, salle);
+  SDL_SetRenderTarget(renderer, NULL);
+  SDL_RenderCopy(renderer, textureSalle, NULL, NULL);
+  SDL_RenderPresent(renderer);
+  SDL_DestroyTexture(textureSalle);
+}
+
+void miseAjourSprites(personnage_t * perso){
+  if(perso->etat == IDLE){
+    perso->spriteActuel.x=0;
+    perso->spriteActuel.y=IDLE;
+  }
+  else if(perso->etat == FALLING){
+    perso->spriteActuel.x=7*LARGEURSPRITEPERS;
+    perso->spriteActuel.y=JUMPING*HAUTEURSPRITEPERS;
+  }
+  if(perso->newEtat){
+    if(perso->etat > IDLE && perso->etat < FALLING){
+      perso->spriteActuel.x=0;
+      perso->spriteActuel.y=perso->etat * HAUTEURSPRITEPERS;
+    }
+    perso->newEtat=FALSE;
+  }
+  else{
+    if(perso->etat > IDLE && perso->etat < FALLING){
+      perso->spriteActuel.x+=LARGEURSPRITEPERS;
+      if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*LARGEURSPRITEPERS)
+        perso->spriteActuel.x=0;
+    }
+  }
 
 }

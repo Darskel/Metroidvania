@@ -155,6 +155,7 @@ typedef struct personnage_s{
     SDL_Rect spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
     taille_t hitbox; /**< Taille de la hitbox du personnage en cases */
     etat_t etat;
+    boolean_t newEtat;
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du personage */
     char forme; /**< Forme du personnage H = humain, F = renard */
     int inventaire[TAILLE_INVENTAIRE]; /**<Tableau qui contient les informations sur l'inventaire actuel du personnage */

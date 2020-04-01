@@ -6,6 +6,7 @@
 #include <SDL2/SDL_image.h>
 #include "../headers/structs.h"
 #include "../headers/source.h"
+#include "../headers/comportement.h"
 
 #define NOM_JEU "Diskosieni"
 #define FRAMEDELAY 20
@@ -30,11 +31,13 @@
 
 void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_DisplayMode * mode, boolean_t fullscreen);
 void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer);
-void evenements(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode * mode);
+void evenements(SDL_Renderer * renderer, SDL_DisplayMode * mode);
 SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer);
 personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t positionDepart);
 salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, char * nomBG, SDL_Texture * tileset);
 void afficher_salle(SDL_Renderer * renderer, salle_t * salle);
-void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage);
+void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, salle_t * salle);
+void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * personnage);
+void miseAjourSprites(personnage_t * personnage);
 void destroy_salle(salle_t ** salle);
-void destroy_personnage(personnage_t ** personnage);
+void destroy_personnage(personnage_t ** perso);

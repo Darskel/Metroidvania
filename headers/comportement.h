@@ -1,17 +1,8 @@
 #ifndef COMPORTEMENT_INCLUDED
 #define COMPORTEMENT_INCLUDED
 
-typedef enum{
-    POSEQ,
-    NORD,
-    NORD_EST,
-    EST,
-    SUD_EST,
-    SUD,
-    SUD_OUEST,
-    OUEST,
-    NORD_OUEST
-} test;
+int hitE(monstre_t* e1, monstre_t* e2);
+int hitP(monstre_t* e, personnage_t* p);
 
 void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);
 void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);

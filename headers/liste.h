@@ -43,4 +43,7 @@ void ajoutDroit(liste_t *maListe, void *v);
 void ajoutGauche(liste_t *maListe, void *v);
 void supListe(liste_t **maListe, void (*delete)(void**));
 
+void supPorte(porte_t**);
+void supMonstre(monstre_t**);
+
 #endif

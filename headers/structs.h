@@ -54,8 +54,9 @@
 
 */
 
-typedef struct {
-  int h,v;
+typedef struct taille_s{
+  int hauteur;
+  int largeur;
 }taille_t;
 
 /**
@@ -100,6 +101,14 @@ typedef enum indSprite_e{
     JP8 /**< Sprite de saut (Jump) n°8 */
 } indSpritePer_t;
 
+typedef enum etat_e{
+    IDLE,
+    RUNNING,
+    JUMPING,
+    ATTACKING,
+    FALLING
+} etat_t;
+
 
 
 /**
@@ -119,24 +128,6 @@ typedef struct salle_s{
 } salle_t;
 
 /**
- * \struct fraction_s
- * \brief Une fration représenter par deux entier
-*/
-typedef struct fraction_s{
-    int numerateur; /**< Numérateur de la fraction */
-    int denominateur; /**< Denominateur de la fraction */
-}fraction_t;
-
-/**
- * \struct fracPos_s
- * \brief Structure représentant la différence de position en fraction
-*/
-typedef struct fracPos_s{
-    fraction_t delta_x; /**< Différence de position sur l'axe x à ajouter à la position entière (valeur comprise -1 et 1) */
-    fraction_t delta_y; /**< Différence de position sur l'axe y à ajouter à la position entière (valeur comprise -1 et 1) */
-} fracPos_t;
-
-/**
  * \struct personnage_s
  * \brief Structure représentant le personnage
 */
@@ -146,12 +137,21 @@ typedef struct personnage_s{
     int vit_dep; /**< Vitesse de déplacement du personnage (pixel par tick) */
     int vit_att; /**< Vitesse d'attaque du personnage (en nombre de frame) */
     position_t pos; /**< Position actuel du personnage (position entière) */
-    //passage de fractPos à position
-    fracPos_t delta; /**< Différence de position à ajouter à la position entière */
+    position_t delta; /**< Différence de position à ajouter à la position entière */
+
+    int inv;
+
+    #ifdef SDL_h_
+    SDL_Surface ** sprites; /**Pointeur vers le tableau de sprites du personnage */
+    #else
     void ** sprites; /**Pointeur vers le tableau de sprites du personnage */
+    #endif
+
     indSpritePer_t spriteActuel; /**< Indice du sprite à afficher */
     int nb_sprites;/**< Nombre de sprites du personnage (sans orientation)*/
     char forme; /**< Forme du personnage H = humain, F = renard */
+    taille_t hitbox;
+    etat_t etat;
     int inventaire[TAILLE_INVENTAIRE];
     char* nomObj[TAILLE_INVENTAIRE];
 
@@ -169,8 +169,8 @@ typedef struct type_monstre_s{
     char* nom;
     char* sprites; /**< Chemin d'accès aux sprites qui seront utilisés*/
     int nb_sprites;/**< Nombre de sprites du monstre (sans orientation)*/
-    int largeur; /**< Largeur du monstre en unité de case (taille d'une case) */
-    int hauteur; /**< Hauteur du monstre en unité de case (taille d'une case) */
+    taille_t hitbox; /**< Largeur du monstre en unité de case (taille d'une case) */
+    /**< Hauteur du monstre en unité de case (taille d'une case) */
     int degat;
 
     boolean_t passeEntites; /**< Indique si le monstre peut passer à travers les entités (autres monstres/joueur) */
@@ -187,8 +187,9 @@ typedef struct monstre_s{
     type_monstre_t * type; /**< Type de monstre */
     int pv; /**< PV actuels du monstre */
     int spritesActuel; /**< Indice du sprite à afficher */
+    etat_t etat;
     position_t pos; /**< Postition actuelle du monstre (position entière) */
-    fracPos_t delta; /**< Différence de position à ajouter à la position entière */
+    position_t delta; /**< Différence de position à ajouter à la position entière */
     boolean_t direction; /**< Direction vers laquelle regarde le monstre (1: vers la gauche(LEFT), 0: vers la droite(RIGHT)) */
 
 } monstre_t;
@@ -215,8 +216,5 @@ typedef struct porte_s{
     char* listeSprites; /**< Chemin vers les sprites de la porte */
     int spritesActuel; /**< Indice du sprite à afficher */
 } porte_t;
-
-void supPorte(porte_t**);
-void supMonstre(monstre_t**);
 
 #endif

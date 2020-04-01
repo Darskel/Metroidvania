@@ -11,7 +11,7 @@
 #define FRAMEDELAY 20
 #define PLAYERSPRITESPATH "./sprites/entite/joueur/sprite_joueur.png"
 #define TILESETPATH "./sprites/bloc/tileset.png"
-
+#define TAILLEBLOC 8
 
 
 /**

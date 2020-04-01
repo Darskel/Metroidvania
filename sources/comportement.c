@@ -23,6 +23,12 @@
     return SDL_IntersectRect(&rect1,&rect2);
 }*/
 
+/**
+ * \brief Recupère l'élément récupérable (type monstre_t)
+ *
+ * @param entite pointeur vers l'élément à récupérer
+ * @param perso pointeur vers le personnage pour lui crediter l'objet
+*/
 static void recupElem(monstre_t* entite, personnage_t* perso){
     for(int i = 0; i < TAILLE_INVENTAIRE; i++){
         if(!strcmp(entite->type->nom,perso->nomObj[i])){
@@ -32,6 +38,14 @@ static void recupElem(monstre_t* entite, personnage_t* perso){
     }
 }
 
+/**
+ * \brief Vérifie si une entité touche une autre entité
+ *
+ * @param e1 pointeur vers la première entité
+ * @param e2 pointeur vers la seconde entité
+ * 
+ * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
+*/
 int hitE(monstre_t* e1, monstre_t* e2){
     int leftE1, leftE2;
     int rightE1, rightE2;
@@ -63,6 +77,14 @@ int hitE(monstre_t* e1, monstre_t* e2){
     return TRUE;
 }
 
+/**
+ * \brief Vérifie si une entité touche une autre entité
+ *
+ * @param e1 pointeur vers la première entité
+ * @param e2 pointeur vers la seconde entité
+ * 
+ * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
+*/
 int hitP(monstre_t* e, personnage_t* p){
     int leftE, leftP;
     int rightE, rightP;
@@ -94,6 +116,14 @@ int hitP(monstre_t* e, personnage_t* p){
     return TRUE;
 }
 
+/**
+ * \brief Vérifie si une entité est dans un bloc que la salle
+ *
+ * @param e pointeur vers l'entité
+ * @param s pointeur vers la salle
+ * 
+ * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
+*/
 static int hitB(monstre_t* e, salle_t* s){
     int leftE;
     int rightE;
@@ -116,6 +146,14 @@ static int hitB(monstre_t* e, salle_t* s){
     return FALSE;
 }
 
+/**
+ * \brief Vérifie si le deplacement du personnage est valide
+ *
+ * @param p pointeur vers le personnage
+ * @param s pointeur vers la salle
+ * 
+ * @return 1 (TRUE) si le déplacement est valide, 0 (FALSE) sinon
+*/
 static int persValidDep(personnage_t* p, salle_t* s){
     int leftP;
     int rightP;
@@ -138,6 +176,12 @@ static int persValidDep(personnage_t* p, salle_t* s){
     return TRUE;
 }
 
+/**
+ * \brief Gère le déplacement vers la droite du personnage quelque soit son état
+ *
+ * @param p pointeur vers le personnage
+ * @param s pointeur vers la salle
+*/
 void depDroite(personnage_t* p, salle_t* s){
     switch(p->etat){
         case IDLE:
@@ -161,6 +205,12 @@ void depDroite(personnage_t* p, salle_t* s){
     }
 }
 
+/**
+ * \brief Gère le déplacement vers la gauche du personnage quelque soit son état
+ *
+ * @param p pointeur vers le personnage
+ * @param s pointeur vers la salle
+*/
 void depGauche(personnage_t* p, salle_t* s){
     switch(p->etat){
         case IDLE:

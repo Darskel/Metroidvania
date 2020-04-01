@@ -105,9 +105,12 @@ static int hitB(monstre_t* e, salle_t* s){
     topE = e->pos.y;
     bottomE = e->pos.y + e->delta.y ? 1 : 0;
 
+    if(leftE < 0 || topE < 0)
+        return FALSE;
+
     for(int i = leftE; i <= rightE; i++)
         for(int j = topE; j <= bottomE; j++)
-            if(s->mat[i][j])
+            if(j >= s->largeur || i >= s->hauteur || s->mat[i][j])
                 return TRUE;
 
     return FALSE;
@@ -124,9 +127,12 @@ static int persValidDep(personnage_t* p, salle_t* s){
     topP = p->pos.y;
     bottomP = topP + p->hitbox.hauteur + p->delta.y ? 1 : 0;
 
+    if(leftP < 0 || topP < 0)
+        return FALSE;
+
     for(int i = leftP; i <= rightP; i++)
         for(int j = topP; j <= bottomP; j++)
-            if(s->mat[i][j])
+            if(j >= s->largeur || i >= s->hauteur || s->mat[i][j])
                 return FALSE;
 
     return TRUE;
@@ -281,11 +287,9 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t
         perso->pv -= entite->type->degat;
         perso->inv = 30;
         entite->direction = 1 - entite->direction;
-        //sprite
     }else{
         dep(entite,salle);
     }
-    //gestion sprite
 }
 
 void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){

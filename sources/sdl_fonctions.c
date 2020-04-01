@@ -166,8 +166,10 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer){
   personnage->sprites=texture;
   personnage->spriteActuel.x=0;
   personnage->spriteActuel.y=0;
-  personnage->spriteActuel.h=33;
-  personnage->spriteActuel.w=30;
+  personnage->spriteActuel.h=HAUTEURSPRITEPERS;
+  personnage->spriteActuel.w=LARGEURSPRITEPERS;
+  personnage->hitbox.hauteur=HAUTEURHITBOXPERS;
+  personnage->hitbox.largeur=LARGEURHITBOXPERS;
   int * nbAnim = malloc(4*sizeof(int));
   nbAnim[0]=1;
   nbAnim[1]=8;
@@ -175,6 +177,16 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer){
   nbAnim[3]=3;
   personnage->nbAnim=nbAnim;
   personnage->forme='h';
+  for(int i = 0; i < TAILLE_INVENTAIRE; i++)
+        personnage->inventaire[i] = 0;
+  personnage->nomObj[0] = "champignon";
+  personnage->nomObj[1] = "cle bleue";
+  personnage->nomObj[2] = "cle rouille";
+  personnage->nomObj[3] = "cle rouge";
+  personnage->nomObj[4] = "cle verte";
+  personnage->nomObj[5] = "double saut";
+  personnage->nomObj[6] = "fleche de feu";
+  personnage->nomObj[7] = "renard";
   return personnage;
 }
 
@@ -217,13 +229,30 @@ void destroy_salle(salle_t ** salle){
 }
 
 /**
- * \brief Fonction d'affichage de la salle
+ * \brief Fonction d'affichage de la salle (fait par Yannis Allain)
  *
  * @param renderer le pointeur vers le SDL_Renderer à utiliser
  * @param salle la structure salle à afficher
  */
 void afficher_salle(SDL_Renderer * renderer, salle_t * salle){
-
+    int i, j;
+    SDL_Rect Rect_dest;
+    SDL_Rect Rect_source;
+    Rect_source.w = TAILLEBLOC;
+    Rect_dest.w   = TAILLEBLOC*3;
+    Rect_source.h = TAILLEBLOC;
+    Rect_dest.h   = TAILLEBLOC*3;
+    for(i = 0 ; i < salle->largeur; i++)
+    {
+        for(j = 0 ; j < salle->hauteur; j++)
+        {
+            Rect_dest.x = i * TAILLEBLOC*3;
+            Rect_dest.y = j * TAILLEBLOC*3;
+            Rect_source.x = (salle->mat[j][i] - '0') * TAILLEBLOC;
+            Rect_source.y = 0;
+            SDL_RenderCopy(renderer, salle->tileset, &Rect_source, &Rect_dest);
+        }
+    }
 }
 
 

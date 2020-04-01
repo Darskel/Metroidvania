@@ -10,6 +10,18 @@
  * \version 2.0
  * \date 13/02/2020
 */
+//Redefinition de monstre_t pour eviter les erreurs dans le test (pas mis à jour avec les nouvelles structures)
+typedef struct monstre_stemp{
+    type_monstre_t * type; /**< Type de monstre */
+    int pv; /**< PV actuels du monstre */
+    etat_t etat;
+    int spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
+    position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
+    position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
+    boolean_t direction; /**< Direction vers laquelle regarde le monstre (1: vers la gauche(LEFT), 0: vers la droite(RIGHT)) */
+
+} monstre_temp;
+
 
 /**
  * \brief Test si les éléments sont dans l'ordre
@@ -21,7 +33,7 @@
 */
 int testElem(liste_t* l, int n){
     porte_t p; /**< structure temporaire pour tester les valeurs */
-    monstre_t m; /**< structure temporaire pour tester les valeurs */
+    monstre_temp m; /**< structure temporaire pour tester les valeurs */
     enTete(l);
     printf("Test de mise en tete: %s\n", l->ec == l->drapeau->succ ? "OK" : "erreur");
 
@@ -47,7 +59,7 @@ int testElem(liste_t* l, int n){
 int main(){
     liste_t* l = NULL; /**< liste principale */
     porte_t* p = NULL; /**< structure pour importer dans la liste */
-    monstre_t* m = NULL; /**< structure pour importer dans la liste */
+    monstre_temp * m = NULL; /**< structure pour importer dans la liste */
     char test[2][10] = {"porte", "monstre"}; /**< Tableau pour faire le traitement sur les deux types de liste */
 
     for(int i = 0; i < 2; i++){

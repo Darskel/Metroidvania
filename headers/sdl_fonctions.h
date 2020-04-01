@@ -12,6 +12,12 @@
 #define PLAYERSPRITESPATH "./sprites/entite/joueur/sprite_joueur.png"
 #define TILESETPATH "./sprites/bloc/tileset.png"
 #define TAILLEBLOC 8
+#define HAUTEURPORTE 36
+#define LARGEURPORTE 13
+#define HAUTEURSPRITEPERS 33
+#define LARGEURSPRITEPERS 30
+#define HAUTEURHITBOXPERS 4
+#define LARGEURHITBOXPERS 2
 
 
 /**

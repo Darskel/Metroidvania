@@ -65,8 +65,14 @@
 
 */
 
-typedef struct {
-  int h,v;
+
+/**
+ * \struct taille_t
+ * \brief Taille avec hauteur et largeur
+*/
+typedef struct taille_s{
+  int hauteur;/**< Hauteur*/
+  int largeur;/**< Largeur*/
 }taille_t;
 
 /**
@@ -74,7 +80,7 @@ typedef struct {
  * \brief Une position représentée par deux valeurs entières
 */
 typedef struct position_s {
-    int x; /**< Position en hauteur */
+    int x; /**< Position en hauteur*/
     int y; /**< Position en longueur*/
 } position_t;
 
@@ -111,7 +117,13 @@ typedef enum indSprite_e{
     JP8 /**< Sprite de saut (Jump) n°8 */
 } indSpritePer_t;
 
-
+typedef enum etat_e{
+    IDLE,
+    RUNNING,
+    JUMPING,
+    ATTACKING,
+    FALLING
+} etat_t;
 
 /**
  * \struct salle_s
@@ -153,12 +165,15 @@ typedef struct fracPos_s{
 */
 typedef struct personnage_s{
     int pv; /**< PV(points de vie) actuel du personnage */
+    int inv;
     int vit_dep; /**< Vitesse de déplacement du personnage (pixel par tick) */
     int vit_att; /**< Vitesse d'attaque du personnage (en nombre de frame) */
     position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
     position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du personnage */
     SDL_Rect spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
+    taille_t hitbox; /**< Taille de la hitbox du personnage en cases */
+    etat_t etat;
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du personage */
     char forme; /**< Forme du personnage H = humain, F = renard */
     int inventaire[TAILLE_INVENTAIRE]; /**<Tableau qui contient les informations sur l'inventaire actuel du personnage */
@@ -179,7 +194,7 @@ typedef struct type_monstre_s{
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du monstre */
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du monstre */
     int degat;
-    taille_t taille; /**< Taille d'un sprite de monstre en cases */
+    taille_t hitbox; /**< Taille de la hitbox de monstre en cases */
     boolean_t passeEntites; /**< Indique si le monstre peut passer à travers les entités (autres monstres/joueur) */
     boolean_t passeBlocs; /**< Indique si le monstre peut passer à travers les blocs */
 
@@ -193,7 +208,8 @@ typedef struct type_monstre_s{
 typedef struct monstre_s{
     type_monstre_t * type; /**< Type de monstre */
     int pv; /**< PV actuels du monstre */
-    int spriteActuel; /**< Indice du sprite actuel */
+    etat_t etat;
+    SDL_Rect spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
     position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
     position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
     boolean_t direction; /**< Direction vers laquelle regarde le monstre (1: vers la gauche(LEFT), 0: vers la droite(RIGHT)) */
@@ -220,6 +236,7 @@ typedef struct porte_s{
     char* salleSuivante; /**< Nom de la salle suivante (nom de la salle) */
     position_t pos_arrivee; /**< Postition d'apparition dans la salle d'arrivée */
     char* listeSprites; /**< Chemin vers les sprites de la porte */
+    SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites de la porte */
     int spriteActuel; /**< Indice du sprite à afficher */
 } porte_t;
 

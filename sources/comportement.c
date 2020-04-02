@@ -161,16 +161,16 @@ static int persValidDep(personnage_t* p, salle_t* s){
     int bottomP;
 
     leftP = p->pos.x;
-    rightP = rightP + p->hitbox.largeur + p->delta.x ? 1 : 0;
-    topP = p->pos.y;
-    bottomP = topP + p->hitbox.hauteur + p->delta.y ? 1 : 0;
+    rightP = leftP + p->hitbox.largeur + (p->delta.x ? 1 : 0);
+    topP = p->pos.y + (p->delta.y ? 1 : 0);
+    bottomP = p->pos.y + p->hitbox.hauteur;
 
-    if(leftP < 0 || topP < 0)
+    if(leftP < 0 || topP < 0 || bottomP >= s->hauteur || rightP >= s->largeur)
         return FALSE;
 
     for(int i = leftP; i <= rightP; i++)
         for(int j = topP; j <= bottomP; j++)
-            if(j >= s->largeur || i >= s->hauteur || s->mat[i][j])
+            if(s->mat[j][i])
                 return FALSE;
 
     return TRUE;
@@ -226,7 +226,7 @@ void depGauche(personnage_t* p, salle_t* s){
             p->delta.x -= p->vit_dep;
             if(p->delta.x < 0){
                 (p->pos.x)--;
-                p->delta.x = 0;
+                p->delta.x = TAILLE_BLOCK -1;
             }
             if(persValidDep(p,s)){
               //Modifié par MN :

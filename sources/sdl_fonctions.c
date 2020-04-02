@@ -77,8 +77,8 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
  */
   void evenements(SDL_Renderer * renderer, SDL_DisplayMode * mode){
     SDL_Event event;
-  	/*Uint32 frameStart;
-  	int frameTime;*/
+  	//Uint32 frameStart;
+  	//int frameTime;
     boolean_t Gauche = FALSE;
     boolean_t Droite = FALSE;
     int mousex;
@@ -88,11 +88,14 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
     salle_t * salle;
     personnage_t * perso;
     position_t positionDepart;
+    position_t positionDepartDelta;
     positionDepart.x = 0;
-    positionDepart.y = 10;
+    positionDepartDelta.x = 0;
+    positionDepart.y = 9;
+    positionDepartDelta.y = 7;
     tileset=initialiser_texture(TILESETPATH, renderer);
-    salle=initialiser_salle(renderer, "salle_debut.txt", "./sprites/salles/salle_debut.png", tileset);
-    perso=initialisation_personnage(renderer, positionDepart);
+    salle=initialiser_salle(renderer, NIVEAUTXT, NIVEAUBG, tileset);
+    perso=initialisation_personnage(renderer, positionDepart, positionDepartDelta);
 
     while(!fin){
   		//frameStart = SDL_GetTicks();
@@ -120,14 +123,14 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
                 Gauche=TRUE;
                 if(!Droite){
                   depGauche(perso, salle);
-                  perso->inv = LEFT;
+                  perso->direction = LEFT;
                 }
                 break;
               case SDLK_RIGHT:
                 Droite=TRUE;
                 if(!Gauche){
                   depDroite(perso, salle);
-                  perso->inv = RIGHT;
+                  perso->direction = RIGHT;
                 }
                 break;
   	        }
@@ -192,16 +195,16 @@ SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer){
  * @param personnage pointeur sur la structure à initialiser
  * @return le pointeur sur la structure initialisée
  */
-personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t positionDepart){
+personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t positionDepart, position_t positionDepartDelta){
   personnage_t * personnage=malloc(sizeof(personnage_t));
   personnage->pv=1;
   personnage->pv_max=1;
-  personnage->inv=RIGHT;
+  personnage->inv=0;
+  personnage->direction=RIGHT;
   personnage->vit_dep=2;
   personnage->vit_att=1;
   personnage->pos=positionDepart;
-  personnage->delta.x=0;
-  personnage->delta.y=0;
+  personnage->delta=positionDepartDelta;
   SDL_Texture * texture=initialiser_texture(PLAYERSPRITESPATH, renderer);
   personnage->sprites=texture;
   personnage->spriteActuel.x=0;
@@ -212,6 +215,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->hitbox.largeur=LARGEURHITBOXPERS;
   personnage->etat = IDLE;
   personnage->newEtat = FALSE;
+  personnage->evoSprite = 0;
   int * nbAnim = malloc(4*sizeof(int));
   nbAnim[0]=1;
   nbAnim[1]=8;
@@ -312,7 +316,7 @@ void afficher_salle(SDL_Renderer * renderer, salle_t * salle){
 void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, salle_t * salle){
   SDL_Rect Rect_dest;
   SDL_RendererFlip flip=SDL_FLIP_NONE;
-  if(personnage->inv != RIGHT)
+  if(personnage->direction != RIGHT)
     flip=SDL_FLIP_HORIZONTAL;
   Rect_dest.x = personnage->pos.x * TAILLEBLOC + personnage->delta.x;
   Rect_dest.y = personnage->pos.y * TAILLEBLOC + personnage->delta.y;
@@ -351,12 +355,17 @@ void miseAjourSprites(personnage_t * perso){
       perso->spriteActuel.y=perso->etat * HAUTEURSPRITEPERS;
     }
     perso->newEtat=FALSE;
+    perso->evoSprite=DUREESPRITE;
   }
   else{
     if(perso->etat > IDLE && perso->etat < FALLING){
-      perso->spriteActuel.x+=LARGEURSPRITEPERS;
-      if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*LARGEURSPRITEPERS)
-        perso->spriteActuel.x=0;
+      if(perso->evoSprite<=0){
+        perso->spriteActuel.x+=LARGEURSPRITEPERS;
+        if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*LARGEURSPRITEPERS)
+          perso->spriteActuel.x=0;
+        perso->evoSprite = DUREESPRITE;
+      }
+      else (perso->evoSprite)--;
     }
   }
 

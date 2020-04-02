@@ -171,7 +171,7 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
         return 0; //Le fichier de sauvegarde est vide
     }
 
-    fscanf(file, "ealth Point: %d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", &(perso->pv), salle, &(perso->pos.x), &(perso->pos.y));
+    fscanf(file, "Health Point: %d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", &(perso->pv), salle, &(perso->pos.x), &(perso->pos.y));
 
     for(int i = 0; i < TAILLE_INVENTAIRE; i++){
         fscanf(file,"%[^:]: ", tmp);

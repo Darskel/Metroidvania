@@ -146,7 +146,8 @@ typedef struct salle_s{
 typedef struct personnage_s{
     int pv; /**< PV(points de vie) actuel du personnage */
     int pv_max; /**< PV max du personnage */
-    int inv;
+    int inv; /**< Entier qui permet de décompter l'invulnérabilité du joueur */
+    int direction; /*Vaut 1 si le personnage va à droite et 0 si il va à gauche */
     int vit_dep; /**< Vitesse de déplacement du personnage (pixel par tick) */
     int vit_att; /**< Vitesse d'attaque du personnage (en nombre de frame) */
     position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
@@ -154,8 +155,9 @@ typedef struct personnage_s{
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du personnage */
     SDL_Rect spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
     taille_t hitbox; /**< Taille de la hitbox du personnage en cases */
-    etat_t etat;
-    boolean_t newEtat;
+    etat_t etat; /**< Etat du personnage (idle/running/jumping/attacking/falling) */
+    boolean_t newEtat; /**< Booléen qui signifie qu'un changement d'état vient de s'effectuer */
+    int evoSprite; /**< Entier qui décrémente, changement de sprite quand vaut 0 */
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du personage */
     char forme; /**< Forme du personnage H = humain, F = renard */
     int inventaire[TAILLE_INVENTAIRE]; /**<Tableau qui contient les informations sur l'inventaire actuel du personnage */

@@ -355,7 +355,7 @@ void miseAjourSprites(personnage_t * perso){
       perso->spriteActuel.y=perso->etat * HAUTEURSPRITEPERS;
     }
     perso->newEtat=FALSE;
-    perso->evoSprite=DUREESPRITE;
+    perso->evoSprite=perso->vit_dep;
   }
   else{
     if(perso->etat > IDLE && perso->etat < FALLING){
@@ -363,7 +363,7 @@ void miseAjourSprites(personnage_t * perso){
         perso->spriteActuel.x+=LARGEURSPRITEPERS;
         if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*LARGEURSPRITEPERS)
           perso->spriteActuel.x=0;
-        perso->evoSprite = DUREESPRITE;
+        perso->evoSprite = perso->vit_dep;
       }
       else (perso->evoSprite)--;
     }

@@ -21,7 +21,6 @@
 #define LARGEURHITBOXPERS 2
 #define NIVEAUTXT "salle_debut.txt"
 #define NIVEAUBG "./sprites/salles/salle_debut.png"
-#define DUREESPRITE 2
 
 
 /**

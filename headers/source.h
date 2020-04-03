@@ -1,6 +1,6 @@
 #ifndef SOURCE_INCLUDED
 #define SOURCE_INCLUDED
-#include "structs.h"
+#include "../headers/structs.h"
 
 #define DIR_SAUV "sauvegardes"
 #define DIR_SALLE "./salles/"

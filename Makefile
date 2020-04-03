@@ -25,7 +25,7 @@ else
 	propre=find . -type f -executable -delete
 endif
 
-all: testListe testsdl testSource testSprite testaffsalle testinit
+all: testListe testsdl testSource testSprite testaffsalle testinit testManette
 
 #map: codemap decodemap outdated/deprecated
 
@@ -39,7 +39,10 @@ testListe: ${o}liste.o ${o}testListe.o
 #decodemap: ${c}decodemap.c
 #	${CC} $^ -o $@ ${CFLAGS}
 
-testsdl: ${o}sdl_fonctions.o ${o}test_SDL.o
+testsdl: ${o}sdl_fonctions.o ${o}test_SDL.o ${o}source.o ${o}liste.o ${o}comportement.o
+	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
+
+testManette : ${o}test_manette.o
 	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
 testSource: ${o}source.o ${o}testSource.o ${o}liste.o
@@ -48,7 +51,7 @@ testSource: ${o}source.o ${o}testSource.o ${o}liste.o
 testSprite: ${o}source.o ${o}testSprite.o ${o}liste.o
 	${CC} $^ -o $@ ${CFLAGS}
 
-testaffsalle: ${o}liste.o ${o}source.o ${o}test_affichage_salle.o
+testaffsalle: ${o}liste.o ${o}source.o ${o}test_affichage_salle.o ${o}sdl_fonctions.o ${o}comportement.o
 	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
 testinit: ${o}liste.o ${o}source.o ${o}inits.o ${o}testInits.o

@@ -43,7 +43,7 @@ static void recupElem(monstre_t* entite, personnage_t* perso){
  *
  * @param e1 pointeur vers la première entité
  * @param e2 pointeur vers la seconde entité
- * 
+ *
  * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
 */
 int hitE(monstre_t* e1, monstre_t* e2){
@@ -64,13 +64,13 @@ int hitE(monstre_t* e1, monstre_t* e2){
 
     if(bottomE1 <= topE2)
         return FALSE;
-    
+
     if(topE1 >= bottomE2)
         return FALSE;
-    
+
     if(rightE1 <= leftE2)
         return FALSE;
-    
+
     if(leftE1 >= rightE2)
         return FALSE;
 
@@ -82,7 +82,7 @@ int hitE(monstre_t* e1, monstre_t* e2){
  *
  * @param e1 pointeur vers la première entité
  * @param e2 pointeur vers la seconde entité
- * 
+ *
  * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
 */
 int hitP(monstre_t* e, personnage_t* p){
@@ -103,13 +103,13 @@ int hitP(monstre_t* e, personnage_t* p){
 
     if(bottomE <= topP)
         return FALSE;
-    
+
     if(topE >= bottomP)
         return FALSE;
-    
+
     if(rightE <= leftP)
         return FALSE;
-    
+
     if(leftE >= rightP)
         return FALSE;
 
@@ -121,7 +121,7 @@ int hitP(monstre_t* e, personnage_t* p){
  *
  * @param e pointeur vers l'entité
  * @param s pointeur vers la salle
- * 
+ *
  * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
 */
 static int hitB(monstre_t* e, salle_t* s){
@@ -151,7 +151,7 @@ static int hitB(monstre_t* e, salle_t* s){
  *
  * @param p pointeur vers le personnage
  * @param s pointeur vers la salle
- * 
+ *
  * @return 1 (TRUE) si le déplacement est valide, 0 (FALSE) sinon
 */
 static int persValidDep(personnage_t* p, salle_t* s){
@@ -161,16 +161,16 @@ static int persValidDep(personnage_t* p, salle_t* s){
     int bottomP;
 
     leftP = p->pos.x;
-    rightP = rightP + p->hitbox.largeur + p->delta.x ? 1 : 0;
-    topP = p->pos.y;
-    bottomP = topP + p->hitbox.hauteur + p->delta.y ? 1 : 0;
+    rightP = leftP + p->hitbox.largeur + (p->delta.x ? 1 : 0);
+    topP = p->pos.y + (p->delta.y ? 1 : 0);
+    bottomP = p->pos.y + p->hitbox.hauteur;
 
-    if(leftP < 0 || topP < 0)
+    if(leftP < 0 || topP < 0 || bottomP >= s->hauteur || rightP >= s->largeur)
         return FALSE;
 
     for(int i = leftP; i <= rightP; i++)
         for(int j = topP; j <= bottomP; j++)
-            if(j >= s->largeur || i >= s->hauteur || s->mat[i][j])
+            if(s->mat[j][i])
                 return FALSE;
 
     return TRUE;
@@ -193,11 +193,23 @@ void depDroite(personnage_t* p, salle_t* s){
                 (p->pos.x)++;
                 p->delta.x = 0;
             }
-            if(persValidDep(p,s))
+            //Ajouté par MN :
+            p->posxhitbox += p->vit_dep;
+            //
+            if(TRUE){//persValidDep(p,s)){
+              //Modifié par MN :
+              if(p->etat==IDLE){
                 p->etat = RUNNING;
+                p->newEtat = TRUE;
+              }
+              //
+            }
             else{
                 p->delta.x = TAILLE_BLOCK - 1;
                 (p->pos.x)--;
+                //Ajouté par MN :
+                p->posxhitbox -= p->vit_dep;
+                //
             }
             break;
         default:
@@ -220,13 +232,25 @@ void depGauche(personnage_t* p, salle_t* s){
             p->delta.x -= p->vit_dep;
             if(p->delta.x < 0){
                 (p->pos.x)--;
-                p->delta.x = 0;
+                p->delta.x = TAILLE_BLOCK -1;
             }
-            if(persValidDep(p,s))
+            //Ajouté par MN :
+            p->posxhitbox -= p->vit_dep;
+            //
+            if(TRUE){//persValidDep(p,s)){
+              //Modifié par MN :
+              if(p->etat==IDLE){
                 p->etat = RUNNING;
+                p->newEtat = TRUE;
+              }
+              //
+            }
             else{
                 p->delta.x = 0;
                 (p->pos.x)++;
+                //Ajouté par MN :
+                p->posxhitbox += p->vit_dep;
+                //
             }
             break;
         default:
@@ -235,7 +259,7 @@ void depGauche(personnage_t* p, salle_t* s){
 }
 
 static void dep(monstre_t* entite, salle_t* salle){
-    if(entite->pv)
+    if(entite->pv){
         if(entite->direction){
             entite->delta.x += entite->type->vit_dep;
             if(entite->delta.x >= TAILLE_BLOCK){
@@ -259,9 +283,11 @@ static void dep(monstre_t* entite, salle_t* salle){
                 entite->delta.x = 0;
             }
         }
+    }
 }
-
-static int inRange(monstre_t* entite, personnage_t* perso, int radius){
+//Commentés par MN car ne compile pas (structures pas à jour notamment)
+/*
+  static int inRange(monstre_t* entite, personnage_t* perso, int radius){
     //verif si il n'y a pas de bloc bloquant entre
     int delta = perso->pos.x - entite->pos.x;
 
@@ -303,7 +329,7 @@ void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t
 
     if(hitB(entite,salle))
         entite->pv = 0;
-    
+
     //gestion deb
     dep(entite);
 
@@ -319,7 +345,7 @@ void compMurGlace(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_
     else
         (entite->pv)--;
     */
-}
+/*}
 
 void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
     //fonction en beta
@@ -373,3 +399,4 @@ void compVersGeant(monstre_t* entite, personnage_t* perso, salle_t* salle, liste
 void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
 
 }
+*/

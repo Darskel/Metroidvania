@@ -6,6 +6,7 @@
 #include <SDL2/SDL_image.h>
 #include "../headers/structs.h"
 #include "../headers/source.h"
+#include "../headers/sdl_fonctions.h"
 
 int main(int argc, char* argv[]){
     salle_t* salle = NULL;

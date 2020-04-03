@@ -9,7 +9,6 @@
 #include "../headers/comportement.h"
 
 #define NOM_JEU "Diskosieni"
-#define FRAMEDELAY 20
 #define PLAYERSPRITESPATH "./sprites/entite/joueur/sprite_joueur_hitbox.png"
 #define TILESETPATH "./sprites/bloc/tileset.png"
 #define TAILLEBLOC 8
@@ -20,9 +19,11 @@
 #define LARGEURSPRITEPERSATTACK 30
 #define HAUTEURHITBOXPERS 33
 #define LARGEURHITBOXPERS 12
-#define OFFSETHITBOX 0
-#define VITDEPPERS 2
+#define OFFSETHITBOX 7
+#define VITDEPPERS 1
 #define VITATTACKPERS 1
+#define EVOSPRITES 3
+#define ZONEMORTE 5000
 #define NIVEAUTXT "salle_debut.txt"
 #define NIVEAUBG "./sprites/salles/salle_debut.png"
 

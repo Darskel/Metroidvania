@@ -25,7 +25,7 @@ else
 	propre=find . -type f -executable -delete
 endif
 
-all: testListe testsdl testSource testSprite testaffsalle testinit
+all: testListe testsdl testSource testSprite testaffsalle testinit testManette
 
 #map: codemap decodemap outdated/deprecated
 
@@ -40,6 +40,9 @@ testListe: ${o}liste.o ${o}testListe.o
 #	${CC} $^ -o $@ ${CFLAGS}
 
 testsdl: ${o}sdl_fonctions.o ${o}test_SDL.o ${o}source.o ${o}liste.o ${o}comportement.o
+	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
+
+testManette : ${o}test_manette.o
 	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
 testSource: ${o}source.o ${o}testSource.o ${o}liste.o

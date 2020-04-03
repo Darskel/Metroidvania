@@ -44,7 +44,7 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
     exit(EXIT_FAILURE);
   }
 
-  icon=IMG_Load("./sprites/autre/icon.png");
+  icon=IMG_Load("./sprites/autre/icone.png");
   SDL_SetWindowIcon(*fenetre,icon);
 
   *renderer = SDL_CreateRenderer(*fenetre, -1, SDL_RENDERER_ACCELERATED|SDL_RENDERER_PRESENTVSYNC|SDL_RENDERER_TARGETTEXTURE);
@@ -77,12 +77,28 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
  */
   void evenements(SDL_Renderer * renderer, SDL_DisplayMode * mode){
     SDL_Event event;
-  	//Uint32 frameStart;
-  	//int frameTime;
-    boolean_t Gauche = FALSE;
-    boolean_t Droite = FALSE;
+
     int mousex;
     int mousey;
+    Sint16 x_move;
+    Sint16 y_move;
+
+    SDL_Joystick* pJoystick;
+    int numJoystick = SDL_NumJoysticks();
+    if ( numJoystick >= 1 )
+    {
+        pJoystick = SDL_JoystickOpen(0);
+        if ( pJoystick == NULL )
+        {
+            fprintf(stderr,"Erreur pour ouvrir le premier joystick\n");
+        }
+        else{
+          printf("WARNING : Programme conçu pour manette XBOX\n");
+          SDL_JoystickEventState(SDL_ENABLE);
+        }
+    }
+    boolean_t Gauche = FALSE;
+    boolean_t Droite = FALSE;
     boolean_t fin=FALSE;
     SDL_Texture * tileset;
     salle_t * salle;
@@ -98,7 +114,6 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
     perso=initialisation_personnage(renderer, positionDepart, positionDepartDelta);
 
     while(!fin){
-  		//frameStart = SDL_GetTicks();
   	  while(SDL_PollEvent(&event)){
   	    switch(event.type){
   	      case SDL_QUIT: //Appui sur la croix quitte le programme
@@ -121,36 +136,86 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
   	        switch(event.key.keysym.sym){
               case SDLK_LEFT:
                 Gauche=TRUE;
-                if(!Droite){
-                  depGauche(perso, salle);
-                  perso->direction = LEFT;
-                }
                 break;
               case SDLK_RIGHT:
                 Droite=TRUE;
-                if(!Gauche){
-                  depDroite(perso, salle);
-                  perso->direction = RIGHT;
-                }
                 break;
   	        }
   	        break;
           case SDL_MOUSEMOTION :
             mousex=event.motion.x;
             mousey=event.motion.y;
+            break;
+          case SDL_JOYBUTTONDOWN :
+          case SDL_JOYBUTTONUP :
+            break;
+          case SDL_JOYAXISMOTION :
+            switch(event.jaxis.axis){
+              case 0 :
+                if(event.jaxis.value>ZONEMORTE){
+                  Droite = TRUE;
+                }
+                else if(event.jaxis.value<ZONEMORTE*-1){
+                  Gauche = TRUE;
+                }
+                else{
+                  Gauche = FALSE;
+                  Droite = FALSE;
+                }
+                break;
+            }
+            break;
+          case SDL_JOYBALLMOTION :
+            break;
+          case SDL_JOYHATMOTION :
+            switch(event.jhat.value){
+              case SDL_HAT_CENTERED :
+                Gauche = FALSE;
+                Droite = FALSE;
+                break;
+              case SDL_HAT_LEFT :
+                Gauche = TRUE;
+                break;
+              case SDL_HAT_RIGHT :
+                Droite = TRUE;
+                break;
+            }
   	      }
   	    }
-  			/*frameTime = SDL_GetTicks() - frameStart;
-  			if(frameTime < FRAMEDELAY){
-  				SDL_Delay(FRAMEDELAY - frameTime);
-  			}*/
-        if((Gauche&&Droite) || (!Gauche&&!Droite))
+        if ( pJoystick != NULL ){
+          x_move = SDL_JoystickGetAxis(pJoystick, 0);
+          y_move = SDL_JoystickGetAxis(pJoystick, 1);
+        }
+
+        if((Gauche&&Droite)){
+          Gauche=FALSE;
+          Droite=FALSE;
+        }
+
+        if((!Gauche&&!Droite))
           perso->etat=IDLE;
+
+        if(Gauche){
+          if(!Droite){
+            depGauche(perso, salle);
+            perso->direction = LEFT;
+          }
+        }
+
+        if(Droite){
+          if(!Gauche){
+            depDroite(perso, salle);
+            perso->direction = RIGHT;
+          }
+        }
+
         miseAjourSprites(perso);
         affichage_complet(renderer, salle, perso);
       }
       destroy_salle(&salle);
       destroy_personnage(&perso);
+      if(pJoystick != NULL)
+        SDL_JoystickClose(pJoystick);
   }
 
 /**
@@ -360,7 +425,7 @@ void miseAjourSprites(personnage_t * perso){
     else
       perso->spriteActuel.w = LARGEURSPRITEPERS;
     perso->newEtat=FALSE;
-    perso->evoSprite=perso->vit_dep;
+    perso->evoSprite=0;
   }
   else{
     if(perso->etat > IDLE && perso->etat < FALLING){
@@ -368,7 +433,7 @@ void miseAjourSprites(personnage_t * perso){
         perso->spriteActuel.x+=perso->spriteActuel.w;
         if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
           perso->spriteActuel.x=0;
-        perso->evoSprite = perso->vit_dep;
+        perso->evoSprite = EVOSPRITES;
       }
       else (perso->evoSprite)--;
     }

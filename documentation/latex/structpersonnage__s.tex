@@ -22,7 +22,12 @@ int \hyperlink{structpersonnage__s_a0022973bab638a02774a19710cedcd17}{vit\+\_\+a
 \item 
 \hyperlink{structfrac_pos__s}{frac\+Pos\+\_\+t} \hyperlink{structpersonnage__s_a396d01ba0660ce2327f65f891d4f239e}{delta}
 \item 
-int \hyperlink{structpersonnage__s_aec4def382ab17941f0edfe1c40f0cc59}{sprite\+Actuel}
+\mbox{\Hypertarget{structpersonnage__s_a8a93d7a1c56bf5d45a13754b8387e27c}\label{structpersonnage__s_a8a93d7a1c56bf5d45a13754b8387e27c}} 
+S\+D\+L\+\_\+\+Surface $\ast$$\ast$ {\bfseries sprites}
+\item 
+ind\+Sprite\+Per\+\_\+t \hyperlink{structpersonnage__s_a31cfe3f9dacab7ae783fc557cd0a0adf}{sprite\+Actuel}
+\item 
+int \hyperlink{structpersonnage__s_aabe3731a1f5bbb6b08c4f9e9d89db0a1}{nb\+\_\+sprites}
 \item 
 char \hyperlink{structpersonnage__s_a1f1eb200420640259201a84300bccf7e}{forme}
 \end{DoxyCompactItemize}
@@ -44,7 +49,13 @@ Différence de position à ajouter à la position entière \mbox{\Hypertarget{st
 \subsubsection{\texorpdfstring{forme}{forme}}
 {\footnotesize\ttfamily char personnage\+\_\+s\+::forme}
 
-Forme du personnage H = humain, F = renard \mbox{\Hypertarget{structpersonnage__s_adea4789f8b55587ec092f3a32b7b1964}\label{structpersonnage__s_adea4789f8b55587ec092f3a32b7b1964}} 
+Forme du personnage H = humain, F = renard \mbox{\Hypertarget{structpersonnage__s_aabe3731a1f5bbb6b08c4f9e9d89db0a1}\label{structpersonnage__s_aabe3731a1f5bbb6b08c4f9e9d89db0a1}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!nb\+\_\+sprites@{nb\+\_\+sprites}}
+\index{nb\+\_\+sprites@{nb\+\_\+sprites}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{nb\+\_\+sprites}{nb\_sprites}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::nb\+\_\+sprites}
+
+Nombre de sprites du personnage (sans orientation) \mbox{\Hypertarget{structpersonnage__s_adea4789f8b55587ec092f3a32b7b1964}\label{structpersonnage__s_adea4789f8b55587ec092f3a32b7b1964}} 
 \index{personnage\+\_\+s@{personnage\+\_\+s}!pos@{pos}}
 \index{pos@{pos}!personnage\+\_\+s@{personnage\+\_\+s}}
 \subsubsection{\texorpdfstring{pos}{pos}}
@@ -56,13 +67,13 @@ Position actuel du personnage (position entière) \mbox{\Hypertarget{structperso
 \subsubsection{\texorpdfstring{pv}{pv}}
 {\footnotesize\ttfamily int personnage\+\_\+s\+::pv}
 
-P\+V(points de vie) actuel du personnage \mbox{\Hypertarget{structpersonnage__s_aec4def382ab17941f0edfe1c40f0cc59}\label{structpersonnage__s_aec4def382ab17941f0edfe1c40f0cc59}} 
+P\+V(points de vie) actuel du personnage \mbox{\Hypertarget{structpersonnage__s_a31cfe3f9dacab7ae783fc557cd0a0adf}\label{structpersonnage__s_a31cfe3f9dacab7ae783fc557cd0a0adf}} 
 \index{personnage\+\_\+s@{personnage\+\_\+s}!sprite\+Actuel@{sprite\+Actuel}}
 \index{sprite\+Actuel@{sprite\+Actuel}!personnage\+\_\+s@{personnage\+\_\+s}}
 \subsubsection{\texorpdfstring{sprite\+Actuel}{spriteActuel}}
-{\footnotesize\ttfamily int personnage\+\_\+s\+::sprite\+Actuel}
+{\footnotesize\ttfamily ind\+Sprite\+Per\+\_\+t personnage\+\_\+s\+::sprite\+Actuel}
 
-Indice du sprite à afficher \mbox{\Hypertarget{structpersonnage__s_a0022973bab638a02774a19710cedcd17}\label{structpersonnage__s_a0022973bab638a02774a19710cedcd17}} 
+Pointeur vers le tableau de sprites du personnage Indice du sprite à afficher \mbox{\Hypertarget{structpersonnage__s_a0022973bab638a02774a19710cedcd17}\label{structpersonnage__s_a0022973bab638a02774a19710cedcd17}} 
 \index{personnage\+\_\+s@{personnage\+\_\+s}!vit\+\_\+att@{vit\+\_\+att}}
 \index{vit\+\_\+att@{vit\+\_\+att}!personnage\+\_\+s@{personnage\+\_\+s}}
 \subsubsection{\texorpdfstring{vit\+\_\+att}{vit\_att}}
@@ -74,7 +85,7 @@ Vitesse d\textquotesingle{}attaque du personnage (en nombre de frame) \mbox{\Hyp
 \subsubsection{\texorpdfstring{vit\+\_\+dep}{vit\_dep}}
 {\footnotesize\ttfamily int personnage\+\_\+s\+::vit\+\_\+dep}
 
-Vitesse de déplacement du personnage (facteur/indicateur) 
+Vitesse de déplacement du personnage (pixel par tick) 
 
 La documentation de cette structure a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
 \item 

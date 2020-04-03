@@ -25,7 +25,7 @@ static int filecmp(struct dirent* f1, struct dirent* f2){
 
 char* chercherSprite(int id, char* dirName){
     /* tout sur dirent ici: http://sdz.tdct.org/sdz/arcourir-les-dossiers-avec-dirent-h.html */
-    if(!id)
+    if(id <= 0)
         return NULL;
 
     char newName[200] = "";
@@ -178,9 +178,10 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
         if(!strcmp(tmp,nomObjs[i]))
             fscanf(file,"%d\n", inventaire + i);
         else{
-            while(strcmp(tmp,nomObjs[i])){//opti ici pour chercher l'indice correct (si indice non trouvé -> indice actuel inchangé)
-                inventaire[i] = 0;
-                i++;
+            int j;
+            for(j = 0; j < TAILLE_INVENTAIRE && strcmp(tmp,nomObjs[j]); j++);
+            if(j != TAILLE_INVENTAIRE){
+                fscanf(file,"%d\n", inventaire + j);
             }
         }
     }
@@ -223,7 +224,7 @@ int lireSalle(char* nomFichier, salle_t** salle){
     if(*salle)
         nettoyerSalle(salle);
 
-    char tmp[20] = DIR_SALLE;
+    char tmp[100] = DIR_SALLE;
     strcat(tmp,nomFichier);
 
     //creation des variables dans le tas
@@ -250,6 +251,7 @@ int lireSalle(char* nomFichier, salle_t** salle){
     //Remplissage matrice
     for(int i = 0; i < lon*larg; i++){
         fscanf(monDoc, "%d", &val);
+        //gestion des entités !!!
         (*salle)->mat[i/lon][i%lon] = val;
         //printf("\n %d %d \n", i/lon,i%lon);
     }

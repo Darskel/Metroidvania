@@ -10,15 +10,12 @@ Fonctions de lecture d\textquotesingle{}une salle.
 {\ttfamily \#include $<$sys/stat.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
-{\ttfamily \#include \char`\"{}../headers/structs.\+h\char`\"{}}\newline
-\subsection*{Macros}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{source_8c_ab146d4d97ad31f63e0e77b770cfb08a8}\label{source_8c_ab146d4d97ad31f63e0e77b770cfb08a8}} 
-\#define {\bfseries D\+I\+R\+\_\+\+S\+A\+UV}~\char`\"{}./\char`\"{}
-\end{DoxyCompactItemize}
+{\ttfamily \#include \char`\"{}../headers/source.\+h\char`\"{}}\newline
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{source_8c_a533f4bb0a5e22b4efcfc42b6b903394a}\label{source_8c_a533f4bb0a5e22b4efcfc42b6b903394a}} 
+char $\ast$ {\bfseries chercher\+Sprite} (int id, char $\ast$dir\+Name)
 \item 
 int \hyperlink{source_8c_af7916edbfbb9a2021f0a9802369c76d7}{sauvegarder} (int num\+Sauv, int hp, char $\ast$salle, \hyperlink{structposition__s}{position\+\_\+t} $\ast$dep, int inventaire\mbox{[}$\,$\mbox{]}, char $\ast$nom\+Objs\mbox{[}$\,$\mbox{]})
 \begin{DoxyCompactList}\small\item\em Sauvegarde l\textquotesingle{}état de la partie. \end{DoxyCompactList}\item 
@@ -26,7 +23,7 @@ int \hyperlink{source_8c_ae552ae3538b4ad44354aa761534d1116}{charger\+Sauvegarde}
 \begin{DoxyCompactList}\small\item\em Sauvegarde l\textquotesingle{}état de la partie. \end{DoxyCompactList}\item 
 int \hyperlink{source_8c_ad5237d1625ec6ab16ef2c4f0690bbfb8}{nettoyer\+Salle} (\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$salle)
 \begin{DoxyCompactList}\small\item\em Nettoie et supprime la structure salle donnée. \end{DoxyCompactList}\item 
-int \hyperlink{source_8c_aefc148eb203f3f1e27c3dd7a8f5a2333}{lire\+Salle} (char $\ast$nom\+Fichier, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
+int \hyperlink{source_8c_acfe782df62b56721f4f3aaa311f6e3e6}{lire\+Salle} (char $\ast$nom\+Fichier, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$salle)
 \begin{DoxyCompactList}\small\item\em Modifie la structure salle pour la nouvelle salle. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -73,11 +70,11 @@ Les paramètres num\+Sauv et nom\+Objs doivent être définis avant, les autres 
 \begin{DoxyReturn}{Renvoie}
 un code erreur en fonction de l\textquotesingle{}erreur\+: -\/1 = Mauvais numéro de sauvegarde, -\/2 = impossible d\textquotesingle{}ouvrir ou créer le fichier; le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès), ou 0 si le fichier de sauvegarde est vide 
 \end{DoxyReturn}
-\mbox{\Hypertarget{source_8c_aefc148eb203f3f1e27c3dd7a8f5a2333}\label{source_8c_aefc148eb203f3f1e27c3dd7a8f5a2333}} 
+\mbox{\Hypertarget{source_8c_acfe782df62b56721f4f3aaa311f6e3e6}\label{source_8c_acfe782df62b56721f4f3aaa311f6e3e6}} 
 \index{source.\+c@{source.\+c}!lire\+Salle@{lire\+Salle}}
 \index{lire\+Salle@{lire\+Salle}!source.\+c@{source.\+c}}
 \subsubsection{\texorpdfstring{lire\+Salle()}{lireSalle()}}
-{\footnotesize\ttfamily int lire\+Salle (\begin{DoxyParamCaption}\item[{char $\ast$}]{nom\+Fichier,  }\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$}]{salle }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int lire\+Salle (\begin{DoxyParamCaption}\item[{char $\ast$}]{nom\+Fichier,  }\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$}]{salle }\end{DoxyParamCaption})}
 
 
 

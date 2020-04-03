@@ -4,8 +4,8 @@
  * \file sdl_fonctions.c
  * \brief Fichier qui regroupent les fonctions utilisées pour la gestion des graphismes et des évènements (SDL2)
  * \author Marie-Nina MUNAR L2 Info Le Mans
- * \version 3.0
- * \date 26/03/2020
+ * \version 4.0
+ * \date 03/04/2020
 */
 
 /**

@@ -105,12 +105,15 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
     personnage_t * perso;
     position_t positionDepart;
     position_t positionDepartDelta;
-    positionDepart.x = 0;
-    positionDepartDelta.x = 0;
-    positionDepart.y = 9;
-    positionDepartDelta.y = 7;
+
     tileset=initialiser_texture(TILESETPATH, renderer);
     salle=initialiser_salle(renderer, NIVEAUTXT, NIVEAUBG, tileset);
+
+    positionDepart.x = 1;
+    positionDepartDelta.x = 0;
+    positionDepart.y = salle->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;
+    positionDepartDelta.y = 7;
+
     perso=initialisation_personnage(renderer, positionDepart, positionDepartDelta);
 
     while(!fin){

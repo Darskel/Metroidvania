@@ -193,6 +193,9 @@ void depDroite(personnage_t* p, salle_t* s){
                 (p->pos.x)++;
                 p->delta.x = 0;
             }
+            //Ajouté par MN :
+            p->posxhitbox += p->vit_dep;
+            //
             if(TRUE){//persValidDep(p,s)){
               //Modifié par MN :
               if(p->etat==IDLE){
@@ -204,6 +207,9 @@ void depDroite(personnage_t* p, salle_t* s){
             else{
                 p->delta.x = TAILLE_BLOCK - 1;
                 (p->pos.x)--;
+                //Ajouté par MN :
+                p->posxhitbox -= p->vit_dep;
+                //
             }
             break;
         default:
@@ -228,6 +234,9 @@ void depGauche(personnage_t* p, salle_t* s){
                 (p->pos.x)--;
                 p->delta.x = TAILLE_BLOCK -1;
             }
+            //Ajouté par MN :
+            p->posxhitbox -= p->vit_dep;
+            //
             if(TRUE){//persValidDep(p,s)){
               //Modifié par MN :
               if(p->etat==IDLE){
@@ -239,6 +248,9 @@ void depGauche(personnage_t* p, salle_t* s){
             else{
                 p->delta.x = 0;
                 (p->pos.x)++;
+                //Ajouté par MN :
+                p->posxhitbox += p->vit_dep;
+                //
             }
             break;
         default:

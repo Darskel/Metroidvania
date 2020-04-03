@@ -23,6 +23,7 @@
 #define VITDEPPERS 1
 #define VITATTACKPERS 1
 #define EVOSPRITES 3
+
 #define ZONEMORTE 5000
 #define NIVEAUTXT "salle_debut.txt"
 #define NIVEAUBG "./sprites/salles/salle_debut.png"

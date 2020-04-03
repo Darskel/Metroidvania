@@ -198,18 +198,14 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
         if((!Gauche&&!Droite))
           perso->etat=IDLE;
 
-        if(Gauche){
-          if(!Droite){
-            depGauche(perso, salle);
-            perso->direction = LEFT;
-          }
+        else if(Gauche){
+          depGauche(perso, salle);
+          perso->direction = LEFT;
         }
 
-        if(Droite){
-          if(!Gauche){
-            depDroite(perso, salle);
-            perso->direction = RIGHT;
-          }
+        else if(Droite){
+          depDroite(perso, salle);
+          perso->direction = RIGHT;
         }
 
         miseAjourSprites(perso);

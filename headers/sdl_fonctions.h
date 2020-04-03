@@ -10,15 +10,19 @@
 
 #define NOM_JEU "Diskosieni"
 #define FRAMEDELAY 20
-#define PLAYERSPRITESPATH "./sprites/entite/joueur/sprite_joueur.png"
+#define PLAYERSPRITESPATH "./sprites/entite/joueur/sprite_joueur_hitbox.png"
 #define TILESETPATH "./sprites/bloc/tileset.png"
 #define TAILLEBLOC 8
 #define HAUTEURPORTE 36
 #define LARGEURPORTE 13
 #define HAUTEURSPRITEPERS 33
-#define LARGEURSPRITEPERS 30
-#define HAUTEURHITBOXPERS 4
-#define LARGEURHITBOXPERS 2
+#define LARGEURSPRITEPERS 25
+#define LARGEURSPRITEPERSATTACK 30
+#define HAUTEURHITBOXPERS 33
+#define LARGEURHITBOXPERS 12
+#define OFFSETHITBOX 0
+#define VITDEPPERS 2
+#define VITATTACKPERS 1
 #define NIVEAUTXT "salle_debut.txt"
 #define NIVEAUBG "./sprites/salles/salle_debut.png"
 

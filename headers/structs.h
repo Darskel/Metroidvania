@@ -154,7 +154,8 @@ typedef struct personnage_s{
     position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du personnage */
     SDL_Rect spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
-    taille_t hitbox; /**< Taille de la hitbox du personnage en cases */
+    taille_t hitbox; /**< Taille de la hitbox du personnage en pixel */
+    int posxhitbox; /**< Position horizontale en pixel de la hitbox dans la salle */
     etat_t etat; /**< Etat du personnage (idle/running/jumping/attacking/falling) */
     boolean_t newEtat; /**< Booléen qui signifie qu'un changement d'état vient de s'effectuer */
     int evoSprite; /**< Entier qui décrémente, changement de sprite quand vaut 0 */

@@ -193,7 +193,7 @@ void depDroite(personnage_t* p, salle_t* s){
                 (p->pos.x)++;
                 p->delta.x = 0;
             }
-            if(persValidDep(p,s)){
+            if(TRUE){//persValidDep(p,s)){
               //Modifié par MN :
               if(p->etat==IDLE){
                 p->etat = RUNNING;
@@ -228,7 +228,7 @@ void depGauche(personnage_t* p, salle_t* s){
                 (p->pos.x)--;
                 p->delta.x = TAILLE_BLOCK -1;
             }
-            if(persValidDep(p,s)){
+            if(TRUE){//persValidDep(p,s)){
               //Modifié par MN :
               if(p->etat==IDLE){
                 p->etat = RUNNING;

@@ -201,8 +201,8 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->pv_max=1;
   personnage->inv=0;
   personnage->direction=RIGHT;
-  personnage->vit_dep=2;
-  personnage->vit_att=1;
+  personnage->vit_dep=VITDEPPERS;
+  personnage->vit_att=VITATTACKPERS;
   personnage->pos=positionDepart;
   personnage->delta=positionDepartDelta;
   SDL_Texture * texture=initialiser_texture(PLAYERSPRITESPATH, renderer);
@@ -213,6 +213,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->spriteActuel.w=LARGEURSPRITEPERS;
   personnage->hitbox.hauteur=HAUTEURHITBOXPERS;
   personnage->hitbox.largeur=LARGEURHITBOXPERS;
+  personnage->posxhitbox = positionDepart.x * TAILLEBLOC + positionDepartDelta.x + OFFSETHITBOX;
   personnage->etat = IDLE;
   personnage->newEtat = FALSE;
   personnage->evoSprite = 0;
@@ -320,8 +321,8 @@ void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, sal
     flip=SDL_FLIP_HORIZONTAL;
   Rect_dest.x = personnage->pos.x * TAILLEBLOC + personnage->delta.x;
   Rect_dest.y = personnage->pos.y * TAILLEBLOC + personnage->delta.y;
-  Rect_dest.h = HAUTEURSPRITEPERS;
-  Rect_dest.w = LARGEURSPRITEPERS;
+  Rect_dest.h = personnage->spriteActuel.h;
+  Rect_dest.w = personnage->spriteActuel.w;
   SDL_RenderCopyEx(renderer, personnage->sprites, &(personnage->spriteActuel), &Rect_dest, 0, NULL, flip);
 }
 
@@ -346,22 +347,26 @@ void miseAjourSprites(personnage_t * perso){
     perso->spriteActuel.y=IDLE;
   }
   else if(perso->etat == FALLING){
-    perso->spriteActuel.x=7*LARGEURSPRITEPERS;
-    perso->spriteActuel.y=JUMPING*HAUTEURSPRITEPERS;
+    perso->spriteActuel.x=7*(perso->spriteActuel.w);
+    perso->spriteActuel.y=JUMPING*(perso->spriteActuel.h);
   }
   if(perso->newEtat){
     if(perso->etat > IDLE && perso->etat < FALLING){
       perso->spriteActuel.x=0;
-      perso->spriteActuel.y=perso->etat * HAUTEURSPRITEPERS;
+      perso->spriteActuel.y=perso->etat * (perso->spriteActuel.h);
     }
+    if(perso->etat == ATTACKING)
+      perso->spriteActuel.w = LARGEURSPRITEPERSATTACK;
+    else
+      perso->spriteActuel.w = LARGEURSPRITEPERS;
     perso->newEtat=FALSE;
     perso->evoSprite=perso->vit_dep;
   }
   else{
     if(perso->etat > IDLE && perso->etat < FALLING){
       if(perso->evoSprite<=0){
-        perso->spriteActuel.x+=LARGEURSPRITEPERS;
-        if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*LARGEURSPRITEPERS)
+        perso->spriteActuel.x+=perso->spriteActuel.w;
+        if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
           perso->spriteActuel.x=0;
         perso->evoSprite = perso->vit_dep;
       }

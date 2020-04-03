@@ -205,22 +205,22 @@ void supListe(liste_t **maListe, void (*delete)(void**)){
     (*maListe) = NULL;
 }
 
-static void delPorte(void** p){
+static void delPorte(porte_t** p){
     free((*p)->salleSuivante);
     free((*p)->listeSprites);
     free(*p);
     *p = NULL;
 }
 
-void supPorte(porte_t** p){
-    delPorte(p);
+void supPorte(void** p){
+    delPorte((porte_t**)p);
 }
 
-static void delMonstre(void** m){
+static void delMonstre(monstre_t** m){
     free(*m);
     *m = NULL;
 }
 
-void supMonstre(monstre_t** m){
-    delMonstre(m);
+void supMonstre(void** m){
+    delMonstre((monstre_t**)m);
 }

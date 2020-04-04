@@ -210,7 +210,7 @@ void depDroite(personnage_t* p, salle_t* s){
             //Ajouté par MN :
             p->posxhitbox += p->vit_dep;
             //
-            if(TRUE){//persValidDep(p,s)){
+            if(persValidDep(p,s)){
               //Modifié par MN :
               if(p->etat==IDLE){
                 p->etat = RUNNING;
@@ -251,7 +251,7 @@ void depGauche(personnage_t* p, salle_t* s){
             //Ajouté par MN :
             p->posxhitbox -= p->vit_dep;
             //
-            if(TRUE){//persValidDep(p,s)){
+            if(persValidDep(p,s)){
               //Modifié par MN :
               if(p->etat==IDLE){
                 p->etat = RUNNING;

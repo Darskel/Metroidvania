@@ -26,10 +26,10 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
     fprintf(stderr, "Echec de l'initalisation de la SDL (%s)\n", SDL_GetError());
     exit(EXIT_FAILURE);
   }
-  if(TTF_Init () ==  -1){
+  /*if(TTF_Init () ==  -1){
     fprintf(stderr, "Erreur d’initialisation de TTF_Init : %s\n", TTF_GetError ());
     exit(EXIT_FAILURE);
-  }
+  }*/
 
   if(SDL_GetDesktopDisplayMode(0, mode)){
     fprintf(stderr, "Echec de la récupération des infos de l'écran (%s)\n", SDL_GetError());

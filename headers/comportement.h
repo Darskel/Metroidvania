@@ -9,6 +9,8 @@
  * \date 01/04/2020
 */
 
+int persValidDep(personnage_t* p, salle_t* s);
+
 int hitE(monstre_t* e1, monstre_t* e2);
 int hitP(monstre_t* e, personnage_t* p);
 

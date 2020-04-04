@@ -57,6 +57,9 @@ testaffsalle: ${o}liste.o ${o}source.o ${o}test_affichage_salle.o ${o}sdl_foncti
 testinit: ${o}liste.o ${o}source.o ${o}inits.o ${o}testInits.o
 	${CC} $^ -o $@ ${INCS} ${LIBS} ${CFLAGS}
 
+testDepPers: ${o}testDepPers.o ${o}source.o ${o}comportement.o ${o}liste.o
+	${CC} $^ -o $@ ${CFLAGS} ${LIBS} ${CFLAGS}
+
 ${o}%.o: ${c}%.c
 	${CC} $< -c -o $@ ${INCS} ${LIBS} ${CFLAGS}
 

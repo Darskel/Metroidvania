@@ -154,24 +154,38 @@ static int hitB(monstre_t* e, salle_t* s){
  *
  * @return 1 (TRUE) si le déplacement est valide, 0 (FALSE) sinon
 */
-static int persValidDep(personnage_t* p, salle_t* s){
+int persValidDep(personnage_t* p, salle_t* s){
     int leftP;
     int rightP;
     int topP;
     int bottomP;
 
-    leftP = p->pos.x;
-    rightP = leftP + p->hitbox.largeur + (p->delta.x ? 1 : 0);
-    topP = p->pos.y + (p->delta.y ? 1 : 0);
-    bottomP = p->pos.y + p->hitbox.hauteur;
+    leftP = p->pos.x*TAILLE_BLOCK + p->delta.x;
+    rightP = leftP + p->hitbox.largeur;
+    topP = p->pos.y*TAILLE_BLOCK + p->delta.y;
+    bottomP = topP + p->hitbox.hauteur;
 
-    if(leftP < 0 || topP < 0 || bottomP >= s->hauteur || rightP >= s->largeur)
+    if(leftP < 0 || topP < 0)
         return FALSE;
+
+    leftP /= 8;
+    rightP = rightP/8 + (rightP%8 ? 1 : 0) - 1;
+    topP /= 8;
+    bottomP = bottomP/8 + (bottomP%8 ? 1 : 0) - 1;
+
+    //printf("_l%d_r%d_t%d_b%d_\n",leftP,rightP,topP,bottomP);
+
+    if(bottomP >= s->hauteur || rightP >= s->largeur)
+        return FALSE;
+
+    //printf("_l%d_r%d_t%d_b%d_\n",leftP,rightP,topP,bottomP);
 
     for(int i = leftP; i <= rightP; i++)
         for(int j = topP; j <= bottomP; j++)
-            if(s->mat[j][i])
+            if(s->mat[j][i]){
+                printf("_%d,%d:%d_\n",j,i,s->mat[j][i]);
                 return FALSE;
+            }
 
     return TRUE;
 }

@@ -11,6 +11,7 @@
         "xiosbase": "c",
         "xlocale": "c",
         "xutility": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "comportement.h": "c"
     }
 }

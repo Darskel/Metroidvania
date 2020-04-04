@@ -44,7 +44,7 @@
 
 #define NOM_JEU "Diskosieni"
 
-#define PLAYERSPRITESPATH "./sprites/entite/joueur/sprite_joueur_hitbox.png"
+#define PLAYERSPRITESPATH "./sprites/entite/joueur/sprite_joueur.png"
 #define TILESETPATH "./sprites/bloc/tileset.png"
 
 #define TAILLEBLOC 8
@@ -66,7 +66,6 @@
 #define ZONEMORTE 5000
 
 #define NIVEAUTXT "salle_debut.txt"
-#define NIVEAUBG "./sprites/salles/salle_debut.png"
 #define DIRBG "./sprites/salles/"
 
 

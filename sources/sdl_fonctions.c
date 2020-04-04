@@ -107,7 +107,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
     position_t positionDepartDelta;
 
     tileset=initialiser_texture(TILESETPATH, renderer);
-    salle=initialiser_salle(renderer, NIVEAUTXT, NIVEAUBG, tileset);
+    salle=initialiser_salle(renderer, NIVEAUTXT, tileset);
 
     positionDepart.x = 1;
     positionDepartDelta.x = 0;
@@ -319,11 +319,11 @@ void destroy_personnage(personnage_t ** personnage){
  * @param nomFichier une chaine de caracteres qui contient le nom du fichier de la salle
  * @return un pointeur sur la structure salle initalisée
  */
-salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, char * nomBG, SDL_Texture * tileset){
+salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, SDL_Texture * tileset){
   salle_t ** salle=malloc(sizeof(salle_t *));
   *salle=NULL;
   char nom_bg[100];
-  
+
   strcpy(nom_bg,DIRBG);
   strcat(nom_bg, nomFichier);
   nom_bg[strlen(nom_bg) - 3] = '\0';

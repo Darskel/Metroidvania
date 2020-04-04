@@ -160,7 +160,7 @@ int persValidDep(personnage_t* p, salle_t* s){
 
     leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
     rightP = leftP + p->hitbox.largeur;
-    topP = p->pos.y*TAILLEBLOC + p->delta.y + OFFSETHITBOX;
+    topP = p->pos.y*TAILLEBLOC + p->delta.y;
     bottomP = topP + p->hitbox.hauteur;
 
     if(leftP < 0 || topP < 0)

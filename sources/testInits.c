@@ -15,7 +15,7 @@ int main(){
 
     printf("Pointeurs:\n%p\n%p\n%p\n",s,p,e);
 
-    initCreerPartie(p,&s);
+    initCreerPartie(p,s);
 
     printf("Pointeurs:\n%p\n%p\n%p\n",s,p,e);
 

@@ -4,8 +4,8 @@
  * \file sdl_fonctions.c
  * \brief Fichier qui regroupent les fonctions utilisées pour la gestion des graphismes et des évènements (SDL2)
  * \author Marie-Nina MUNAR L2 Info Le Mans
- * \version 3.0
- * \date 26/03/2020
+ * \version 4.0
+ * \date 03/04/2020
 */
 
 /**
@@ -198,18 +198,14 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
         if((!Gauche&&!Droite))
           perso->etat=IDLE;
 
-        if(Gauche){
-          if(!Droite){
-            depGauche(perso, salle);
-            perso->direction = LEFT;
-          }
+        else if(Gauche){
+          depGauche(perso, salle);
+          perso->direction = LEFT;
         }
 
-        if(Droite){
-          if(!Gauche){
-            depDroite(perso, salle);
-            perso->direction = RIGHT;
-          }
+        else if(Droite){
+          depDroite(perso, salle);
+          perso->direction = RIGHT;
         }
 
         miseAjourSprites(perso);

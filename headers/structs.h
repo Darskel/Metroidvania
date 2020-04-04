@@ -225,8 +225,5 @@ typedef struct porte_s{
     int spriteActuel; /**< Indice du sprite à afficher */
 } porte_t;
 
-//Ces fonctions sont replacées ici en attendant que le problème soit resolu (cf liste.h)
-void supPorte(porte_t**);
-void supMonstre(monstre_t**);
 
 #endif

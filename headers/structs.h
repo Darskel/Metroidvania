@@ -39,23 +39,32 @@
 
 #define LEFT 0
 #define RIGHT 1
+
 #define TAILLE_INVENTAIRE 8
+
 #define NOM_JEU "Diskosieni"
+
 #define PLAYERSPRITESPATH "./sprites/entite/joueur/sprite_joueur_hitbox.png"
 #define TILESETPATH "./sprites/bloc/tileset.png"
+
 #define TAILLEBLOC 8
 #define HAUTEURPORTE 36
 #define LARGEURPORTE 13
 #define HAUTEURSPRITEPERS 33
 #define LARGEURSPRITEPERS 25
 #define LARGEURSPRITEPERSATTACK 30
+
 #define HAUTEURHITBOXPERS 33
 #define LARGEURHITBOXPERS 12
 #define OFFSETHITBOX 7
+
 #define VITDEPPERS 1
 #define VITATTACKPERS 1
+
 #define EVOSPRITES 3
+
 #define ZONEMORTE 5000
+
 #define NIVEAUTXT "salle_debut.txt"
 #define NIVEAUBG "./sprites/salles/salle_debut.png"
 

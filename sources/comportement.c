@@ -5,8 +5,6 @@
 #include "../headers/liste.h"
 #include "../headers/comportement.h"
 
-#define TAILLE_BLOCK 8
-
 /*static int toucher(monstre_t* e1, monstre_t* e2){
     SDL_rect rect1, rect2;
 
@@ -52,13 +50,13 @@ int hitE(monstre_t* e1, monstre_t* e2){
     int topE1, topE2;
     int bottomE1, bottomE2;
 
-    leftE1 = e1->pos.x*TAILLE_BLOCK + e1->delta.x;
-    topE1 = e1->pos.y*TAILLE_BLOCK + e1->delta.y;
+    leftE1 = e1->pos.x*TAILLEBLOC + e1->delta.x;
+    topE1 = e1->pos.y*TAILLEBLOC + e1->delta.y;
     rightE1 = leftE1 + e1->type->hitbox.largeur;
     bottomE1 = topE1 + e1->type->hitbox.hauteur;
 
-    leftE2 = e2->pos.x*TAILLE_BLOCK + e2->delta.x;
-    topE2 = e2->pos.y*TAILLE_BLOCK + e2->delta.y;
+    leftE2 = e2->pos.x*TAILLEBLOC + e2->delta.x;
+    topE2 = e2->pos.y*TAILLEBLOC + e2->delta.y;
     rightE2 = leftE2 + e2->type->hitbox.largeur;
     bottomE2 = topE2 + e2->type->hitbox.hauteur;
 
@@ -91,13 +89,13 @@ int hitP(monstre_t* e, personnage_t* p){
     int topE, topP;
     int bottomE, bottomP;
 
-    leftE = e->pos.x*TAILLE_BLOCK + e->delta.x;
-    topE = e->pos.y*TAILLE_BLOCK + e->delta.y;
+    leftE = e->pos.x*TAILLEBLOC + e->delta.x;
+    topE = e->pos.y*TAILLEBLOC + e->delta.y;
     rightE = leftE + e->type->hitbox.largeur;
     bottomE = topE + e->type->hitbox.hauteur;
 
-    leftP = p->pos.x*TAILLE_BLOCK + p->delta.x;
-    topP = p->pos.y*TAILLE_BLOCK + p->delta.y;
+    leftP = p->pos.x*TAILLEBLOC + p->delta.x;
+    topP = p->pos.y*TAILLEBLOC + p->delta.y;
     rightP = leftP + p->hitbox.largeur;
     bottomP = topP + p->hitbox.hauteur;
 
@@ -160,9 +158,9 @@ int persValidDep(personnage_t* p, salle_t* s){
     int topP;
     int bottomP;
 
-    leftP = p->pos.x*TAILLE_BLOCK + p->delta.x;
+    leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
     rightP = leftP + p->hitbox.largeur;
-    topP = p->pos.y*TAILLE_BLOCK + p->delta.y;
+    topP = p->pos.y*TAILLEBLOC + p->delta.y + OFFSETHITBOX;
     bottomP = topP + p->hitbox.hauteur;
 
     if(leftP < 0 || topP < 0)
@@ -203,7 +201,7 @@ void depDroite(personnage_t* p, salle_t* s){
         case JUMPING:
         case FALLING:
             p->delta.x += p->vit_dep;
-            if(p->delta.x >= TAILLE_BLOCK){
+            if(p->delta.x >= TAILLEBLOC){
                 (p->pos.x)++;
                 p->delta.x = 0;
             }
@@ -219,7 +217,7 @@ void depDroite(personnage_t* p, salle_t* s){
               //
             }
             else{
-                p->delta.x = TAILLE_BLOCK - 1;
+                p->delta.x = TAILLEBLOC - 1;
                 (p->pos.x)--;
                 //Ajouté par MN :
                 p->posxhitbox -= p->vit_dep;
@@ -246,7 +244,7 @@ void depGauche(personnage_t* p, salle_t* s){
             p->delta.x -= p->vit_dep;
             if(p->delta.x < 0){
                 (p->pos.x)--;
-                p->delta.x = TAILLE_BLOCK -1;
+                p->delta.x = TAILLEBLOC -1;
             }
             //Ajouté par MN :
             p->posxhitbox -= p->vit_dep;
@@ -276,14 +274,14 @@ static void dep(monstre_t* entite, salle_t* salle){
     if(entite->pv){
         if(entite->direction){
             entite->delta.x += entite->type->vit_dep;
-            if(entite->delta.x >= TAILLE_BLOCK){
+            if(entite->delta.x >= TAILLEBLOC){
                 (entite->pos.x)++;
                 entite->delta.x = 0;
             }
             if(hitB(entite,salle)){
                 entite->direction = LEFT;
                 (entite->pos.x)--;
-                entite->delta.x = TAILLE_BLOCK - 1;
+                entite->delta.x = TAILLEBLOC - 1;
             }
         }else{
             entite->delta.x -= entite->type->vit_dep;

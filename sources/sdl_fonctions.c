@@ -322,8 +322,15 @@ void destroy_personnage(personnage_t ** personnage){
 salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, char * nomBG, SDL_Texture * tileset){
   salle_t ** salle=malloc(sizeof(salle_t *));
   *salle=NULL;
+  char nom_bg[100];
+  
+  strcpy(nom_bg,DIRBG);
+  strcat(nom_bg, nomFichier);
+  nom_bg[strlen(nom_bg) - 3] = '\0';
+  strcat(nom_bg, "png");
+
   lireSalle(nomFichier, salle);
-  (*salle)->background=initialiser_texture(nomBG, renderer);
+  (*salle)->background=initialiser_texture(nom_bg, renderer);
   (*salle)->tileset=tileset;
   return (*salle);
 }

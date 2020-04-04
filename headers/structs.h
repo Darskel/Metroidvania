@@ -67,6 +67,7 @@
 
 #define NIVEAUTXT "salle_debut.txt"
 #define NIVEAUBG "./sprites/salles/salle_debut.png"
+#define DIRBG "./sprites/salles/"
 
 
 

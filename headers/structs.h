@@ -54,9 +54,9 @@
 #define LARGEURSPRITEPERS 25
 #define LARGEURSPRITEPERSATTACK 30
 
-#define HAUTEURHITBOXPERS 33
-#define LARGEURHITBOXPERS 12
-#define OFFSETHITBOX 7
+#define HAUTEURHITBOXPERS 32
+#define LARGEURHITBOXPERS 14
+#define OFFSETHITBOX 6
 
 #define VITDEPPERS 1
 #define VITATTACKPERS 1
@@ -177,6 +177,8 @@ typedef struct personnage_s{
     int pv; /**< PV(points de vie) actuel du personnage */
     int pv_max; /**< PV max du personnage */
     int inv; /**< Entier qui permet de décompter l'invulnérabilité du joueur */
+    int nbPxSaut; /**< Entier qui indique le nombre de pixel qu'il a fait lors de son saut (ou deuxième saut) */
+    int nbSaut; /**< Entier qui indique le nombre de saut que le personnage à fait avant de retoucher le sol */
     int direction; /*Vaut 1 si le personnage va à droite et 0 si il va à gauche */
     int vit_dep; /**< Vitesse de déplacement du personnage (pixel par tick) */
     int vit_att; /**< Vitesse d'attaque du personnage (en nombre de frame) */

@@ -160,7 +160,7 @@ int persValidDep(personnage_t* p, salle_t* s){
 
     leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
     rightP = leftP + p->hitbox.largeur;
-    topP = p->pos.y*TAILLEBLOC + p->delta.y;
+    topP = p->pos.y*TAILLEBLOC + p->delta.y + 1;
     bottomP = topP + p->hitbox.hauteur;
 
     if(leftP < 0 || topP < 0)
@@ -217,8 +217,11 @@ void depDroite(personnage_t* p, salle_t* s){
               //
             }
             else{
-                p->delta.x = TAILLEBLOC - 1;
-                (p->pos.x)--;
+                p->delta.x = TAILLEBLOC - 1 + OFFSETHITBOX;
+                if(p->delta.x >= TAILLEBLOC)
+                    p->delta.x %= TAILLEBLOC;
+                else
+                    (p->pos.x)--;
                 //Ajouté par MN :
                 p->posxhitbox -= p->vit_dep;
                 //
@@ -258,8 +261,7 @@ void depGauche(personnage_t* p, salle_t* s){
               //
             }
             else{
-                p->delta.x = 0;
-                (p->pos.x)++;
+                p->delta.x = TAILLEBLOC - OFFSETHITBOX;
                 //Ajouté par MN :
                 p->posxhitbox += p->vit_dep;
                 //

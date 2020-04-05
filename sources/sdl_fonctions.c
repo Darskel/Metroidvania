@@ -35,6 +35,7 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
     fprintf(stderr, "Echec de la récupération des infos de l'écran (%s)\n", SDL_GetError());
     exit(EXIT_FAILURE);
   }
+  printf("Frequence écran (en hz) : %i\n", mode->refresh_rate);
   res_h=mode->w - mode->w*OFFSETWINDOW;
   res_v=mode->h - mode->h*OFFSETWINDOW;
 
@@ -201,19 +202,21 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
           Droite=FALSE;
         }*/
 
-        if((!Gauche&&!Droite))
-          perso->etat=IDLE;
-
-        else if(Gauche){
+        if(Gauche){
           depGauche(perso, salle);
-          perso->direction = LEFT;
+          if(!Droite)
+            perso->direction = LEFT;
         }
 
-        else if(Droite){
+        if(Droite){
           depDroite(perso, salle);
-          perso->direction = RIGHT;
+          if(!Gauche)
+            perso->direction = RIGHT;
         }
 
+        if((!Gauche&&!Droite) || (Gauche&&Droite))
+          perso->etat=IDLE;
+          
         miseAjourSprites(perso);
         affichage_complet(renderer, salle, perso);
         frameTime = SDL_GetTicks() - frameStart;
@@ -424,7 +427,7 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
 
 void miseAjourSprites(personnage_t * perso){
   if(perso->etat == IDLE){
-    perso->spriteActuel.x=0;
+    perso->spriteActuel.x=IDLE;
     perso->spriteActuel.y=IDLE;
   }
   else if(perso->etat == FALLING){

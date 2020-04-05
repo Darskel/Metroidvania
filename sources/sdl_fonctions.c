@@ -297,6 +297,8 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->inv=0;
   personnage->direction=RIGHT;
   personnage->vit_dep=VITDEPPERS;
+  personnage->vit_saut=VITSAUTPERS;
+  personnage->vit_chute=VITCHUTEPERS;
   personnage->vit_att=VITATTACKPERS;
   personnage->pos=positionDepart;
   personnage->delta=positionDepartDelta;

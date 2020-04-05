@@ -60,10 +60,13 @@
 #define OFFSETHITBOX 6
 
 #define VITDEPPERS 1
+#define VITSAUTPERS 2
+#define VITCHUTEPERS 2
 #define VITATTACKPERS 1
-#define NBPXSAUT 5*TAILLEBLOC
 
-#define EVOSPRITES 3 //Change
+#define NBPXSAUT 4*TAILLEBLOC
+
+#define EVOSPRITES 3 //Change le sprite seulement 1 tour sur 3
 
 #define ZONEMORTE 5000 //Zone morte de la manette
 
@@ -186,6 +189,8 @@ typedef struct personnage_s{
     int nbSaut; /**< Entier qui indique le nombre de saut que le personnage à fait avant de retoucher le sol */
     int direction; /*Vaut 1 si le personnage va à droite et 0 si il va à gauche */
     int vit_dep; /**< Vitesse de déplacement du personnage (pixel par tick) */
+    int vit_saut; /**< Vitesse de saut du personnage (pixel par tick) */
+    int vit_chute; /**< Vitesse de chute du personnage (pixel par tick) */
     int vit_att; /**< Vitesse d'attaque du personnage (en nombre de frame) */
     position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
     position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */

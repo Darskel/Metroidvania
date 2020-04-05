@@ -357,7 +357,7 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
                         p->newEtat = 1;
                     }else{
                         //continuer saut
-                        p->delta.y -= p->vit_dep;
+                        p->delta.y -= p->vit_saut;
                         if(p->delta.y < 0){
                             (p->pos.y)--;
                             p->delta.y += TAILLEBLOC;
@@ -368,7 +368,7 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
                             (p->pos.y)++;
                             p->delta.y = 1;
                         }else{
-                            p->nbPxSaut += p->vit_dep;
+                            p->nbPxSaut += p->vit_saut;
                         }
                     }
             break;
@@ -384,7 +384,7 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
                 }
                 else{
                     //continuer chute
-                    p->delta.y += p->vit_dep;
+                    p->delta.y += p->vit_chute;
                     if(p->delta.y >= TAILLEBLOC){
                         (p->pos.y)++;
                         p->delta.y -= TAILLEBLOC;

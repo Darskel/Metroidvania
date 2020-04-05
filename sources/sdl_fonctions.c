@@ -98,12 +98,13 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
             fprintf(stderr,"Erreur pour ouvrir le premier joystick\n");
         }
         else{
-          printf("WARNING : Programme conçu pour manette XBOX\n");
+          printf("WARNING : Programme conçu pour manette XBOX, autres manettes non garanties\n");
           SDL_JoystickEventState(SDL_ENABLE);
         }
     }
     boolean_t Gauche = FALSE;
     boolean_t Droite = FALSE;
+    boolean_t tryJump = FALSE;
     boolean_t fin=FALSE;
     SDL_Texture * tileset;
     salle_t * salle;
@@ -122,6 +123,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
     perso=initialisation_personnage(renderer, positionDepart, positionDepartDelta);
 
     while(!fin){
+
       frameStart = SDL_GetTicks();
   	  while(SDL_PollEvent(&event)){
   	    switch(event.type){
@@ -155,6 +157,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
                 break;
               case SDLK_UP:
               case SDLK_z:
+                tryJump=TRUE;
                   break;
               case SDLK_DOWN:
               case SDLK_s:
@@ -211,6 +214,9 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
           Droite=FALSE;
         }*/
 
+        depVert(perso, salle, tryJump);
+
+
         if(Gauche){
           depGauche(perso, salle);
           if(!Droite)
@@ -225,6 +231,8 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
 
         if((!Gauche&&!Droite) || (Gauche&&Droite))
           perso->etat=IDLE;
+
+        tryJump=FALSE;
 
         miseAjourSprites(perso);
         affichage_complet(renderer, salle, perso);
@@ -303,6 +311,8 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->etat = IDLE;
   personnage->newEtat = FALSE;
   personnage->evoSprite = 0;
+  personnage->nbPxSaut = 0;
+  personnage->nbSaut=0;
   int * nbAnim = malloc(4*sizeof(int));
   nbAnim[0]=1;
   nbAnim[1]=8;

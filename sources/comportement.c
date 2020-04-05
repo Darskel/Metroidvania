@@ -322,41 +322,41 @@ int verifCaseDown(personnage_t* p, salle_t* s){
 }
 
 void depVert(personnage_t* p, salle_t* s, int tryJump){
+    if(p->jpCd){
+        (p->jpCd)--;
+    }
     switch(p->etat){
         case IDLE:
         case RUNNING:
-            if(tryJump){
-                //testé
+            if(tryJump && !p->jpCd){
                 p->etat = JUMPING;
-                p->newEtat = 1;
+                p->newEtat = TRUE;
                 p->nbSaut = 1;
                 p->nbPxSaut = 0;
             }else
                 if(!verifCaseDown(p,s)){
-                    //non testé
                     p->etat = FALLING;
-                    p->newEtat = 1;
+                    p->nbSaut = 1;
+                    p->newEtat = TRUE;
                 }
             break;
         case JUMPING:
             if(verifCaseUp(p,s)){
-                //status inconnu
                 p->etat = FALLING;
-                p->newEtat = 1;
+                p->newEtat = TRUE;
             }
             else
                 if(tryJump && p->nbSaut < 1 + p->inventaire[6]){
                     //non testé
                     (p->nbSaut)++;
                     p->nbPxSaut = 0;
+                    //trouver comment gerer l'animation de resaut
                 }
                 else
                     if(p->nbPxSaut >= NBPXSAUT){
-                        //testé
                         p->etat = FALLING;
-                        p->newEtat = 1;
+                        p->newEtat = TRUE;
                     }else{
-                        //continuer saut
                         p->delta.y -= p->vit_dep;
                         if(p->delta.y < 0){
                             (p->pos.y)--;
@@ -376,11 +376,14 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
             if(verifCaseDown(p,s)){
                 p->etat = IDLE; //défini comme tel pour éviter de sortir de etat_t mais on ne sait pas si il est IDLE ou RUNNING
                 p->nbSaut = 0;
-                p->newEtat = 1;
+                p->newEtat = TRUE;
+                p->jpCd = JPCD;
             }else
-                if(tryJump && p->nbSaut < 1 + p->inventaire[6]){
+                if(tryJump && p->nbSaut < 1 + p->inventaire[6] && !p->jpCd){
                     (p->nbSaut)++;
                     p->nbPxSaut = 0;
+                    p->etat = JUMPING;
+                    p->newEtat = TRUE;
                 }
                 else{
                     //continuer chute

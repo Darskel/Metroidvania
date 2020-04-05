@@ -181,7 +181,7 @@ int persValidDep(personnage_t* p, salle_t* s){
     for(int i = leftP; i <= rightP; i++)
         for(int j = topP; j <= bottomP; j++)
             if(s->mat[j][i]){
-                printf("_%d,%d:%d_\n",j,i,s->mat[j][i]);
+                //printf("_%d,%d:%d_\n",j,i,s->mat[j][i]);
                 return FALSE;
             }
 
@@ -203,7 +203,8 @@ void depDroite(personnage_t* p, salle_t* s){
             p->delta.x += p->vit_dep;
             if(p->delta.x >= TAILLEBLOC){
                 (p->pos.x)++;
-                p->delta.x = 0;
+                //p->delta.x = 0;
+                p->delta.x -= TAILLEBLOC;
             }
             //Ajouté par MN :
             p->posxhitbox += p->vit_dep;
@@ -247,7 +248,8 @@ void depGauche(personnage_t* p, salle_t* s){
             p->delta.x -= p->vit_dep;
             if(p->delta.x < 0){
                 (p->pos.x)--;
-                p->delta.x = TAILLEBLOC -1;
+                //p->delta.x = TAILLEBLOC -1;
+                p->delta.x += TAILLEBLOC;
             }
             //Ajouté par MN :
             p->posxhitbox -= p->vit_dep;
@@ -266,6 +268,127 @@ void depGauche(personnage_t* p, salle_t* s){
                 p->posxhitbox += p->vit_dep;
                 //
             }
+            break;
+        default:
+            break;
+    }
+}
+
+int verifCaseUp(personnage_t* p, salle_t* s){
+    int leftP;
+    int rightP;
+    int topP;
+
+    leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
+    rightP = leftP + p->hitbox.largeur;
+    topP = p->pos.y*TAILLEBLOC + p->delta.y;
+
+    if(topP < 0)
+        return TRUE;
+
+    leftP /= 8;
+    rightP = rightP/8 + (rightP%8 ? 1 : 0) - 1;
+    topP /= 8;
+
+    for(int i = leftP; i <= rightP; i++)
+        if(s->mat[topP][i])
+            return TRUE;
+
+    return FALSE;
+}
+
+int verifCaseDown(personnage_t* p, salle_t* s){
+    int leftP;
+    int rightP;
+    int bottomP;
+
+    leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
+    rightP = leftP + p->hitbox.largeur;
+    bottomP = p->pos.y*TAILLEBLOC + p->delta.y + 1;
+    bottomP += p->hitbox.hauteur + 1;
+
+    leftP /= 8;
+    rightP = rightP/8 + (rightP%8 ? 1 : 0) - 1;
+    bottomP = bottomP/8 + (bottomP%8 ? 1 : 0) - 1;
+
+    if(bottomP >= s->hauteur )
+        return -1; //Le personnage est tombé dans un trou
+
+    for(int i = leftP; i <= rightP; i++)
+        if(s->mat[bottomP][i])
+            return TRUE;
+
+    return FALSE;
+}
+
+void depVert(personnage_t* p, salle_t* s, int tryJump){
+    switch(p->etat){
+        case IDLE:
+        case RUNNING:
+            if(tryJump){
+                p->etat = JUMPING;
+                p->newEtat = 1;
+                p->nbSaut = 1;
+                p->nbPxSaut = 0;
+            }else
+                if(verifCaseUp(p,s)){
+                    p->etat = FALLING;
+                    p->newEtat = 1;
+                }
+            break;
+        case JUMPING:
+            if(verifCaseUp(p,s)){
+                p->etat = FALLING;
+                p->newEtat = 1;
+            }
+            else
+                if(tryJump && p->nbSaut < 1 + p->inventaire[6]){
+                    (p->nbSaut)++;
+                    p->nbPxSaut = 0;
+                }
+                else
+                    if(p->nbPxSaut >= 4*TAILLEBLOC){
+                        p->etat = FALLING;
+                        p->newEtat = 1;
+                    }else{
+                        //continuer saut
+                        p->delta.y -= p->vit_dep;
+                        if(p->delta.y < 0){
+                            (p->pos.y)--;
+                            p->delta.y += TAILLEBLOC;
+                        }
+                        if(!persValidDep(p,s)){
+                            //traitement si le pixel juste au dessus est accessible mais pas la position d'arrivé
+                            //aka trouver le position de cognement
+                            (p->pos.y)++;
+                            p->delta.y = 1;
+                        }
+                    }
+            break;
+        case FALLING:
+            if(verifCaseDown(s,p)){
+                p->etat = IDLE; //défini comme tel pour éviter de sortir de etat_t mais on ne sait pas si il est IDLE ou RUNNING
+                p->nbSaut = 0;
+                p->newEtat = 1;
+            }else
+                if(tryJump && p->nbSaut < 1 + p->inventaire[6]){
+                    (p->nbSaut)++;
+                    p->nbPxSaut = 0;
+                }
+                else{
+                    //continuer chute
+                    p->delta.y += p->vit_dep;
+                    if(p->delta.y >= TAILLEBLOC){
+                        (p->pos.y)++;
+                        p->delta.y -= TAILLEBLOC;
+                    }
+                    if(!persValidDep(p,s)){
+                        //traitement si le pixel juste en dessous est accessible mais pas la position d'arrivé
+                        //aka trouver le position de cognement
+                        (p->pos.y)--;
+                        p->delta.y = 1;
+                    }
+                }
             break;
         default:
             break;

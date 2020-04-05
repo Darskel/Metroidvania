@@ -63,6 +63,7 @@
 #define VITSAUTPERS 2
 #define VITCHUTEPERS 2
 #define VITATTACKPERS 1
+#define JPCD 11
 
 #define NBPXSAUT 4*TAILLEBLOC
 
@@ -187,6 +188,7 @@ typedef struct personnage_s{
     int inv; /**< Entier qui permet de décompter l'invulnérabilité du joueur */
     int nbPxSaut; /**< Entier qui indique le nombre de pixel qu'il a fait lors de son saut (ou deuxième saut) */
     int nbSaut; /**< Entier qui indique le nombre de saut que le personnage à fait avant de retoucher le sol */
+    int jpCd; /**< Entier qui indique le nombre de frames restantes avant de pouvoir resauter */
     int direction; /*Vaut 1 si le personnage va à droite et 0 si il va à gauche */
     int vit_dep; /**< Vitesse de déplacement du personnage (pixel par tick) */
     int vit_saut; /**< Vitesse de saut du personnage (pixel par tick) */

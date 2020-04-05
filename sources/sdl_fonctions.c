@@ -322,6 +322,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->evoSprite = 0;
   personnage->nbPxSaut = 0;
   personnage->nbSaut=0;
+  personnage->jpCd = 0;
   int * nbAnim = malloc(4*sizeof(int));
   nbAnim[0]=1;
   nbAnim[1]=8;

@@ -331,7 +331,7 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
                 p->nbSaut = 1;
                 p->nbPxSaut = 0;
             }else
-                if(verifCaseUp(p,s)){
+                if(verifCaseDown(p,s)){
                     p->etat = FALLING;
                     p->newEtat = 1;
                 }
@@ -362,6 +362,8 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
                             //aka trouver le position de cognement
                             (p->pos.y)++;
                             p->delta.y = 1;
+                        }else{
+                            p->nbPxSaut += p->vit_dep;
                         }
                     }
             break;

@@ -47,7 +47,7 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
   icon=IMG_Load("./sprites/autre/icone.png");
   SDL_SetWindowIcon(*fenetre,icon);
 
-  *renderer = SDL_CreateRenderer(*fenetre, -1, SDL_RENDERER_ACCELERATED|SDL_RENDERER_PRESENTVSYNC|SDL_RENDERER_TARGETTEXTURE);
+  *renderer = SDL_CreateRenderer(*fenetre, -1, SDL_RENDERER_ACCELERATED|SDL_RENDERER_TARGETTEXTURE);
   if(!(*renderer)){
     fprintf(stderr, "Erreur de creation du renderer : %s\n", SDL_GetError());
     exit(EXIT_FAILURE);
@@ -77,7 +77,8 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
  */
   void evenements(SDL_Renderer * renderer, SDL_DisplayMode * mode){
     SDL_Event event;
-
+    Uint32 frameStart;
+    int frameTime;
     int mousex;
     int mousey;
     Sint16 x_move;
@@ -117,6 +118,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
     perso=initialisation_personnage(renderer, positionDepart, positionDepartDelta);
 
     while(!fin){
+      frameStart = SDL_GetTicks();
   	  while(SDL_PollEvent(&event)){
   	    switch(event.type){
   	      case SDL_QUIT: //Appui sur la croix quitte le programme
@@ -210,6 +212,10 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
 
         miseAjourSprites(perso);
         affichage_complet(renderer, salle, perso);
+        frameTime = SDL_GetTicks() - frameStart;
+        if(frameTime < FRAMEDELAY){ 
+          SDL_Delay(FRAMEDELAY - frameTime);
+        }
       }
       destroy_salle(&salle);
       destroy_personnage(&perso);

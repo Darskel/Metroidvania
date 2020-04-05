@@ -62,14 +62,15 @@
 #define VITDEPPERS 1
 #define VITATTACKPERS 1
 
-#define EVOSPRITES 3
+#define EVOSPRITES 3 //Change
 
 #define ZONEMORTE 5000
 
 #define NIVEAUTXT "salle_debut.txt"
 #define DIRBG "./sprites/salles/"
 
-#define OFFSETWINDOW 0.05
+#define OFFSETWINDOW 0.05 //5% de la taille de l'écran en moins
+#define FRAMEDELAY 17 //Correspond à du 59fps
 
 
 /*

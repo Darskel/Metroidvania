@@ -7,6 +7,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 
 #endif
 
@@ -68,7 +69,7 @@
 #define NIVEAUTXT "salle_debut.txt"
 #define DIRBG "./sprites/salles/"
 
-
+#define OFFSETWINDOW 0.05
 
 
 /*

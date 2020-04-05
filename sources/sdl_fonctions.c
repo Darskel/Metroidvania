@@ -35,10 +35,10 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
     fprintf(stderr, "Echec de la récupération des infos de l'écran (%s)\n", SDL_GetError());
     exit(EXIT_FAILURE);
   }
-  res_h=mode->w;
-  res_v=mode->h;
+  res_h=mode->w - mode->w*OFFSETWINDOW;
+  res_v=mode->h - mode->h*OFFSETWINDOW;
 
-  *fenetre = SDL_CreateWindow(NOM_JEU, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, res_h, res_v, fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : SDL_WINDOW_SHOWN);
+  *fenetre = SDL_CreateWindow(NOM_JEU, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, res_h, res_v, fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : SDL_WINDOW_SHOWN);
   if(!(*fenetre)){
     fprintf(stderr, "Erreur de creation de la fenetre : %s\n", SDL_GetError());
     exit(EXIT_FAILURE);

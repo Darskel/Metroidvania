@@ -326,28 +326,33 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
         case IDLE:
         case RUNNING:
             if(tryJump){
+                //testé
                 p->etat = JUMPING;
                 p->newEtat = 1;
                 p->nbSaut = 1;
                 p->nbPxSaut = 0;
             }else
-                if(verifCaseDown(p,s)){
+                if(!verifCaseDown(p,s)){
+                    //non testé
                     p->etat = FALLING;
                     p->newEtat = 1;
                 }
             break;
         case JUMPING:
             if(verifCaseUp(p,s)){
+                //status inconnu
                 p->etat = FALLING;
                 p->newEtat = 1;
             }
             else
                 if(tryJump && p->nbSaut < 1 + p->inventaire[6]){
+                    //non testé
                     (p->nbSaut)++;
                     p->nbPxSaut = 0;
                 }
                 else
-                    if(p->nbPxSaut >= 4*TAILLEBLOC){
+                    if(p->nbPxSaut >= NBPXSAUT){
+                        //testé
                         p->etat = FALLING;
                         p->newEtat = 1;
                     }else{

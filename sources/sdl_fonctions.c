@@ -230,7 +230,8 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
         }
 
         if((!Gauche&&!Droite) || (Gauche&&Droite))
-          perso->etat=IDLE;
+          if(perso->etat == RUNNING)//ajouter par Thomas: on souhaite passer de RUNNING à IDLE mais pas de JUMPING à IDLE ou bien de ATTACKING à IDLE
+            perso->etat=IDLE;
 
         tryJump=FALSE;
 

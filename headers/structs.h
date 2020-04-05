@@ -61,7 +61,7 @@
 
 #define VITDEPPERS 1
 #define VITSAUTPERS 2
-#define VITCHUTEPERS 2
+#define VITCHUTEPERS 1
 #define VITATTACKPERS 1
 #define JPCD 2
 

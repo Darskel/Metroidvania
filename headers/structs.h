@@ -63,7 +63,7 @@
 #define VITSAUTPERS 2
 #define VITCHUTEPERS 2
 #define VITATTACKPERS 1
-#define JPCD 11
+#define JPCD 2
 
 #define NBPXSAUT 4*TAILLEBLOC
 

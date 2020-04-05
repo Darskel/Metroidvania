@@ -357,7 +357,7 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
                         p->etat = FALLING;
                         p->newEtat = TRUE;
                     }else{
-                        p->delta.y -= p->vit_dep;
+                        p->delta.y -= p->vit_saut;
                         if(p->delta.y < 0){
                             (p->pos.y)--;
                             p->delta.y += TAILLEBLOC;

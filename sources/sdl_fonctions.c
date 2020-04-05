@@ -171,12 +171,13 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
             break;
           case SDL_JOYBUTTONDOWN :
           switch(event.jbutton.button){
-            case 0 :
-              tryJump=TRUE;
+              case 0 :
+                tryJump=TRUE;
                 break;
-          }
-          case SDL_JOYBUTTONUP :
-            break;
+            }
+          break;
+          /*case SDL_JOYBUTTONUP :
+            break;*/
           case SDL_JOYAXISMOTION :
             switch(event.jaxis.axis){
               case 0 :
@@ -193,19 +194,22 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
                 break;
             }
             break;
-          case SDL_JOYBALLMOTION :
-            break;
+          /*case SDL_JOYBALLMOTION :
+            break;*/
           case SDL_JOYHATMOTION :
             switch(event.jhat.value){
-              case SDL_HAT_CENTERED :
+              case SDL_HAT_CENTERED:
                 Gauche = FALSE;
                 Droite = FALSE;
                 break;
-              case SDL_HAT_LEFT :
+              case SDL_HAT_LEFT:
                 Gauche = TRUE;
                 break;
-              case SDL_HAT_RIGHT :
+              case SDL_HAT_RIGHT:
                 Droite = TRUE;
+                break;
+              case SDL_HAT_UP:
+                tryJump=TRUE;
                 break;
             }
   	      }

@@ -130,9 +130,11 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
   	            fin=TRUE;
   	            break;
               case SDLK_LEFT:
+              case SDLK_q:
                 Gauche=FALSE;
                 break;
               case SDLK_RIGHT:
+              case SDLK_d:
                 Droite=FALSE;
                 break;
   	        }
@@ -140,9 +142,11 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
   	      case SDL_KEYDOWN:
   	        switch(event.key.keysym.sym){
               case SDLK_LEFT:
+              case SDLK_q:
                 Gauche=TRUE;
                 break;
               case SDLK_RIGHT:
+              case SDLK_d:
                 Droite=TRUE;
                 break;
   	        }
@@ -192,10 +196,10 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
           y_move = SDL_JoystickGetAxis(pJoystick, 1);
         }
 
-        if((Gauche&&Droite)){
+        /*if((Gauche&&Droite)){
           Gauche=FALSE;
           Droite=FALSE;
-        }
+        }*/
 
         if((!Gauche&&!Droite))
           perso->etat=IDLE;
@@ -213,7 +217,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
         miseAjourSprites(perso);
         affichage_complet(renderer, salle, perso);
         frameTime = SDL_GetTicks() - frameStart;
-        if(frameTime < FRAMEDELAY){ 
+        if(frameTime < FRAMEDELAY){
           SDL_Delay(FRAMEDELAY - frameTime);
         }
       }

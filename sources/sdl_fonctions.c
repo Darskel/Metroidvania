@@ -157,6 +157,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
                 break;
               case SDLK_UP:
               case SDLK_z:
+              case SDLK_SPACE:
                 tryJump=TRUE;
                   break;
               case SDLK_DOWN:
@@ -169,6 +170,11 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
             mousey=event.motion.y;
             break;
           case SDL_JOYBUTTONDOWN :
+          switch(event.jbutton.button){
+            case 0 :
+              tryJump=TRUE;
+                break;
+          }
           case SDL_JOYBUTTONUP :
             break;
           case SDL_JOYAXISMOTION :

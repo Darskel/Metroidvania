@@ -158,6 +158,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
               case SDLK_UP:
               case SDLK_z:
               case SDLK_SPACE:
+              //Cette façon de faire produit la possibilité de bunny hop
                 tryJump=TRUE;
                   break;
               case SDLK_DOWN:

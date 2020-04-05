@@ -29,3 +29,5 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
 void miseAjourSprites(personnage_t * personnage);
 void destroy_salle(salle_t ** salle);
 void destroy_personnage(personnage_t ** perso);
+Mix_Chunk** AudioInit(void);
+void DetruireAudio(Mix_Chunk ** audiosample);

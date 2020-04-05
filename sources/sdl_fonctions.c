@@ -21,6 +21,9 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
   int res_h;
   int res_v;
   SDL_Surface * icon;
+  SDL_AudioDeviceID audio_device;
+  SDL_AudioSpec desired;
+  SDL_AudioSpec obtained;
 
   if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
     fprintf(stderr, "Echec de l'initalisation de la SDL (%s)\n", SDL_GetError());
@@ -150,6 +153,12 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
               case SDLK_d:
                 Droite=TRUE;
                 break;
+              case SDLK_UP:
+              case SDLK_z:
+                  break;
+              case SDLK_DOWN:
+              case SDLK_s:
+                break;
   	        }
   	        break;
           case SDL_MOUSEMOTION :
@@ -216,7 +225,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
 
         if((!Gauche&&!Droite) || (Gauche&&Droite))
           perso->etat=IDLE;
-          
+
         miseAjourSprites(perso);
         affichage_complet(renderer, salle, perso);
         frameTime = SDL_GetTicks() - frameStart;
@@ -457,5 +466,29 @@ void miseAjourSprites(personnage_t * perso){
       else (perso->evoSprite)--;
     }
   }
+
+}
+
+Mix_Chunk** AudioInit(void){
+    Mix_Chunk ** audiosample = malloc(NBSOUNDS * sizeof(Mix_Chunk*));
+
+    // Load waveforms
+    for( int i = 0; i < NBSOUNDS; i++ )
+    {
+        audiosample[i] = Mix_LoadWAV(WAVFILE);
+        if( audiosample[i] == NULL )
+        {
+            fprintf(stderr, "Unable to load wave file: %s\n", WAVFILE);
+        }
+    }
+
+    return audiosample;
+}
+
+void DetruireAudio(Mix_Chunk ** audiosample){
+  for( int i = 0; i < NBSOUNDS; i++ )
+    {
+        Mix_FreeChunk(audiosample[i]);
+    }
 
 }

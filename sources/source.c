@@ -25,7 +25,7 @@ static int filecmp(struct dirent* f1, struct dirent* f2){
 }
 
 char* chercherSprite(int id, char* dirName){
-    /* tout sur dirent ici: http://sdz.tdct.org/sdz/arcourir-les-dossiers-avec-dirent-h.html */
+    /* tout sur dirent ici: http://sdz.tdct.org/sdz/parcourir-les-dossiers-avec-dirent-h.html */
     if(id <= 0)
         return NULL;
 

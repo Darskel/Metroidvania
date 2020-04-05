@@ -366,7 +366,7 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
                     }
             break;
         case FALLING:
-            if(verifCaseDown(s,p)){
+            if(verifCaseDown(p,s)){
                 p->etat = IDLE; //défini comme tel pour éviter de sortir de etat_t mais on ne sait pas si il est IDLE ou RUNNING
                 p->nbSaut = 0;
                 p->newEtat = 1;

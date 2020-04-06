@@ -31,3 +31,4 @@ void destroy_salle(salle_t ** salle);
 void destroy_personnage(personnage_t ** perso);
 Mix_Chunk** AudioInit(void);
 void DetruireAudio(Mix_Chunk ** audiosample);
+void ecranNoir(SDL_Renderer * renderer, int ms);

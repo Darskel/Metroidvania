@@ -252,13 +252,12 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
         tryJump=FALSE;
 
         miseAjourSprites(perso);
+
         if(salleChangee){
-          SDL_SetRenderDrawColor(renderer,0,0,0,255);
-          SDL_RenderClear(renderer);
-          SDL_RenderPresent(renderer);
-          SDL_Delay(100);
+          ecranNoir(renderer,100);
           salleChangee=FALSE;
         }
+
         affichage_complet(renderer, salle, perso);
 
         frameTime = SDL_GetTicks() - frameStart;
@@ -529,4 +528,11 @@ void DetruireAudio(Mix_Chunk ** audiosample){
         Mix_FreeChunk(audiosample[i]);
     }
 
+}
+
+void ecranNoir(SDL_Renderer * renderer, int ms){
+    SDL_SetRenderDrawColor(renderer,0,0,0,255);
+    SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
+    SDL_Delay(ms);
 }

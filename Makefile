@@ -55,6 +55,9 @@ testinit: ${o}liste.o ${o}source.o ${o}inits.o ${o}testInits.o
 testDepPers: ${o}testDepPers.o ${o}source.o ${o}comportement.o ${o}liste.o
 	${CC} $^ -o $@  ${LIBS}
 
+testPorte: ${o}testPorte.o ${o}source.o ${o}comportement.o ${o}liste.o
+	${CC} $^ -o $@  ${LIBS}
+
 ${o}%.o: ${c}%.c
 	${CC} $< -c -o $@ ${LIBS} 
 

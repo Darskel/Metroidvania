@@ -152,7 +152,7 @@ static int hitB(monstre_t* e, salle_t* s){
  *
  * @return 1 (TRUE) si le déplacement est valide, 0 (FALSE) sinon
 */
-int persValidDep(personnage_t* p, salle_t* s){
+static int persValidDep(personnage_t* p, salle_t* s){
     int leftP;
     int rightP;
     int topP;
@@ -274,7 +274,7 @@ void depGauche(personnage_t* p, salle_t* s){
     }
 }
 
-int verifCaseUp(personnage_t* p, salle_t* s){
+static int verifCaseUp(personnage_t* p, salle_t* s){
     int leftP;
     int rightP;
     int topP;
@@ -297,7 +297,7 @@ int verifCaseUp(personnage_t* p, salle_t* s){
     return FALSE;
 }
 
-int verifCaseDown(personnage_t* p, salle_t* s){
+static int verifCaseDown(personnage_t* p, salle_t* s){
     int leftP;
     int rightP;
     int bottomP;
@@ -405,6 +405,38 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
     }
 }
 
+char* prendPorte(personnage_t* p, liste_t* lPortes){
+    if(strcmp(lPortes->type,"porte"))
+        return NULL;
+    
+    porte_t porte;
+    char* salle = NULL;
+    int i = 1;
+
+    enTete(lPortes);
+    while(!horsListe(lPortes)){
+        valeurElm(lPortes,&porte);
+        int leftPo = porte.pos.x * TAILLEBLOC;
+        int rightPo = leftPo + TAILLEBLOC;
+        int topPo = porte.pos.y * TAILLEBLOC;
+        int bottomPo = topPo + TAILLEBLOC;
+
+        int leftPe = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
+        int rightPe = leftPe + p->hitbox.largeur;
+        int topPe = p->pos.y*TAILLEBLOC + p->delta.y + 1;
+        int bottomPe = topPe + p->hitbox.hauteur;
+
+        if(rightPe >= rightPo && leftPe <= leftPo && topPe <= topPo && bottomPe >= bottomPo){
+            p->pos = porte.pos_arrivee;
+            salle = malloc(strlen(porte.salleSuivante));
+            strcpy(salle,porte.salleSuivante);
+            return salle;
+        }
+        suivant(lPortes);
+    }
+    return NULL;
+}
+
 static void dep(monstre_t* entite, salle_t* salle){
     if(entite->pv){
         if(entite->direction){
@@ -432,6 +464,7 @@ static void dep(monstre_t* entite, salle_t* salle){
         }
     }
 }
+
 //Commentés par MN car ne compile pas (structures pas à jour notamment)
 /*
   static int inRange(monstre_t* entite, personnage_t* perso, int radius){

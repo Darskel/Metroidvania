@@ -9,18 +9,15 @@
  * \date 01/04/2020
 */
 
-int persValidDep(personnage_t* p, salle_t* s);
-
 int hitE(monstre_t* e1, monstre_t* e2);
 int hitP(monstre_t* e, personnage_t* p);
 
 void depDroite(personnage_t* p, salle_t* s);
 void depGauche(personnage_t* p, salle_t* s);
 void depVert(personnage_t* p, salle_t* s, int tryJump);
+char* prendPorte(personnage_t* p, liste_t* lPortes);
 
-int verifCaseUp(personnage_t* p, salle_t* s);
-int verifCaseDown(personnage_t* p, salle_t* s);
-
+int persValidDep(personnage_t* p, salle_t* s);
 
 void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);
 void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);

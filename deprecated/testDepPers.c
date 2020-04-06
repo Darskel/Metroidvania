@@ -5,10 +5,10 @@
 
 int main(int argc, char* argv[]){
     salle_t* s = NULL;
-    personnage_t* p;
+    personnage_t* p = malloc(sizeof(personnage_t));
 
     lireSalle("./salle_debut.txt", &s);
-    p->pos = (position_t){14,0};
+    p->pos = (position_t){0,10};
     p->delta = (position_t){0,0};
     p->hitbox = (taille_t){4*8,2*8};
 
@@ -25,6 +25,8 @@ int main(int argc, char* argv[]){
     }
 
     printf("pos: %s\n", persValidDep(p,s) ? "Valides" : "Non valides");
+
+    free(p);
 
     return 0;
 }

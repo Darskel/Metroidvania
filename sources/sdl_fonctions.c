@@ -88,6 +88,11 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
     Sint16 x_move;
     Sint16 y_move;
     char * salle_nom;
+    int kon = 0;
+    char konami[11];
+    int indKon = 0;
+    for(int i = 0; i < 11; i++)
+      konami[i] = '\0';
 
     SDL_Joystick* pJoystick;
     int numJoystick = SDL_NumJoysticks();
@@ -139,11 +144,31 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
   	            break;
               case SDLK_LEFT:
               case SDLK_q:
+                konami[indKon++] = 'l';
                 Gauche=FALSE;
                 break;
               case SDLK_RIGHT:
               case SDLK_d:
+                konami[indKon++] = 'r';
                 Droite=FALSE;
+                break;
+              case SDLK_UP:
+              case SDLK_z:
+              case SDLK_SPACE:
+                konami[indKon++] = 'u';
+                break;
+              case SDLK_DOWN:
+              case SDLK_s:
+                konami[indKon++] = 'd';
+                break;
+              case SDLK_a:
+                konami[indKon++] = 'a';
+                break;
+              case SDLK_b:
+                konami[indKon++] = 'b';
+                break;
+              case SDLK_RETURN:
+                konami[indKon++] = 's';
                 break;
   	        }
   	        break;
@@ -174,8 +199,15 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
             break;
           case SDL_JOYBUTTONDOWN :
           switch(event.jbutton.button){
-              case 0 :
+              case 0 : //bouton A manette XBOX
+                konami[indKon++] = 'a';
                 tryJump=TRUE;
+                break;
+              case 1 : //bouton B manette XBOX
+                konami[indKon++] = 'b';
+                break;
+              case 7 : //bouton Start manette XBOX
+                konami[indKon++] = 's';
                 break;
             }
           break;
@@ -206,13 +238,19 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
                 Droite = FALSE;
                 break;
               case SDL_HAT_LEFT:
+                konami[indKon++] = 'l';
                 Gauche = TRUE;
                 break;
               case SDL_HAT_RIGHT:
+                konami[indKon++] = 'r';
                 Droite = TRUE;
                 break;
               case SDL_HAT_UP:
+                konami[indKon++] = 'u';
                 tryJump=TRUE;
+                break;
+              case SDL_HAT_DOWN:
+                konami[indKon++] = 'd';
                 break;
             }
   	      }
@@ -222,11 +260,47 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
           y_move = SDL_JoystickGetAxis(pJoystick, 1);
         }
 
+        char verifCode[11] = "uuddlrlrbas";
+        //tester konamicode
+        if(indKon){
+          if(!strcmp(salle->nomFichier,"salle_entree_grotte.txt") && !kon){
+            int indVerif;
+            for(indVerif = 0; (indVerif < indKon) && (konami[indVerif] == verifCode[indVerif]); indVerif++);
+            if(indKon != indVerif){
+              indKon = 0;
+              for(int i = 0; i < 11; i++)
+                konami[i] = '\0';
+            }else{
+              if(indKon == 11){
+                //effectuer code
+                printf("konami code\n");
+                salle->mat[9][9] = 34;
+                salle->mat[10][9] = 1;
+                salle->mat[10][8] = 34;
+                salle->mat[10][10] = 34;
+                if(!persValidDep(perso,salle)){
+                  perso->pos.x = 5;
+                  perso->delta.x = TAILLEBLOC - 1 + OFFSETHITBOX;
+                  if(perso->delta.x >= TAILLEBLOC)
+                    perso->delta.x %= TAILLEBLOC;
+                }
+                kon = 1;
+                for(int i = 0; i < 11; i++)
+                  konami[i] = '\0';
+              }
+            }
+          }else
+            indKon = 0;
+        }
+
+        printf("%s\n",konami);
+
         salle_nom=prendPorte(perso, salle->listePorte);
         if(salle_nom != NULL){
           destroy_salle(&salle);
           salle=initialiser_salle(renderer, salle_nom, tileset);
           salleChangee=TRUE;
+          kon = 0;
           free(salle_nom);
         }
 
@@ -254,7 +328,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
         miseAjourSprites(perso);
 
         if(salleChangee){
-          ecranNoir(renderer,100);
+          ecranNoir(renderer,150);
           salleChangee=FALSE;
         }
 

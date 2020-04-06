@@ -152,7 +152,7 @@ static int hitB(monstre_t* e, salle_t* s){
  *
  * @return 1 (TRUE) si le déplacement est valide, 0 (FALSE) sinon
 */
-static int persValidDep(personnage_t* p, salle_t* s){
+int persValidDep(personnage_t* p, salle_t* s){
     int leftP;
     int rightP;
     int topP;

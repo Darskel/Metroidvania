@@ -408,7 +408,7 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
 char* prendPorte(personnage_t* p, liste_t* lPortes){
     if(strcmp(lPortes->type,"porte"))
         return NULL;
-    
+
     porte_t porte;
     char* salle = NULL;
     int i = 1;
@@ -428,6 +428,7 @@ char* prendPorte(personnage_t* p, liste_t* lPortes){
 
         if(rightPe >= rightPo && leftPe <= leftPo && topPe <= topPo && bottomPe >= bottomPo){
             p->pos = porte.pos_arrivee;
+            p->delta.x = 2;
             salle = malloc(strlen(porte.salleSuivante));
             strcpy(salle,porte.salleSuivante);
             return salle;

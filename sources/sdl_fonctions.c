@@ -87,6 +87,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
     int mousey;
     Sint16 x_move;
     Sint16 y_move;
+    char * salle_nom;
 
     SDL_Joystick* pJoystick;
     int numJoystick = SDL_NumJoysticks();
@@ -106,6 +107,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
     boolean_t Droite = FALSE;
     boolean_t tryJump = FALSE;
     boolean_t fin=FALSE;
+    boolean_t salleChangee=FALSE;
     SDL_Texture * tileset;
     salle_t * salle;
     personnage_t * perso;
@@ -220,10 +222,13 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
           y_move = SDL_JoystickGetAxis(pJoystick, 1);
         }
 
-        /*if((Gauche&&Droite)){
-          Gauche=FALSE;
-          Droite=FALSE;
-        }*/
+        salle_nom=prendPorte(perso, salle->listePorte);
+        if(salle_nom != NULL){
+          destroy_salle(&salle);
+          salle=initialiser_salle(renderer, salle_nom, tileset);
+          salleChangee=TRUE;
+          free(salle_nom);
+        }
 
         depVert(perso, salle, tryJump);
 
@@ -247,7 +252,15 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
         tryJump=FALSE;
 
         miseAjourSprites(perso);
+        if(salleChangee){
+          SDL_SetRenderDrawColor(renderer,0,0,0,255);
+          SDL_RenderClear(renderer);
+          SDL_RenderPresent(renderer);
+          SDL_Delay(100);
+          salleChangee=FALSE;
+        }
         affichage_complet(renderer, salle, perso);
+
         frameTime = SDL_GetTicks() - frameStart;
         if(frameTime < FRAMEDELAY){
           SDL_Delay(FRAMEDELAY - frameTime);

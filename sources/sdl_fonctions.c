@@ -293,8 +293,6 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
             indKon = 0;
         }
 
-        printf("%s\n",konami);
-
         salle_nom=prendPorte(perso, salle->listePorte);
         if(salle_nom != NULL){
           destroy_salle(&salle);

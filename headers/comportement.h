@@ -17,8 +17,6 @@ void depGauche(personnage_t* p, salle_t* s);
 void depVert(personnage_t* p, salle_t* s, int tryJump);
 char* prendPorte(personnage_t* p, liste_t* lPortes);
 
-int persValidDep(personnage_t* p, salle_t* s);
-
 void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);
 void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);
 void compMurGlace(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);

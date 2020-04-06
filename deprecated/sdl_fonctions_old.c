@@ -7,13 +7,6 @@
 #include "../headers/sdl_fonctions.h"
 #include "../headers/structs.h"
 
-/**
- * \file sdl_fonctions.c
- * \brief Fichier qui regroupent les fonctions utilisées pour la gestion des graphismes et des évènements (SDL2)
- * \author Marie-Nina MUNAR L2 Info Le Mans
- * \version 2.0
- * \date 11/03/2020
-*/
 
 /**
  * \brief Fonction d'initalisation de la SDL et de création de la fenetre

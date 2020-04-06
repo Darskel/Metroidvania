@@ -15,13 +15,7 @@
 #define NOM_JEU "Diskosieni"
 #define TAILLEBLOC 8
 
-/**
- * \file sdl_fonctions.h
- * \brief Header pour la librairie de fonctions et les constantes liées à l'usage de la SDL2
- * \author Marie-Nina MUNAR L2 Info Le Mans
- * \version 2.0
- * \date 11/03/2020
-*/
+/** Pas inclut dans la doc*/
 
 SDL_Window * initialisation_SDL();
 void quitter_SDL(SDL_Window * fenetre);

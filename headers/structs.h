@@ -30,9 +30,9 @@
 /**
  * \file structs.h
  * \brief Ensemble de structures utilisées dans le projets
- * \author Thomas DIDIER L2 Info Le Mans
- * \version 1.0
- * \date 13/02/2020
+ * \author Thomas DIDIER Marie-Nina MUNAR L2 Info Le Mans
+ * \version 2.1
+ * \date 06/04/2020
 */
 
 #ifndef STRUCTS_INCLUDED
@@ -45,9 +45,12 @@
 
 #define NOM_JEU "Diskosieni"
 
+//Path :
 #define PLAYERSPRITESPATH "./sprites/entite/joueur/sprite_joueur.png"
 #define TILESETPATH "./sprites/bloc/tileset.png"
+#define DIRBG "./sprites/salles/"
 
+//Hauteur et largeur en pixels :
 #define TAILLEBLOC 8
 #define HAUTEURPORTE 36
 #define LARGEURPORTE 13
@@ -57,28 +60,32 @@
 
 #define HAUTEURHITBOXPERS 32
 #define LARGEURHITBOXPERS 13
-#define OFFSETHITBOX 6
 
+#define OFFSETHITBOX 6 //Différence de x (en pixel) entre le début du sprite et le début de l'hitbox
+
+//Vitesses en pixel par secondes :
 #define VITDEPPERS 1
 #define VITSAUTPERS 2
 #define VITCHUTEPERS 1
 #define VITATTACKPERS 1
-#define JPCD 2
 
-#define NBPXSAUT 4*TAILLEBLOC
+#define JPCD 2 //Délai avant de pouvoir de nouveau sauter
+
+#define NBPXSAUT 4*TAILLEBLOC //Taille d'un saut en pixel
 
 #define EVOSPRITES 3 //Change le sprite seulement 1 tour sur 3
 
 #define ZONEMORTE 5000 //Zone morte de la manette
 
+//Fichier du niveau de départ :
 #define NIVEAUTXT "salle_debut.txt"
-#define DIRBG "./sprites/salles/"
 
-#define OFFSETWINDOW 0.05 //5% de la taille de l'écran en moins
+#define OFFSETWINDOW 0.05 //5% de la taille de l'écran en moins (pour mode fenêtré)
+
 #define FRAMEDELAY 17 //Correspond à du 59fps
 
-#define WAVFILE "./audio/test.wav"
-#define NBSOUNDS 1
+#define TAILLEKONAMI 11 //NB d'inputs du Konami code
+#define KONAMICODE "uuddlrlrbas"
 
 /*
     INVENTAIRE:
@@ -104,7 +111,7 @@
 
 
 /**
- * \struct taille_t
+ * \struct taille_s
  * \brief Taille avec hauteur et largeur
 */
 typedef struct taille_s{
@@ -131,35 +138,15 @@ typedef enum boulean_e{
 } boolean_t;
 
 /**
- * \enum indSprite_e
- * \brief Nom des indices des sprites
+ * \enum etat_e
+ * \brief Nom des différents états possibles du personnage (utiles pour l'animation de sprites)
 */
-typedef enum indSprite_e{
-    SU, /**< Sprite de non déplacement (Stand-Up) */
-    DEP1, /**< Sprite de déplacement n°1 */
-    DEP2, /**< Sprite de déplacement n°2 */
-    DEP3, /**< Sprite de déplacement n°3 */
-    DEP4, /**< Sprite de déplacement n°4 */
-    DEP5, /**< Sprite de déplacement n°5 */
-    DEP6, /**< Sprite de déplacement n°6 */
-    DEP7, /**< Sprite de déplacement n°7 */
-    DEP8, /**< Sprite de déplacement n°8 */
-    JP1, /**< Sprite de saut (Jump) n°1 */
-    JP2, /**< Sprite de saut (Jump) n°2 */
-    JP3, /**< Sprite de saut (Jump) n°3 */
-    JP4, /**< Sprite de saut (Jump) n°4 */
-    JP5, /**< Sprite de saut (Jump) n°5 */
-    JP6, /**< Sprite de saut (Jump) n°6 */
-    JP7, /**< Sprite de saut (Jump) n°7 */
-    JP8 /**< Sprite de saut (Jump) n°8 */
-} indSpritePer_t;
-
 typedef enum etat_e{
-    IDLE,
-    RUNNING,
-    JUMPING,
-    ATTACKING,
-    FALLING
+    IDLE, /**< Etat immobile */
+    RUNNING, /**< Etat course */
+    JUMPING, /**< Etat saut */
+    ATTACKING, /**< Etat attaque */
+    FALLING /**< Etat chute */
 } etat_t;
 
 /**
@@ -199,7 +186,6 @@ typedef struct personnage_s{
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du personnage */
     SDL_Rect spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
     taille_t hitbox; /**< Taille de la hitbox du personnage en pixel */
-    int posxhitbox; /**< Position horizontale en pixel de la hitbox dans la salle */
     etat_t etat; /**< Etat du personnage (idle/running/jumping/attacking/falling) */
     boolean_t newEtat; /**< Booléen qui signifie qu'un changement d'état vient de s'effectuer */
     int evoSprite; /**< Entier qui décrémente, changement de sprite quand vaut 0 */
@@ -217,12 +203,11 @@ typedef struct type_monstre_s{
     int pv_base; /**< PV de base du monstre */
     int vit_dep; /**< Vitesse de déplacement du monstre (facteur/indicateur) */
     int vit_att; /**< Vitesse d'attaque du monstre (en nombre de frame) */
-
     char* nom;
     char* path; /**< Chemin d'accès à l'image qui contient les sprites*/
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du monstre */
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du monstre */
-    int degat;
+    int degat; /**< Nombre de dégâts faits par le monstre */
     taille_t hitbox; /**< Taille de la hitbox de monstre en cases */
     boolean_t passeEntites; /**< Indique si le monstre peut passer à travers les entités (autres monstres/joueur) */
     boolean_t passeBlocs; /**< Indique si le monstre peut passer à travers les blocs */
@@ -237,8 +222,8 @@ typedef struct type_monstre_s{
 typedef struct monstre_s{
     type_monstre_t * type; /**< Type de monstre */
     int pv; /**< PV actuels du monstre */
-    etat_t etat;
-    SDL_Rect spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
+    etat_t etat; /**< Etat actuel du personnage */
+    SDL_Rect spriteActuel; /**< Rectangle qui correspond à la taille du sprite actuel dans la texture */
     position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
     position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
     boolean_t direction; /**< Direction vers laquelle regarde le monstre (1: vers la gauche(LEFT), 0: vers la droite(RIGHT)) */

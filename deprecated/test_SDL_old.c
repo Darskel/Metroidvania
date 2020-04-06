@@ -1,13 +1,6 @@
 #include <stdio.h>
 #include "../headers/sdl_fonctions.h"
 
-/**
- * \file test_SDL.c
- * \brief Fichier de test des fonctions de 'sdl_fonctions.c'
- * \author Marie-Nina MUNAR L2 Info Le Mans
- * \version 1.0
- * \date 25/02/2020
-*/
 
 /**
  * \brief Programme de test qui initalise la sdl, lance la gestion d'évènements et gère les erreurs

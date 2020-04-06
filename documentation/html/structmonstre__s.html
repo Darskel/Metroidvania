@@ -78,30 +78,32 @@ Attributs publics</h2></td></tr>
 <tr class="separator:af58fb0da12d89fbdce602578f457560e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e26c0e85b90352f9496f331ec74e98d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmonstre__s.html#a1e26c0e85b90352f9496f331ec74e98d">pv</a></td></tr>
 <tr class="separator:a1e26c0e85b90352f9496f331ec74e98d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94bfe0a4981f2656bbfd2ce29e4e7763"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmonstre__s.html#a94bfe0a4981f2656bbfd2ce29e4e7763">spritesActuel</a></td></tr>
-<tr class="separator:a94bfe0a4981f2656bbfd2ce29e4e7763"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38d270db8b7dd326f1e014eb3b72b740"><td class="memItemLeft" align="right" valign="top">etat_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmonstre__s.html#a38d270db8b7dd326f1e014eb3b72b740">etat</a></td></tr>
+<tr class="separator:a38d270db8b7dd326f1e014eb3b72b740"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c57e6c890e0709f09b1df09c71a8daa"><td class="memItemLeft" align="right" valign="top">SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmonstre__s.html#a7c57e6c890e0709f09b1df09c71a8daa">spriteActuel</a></td></tr>
+<tr class="separator:a7c57e6c890e0709f09b1df09c71a8daa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a972c2fb3087127d04bd3719d62c1030e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structposition__s.html">position_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmonstre__s.html#a972c2fb3087127d04bd3719d62c1030e">pos</a></td></tr>
 <tr class="separator:a972c2fb3087127d04bd3719d62c1030e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6ab2d77d3fc8726015c43ed81e699e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfrac_pos__s.html">fracPos_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmonstre__s.html#af6ab2d77d3fc8726015c43ed81e699e0">delta</a></td></tr>
-<tr class="separator:af6ab2d77d3fc8726015c43ed81e699e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a4bad53b10cc5379c594dd689750b0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structposition__s.html">position_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmonstre__s.html#a9a4bad53b10cc5379c594dd689750b0c">delta</a></td></tr>
+<tr class="separator:a9a4bad53b10cc5379c594dd689750b0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1a2d6868b660addc5855614f1849540"><td class="memItemLeft" align="right" valign="top">boolean_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmonstre__s.html#aa1a2d6868b660addc5855614f1849540">direction</a></td></tr>
 <tr class="separator:aa1a2d6868b660addc5855614f1849540"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p>Structure représentant un monstre. </p>
 </div><h2 class="groupheader">Documentation des données membres</h2>
-<a id="af6ab2d77d3fc8726015c43ed81e699e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6ab2d77d3fc8726015c43ed81e699e0">&#9670;&nbsp;</a></span>delta</h2>
+<a id="a9a4bad53b10cc5379c594dd689750b0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a4bad53b10cc5379c594dd689750b0c">&#9670;&nbsp;</a></span>delta</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structfrac_pos__s.html">fracPos_t</a> monstre_s::delta</td>
+          <td class="memname"><a class="el" href="structposition__s.html">position_t</a> monstre_s::delta</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Différence de position à ajouter à la position entière </p>
+<p>Position en pixel à l'intérieur de la case de matrice </p>
 
 </div>
 </div>
@@ -120,6 +122,21 @@ Attributs publics</h2></td></tr>
 
 </div>
 </div>
+<a id="a38d270db8b7dd326f1e014eb3b72b740"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38d270db8b7dd326f1e014eb3b72b740">&#9670;&nbsp;</a></span>etat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">etat_t monstre_s::etat</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Etat actuel du personnage </p>
+
+</div>
+</div>
 <a id="a972c2fb3087127d04bd3719d62c1030e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a972c2fb3087127d04bd3719d62c1030e">&#9670;&nbsp;</a></span>pos</h2>
 
@@ -131,7 +148,7 @@ Attributs publics</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Postition actuelle du monstre (position entière) </p>
+<p>Position actuel du personnage (position entière en cases de matrice) </p>
 
 </div>
 </div>
@@ -150,18 +167,18 @@ Attributs publics</h2></td></tr>
 
 </div>
 </div>
-<a id="a94bfe0a4981f2656bbfd2ce29e4e7763"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94bfe0a4981f2656bbfd2ce29e4e7763">&#9670;&nbsp;</a></span>spritesActuel</h2>
+<a id="a7c57e6c890e0709f09b1df09c71a8daa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c57e6c890e0709f09b1df09c71a8daa">&#9670;&nbsp;</a></span>spriteActuel</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int monstre_s::spritesActuel</td>
+          <td class="memname">SDL_Rect monstre_s::spriteActuel</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Indice du sprite à afficher </p>
+<p>Rectangle qui correspond à la taille du sprite actuel dans la texture </p>
 
 </div>
 </div>

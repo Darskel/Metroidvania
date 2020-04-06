@@ -67,8 +67,7 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Définitions de type</a> &#124;
-<a href="#enum-members">Énumérations</a> &#124;
-<a href="#func-members">Fonctions</a>  </div>
+<a href="#enum-members">Énumérations</a>  </div>
   <div class="headertitle">
 <div class="title">Référence du fichier structs.h</div>  </div>
 </div><!--header-->
@@ -77,26 +76,24 @@ $(function() {
 <p>Ensemble de structures utilisées dans le projets.  
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;SDL2/SDL.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="liste_8h_source.html">liste.h</a>&quot;</code><br />
+<code>#include &lt;SDL2/SDL.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL_ttf.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL_image.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL_mixer.h&gt;</code><br />
 </div>
 <p><a href="structs_8h_source.html">Aller au code source de ce fichier.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtaille__t.html">taille_t</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtaille__s.html">taille_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Taille avec hauteur et largeur.  <a href="structtaille__s.html#details">Plus de détails...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structposition__s.html">position_s</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Une position représentée par deux valeurs entières.  <a href="structposition__s.html#details">Plus de détails...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsalle__s.html">salle_s</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure représentant les salles.  <a href="structsalle__s.html#details">Plus de détails...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfraction__s.html">fraction_s</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Une fration représenter par deux entier.  <a href="structfraction__s.html#details">Plus de détails...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrac_pos__s.html">fracPos_s</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure représentant la différence de position en fraction.  <a href="structfrac_pos__s.html#details">Plus de détails...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpersonnage__s.html">personnage_s</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure représentant le personnage.  <a href="structpersonnage__s.html#details">Plus de détails...</a><br /></td></tr>
@@ -116,6 +113,9 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:ad8fd7726134c2bc64bc41a6b086150b4"><td class="memItemLeft" align="right" valign="top"><a id="ad8fd7726134c2bc64bc41a6b086150b4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SYSTEM_INCLUDED</b></td></tr>
+<tr class="separator:ad8fd7726134c2bc64bc41a6b086150b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5666ac5930c9f903698073ab1fa694f7"><td class="memItemLeft" align="right" valign="top"><a id="a5666ac5930c9f903698073ab1fa694f7"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>PAUSE</b></td></tr>
 <tr class="separator:a5666ac5930c9f903698073ab1fa694f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,29 +132,104 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>RIGHT</b>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a80fb826a684cf3f0d306b22aa100ddac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fdcc1659ee790f8bdd196e7745ab403"><td class="memItemLeft" align="right" valign="top"><a id="a5fdcc1659ee790f8bdd196e7745ab403"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>TAILLE_INVENTAIRE</b>&#160;&#160;&#160;6</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TAILLE_INVENTAIRE</b>&#160;&#160;&#160;8</td></tr>
 <tr class="separator:a5fdcc1659ee790f8bdd196e7745ab403"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73b3bbc51c65bf165939cc7b57e9eb4b"><td class="memItemLeft" align="right" valign="top"><a id="a73b3bbc51c65bf165939cc7b57e9eb4b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>NOM_JEU</b>&#160;&#160;&#160;&quot;Diskosieni&quot;</td></tr>
+<tr class="separator:a73b3bbc51c65bf165939cc7b57e9eb4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67ef72cf4050f504bfafcf3e6503bb56"><td class="memItemLeft" align="right" valign="top"><a id="a67ef72cf4050f504bfafcf3e6503bb56"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PLAYERSPRITESPATH</b>&#160;&#160;&#160;&quot;./sprites/entite/joueur/sprite_joueur.png&quot;</td></tr>
+<tr class="separator:a67ef72cf4050f504bfafcf3e6503bb56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf4193200441b7a6e1f02ebff70ea2d9"><td class="memItemLeft" align="right" valign="top"><a id="abf4193200441b7a6e1f02ebff70ea2d9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TILESETPATH</b>&#160;&#160;&#160;&quot;./sprites/bloc/tileset.png&quot;</td></tr>
+<tr class="separator:abf4193200441b7a6e1f02ebff70ea2d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb631ee3c4f196aaae2d314dc3b72983"><td class="memItemLeft" align="right" valign="top"><a id="afb631ee3c4f196aaae2d314dc3b72983"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>DIRBG</b>&#160;&#160;&#160;&quot;./sprites/salles/&quot;</td></tr>
+<tr class="separator:afb631ee3c4f196aaae2d314dc3b72983"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f3f48a893d39a15c49bb4661352eff5"><td class="memItemLeft" align="right" valign="top"><a id="a1f3f48a893d39a15c49bb4661352eff5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TAILLEBLOC</b>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:a1f3f48a893d39a15c49bb4661352eff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adee98db21c24ed30e252c29fbcef08cb"><td class="memItemLeft" align="right" valign="top"><a id="adee98db21c24ed30e252c29fbcef08cb"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>HAUTEURPORTE</b>&#160;&#160;&#160;36</td></tr>
+<tr class="separator:adee98db21c24ed30e252c29fbcef08cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20e7a98af95c2205f9daf298cc667008"><td class="memItemLeft" align="right" valign="top"><a id="a20e7a98af95c2205f9daf298cc667008"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LARGEURPORTE</b>&#160;&#160;&#160;13</td></tr>
+<tr class="separator:a20e7a98af95c2205f9daf298cc667008"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7423af0a1479f13d79cd0c49c79e5962"><td class="memItemLeft" align="right" valign="top"><a id="a7423af0a1479f13d79cd0c49c79e5962"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>HAUTEURSPRITEPERS</b>&#160;&#160;&#160;33</td></tr>
+<tr class="separator:a7423af0a1479f13d79cd0c49c79e5962"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a23858655a03f63cb0b6052c986eae4"><td class="memItemLeft" align="right" valign="top"><a id="a4a23858655a03f63cb0b6052c986eae4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LARGEURSPRITEPERS</b>&#160;&#160;&#160;25</td></tr>
+<tr class="separator:a4a23858655a03f63cb0b6052c986eae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf2c88ec7d9ef42adfe6f37a67874ac5"><td class="memItemLeft" align="right" valign="top"><a id="aaf2c88ec7d9ef42adfe6f37a67874ac5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LARGEURSPRITEPERSATTACK</b>&#160;&#160;&#160;30</td></tr>
+<tr class="separator:aaf2c88ec7d9ef42adfe6f37a67874ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad6128d7fab77d16eba9a5f25c0b19b1"><td class="memItemLeft" align="right" valign="top"><a id="aad6128d7fab77d16eba9a5f25c0b19b1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>HAUTEURHITBOXPERS</b>&#160;&#160;&#160;32</td></tr>
+<tr class="separator:aad6128d7fab77d16eba9a5f25c0b19b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12acd8af9860b9af2a26c52f756a338e"><td class="memItemLeft" align="right" valign="top"><a id="a12acd8af9860b9af2a26c52f756a338e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LARGEURHITBOXPERS</b>&#160;&#160;&#160;13</td></tr>
+<tr class="separator:a12acd8af9860b9af2a26c52f756a338e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a098d05ee927f4ff0b87ef11b56314643"><td class="memItemLeft" align="right" valign="top"><a id="a098d05ee927f4ff0b87ef11b56314643"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OFFSETHITBOX</b>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:a098d05ee927f4ff0b87ef11b56314643"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52280fbbe28eda3540ba23e3fc3195e2"><td class="memItemLeft" align="right" valign="top"><a id="a52280fbbe28eda3540ba23e3fc3195e2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>VITDEPPERS</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a52280fbbe28eda3540ba23e3fc3195e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a246757ac96450448d775864c3f543e03"><td class="memItemLeft" align="right" valign="top"><a id="a246757ac96450448d775864c3f543e03"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>VITSAUTPERS</b>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a246757ac96450448d775864c3f543e03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51fffba4988e62b540adbeb5ce5d0993"><td class="memItemLeft" align="right" valign="top"><a id="a51fffba4988e62b540adbeb5ce5d0993"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>VITCHUTEPERS</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a51fffba4988e62b540adbeb5ce5d0993"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae61089395a1490a8242e41d55b720357"><td class="memItemLeft" align="right" valign="top"><a id="ae61089395a1490a8242e41d55b720357"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>VITATTACKPERS</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ae61089395a1490a8242e41d55b720357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2326924fc935f7a3415c0e3894e2ddc"><td class="memItemLeft" align="right" valign="top"><a id="aa2326924fc935f7a3415c0e3894e2ddc"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>JPCD</b>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:aa2326924fc935f7a3415c0e3894e2ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a130b65b0ce9f74f28ad552abf2d6cfac"><td class="memItemLeft" align="right" valign="top"><a id="a130b65b0ce9f74f28ad552abf2d6cfac"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>NBPXSAUT</b>&#160;&#160;&#160;4*TAILLEBLOC</td></tr>
+<tr class="separator:a130b65b0ce9f74f28ad552abf2d6cfac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae63e5d862b727e84be5532481c97f6a2"><td class="memItemLeft" align="right" valign="top"><a id="ae63e5d862b727e84be5532481c97f6a2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>EVOSPRITES</b>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:ae63e5d862b727e84be5532481c97f6a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae845c1a50d8597e702fcc6fc4d08205"><td class="memItemLeft" align="right" valign="top"><a id="aae845c1a50d8597e702fcc6fc4d08205"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ZONEMORTE</b>&#160;&#160;&#160;5000</td></tr>
+<tr class="separator:aae845c1a50d8597e702fcc6fc4d08205"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fd7da7c096dd160453b799184da9002"><td class="memItemLeft" align="right" valign="top"><a id="a7fd7da7c096dd160453b799184da9002"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>NIVEAUTXT</b>&#160;&#160;&#160;&quot;salle_debut.txt&quot;</td></tr>
+<tr class="separator:a7fd7da7c096dd160453b799184da9002"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4817d1298844898123c54ac9a24b62b"><td class="memItemLeft" align="right" valign="top"><a id="af4817d1298844898123c54ac9a24b62b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OFFSETWINDOW</b>&#160;&#160;&#160;0.05</td></tr>
+<tr class="separator:af4817d1298844898123c54ac9a24b62b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd4b5f839f90f855c5f289c24667eea5"><td class="memItemLeft" align="right" valign="top"><a id="abd4b5f839f90f855c5f289c24667eea5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>FRAMEDELAY</b>&#160;&#160;&#160;17</td></tr>
+<tr class="separator:abd4b5f839f90f855c5f289c24667eea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a252d76aa96596f6536b71713b8f2d895"><td class="memItemLeft" align="right" valign="top"><a id="a252d76aa96596f6536b71713b8f2d895"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TAILLEKONAMI</b>&#160;&#160;&#160;11</td></tr>
+<tr class="separator:a252d76aa96596f6536b71713b8f2d895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fe6fd113bdaa732983693e5c6a2941c"><td class="memItemLeft" align="right" valign="top"><a id="a4fe6fd113bdaa732983693e5c6a2941c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>KONAMICODE</b>&#160;&#160;&#160;&quot;uuddlrlrbas&quot;</td></tr>
+<tr class="separator:a4fe6fd113bdaa732983693e5c6a2941c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Définitions de type</h2></td></tr>
+<tr class="memitem:a46dc52a35db08cf532828128f8cf47e7"><td class="memItemLeft" align="right" valign="top"><a id="a46dc52a35db08cf532828128f8cf47e7"></a>
+typedef struct <a class="el" href="structtaille__s.html">taille_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>taille_t</b></td></tr>
+<tr class="separator:a46dc52a35db08cf532828128f8cf47e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0edf461c60578ea071dc06a4b3a57b1"><td class="memItemLeft" align="right" valign="top"><a id="ad0edf461c60578ea071dc06a4b3a57b1"></a>
 typedef struct <a class="el" href="structposition__s.html">position_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>position_t</b></td></tr>
 <tr class="separator:ad0edf461c60578ea071dc06a4b3a57b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54882e7c5a50e83d169b020d314a5d76"><td class="memItemLeft" align="right" valign="top"><a id="a54882e7c5a50e83d169b020d314a5d76"></a>
 typedef enum <a class="el" href="structs_8h.html#a81fbe2bfb808675f1d63cbfe1335c271">boulean_e</a>&#160;</td><td class="memItemRight" valign="bottom"><b>boolean_t</b></td></tr>
 <tr class="separator:a54882e7c5a50e83d169b020d314a5d76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa774ec09009f9aca26a1f991980cc01d"><td class="memItemLeft" align="right" valign="top"><a id="aa774ec09009f9aca26a1f991980cc01d"></a>
-typedef enum <a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1e">indSprite_e</a>&#160;</td><td class="memItemRight" valign="bottom"><b>indSpritePer_t</b></td></tr>
-<tr class="separator:aa774ec09009f9aca26a1f991980cc01d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3095e9752f46c8a3dffac01c790d38b3"><td class="memItemLeft" align="right" valign="top"><a id="a3095e9752f46c8a3dffac01c790d38b3"></a>
+typedef enum <a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2c">etat_e</a>&#160;</td><td class="memItemRight" valign="bottom"><b>etat_t</b></td></tr>
+<tr class="separator:a3095e9752f46c8a3dffac01c790d38b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada6d98da4b79a612ca12f1778d890b4b"><td class="memItemLeft" align="right" valign="top"><a id="ada6d98da4b79a612ca12f1778d890b4b"></a>
 typedef struct <a class="el" href="structsalle__s.html">salle_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>salle_t</b></td></tr>
 <tr class="separator:ada6d98da4b79a612ca12f1778d890b4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22dc742b27da5ef525dc878fb8895311"><td class="memItemLeft" align="right" valign="top"><a id="a22dc742b27da5ef525dc878fb8895311"></a>
-typedef struct <a class="el" href="structfraction__s.html">fraction_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fraction_t</b></td></tr>
-<tr class="separator:a22dc742b27da5ef525dc878fb8895311"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf439d737c92b655ab850b476d7d4159"><td class="memItemLeft" align="right" valign="top"><a id="adf439d737c92b655ab850b476d7d4159"></a>
-typedef struct <a class="el" href="structfrac_pos__s.html">fracPos_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>fracPos_t</b></td></tr>
-<tr class="separator:adf439d737c92b655ab850b476d7d4159"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeca7e7adc19e924d5fade8ea3c6937ac"><td class="memItemLeft" align="right" valign="top"><a id="aeca7e7adc19e924d5fade8ea3c6937ac"></a>
 typedef struct <a class="el" href="structpersonnage__s.html">personnage_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>personnage_t</b></td></tr>
 <tr class="separator:aeca7e7adc19e924d5fade8ea3c6937ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,47 +253,23 @@ typedef struct <a class="el" href="structporte__s.html">porte_s</a>&#160;</td><t
  }<tr class="memdesc:a81fbe2bfb808675f1d63cbfe1335c271"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet d'utiliser <em>TRUE</em> et <em>FALSE</em>.  <a href="structs_8h.html#a81fbe2bfb808675f1d63cbfe1335c271">Plus de détails...</a><br /></td></tr>
 </td></tr>
 <tr class="separator:a81fbe2bfb808675f1d63cbfe1335c271"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc92dae96c834a587153fcb1fb87df1e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1e">indSprite_e</a> { <br />
-&#160;&#160;<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea7911229e7fd613f96aeaf9413c8251bc">SU</a>, 
-<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea0be47f0b04acb232d923e709fa894bb2">DEP1</a>, 
-<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea89e919aa18342c5ac61acfad301d2fa3">DEP2</a>, 
-<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea9915ae810af5d2414989b1b8da181819">DEP3</a>, 
+<tr class="memitem:ac652084689fae43c9ede5782aedc0d2c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2c">etat_e</a> { <br />
+&#160;&#160;<a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2cafd6a0e4343048b10646dd2976cc5ad18">IDLE</a>, 
+<a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2ca1061be6c3fb88d32829cba6f6b2be304">RUNNING</a>, 
+<a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2cab8cd32180a1d5897df8369b127256ad1">JUMPING</a>, 
+<a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2ca05f520974a8946a4b11907b698557a8b">ATTACKING</a>, 
 <br />
-&#160;&#160;<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea48c8ff9158c2e520d1ac043e0782e146">DEP4</a>, 
-<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1eaba6603f4d77cb0d36d164f1b10b85476">DEP5</a>, 
-<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea23c524f1921055449d2fa639448ecdb8">DEP6</a>, 
-<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1eaf96ce696d487f6a941d7c42d80e9bdcc">DEP7</a>, 
+&#160;&#160;<a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2cad24712a6a30c1d431b927d1ba2f84b66">FALLING</a>
 <br />
-&#160;&#160;<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1ead9718755aea697e4b5ffd9e2b6e3e7d1">DEP8</a>, 
-<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1eaca24f796340bb8bf3ea89af1f858d13c">JP1</a>, 
-<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea876188282a95ccb4c239ba10a9b7d4c4">JP2</a>, 
-<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1eab277d3e4d540960a818de52825e64add">JP3</a>, 
-<br />
-&#160;&#160;<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea39b78adf09688e56f7aa4c7bcbcc9786">JP4</a>, 
-<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1eae793d5968204651d96b7d0c933bfe51e">JP5</a>, 
-<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1ead4c49849aed1803d35d7e1937c9e180b">JP6</a>, 
-<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea04a9327a3a1dde259800007956b6d482">JP7</a>, 
-<br />
-&#160;&#160;<a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea7cf7aee82a1ca557ea9c8a1037f9eebc">JP8</a>
-<br />
- }<tr class="memdesc:acc92dae96c834a587153fcb1fb87df1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nom des indices des sprites.  <a href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1e">Plus de détails...</a><br /></td></tr>
+ }<tr class="memdesc:ac652084689fae43c9ede5782aedc0d2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nom des différents états possibles du personnage (utiles pour l'animation de sprites)  <a href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2c">Plus de détails...</a><br /></td></tr>
 </td></tr>
-<tr class="separator:acc92dae96c834a587153fcb1fb87df1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Fonctions</h2></td></tr>
-<tr class="memitem:aae90c8ca9d63dc77fed2a674555344b2"><td class="memItemLeft" align="right" valign="top"><a id="aae90c8ca9d63dc77fed2a674555344b2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>supPorte</b> (<a class="el" href="structporte__s.html">porte_t</a> **)</td></tr>
-<tr class="separator:aae90c8ca9d63dc77fed2a674555344b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7f22ce7d8e2944ec9d141c24c75fbd6"><td class="memItemLeft" align="right" valign="top"><a id="ac7f22ce7d8e2944ec9d141c24c75fbd6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>supMonstre</b> (<a class="el" href="structmonstre__s.html">monstre_t</a> **m)</td></tr>
-<tr class="separator:ac7f22ce7d8e2944ec9d141c24c75fbd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ac652084689fae43c9ede5782aedc0d2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p>Ensemble de structures utilisées dans le projets. </p>
-<dl class="section author"><dt>Auteur</dt><dd>Thomas DIDIER L2 Info Le Mans </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>13/02/2020 </dd></dl>
+<dl class="section author"><dt>Auteur</dt><dd>Thomas DIDIER Marie-Nina MUNAR L2 Info Le Mans </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>2.1 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>06/04/2020 </dd></dl>
 </div><h2 class="groupheader">Documentation du type de l'énumération</h2>
 <a id="a81fbe2bfb808675f1d63cbfe1335c271"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a81fbe2bfb808675f1d63cbfe1335c271">&#9670;&nbsp;</a></span>boulean_e</h2>
@@ -242,53 +293,29 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>supMonstre</b> (<a cl
 
 </div>
 </div>
-<a id="acc92dae96c834a587153fcb1fb87df1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc92dae96c834a587153fcb1fb87df1e">&#9670;&nbsp;</a></span>indSprite_e</h2>
+<a id="ac652084689fae43c9ede5782aedc0d2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac652084689fae43c9ede5782aedc0d2c">&#9670;&nbsp;</a></span>etat_e</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1e">indSprite_e</a></td>
+          <td class="memname">enum <a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2c">etat_e</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Nom des indices des sprites. </p>
+<p>Nom des différents états possibles du personnage (utiles pour l'animation de sprites) </p>
 <table class="fieldtable">
-<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1ea7911229e7fd613f96aeaf9413c8251bc"></a>SU&#160;</td><td class="fielddoc"><p>Sprite de non déplacement (Stand-Up) </p>
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="ac652084689fae43c9ede5782aedc0d2cafd6a0e4343048b10646dd2976cc5ad18"></a>IDLE&#160;</td><td class="fielddoc"><p>Etat immobile </p>
 </td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1ea0be47f0b04acb232d923e709fa894bb2"></a>DEP1&#160;</td><td class="fielddoc"><p>Sprite de déplacement n°1 </p>
+<tr><td class="fieldname"><a id="ac652084689fae43c9ede5782aedc0d2ca1061be6c3fb88d32829cba6f6b2be304"></a>RUNNING&#160;</td><td class="fielddoc"><p>Etat course </p>
 </td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1ea89e919aa18342c5ac61acfad301d2fa3"></a>DEP2&#160;</td><td class="fielddoc"><p>Sprite de déplacement n°2 </p>
+<tr><td class="fieldname"><a id="ac652084689fae43c9ede5782aedc0d2cab8cd32180a1d5897df8369b127256ad1"></a>JUMPING&#160;</td><td class="fielddoc"><p>Etat saut </p>
 </td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1ea9915ae810af5d2414989b1b8da181819"></a>DEP3&#160;</td><td class="fielddoc"><p>Sprite de déplacement n°3 </p>
+<tr><td class="fieldname"><a id="ac652084689fae43c9ede5782aedc0d2ca05f520974a8946a4b11907b698557a8b"></a>ATTACKING&#160;</td><td class="fielddoc"><p>Etat attaque </p>
 </td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1ea48c8ff9158c2e520d1ac043e0782e146"></a>DEP4&#160;</td><td class="fielddoc"><p>Sprite de déplacement n°4 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1eaba6603f4d77cb0d36d164f1b10b85476"></a>DEP5&#160;</td><td class="fielddoc"><p>Sprite de déplacement n°5 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1ea23c524f1921055449d2fa639448ecdb8"></a>DEP6&#160;</td><td class="fielddoc"><p>Sprite de déplacement n°6 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1eaf96ce696d487f6a941d7c42d80e9bdcc"></a>DEP7&#160;</td><td class="fielddoc"><p>Sprite de déplacement n°7 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1ead9718755aea697e4b5ffd9e2b6e3e7d1"></a>DEP8&#160;</td><td class="fielddoc"><p>Sprite de déplacement n°8 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1eaca24f796340bb8bf3ea89af1f858d13c"></a>JP1&#160;</td><td class="fielddoc"><p>Sprite de saut (Jump) n°1 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1ea876188282a95ccb4c239ba10a9b7d4c4"></a>JP2&#160;</td><td class="fielddoc"><p>Sprite de saut (Jump) n°2 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1eab277d3e4d540960a818de52825e64add"></a>JP3&#160;</td><td class="fielddoc"><p>Sprite de saut (Jump) n°3 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1ea39b78adf09688e56f7aa4c7bcbcc9786"></a>JP4&#160;</td><td class="fielddoc"><p>Sprite de saut (Jump) n°4 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1eae793d5968204651d96b7d0c933bfe51e"></a>JP5&#160;</td><td class="fielddoc"><p>Sprite de saut (Jump) n°5 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1ead4c49849aed1803d35d7e1937c9e180b"></a>JP6&#160;</td><td class="fielddoc"><p>Sprite de saut (Jump) n°6 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1ea04a9327a3a1dde259800007956b6d482"></a>JP7&#160;</td><td class="fielddoc"><p>Sprite de saut (Jump) n°7 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="acc92dae96c834a587153fcb1fb87df1ea7cf7aee82a1ca557ea9c8a1037f9eebc"></a>JP8&#160;</td><td class="fielddoc"><p>Sprite de saut (Jump) n°8 </p>
+<tr><td class="fieldname"><a id="ac652084689fae43c9ede5782aedc0d2cad24712a6a30c1d431b927d1ba2f84b66"></a>FALLING&#160;</td><td class="fielddoc"><p>Etat chute </p>
 </td></tr>
 </table>
 

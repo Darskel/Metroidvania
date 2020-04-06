@@ -7,6 +7,14 @@
 #define BLOC_ERR "./autre/erreur.png"
 #define BASE 100
 
+/**
+ * \file source.h
+ * \brief Headers et constantes des fonctions de lecture d'une salle
+ * \author Thomas DIDIER L2 Info Le Mans
+ * \version 1.1
+ * \date 06/04/2020
+*/
+
 extern char* chercherSprite(int, char*);
 extern int sauvegarder(int, int, char*, position_t*, int[], char* []);
 extern int chargerSauvegarde(int, char*, personnage_t*, int[], char*[]);

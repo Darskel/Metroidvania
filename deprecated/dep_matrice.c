@@ -5,14 +5,6 @@
 #define Y 5
 
 /**
- * \file sdl_fonctions.h
- * \brief Header pour la librairie de fonctions et les constantes liées à l'usage de la SDL2
- * \author Marie-Nina MUNAR L2 Info Le Mans
- * \version 2.0
- * \date 25/02/2020
-*/
-
-/**
  * \enum direction
  * \brief Premet l'utilisation des 4 directions dans les fonctions
 */

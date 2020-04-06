@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['largeur',['largeur',['../structsalle__s.html#ac1273e8d176620c3b9130d2f1e741315',1,'salle_s::largeur()'],['../structtype__monstre__s.html#aad3de2b9e1e4199ed5c0a1cb43bfc259',1,'type_monstre_s::largeur()']]],
-  ['listesprites',['listeSprites',['../structporte__s.html#aa55e29e3a22ae8711ea6ff4de335feee',1,'porte_s']]]
+  ['id_5fsprite',['id_sprite',['../structbloc__s.html#a291781698b4163cff50b321d5b010663',1,'bloc_s']]],
+  ['inv',['inv',['../structpersonnage__s.html#a1d76a383232b764037a80a8b39b3c378',1,'personnage_s']]],
+  ['inventaire',['inventaire',['../structpersonnage__s.html#a0aefe070eb6c9c73fe6a40c909d2dc30',1,'personnage_s']]]
 ];

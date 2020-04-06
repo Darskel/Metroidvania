@@ -5,6 +5,7 @@
 #include "../headers/structs.h"
 #include "../headers/source.h"
 
+
 //Mis en commentaire des fonctions car les structures ont changé
 
 void mainInit(personnage_t** perso, liste_t** entites){

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['changerext',['changerExt',['../codemap_8c.html#aa1b08cf83f2efc79bf91a090a565d075',1,'changerExt(char *nomDoc):&#160;codemap.c'],['../decodemap_8c.html#aa1b08cf83f2efc79bf91a090a565d075',1,'changerExt(char *nomDoc):&#160;decodemap.c']]],
-  ['chargersauvegarde',['chargerSauvegarde',['../source_8c.html#ae552ae3538b4ad44354aa761534d1116',1,'source.c']]],
-  ['creerliste',['creerListe',['../liste_8h.html#a7439a021fe740a427e51831efbf44a7a',1,'creerListe(char *type):&#160;liste.c'],['../liste_8c.html#a7439a021fe740a427e51831efbf44a7a',1,'creerListe(char *type):&#160;liste.c']]]
+  ['chargersauvegarde',['chargerSauvegarde',['../source_8c.html#ae552ae3538b4ad44354aa761534d1116',1,'chargerSauvegarde(int numSauv, char *salle, personnage_t *perso, int inventaire[], char *nomObjs[]):&#160;source.c'],['../source_8h.html#a048224bdc440e43ed701bcbd75816449',1,'chargerSauvegarde(int, char *, personnage_t *, int[], char *[]):&#160;source.c']]],
+  ['cherchersprite',['chercherSprite',['../source_8c.html#a533f4bb0a5e22b4efcfc42b6b903394a',1,'chercherSprite(int id, char *dirName):&#160;source.c'],['../source_8h.html#aaba5828d70f80f7a7e34f45c304b643f',1,'chercherSprite(int, char *):&#160;source.c']]],
+  ['creerliste',['creerListe',['../liste_8c.html#a7439a021fe740a427e51831efbf44a7a',1,'creerListe(char *type):&#160;liste.c'],['../liste_8h.html#a7439a021fe740a427e51831efbf44a7a',1,'creerListe(char *type):&#160;liste.c']]]
 ];

@@ -1,0 +1,171 @@
+\hypertarget{source_8h}{}\section{Référence du fichier headers/source.h}
+\label{source_8h}\index{headers/source.\+h@{headers/source.\+h}}
+
+
+Headers et constantes des fonctions de lecture d\textquotesingle{}une salle.  
+
+
+{\ttfamily \#include \char`\"{}../headers/structs.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{source_8h_ab146d4d97ad31f63e0e77b770cfb08a8}\label{source_8h_ab146d4d97ad31f63e0e77b770cfb08a8}} 
+\#define {\bfseries D\+I\+R\+\_\+\+S\+A\+UV}~\char`\"{}sauvegardes\char`\"{}
+\item 
+\mbox{\Hypertarget{source_8h_ae0bb01ef886639a9465ccb684dd2f6bc}\label{source_8h_ae0bb01ef886639a9465ccb684dd2f6bc}} 
+\#define {\bfseries D\+I\+R\+\_\+\+S\+A\+L\+LE}~\char`\"{}./salles/\char`\"{}
+\item 
+\mbox{\Hypertarget{source_8h_a94a7171631034736f17160005eedf950}\label{source_8h_a94a7171631034736f17160005eedf950}} 
+\#define {\bfseries B\+L\+O\+C\+\_\+\+E\+RR}~\char`\"{}./autre/erreur.\+png\char`\"{}
+\item 
+\mbox{\Hypertarget{source_8h_a79bcfb6bde984f42d1124b068a509af7}\label{source_8h_a79bcfb6bde984f42d1124b068a509af7}} 
+\#define {\bfseries B\+A\+SE}~100
+\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{source_8h_aaba5828d70f80f7a7e34f45c304b643f}{chercher\+Sprite} (int, char $\ast$)
+\begin{DoxyCompactList}\small\item\em Recherche un sprite dans un dossier (méthode dirent) \end{DoxyCompactList}\item 
+int \hyperlink{source_8h_a237b7fdb7359dcf2c40a191fb12e883e}{sauvegarder} (int, int, char $\ast$, \hyperlink{structposition__s}{position\+\_\+t} $\ast$, int\mbox{[}$\,$\mbox{]}, char $\ast$\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Sauvegarde l\textquotesingle{}état de la partie. \end{DoxyCompactList}\item 
+int \hyperlink{source_8h_a048224bdc440e43ed701bcbd75816449}{charger\+Sauvegarde} (int, char $\ast$, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$, int\mbox{[}$\,$\mbox{]}, char $\ast$\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Charge l\textquotesingle{}état de la partie. \end{DoxyCompactList}\item 
+int \hyperlink{source_8h_ad5237d1625ec6ab16ef2c4f0690bbfb8}{nettoyer\+Salle} (\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$salle)
+\begin{DoxyCompactList}\small\item\em Nettoie et supprime la structure salle donnée. \end{DoxyCompactList}\item 
+int \hyperlink{source_8h_a772c619ce47ab23c7a90d0758ef29ba6}{lire\+Salle} (char $\ast$, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$)
+\begin{DoxyCompactList}\small\item\em Modifie la structure salle pour la nouvelle salle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Headers et constantes des fonctions de lecture d\textquotesingle{}une salle. 
+
+\begin{DoxyAuthor}{Auteur}
+Thomas D\+I\+D\+I\+ER L2 Info Le Mans 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+06/04/2020 
+\end{DoxyDate}
+
+
+\subsection{Documentation des fonctions}
+\mbox{\Hypertarget{source_8h_a048224bdc440e43ed701bcbd75816449}\label{source_8h_a048224bdc440e43ed701bcbd75816449}} 
+\index{source.\+h@{source.\+h}!charger\+Sauvegarde@{charger\+Sauvegarde}}
+\index{charger\+Sauvegarde@{charger\+Sauvegarde}!source.\+h@{source.\+h}}
+\subsubsection{\texorpdfstring{charger\+Sauvegarde()}{chargerSauvegarde()}}
+{\footnotesize\ttfamily int charger\+Sauvegarde (\begin{DoxyParamCaption}\item[{int}]{num\+Sauv,  }\item[{char $\ast$}]{salle,  }\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{perso,  }\item[{int}]{inventaire\mbox{[}$\,$\mbox{]},  }\item[{char $\ast$}]{nom\+Objs\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Charge l\textquotesingle{}état de la partie. 
+
+Les paramètres num\+Sauv et nom\+Objs doivent être définis avant, les autres paramètres seront remplis par cette fonction
+
+
+\begin{DoxyParams}{Paramètres}
+{\em num\+Sauv} & numéro de la sauvegarde (entre 1 et 3) \\
+\hline
+{\em salle} & nom de la salle à charger \\
+\hline
+{\em perso} & personnage (structure personnage\+\_\+t) à remplir \\
+\hline
+{\em inventaire} & tableau contenant l\textquotesingle{}état de l\textquotesingle{}inventaire du personnage \\
+\hline
+{\em nom\+Objs} & tableau contenant le nom des objets de l\textquotesingle{}inventaire dans l\textquotesingle{}ordre\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+un code erreur en fonction de l\textquotesingle{}erreur\+: -\/1 = Mauvais numéro de sauvegarde, -\/2 = impossible d\textquotesingle{}ouvrir ou créer le fichier; le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès), ou 0 si le fichier de sauvegarde est vide 
+\end{DoxyReturn}
+\mbox{\Hypertarget{source_8h_aaba5828d70f80f7a7e34f45c304b643f}\label{source_8h_aaba5828d70f80f7a7e34f45c304b643f}} 
+\index{source.\+h@{source.\+h}!chercher\+Sprite@{chercher\+Sprite}}
+\index{chercher\+Sprite@{chercher\+Sprite}!source.\+h@{source.\+h}}
+\subsubsection{\texorpdfstring{chercher\+Sprite()}{chercherSprite()}}
+{\footnotesize\ttfamily char$\ast$ chercher\+Sprite (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{char $\ast$}]{dir\+Name }\end{DoxyParamCaption})}
+
+
+
+Recherche un sprite dans un dossier (méthode dirent) 
+
+Tout sur dirent ici\+: \href{http://sdz.tdct.org/sdz/parcourir-les-dossiers-avec-dirent-h.html}{\tt http\+://sdz.\+tdct.\+org/sdz/parcourir-\/les-\/dossiers-\/avec-\/dirent-\/h.\+html}
+
+
+\begin{DoxyParams}{Paramètres}
+{\em id} & un entier correpondant à un id \\
+\hline
+{\em dir\+Name} & la chaîne de caractères correspondant au chemin du dossier où chercher le sprite\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+le path (chaîne de caractères) du sprite trouvé 
+\end{DoxyReturn}
+\mbox{\Hypertarget{source_8h_a772c619ce47ab23c7a90d0758ef29ba6}\label{source_8h_a772c619ce47ab23c7a90d0758ef29ba6}} 
+\index{source.\+h@{source.\+h}!lire\+Salle@{lire\+Salle}}
+\index{lire\+Salle@{lire\+Salle}!source.\+h@{source.\+h}}
+\subsubsection{\texorpdfstring{lire\+Salle()}{lireSalle()}}
+{\footnotesize\ttfamily int lire\+Salle (\begin{DoxyParamCaption}\item[{char $\ast$}]{nom\+Fichier,  }\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$}]{salle }\end{DoxyParamCaption})}
+
+
+
+Modifie la structure salle pour la nouvelle salle. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em nom\+Fichier} & chaîne de caractères correspondant au nom du fichier à lire \\
+\hline
+{\em salle} & pointeur du pointeur de la structure salle à remplir avec la lecture \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+0 si tout s\textquotesingle{}est bien déroulé 
+\end{DoxyReturn}
+\mbox{\Hypertarget{source_8h_ad5237d1625ec6ab16ef2c4f0690bbfb8}\label{source_8h_ad5237d1625ec6ab16ef2c4f0690bbfb8}} 
+\index{source.\+h@{source.\+h}!nettoyer\+Salle@{nettoyer\+Salle}}
+\index{nettoyer\+Salle@{nettoyer\+Salle}!source.\+h@{source.\+h}}
+\subsubsection{\texorpdfstring{nettoyer\+Salle()}{nettoyerSalle()}}
+{\footnotesize\ttfamily int nettoyer\+Salle (\begin{DoxyParamCaption}\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$}]{salle }\end{DoxyParamCaption})}
+
+
+
+Nettoie et supprime la structure salle donnée. 
+
+libère toute la mémoire utiliser et prépare le pointeur à être de nouveau utilisé
+
+
+\begin{DoxyParams}{Paramètres}
+{\em salle} & pointeur sur le pointeur de la structure salle à nettoyer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+0 si tout s\textquotesingle{}est bien déroulé 
+\end{DoxyReturn}
+\mbox{\Hypertarget{source_8h_a237b7fdb7359dcf2c40a191fb12e883e}\label{source_8h_a237b7fdb7359dcf2c40a191fb12e883e}} 
+\index{source.\+h@{source.\+h}!sauvegarder@{sauvegarder}}
+\index{sauvegarder@{sauvegarder}!source.\+h@{source.\+h}}
+\subsubsection{\texorpdfstring{sauvegarder()}{sauvegarder()}}
+{\footnotesize\ttfamily int sauvegarder (\begin{DoxyParamCaption}\item[{int}]{num\+Sauv,  }\item[{int}]{hp,  }\item[{char $\ast$}]{salle,  }\item[{\hyperlink{structposition__s}{position\+\_\+t} $\ast$}]{dep,  }\item[{int}]{inventaire\mbox{[}$\,$\mbox{]},  }\item[{char $\ast$}]{nom\+Objs\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Sauvegarde l\textquotesingle{}état de la partie. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em num\+Sauv} & numéro de la sauvegarde (entre 1 et 3) \\
+\hline
+{\em hp} & nombre de point de vies du personnage principal \\
+\hline
+{\em salle} & nom de la dernière salle visité par le personnage principal \\
+\hline
+{\em dep} & position(position\+\_\+t) d\textquotesingle{}arrivé dans la salle (position de départ après chargement) \\
+\hline
+{\em inventaire} & tableau contenant l\textquotesingle{}état de l\textquotesingle{}inventaire du personnage \\
+\hline
+{\em nom\+Objs} & tableau contenant le nom des objets de l\textquotesingle{}inventaire dans l\textquotesingle{}ordre\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+un code erreur en fonction de l\textquotesingle{}erreur\+: -\/1 = Mauvais numéro de sauvegarde, -\/2 = impossible d\textquotesingle{}ouvrir ou créer le fichier; ou le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès) 
+\end{DoxyReturn}

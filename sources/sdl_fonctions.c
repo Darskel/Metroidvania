@@ -21,9 +21,6 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
   int res_h;
   int res_v;
   SDL_Surface * icon;
-  SDL_AudioDeviceID audio_device;
-  SDL_AudioSpec desired;
-  SDL_AudioSpec obtained;
 
   if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
     fprintf(stderr, "Echec de l'initalisation de la SDL (%s)\n", SDL_GetError());
@@ -76,8 +73,8 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
 /**
  * \brief Fonction de gestions des evenements
  *
- * @param fenetre la fenetre d'action
- * @return 0 si tout s'est bien déroulé (arrêt du programme)
+ * @param renderer le renderer à utiliser
+ * @param mode le mode de l'écran utilisé
  */
   void evenements(SDL_Renderer * renderer, SDL_DisplayMode * mode){
     SDL_Event event;
@@ -88,7 +85,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
     Sint16 x_move;
     Sint16 y_move;
     char * salle_nom;
-    int kon = 0;
+    boolean_t kon = FALSE;
     char konami[11];
     int indKon = 0;
     for(int i = 0; i < 11; i++)
@@ -125,7 +122,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
     positionDepart.x = 1;
     positionDepartDelta.x = 0;
     positionDepart.y = salle->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;
-    positionDepartDelta.y = 7;
+    positionDepartDelta.y = TAILLEBLOC-1;
 
     perso=initialisation_personnage(renderer, positionDepart, positionDepartDelta);
 
@@ -185,7 +182,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
               case SDLK_UP:
               case SDLK_z:
               case SDLK_SPACE:
-              //Cette façon de faire produit la possibilité de bunny hop
+              //Cette façon de faire produit la possibilité de bunny hop (saut juste après un saut, quand le bouton reste appuyé)
                 tryJump=TRUE;
                   break;
               case SDLK_DOWN:
@@ -260,45 +257,14 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
           y_move = SDL_JoystickGetAxis(pJoystick, 1);
         }
 
-        char verifCode[11] = "uuddlrlrbas";
-        //tester konamicode
-        if(indKon){
-          if(!strcmp(salle->nomFichier,"salle_entree_grotte.txt") && !kon){
-            int indVerif;
-            for(indVerif = 0; (indVerif < indKon) && (konami[indVerif] == verifCode[indVerif]); indVerif++);
-            if(indKon != indVerif){
-              indKon = 0;
-              for(int i = 0; i < 11; i++)
-                konami[i] = '\0';
-            }else{
-              if(indKon == 11){
-                //effectuer code
-                printf("konami code\n");
-                salle->mat[9][9] = 34;
-                salle->mat[10][9] = 1;
-                salle->mat[10][8] = 34;
-                salle->mat[10][10] = 34;
-                if(!persValidDep(perso,salle)){
-                  perso->pos.x = 5;
-                  perso->delta.x = TAILLEBLOC - 1 + OFFSETHITBOX;
-                  if(perso->delta.x >= TAILLEBLOC)
-                    perso->delta.x %= TAILLEBLOC;
-                }
-                kon = 1;
-                for(int i = 0; i < 11; i++)
-                  konami[i] = '\0';
-              }
-            }
-          }else
-            indKon = 0;
-        }
+        konamicode(perso,salle,konami,&indKon,&kon);
 
         salle_nom=prendPorte(perso, salle->listePorte);
         if(salle_nom != NULL){
           destroy_salle(&salle);
           salle=initialiser_salle(renderer, salle_nom, tileset);
           salleChangee=TRUE;
-          kon = 0;
+          kon = FALSE;
           free(salle_nom);
         }
 
@@ -382,7 +348,9 @@ SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer){
 /**
  * \brief Fonction d'initialisation de la structure personnage
  *
- * @param personnage pointeur sur la structure à initialiser
+ * @param renderer le renderer utilisé
+ * @param positionDepart la position de depart du joueur (en blocs)
+ * @param positionDepartDelta la position de depart du joueur (en pixels à ajouter)
  * @return le pointeur sur la structure initialisée
  */
 personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t positionDepart, position_t positionDepartDelta){
@@ -405,7 +373,6 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->spriteActuel.w=LARGEURSPRITEPERS;
   personnage->hitbox.hauteur=HAUTEURHITBOXPERS;
   personnage->hitbox.largeur=LARGEURHITBOXPERS;
-  personnage->posxhitbox = positionDepart.x * TAILLEBLOC + positionDepartDelta.x + OFFSETHITBOX;
   personnage->etat = IDLE;
   personnage->newEtat = FALSE;
   personnage->evoSprite = 0;
@@ -447,8 +414,10 @@ void destroy_personnage(personnage_t ** personnage){
 /**
  * \brief Fonction d'initialisation de la salle
  *
+ * @param renderer le renderer utilisé
  * @param nomFichier une chaine de caracteres qui contient le nom du fichier de la salle
- * @return un pointeur sur la structure salle initalisée
+ * @param tileset le pointeur vers la texture de tileset
+ * @return un pointeur sur la structure salle initialisée
  */
 salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, SDL_Texture * tileset){
   salle_t ** salle=malloc(sizeof(salle_t *));
@@ -467,9 +436,9 @@ salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, SDL_Textu
 }
 
 /**
- * \brief Fonction de destruction de la structure personnage
+ * \brief Fonction de destruction de la structure salle
  *
- * @param salle pointeur sur le pointeur de la structure à détruire
+ * @param salle pointeur sur le pointeur de la structure salle à détruire
  */
 void destroy_salle(salle_t ** salle){
   SDL_DestroyTexture((*salle)->background);
@@ -477,10 +446,10 @@ void destroy_salle(salle_t ** salle){
 }
 
 /**
- * \brief Fonction d'affichage de la salle (fait en coop avec Yannis Allain)
+ * \brief Fonction d'affichage de la salle (fait en coopération avec Yannis Allain)
  *
  * @param renderer le pointeur vers le SDL_Renderer à utiliser
- * @param salle la structure salle à afficher
+ * @param salle le pointeur sur la structure salle à afficher
  */
 void afficher_salle(SDL_Renderer * renderer, salle_t * salle){
     int i, j;
@@ -513,8 +482,8 @@ void afficher_salle(SDL_Renderer * renderer, salle_t * salle){
  * \brief Fonction d'affichage du personnage
  *
  * @param renderer le pointeur vers le SDL_Renderer à utiliser
- * @param personnage la structure personnage à afficher
- * @param salle la salle où afficher le joueur
+ * @param personnage le pointeur sur la structure personnage à afficher
+ * @param salle le pointeur sur la salle où afficher le joueur
  */
 void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, salle_t * salle){
   SDL_Rect Rect_dest;
@@ -528,6 +497,13 @@ void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, sal
   SDL_RenderCopyEx(renderer, personnage->sprites, &(personnage->spriteActuel), &Rect_dest, 0, NULL, flip);
 }
 
+/**
+ * \brief Fonction d'affichage complet (salle et personnage)
+ *
+ * @param renderer le pointeur vers le SDL_Renderer à utiliser
+ * @param personnage le pointeur sur la structure personnage à afficher
+ * @param salle le pointeur sur la salle où afficher le joueur
+ */
 void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * personnage){
   SDL_Texture * textureSalle;
   textureSalle=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET, (salle->largeur)* TAILLEBLOC, (salle->hauteur) * TAILLEBLOC);
@@ -543,6 +519,11 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
   SDL_DestroyTexture(textureSalle);
 }
 
+/**
+ * \brief Fonction qui fait évoluer les sprites du personnage (animation)
+ *
+ * @param perso le pointeur sur la structure personnage à faire évoluer
+ */
 void miseAjourSprites(personnage_t * perso){
   if(perso->etat == IDLE){
     perso->spriteActuel.x=IDLE;
@@ -578,33 +559,59 @@ void miseAjourSprites(personnage_t * perso){
 
 }
 
-Mix_Chunk** AudioInit(void){
-    Mix_Chunk ** audiosample = malloc(NBSOUNDS * sizeof(Mix_Chunk*));
-
-    // Load waveforms
-    for( int i = 0; i < NBSOUNDS; i++ )
-    {
-        audiosample[i] = Mix_LoadWAV(WAVFILE);
-        if( audiosample[i] == NULL )
-        {
-            fprintf(stderr, "Unable to load wave file: %s\n", WAVFILE);
-        }
-    }
-
-    return audiosample;
-}
-
-void DetruireAudio(Mix_Chunk ** audiosample){
-  for( int i = 0; i < NBSOUNDS; i++ )
-    {
-        Mix_FreeChunk(audiosample[i]);
-    }
-
-}
-
+/**
+ * \brief Fonction d'affichage d'un écran noir d'une durée choisie
+ *
+ * @param renderer le pointeur vers le SDL_Renderer à utiliser
+ * @param ms un entier correspondant à la durée d'affichage de l'écran noir (en millisecondes)
+ */
 void ecranNoir(SDL_Renderer * renderer, int ms){
     SDL_SetRenderDrawColor(renderer,0,0,0,255);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
     SDL_Delay(ms);
+}
+
+/**
+ * \brief Fonction qui détecte si le Konami code a été rentré, dans la bonne salle, et qui créé l'easter egg en conséquence (modifie la matrice de la salle)
+ *
+ * @param perso le pointeur vers la structure personnage (utile en cas de collision avec les blocs créés)
+ * @param salle le pointeur vers la structure salle qui sera modifié en cas de Konami code
+ * @param konami le tableau de caractère correspondant au code en cours (inputs)
+ * @param indKon le pointeur vers l'entier qui correspond au nombre de caractères actuellement dans le code entré
+ * @param kon le pointeur vers un booléen qui vaut FALSE si le Konami code n'a pas été entré et TRUE si c'est le cas
+ */
+void konamicode(personnage_t * perso, salle_t * salle, char * konami, int * indKon, boolean_t * kon){
+  char verifCode[TAILLEKONAMI] = KONAMICODE;
+  int indVerif;
+  //tester konamicode
+  if(*indKon){
+    if(!strcmp(salle->nomFichier,"salle_entree_grotte.txt") && !(*kon)){
+      for(indVerif = 0; (indVerif < *indKon) && (konami[indVerif] == verifCode[indVerif]); indVerif++);
+      if(*indKon != indVerif){
+        *indKon = 0;
+        for(int i = 0; i < TAILLEKONAMI; i++)
+          konami[i] = '\0';
+      }else{
+        if(*indKon == TAILLEKONAMI){
+          //effectuer code
+          printf("Konami code effectué !\n");
+          salle->mat[9][9] = 34;
+          salle->mat[10][9] = 1;
+          salle->mat[10][8] = 34;
+          salle->mat[10][10] = 34;
+          if(!persValidDep(perso,salle)){
+            perso->pos.x = 5;
+            perso->delta.x = TAILLEBLOC - 1 + OFFSETHITBOX;
+            if(perso->delta.x >= TAILLEBLOC)
+              perso->delta.x %= TAILLEBLOC;
+          }
+          *kon = TRUE;
+          for(int i = 0; i < TAILLEKONAMI; i++)
+            konami[i] = '\0';
+        }
+      }
+    }else
+      *indKon = 0;
+  }
 }

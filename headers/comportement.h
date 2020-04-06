@@ -2,11 +2,11 @@
 #define COMPORTEMENT_INCLUDED
 
 /**
- * \file structs.h
- * \brief Ensemble de fonctions pour le comportement des mobs et du personnage
+ * \file comportement.h
+ * \brief Headers de l'ensemble de fonctions pour le comportement des mobs et du personnage
  * \author Thomas DIDIER L2 Info Le Mans
- * \version 1.0
- * \date 01/04/2020
+ * \version 1.1
+ * \date 06/04/2020
 */
 
 int hitE(monstre_t* e1, monstre_t* e2);

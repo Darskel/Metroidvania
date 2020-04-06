@@ -11,16 +11,16 @@ Fonctions de lecture d\textquotesingle{}une salle.
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}../headers/source.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../headers/liste.\+h\char`\"{}}\newline
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{source_8c_a533f4bb0a5e22b4efcfc42b6b903394a}\label{source_8c_a533f4bb0a5e22b4efcfc42b6b903394a}} 
-char $\ast$ {\bfseries chercher\+Sprite} (int id, char $\ast$dir\+Name)
-\item 
+char $\ast$ \hyperlink{source_8c_a533f4bb0a5e22b4efcfc42b6b903394a}{chercher\+Sprite} (int id, char $\ast$dir\+Name)
+\begin{DoxyCompactList}\small\item\em Recherche un sprite dans un dossier (méthode dirent) \end{DoxyCompactList}\item 
 int \hyperlink{source_8c_af7916edbfbb9a2021f0a9802369c76d7}{sauvegarder} (int num\+Sauv, int hp, char $\ast$salle, \hyperlink{structposition__s}{position\+\_\+t} $\ast$dep, int inventaire\mbox{[}$\,$\mbox{]}, char $\ast$nom\+Objs\mbox{[}$\,$\mbox{]})
 \begin{DoxyCompactList}\small\item\em Sauvegarde l\textquotesingle{}état de la partie. \end{DoxyCompactList}\item 
 int \hyperlink{source_8c_ae552ae3538b4ad44354aa761534d1116}{charger\+Sauvegarde} (int num\+Sauv, char $\ast$salle, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, int inventaire\mbox{[}$\,$\mbox{]}, char $\ast$nom\+Objs\mbox{[}$\,$\mbox{]})
-\begin{DoxyCompactList}\small\item\em Sauvegarde l\textquotesingle{}état de la partie. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Charge l\textquotesingle{}état de la partie. \end{DoxyCompactList}\item 
 int \hyperlink{source_8c_ad5237d1625ec6ab16ef2c4f0690bbfb8}{nettoyer\+Salle} (\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$salle)
 \begin{DoxyCompactList}\small\item\em Nettoie et supprime la structure salle donnée. \end{DoxyCompactList}\item 
 int \hyperlink{source_8c_acfe782df62b56721f4f3aaa311f6e3e6}{lire\+Salle} (char $\ast$nom\+Fichier, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$salle)
@@ -34,7 +34,7 @@ Fonctions de lecture d\textquotesingle{}une salle.
 Thomas D\+I\+D\+I\+ER L2 Info Le Mans 
 \end{DoxyAuthor}
 \begin{DoxyVersion}{Version}
-1.\+0 
+1.\+1 
 \end{DoxyVersion}
 \begin{DoxyDate}{Date}
 13/02/2020 
@@ -50,7 +50,7 @@ Thomas D\+I\+D\+I\+ER L2 Info Le Mans
 
 
 
-Sauvegarde l\textquotesingle{}état de la partie. 
+Charge l\textquotesingle{}état de la partie. 
 
 Les paramètres num\+Sauv et nom\+Objs doivent être définis avant, les autres paramètres seront remplis par cette fonction
 
@@ -70,6 +70,28 @@ Les paramètres num\+Sauv et nom\+Objs doivent être définis avant, les autres 
 \begin{DoxyReturn}{Renvoie}
 un code erreur en fonction de l\textquotesingle{}erreur\+: -\/1 = Mauvais numéro de sauvegarde, -\/2 = impossible d\textquotesingle{}ouvrir ou créer le fichier; le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès), ou 0 si le fichier de sauvegarde est vide 
 \end{DoxyReturn}
+\mbox{\Hypertarget{source_8c_a533f4bb0a5e22b4efcfc42b6b903394a}\label{source_8c_a533f4bb0a5e22b4efcfc42b6b903394a}} 
+\index{source.\+c@{source.\+c}!chercher\+Sprite@{chercher\+Sprite}}
+\index{chercher\+Sprite@{chercher\+Sprite}!source.\+c@{source.\+c}}
+\subsubsection{\texorpdfstring{chercher\+Sprite()}{chercherSprite()}}
+{\footnotesize\ttfamily char$\ast$ chercher\+Sprite (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{char $\ast$}]{dir\+Name }\end{DoxyParamCaption})}
+
+
+
+Recherche un sprite dans un dossier (méthode dirent) 
+
+Tout sur dirent ici\+: \href{http://sdz.tdct.org/sdz/parcourir-les-dossiers-avec-dirent-h.html}{\tt http\+://sdz.\+tdct.\+org/sdz/parcourir-\/les-\/dossiers-\/avec-\/dirent-\/h.\+html}
+
+
+\begin{DoxyParams}{Paramètres}
+{\em id} & un entier correpondant à un id \\
+\hline
+{\em dir\+Name} & la chaîne de caractères correspondant au chemin du dossier où chercher le sprite\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+le path (chaîne de caractères) du sprite trouvé 
+\end{DoxyReturn}
 \mbox{\Hypertarget{source_8c_acfe782df62b56721f4f3aaa311f6e3e6}\label{source_8c_acfe782df62b56721f4f3aaa311f6e3e6}} 
 \index{source.\+c@{source.\+c}!lire\+Salle@{lire\+Salle}}
 \index{lire\+Salle@{lire\+Salle}!source.\+c@{source.\+c}}
@@ -82,11 +104,14 @@ Modifie la structure salle pour la nouvelle salle.
 
 
 \begin{DoxyParams}{Paramètres}
-{\em nom\+Fichier} & nom du fichier de la salle à lire \\
+{\em nom\+Fichier} & chaîne de caractères correspondant au nom du fichier à lire \\
 \hline
-{\em salle} & structure salle du programme \\
+{\em salle} & pointeur du pointeur de la structure salle à remplir avec la lecture \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+0 si tout s\textquotesingle{}est bien déroulé 
+\end{DoxyReturn}
 \mbox{\Hypertarget{source_8c_ad5237d1625ec6ab16ef2c4f0690bbfb8}\label{source_8c_ad5237d1625ec6ab16ef2c4f0690bbfb8}} 
 \index{source.\+c@{source.\+c}!nettoyer\+Salle@{nettoyer\+Salle}}
 \index{nettoyer\+Salle@{nettoyer\+Salle}!source.\+c@{source.\+c}}
@@ -101,9 +126,12 @@ libère toute la mémoire utiliser et prépare le pointeur à être de nouveau u
 
 
 \begin{DoxyParams}{Paramètres}
-{\em salle} & structure salle à traiter \\
+{\em salle} & pointeur sur le pointeur de la structure salle à nettoyer \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+0 si tout s\textquotesingle{}est bien déroulé 
+\end{DoxyReturn}
 \mbox{\Hypertarget{source_8c_af7916edbfbb9a2021f0a9802369c76d7}\label{source_8c_af7916edbfbb9a2021f0a9802369c76d7}} 
 \index{source.\+c@{source.\+c}!sauvegarder@{sauvegarder}}
 \index{sauvegarder@{sauvegarder}!source.\+c@{source.\+c}}

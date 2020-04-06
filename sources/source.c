@@ -12,10 +12,18 @@
  * \file source.c
  * \brief Fonctions de lecture d'une salle
  * \author Thomas DIDIER L2 Info Le Mans
- * \version 1.0
+ * \version 1.1
  * \date 13/02/2020
 */
 
+/**
+ * \brief Compare deux fichiers en paramètres (méthode dirent)
+ *
+ * @param f1 pointeur sur une structure dirent à utiliser
+ * @param f2 pointeur sur une structure dirent à utiliser
+ *
+ * @return la comparaison entre les noms de fichiers
+*/
 static int filecmp(struct dirent* f1, struct dirent* f2){
     if(f1->d_type != f2->d_type){
         return f1->d_type == DT_DIR ? -1 : 1;
@@ -24,8 +32,16 @@ static int filecmp(struct dirent* f1, struct dirent* f2){
     return strcmp(f1->d_name,f2->d_name);
 }
 
+/**
+ * \brief Recherche un sprite dans un dossier (méthode dirent)
+ * \details Tout sur dirent ici: http://sdz.tdct.org/sdz/parcourir-les-dossiers-avec-dirent-h.html
+ *
+ * @param id un entier correpondant à un id
+ * @param dirName la chaîne de caractères correspondant au chemin du dossier où chercher le sprite
+ *
+ * @return le path (chaîne de caractères) du sprite trouvé
+*/
 char* chercherSprite(int id, char* dirName){
-    /* tout sur dirent ici: http://sdz.tdct.org/sdz/parcourir-les-dossiers-avec-dirent-h.html */
     if(id <= 0)
         return NULL;
 
@@ -195,7 +211,8 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
  * \brief Nettoie et supprime la structure salle donnée
  * \details libère toute la mémoire utiliser et prépare le pointeur à être de nouveau utilisé
  *
- * @param salle structure salle à traiter
+ * @param salle pointeur sur le pointeur de la structure salle à nettoyer
+ * @return 0 si tout s'est bien déroulé
 */
 int nettoyerSalle(salle_t** salle){
     for(int i = 0; i < (*salle)->hauteur; i++)
@@ -213,8 +230,9 @@ int nettoyerSalle(salle_t** salle){
 /**
  * \brief Modifie la structure salle pour la nouvelle salle
  *
- * @param nomFichier nom du fichier de la salle à lire
- * @param salle structure salle du programme
+ * @param nomFichier chaîne de caractères correspondant au nom du fichier à lire
+ * @param salle pointeur du pointeur de la structure salle à remplir avec la lecture
+ * @return 0 si tout s'est bien déroulé
 */
 int lireSalle(char* nomFichier, salle_t** salle){
     FILE * monDoc = NULL;

@@ -3,19 +3,17 @@
 #include <string.h>
 #include "../headers/structs.h"
 
-/**
- * \file testListe.c
- * \brief Programme permettant de tester la librairie de liste
- * \author Thomas DIDIER L2 Info Le Mans
- * \version 2.0
- * \date 13/02/2020
-*/
 //Redefinition de monstre_t pour eviter les erreurs dans le test (pas mis à jour avec les nouvelles structures)
+
+/**
+ * \struct monstre_stemp
+ * \brief Structure représentant un monstre (temporaire)
+*/
 typedef struct monstre_stemp{
     type_monstre_t * type; /**< Type de monstre */
     int pv; /**< PV actuels du monstre */
-    etat_t etat;
-    int spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
+    etat_t etat; /**< Etat actuel du personnage */
+    int spriteActuel; /**< Entier qui correspond à la taille du sprite actuel dans la texture */
     position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
     position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
     boolean_t direction; /**< Direction vers laquelle regarde le monstre (1: vers la gauche(LEFT), 0: vers la droite(RIGHT)) */

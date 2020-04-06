@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Metroidvania:  Fichier source de deprecated/sdl_fonctions_old.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Metroidvania
+   </div>
+   <div id="projectbrief">Création d&#39;un Métroidvania dans le cadre du cours nommé &#39;Projet&#39;</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_a78ceb8b5743c87a53f081e93e134051.html">deprecated</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">sdl_fonctions_old.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL_ttf.h&gt;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL_image.h&gt;</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="structs_8h.html">structs.h</a>&quot;</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define RES_H 1280</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define RES_V 720</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define TEMPSSPRITE 2</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define TEMPSSAUT 25</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define FPS 50</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define FRAMEDELAY 1000/FPS</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define LIMITS 30</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define NOM_JEU &quot;Diskosieni&quot;</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define TAILLEBLOC 8</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;SDL_Window * <a class="code" href="sdl__fonctions_8h.html#ac7a206e3c72f0892f43e2e1dae5daf06">initialisation_SDL</a>();</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keywordtype">void</span> <a class="code" href="sdl__fonctions_8h.html#af4ffdd61eb400c65a78258ee8ad1172a">quitter_SDL</a>(SDL_Window * fenetre);</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">int</span> <a class="code" href="sdl__fonctions_8h.html#a814c2dcbea63c3a94a4d2be833c2177d">evenements</a>(SDL_Window * fenetre);</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">void</span> <a class="code" href="sdl__fonctions_8h.html#a0367af4ebfb233148060fb9aaae22c1c">initialiser_salle</a>(<a class="code" href="structsalle__s.html">salle_t</a> * s);</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> initialiser_sprites_personnages(<a class="code" href="structpersonnage__s.html">personnage_t</a> * p);</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keywordtype">void</span> initialiser_sprites_salle(<a class="code" href="structsalle__s.html">salle_t</a> * s);</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<a class="code" href="structpersonnage__s.html">personnage_t</a> * <a class="code" href="sdl__fonctions_8h.html#a9ffbbd8791b49989f9ee4716096d2b7b">initialisation_personnage</a>();</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">void</span> afficher_surface(SDL_Surface * zone, SDL_Surface * sprite, <a class="code" href="structposition__s.html">position_t</a> position);</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">void</span> <a class="code" href="sdl__fonctions_8h.html#a43fe0bd9ff0140776130dfb53fba14f6">afficher_salle</a>(SDL_Surface * zone, <a class="code" href="structsalle__s.html">salle_t</a> * salle);</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">void</span> nettoyage_zone(SDL_Surface * zone);</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> supprimer_sprites(SDL_Surface ** tab, <span class="keywordtype">int</span> nb_sprites);</div><div class="ttc" id="structs_8h_html"><div class="ttname"><a href="structs_8h.html">structs.h</a></div><div class="ttdoc">Ensemble de structures utilisées dans le projets. </div></div>
+<div class="ttc" id="structsalle__s_html"><div class="ttname"><a href="structsalle__s.html">salle_s</a></div><div class="ttdoc">Structure représentant les salles. </div><div class="ttdef"><b>Definition:</b> structs.h:156</div></div>
+<div class="ttc" id="structposition__s_html"><div class="ttname"><a href="structposition__s.html">position_s</a></div><div class="ttdoc">Une position représentée par deux valeurs entières. </div><div class="ttdef"><b>Definition:</b> structs.h:126</div></div>
+<div class="ttc" id="sdl__fonctions_8h_html_a43fe0bd9ff0140776130dfb53fba14f6"><div class="ttname"><a href="sdl__fonctions_8h.html#a43fe0bd9ff0140776130dfb53fba14f6">afficher_salle</a></div><div class="ttdeci">void afficher_salle(SDL_Renderer *renderer, salle_t *salle)</div><div class="ttdoc">Fonction d&amp;#39;affichage de la salle (fait en coopération avec Yannis Allain) </div><div class="ttdef"><b>Definition:</b> sdl_fonctions.c:454</div></div>
+<div class="ttc" id="sdl__fonctions_8h_html_a0367af4ebfb233148060fb9aaae22c1c"><div class="ttname"><a href="sdl__fonctions_8h.html#a0367af4ebfb233148060fb9aaae22c1c">initialiser_salle</a></div><div class="ttdeci">salle_t * initialiser_salle(SDL_Renderer *renderer, char *nomFichier, SDL_Texture *tileset)</div><div class="ttdoc">Fonction d&amp;#39;initialisation de la salle. </div><div class="ttdef"><b>Definition:</b> sdl_fonctions.c:422</div></div>
+<div class="ttc" id="sdl__fonctions_8h_html_ac7a206e3c72f0892f43e2e1dae5daf06"><div class="ttname"><a href="sdl__fonctions_8h.html#ac7a206e3c72f0892f43e2e1dae5daf06">initialisation_SDL</a></div><div class="ttdeci">void initialisation_SDL(SDL_Window **fenetre, SDL_Renderer **renderer, SDL_DisplayMode *mode, boolean_t fullscreen)</div><div class="ttdoc">Fonction d&amp;#39;initalisation de la SDL et de création de la fenetre et du renderer ainsi que du remplissa...</div><div class="ttdef"><b>Definition:</b> sdl_fonctions.c:19</div></div>
+<div class="ttc" id="sdl__fonctions_8h_html_a814c2dcbea63c3a94a4d2be833c2177d"><div class="ttname"><a href="sdl__fonctions_8h.html#a814c2dcbea63c3a94a4d2be833c2177d">evenements</a></div><div class="ttdeci">void evenements(SDL_Renderer *renderer, SDL_DisplayMode *mode)</div><div class="ttdoc">Fonction de gestions des evenements. </div><div class="ttdef"><b>Definition:</b> sdl_fonctions.c:79</div></div>
+<div class="ttc" id="structpersonnage__s_html"><div class="ttname"><a href="structpersonnage__s.html">personnage_s</a></div><div class="ttdoc">Structure représentant le personnage. </div><div class="ttdef"><b>Definition:</b> structs.h:172</div></div>
+<div class="ttc" id="sdl__fonctions_8h_html_af4ffdd61eb400c65a78258ee8ad1172a"><div class="ttname"><a href="sdl__fonctions_8h.html#af4ffdd61eb400c65a78258ee8ad1172a">quitter_SDL</a></div><div class="ttdeci">void quitter_SDL(SDL_Window **fenetre, SDL_Renderer **renderer)</div><div class="ttdoc">Fonction qui permet de détruire la fenetre et quitter la SDL. </div><div class="ttdef"><b>Definition:</b> sdl_fonctions.c:67</div></div>
+<div class="ttc" id="sdl__fonctions_8h_html_a9ffbbd8791b49989f9ee4716096d2b7b"><div class="ttname"><a href="sdl__fonctions_8h.html#a9ffbbd8791b49989f9ee4716096d2b7b">initialisation_personnage</a></div><div class="ttdeci">personnage_t * initialisation_personnage(SDL_Renderer *renderer, position_t positionDepart, position_t positionDepartDelta)</div><div class="ttdoc">Fonction d&amp;#39;initialisation de la structure personnage. </div><div class="ttdef"><b>Definition:</b> sdl_fonctions.c:356</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

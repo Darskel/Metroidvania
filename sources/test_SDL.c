@@ -2,15 +2,17 @@
 
 /**
  * \file test_SDL.c
- * \brief Fichier de test des fonctions de 'sdl_fonctions.c'
+ * \brief Fichier de test des fonctions de 'sdl_fonctions.c' (Actuellement le programme principal)
  * \author Marie-Nina MUNAR L2 Info Le Mans
- * \version 1.0
- * \date 25/02/2020
+ * \version 1.1
+ * \date 06/04/2020
 */
 
 /**
  * \brief Programme de test qui initalise la sdl
  *
+ * @param argc le nombre d'arguments du main (attendu : 0 ou 1)
+ * @param argv le tableau des chaînes de caractères des arguments (attendu : rien ou "-fullscreen")
  * @return 0 si tout s'est bien déroulé
  */
 int main(int argc, char *argv[]){

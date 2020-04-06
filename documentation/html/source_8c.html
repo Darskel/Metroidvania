@@ -77,18 +77,19 @@ $(function() {
 <code>#include &lt;sys/stat.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;../headers/source.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="source_8h_source.html">../headers/source.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="liste_8h_source.html">../headers/liste.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:a533f4bb0a5e22b4efcfc42b6b903394a"><td class="memItemLeft" align="right" valign="top"><a id="a533f4bb0a5e22b4efcfc42b6b903394a"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>chercherSprite</b> (int id, char *dirName)</td></tr>
+<tr class="memitem:a533f4bb0a5e22b4efcfc42b6b903394a"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#a533f4bb0a5e22b4efcfc42b6b903394a">chercherSprite</a> (int id, char *dirName)</td></tr>
+<tr class="memdesc:a533f4bb0a5e22b4efcfc42b6b903394a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recherche un sprite dans un dossier (méthode dirent)  <a href="#a533f4bb0a5e22b4efcfc42b6b903394a">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a533f4bb0a5e22b4efcfc42b6b903394a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7916edbfbb9a2021f0a9802369c76d7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#af7916edbfbb9a2021f0a9802369c76d7">sauvegarder</a> (int numSauv, int hp, char *salle, <a class="el" href="structposition__s.html">position_t</a> *dep, int inventaire[], char *nomObjs[])</td></tr>
 <tr class="memdesc:af7916edbfbb9a2021f0a9802369c76d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sauvegarde l'état de la partie.  <a href="#af7916edbfbb9a2021f0a9802369c76d7">Plus de détails...</a><br /></td></tr>
 <tr class="separator:af7916edbfbb9a2021f0a9802369c76d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae552ae3538b4ad44354aa761534d1116"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#ae552ae3538b4ad44354aa761534d1116">chargerSauvegarde</a> (int numSauv, char *salle, <a class="el" href="structpersonnage__s.html">personnage_t</a> *perso, int inventaire[], char *nomObjs[])</td></tr>
-<tr class="memdesc:ae552ae3538b4ad44354aa761534d1116"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sauvegarde l'état de la partie.  <a href="#ae552ae3538b4ad44354aa761534d1116">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:ae552ae3538b4ad44354aa761534d1116"><td class="mdescLeft">&#160;</td><td class="mdescRight">Charge l'état de la partie.  <a href="#ae552ae3538b4ad44354aa761534d1116">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ae552ae3538b4ad44354aa761534d1116"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5237d1625ec6ab16ef2c4f0690bbfb8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#ad5237d1625ec6ab16ef2c4f0690bbfb8">nettoyerSalle</a> (<a class="el" href="structsalle__s.html">salle_t</a> **salle)</td></tr>
 <tr class="memdesc:ad5237d1625ec6ab16ef2c4f0690bbfb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nettoie et supprime la structure salle donnée.  <a href="#ad5237d1625ec6ab16ef2c4f0690bbfb8">Plus de détails...</a><br /></td></tr>
@@ -100,7 +101,7 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>chercherSprite</b> 
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p>Fonctions de lecture d'une salle. </p>
 <dl class="section author"><dt>Auteur</dt><dd>Thomas DIDIER L2 Info Le Mans </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>13/02/2020 </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
 <a id="ae552ae3538b4ad44354aa761534d1116"></a>
@@ -147,7 +148,7 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>chercherSprite</b> 
       </table>
 </div><div class="memdoc">
 
-<p>Sauvegarde l'état de la partie. </p>
+<p>Charge l'état de la partie. </p>
 <p>Les paramètres numSauv et nomObjs doivent être définis avant, les autres paramètres seront remplis par cette fonction</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
@@ -160,6 +161,45 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>chercherSprite</b> 
   </dd>
 </dl>
 <dl class="section return"><dt>Renvoie</dt><dd>un code erreur en fonction de l'erreur: -1 = Mauvais numéro de sauvegarde, -2 = impossible d'ouvrir ou créer le fichier; le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès), ou 0 si le fichier de sauvegarde est vide </dd></dl>
+
+</div>
+</div>
+<a id="a533f4bb0a5e22b4efcfc42b6b903394a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a533f4bb0a5e22b4efcfc42b6b903394a">&#9670;&nbsp;</a></span>chercherSprite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* chercherSprite </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>dirName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Recherche un sprite dans un dossier (méthode dirent) </p>
+<p>Tout sur dirent ici: <a href="http://sdz.tdct.org/sdz/parcourir-les-dossiers-avec-dirent-h.html">http://sdz.tdct.org/sdz/parcourir-les-dossiers-avec-dirent-h.html</a></p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>un entier correpondant à un id </td></tr>
+    <tr><td class="paramname">dirName</td><td>la chaîne de caractères correspondant au chemin du dossier où chercher le sprite</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>le path (chaîne de caractères) du sprite trouvé </dd></dl>
 
 </div>
 </div>
@@ -192,11 +232,12 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>chercherSprite</b> 
 <p>Modifie la structure salle pour la nouvelle salle. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">nomFichier</td><td>nom du fichier de la salle à lire </td></tr>
-    <tr><td class="paramname">salle</td><td>structure salle du programme </td></tr>
+    <tr><td class="paramname">nomFichier</td><td>chaîne de caractères correspondant au nom du fichier à lire </td></tr>
+    <tr><td class="paramname">salle</td><td>pointeur du pointeur de la structure salle à remplir avec la lecture </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Renvoie</dt><dd>0 si tout s'est bien déroulé </dd></dl>
 
 </div>
 </div>
@@ -220,10 +261,11 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>chercherSprite</b> 
 <p>libère toute la mémoire utiliser et prépare le pointeur à être de nouveau utilisé</p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">salle</td><td>structure salle à traiter </td></tr>
+    <tr><td class="paramname">salle</td><td>pointeur sur le pointeur de la structure salle à nettoyer </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Renvoie</dt><dd>0 si tout s'est bien déroulé </dd></dl>
 
 </div>
 </div>

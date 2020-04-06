@@ -2,29 +2,28 @@
 \label{test___s_d_l_8c}\index{sources/test\+\_\+\+S\+D\+L.\+c@{sources/test\+\_\+\+S\+D\+L.\+c}}
 
 
-Fichier de test des fonctions de \textquotesingle{}\hyperlink{sdl__fonctions_8c}{sdl\+\_\+fonctions.\+c}\textquotesingle{}.  
+Fichier de test des fonctions de \textquotesingle{}\hyperlink{sdl__fonctions_8c}{sdl\+\_\+fonctions.\+c}\textquotesingle{} (Actuellement le programme principal)  
 
 
-{\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}../headers/sdl\+\_\+fonctions.\+h\char`\"{}}\newline
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
 int \hyperlink{test___s_d_l_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
-\begin{DoxyCompactList}\small\item\em Programme de test qui initalise la sdl, lance la gestion d\textquotesingle{}évènements et gère les erreurs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Programme de test qui initalise la sdl. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Description détaillée}
-Fichier de test des fonctions de \textquotesingle{}\hyperlink{sdl__fonctions_8c}{sdl\+\_\+fonctions.\+c}\textquotesingle{}. 
+Fichier de test des fonctions de \textquotesingle{}\hyperlink{sdl__fonctions_8c}{sdl\+\_\+fonctions.\+c}\textquotesingle{} (Actuellement le programme principal) 
 
 \begin{DoxyAuthor}{Auteur}
 Marie-\/\+Nina M\+U\+N\+AR L2 Info Le Mans 
 \end{DoxyAuthor}
 \begin{DoxyVersion}{Version}
-1.\+0 
+1.\+1 
 \end{DoxyVersion}
 \begin{DoxyDate}{Date}
-25/02/2020 
+06/04/2020 
 \end{DoxyDate}
 
 
@@ -37,8 +36,15 @@ Marie-\/\+Nina M\+U\+N\+AR L2 Info Le Mans
 
 
 
-Programme de test qui initalise la sdl, lance la gestion d\textquotesingle{}évènements et gère les erreurs. 
+Programme de test qui initalise la sdl. 
 
+
+\begin{DoxyParams}{Paramètres}
+{\em argc} & le nombre d\textquotesingle{}arguments du main (attendu \+: 0 ou 1) \\
+\hline
+{\em argv} & le tableau des chaînes de caractères des arguments (attendu \+: rien ou \char`\"{}-\/fullscreen\char`\"{}) \\
+\hline
+\end{DoxyParams}
 \begin{DoxyReturn}{Renvoie}
 0 si tout s\textquotesingle{}est bien déroulé 
 \end{DoxyReturn}

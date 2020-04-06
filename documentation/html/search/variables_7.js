@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['nb_5fsprites',['nb_sprites',['../structpersonnage__s.html#aabe3731a1f5bbb6b08c4f9e9d89db0a1',1,'personnage_s::nb_sprites()'],['../structtype__monstre__s.html#afd34506ee621c0e8608bab608cc17e58',1,'type_monstre_s::nb_sprites()']]],
-  ['nomfichier',['nomFichier',['../structsalle__s.html#a12e47589795f5ed60109cf2b073ec671',1,'salle_s']]],
-  ['numerateur',['numerateur',['../structfraction__s.html#ae64276e77a47e70484fbae621d2802d2',1,'fraction_s']]]
+  ['largeur',['largeur',['../structtaille__s.html#a2dbe2c36f1f6ee42d2ee9abb66c53e96',1,'taille_s::largeur()'],['../structsalle__s.html#ac1273e8d176620c3b9130d2f1e741315',1,'salle_s::largeur()']]],
+  ['listeporte',['listePorte',['../structsalle__s.html#a8c3b513a26b2418863a37bfd91f86b11',1,'salle_s']]],
+  ['listesprites',['listeSprites',['../structporte__s.html#aa55e29e3a22ae8711ea6ff4de335feee',1,'porte_s']]]
 ];

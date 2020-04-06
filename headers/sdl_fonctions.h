@@ -13,8 +13,8 @@
  * \file sdl_fonctions.h
  * \brief Header pour la librairie de fonctions et les constantes liées à l'usage de la SDL2
  * \author Marie-Nina MUNAR L2 Info Le Mans
- * \version 3.0
- * \date 26/03/2020
+ * \version 4.0
+ * \date 06/04/2020
 */
 
 void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_DisplayMode * mode, boolean_t fullscreen);
@@ -29,6 +29,5 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
 void miseAjourSprites(personnage_t * personnage);
 void destroy_salle(salle_t ** salle);
 void destroy_personnage(personnage_t ** perso);
-Mix_Chunk** AudioInit(void);
-void DetruireAudio(Mix_Chunk ** audiosample);
 void ecranNoir(SDL_Renderer * renderer, int ms);
+void konamicode(personnage_t * perso, salle_t * salle, char * konami, int * indKon, boolean_t * kon);

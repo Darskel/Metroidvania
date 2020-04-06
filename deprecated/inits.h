@@ -3,6 +3,7 @@
 
 #include "../headers/structs.h"
 
+
 void mainInit(personnage_t** perso, liste_t** entites);
 void initSdlSalle(salle_t* salle);
 void freeSdlSalle(salle_t* salle);

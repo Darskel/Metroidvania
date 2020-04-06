@@ -1,18 +1,12 @@
 var searchData=
 [
-  ['decodemap_2ec',['decodemap.c',['../decodemap_8c.html',1,'']]],
-  ['delta',['delta',['../structpersonnage__s.html#a396d01ba0660ce2327f65f891d4f239e',1,'personnage_s::delta()'],['../structmonstre__s.html#af6ab2d77d3fc8726015c43ed81e699e0',1,'monstre_s::delta()']]],
-  ['delta_5fx',['delta_x',['../structfrac_pos__s.html#ac62e5ff2d9cda05e685fc9a0465cd17d',1,'fracPos_s']]],
-  ['delta_5fy',['delta_y',['../structfrac_pos__s.html#aff1b19a8e4e258da47ab4e5bd309a935',1,'fracPos_s']]],
-  ['denominateur',['denominateur',['../structfraction__s.html#ad0c0bf49a85a94db886faf62f9a86677',1,'fraction_s']]],
-  ['dep1',['DEP1',['../structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea0be47f0b04acb232d923e709fa894bb2',1,'structs.h']]],
-  ['dep2',['DEP2',['../structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea89e919aa18342c5ac61acfad301d2fa3',1,'structs.h']]],
-  ['dep3',['DEP3',['../structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea9915ae810af5d2414989b1b8da181819',1,'structs.h']]],
-  ['dep4',['DEP4',['../structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea48c8ff9158c2e520d1ac043e0782e146',1,'structs.h']]],
-  ['dep5',['DEP5',['../structs_8h.html#acc92dae96c834a587153fcb1fb87df1eaba6603f4d77cb0d36d164f1b10b85476',1,'structs.h']]],
-  ['dep6',['DEP6',['../structs_8h.html#acc92dae96c834a587153fcb1fb87df1ea23c524f1921055449d2fa639448ecdb8',1,'structs.h']]],
-  ['dep7',['DEP7',['../structs_8h.html#acc92dae96c834a587153fcb1fb87df1eaf96ce696d487f6a941d7c42d80e9bdcc',1,'structs.h']]],
-  ['dep8',['DEP8',['../structs_8h.html#acc92dae96c834a587153fcb1fb87df1ead9718755aea697e4b5ffd9e2b6e3e7d1',1,'structs.h']]],
-  ['direction',['direction',['../structmonstre__s.html#aa1a2d6868b660addc5855614f1849540',1,'monstre_s']]],
+  ['degat',['degat',['../structtype__monstre__s.html#aa3e5568720dc977348e6929f3df5260c',1,'type_monstre_s']]],
+  ['delta',['delta',['../structmonstre__stemp.html#a160ccac69209691aad5a59ae583c3435',1,'monstre_stemp::delta()'],['../structpersonnage__s.html#a09fb83af37953227050f9ced0410f032',1,'personnage_s::delta()'],['../structmonstre__s.html#a9a4bad53b10cc5379c594dd689750b0c',1,'monstre_s::delta()']]],
+  ['depdroite',['depDroite',['../comportement_8c.html#a20b641f4100f604650a4ff3961cccc55',1,'depDroite(personnage_t *p, salle_t *s):&#160;comportement.c'],['../comportement_8h.html#a20b641f4100f604650a4ff3961cccc55',1,'depDroite(personnage_t *p, salle_t *s):&#160;comportement.c']]],
+  ['depgauche',['depGauche',['../comportement_8c.html#a8797da75308a831b1bcd0b84f0470ed5',1,'depGauche(personnage_t *p, salle_t *s):&#160;comportement.c'],['../comportement_8h.html#a8797da75308a831b1bcd0b84f0470ed5',1,'depGauche(personnage_t *p, salle_t *s):&#160;comportement.c']]],
+  ['depvert',['depVert',['../comportement_8c.html#ab62b168c2d0150f4ec41bf954e111f57',1,'depVert(personnage_t *p, salle_t *s, int tryJump):&#160;comportement.c'],['../comportement_8h.html#ab62b168c2d0150f4ec41bf954e111f57',1,'depVert(personnage_t *p, salle_t *s, int tryJump):&#160;comportement.c']]],
+  ['destroy_5fpersonnage',['destroy_personnage',['../sdl__fonctions_8c.html#a135b8f01937ed48bb6435d1122ea5936',1,'destroy_personnage(personnage_t **personnage):&#160;sdl_fonctions.c'],['../sdl__fonctions_8h.html#a8754279fcd8693c28c3fc5c6f4624b31',1,'destroy_personnage(personnage_t **perso):&#160;sdl_fonctions.c']]],
+  ['destroy_5fsalle',['destroy_salle',['../sdl__fonctions_8c.html#a178137e264817341b869df39374cd384',1,'destroy_salle(salle_t **salle):&#160;sdl_fonctions.c'],['../sdl__fonctions_8h.html#a178137e264817341b869df39374cd384',1,'destroy_salle(salle_t **salle):&#160;sdl_fonctions.c']]],
+  ['direction',['direction',['../structmonstre__stemp.html#a66e083b29f2101e51efd2261ed45fcb4',1,'monstre_stemp::direction()'],['../structmonstre__s.html#aa1a2d6868b660addc5855614f1849540',1,'monstre_s::direction()']]],
   ['drapeau',['drapeau',['../structliste__s.html#aef9dbdf8c2c0370440b9bb9de250041a',1,'liste_s']]]
 ];

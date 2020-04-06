@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['sauvegarder',['sauvegarder',['../source_8c.html#af7916edbfbb9a2021f0a9802369c76d7',1,'source.c']]],
-  ['suivant',['suivant',['../liste_8h.html#a10b3e8967207aed77f0fe2c087c79782',1,'suivant(liste_t *maListe):&#160;liste.c'],['../liste_8c.html#a10b3e8967207aed77f0fe2c087c79782',1,'suivant(liste_t *maListe):&#160;liste.c']]],
-  ['supliste',['supListe',['../liste_8h.html#adefa48de4f9f943350d21ee07dd55e19',1,'supListe(liste_t **maListe, void(*delete)(void **)):&#160;liste.c'],['../liste_8c.html#adefa48de4f9f943350d21ee07dd55e19',1,'supListe(liste_t **maListe, void(*delete)(void **)):&#160;liste.c']]],
-  ['supprimer_5fsprites',['supprimer_sprites',['../sdl__fonctions_8h.html#a416f82b1fd7f6724728aaa8fd2ef2d8c',1,'supprimer_sprites(SDL_Surface **tab, int nb_sprites):&#160;sdl_fonctions.c'],['../sdl__fonctions_8c.html#a416f82b1fd7f6724728aaa8fd2ef2d8c',1,'supprimer_sprites(SDL_Surface **tab, int nb_sprites):&#160;sdl_fonctions.c']]]
+  ['persvaliddep',['persValidDep',['../comportement_8c.html#aede415007da55f94b84a40f93ec45d6f',1,'persValidDep(personnage_t *p, salle_t *s):&#160;comportement.c'],['../comportement_8h.html#aede415007da55f94b84a40f93ec45d6f',1,'persValidDep(personnage_t *p, salle_t *s):&#160;comportement.c']]],
+  ['precedent',['precedent',['../liste_8c.html#a5d633040067cf4ba37700d6e96c09372',1,'precedent(liste_t *maListe):&#160;liste.c'],['../liste_8h.html#a5d633040067cf4ba37700d6e96c09372',1,'precedent(liste_t *maListe):&#160;liste.c']]],
+  ['prendporte',['prendPorte',['../comportement_8c.html#abdb96a0c189ae3f478ddd849a12612f4',1,'prendPorte(personnage_t *p, liste_t *lPortes):&#160;comportement.c'],['../comportement_8h.html#abdb96a0c189ae3f478ddd849a12612f4',1,'prendPorte(personnage_t *p, liste_t *lPortes):&#160;comportement.c']]]
 ];

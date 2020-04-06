@@ -5,6 +5,14 @@
 #include "../headers/liste.h"
 #include "../headers/comportement.h"
 
+/**
+ * \file comportement.c
+ * \brief Ensemble de fonctions pour le comportement des mobs et du personnage
+ * \author Thomas DIDIER L2 Info Le Mans
+ * \version 3.1
+ * \date 06/04/2020
+*/
+
 /*static int toucher(monstre_t* e1, monstre_t* e2){
     SDL_rect rect1, rect2;
 
@@ -20,6 +28,7 @@
 
     return SDL_IntersectRect(&rect1,&rect2);
 }*/
+
 
 /**
  * \brief Recupère l'élément récupérable (type monstre_t)
@@ -206,9 +215,6 @@ void depDroite(personnage_t* p, salle_t* s){
                 //p->delta.x = 0;
                 p->delta.x -= TAILLEBLOC;
             }
-            //Ajouté par MN :
-            p->posxhitbox += p->vit_dep;
-            //
             if(persValidDep(p,s)){
               //Modifié par MN :
               if(p->etat==IDLE){
@@ -223,9 +229,6 @@ void depDroite(personnage_t* p, salle_t* s){
                     p->delta.x %= TAILLEBLOC;
                 else
                     (p->pos.x)--;
-                //Ajouté par MN :
-                p->posxhitbox -= p->vit_dep;
-                //
             }
             break;
         default:
@@ -251,9 +254,6 @@ void depGauche(personnage_t* p, salle_t* s){
                 //p->delta.x = TAILLEBLOC -1;
                 p->delta.x += TAILLEBLOC;
             }
-            //Ajouté par MN :
-            p->posxhitbox -= p->vit_dep;
-            //
             if(persValidDep(p,s)){
               //Modifié par MN :
               if(p->etat==IDLE){
@@ -264,9 +264,6 @@ void depGauche(personnage_t* p, salle_t* s){
             }
             else{
                 p->delta.x = TAILLEBLOC - OFFSETHITBOX;
-                //Ajouté par MN :
-                p->posxhitbox += p->vit_dep;
-                //
             }
             break;
         default:
@@ -274,6 +271,13 @@ void depGauche(personnage_t* p, salle_t* s){
     }
 }
 
+/**
+ * \brief Vérifie la case au dessus du personnage
+ *
+ * @param p pointeur vers le personnage
+ * @param s pointeur vers la salle
+ * @return 1 (TRUE) si le il y a un bloc, 0 (FALSE) sinon
+*/
 static int verifCaseUp(personnage_t* p, salle_t* s){
     int leftP;
     int rightP;
@@ -297,6 +301,13 @@ static int verifCaseUp(personnage_t* p, salle_t* s){
     return FALSE;
 }
 
+/**
+ * \brief Vérifie la case en dessous du personnage
+ *
+ * @param p pointeur vers le personnage
+ * @param s pointeur vers la salle
+ * @return 1 (TRUE) si le il y a un bloc, 0 (FALSE) sinon
+*/
 static int verifCaseDown(personnage_t* p, salle_t* s){
     int leftP;
     int rightP;
@@ -321,6 +332,13 @@ static int verifCaseDown(personnage_t* p, salle_t* s){
     return FALSE;
 }
 
+/**
+ * \brief Gère le déplacement vertical du personnage quelque soit son état
+ *
+ * @param p pointeur vers le personnage
+ * @param s pointeur vers la salle
+ * @param tryJump booléen qui vaut TRUE(1) si le personnage essaie actuellement de sauter, FALSE(0) sinon
+*/
 void depVert(personnage_t* p, salle_t* s, int tryJump){
     if(p->jpCd){
         (p->jpCd)--;
@@ -405,6 +423,13 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
     }
 }
 
+/**
+ * \brief Estime si le joueur touche une porte et rend l'endroit où elle l'emmène
+ *
+ * @param p pointeur vers le personnage
+ * @param lPortes pointeur vers la liste de portes à vérifier
+ * @return une chaine de caractères correspondant au fichier texte à charger (nouvelle salle)
+*/
 char* prendPorte(personnage_t* p, liste_t* lPortes){
     if(strcmp(lPortes->type,"porte"))
         return NULL;
@@ -438,6 +463,12 @@ char* prendPorte(personnage_t* p, liste_t* lPortes){
     return NULL;
 }
 
+/**
+ * \brief Gère le déplacement d'une entite (monstre)
+ *
+ * @param entite le pointeur vers la structure monstre à déplacer
+ * @param salle le pointeur vers la structure salle où se trouve l'entite
+*/
 static void dep(monstre_t* entite, salle_t* salle){
     if(entite->pv){
         if(entite->direction){

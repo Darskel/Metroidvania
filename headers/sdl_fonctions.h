@@ -30,3 +30,5 @@ void destroy_salle(salle_t ** salle);
 void destroy_personnage(personnage_t ** perso);
 void ecranNoir(SDL_Renderer * renderer, int ms);
 void konamicode(personnage_t * perso, salle_t * salle, char * konami, int * indKon, boolean_t * kon);
+void destroy_typeentites(void);
+void initialiser_typeentites(SDL_Renderer * renderer);

@@ -174,9 +174,36 @@ void destroy_personnage(personnage_t ** personnage){
 }
 
 /**
+ * \brief Fonction de destruction des types de monstres
+ *
+ */
+void destroy_typeentites(void){
+  /*for(int i=0; i<NBTYPEMONSTRE; i++){
+    SDL_DestroyTexture((typesMonstre[i]).sprites);
+    free((typesMonstre[i]).nbAnim);
+  }Pour tout les types de monstres*/
+  SDL_DestroyTexture((typesMonstre[14]).sprites);
+  free((typesMonstre[14]).nbAnim);
+}
+
+/**
+ * \brief Fonction d'initialisation des types monstres
+ *
+ * @param renderer le pointeur vers le renderer utilisé par les textures
+ */
+void initialiser_typeentites(SDL_Renderer * renderer){
+  creerTypeEntite();
+  /*for(int i=0; i<NBTYPEMONSTRE; i++){
+    typesMonstre[i].sprites = initialiser_texture(typesMonstre[i].path, renderer);
+  }*/
+  typesMonstre[14].sprites = initialiser_texture(typesMonstre[14].path, renderer);
+}
+
+
+/**
  * \brief Fonction d'initialisation de la salle
  *
- * @param renderer le renderer utilisé
+ * @param renderer pointeur vers le renderer utilisé
  * @param nomFichier une chaine de caracteres qui contient le nom du fichier de la salle
  * @param tileset le pointeur vers la texture de tileset
  * @return un pointeur sur la structure salle initialisée
@@ -261,20 +288,32 @@ void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, sal
 }
 
 /**
- * \brief Fonction d'affichage du personnage
+ * \brief Fonction d'affichage des entités
  *
  * @param renderer le pointeur vers le SDL_Renderer à utiliser
- * @param salle le pointeur sur la salle où afficher le joueur
+ * @param salle le pointeur sur la salle où afficher l'entité
  */
 void afficher_entites(SDL_Renderer * renderer, salle_t * salle){
-  monstre_t* entite;
+  monstre_t entite;
+  SDL_Rect Rect_dest;
+  SDL_Rect Rect_source;
+  SDL_RendererFlip flip=SDL_FLIP_NONE;
   enTete(salle->listeEntite);
   while(!horsListe(salle->listeEntite)){
-    valeurElm(salle->listeEntite, entite);
-    //affichage
+    flip=SDL_FLIP_NONE;
+    valeurElm(salle->listeEntite, &entite);
+    if(entite.direction != RIGHT)
+      flip=SDL_FLIP_HORIZONTAL;
+    Rect_source.x = entite.spriteActuel.x;
+    Rect_source.y = IDLE;
+    Rect_source.h = entite.spriteActuel.h;
+    Rect_source.w = entite.spriteActuel.w;
+    Rect_dest.x = entite.pos.x * TAILLEBLOC + entite.delta.x;
+    Rect_dest.y = entite.pos.y * TAILLEBLOC + entite.delta.y;
+    Rect_dest.h = entite.spriteActuel.h;
+    Rect_dest.w = entite.spriteActuel.w;
+    SDL_RenderCopyEx(renderer, entite.type->sprites, &Rect_source, &Rect_dest, 0, NULL, flip);
     suivant(salle->listeEntite);
-    free(entite);
-    entite = NULL;
   }
 }
 
@@ -293,6 +332,7 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
   SDL_SetRenderDrawColor(renderer, 0,0,0,0);
   SDL_RenderClear(renderer);
   afficher_salle(renderer,salle);
+  afficher_entites(renderer, salle);
   afficher_personnage(renderer, personnage, salle);
   SDL_SetRenderTarget(renderer, NULL);
   SDL_RenderCopy(renderer, textureSalle, NULL, NULL);

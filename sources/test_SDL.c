@@ -26,6 +26,7 @@ int main(int argc, char *argv[]){
       exit(EXIT_FAILURE);
     }
   }
+
   SDL_DisplayMode mode;
   SDL_Window * fenetre=NULL;
   SDL_Renderer * renderer=NULL;
@@ -72,7 +73,7 @@ int main(int argc, char *argv[]){
         SDL_JoystickEventState(SDL_ENABLE);
       }
   }
-  creerTypeEntite(); //ajouté par thomas
+  initialiser_typeentites(renderer);
   tileset=initialiser_texture(TILESETPATH, renderer);
   salle=initialiser_salle(renderer, NIVEAUTXT, tileset);
 
@@ -263,6 +264,7 @@ int main(int argc, char *argv[]){
     }
     destroy_salle(&salle);
     destroy_personnage(&perso);
+    destroy_typeentites();
     if(pJoystick != NULL)
       SDL_JoystickClose(pJoystick);
     quitter_SDL(&fenetre, &renderer);

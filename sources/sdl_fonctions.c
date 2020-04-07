@@ -20,7 +20,7 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
 
   int res_h;
   int res_v;
-  SDL_Surface * icon;
+  SDL_Surface * icon = NULL;
 
   if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
     fprintf(stderr, "Echec de l'initalisation de la SDL (%s)\n", SDL_GetError());

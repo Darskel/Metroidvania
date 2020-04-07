@@ -56,7 +56,7 @@ static void recupElem(monstre_t* entite, personnage_t* perso){
 */
 int hitE(monstre_t* e1, monstre_t* e2){
 
-    if(strcmp(e1->type->nom,"fleche") && !strcmp(e1->type->nom,"fleche_feu"))
+    if(strcmp(e1->type->nom,"fleche") && strcmp(e1->type->nom,"fleche_feu"))
         return FALSE;
 
     if(!strcmp(e2->type->nom,"fleche") || !strcmp(e2->type->nom,"fleche_feu") || !strcmp(e2->type->nom,"crachat"))
@@ -67,13 +67,13 @@ int hitE(monstre_t* e1, monstre_t* e2){
     int topE1, topE2;
     int bottomE1, bottomE2;
 
-    leftE1 = e1->pos.x*TAILLEBLOC + e1->delta.x;
-    topE1 = e1->pos.y*TAILLEBLOC + e1->delta.y;
+    leftE1 = e1->pos.x*TAILLEBLOC + e1->delta.x + (e1->type->tailleSprite.largeur - e1->type->hitbox.largeur)/2;
+    topE1 = e1->pos.y*TAILLEBLOC + e1->delta.y + (e1->type->tailleSprite.hauteur - e1->type->hitbox.hauteur)/2;;
     rightE1 = leftE1 + e1->type->hitbox.largeur;
     bottomE1 = topE1 + e1->type->hitbox.hauteur;
 
-    leftE2 = e2->pos.x*TAILLEBLOC + e2->delta.x;
-    topE2 = e2->pos.y*TAILLEBLOC + e2->delta.y;
+    leftE2 = e2->pos.x*TAILLEBLOC + e2->delta.x + (e2->type->tailleSprite.largeur - e2->type->hitbox.largeur)/2;
+    topE2 = e2->pos.y*TAILLEBLOC + e2->delta.y + (e2->type->tailleSprite.hauteur - e2->type->hitbox.hauteur)/2;;
     rightE2 = leftE2 + e2->type->hitbox.largeur;
     bottomE2 = topE2 + e2->type->hitbox.hauteur;
 
@@ -106,9 +106,9 @@ static int hitP(monstre_t* m, personnage_t* p){
     int topE, topP;
     int bottomE, bottomP;
 
-    leftE = m->pos.x*TAILLEBLOC + m->delta.x;
-    rightE = leftE + m->type->hitbox.largeur - (m->type->tailleSprite.largeur - m->type->hitbox.largeur)/2;
-    topE = m->pos.y*TAILLEBLOC + m->delta.y + 1;
+    leftE = m->pos.x*TAILLEBLOC + m->delta.x + (m->type->tailleSprite.largeur - m->type->hitbox.largeur)/2;
+    rightE = leftE + m->type->hitbox.largeur;
+    topE = m->pos.y*TAILLEBLOC + m->delta.y + (m->type->tailleSprite.hauteur - m->type->hitbox.hauteur)/2;
     bottomE = topE + m->type->hitbox.hauteur;
 
     leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
@@ -401,7 +401,7 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
     }
 }
 
-/*void attaquer(personnage_t* p, salle_t* s, int tryAtk){
+void attaquer(personnage_t* p, salle_t* s, int tryAtk){
     if(p->etat == ATTACKING){
         if(p->nbFrameAtk == p->vit_att){
             monstre_t* f = malloc(sizeof(monstre_t));
@@ -435,7 +435,7 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
                 }
             }
 
-            f->etat = IDLE;
+            f->etat = RUNNING;
 
             f->spriteActuel.h = f->type->tailleSprite.hauteur;
             f->spriteActuel.w = f->type->tailleSprite.largeur;
@@ -454,7 +454,7 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
             p->nbFrameAtk = 0;
         }
     }
-}*/
+}
 
 /**
  * \brief Estime si le joueur touche une porte et rend l'endroit où elle l'emmène
@@ -581,33 +581,18 @@ static int dep(monstre_t* entite, salle_t* salle){
                 (entite->pos.x)++;
                 entite->delta.x -= TAILLEBLOC;
             }
-            if(hitB(entite,salle) || verifChuteMonstre(entite,salle)){
-                entite->direction = LEFT;
-                entite->delta.x -= entite->type->vit_dep;
-                if(entite->delta.x < 0){
-                    (entite->pos.x)--;
-                    entite->delta.x += TAILLEBLOC;
-                }
-                //return TRUE;
-            }
-            //return FALSE;
+            if(hitB(entite,salle) || verifChuteMonstre(entite,salle))
+                return TRUE;
+            return FALSE;
         }else{
             entite->delta.x -= entite->type->vit_dep;
             if(entite->delta.x < 0){
                 (entite->pos.x)--;
                 entite->delta.x += TAILLEBLOC;
             }
-            if(hitB(entite,salle) || verifChuteMonstre(entite,salle)){
-                entite->direction = RIGHT;
-                entite->delta.x += entite->type->vit_dep;
-
-                if(entite->delta.x >= TAILLEBLOC){
-                    (entite->pos.x)++;
-                    entite->delta.x -= TAILLEBLOC;
-                }
-                //return TRUE;
-            }
-            //return FALSE;
+            if(hitB(entite,salle) || verifChuteMonstre(entite,salle))
+                return TRUE;
+            return FALSE;
         }
     }
 }
@@ -636,34 +621,31 @@ void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle, lis
 
     //gestion des sprites
     entite->spritesActuel = (entite->spritesActuel + 1)%(entite->type->nb_sprites);
-}
+}*/
 
-void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
-    if(strcmp(lEntites->type, "monstre"))
-        return;
-    monstre_t* tmp = malloc(sizeof(monstre_t));
-    enTete(lEntites);
-    while(!horsListe(lEntites)){
-        valeurElm(lEntites,tmp);
-        if(hitE(entite,tmp) && entite->pv){
-            tmp->pv -= entite->type->degat;
-            modifElm(lEntites,tmp);
+void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle){
+    monstre_t tmp;
+    enTete(salle->listeEntite);
+    while(!horsListe(salle->listeEntite)){
+        valeurElm(salle->listeEntite,&tmp);
+        if(hitE(entite,&tmp)){
+            tmp.pv -= entite->type->degat;
+            modifElm(salle->listeEntite,&tmp);
             entite->pv = 0;
+            entite->etat = IDLE;
+            entite->newEtat = TRUE;
         }
-        suivant(lEntites);
+        suivant(salle->listeEntite);
     }
-    free(tmp);
 
-    if(hitB(entite,salle))
+    if(dep(entite,salle)){
         entite->pv = 0;
-
-    //gestion deb
-    dep(entite);
-
-    //gestion des sprites
+        entite->etat = IDLE;
+        entite->newEtat = TRUE;
+    }
 }
 
-void compMurGlace(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
+/*void compMurGlace(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
     if(entite->pv)
         entite->pv = 2;
     /*ou
@@ -691,11 +673,12 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
         perso->inv = 60;
         entite->direction = 1 - entite->direction;
     }else{
-        entite->type->vit_dep = 1 - entite->type->vit_dep;
+        entite->type->vit_dep = 1 - entite->type->vit_dep; //divise par deux la vitesse de dep du serpent
+
         if(perso->inv)
             (perso->inv)--;
-        dep(entite,salle);
-        /*if(dep(entite,salle)){
+        
+        if(dep(entite,salle)){
             if(entite->direction){
                 entite->direction = LEFT;
                 entite->delta.x -= entite->type->vit_dep;
@@ -712,7 +695,7 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
                     entite->delta.x -= TAILLEBLOC;
                 }
             }
-        }*/
+        }
     }
 }
 
@@ -757,8 +740,18 @@ void evolution(personnage_t* p, salle_t* s){
         if(e.pv){
             e.type->comportement(&e,p,s);
             modifElm(s->listeEntite,&e);
-        }else
+        }else{
             oterElm(s->listeEntite,supMonstre); //je reviens au précédent après avoir oté
+
+            //creation des coeurs
+            /*if(strcmp(e.type->nom,"fleche") && strcmp(e.type->nom,"fleche_feu") && strcmp(e.type->nom,"crachat") && e.type->comportement != compRecuperable){
+                srand(time(NULL));
+                int r = rand() % 100;
+                if(r < COEURDROPRATE){
+                    //creer un coeur
+                }
+            }*/
+        }
         suivant(s->listeEntite);
     }
 }

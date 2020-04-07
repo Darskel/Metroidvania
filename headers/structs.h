@@ -1,6 +1,15 @@
 #include <stdio.h>
-#include <SDL2/SDL.h>
 #include "liste.h"
+
+#ifndef SDL_H
+#define SDL_H
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+
+#endif
 
 #ifndef SYSTEM_INCLUDED
 #define SYSTEM_INCLUDED
@@ -15,8 +24,6 @@
         #define PAUSE
         #define CLEAR
     #endif
-
-    //#define CREATE_DIR(X) system(strcat("mkdir ",X));
 
 #endif
 
@@ -33,10 +40,76 @@
 
 #define LEFT 0
 #define RIGHT 1
-#define TAILLE_INVENTAIRE 6
 
-typedef struct {
-  int h,v;
+#define TAILLE_INVENTAIRE 8
+
+#define NOM_JEU "Diskosieni"
+
+#define PLAYERSPRITESPATH "./sprites/entite/joueur/sprite_joueur.png"
+#define TILESETPATH "./sprites/bloc/tileset.png"
+
+#define TAILLEBLOC 8
+#define HAUTEURPORTE 36
+#define LARGEURPORTE 13
+#define HAUTEURSPRITEPERS 33
+#define LARGEURSPRITEPERS 25
+#define LARGEURSPRITEPERSATTACK 30
+
+#define HAUTEURHITBOXPERS 32
+#define LARGEURHITBOXPERS 13
+#define OFFSETHITBOX 6
+
+#define VITDEPPERS 1
+#define VITSAUTPERS 2
+#define VITCHUTEPERS 1
+#define VITATTACKPERS 1
+#define JPCD 2
+
+#define NBPXSAUT 4*TAILLEBLOC
+
+#define EVOSPRITES 3 //Change le sprite seulement 1 tour sur 3
+
+#define ZONEMORTE 5000 //Zone morte de la manette
+
+#define NIVEAUTXT "salle_debut.txt"
+#define DIRBG "./sprites/salles/"
+
+#define OFFSETWINDOW 0.05 //5% de la taille de l'écran en moins
+#define FRAMEDELAY 17 //Correspond à du 59fps
+
+#define WAVFILE "./audio/test.wav"
+#define NBSOUNDS 1
+
+/*
+    INVENTAIRE:
+        objet n°1 : clé rouillé
+        objet n°2 : clé rouge
+        objet n°3 : clé verte
+        objet n°4 : fléche de feu
+        objet n°5 : clé bleu
+        objet n°6 : double saut
+        objet n°7 : renard
+        objet n°8 : champignon
+    >
+        champignon
+        cle bleue
+        cle rouille
+        cle rouge
+        cle verte
+        double saut
+        fleche de feu
+        renard
+
+*/
+
+
+/**
+ * \struct taille_t
+ * \brief Taille avec hauteur et largeur
+*/
+typedef struct taille_s{
+  int hauteur;/**< Hauteur*/
+  int largeur;/**< Largeur*/
 }taille_t;
 
 /**
@@ -44,7 +117,7 @@ typedef struct {
  * \brief Une position représentée par deux valeurs entières
 */
 typedef struct position_s {
-    int x; /**< Position en hauteur */
+    int x; /**< Position en hauteur*/
     int y; /**< Position en longueur*/
 } position_t;
 
@@ -81,7 +154,13 @@ typedef enum indSprite_e{
     JP8 /**< Sprite de saut (Jump) n°8 */
 } indSpritePer_t;
 
-
+typedef enum etat_e{
+    IDLE,
+    RUNNING,
+    JUMPING,
+    ATTACKING,
+    FALLING
+} etat_t;
 
 /**
  * \struct salle_s
@@ -93,29 +172,11 @@ typedef struct salle_s{
     int hauteur; /**< Hauteur de la salle en blocks */
     int largeur; /**< Longueur de la salle en blocks */
     int ** mat; /**< Matrice de positionnement des objets */
-
+    SDL_Texture * background; /**< Image d'arrière-plan de la salle */
+    SDL_Texture * tileset; /**< Image qui contient tout les sprites de la tileset associée à la salle */
     int spriteActuel; /**< Indice du sprite à afficher */
-
-    liste_t * listePorte;
+    liste_t * listePorte; /**< Liste des portes de la salle */
 } salle_t;
-
-/**
- * \struct fraction_s
- * \brief Une fration représenter par deux entier
-*/
-typedef struct fraction_s{
-    int numerateur; /**< Numérateur de la fraction */
-    int denominateur; /**< Denominateur de la fraction */
-}fraction_t;
-
-/**
- * \struct fracPos_s
- * \brief Structure représentant la différence de position en fraction
-*/
-typedef struct fracPos_s{
-    fraction_t delta_x; /**< Différence de position sur l'axe x à ajouter à la position entière (valeur comprise -1 et 1) */
-    fraction_t delta_y; /**< Différence de position sur l'axe y à ajouter à la position entière (valeur comprise -1 et 1) */
-} fracPos_t;
 
 /**
  * \struct personnage_s
@@ -123,16 +184,29 @@ typedef struct fracPos_s{
 */
 typedef struct personnage_s{
     int pv; /**< PV(points de vie) actuel du personnage */
+    int pv_max; /**< PV max du personnage */
+    int inv; /**< Entier qui permet de décompter l'invulnérabilité du joueur */
+    int nbPxSaut; /**< Entier qui indique le nombre de pixel qu'il a fait lors de son saut (ou deuxième saut) */
+    int nbSaut; /**< Entier qui indique le nombre de saut que le personnage à fait avant de retoucher le sol */
+    int jpCd; /**< Entier qui indique le nombre de frames restantes avant de pouvoir resauter */
+    int direction; /*Vaut 1 si le personnage va à droite et 0 si il va à gauche */
     int vit_dep; /**< Vitesse de déplacement du personnage (pixel par tick) */
+    int vit_saut; /**< Vitesse de saut du personnage (pixel par tick) */
+    int vit_chute; /**< Vitesse de chute du personnage (pixel par tick) */
     int vit_att; /**< Vitesse d'attaque du personnage (en nombre de frame) */
-    position_t pos; /**< Position actuel du personnage (position entière) */
-    fracPos_t delta; /**< Différence de position à ajouter à la position entière */
-    SDL_Surface ** sprites; /**Pointeur vers le tableau de sprites du personnage */
-    indSpritePer_t spriteActuel; /**< Indice du sprite à afficher */
-    int nb_sprites;/**< Nombre de sprites du personnage (sans orientation)*/
+    position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
+    position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
+    SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du personnage */
+    SDL_Rect spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
+    taille_t hitbox; /**< Taille de la hitbox du personnage en pixel */
+    int posxhitbox; /**< Position horizontale en pixel de la hitbox dans la salle */
+    etat_t etat; /**< Etat du personnage (idle/running/jumping/attacking/falling) */
+    boolean_t newEtat; /**< Booléen qui signifie qu'un changement d'état vient de s'effectuer */
+    int evoSprite; /**< Entier qui décrémente, changement de sprite quand vaut 0 */
+    int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du personage */
     char forme; /**< Forme du personnage H = humain, F = renard */
-    //hitbox en dur possible
-
+    int inventaire[TAILLE_INVENTAIRE]; /**<Tableau qui contient les informations sur l'inventaire actuel du personnage */
+    char* nomObj[TAILLE_INVENTAIRE]; /**<Tableau qui contient les noms des objets de l'inventaire */
 } personnage_t;
 
 /**
@@ -144,11 +218,12 @@ typedef struct type_monstre_s{
     int vit_dep; /**< Vitesse de déplacement du monstre (facteur/indicateur) */
     int vit_att; /**< Vitesse d'attaque du monstre (en nombre de frame) */
 
-    char* sprites; /**< Chemin d'accès aux sprites qui seront utilisés*/
-    int nb_sprites;/**< Nombre de sprites du monstre (sans orientation)*/
-    int largeur; /**< Largeur du monstre en unité de case (taille d'une case) */
-    int haunteur; /**< Hauteur du monstre en unité de case (taille d'une case) */
-
+    char* nom;
+    char* path; /**< Chemin d'accès à l'image qui contient les sprites*/
+    SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du monstre */
+    int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du monstre */
+    int degat;
+    taille_t hitbox; /**< Taille de la hitbox de monstre en cases */
     boolean_t passeEntites; /**< Indique si le monstre peut passer à travers les entités (autres monstres/joueur) */
     boolean_t passeBlocs; /**< Indique si le monstre peut passer à travers les blocs */
 
@@ -162,9 +237,10 @@ typedef struct type_monstre_s{
 typedef struct monstre_s{
     type_monstre_t * type; /**< Type de monstre */
     int pv; /**< PV actuels du monstre */
-    int spritesActuel; /**< Indice du sprite à afficher */
-    position_t pos; /**< Postition actuelle du monstre (position entière) */
-    fracPos_t delta; /**< Différence de position à ajouter à la position entière */
+    etat_t etat;
+    SDL_Rect spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
+    position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
+    position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
     boolean_t direction; /**< Direction vers laquelle regarde le monstre (1: vers la gauche(LEFT), 0: vers la droite(RIGHT)) */
 
 } monstre_t;
@@ -189,10 +265,9 @@ typedef struct porte_s{
     char* salleSuivante; /**< Nom de la salle suivante (nom de la salle) */
     position_t pos_arrivee; /**< Postition d'apparition dans la salle d'arrivée */
     char* listeSprites; /**< Chemin vers les sprites de la porte */
-    int spritesActuel; /**< Indice du sprite à afficher */
+    SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites de la porte */
+    int spriteActuel; /**< Indice du sprite à afficher */
 } porte_t;
 
-void supPorte(porte_t**);
-void supMonstre(monstre_t** m);
 
 #endif

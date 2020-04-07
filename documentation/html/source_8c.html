@@ -64,7 +64,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Fonctions</a>  </div>
   <div class="headertitle">
 <div class="title">Référence du fichier source.c</div>  </div>
@@ -78,16 +77,13 @@ $(function() {
 <code>#include &lt;sys/stat.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="structs_8h_source.html">../headers/structs.h</a>&quot;</code><br />
+<code>#include &quot;../headers/source.h&quot;</code><br />
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ab146d4d97ad31f63e0e77b770cfb08a8"><td class="memItemLeft" align="right" valign="top"><a id="ab146d4d97ad31f63e0e77b770cfb08a8"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>DIR_SAUV</b>&#160;&#160;&#160;&quot;./&quot;</td></tr>
-<tr class="separator:ab146d4d97ad31f63e0e77b770cfb08a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
+<tr class="memitem:a533f4bb0a5e22b4efcfc42b6b903394a"><td class="memItemLeft" align="right" valign="top"><a id="a533f4bb0a5e22b4efcfc42b6b903394a"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>chercherSprite</b> (int id, char *dirName)</td></tr>
+<tr class="separator:a533f4bb0a5e22b4efcfc42b6b903394a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7916edbfbb9a2021f0a9802369c76d7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#af7916edbfbb9a2021f0a9802369c76d7">sauvegarder</a> (int numSauv, int hp, char *salle, <a class="el" href="structposition__s.html">position_t</a> *dep, int inventaire[], char *nomObjs[])</td></tr>
 <tr class="memdesc:af7916edbfbb9a2021f0a9802369c76d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sauvegarde l'état de la partie.  <a href="#af7916edbfbb9a2021f0a9802369c76d7">Plus de détails...</a><br /></td></tr>
 <tr class="separator:af7916edbfbb9a2021f0a9802369c76d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,9 +93,9 @@ Fonctions</h2></td></tr>
 <tr class="memitem:ad5237d1625ec6ab16ef2c4f0690bbfb8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#ad5237d1625ec6ab16ef2c4f0690bbfb8">nettoyerSalle</a> (<a class="el" href="structsalle__s.html">salle_t</a> **salle)</td></tr>
 <tr class="memdesc:ad5237d1625ec6ab16ef2c4f0690bbfb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nettoie et supprime la structure salle donnée.  <a href="#ad5237d1625ec6ab16ef2c4f0690bbfb8">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ad5237d1625ec6ab16ef2c4f0690bbfb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefc148eb203f3f1e27c3dd7a8f5a2333"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#aefc148eb203f3f1e27c3dd7a8f5a2333">lireSalle</a> (char *nomFichier, <a class="el" href="structsalle__s.html">salle_t</a> *salle)</td></tr>
-<tr class="memdesc:aefc148eb203f3f1e27c3dd7a8f5a2333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie la structure salle pour la nouvelle salle.  <a href="#aefc148eb203f3f1e27c3dd7a8f5a2333">Plus de détails...</a><br /></td></tr>
-<tr class="separator:aefc148eb203f3f1e27c3dd7a8f5a2333"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfe782df62b56721f4f3aaa311f6e3e6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#acfe782df62b56721f4f3aaa311f6e3e6">lireSalle</a> (char *nomFichier, <a class="el" href="structsalle__s.html">salle_t</a> **salle)</td></tr>
+<tr class="memdesc:acfe782df62b56721f4f3aaa311f6e3e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie la structure salle pour la nouvelle salle.  <a href="#acfe782df62b56721f4f3aaa311f6e3e6">Plus de détails...</a><br /></td></tr>
+<tr class="separator:acfe782df62b56721f4f3aaa311f6e3e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p>Fonctions de lecture d'une salle. </p>
@@ -167,8 +163,8 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="aefc148eb203f3f1e27c3dd7a8f5a2333"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aefc148eb203f3f1e27c3dd7a8f5a2333">&#9670;&nbsp;</a></span>lireSalle()</h2>
+<a id="acfe782df62b56721f4f3aaa311f6e3e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfe782df62b56721f4f3aaa311f6e3e6">&#9670;&nbsp;</a></span>lireSalle()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,7 +178,7 @@ Fonctions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structsalle__s.html">salle_t</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structsalle__s.html">salle_t</a> **&#160;</td>
           <td class="paramname"><em>salle</em>&#160;</td>
         </tr>
         <tr>

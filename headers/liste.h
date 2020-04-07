@@ -43,4 +43,8 @@ void ajoutDroit(liste_t *maListe, void *v);
 void ajoutGauche(liste_t *maListe, void *v);
 void supListe(liste_t **maListe, void (*delete)(void**));
 
+//porte_t et monstre_t non initialisés dans ce fichier
+void supPorte(void**);
+void supMonstre(void**);
+
 #endif

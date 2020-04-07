@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../headers/source.h"
+#include "../headers/liste.h"
 
 /**
  * \file source.c
@@ -24,8 +25,8 @@ static int filecmp(struct dirent* f1, struct dirent* f2){
 }
 
 char* chercherSprite(int id, char* dirName){
-    /* tout sur dirent ici: http://sdz.tdct.org/sdz/arcourir-les-dossiers-avec-dirent-h.html */
-    if(!id)
+    /* tout sur dirent ici: http://sdz.tdct.org/sdz/parcourir-les-dossiers-avec-dirent-h.html */
+    if(id <= 0)
         return NULL;
 
     char newName[200] = "";
@@ -123,7 +124,7 @@ int sauvegarder(int numSauv, int hp, char* salle, position_t* dep, int inventair
 }
 
 /**
- * \brief Sauvegarde l'état de la partie
+ * \brief Charge l'état de la partie
  * \details Les paramètres numSauv et nomObjs doivent être définis avant, les autres paramètres seront remplis par cette fonction
  *
  * @param numSauv numéro de la sauvegarde (entre 1 et 3)
@@ -170,7 +171,7 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
         return 0; //Le fichier de sauvegarde est vide
     }
 
-    fscanf(file, "ealth Point: %d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", &(perso->pv), salle, &(perso->pos.x), &(perso->pos.y));
+    fscanf(file, "Health Point: %d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", &(perso->pv), salle, &(perso->pos.x), &(perso->pos.y));
 
     for(int i = 0; i < TAILLE_INVENTAIRE; i++){
         fscanf(file,"%[^:]: ", tmp);
@@ -178,9 +179,10 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
         if(!strcmp(tmp,nomObjs[i]))
             fscanf(file,"%d\n", inventaire + i);
         else{
-            while(strcmp(tmp,nomObjs[i])){//opti ici pour chercher l'indice correct (si indice non trouvé -> indice actuel inchangé)
-                inventaire[i] = 0;
-                i++;
+            int j;
+            for(j = 0; j < TAILLE_INVENTAIRE && strcmp(tmp,nomObjs[j]); j++);
+            if(j != TAILLE_INVENTAIRE){
+                fscanf(file,"%d\n", inventaire + j);
             }
         }
     }
@@ -220,10 +222,10 @@ int lireSalle(char* nomFichier, salle_t** salle){
     int lon, larg, val;
     int cx1, cx2, cy1, cy2;
 
-    if(*salle)
+    if(*salle!=NULL)
         nettoyerSalle(salle);
 
-    char tmp[20] = DIR_SALLE;
+    char tmp[100] = DIR_SALLE;
     strcat(tmp,nomFichier);
 
     //creation des variables dans le tas
@@ -250,6 +252,7 @@ int lireSalle(char* nomFichier, salle_t** salle){
     //Remplissage matrice
     for(int i = 0; i < lon*larg; i++){
         fscanf(monDoc, "%d", &val);
+        //gestion des entités !!!
         (*salle)->mat[i/lon][i%lon] = val;
         //printf("\n %d %d \n", i/lon,i%lon);
     }
@@ -268,7 +271,7 @@ int lireSalle(char* nomFichier, salle_t** salle){
         p->salleSuivante = malloc(sizeof(char) * (strlen(mot) + 1));
         strcpy(p->salleSuivante, mot);
         //Gestion des sprites de portes potentiellement à modifier
-        p->spritesActuel = -1;
+        p->spriteActuel = -1;
         p->listeSprites = NULL;
         ajoutDroit((*salle)->listePorte, p);
         fscanf(monDoc, "%s %d %d %d %d", mot, &cx1, &cy1, &cx2, &cy2);

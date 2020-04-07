@@ -84,8 +84,13 @@ Attributs publics</h2></td></tr>
 <tr class="separator:adea4789f8b55587ec092f3a32b7b1964"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a396d01ba0660ce2327f65f891d4f239e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfrac_pos__s.html">fracPos_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpersonnage__s.html#a396d01ba0660ce2327f65f891d4f239e">delta</a></td></tr>
 <tr class="separator:a396d01ba0660ce2327f65f891d4f239e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec4def382ab17941f0edfe1c40f0cc59"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpersonnage__s.html#aec4def382ab17941f0edfe1c40f0cc59">spriteActuel</a></td></tr>
-<tr class="separator:aec4def382ab17941f0edfe1c40f0cc59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a93d7a1c56bf5d45a13754b8387e27c"><td class="memItemLeft" align="right" valign="top"><a id="a8a93d7a1c56bf5d45a13754b8387e27c"></a>
+SDL_Surface **&#160;</td><td class="memItemRight" valign="bottom"><b>sprites</b></td></tr>
+<tr class="separator:a8a93d7a1c56bf5d45a13754b8387e27c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31cfe3f9dacab7ae783fc557cd0a0adf"><td class="memItemLeft" align="right" valign="top">indSpritePer_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpersonnage__s.html#a31cfe3f9dacab7ae783fc557cd0a0adf">spriteActuel</a></td></tr>
+<tr class="separator:a31cfe3f9dacab7ae783fc557cd0a0adf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabe3731a1f5bbb6b08c4f9e9d89db0a1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpersonnage__s.html#aabe3731a1f5bbb6b08c4f9e9d89db0a1">nb_sprites</a></td></tr>
+<tr class="separator:aabe3731a1f5bbb6b08c4f9e9d89db0a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f1eb200420640259201a84300bccf7e"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpersonnage__s.html#a1f1eb200420640259201a84300bccf7e">forme</a></td></tr>
 <tr class="separator:a1f1eb200420640259201a84300bccf7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -122,6 +127,21 @@ Attributs publics</h2></td></tr>
 
 </div>
 </div>
+<a id="aabe3731a1f5bbb6b08c4f9e9d89db0a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabe3731a1f5bbb6b08c4f9e9d89db0a1">&#9670;&nbsp;</a></span>nb_sprites</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int personnage_s::nb_sprites</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Nombre de sprites du personnage (sans orientation) </p>
+
+</div>
+</div>
 <a id="adea4789f8b55587ec092f3a32b7b1964"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adea4789f8b55587ec092f3a32b7b1964">&#9670;&nbsp;</a></span>pos</h2>
 
@@ -152,18 +172,18 @@ Attributs publics</h2></td></tr>
 
 </div>
 </div>
-<a id="aec4def382ab17941f0edfe1c40f0cc59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec4def382ab17941f0edfe1c40f0cc59">&#9670;&nbsp;</a></span>spriteActuel</h2>
+<a id="a31cfe3f9dacab7ae783fc557cd0a0adf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31cfe3f9dacab7ae783fc557cd0a0adf">&#9670;&nbsp;</a></span>spriteActuel</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int personnage_s::spriteActuel</td>
+          <td class="memname">indSpritePer_t personnage_s::spriteActuel</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Indice du sprite à afficher </p>
+<p>Pointeur vers le tableau de sprites du personnage Indice du sprite à afficher </p>
 
 </div>
 </div>
@@ -193,7 +213,7 @@ Attributs publics</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Vitesse de déplacement du personnage (facteur/indicateur) </p>
+<p>Vitesse de déplacement du personnage (pixel par tick) </p>
 
 </div>
 </div>

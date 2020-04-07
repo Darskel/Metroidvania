@@ -67,7 +67,8 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Définitions de type</a> &#124;
-<a href="#enum-members">Énumérations</a>  </div>
+<a href="#enum-members">Énumérations</a> &#124;
+<a href="#func-members">Fonctions</a>  </div>
   <div class="headertitle">
 <div class="title">Référence du fichier structs.h</div>  </div>
 </div><!--header-->
@@ -76,6 +77,7 @@ $(function() {
 <p>Ensemble de structures utilisées dans le projets.  
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="liste_8h_source.html">liste.h</a>&quot;</code><br />
 </div>
 <p><a href="structs_8h_source.html">Aller au code source de ce fichier.</a></p>
@@ -120,9 +122,6 @@ Macros</h2></td></tr>
 <tr class="memitem:a611cc9b5f655508482f3d7a9751c182a"><td class="memItemLeft" align="right" valign="top"><a id="a611cc9b5f655508482f3d7a9751c182a"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>CLEAR</b></td></tr>
 <tr class="separator:a611cc9b5f655508482f3d7a9751c182a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1af6db5f19bb8f04997f5d53b2e3226e"><td class="memItemLeft" align="right" valign="top"><a id="a1af6db5f19bb8f04997f5d53b2e3226e"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>CREATE_DIR</b>(X)&#160;&#160;&#160;char Y[20] = &quot;mkdir &quot;; strcat(Y, X); system(Y);</td></tr>
-<tr class="separator:a1af6db5f19bb8f04997f5d53b2e3226e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14862d1ea290aaf4ce47601ceb2830ad"><td class="memItemLeft" align="right" valign="top"><a id="a14862d1ea290aaf4ce47601ceb2830ad"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>STRUCTS_INCLUDED</b></td></tr>
 <tr class="separator:a14862d1ea290aaf4ce47601ceb2830ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -205,6 +204,15 @@ typedef struct <a class="el" href="structporte__s.html">porte_s</a>&#160;</td><t
  }<tr class="memdesc:acc92dae96c834a587153fcb1fb87df1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nom des indices des sprites.  <a href="structs_8h.html#acc92dae96c834a587153fcb1fb87df1e">Plus de détails...</a><br /></td></tr>
 </td></tr>
 <tr class="separator:acc92dae96c834a587153fcb1fb87df1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:aae90c8ca9d63dc77fed2a674555344b2"><td class="memItemLeft" align="right" valign="top"><a id="aae90c8ca9d63dc77fed2a674555344b2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>supPorte</b> (<a class="el" href="structporte__s.html">porte_t</a> **)</td></tr>
+<tr class="separator:aae90c8ca9d63dc77fed2a674555344b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7f22ce7d8e2944ec9d141c24c75fbd6"><td class="memItemLeft" align="right" valign="top"><a id="ac7f22ce7d8e2944ec9d141c24c75fbd6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>supMonstre</b> (<a class="el" href="structmonstre__s.html">monstre_t</a> **m)</td></tr>
+<tr class="separator:ac7f22ce7d8e2944ec9d141c24c75fbd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p>Ensemble de structures utilisées dans le projets. </p>

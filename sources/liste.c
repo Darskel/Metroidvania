@@ -30,7 +30,7 @@ static void initListe(liste_t *maListe, char *type){
  * @return adresse de la liste créée
 */
 liste_t* creerListe(char* type){
-    liste_t* maListe = malloc(sizeof(elemListe_t*));
+    liste_t* maListe = malloc(sizeof(liste_t));
     initListe(maListe, type);
     return maListe;
 }
@@ -205,14 +205,22 @@ void supListe(liste_t **maListe, void (*delete)(void**)){
     (*maListe) = NULL;
 }
 
-void supPorte(porte_t** p){
+static void delPorte(porte_t** p){
     free((*p)->salleSuivante);
     free((*p)->listeSprites);
     free(*p);
     *p = NULL;
 }
 
-void supMonstre(monstre_t** m){
+void supPorte(void** p){
+    delPorte((porte_t**)p);
+}
+
+static void delMonstre(monstre_t** m){
     free(*m);
     *m = NULL;
+}
+
+void supMonstre(void** m){
+    delMonstre((monstre_t**)m);
 }

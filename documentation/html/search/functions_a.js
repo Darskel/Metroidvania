@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['precedent',['precedent',['../liste_8h.html#a5d633040067cf4ba37700d6e96c09372',1,'precedent(liste_t *maListe):&#160;liste.c'],['../liste_8c.html#a5d633040067cf4ba37700d6e96c09372',1,'precedent(liste_t *maListe):&#160;liste.c']]]
+  ['quitter_5fsdl',['quitter_SDL',['../sdl__fonctions_8h.html#ae6d762efc12860f009555b28b7a9b34e',1,'quitter_SDL(SDL_Window *fenetre):&#160;sdl_fonctions.c'],['../sdl__fonctions_8c.html#ae6d762efc12860f009555b28b7a9b34e',1,'quitter_SDL(SDL_Window *fenetre):&#160;sdl_fonctions.c']]]
 ];

@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 int main (int argc, char* argv[])
 {
-     // Démarre SDL avec la gestion des joysticks
+     // Dï¿½marre SDL avec la gestion des joysticks
   if ( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK) == -1 )
   {
     fprintf(stderr,"Erreur lors de l'initialisation de la SDL\n");
@@ -15,7 +15,7 @@ int numJoystick = SDL_NumJoysticks(); // Compte le nombre de joysticks
 printf("Vous avez %d joysticks sur cette machine\n",numJoystick);
 if ( numJoystick >= 1 )
 {
-    // Ouvre le premier joystick présent sur la machine
+    // Ouvre le premier joystick prï¿½sent sur la machine
     pJoystick = SDL_JoystickOpen(0);
     if ( pJoystick == NULL )
     {
@@ -31,7 +31,7 @@ if ( event.type == SDL_JOYBUTTONDOWN )
     printf("Bouton : %d\n",event.jbutton.button);
 }
 
-// On indique que l'on souhaite utiliser le système d'événements
+// On indique que l'on souhaite utiliser le systï¿½me d'ï¿½vï¿½nements
 SDL_JoystickEventState(SDL_ENABLE);
 
 if ( event.type == SDL_JOYAXISMOTION )
@@ -46,7 +46,7 @@ if ( event.type == SDL_JOYAXISMOTION )
 }
 else if ( event.type == SDL_JOYBUTTONDOWN || event.type == SDL_JOYBUTTONUP )
 {
-    // Bouton appuyé ou relâché
+    // Bouton appuyï¿½ ou relï¿½chï¿½
     // Nous devons donc utiliser le champ jbutton
     if ( event.jbutton.state == SDL_PRESSED )
     {
@@ -56,7 +56,7 @@ else if ( event.type == SDL_JOYBUTTONDOWN || event.type == SDL_JOYBUTTONUP )
     }
     else if ( event.jbutton.state == SDL_RELEASED )
     {
-        printf("Relâchement sur le bouton %d du joystick %d\n",
+        printf("Relï¿½chement sur le bouton %d du joystick %d\n",
                 event.jbutton.button,
                 event.jbutton.which);
     }
@@ -66,7 +66,7 @@ else if ( event.type == SDL_JOYBALLMOTION )
     // Mouvement de trackball
     // Nous devons donc utiliser le champ jball
     printf("Mouvement du trackball\n");
-    printf("La balle %d du joystick %d a bougé de %d;%d\n",
+    printf("La balle %d du joystick %d a bougï¿½ de %d;%d\n",
            event.jball.ball,
            event.jball.which,
            event.jball.xrel,
@@ -100,4 +100,3 @@ else if ( event.type == SDL_JOYHATMOTION )
 }
     }
 }
-

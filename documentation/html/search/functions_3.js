@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fullscreen_5fswitch',['fullscreen_switch',['../sdl__fonctions_8h.html#ace268ecb7ed08ec8ebb0739aa30334b4',1,'fullscreen_switch(SDL_Window *fenetre, int state):&#160;sdl_fonctions.c'],['../sdl__fonctions_8c.html#ace268ecb7ed08ec8ebb0739aa30334b4',1,'fullscreen_switch(SDL_Window *fenetre, int state):&#160;sdl_fonctions.c']]]
+  ['horsliste',['horsListe',['../liste_8h.html#a2a28644c1964d291e68300494d2a97f9',1,'horsListe(liste_t *maListe):&#160;liste.c'],['../liste_8c.html#a2a28644c1964d291e68300494d2a97f9',1,'horsListe(liste_t *maListe):&#160;liste.c']]]
 ];

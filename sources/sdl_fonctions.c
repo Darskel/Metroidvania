@@ -86,9 +86,9 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
     Sint16 y_move;
     char * salle_nom;
     boolean_t kon = FALSE;
-    char konami[11];
+    char konami[TAILLEKONAMI];
     int indKon = 0;
-    for(int i = 0; i < 11; i++)
+    for(int i = 0; i < TAILLEKONAMI; i++)
       konami[i] = '\0';
 
     SDL_Joystick* pJoystick;
@@ -266,6 +266,7 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
           salleChangee=TRUE;
           kon = FALSE;
           free(salle_nom);
+          salle_nom=NULL;
         }
 
         depVert(perso, salle, tryJump);
@@ -443,6 +444,7 @@ salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, SDL_Textu
 void destroy_salle(salle_t ** salle){
   SDL_DestroyTexture((*salle)->background);
   nettoyerSalle(salle);
+  *salle=NULL;
 }
 
 /**

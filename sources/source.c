@@ -209,6 +209,12 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
 }
 
 void creerTypeEntite(){
+    int* tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 0;
+    tmp[1] = 2;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
     typesMonstre[14] = (type_monstre_t){
         2, //pv de base
         VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
@@ -216,7 +222,7 @@ void creerTypeEntite(){
         "serpent_bleu",//nom, //nom de l'entité
         "sprites/entite/serpent_bleu/tileset.png",//chemin, //chemin vers les sprites
         NULL, //SDL_Texture* sprites non initialisé !!!
-        {1}, //Tableau de nombre d'animations par etat
+        tmp, //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
         {28,51}, //hitbox de l'entité (hauteur,largeur)
         {30,51}, //taille sprites
@@ -240,7 +246,7 @@ static void creerEntite(idEnt_t id, salle_t* s, position_t pos){
     e->delta = (position_t){0,TAILLEBLOC - e->type->hitbox.hauteur%TAILLEBLOC};
     e->pos = pos;
     e->direction = LEFT;
-    e->etat = IDLE;
+    e->etat = RUNNING;
 
     e->spriteActuel.x = 0;
     e->spriteActuel.y = 0;

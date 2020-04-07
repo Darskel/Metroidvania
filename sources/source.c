@@ -241,7 +241,7 @@ void creerTypeEntite(){
 
     typesMonstre[-FLECHE - 1] = (type_monstre_t){
         1, //pv de base
-        VITDEPPERS, //vit de deplacement
+        2, //vit de deplacement
         0, //vitesse d'attaque
         "fleche",//nom, //nom de l'entité
         "sprites/entite/fleche/tileset.png",//chemin, //chemin vers les sprites

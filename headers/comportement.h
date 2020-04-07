@@ -15,6 +15,7 @@ int persValidDep(personnage_t* p, salle_t* s);
 void depDroite(personnage_t* p, salle_t* s);
 void depGauche(personnage_t* p, salle_t* s);
 void depVert(personnage_t* p, salle_t* s, int tryJump);
+void attaquer(personnage_t* p, salle_t* s, int tryAtk);
 char* prendPorte(personnage_t* p, liste_t* lPortes);
 
 void evolution(personnage_t* p, salle_t* s);

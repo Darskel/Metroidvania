@@ -184,6 +184,8 @@ void destroy_typeentites(void){
   }Pour tout les types de monstres*/
   SDL_DestroyTexture((typesMonstre[-SERPENTBLEU -1]).sprites);
   free((typesMonstre[-SERPENTBLEU -1]).nbAnim);
+  SDL_DestroyTexture((typesMonstre[-FLECHE -1]).sprites);
+  free((typesMonstre[-FLECHE -1]).nbAnim);
 }
 
 /**
@@ -197,6 +199,7 @@ void initialiser_typeentites(SDL_Renderer * renderer){
     typesMonstre[i].sprites = initialiser_texture(typesMonstre[i].path, renderer);
   }*/
   typesMonstre[-SERPENTBLEU -1].sprites = initialiser_texture(typesMonstre[-SERPENTBLEU -1].path, renderer);
+  typesMonstre[-FLECHE - 1].sprites = initialiser_texture(typesMonstre[-FLECHE -1].path, renderer);
 }
 
 

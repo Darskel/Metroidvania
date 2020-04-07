@@ -41,6 +41,7 @@ int main(int argc, char *argv[]){
   boolean_t Gauche = FALSE;
   boolean_t Droite = FALSE;
   boolean_t tryJump = FALSE;
+  boolean_t tryAtk = FALSE;
   boolean_t fin=FALSE;
   boolean_t salleChangee=FALSE;
   SDL_Texture * tileset=NULL;
@@ -146,6 +147,9 @@ int main(int argc, char *argv[]){
             case SDLK_DOWN:
             case SDLK_s:
               break;
+            case SDLK_e:
+              tryAtk=TRUE;
+              break;
           }
           break;
         case SDL_MOUSEMOTION :
@@ -160,6 +164,7 @@ int main(int argc, char *argv[]){
               break;
             case 1 : //bouton B manette XBOX
               konami[indKon++] = 'b';
+              tryAtk=TRUE;
               break;
             case 7 : //bouton Start manette XBOX
               konami[indKon++] = 's';
@@ -247,6 +252,10 @@ int main(int argc, char *argv[]){
           perso->etat=IDLE;
 
       tryJump=FALSE;
+
+      attaquer(perso,salle,tryAtk);
+
+      tryAtk=FALSE;
 
       evolution(perso,salle);
 

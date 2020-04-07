@@ -27,6 +27,7 @@ typedef struct liste_s{
     char* type; /**< Nom du type de l'objet présent dans la liste (monstre ou porte) */
     elemListe_t *drapeau; /**< Drapeau de la liste */
     elemListe_t *ec; /**< Element courant de la liste */
+    int indTmp; /**< Indice element temporaire */
 } liste_t;
 
 liste_t* creerListe(char* type);

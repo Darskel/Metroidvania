@@ -59,7 +59,7 @@ int hitE(monstre_t* e1, monstre_t* e2){
     if(strcmp(e1->type->nom,"fleche") && strcmp(e1->type->nom,"fleche_feu"))
         return FALSE;
 
-    if(!strcmp(e2->type->nom,"fleche") || !strcmp(e2->type->nom,"fleche_feu") || !strcmp(e2->type->nom,"crachat"))
+    if(!strcmp(e2->type->nom,"fleche") || !strcmp(e2->type->nom,"fleche_feu") || !strcmp(e2->type->nom,"venin"))
         return FALSE;
 
     int leftE1, leftE2;
@@ -68,12 +68,12 @@ int hitE(monstre_t* e1, monstre_t* e2){
     int bottomE1, bottomE2;
 
     leftE1 = e1->pos.x*TAILLEBLOC + e1->delta.x + (e1->type->tailleSprite.largeur - e1->type->hitbox.largeur)/2;
-    topE1 = e1->pos.y*TAILLEBLOC + e1->delta.y + (e1->type->tailleSprite.hauteur - e1->type->hitbox.hauteur)/2;;
+    topE1 = e1->pos.y*TAILLEBLOC + e1->delta.y + (e1->type->tailleSprite.hauteur - e1->type->hitbox.hauteur)/2;
     rightE1 = leftE1 + e1->type->hitbox.largeur;
     bottomE1 = topE1 + e1->type->hitbox.hauteur;
 
     leftE2 = e2->pos.x*TAILLEBLOC + e2->delta.x + (e2->type->tailleSprite.largeur - e2->type->hitbox.largeur)/2;
-    topE2 = e2->pos.y*TAILLEBLOC + e2->delta.y + (e2->type->tailleSprite.hauteur - e2->type->hitbox.hauteur)/2;;
+    topE2 = e2->pos.y*TAILLEBLOC + e2->delta.y + (e2->type->tailleSprite.hauteur - e2->type->hitbox.hauteur)/2;
     rightE2 = leftE2 + e2->type->hitbox.largeur;
     bottomE2 = topE2 + e2->type->hitbox.hauteur;
 
@@ -412,12 +412,12 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
             int rightP = leftP + p->hitbox.largeur;
 
             if(p->direction){
-                f->delta = (position_t){rightP%8,0};
-                f->pos = (position_t){rightP/8,p->pos.y+1};
+                f->delta = (position_t){rightP%8,1};
+                f->pos = (position_t){rightP/8,p->pos.y+2};
                 f->direction = RIGHT;
             }else{
-                f->delta = (position_t){leftP%8,0};
-                f->pos = (position_t){leftP/8,p->pos.y+1};
+                f->delta = (position_t){leftP%8,1};
+                f->pos = (position_t){leftP/8 - 1,p->pos.y+2};
                 f->direction = LEFT;
             }
 
@@ -444,10 +444,11 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
             //f->spriteActuel.y = f->etat * f->spriteActuel.h;
 
             enTete(s->listeEntite);
-            ajoutGauche(s->listeEntite, f);
+            ajoutDroit(s->listeEntite, f);
 
             p->etat = IDLE;
             p->newEtat = TRUE;
+            p->nbFrameAtk = 0;
         }else{
             (p->nbFrameAtk)++;
         }
@@ -577,7 +578,7 @@ static int verifChuteMonstre(monstre_t* m, salle_t* s){
  * @param entite le pointeur vers la structure monstre à déplacer
  * @param salle le pointeur vers la structure salle où se trouve l'entite
 */
-static int dep(monstre_t* entite, salle_t* salle){
+static int dep(monstre_t* entite, salle_t* salle, boolean_t chute){
     if(entite->pv){
         if(entite->direction){
             entite->delta.x += entite->type->vit_dep;
@@ -585,7 +586,7 @@ static int dep(monstre_t* entite, salle_t* salle){
                 (entite->pos.x)++;
                 entite->delta.x -= TAILLEBLOC;
             }
-            if(hitB(entite,salle) || verifChuteMonstre(entite,salle))
+            if(hitB(entite,salle) || (verifChuteMonstre(entite,salle) && chute))
                 return TRUE;
             return FALSE;
         }else{
@@ -594,11 +595,12 @@ static int dep(monstre_t* entite, salle_t* salle){
                 (entite->pos.x)--;
                 entite->delta.x += TAILLEBLOC;
             }
-            if(hitB(entite,salle) || verifChuteMonstre(entite,salle))
+            if(hitB(entite,salle) || (verifChuteMonstre(entite,salle) && chute))
                 return TRUE;
             return FALSE;
         }
     }
+    return FALSE;
 }
 
 //Commentés par MN car ne compile pas (structures pas à jour notamment)
@@ -637,15 +639,15 @@ void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle){
             modifElm(salle->listeEntite,&tmp);
             entite->pv = 0;
             entite->etat = IDLE;
-            entite->newEtat = TRUE;
+            //entite->newEtat = TRUE;
         }
         suivant(salle->listeEntite);
     }
 
-    if(dep(entite,salle)){
+    if(dep(entite,salle,FALSE)){
         entite->pv = 0;
         entite->etat = IDLE;
-        entite->newEtat = TRUE;
+        //entite->newEtat = TRUE;
     }
 }
 
@@ -682,7 +684,7 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
         if(perso->inv)
             (perso->inv)--;
         
-        if(dep(entite,salle)){
+        if(dep(entite,salle,TRUE)){
             if(entite->direction){
                 entite->direction = LEFT;
                 entite->delta.x -= entite->type->vit_dep;
@@ -737,18 +739,24 @@ void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_
 */
 
 void evolution(personnage_t* p, salle_t* s){
+    s->listeEntite->indTmp = 0;
     monstre_t e;
     enTete(s->listeEntite);
     while(!horsListe(s->listeEntite)){
         valeurElm(s->listeEntite,&e);
-        if(e.pv){
+        if(e.pv > 0){
             e.type->comportement(&e,p,s);
+
+            enTete(s->listeEntite);
+            for(int i = 0; i < s->listeEntite->indTmp; i++)
+                suivant(s->listeEntite);
+
             modifElm(s->listeEntite,&e);
         }else{
             oterElm(s->listeEntite,supMonstre); //je reviens au précédent après avoir oté
 
             //creation des coeurs
-            /*if(strcmp(e.type->nom,"fleche") && strcmp(e.type->nom,"fleche_feu") && strcmp(e.type->nom,"crachat") && e.type->comportement != compRecuperable){
+            /*if(strcmp(e.type->nom,"fleche") && strcmp(e.type->nom,"fleche_feu") && strcmp(e.type->nom,"venin") && e.type->comportement != compRecuperable){
                 srand(time(NULL));
                 int r = rand() % 100;
                 if(r < COEURDROPRATE){

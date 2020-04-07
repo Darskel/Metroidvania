@@ -54,6 +54,13 @@ static void recupElem(monstre_t* entite, personnage_t* perso){
  * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
 */
 int hitE(monstre_t* e1, monstre_t* e2){
+
+    if(strcmp(e1->type->nom,"fleche") && !strcmp(e1->type->nom,"fleche_feu") && !strcmp(e1->type->nom,"crachat"))
+        return FALSE;
+
+    if(!strcmp(e2->type->nom,"fleche") || !strcmp(e2->type->nom,"fleche_feu") || !strcmp(e2->type->nom,"crachat"))
+        return FALSE;
+
     int leftE1, leftE2;
     int rightE1, rightE2;
     int topE1, topE2;
@@ -121,36 +128,6 @@ int hitP(monstre_t* e, personnage_t* p){
         return FALSE;
 
     return TRUE;
-}
-
-/**
- * \brief Vérifie si une entité est dans un bloc que la salle
- *
- * @param e pointeur vers l'entité
- * @param s pointeur vers la salle
- *
- * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
-*/
-static int hitB(monstre_t* e, salle_t* s){
-    int leftE;
-    int rightE;
-    int topE;
-    int bottomE;
-
-    leftE = e->pos.x;
-    rightE = e->pos.x + e->delta.x ? 1 : 0;
-    topE = e->pos.y;
-    bottomE = e->pos.y + e->delta.y ? 1 : 0;
-
-    if(leftE < 0 || topE < 0)
-        return FALSE;
-
-    for(int i = leftE; i <= rightE; i++)
-        for(int j = topE; j <= bottomE; j++)
-            if(j >= s->largeur || i >= s->hauteur || s->mat[i][j])
-                return TRUE;
-
-    return FALSE;
 }
 
 /**
@@ -464,6 +441,76 @@ char* prendPorte(personnage_t* p, liste_t* lPortes){
 }
 
 /**
+ * \brief Vérifie si une entité est dans un bloc que la salle
+ *
+ * @param e pointeur vers l'entité
+ * @param s pointeur vers la salle
+ *
+ * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
+*/
+static int hitB(monstre_t* m, salle_t* s){
+    int leftM;
+    int rightM;
+    int topM;
+    int bottomM;
+
+    leftM = m->pos.x*TAILLEBLOC + m->delta.x;
+    rightM = leftM + m->type->hitbox.largeur;
+    topM = m->pos.y*TAILLEBLOC + m->delta.y + 1;
+    bottomM = topM + m->type->hitbox.hauteur;
+
+    if(leftM < 0 || topM < 0)
+        return TRUE;
+
+    leftM /= 8;
+    rightM = rightM/8 + (rightM%8 ? 1 : 0) - 1;
+    topM /= 8;
+    bottomM = bottomM/8 + (bottomM%8 ? 1 : 0) - 1;
+
+    if(bottomM >= s->hauteur || rightM >= s->largeur)
+        return TRUE;
+
+    for(int i = leftM; i <= rightM; i++)
+        for(int j = topM; j <= bottomM; j++)
+            if(s->mat[j][i]){
+                return TRUE;
+            }
+
+    return FALSE;
+}
+
+/**
+ * \brief Vérifie si le monstre doit chuter
+ *
+ * @param m pointeur vers le monstre
+ * @param s pointeur vers la salle
+ * @return 1 (TRUE) si le monstre doit chuter, 0 (FALSE) sinon
+*/
+static int verifChuteMonstre(monstre_t* m, salle_t* s){
+    int leftM;
+    int rightM;
+    int bottomM;
+
+    leftM = m->pos.x*TAILLEBLOC + m->delta.x + OFFSETHITBOX;
+    rightM = leftM + m->type->hitbox.largeur;
+    bottomM = m->pos.y*TAILLEBLOC + m->delta.y + 1;
+    bottomM += m->type->hitbox.hauteur;
+
+    leftM /= 8;
+    rightM = rightM/8 + (rightM%8 ? 1 : 0) - 1;
+    bottomM = bottomM/8 + (bottomM%8 ? 1 : 0) - 1;
+
+    if(bottomM >= s->hauteur )
+        return -1; //Le monstre est tombé dans le vide ?
+
+    for(int i = leftM; i <= rightM; i++)
+        if(s->mat[bottomM][i])
+            return FALSE;
+
+    return TRUE;
+}
+
+/**
  * \brief Gère le déplacement d'une entite (monstre)
  *
  * @param entite le pointeur vers la structure monstre à déplacer
@@ -475,23 +522,31 @@ static void dep(monstre_t* entite, salle_t* salle){
             entite->delta.x += entite->type->vit_dep;
             if(entite->delta.x >= TAILLEBLOC){
                 (entite->pos.x)++;
-                entite->delta.x = 0;
+                entite->delta.x -= TAILLEBLOC;
             }
-            if(hitB(entite,salle)){
+            if(hitB(entite,salle) || verifChuteMonstre(entite,salle)){
                 entite->direction = LEFT;
-                (entite->pos.x)--;
-                entite->delta.x = TAILLEBLOC - 1;
+                entite->delta.x -= entite->type->vit_dep;
+
+                if(entite->.delta.x < 0){
+                    (p->pos.x)--;
+                    entite->delta.x += TAILLEBLOC;
+                }
             }
         }else{
             entite->delta.x -= entite->type->vit_dep;
             if(entite->delta.x < 0){
                 (entite->pos.x)--;
-                entite->delta.x = 0;
+                entite->delta.x += TAILLEBLOC;
             }
-            if(hitB(entite,salle)){
+            if(hitB(entite,salle) || verifChuteMonstre(entite,salle)){
                 entite->direction = RIGHT;
-                (entite->pos.x)++;
-                entite->delta.x = 0;
+                entite->delta.x += entite->type->vit_dep;
+
+                if(entite->.delta.x >= TAILLEBLOC){
+                    (p->pos.x)++;
+                    entite->delta.x -= TAILLEBLOC;
+                }
             }
         }
     }
@@ -571,7 +626,7 @@ void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, lis
 }*/
 
 void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
-    if(hitP(entite,perso)){
+    if(hitP(entite,perso) && !perso->inv){
         perso->pv -= entite->type->degat;
         perso->inv = 30;
         entite->direction = 1 - entite->direction;
@@ -612,3 +667,17 @@ void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_
 
 }
 */
+
+void evolution(personnage_t* p, salle_t* s){
+    monstre_t e;
+    enTete(s->listeEntite);
+    while(!horsListe(s->listeEntite)){
+        valeurElm(s->listeEntite,&e);
+        if(e.pv){
+            e.type->comportement(&e,p,s);
+            modifElm(s->listeEntite,&e);
+        }else
+            oterElm(s->listeEntite,supMonstre); //je reviens au précédent après avoir oté
+        suivant(s->listeEntite);
+    }
+}

@@ -752,6 +752,7 @@ void evolution(personnage_t* p, salle_t* s){
                 suivant(s->listeEntite);
 
             modifElm(s->listeEntite,&e);
+            (s->listeEntite->indTmp)++;
         }else{
             oterElm(s->listeEntite,supMonstre); //je reviens au précédent après avoir oté
 

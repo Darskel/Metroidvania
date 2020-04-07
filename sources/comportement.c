@@ -440,10 +440,14 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
             f->spriteActuel.h = f->type->tailleSprite.hauteur;
             f->spriteActuel.w = f->type->tailleSprite.largeur;
             f->spriteActuel.x = 0;
-            f->spriteActuel.y = f->etat * f->spriteActuel.h;
+            f->spriteActuel.y = 0;
+            //f->spriteActuel.y = f->etat * f->spriteActuel.h;
 
             enTete(s->listeEntite);
             ajoutGauche(s->listeEntite, f);
+
+            p->etat = IDLE;
+            p->newEtat = TRUE;
         }else{
             (p->nbFrameAtk)++;
         }

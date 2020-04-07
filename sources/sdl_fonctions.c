@@ -381,6 +381,64 @@ void miseAjourSprites(personnage_t * perso){
 }
 
 /**
+ * \brief Fonction qui fait évoluer les sprites de l'entite (animation)
+ *
+ * @param perso le pointeur sur la structure monstre (entite) à faire évoluer
+ */
+void miseAjourSpritesEntites(salle_t * salle){
+  monstre_t entite;
+
+  enTete(salle->listeEntite);
+  while(!horsListe(salle->listeEntite)){
+    valeurElm(salle->listeEntite, &entite);
+
+    /*Rect_source.x = entite.spriteActuel.x;
+    Rect_source.y = IDLE;
+    Rect_source.h = entite.spriteActuel.h;
+    Rect_source.w = entite.spriteActuel.w;
+    Rect_dest.x = entite.pos.x * TAILLEBLOC + entite.delta.x;
+    Rect_dest.y = entite.pos.y * TAILLEBLOC + entite.delta.y;
+    Rect_dest.h = entite.spriteActuel.h;
+    Rect_dest.w = entite.spriteActuel.w;
+    suivant(salle->listeEntite);
+  }
+
+  if(perso->etat == IDLE){
+    perso->spriteActuel.x=IDLE;
+    perso->spriteActuel.y=IDLE;
+  }
+  else if(perso->etat == FALLING){
+    perso->spriteActuel.x=7*(perso->spriteActuel.w);
+    perso->spriteActuel.y=JUMPING*(perso->spriteActuel.h);
+  }
+  if(perso->newEtat){
+    if(perso->etat > IDLE && perso->etat < FALLING){
+      perso->spriteActuel.x=0;
+      perso->spriteActuel.y=perso->etat * (perso->spriteActuel.h);
+    }
+    if(perso->etat == ATTACKING)
+      perso->spriteActuel.w = LARGEURSPRITEPERSATTACK;
+    else
+      perso->spriteActuel.w = LARGEURSPRITEPERS;
+    perso->newEtat=FALSE;
+    perso->evoSprite=0;
+  }
+  else{
+    if(perso->etat > IDLE && perso->etat < FALLING){
+      if(perso->evoSprite<=0){
+        perso->spriteActuel.x+=perso->spriteActuel.w;
+        if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
+          perso->spriteActuel.x=0;
+        perso->evoSprite = EVOSPRITES;
+      }
+      else (perso->evoSprite)--;
+    }*/
+  }
+
+}
+
+
+/**
  * \brief Fonction d'affichage d'un écran noir d'une durée choisie
  *
  * @param renderer le pointeur vers le SDL_Renderer à utiliser

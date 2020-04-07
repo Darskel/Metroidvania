@@ -303,7 +303,7 @@ int lireSalle(char* nomFichier, salle_t** salle){
 
     //taille matrice
     fscanf(monDoc, "%d %d", &lon, &larg);
-    printf ("%d, %d \n", lon, larg);
+    //printf ("%d, %d \n", lon, larg);
 
     (*salle)->largeur = lon;
     (*salle)->hauteur = larg;

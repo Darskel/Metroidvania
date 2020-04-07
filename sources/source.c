@@ -242,16 +242,16 @@ static void creerEntite(idEnt_t id, salle_t* s, position_t pos){
 
     e->type = &typesMonstre[id-1];
     e->pv = e->type->pv_base;
-    
+
     e->delta = (position_t){0,TAILLEBLOC - e->type->tailleSprite.hauteur%TAILLEBLOC};
     e->pos = pos;
     e->direction = LEFT;
     e->etat = RUNNING;
 
-    e->spriteActuel.x = 0;
     e->spriteActuel.h = e->type->tailleSprite.hauteur;
-    e->spriteActuel.y = e->etat*e->spriteActuel.h;
     e->spriteActuel.w = e->type->tailleSprite.largeur;
+    e->spriteActuel.x = 0;
+    e->spriteActuel.y = e->etat * e->spriteActuel.h;
 
     printf("__%s ajoute a la liste des entites__\n", e->type->nom);
 

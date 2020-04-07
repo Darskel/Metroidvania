@@ -20,7 +20,7 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
 
   int res_h;
   int res_v;
-  SDL_Surface * icon;
+  SDL_Surface * icon = NULL;
 
   if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
     fprintf(stderr, "Echec de l'initalisation de la SDL (%s)\n", SDL_GetError());
@@ -70,245 +70,6 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
   SDL_Quit();
 }
 
-/**
- * \brief Fonction de gestions des evenements
- *
- * @param renderer le renderer à utiliser
- * @param mode le mode de l'écran utilisé
- */
-  void evenements(SDL_Renderer * renderer, SDL_DisplayMode * mode){
-    SDL_Event event;
-    Uint32 frameStart;
-    int frameTime;
-    int mousex;
-    int mousey;
-    Sint16 x_move;
-    Sint16 y_move;
-    char * salle_nom;
-    boolean_t kon = FALSE;
-    char konami[TAILLEKONAMI];
-    int indKon = 0;
-    for(int i = 0; i < TAILLEKONAMI; i++)
-      konami[i] = '\0';
-
-    SDL_Joystick* pJoystick;
-    int numJoystick = SDL_NumJoysticks();
-    if ( numJoystick >= 1 )
-    {
-        pJoystick = SDL_JoystickOpen(0);
-        if ( pJoystick == NULL )
-        {
-            fprintf(stderr,"Erreur pour ouvrir le premier joystick\n");
-        }
-        else{
-          printf("WARNING : Programme conçu pour manette XBOX, autres manettes non garanties\n");
-          SDL_JoystickEventState(SDL_ENABLE);
-        }
-    }
-    boolean_t Gauche = FALSE;
-    boolean_t Droite = FALSE;
-    boolean_t tryJump = FALSE;
-    boolean_t fin=FALSE;
-    boolean_t salleChangee=FALSE;
-    SDL_Texture * tileset;
-    salle_t * salle;
-    personnage_t * perso;
-    position_t positionDepart;
-    position_t positionDepartDelta;
-
-    tileset=initialiser_texture(TILESETPATH, renderer);
-    salle=initialiser_salle(renderer, NIVEAUTXT, tileset);
-
-    positionDepart.x = 1;
-    positionDepartDelta.x = 0;
-    positionDepart.y = salle->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;
-    positionDepartDelta.y = TAILLEBLOC-1;
-
-    perso=initialisation_personnage(renderer, positionDepart, positionDepartDelta);
-
-    while(!fin){
-
-      frameStart = SDL_GetTicks();
-  	  while(SDL_PollEvent(&event)){
-  	    switch(event.type){
-  	      case SDL_QUIT: //Appui sur la croix quitte le programme
-  	        fin=TRUE;
-  	        break;
-  	      case SDL_KEYUP:
-  	        switch(event.key.keysym.sym){
-  	          case SDLK_ESCAPE://Appui sur Echap quitte le programme
-  	            fin=TRUE;
-  	            break;
-              case SDLK_LEFT:
-              case SDLK_q:
-                konami[indKon++] = 'l';
-                Gauche=FALSE;
-                break;
-              case SDLK_RIGHT:
-              case SDLK_d:
-                konami[indKon++] = 'r';
-                Droite=FALSE;
-                break;
-              case SDLK_UP:
-              case SDLK_z:
-              case SDLK_SPACE:
-                konami[indKon++] = 'u';
-                break;
-              case SDLK_DOWN:
-              case SDLK_s:
-                konami[indKon++] = 'd';
-                break;
-              case SDLK_a:
-                konami[indKon++] = 'a';
-                break;
-              case SDLK_b:
-                konami[indKon++] = 'b';
-                break;
-              case SDLK_RETURN:
-                konami[indKon++] = 's';
-                break;
-  	        }
-  	        break;
-  	      case SDL_KEYDOWN:
-  	        switch(event.key.keysym.sym){
-              case SDLK_LEFT:
-              case SDLK_q:
-                Gauche=TRUE;
-                break;
-              case SDLK_RIGHT:
-              case SDLK_d:
-                Droite=TRUE;
-                break;
-              case SDLK_UP:
-              case SDLK_z:
-              case SDLK_SPACE:
-              //Cette façon de faire produit la possibilité de bunny hop (saut juste après un saut, quand le bouton reste appuyé)
-                tryJump=TRUE;
-                  break;
-              case SDLK_DOWN:
-              case SDLK_s:
-                break;
-  	        }
-  	        break;
-          case SDL_MOUSEMOTION :
-            mousex=event.motion.x;
-            mousey=event.motion.y;
-            break;
-          case SDL_JOYBUTTONDOWN :
-          switch(event.jbutton.button){
-              case 0 : //bouton A manette XBOX
-                konami[indKon++] = 'a';
-                tryJump=TRUE;
-                break;
-              case 1 : //bouton B manette XBOX
-                konami[indKon++] = 'b';
-                break;
-              case 7 : //bouton Start manette XBOX
-                konami[indKon++] = 's';
-                break;
-            }
-          break;
-          /*case SDL_JOYBUTTONUP :
-            break;*/
-          case SDL_JOYAXISMOTION :
-            switch(event.jaxis.axis){
-              case 0 :
-                if(event.jaxis.value>ZONEMORTE){
-                  Droite = TRUE;
-                }
-                else if(event.jaxis.value<ZONEMORTE*-1){
-                  Gauche = TRUE;
-                }
-                else{
-                  Gauche = FALSE;
-                  Droite = FALSE;
-                }
-                break;
-            }
-            break;
-          /*case SDL_JOYBALLMOTION :
-            break;*/
-          case SDL_JOYHATMOTION :
-            switch(event.jhat.value){
-              case SDL_HAT_CENTERED:
-                Gauche = FALSE;
-                Droite = FALSE;
-                break;
-              case SDL_HAT_LEFT:
-                konami[indKon++] = 'l';
-                Gauche = TRUE;
-                break;
-              case SDL_HAT_RIGHT:
-                konami[indKon++] = 'r';
-                Droite = TRUE;
-                break;
-              case SDL_HAT_UP:
-                konami[indKon++] = 'u';
-                tryJump=TRUE;
-                break;
-              case SDL_HAT_DOWN:
-                konami[indKon++] = 'd';
-                break;
-            }
-  	      }
-  	    }
-        if ( pJoystick != NULL ){
-          x_move = SDL_JoystickGetAxis(pJoystick, 0);
-          y_move = SDL_JoystickGetAxis(pJoystick, 1);
-        }
-
-        konamicode(perso,salle,konami,&indKon,&kon);
-
-        salle_nom=prendPorte(perso, salle->listePorte);
-        if(salle_nom != NULL){
-          destroy_salle(&salle);
-          salle=initialiser_salle(renderer, salle_nom, tileset);
-          salleChangee=TRUE;
-          kon = FALSE;
-          free(salle_nom);
-          salle_nom=NULL;
-        }
-
-        depVert(perso, salle, tryJump);
-
-
-        if(Gauche){
-          depGauche(perso, salle);
-          if(!Droite)
-            perso->direction = LEFT;
-        }
-
-        if(Droite){
-          depDroite(perso, salle);
-          if(!Gauche)
-            perso->direction = RIGHT;
-        }
-
-        if((!Gauche&&!Droite) || (Gauche&&Droite))
-          if(perso->etat == RUNNING)//ajouter par Thomas: on souhaite passer de RUNNING à IDLE mais pas de JUMPING à IDLE ou bien de ATTACKING à IDLE
-            perso->etat=IDLE;
-
-        tryJump=FALSE;
-
-        miseAjourSprites(perso);
-
-        if(salleChangee){
-          ecranNoir(renderer,150);
-          salleChangee=FALSE;
-        }
-
-        affichage_complet(renderer, salle, perso);
-
-        frameTime = SDL_GetTicks() - frameStart;
-        if(frameTime < FRAMEDELAY){
-          SDL_Delay(FRAMEDELAY - frameTime);
-        }
-      }
-      destroy_salle(&salle);
-      destroy_personnage(&perso);
-      if(pJoystick != NULL)
-        SDL_JoystickClose(pJoystick);
-  }
 
 /**
  * \brief Fonction qui permet d'initialiser une texture à partir d'une image
@@ -413,9 +174,36 @@ void destroy_personnage(personnage_t ** personnage){
 }
 
 /**
+ * \brief Fonction de destruction des types de monstres
+ *
+ */
+void destroy_typeentites(void){
+  /*for(int i=0; i<NBTYPEMONSTRE; i++){
+    SDL_DestroyTexture((typesMonstre[i]).sprites);
+    free((typesMonstre[i]).nbAnim);
+  }Pour tout les types de monstres*/
+  SDL_DestroyTexture((typesMonstre[14]).sprites);
+  free((typesMonstre[14]).nbAnim);
+}
+
+/**
+ * \brief Fonction d'initialisation des types monstres
+ *
+ * @param renderer le pointeur vers le renderer utilisé par les textures
+ */
+void initialiser_typeentites(SDL_Renderer * renderer){
+  creerTypeEntite();
+  /*for(int i=0; i<NBTYPEMONSTRE; i++){
+    typesMonstre[i].sprites = initialiser_texture(typesMonstre[i].path, renderer);
+  }*/
+  typesMonstre[14].sprites = initialiser_texture(typesMonstre[14].path, renderer);
+}
+
+
+/**
  * \brief Fonction d'initialisation de la salle
  *
- * @param renderer le renderer utilisé
+ * @param renderer pointeur vers le renderer utilisé
  * @param nomFichier une chaine de caracteres qui contient le nom du fichier de la salle
  * @param tileset le pointeur vers la texture de tileset
  * @return un pointeur sur la structure salle initialisée
@@ -500,20 +288,32 @@ void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, sal
 }
 
 /**
- * \brief Fonction d'affichage du personnage
+ * \brief Fonction d'affichage des entités
  *
  * @param renderer le pointeur vers le SDL_Renderer à utiliser
- * @param salle le pointeur sur la salle où afficher le joueur
+ * @param salle le pointeur sur la salle où afficher l'entité
  */
 void afficher_entites(SDL_Renderer * renderer, salle_t * salle){
-  monstre_t* entite;
+  monstre_t entite;
+  SDL_Rect Rect_dest;
+  SDL_Rect Rect_source;
+  SDL_RendererFlip flip=SDL_FLIP_NONE;
   enTete(salle->listeEntite);
   while(!horsListe(salle->listeEntite)){
-    valeurElm(salle->listeEntite, entite);
-    //affichage
+    flip=SDL_FLIP_NONE;
+    valeurElm(salle->listeEntite, &entite);
+    if(entite.direction != RIGHT)
+      flip=SDL_FLIP_HORIZONTAL;
+    Rect_source.x = entite.spriteActuel.x;
+    Rect_source.y = IDLE;
+    Rect_source.h = entite.spriteActuel.h;
+    Rect_source.w = entite.spriteActuel.w;
+    Rect_dest.x = entite.pos.x * TAILLEBLOC + entite.delta.x;
+    Rect_dest.y = entite.pos.y * TAILLEBLOC + entite.delta.y;
+    Rect_dest.h = entite.spriteActuel.h;
+    Rect_dest.w = entite.spriteActuel.w;
+    SDL_RenderCopyEx(renderer, entite.type->sprites, &Rect_source, &Rect_dest, 0, NULL, flip);
     suivant(salle->listeEntite);
-    free(entite);
-    entite = NULL;
   }
 }
 
@@ -532,6 +332,7 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
   SDL_SetRenderDrawColor(renderer, 0,0,0,0);
   SDL_RenderClear(renderer);
   afficher_salle(renderer,salle);
+  afficher_entites(renderer, salle);
   afficher_personnage(renderer, personnage, salle);
   SDL_SetRenderTarget(renderer, NULL);
   SDL_RenderCopy(renderer, textureSalle, NULL, NULL);

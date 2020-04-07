@@ -70,13 +70,6 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
   SDL_Quit();
 }
 
-/**
- * \brief Fonction de gestions des evenements
- *
- * @param fullscreen booléen qui vaut 1 si le programme doit se lancer en fullscreen et 0 sinon
- */
-  void evenements(int fullscreen){
-  }
 
 /**
  * \brief Fonction qui permet d'initialiser une texture à partir d'une image

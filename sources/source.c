@@ -216,9 +216,10 @@ void creerTypeEntite(){
         "serpent_bleu",//nom, //nom de l'entité
         "sprites/entite/serpent_bleu/tileset.png",//chemin, //chemin vers les sprites
         NULL, //SDL_Texture* sprites non initialisé !!!
-        NULL, //Tableau de nombre d'animations par etat
+        {1}, //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
         {28,51}, //hitbox de l'entité (hauteur,largeur)
+        {30,51}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         compSerpent //comportement à rajouter avec un la fonction (pointeur sur la fonction)
@@ -230,20 +231,25 @@ type_monstre_t* obtenirTypesEntite(){
 }
 
 static void creerEntite(idEnt_t id, salle_t* s, position_t pos){
-    monstre_t e;
+    monstre_t* e = malloc(sizeof(monstre_t));
     id *= -1;
 
-    e.type = &typesMonstre[id-1];
-    e.pv = e.type ? e.type->pv_base : 1;
+    e->type = &typesMonstre[id-1];
+    e->pv = e->type->pv_base;
     
-    e.delta = (position_t){0,TAILLEBLOC - e.type->hitbox.hauteur%TAILLEBLOC};
-    e.pos = pos;
-    e.direction = LEFT;
-    e.etat = IDLE;
+    e->delta = (position_t){0,TAILLEBLOC - e->type->hitbox.hauteur%TAILLEBLOC};
+    e->pos = pos;
+    e->direction = LEFT;
+    e->etat = IDLE;
 
-    printf("__%s ajoute a la liste des entites__\n", e.type->nom);
+    e->spriteActuel.x = 0;
+    e->spriteActuel.y = 0;
+    e->spriteActuel.w = e->type->tailleSprite.largeur;
+    e->spriteActuel.h = e->type->tailleSprite.hauteur;
 
-    ajoutDroit(s->listeEntite, &e);
+    printf("__%s ajoute a la liste des entites__\n", e->type->nom);
+
+    ajoutDroit(s->listeEntite, e);
 }
 
 /**
@@ -313,11 +319,11 @@ int lireSalle(char* nomFichier, salle_t** salle){
     for(int i = 0; i < lon*larg; i++){
         fscanf(monDoc, "%d", &val);
         //gestion des entités !!!
-        if(val < 0){
+        if(val < 0 && val >= -NBTYPEMONSTRE){
             creerEntite(val,*salle, (position_t){i%lon,i/lon});
             (*salle)->mat[i/lon][i%lon] = 0;
         }else
-            (*salle)->mat[i/lon][i%lon] = val;
+            (*salle)->mat[i/lon][i%lon] = val > 0 ? val : 0;
         //printf("\n %d %d \n", i/lon,i%lon);
     }
 

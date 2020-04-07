@@ -46,7 +46,7 @@
 #define NOM_JEU "Diskosieni"
 
 //Path :
-#define PLAYERSPRITESPATH "./sprites/entite/joueur/sprite_joueur.png"
+#define PLAYERSPRITESPATH "./sprites/entite/joueur/tileset.png"
 #define TILESETPATH "./sprites/bloc/tileset.png"
 #define DIRBG "./sprites/salles/"
 
@@ -238,7 +238,8 @@ typedef struct type_monstre_s{
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du monstre */
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du monstre */
     int degat; /**< Nombre de dégâts faits par le monstre */
-    taille_t hitbox; /**< Taille de la hitbox de monstre en cases */
+    taille_t hitbox; /**< Taille de la hitbox de monstre en pixel */
+    taille_t tailleSprite; /**< Taille des sprites de monstre en pixel */
     boolean_t passeEntites; /**< Indique si le monstre peut passer à travers les entités (autres monstres/joueur) */
     boolean_t passeBlocs; /**< Indique si le monstre peut passer à travers les blocs */
 

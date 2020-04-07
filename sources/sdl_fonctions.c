@@ -498,6 +498,24 @@ void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, sal
 }
 
 /**
+ * \brief Fonction d'affichage du personnage
+ *
+ * @param renderer le pointeur vers le SDL_Renderer à utiliser
+ * @param salle le pointeur sur la salle où afficher le joueur
+ */
+void afficher_entites(SDL_Renderer * renderer, salle_t * salle){
+  monstre_t* entite;
+  enTete(salle->listeEntite);
+  while(!horsListe(salle->listeEntite)){
+    valeurElm(salle->listeEntite, entite);
+    //affichage
+    suivant(salle->listeEntite);
+    free(entite);
+    entite = NULL;
+  }
+}
+
+/**
  * \brief Fonction d'affichage complet (salle et personnage)
  *
  * @param renderer le pointeur vers le SDL_Renderer à utiliser

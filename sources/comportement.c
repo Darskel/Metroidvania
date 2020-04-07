@@ -4,6 +4,7 @@
 #include "../headers/structs.h"
 #include "../headers/liste.h"
 #include "../headers/comportement.h"
+#include "../headers/source.h"
 
 /**
  * \file comportement.c
@@ -54,18 +55,25 @@ static void recupElem(monstre_t* entite, personnage_t* perso){
  * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
 */
 int hitE(monstre_t* e1, monstre_t* e2){
+
+    if(strcmp(e1->type->nom,"fleche") && strcmp(e1->type->nom,"fleche_feu"))
+        return FALSE;
+
+    if(!strcmp(e2->type->nom,"fleche") || !strcmp(e2->type->nom,"fleche_feu") || !strcmp(e2->type->nom,"crachat"))
+        return FALSE;
+
     int leftE1, leftE2;
     int rightE1, rightE2;
     int topE1, topE2;
     int bottomE1, bottomE2;
 
-    leftE1 = e1->pos.x*TAILLEBLOC + e1->delta.x;
-    topE1 = e1->pos.y*TAILLEBLOC + e1->delta.y;
+    leftE1 = e1->pos.x*TAILLEBLOC + e1->delta.x + (e1->type->tailleSprite.largeur - e1->type->hitbox.largeur)/2;
+    topE1 = e1->pos.y*TAILLEBLOC + e1->delta.y + (e1->type->tailleSprite.hauteur - e1->type->hitbox.hauteur)/2;;
     rightE1 = leftE1 + e1->type->hitbox.largeur;
     bottomE1 = topE1 + e1->type->hitbox.hauteur;
 
-    leftE2 = e2->pos.x*TAILLEBLOC + e2->delta.x;
-    topE2 = e2->pos.y*TAILLEBLOC + e2->delta.y;
+    leftE2 = e2->pos.x*TAILLEBLOC + e2->delta.x + (e2->type->tailleSprite.largeur - e2->type->hitbox.largeur)/2;
+    topE2 = e2->pos.y*TAILLEBLOC + e2->delta.y + (e2->type->tailleSprite.hauteur - e2->type->hitbox.hauteur)/2;;
     rightE2 = leftE2 + e2->type->hitbox.largeur;
     bottomE2 = topE2 + e2->type->hitbox.hauteur;
 
@@ -92,20 +100,20 @@ int hitE(monstre_t* e1, monstre_t* e2){
  *
  * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
 */
-int hitP(monstre_t* e, personnage_t* p){
+static int hitP(monstre_t* m, personnage_t* p){
     int leftE, leftP;
     int rightE, rightP;
     int topE, topP;
     int bottomE, bottomP;
 
-    leftE = e->pos.x*TAILLEBLOC + e->delta.x;
-    topE = e->pos.y*TAILLEBLOC + e->delta.y;
-    rightE = leftE + e->type->hitbox.largeur;
-    bottomE = topE + e->type->hitbox.hauteur;
+    leftE = m->pos.x*TAILLEBLOC + m->delta.x + (m->type->tailleSprite.largeur - m->type->hitbox.largeur)/2;
+    rightE = leftE + m->type->hitbox.largeur;
+    topE = m->pos.y*TAILLEBLOC + m->delta.y + (m->type->tailleSprite.hauteur - m->type->hitbox.hauteur)/2;
+    bottomE = topE + m->type->hitbox.hauteur;
 
-    leftP = p->pos.x*TAILLEBLOC + p->delta.x;
-    topP = p->pos.y*TAILLEBLOC + p->delta.y;
+    leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
     rightP = leftP + p->hitbox.largeur;
+    topP = p->pos.y*TAILLEBLOC + p->delta.y + 1;
     bottomP = topP + p->hitbox.hauteur;
 
     if(bottomE <= topP)
@@ -121,36 +129,6 @@ int hitP(monstre_t* e, personnage_t* p){
         return FALSE;
 
     return TRUE;
-}
-
-/**
- * \brief Vérifie si une entité est dans un bloc que la salle
- *
- * @param e pointeur vers l'entité
- * @param s pointeur vers la salle
- *
- * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
-*/
-static int hitB(monstre_t* e, salle_t* s){
-    int leftE;
-    int rightE;
-    int topE;
-    int bottomE;
-
-    leftE = e->pos.x;
-    rightE = e->pos.x + e->delta.x ? 1 : 0;
-    topE = e->pos.y;
-    bottomE = e->pos.y + e->delta.y ? 1 : 0;
-
-    if(leftE < 0 || topE < 0)
-        return FALSE;
-
-    for(int i = leftE; i <= rightE; i++)
-        for(int j = topE; j <= bottomE; j++)
-            if(j >= s->largeur || i >= s->hauteur || s->mat[i][j])
-                return TRUE;
-
-    return FALSE;
 }
 
 /**
@@ -423,6 +401,65 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
     }
 }
 
+void attaquer(personnage_t* p, salle_t* s, int tryAtk){
+    if(p->etat == ATTACKING){
+        if(p->nbFrameAtk == p->vit_att){
+            monstre_t* f = malloc(sizeof(monstre_t));
+            f->type = &typesMonstre[-FLECHE - 1];
+            f->pv = f->type->pv_base;
+
+            int leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
+            int rightP = leftP + p->hitbox.largeur;
+
+            if(p->direction){
+                f->delta = (position_t){rightP%8,0};
+                f->pos = (position_t){rightP/8,p->pos.y+1};
+                f->direction = RIGHT;
+            }else{
+                f->delta = (position_t){leftP%8,0};
+                f->pos = (position_t){leftP/8,p->pos.y+1};
+                f->direction = LEFT;
+            }
+
+            f->delta.x += f->type->vit_dep * f->direction ? 1 : -1;
+
+            if(f->direction){
+                if(f->delta.x >= TAILLEBLOC){
+                    (f->pos.x)++;
+                    f->delta.x -= TAILLEBLOC;
+                }
+            }else{
+                if(f->delta.x < 0){
+                    (f->pos.x)--;
+                    f->delta.x += TAILLEBLOC;
+                }
+            }
+
+            f->etat = RUNNING;
+
+            f->spriteActuel.h = f->type->tailleSprite.hauteur;
+            f->spriteActuel.w = f->type->tailleSprite.largeur;
+            f->spriteActuel.x = 0;
+            f->spriteActuel.y = 0;
+            //f->spriteActuel.y = f->etat * f->spriteActuel.h;
+
+            enTete(s->listeEntite);
+            ajoutGauche(s->listeEntite, f);
+
+            p->etat = IDLE;
+            p->newEtat = TRUE;
+        }else{
+            (p->nbFrameAtk)++;
+        }
+    }else{
+        if(tryAtk && p->etat <= RUNNING){
+            p->etat = ATTACKING;
+            p->newEtat = TRUE;
+            p->nbFrameAtk = 0;
+        }
+    }
+}
+
 /**
  * \brief Estime si le joueur touche une porte et rend l'endroit où elle l'emmène
  *
@@ -464,35 +501,102 @@ char* prendPorte(personnage_t* p, liste_t* lPortes){
 }
 
 /**
+ * \brief Vérifie si une entité est dans un bloc que la salle
+ *
+ * @param e pointeur vers l'entité
+ * @param s pointeur vers la salle
+ *
+ * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
+*/
+static int hitB(monstre_t* m, salle_t* s){
+    int leftM;
+    int rightM;
+    int topM;
+    int bottomM;
+
+    leftM = m->pos.x*TAILLEBLOC + m->delta.x;
+    rightM = leftM + m->type->hitbox.largeur - (m->type->tailleSprite.largeur - m->type->hitbox.largeur)/2;
+    topM = m->pos.y*TAILLEBLOC + m->delta.y + 1;
+    bottomM = topM + m->type->hitbox.hauteur;
+
+    if(leftM < 0 || topM < 0)
+        return TRUE;
+
+    leftM /= 8;
+    rightM = rightM/8 + (rightM%8 ? 1 : 0) - 1;
+    topM /= 8;
+    bottomM = bottomM/8 + (bottomM%8 ? 1 : 0) - 1;
+
+    if(bottomM >= s->hauteur || rightM >= s->largeur)
+        return TRUE;
+
+    for(int i = leftM; i <= rightM; i++)
+        for(int j = topM; j <= bottomM; j++)
+            if(s->mat[j][i]){
+                return TRUE;
+            }
+
+    return FALSE;
+}
+
+/**
+ * \brief Vérifie si le monstre doit chuter
+ *
+ * @param m pointeur vers le monstre
+ * @param s pointeur vers la salle
+ * @return 1 (TRUE) si le monstre doit chuter, 0 (FALSE) sinon
+*/
+static int verifChuteMonstre(monstre_t* m, salle_t* s){
+    int leftM;
+    int rightM;
+    int bottomM;
+
+    leftM = m->pos.x*TAILLEBLOC + m->delta.x;
+    rightM = leftM + m->type->hitbox.largeur - (m->type->tailleSprite.largeur - m->type->hitbox.largeur)/2;
+    bottomM = m->pos.y*TAILLEBLOC + m->delta.y + 1;
+    bottomM += m->type->hitbox.hauteur;
+
+    leftM /= 8;
+    rightM = rightM/8 + (rightM%8 ? 1 : 0) - 1;
+    bottomM = bottomM/8 + (bottomM%8 ? 1 : 0);
+
+    if(bottomM >= s->hauteur )
+        return -1; //Le monstre est tombé dans le vide ?
+
+    for(int i = leftM; i <= rightM; i++){
+        if(s->mat[bottomM][i])
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+/**
  * \brief Gère le déplacement d'une entite (monstre)
  *
  * @param entite le pointeur vers la structure monstre à déplacer
  * @param salle le pointeur vers la structure salle où se trouve l'entite
 */
-static void dep(monstre_t* entite, salle_t* salle){
+static int dep(monstre_t* entite, salle_t* salle){
     if(entite->pv){
         if(entite->direction){
             entite->delta.x += entite->type->vit_dep;
             if(entite->delta.x >= TAILLEBLOC){
                 (entite->pos.x)++;
-                entite->delta.x = 0;
+                entite->delta.x -= TAILLEBLOC;
             }
-            if(hitB(entite,salle)){
-                entite->direction = LEFT;
-                (entite->pos.x)--;
-                entite->delta.x = TAILLEBLOC - 1;
-            }
+            if(hitB(entite,salle) || verifChuteMonstre(entite,salle))
+                return TRUE;
+            return FALSE;
         }else{
             entite->delta.x -= entite->type->vit_dep;
             if(entite->delta.x < 0){
                 (entite->pos.x)--;
-                entite->delta.x = 0;
+                entite->delta.x += TAILLEBLOC;
             }
-            if(hitB(entite,salle)){
-                entite->direction = RIGHT;
-                (entite->pos.x)++;
-                entite->delta.x = 0;
-            }
+            if(hitB(entite,salle) || verifChuteMonstre(entite,salle))
+                return TRUE;
+            return FALSE;
         }
     }
 }
@@ -521,34 +625,31 @@ void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle, lis
 
     //gestion des sprites
     entite->spritesActuel = (entite->spritesActuel + 1)%(entite->type->nb_sprites);
-}
+}*/
 
-void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
-    if(strcmp(lEntites->type, "monstre"))
-        return;
-    monstre_t* tmp = malloc(sizeof(monstre_t));
-    enTete(lEntites);
-    while(!horsListe(lEntites)){
-        valeurElm(lEntites,tmp);
-        if(hitE(entite,tmp) && entite->pv){
-            tmp->pv -= entite->type->degat;
-            modifElm(lEntites,tmp);
+void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle){
+    monstre_t tmp;
+    enTete(salle->listeEntite);
+    while(!horsListe(salle->listeEntite)){
+        valeurElm(salle->listeEntite,&tmp);
+        if(hitE(entite,&tmp)){
+            tmp.pv -= entite->type->degat;
+            modifElm(salle->listeEntite,&tmp);
             entite->pv = 0;
+            entite->etat = IDLE;
+            entite->newEtat = TRUE;
         }
-        suivant(lEntites);
+        suivant(salle->listeEntite);
     }
-    free(tmp);
 
-    if(hitB(entite,salle))
+    if(dep(entite,salle)){
         entite->pv = 0;
-
-    //gestion deb
-    dep(entite);
-
-    //gestion des sprites
+        entite->etat = IDLE;
+        entite->newEtat = TRUE;
+    }
 }
 
-void compMurGlace(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
+/*void compMurGlace(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
     if(entite->pv)
         entite->pv = 2;
     /*ou
@@ -571,12 +672,34 @@ void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, lis
 }*/
 
 void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
-    if(hitP(entite,perso)){
+    if(hitP(entite,perso) && !perso->inv){
         perso->pv -= entite->type->degat;
-        perso->inv = 30;
+        perso->inv = 60;
         entite->direction = 1 - entite->direction;
     }else{
-        dep(entite,salle);
+        entite->type->vit_dep = 1 - entite->type->vit_dep; //divise par deux la vitesse de dep du serpent
+
+        if(perso->inv)
+            (perso->inv)--;
+        
+        if(dep(entite,salle)){
+            if(entite->direction){
+                entite->direction = LEFT;
+                entite->delta.x -= entite->type->vit_dep;
+                if(entite->delta.x < 0){
+                    (entite->pos.x)--;
+                    entite->delta.x += TAILLEBLOC;
+                }
+            }else{
+                entite->direction = RIGHT;
+                entite->delta.x += entite->type->vit_dep;
+
+                if(entite->delta.x >= TAILLEBLOC){
+                    (entite->pos.x)++;
+                    entite->delta.x -= TAILLEBLOC;
+                }
+            }
+        }
     }
 }
 
@@ -612,3 +735,27 @@ void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_
 
 }
 */
+
+void evolution(personnage_t* p, salle_t* s){
+    monstre_t e;
+    enTete(s->listeEntite);
+    while(!horsListe(s->listeEntite)){
+        valeurElm(s->listeEntite,&e);
+        if(e.pv){
+            e.type->comportement(&e,p,s);
+            modifElm(s->listeEntite,&e);
+        }else{
+            oterElm(s->listeEntite,supMonstre); //je reviens au précédent après avoir oté
+
+            //creation des coeurs
+            /*if(strcmp(e.type->nom,"fleche") && strcmp(e.type->nom,"fleche_feu") && strcmp(e.type->nom,"crachat") && e.type->comportement != compRecuperable){
+                srand(time(NULL));
+                int r = rand() % 100;
+                if(r < COEURDROPRATE){
+                    //creer un coeur
+                }
+            }*/
+        }
+        suivant(s->listeEntite);
+    }
+}

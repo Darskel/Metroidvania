@@ -4,10 +4,17 @@
 #ifndef SDL_H
 #define SDL_H
 
-#include <SDL.h>
-#include <SDL_ttf.h>
-#include <SDL_image.h>
-#include <SDL_mixer.h>
+    #if defined(_WIN32)
+        #include <SDL2/SDL.h>
+        #include <SDL2/SDL_ttf.h>
+        #include <SDL2/SDL_image.h>
+        #include <SDL2/SDL_mixer.h>
+    #else
+        #include <SDL.h>
+        #include <SDL_ttf.h>
+        #include <SDL_image.h>
+        #include <SDL_mixer.h>
+    #endif
 
 #endif
 
@@ -67,7 +74,7 @@
 #define VITDEPPERS 1
 #define VITSAUTPERS 2
 #define VITCHUTEPERS 1
-#define VITATTACKPERS 1
+#define VITATTACKPERS 30
 
 #define JPCD 2 //Délai avant de pouvoir de nouveau sauter
 
@@ -114,7 +121,11 @@
  * \brief Id des entités présentes dans les fichiers de salle
 */
 typedef enum idEnt_e{
-    VIFPLUME = -20, /**< vifplume = -20 */
+    VENIN = -24,    /**< venin = -24 */
+    FLECHEFEU,      /**< une fleche de feu = -23 */
+    FLECHE,         /**< une flèche = -22 */
+    COEUR,          /**< un coeur = -21 */
+    VIFPLUME,       /**< vifplume = -20 */
     VERSGEANT,      /**< vers géant = -19 */
     SINGEGROTTE,    /**< singe grotte = -18 */
     SERPENTVERT,    /**< serpent vert = -17 */
@@ -202,6 +213,7 @@ typedef struct personnage_s{
     int pv_max; /**< PV max du personnage */
     int inv; /**< Entier qui permet de décompter l'invulnérabilité du joueur */
     int nbPxSaut; /**< Entier qui indique le nombre de pixel qu'il a fait lors de son saut (ou deuxième saut) */
+    int nbFrameAtk; /**< Entier qui indique le nombre de frames qui a eu lieu depuis le début de l'attaque */
     int nbSaut; /**< Entier qui indique le nombre de saut que le personnage à fait avant de retoucher le sol */
     int jpCd; /**< Entier qui indique le nombre de frames restantes avant de pouvoir resauter */
     int direction; /*Vaut 1 si le personnage va à droite et 0 si il va à gauche */

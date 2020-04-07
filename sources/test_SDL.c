@@ -248,6 +248,8 @@ int main(int argc, char *argv[]){
 
       tryJump=FALSE;
 
+      evolution(perso,salle);
+
       miseAjourSprites(perso);
 
       if(salleChangee){

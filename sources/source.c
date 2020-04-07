@@ -209,13 +209,14 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
 }
 
 void creerTypeEntite(){
+    //Serpent bleu
     int* tmp = malloc(sizeof(int) * 4);
     tmp[0] = 0;
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 0;
 
-    typesMonstre[14] = (type_monstre_t){
+    typesMonstre[-SERPENTBLEU - 1] = (type_monstre_t){
         2, //pv de base
         VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
         0, //vitesse d'attaque
@@ -229,6 +230,29 @@ void creerTypeEntite(){
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         compSerpent //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //fleche
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 1;
+    tmp[1] = 2;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-FLECHE - 1] = (type_monstre_t){
+        1, //pv de base
+        VITDEPPERS, //vit de deplacement
+        0, //vitesse d'attaque
+        "fleche",//nom, //nom de l'entité
+        "sprites/entite/fleche/tileset.png",//chemin, //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        1, //nombre de dégats qu'il inflige
+        {3,19}, //hitbox de l'entité (hauteur,largeur)
+        {10,19}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        compFleches //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 }
 
@@ -252,8 +276,6 @@ static void creerEntite(idEnt_t id, salle_t* s, position_t pos){
     e->spriteActuel.w = e->type->tailleSprite.largeur;
     e->spriteActuel.x = 0;
     e->spriteActuel.y = e->etat * e->spriteActuel.h;
-
-    printf("__%s ajoute a la liste des entites__\n", e->type->nom);
 
     ajoutDroit(s->listeEntite, e);
 }

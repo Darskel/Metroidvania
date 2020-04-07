@@ -15,7 +15,7 @@
  * \date 06/04/2020
 */
 
-#define NBTYPEMONSTRE 20
+#define NBTYPEMONSTRE 24
 type_monstre_t typesMonstre[NBTYPEMONSTRE];
 
 char* chercherSprite(int, char*);

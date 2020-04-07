@@ -4,6 +4,7 @@
 #include "../headers/structs.h"
 #include "../headers/liste.h"
 #include "../headers/comportement.h"
+#include "../headers/source.h"
 
 /**
  * \file comportement.c
@@ -55,7 +56,7 @@ static void recupElem(monstre_t* entite, personnage_t* perso){
 */
 int hitE(monstre_t* e1, monstre_t* e2){
 
-    if(strcmp(e1->type->nom,"fleche") && !strcmp(e1->type->nom,"fleche_feu") && !strcmp(e1->type->nom,"crachat"))
+    if(strcmp(e1->type->nom,"fleche") && !strcmp(e1->type->nom,"fleche_feu"))
         return FALSE;
 
     if(!strcmp(e2->type->nom,"fleche") || !strcmp(e2->type->nom,"fleche_feu") || !strcmp(e2->type->nom,"crachat"))
@@ -99,20 +100,20 @@ int hitE(monstre_t* e1, monstre_t* e2){
  *
  * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
 */
-int hitP(monstre_t* e, personnage_t* p){
+static int hitP(monstre_t* m, personnage_t* p){
     int leftE, leftP;
     int rightE, rightP;
     int topE, topP;
     int bottomE, bottomP;
 
-    leftE = e->pos.x*TAILLEBLOC + e->delta.x;
-    topE = e->pos.y*TAILLEBLOC + e->delta.y;
-    rightE = leftE + e->type->hitbox.largeur;
-    bottomE = topE + e->type->hitbox.hauteur;
+    leftE = m->pos.x*TAILLEBLOC + m->delta.x;
+    rightE = leftE + m->type->hitbox.largeur - (m->type->tailleSprite.largeur - m->type->hitbox.largeur)/2;
+    topE = m->pos.y*TAILLEBLOC + m->delta.y + 1;
+    bottomE = topE + m->type->hitbox.hauteur;
 
-    leftP = p->pos.x*TAILLEBLOC + p->delta.x;
-    topP = p->pos.y*TAILLEBLOC + p->delta.y;
+    leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
     rightP = leftP + p->hitbox.largeur;
+    topP = p->pos.y*TAILLEBLOC + p->delta.y + 1;
     bottomP = topP + p->hitbox.hauteur;
 
     if(bottomE <= topP)
@@ -400,6 +401,61 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
     }
 }
 
+/*void attaquer(personnage_t* p, salle_t* s, int tryAtk){
+    if(p->etat == ATTACKING){
+        if(p->nbFrameAtk == p->vit_att){
+            monstre_t* f = malloc(sizeof(monstre_t));
+            f->type = &typesMonstre[-FLECHE - 1];
+            f->pv = f->type->pv_base;
+
+            int leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
+            int rightP = leftP + p->hitbox.largeur;
+
+            if(p->direction){
+                f->delta = (position_t){rightP%8,0};
+                f->pos = (position_t){rightP/8,p->pos.y+1};
+                f->direction = RIGHT;
+            }else{
+                f->delta = (position_t){leftP%8,0};
+                f->pos = (position_t){leftP/8,p->pos.y+1};
+                f->direction = LEFT;
+            }
+
+            f->delta.x += f->type->vit_dep * f->direction ? 1 : -1;
+
+            if(f->direction){
+                if(f->delta.x >= TAILLEBLOC){
+                    (f->pos.x)++;
+                    f->delta.x -= TAILLEBLOC;
+                }
+            }else{
+                if(f->delta.x < 0){
+                    (f->pos.x)--;
+                    f->delta.x += TAILLEBLOC;
+                }
+            }
+
+            f->etat = IDLE;
+
+            f->spriteActuel.h = f->type->tailleSprite.hauteur;
+            f->spriteActuel.w = f->type->tailleSprite.largeur;
+            f->spriteActuel.x = 0;
+            f->spriteActuel.y = f->etat * f->spriteActuel.h;
+
+            enTete(s->listeEntite);
+            ajoutGauche(s->listeEntite, f);
+        }else{
+            (p->nbFrameAtk)++;
+        }
+    }else{
+        if(tryAtk && p->etat <= RUNNING){
+            p->etat = ATTACKING;
+            p->newEtat = TRUE;
+            p->nbFrameAtk = 0;
+        }
+    }
+}*/
+
 /**
  * \brief Estime si le joueur touche une porte et rend l'endroit où elle l'emmène
  *
@@ -455,7 +511,7 @@ static int hitB(monstre_t* m, salle_t* s){
     int bottomM;
 
     leftM = m->pos.x*TAILLEBLOC + m->delta.x;
-    rightM = leftM + m->type->hitbox.largeur;
+    rightM = leftM + m->type->hitbox.largeur - (m->type->tailleSprite.largeur - m->type->hitbox.largeur)/2;
     topM = m->pos.y*TAILLEBLOC + m->delta.y + 1;
     bottomM = topM + m->type->hitbox.hauteur;
 
@@ -491,21 +547,22 @@ static int verifChuteMonstre(monstre_t* m, salle_t* s){
     int rightM;
     int bottomM;
 
-    leftM = m->pos.x*TAILLEBLOC + m->delta.x + OFFSETHITBOX;
-    rightM = leftM + m->type->hitbox.largeur;
+    leftM = m->pos.x*TAILLEBLOC + m->delta.x;
+    rightM = leftM + m->type->hitbox.largeur - (m->type->tailleSprite.largeur - m->type->hitbox.largeur)/2;
     bottomM = m->pos.y*TAILLEBLOC + m->delta.y + 1;
     bottomM += m->type->hitbox.hauteur;
 
     leftM /= 8;
     rightM = rightM/8 + (rightM%8 ? 1 : 0) - 1;
-    bottomM = bottomM/8 + (bottomM%8 ? 1 : 0) - 1;
+    bottomM = bottomM/8 + (bottomM%8 ? 1 : 0);
 
     if(bottomM >= s->hauteur )
         return -1; //Le monstre est tombé dans le vide ?
 
-    for(int i = leftM; i <= rightM; i++)
+    for(int i = leftM; i <= rightM; i++){
         if(s->mat[bottomM][i])
             return FALSE;
+    }
 
     return TRUE;
 }
@@ -516,7 +573,7 @@ static int verifChuteMonstre(monstre_t* m, salle_t* s){
  * @param entite le pointeur vers la structure monstre à déplacer
  * @param salle le pointeur vers la structure salle où se trouve l'entite
 */
-static void dep(monstre_t* entite, salle_t* salle){
+static int dep(monstre_t* entite, salle_t* salle){
     if(entite->pv){
         if(entite->direction){
             entite->delta.x += entite->type->vit_dep;
@@ -527,12 +584,13 @@ static void dep(monstre_t* entite, salle_t* salle){
             if(hitB(entite,salle) || verifChuteMonstre(entite,salle)){
                 entite->direction = LEFT;
                 entite->delta.x -= entite->type->vit_dep;
-
                 if(entite->delta.x < 0){
                     (entite->pos.x)--;
                     entite->delta.x += TAILLEBLOC;
                 }
+                //return TRUE;
             }
+            //return FALSE;
         }else{
             entite->delta.x -= entite->type->vit_dep;
             if(entite->delta.x < 0){
@@ -547,7 +605,9 @@ static void dep(monstre_t* entite, salle_t* salle){
                     (entite->pos.x)++;
                     entite->delta.x -= TAILLEBLOC;
                 }
+                //return TRUE;
             }
+            //return FALSE;
         }
     }
 }
@@ -628,10 +688,31 @@ void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, lis
 void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
     if(hitP(entite,perso) && !perso->inv){
         perso->pv -= entite->type->degat;
-        perso->inv = 30;
+        perso->inv = 60;
         entite->direction = 1 - entite->direction;
     }else{
+        entite->type->vit_dep = 1 - entite->type->vit_dep;
+        if(perso->inv)
+            (perso->inv)--;
         dep(entite,salle);
+        /*if(dep(entite,salle)){
+            if(entite->direction){
+                entite->direction = LEFT;
+                entite->delta.x -= entite->type->vit_dep;
+                if(entite->delta.x < 0){
+                    (entite->pos.x)--;
+                    entite->delta.x += TAILLEBLOC;
+                }
+            }else{
+                entite->direction = RIGHT;
+                entite->delta.x += entite->type->vit_dep;
+
+                if(entite->delta.x >= TAILLEBLOC){
+                    (entite->pos.x)++;
+                    entite->delta.x -= TAILLEBLOC;
+                }
+            }
+        }*/
     }
 }
 

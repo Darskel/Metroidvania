@@ -215,7 +215,7 @@ void creerTypeEntite(){
     tmp[2] = 0;
     tmp[3] = 0;
 
-    typesMonstre[14] = (type_monstre_t){
+    typesMonstre[-SERPENTBLEU - 1] = (type_monstre_t){
         2, //pv de base
         VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
         0, //vitesse d'attaque
@@ -252,8 +252,6 @@ static void creerEntite(idEnt_t id, salle_t* s, position_t pos){
     e->spriteActuel.w = e->type->tailleSprite.largeur;
     e->spriteActuel.x = 0;
     e->spriteActuel.y = e->etat * e->spriteActuel.h;
-
-    printf("__%s ajoute a la liste des entites__\n", e->type->nom);
 
     ajoutDroit(s->listeEntite, e);
 }

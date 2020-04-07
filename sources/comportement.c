@@ -528,8 +528,8 @@ static void dep(monstre_t* entite, salle_t* salle){
                 entite->direction = LEFT;
                 entite->delta.x -= entite->type->vit_dep;
 
-                if(entite->.delta.x < 0){
-                    (p->pos.x)--;
+                if(entite->delta.x < 0){
+                    (entite->pos.x)--;
                     entite->delta.x += TAILLEBLOC;
                 }
             }
@@ -543,8 +543,8 @@ static void dep(monstre_t* entite, salle_t* salle){
                 entite->direction = RIGHT;
                 entite->delta.x += entite->type->vit_dep;
 
-                if(entite->.delta.x >= TAILLEBLOC){
-                    (p->pos.x)++;
+                if(entite->delta.x >= TAILLEBLOC){
+                    (entite->pos.x)++;
                     entite->delta.x -= TAILLEBLOC;
                 }
             }

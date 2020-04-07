@@ -190,6 +190,7 @@ typedef struct salle_s{
     SDL_Texture * tileset; /**< Image qui contient tout les sprites de la tileset associée à la salle */
     int spriteActuel; /**< Indice du sprite à afficher */
     liste_t * listePorte; /**< Liste des portes de la salle */
+    liste_t * listeEntite; /**< Liste des entités de la salle */
 } salle_t;
 
 /**
@@ -222,6 +223,8 @@ typedef struct personnage_s{
     char* nomObj[TAILLE_INVENTAIRE]; /**<Tableau qui contient les noms des objets de l'inventaire */
 } personnage_t;
 
+typedef struct monstre_s monstre_t;
+
 /**
  * \struct type_monstre_s
  * \brief Structure représentant le type d'un monstre
@@ -230,7 +233,7 @@ typedef struct type_monstre_s{
     int pv_base; /**< PV de base du monstre */
     int vit_dep; /**< Vitesse de déplacement du monstre (facteur/indicateur) */
     int vit_att; /**< Vitesse d'attaque du monstre (en nombre de frame) */
-    char* nom;
+    char* nom;  /**< Nom de l'entité/monstre (permet de gérer l'inventaire lors du pick up) */
     char* path; /**< Chemin d'accès à l'image qui contient les sprites*/
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du monstre */
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du monstre */
@@ -240,22 +243,23 @@ typedef struct type_monstre_s{
     boolean_t passeBlocs; /**< Indique si le monstre peut passer à travers les blocs */
 
     //comportement (pointeur sur fonction)
+    void (*comportement)(monstre_t* entite, personnage_t* perso, salle_t* salle);
 } type_monstre_t;
 
 /**
  * \struct monstre_s
  * \brief Structure représentant un monstre
 */
-typedef struct monstre_s{
+struct monstre_s{
     type_monstre_t * type; /**< Type de monstre */
     int pv; /**< PV actuels du monstre */
-    etat_t etat; /**< Etat actuel du personnage */
+    etat_t etat; /**< Etat actuel du monstre */
     SDL_Rect spriteActuel; /**< Rectangle qui correspond à la taille du sprite actuel dans la texture */
     position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
     position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
     boolean_t direction; /**< Direction vers laquelle regarde le monstre (1: vers la gauche(LEFT), 0: vers la droite(RIGHT)) */
 
-} monstre_t;
+};
 
 /**
  * \struct bloc_s

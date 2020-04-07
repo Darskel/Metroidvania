@@ -7,6 +7,7 @@
 #include <string.h>
 #include "../headers/source.h"
 #include "../headers/liste.h"
+#include "../headers/comportement.h"
 
 /**
  * \file source.c
@@ -207,6 +208,44 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
     return numSauv;
 }
 
+void creerTypeEntite(){
+    typesMonstre[14] = (type_monstre_t){
+        2, //pv de base
+        VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
+        0, //vitesse d'attaque
+        "serpent_bleu",//nom, //nom de l'entité
+        "sprites/entite/serpent_bleu/tileset.png",//chemin, //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //Tableau de nombre d'animations par etat
+        1, //nombre de dégats qu'il inflige
+        {28,51}, //hitbox de l'entité (hauteur,largeur)
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        compSerpent //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+}
+
+type_monstre_t* obtenirTypesEntite(){
+    return typesMonstre;
+}
+
+static void creerEntite(idEnt_t id, salle_t* s, position_t pos){
+    monstre_t e;
+    id *= -1;
+
+    e.type = &typesMonstre[id-1];
+    e.pv = e.type ? e.type->pv_base : 1;
+    
+    e.delta = (position_t){0,TAILLEBLOC - e.type->hitbox.hauteur%TAILLEBLOC};
+    e.pos = pos;
+    e.direction = LEFT;
+    e.etat = IDLE;
+
+    printf("__%s ajoute a la liste des entites__\n", e.type->nom);
+
+    ajoutDroit(s->listeEntite, &e);
+}
+
 /**
  * \brief Nettoie et supprime la structure salle donnée
  * \details libère toute la mémoire utiliser et prépare le pointeur à être de nouveau utilisé
@@ -219,6 +258,7 @@ int nettoyerSalle(salle_t** salle){
         free((*salle)->mat[i]);
 
     supListe(&((*salle)->listePorte),supPorte);
+    supListe(&((*salle)->listeEntite),supMonstre);
     free((*salle)->mat);
     free((*salle)->nomFichier);
     free(*salle);
@@ -267,11 +307,17 @@ int lireSalle(char* nomFichier, salle_t** salle){
     for(int i = 0; i < larg; i++)
         (*salle)->mat[i] = malloc(sizeof(int) * lon);
 
+    (*salle)->listeEntite = creerListe("monstre");
+
     //Remplissage matrice
     for(int i = 0; i < lon*larg; i++){
         fscanf(monDoc, "%d", &val);
         //gestion des entités !!!
-        (*salle)->mat[i/lon][i%lon] = val;
+        if(val < 0){
+            creerEntite(val,*salle, (position_t){i%lon,i/lon});
+            (*salle)->mat[i/lon][i%lon] = 0;
+        }else
+            (*salle)->mat[i/lon][i%lon] = val;
         //printf("\n %d %d \n", i/lon,i%lon);
     }
 

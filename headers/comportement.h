@@ -18,14 +18,14 @@ void depGauche(personnage_t* p, salle_t* s);
 void depVert(personnage_t* p, salle_t* s, int tryJump);
 char* prendPorte(personnage_t* p, liste_t* lPortes);
 
-void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);
-void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);
-void compMurGlace(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);
-void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);
-void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);
-void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);
-void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);
-void compVersGeant(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);
-void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites);
+void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle);
+void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle);
+void compMurGlace(monstre_t* entite, personnage_t* perso, salle_t* salle);
+void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle);
+void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle);
+void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle);
+void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle);
+void compVersGeant(monstre_t* entite, personnage_t* perso, salle_t* salle);
+void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle);
 
 #endif

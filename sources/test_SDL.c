@@ -17,6 +17,7 @@
  */
 int main(int argc, char *argv[]){
   boolean_t fullscreen=FALSE;
+  creerTypeEntite(); //ajouté par thomas
   SDL_DisplayMode mode;
   SDL_Window * fenetre=NULL;
   SDL_Renderer * renderer=NULL;

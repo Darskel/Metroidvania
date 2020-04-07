@@ -568,9 +568,9 @@ void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, lis
         dep(entite);
     }
     //gestion sprite
-}
+}*/
 
-void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
+void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
     if(hitP(entite,perso)){
         perso->pv -= entite->type->degat;
         perso->inv = 30;
@@ -580,7 +580,7 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t
     }
 }
 
-void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
+/*void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
     if(hitP(entite,perso)){
         perso->pv -= entite->type->degat;
         entite->direction = 1 - entite->direction;

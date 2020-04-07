@@ -36,15 +36,15 @@ int main(int argc, char *argv[]){
   int mousey;
   Sint16 x_move;
   Sint16 y_move;
-  char * salle_nom;
+  char * salle_nom = NULL;
   boolean_t Gauche = FALSE;
   boolean_t Droite = FALSE;
   boolean_t tryJump = FALSE;
   boolean_t fin=FALSE;
   boolean_t salleChangee=FALSE;
-  SDL_Texture * tileset;
-  salle_t * salle;
-  personnage_t * perso;
+  SDL_Texture * tileset=NULL;
+  salle_t * salle=NULL;
+  personnage_t * perso=NULL;
   position_t positionDepart;
   position_t positionDepartDelta;
   boolean_t kon = FALSE;
@@ -58,7 +58,7 @@ int main(int argc, char *argv[]){
   SDL_RenderClear(renderer);
   SDL_RenderPresent(renderer);
 
-  SDL_Joystick* pJoystick;
+  SDL_Joystick* pJoystick = NULL;
   int numJoystick = SDL_NumJoysticks();
   if ( numJoystick >= 1 )
   {

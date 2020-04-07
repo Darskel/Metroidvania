@@ -109,6 +109,33 @@
 
 */
 
+/** 
+ * \enum idEnt_e 
+ * \brief Id des entités présentes dans les fichiers de salle 
+*/ 
+typedef enum idEnt_e{ 
+    VIFPLUME = -20, /**< vifplume = -20 */ 
+    VERSGEANT,      /**< vers géant = -19 */ 
+    SINGEGROTTE,    /**< singe grotte = -18 */ 
+    SERPENTVERT,    /**< serpent vert = -17 */ 
+    SERPENTROSE,    /**< serpent rose = -16 */ 
+    SERPENTBLEU,    /**< serpent bleu = -15 */ 
+    ROIVP,          /**< roi vifplume = -14 */ 
+    RENARD,         /**< renard = -13 */ 
+    PORTEV,         /**< porte verte = -12 */ 
+    PORTERL,        /**< porte rouillée = -11 */ 
+    PORTERG,        /**< porte rouge = -10 */ 
+    PORTEB,         /**< porte bleue = -9 */ 
+    MURGLACE,       /**< mur de glace = -8 */ 
+    FLACONHUILE,    /**< fleches de feu = -7 */ 
+    DOUBLESAUT,     /**< double saut = -6 */ 
+    DISCOSHROOM,    /**< discoshroom = -5 */ 
+    CLEVERTE,       /**< clé verte = -4 */ 
+    CLEROUILLE,     /**< clé rouillée = -3 */ 
+    CLEROUGE,       /**< clé rouge = -2 */ 
+    CLEBLEUE,       /**< clé bleue = -1 */ 
+} idEnt_t; 
+
 
 /**
  * \struct taille_s

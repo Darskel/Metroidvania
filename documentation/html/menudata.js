@@ -79,4 +79,16 @@ var menudata={children:[
 {text:"s",url:"globals_func.html#index_s"},
 {text:"v",url:"globals_func.html#index_v"}]},
 {text:"Énumérations",url:"globals_enum.html"},
-{text:"Valeurs énumérées",url:"globals_eval.html"}]}]}]}
+{text:"Valeurs énumérées",url:"globals_eval.html",children:[
+{text:"a",url:"globals_eval.html#index_a"},
+{text:"c",url:"globals_eval.html#index_c"},
+{text:"d",url:"globals_eval.html#index_d"},
+{text:"f",url:"globals_eval.html#index_f"},
+{text:"i",url:"globals_eval.html#index_i"},
+{text:"j",url:"globals_eval.html#index_j"},
+{text:"m",url:"globals_eval.html#index_m"},
+{text:"p",url:"globals_eval.html#index_p"},
+{text:"r",url:"globals_eval.html#index_r"},
+{text:"s",url:"globals_eval.html#index_s"},
+{text:"t",url:"globals_eval.html#index_t"},
+{text:"v",url:"globals_eval.html#index_v"}]}]}]}]}

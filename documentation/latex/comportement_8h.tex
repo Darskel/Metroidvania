@@ -2,15 +2,13 @@
 \label{comportement_8h}\index{headers/comportement.\+h@{headers/comportement.\+h}}
 
 
-Headers de l\textquotesingle{}ensemble de fonctions pour le comportement des mobs et du personnage.  
+Header de l\textquotesingle{}ensemble de fonctions pour le comportement des mobs et du personnage.  
 
 
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
 int \hyperlink{comportement_8h_aa7e846fc01d69c6734a372054ce218ca}{hitE} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$e1, \hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$e2)
-\begin{DoxyCompactList}\small\item\em Vérifie si une entité touche une autre entité \end{DoxyCompactList}\item 
-int \hyperlink{comportement_8h_a7e78db7adfb7d32b8438d54a9ca9ee6d}{hitP} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$e, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$p)
 \begin{DoxyCompactList}\small\item\em Vérifie si une entité touche une autre entité \end{DoxyCompactList}\item 
 int \hyperlink{comportement_8h_aede415007da55f94b84a40f93ec45d6f}{pers\+Valid\+Dep} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$p, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$s)
 \begin{DoxyCompactList}\small\item\em Vérifie si le deplacement du personnage est valide. \end{DoxyCompactList}\item 
@@ -20,39 +18,45 @@ void \hyperlink{comportement_8h_a8797da75308a831b1bcd0b84f0470ed5}{dep\+Gauche} 
 \begin{DoxyCompactList}\small\item\em Gère le déplacement vers la gauche du personnage quelque soit son état. \end{DoxyCompactList}\item 
 void \hyperlink{comportement_8h_ab62b168c2d0150f4ec41bf954e111f57}{dep\+Vert} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$p, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$s, int try\+Jump)
 \begin{DoxyCompactList}\small\item\em Gère le déplacement vertical du personnage quelque soit son état. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{comportement_8h_a1d6b0d91c298e2e657560ccdf54ad51e}\label{comportement_8h_a1d6b0d91c298e2e657560ccdf54ad51e}} 
+void {\bfseries attaquer} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$p, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$s, int try\+Atk)
+\item 
 char $\ast$ \hyperlink{comportement_8h_abdb96a0c189ae3f478ddd849a12612f4}{prend\+Porte} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$p, \hyperlink{structliste__s}{liste\+\_\+t} $\ast$l\+Portes)
 \begin{DoxyCompactList}\small\item\em Estime si le joueur touche une porte et rend l\textquotesingle{}endroit où elle l\textquotesingle{}emmène. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{comportement_8h_ad512905834cc5a25fb3d1bb02a168e1f}\label{comportement_8h_ad512905834cc5a25fb3d1bb02a168e1f}} 
-void {\bfseries comp\+Recuperable} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, \hyperlink{structliste__s}{liste\+\_\+t} $\ast$l\+Entites)
+\mbox{\Hypertarget{comportement_8h_ae4e8889bccdb5040ff350e5cb9a54938}\label{comportement_8h_ae4e8889bccdb5040ff350e5cb9a54938}} 
+void {\bfseries evolution} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$p, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$s)
 \item 
-\mbox{\Hypertarget{comportement_8h_a8d28235e49b430eaaf7371e2ef28e8dd}\label{comportement_8h_a8d28235e49b430eaaf7371e2ef28e8dd}} 
-void {\bfseries comp\+Fleches} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, \hyperlink{structliste__s}{liste\+\_\+t} $\ast$l\+Entites)
+\mbox{\Hypertarget{comportement_8h_a5f181f1f0dbff2b224a7567a573b4922}\label{comportement_8h_a5f181f1f0dbff2b224a7567a573b4922}} 
+void {\bfseries comp\+Recuperable} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
 \item 
-\mbox{\Hypertarget{comportement_8h_ae162b0c87af996f100195160c626ed09}\label{comportement_8h_ae162b0c87af996f100195160c626ed09}} 
-void {\bfseries comp\+Mur\+Glace} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, \hyperlink{structliste__s}{liste\+\_\+t} $\ast$l\+Entites)
+\mbox{\Hypertarget{comportement_8h_a999cd83e4f7ba4ae040c7b49bed4da85}\label{comportement_8h_a999cd83e4f7ba4ae040c7b49bed4da85}} 
+void {\bfseries comp\+Fleches} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
 \item 
-\mbox{\Hypertarget{comportement_8h_a9f687092a8fe8dde09841f7d4f406c66}\label{comportement_8h_a9f687092a8fe8dde09841f7d4f406c66}} 
-void {\bfseries comp\+Roi\+Vifplume} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, \hyperlink{structliste__s}{liste\+\_\+t} $\ast$l\+Entites)
+\mbox{\Hypertarget{comportement_8h_a462de8a9fd9dc14a24d59477bb189995}\label{comportement_8h_a462de8a9fd9dc14a24d59477bb189995}} 
+void {\bfseries comp\+Mur\+Glace} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
 \item 
-\mbox{\Hypertarget{comportement_8h_a9aebd3eccfffd2c0fcffea5f8bb206dc}\label{comportement_8h_a9aebd3eccfffd2c0fcffea5f8bb206dc}} 
-void {\bfseries comp\+Serpent} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, \hyperlink{structliste__s}{liste\+\_\+t} $\ast$l\+Entites)
+\mbox{\Hypertarget{comportement_8h_a666112b165219fbdf73bed68f2b82c2d}\label{comportement_8h_a666112b165219fbdf73bed68f2b82c2d}} 
+void {\bfseries comp\+Roi\+Vifplume} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
 \item 
-\mbox{\Hypertarget{comportement_8h_ab0bc73fc0c0939e5c9542fa18f9e0edc}\label{comportement_8h_ab0bc73fc0c0939e5c9542fa18f9e0edc}} 
-void {\bfseries comp\+Serpent\+Rose} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, \hyperlink{structliste__s}{liste\+\_\+t} $\ast$l\+Entites)
+\mbox{\Hypertarget{comportement_8h_a19a961efc662b4de3d824ac1fce50c73}\label{comportement_8h_a19a961efc662b4de3d824ac1fce50c73}} 
+void {\bfseries comp\+Serpent} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
 \item 
-\mbox{\Hypertarget{comportement_8h_a8cf86970b917a16baf77918c29416526}\label{comportement_8h_a8cf86970b917a16baf77918c29416526}} 
-void {\bfseries comp\+Singe\+Grotte} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, \hyperlink{structliste__s}{liste\+\_\+t} $\ast$l\+Entites)
+\mbox{\Hypertarget{comportement_8h_ae0afebfb61b3c0167e1b4ae4521b9776}\label{comportement_8h_ae0afebfb61b3c0167e1b4ae4521b9776}} 
+void {\bfseries comp\+Serpent\+Rose} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
 \item 
-\mbox{\Hypertarget{comportement_8h_a9997b022dac83706828daeecbae100be}\label{comportement_8h_a9997b022dac83706828daeecbae100be}} 
-void {\bfseries comp\+Vers\+Geant} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, \hyperlink{structliste__s}{liste\+\_\+t} $\ast$l\+Entites)
+\mbox{\Hypertarget{comportement_8h_aac542af1913df7c46111ee3261e34845}\label{comportement_8h_aac542af1913df7c46111ee3261e34845}} 
+void {\bfseries comp\+Singe\+Grotte} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
 \item 
-\mbox{\Hypertarget{comportement_8h_a65fd165ef5538c582979afe684afa92b}\label{comportement_8h_a65fd165ef5538c582979afe684afa92b}} 
-void {\bfseries comp\+Vifplume} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, \hyperlink{structliste__s}{liste\+\_\+t} $\ast$l\+Entites)
+\mbox{\Hypertarget{comportement_8h_aaf401bb1b3a74aa6b9138e0536e4cf92}\label{comportement_8h_aaf401bb1b3a74aa6b9138e0536e4cf92}} 
+void {\bfseries comp\+Vers\+Geant} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
+\item 
+\mbox{\Hypertarget{comportement_8h_a1844dcf03aabf3774236fbff00b1ba85}\label{comportement_8h_a1844dcf03aabf3774236fbff00b1ba85}} 
+void {\bfseries comp\+Vifplume} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
 \end{DoxyCompactItemize}
 
 
 \subsection{Description détaillée}
-Headers de l\textquotesingle{}ensemble de fonctions pour le comportement des mobs et du personnage. 
+Header de l\textquotesingle{}ensemble de fonctions pour le comportement des mobs et du personnage. 
 
 \begin{DoxyAuthor}{Auteur}
 Thomas D\+I\+D\+I\+ER L2 Info Le Mans 
@@ -124,26 +128,6 @@ Gère le déplacement vertical du personnage quelque soit son état.
 \index{hitE@{hitE}!comportement.\+h@{comportement.\+h}}
 \subsubsection{\texorpdfstring{hit\+E()}{hitE()}}
 {\footnotesize\ttfamily int hitE (\begin{DoxyParamCaption}\item[{\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$}]{e1,  }\item[{\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$}]{e2 }\end{DoxyParamCaption})}
-
-
-
-Vérifie si une entité touche une autre entité 
-
-
-\begin{DoxyParams}{Paramètres}
-{\em e1} & pointeur vers la première entité \\
-\hline
-{\em e2} & pointeur vers la seconde entité\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-1 (T\+R\+UE) si il y a contact, 0 (F\+A\+L\+SE) sinon 
-\end{DoxyReturn}
-\mbox{\Hypertarget{comportement_8h_a7e78db7adfb7d32b8438d54a9ca9ee6d}\label{comportement_8h_a7e78db7adfb7d32b8438d54a9ca9ee6d}} 
-\index{comportement.\+h@{comportement.\+h}!hitP@{hitP}}
-\index{hitP@{hitP}!comportement.\+h@{comportement.\+h}}
-\subsubsection{\texorpdfstring{hit\+P()}{hitP()}}
-{\footnotesize\ttfamily int hitP (\begin{DoxyParamCaption}\item[{\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$}]{e,  }\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{p }\end{DoxyParamCaption})}
 
 
 

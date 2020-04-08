@@ -8,10 +8,9 @@ Header pour la librairie de fonctions et les constantes liées à l\textquotesin
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
-{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L.\+h$>$}\newline
-{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L\+\_\+ttf.\+h$>$}\newline
-{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L\+\_\+image.\+h$>$}\newline
-{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L\+\_\+mixer.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L\+\_\+image.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}../headers/structs.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../headers/source.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../headers/comportement.\+h\char`\"{}}\newline
@@ -22,8 +21,6 @@ void \hyperlink{sdl__fonctions_8h_ac7a206e3c72f0892f43e2e1dae5daf06}{initialisat
 \begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}initalisation de la S\+DL et de création de la fenetre et du renderer ainsi que du remplissage du mode d\textquotesingle{}écran (en parametre) \end{DoxyCompactList}\item 
 void \hyperlink{sdl__fonctions_8h_af4ffdd61eb400c65a78258ee8ad1172a}{quitter\+\_\+\+S\+DL} (S\+D\+L\+\_\+\+Window $\ast$$\ast$fenetre, S\+D\+L\+\_\+\+Renderer $\ast$$\ast$renderer)
 \begin{DoxyCompactList}\small\item\em Fonction qui permet de détruire la fenetre et quitter la S\+DL. \end{DoxyCompactList}\item 
-void \hyperlink{sdl__fonctions_8h_a814c2dcbea63c3a94a4d2be833c2177d}{evenements} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, S\+D\+L\+\_\+\+Display\+Mode $\ast$mode)
-\begin{DoxyCompactList}\small\item\em Fonction de gestions des evenements. \end{DoxyCompactList}\item 
 S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{sdl__fonctions_8h_a8f83b4b265112950d62a81b33f26e890}{initialiser\+\_\+texture} (char $\ast$path, S\+D\+L\+\_\+\+Renderer $\ast$renderer)
 \begin{DoxyCompactList}\small\item\em Fonction qui permet d\textquotesingle{}initialiser une texture à partir d\textquotesingle{}une image. \end{DoxyCompactList}\item 
 \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$ \hyperlink{sdl__fonctions_8h_a9ffbbd8791b49989f9ee4716096d2b7b}{initialisation\+\_\+personnage} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, \hyperlink{structposition__s}{position\+\_\+t} position\+Depart, \hyperlink{structposition__s}{position\+\_\+t} position\+Depart\+Delta)
@@ -45,7 +42,12 @@ void \hyperlink{sdl__fonctions_8h_a8754279fcd8693c28c3fc5c6f4624b31}{destroy\+\_
 void \hyperlink{sdl__fonctions_8h_afb46b3ed18a1969155b218f8b0179308}{ecran\+Noir} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, int ms)
 \begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}affichage d\textquotesingle{}un écran noir d\textquotesingle{}une durée choisie. \end{DoxyCompactList}\item 
 void \hyperlink{sdl__fonctions_8h_a79c168095e834346bbaaf27c91cfddc2}{konamicode} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, char $\ast$konami, int $\ast$ind\+Kon, boolean\+\_\+t $\ast$kon)
-\begin{DoxyCompactList}\small\item\em Fonction qui détecte si le Konami code a été rentré, dans la bonne salle, et qui créé l\textquotesingle{}easter egg en conséquence (modifie la matrice de la salle) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Fonction qui détecte si le Konami code a été rentré, dans la bonne salle, et qui créé l\textquotesingle{}easter egg en conséquence (modifie la matrice de la salle) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sdl__fonctions_8h_a672ae3a027fee5a7fd52d27243a08572}\label{sdl__fonctions_8h_a672ae3a027fee5a7fd52d27243a08572}} 
+void \hyperlink{sdl__fonctions_8h_a672ae3a027fee5a7fd52d27243a08572}{destroy\+\_\+typeentites} (void)
+\begin{DoxyCompactList}\small\item\em Fonction de destruction des types de monstres. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_ae1d88b10b3071168e331039a28e8ecb7}{initialiser\+\_\+typeentites} (S\+D\+L\+\_\+\+Renderer $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}initialisation des types monstres. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Description détaillée}
@@ -77,9 +79,9 @@ Fonction d\textquotesingle{}affichage complet (salle et personnage)
 \begin{DoxyParams}{Paramètres}
 {\em renderer} & le pointeur vers le S\+D\+L\+\_\+\+Renderer à utiliser \\
 \hline
-{\em personnage} & le pointeur sur la structure personnage à afficher \\
+{\em salle} & le pointeur sur la salle où afficher le joueur et les entités \\
 \hline
-{\em salle} & le pointeur sur la salle où afficher le joueur \\
+{\em personnage} & le pointeur sur la structure personnage à afficher \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{sdl__fonctions_8h_a4084fb646ec706351e7854d1166b2e53}\label{sdl__fonctions_8h_a4084fb646ec706351e7854d1166b2e53}} 
@@ -165,23 +167,6 @@ Fonction d\textquotesingle{}affichage d\textquotesingle{}un écran noir d\textqu
 {\em ms} & un entier correspondant à la durée d\textquotesingle{}affichage de l\textquotesingle{}écran noir (en millisecondes) \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{sdl__fonctions_8h_a814c2dcbea63c3a94a4d2be833c2177d}\label{sdl__fonctions_8h_a814c2dcbea63c3a94a4d2be833c2177d}} 
-\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!evenements@{evenements}}
-\index{evenements@{evenements}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
-\subsubsection{\texorpdfstring{evenements()}{evenements()}}
-{\footnotesize\ttfamily void evenements (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{S\+D\+L\+\_\+\+Display\+Mode $\ast$}]{mode }\end{DoxyParamCaption})}
-
-
-
-Fonction de gestions des evenements. 
-
-
-\begin{DoxyParams}{Paramètres}
-{\em renderer} & le renderer à utiliser \\
-\hline
-{\em mode} & le mode de l\textquotesingle{}écran utilisé \\
-\hline
-\end{DoxyParams}
 \mbox{\Hypertarget{sdl__fonctions_8h_a9ffbbd8791b49989f9ee4716096d2b7b}\label{sdl__fonctions_8h_a9ffbbd8791b49989f9ee4716096d2b7b}} 
 \index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!initialisation\+\_\+personnage@{initialisation\+\_\+personnage}}
 \index{initialisation\+\_\+personnage@{initialisation\+\_\+personnage}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
@@ -237,7 +222,7 @@ Fonction d\textquotesingle{}initialisation de la salle.
 
 
 \begin{DoxyParams}{Paramètres}
-{\em renderer} & le renderer utilisé \\
+{\em renderer} & pointeur vers le renderer utilisé \\
 \hline
 {\em nom\+Fichier} & une chaine de caracteres qui contient le nom du fichier de la salle \\
 \hline
@@ -267,6 +252,21 @@ Fonction qui permet d\textquotesingle{}initialiser une texture à partir d\textq
 \begin{DoxyReturn}{Renvoie}
 le pointeur sur la texture générée 
 \end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_ae1d88b10b3071168e331039a28e8ecb7}\label{sdl__fonctions_8h_ae1d88b10b3071168e331039a28e8ecb7}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!initialiser\+\_\+typeentites@{initialiser\+\_\+typeentites}}
+\index{initialiser\+\_\+typeentites@{initialiser\+\_\+typeentites}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{initialiser\+\_\+typeentites()}{initialiser\_typeentites()}}
+{\footnotesize\ttfamily void initialiser\+\_\+typeentites (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}initialisation des types monstres. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur vers le renderer utilisé par les textures \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{sdl__fonctions_8h_a79c168095e834346bbaaf27c91cfddc2}\label{sdl__fonctions_8h_a79c168095e834346bbaaf27c91cfddc2}} 
 \index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!konamicode@{konamicode}}
 \index{konamicode@{konamicode}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}

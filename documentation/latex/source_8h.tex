@@ -2,7 +2,7 @@
 \label{source_8h}\index{headers/source.\+h@{headers/source.\+h}}
 
 
-Headers et constantes des fonctions de lecture d\textquotesingle{}une salle.  
+Header et constantes des fonctions de lecture d\textquotesingle{}une salle.  
 
 
 {\ttfamily \#include \char`\"{}../headers/structs.\+h\char`\"{}}\newline
@@ -20,6 +20,9 @@ Headers et constantes des fonctions de lecture d\textquotesingle{}une salle.
 \item 
 \mbox{\Hypertarget{source_8h_a79bcfb6bde984f42d1124b068a509af7}\label{source_8h_a79bcfb6bde984f42d1124b068a509af7}} 
 \#define {\bfseries B\+A\+SE}~100
+\item 
+\mbox{\Hypertarget{source_8h_a5e5589d805ecf7f88f190412ee903b09}\label{source_8h_a5e5589d805ecf7f88f190412ee903b09}} 
+\#define {\bfseries N\+B\+T\+Y\+P\+E\+M\+O\+N\+S\+T\+RE}~24
 \end{DoxyCompactItemize}
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
@@ -30,14 +33,25 @@ int \hyperlink{source_8h_a237b7fdb7359dcf2c40a191fb12e883e}{sauvegarder} (int, i
 \begin{DoxyCompactList}\small\item\em Sauvegarde l\textquotesingle{}état de la partie. \end{DoxyCompactList}\item 
 int \hyperlink{source_8h_a048224bdc440e43ed701bcbd75816449}{charger\+Sauvegarde} (int, char $\ast$, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$, int\mbox{[}$\,$\mbox{]}, char $\ast$\mbox{[}$\,$\mbox{]})
 \begin{DoxyCompactList}\small\item\em Charge l\textquotesingle{}état de la partie. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{source_8h_a9157f2db38ecc8aca230dbf3b21145c6}\label{source_8h_a9157f2db38ecc8aca230dbf3b21145c6}} 
+void \hyperlink{source_8h_a9157f2db38ecc8aca230dbf3b21145c6}{creer\+Type\+Entite} ()
+\begin{DoxyCompactList}\small\item\em Créé le tableau de types d\textquotesingle{}entités. \end{DoxyCompactList}\item 
+\hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+t} $\ast$ \hyperlink{source_8h_acb8eb0f3e06d01c57473af3b8a7e8499}{obtenir\+Types\+Entite} ()
+\begin{DoxyCompactList}\small\item\em Permet d\textquotesingle{}obtenir le tableau des types d\textquotesingle{}entités. \end{DoxyCompactList}\item 
 int \hyperlink{source_8h_ad5237d1625ec6ab16ef2c4f0690bbfb8}{nettoyer\+Salle} (\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$salle)
 \begin{DoxyCompactList}\small\item\em Nettoie et supprime la structure salle donnée. \end{DoxyCompactList}\item 
 int \hyperlink{source_8h_a772c619ce47ab23c7a90d0758ef29ba6}{lire\+Salle} (char $\ast$, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$)
 \begin{DoxyCompactList}\small\item\em Modifie la structure salle pour la nouvelle salle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{source_8h_aa9eab917d84e6c73c1df1e93b570fe28}\label{source_8h_aa9eab917d84e6c73c1df1e93b570fe28}} 
+\hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+t} {\bfseries types\+Monstre} \mbox{[}N\+B\+T\+Y\+P\+E\+M\+O\+N\+S\+T\+RE\mbox{]}
+\end{DoxyCompactItemize}
 
 
 \subsection{Description détaillée}
-Headers et constantes des fonctions de lecture d\textquotesingle{}une salle. 
+Header et constantes des fonctions de lecture d\textquotesingle{}une salle. 
 
 \begin{DoxyAuthor}{Auteur}
 Thomas D\+I\+D\+I\+ER L2 Info Le Mans 
@@ -93,7 +107,7 @@ Tout sur dirent ici\+: \href{http://sdz.tdct.org/sdz/parcourir-les-dossiers-avec
 
 
 \begin{DoxyParams}{Paramètres}
-{\em id} & un entier correpondant à un id \\
+{\em id} & un entier correpondant à un id de sprite \\
 \hline
 {\em dir\+Name} & la chaîne de caractères correspondant au chemin du dossier où chercher le sprite\\
 \hline
@@ -140,6 +154,19 @@ libère toute la mémoire utiliser et prépare le pointeur à être de nouveau u
 \end{DoxyParams}
 \begin{DoxyReturn}{Renvoie}
 0 si tout s\textquotesingle{}est bien déroulé 
+\end{DoxyReturn}
+\mbox{\Hypertarget{source_8h_acb8eb0f3e06d01c57473af3b8a7e8499}\label{source_8h_acb8eb0f3e06d01c57473af3b8a7e8499}} 
+\index{source.\+h@{source.\+h}!obtenir\+Types\+Entite@{obtenir\+Types\+Entite}}
+\index{obtenir\+Types\+Entite@{obtenir\+Types\+Entite}!source.\+h@{source.\+h}}
+\subsubsection{\texorpdfstring{obtenir\+Types\+Entite()}{obtenirTypesEntite()}}
+{\footnotesize\ttfamily \hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+t}$\ast$ obtenir\+Types\+Entite (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Permet d\textquotesingle{}obtenir le tableau des types d\textquotesingle{}entités. 
+
+\begin{DoxyReturn}{Renvoie}
+le tableau de types d\textquotesingle{}entités 
 \end{DoxyReturn}
 \mbox{\Hypertarget{source_8h_a237b7fdb7359dcf2c40a191fb12e883e}\label{source_8h_a237b7fdb7359dcf2c40a191fb12e883e}} 
 \index{source.\+h@{source.\+h}!sauvegarder@{sauvegarder}}

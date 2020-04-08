@@ -4,8 +4,8 @@
  * \file sdl_fonctions.c
  * \brief Fichier qui regroupent les fonctions utilisées pour la gestion des graphismes et des évènements (SDL2)
  * \author Marie-Nina MUNAR L2 Info Le Mans
- * \version 4.1
- * \date 04/04/2020
+ * \version 4.2
+ * \date 07/04/2020
 */
 
 /**
@@ -39,7 +39,7 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
   res_h=mode->w - mode->w*OFFSETWINDOW;
   res_v=mode->h - mode->h*OFFSETWINDOW;
 
-  *fenetre = SDL_CreateWindow(NOM_JEU, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, res_h, res_v, fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : SDL_WINDOW_SHOWN);
+  *fenetre = SDL_CreateWindow(NOM_JEU, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, res_h, res_v, fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : (SDL_WINDOW_SHOWN|SDL_WINDOW_RESIZABLE));
   if(!(*fenetre)){
     fprintf(stderr, "Erreur de creation de la fenetre : %s\n", SDL_GetError());
     exit(EXIT_FAILURE);
@@ -55,6 +55,7 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
   }
   SDL_SetRenderDrawColor(*renderer,0,0,0,255);
   SDL_SetRenderDrawBlendMode(*renderer, SDL_BLENDMODE_BLEND);
+
 
 }
 
@@ -259,6 +260,8 @@ void afficher_salle(SDL_Renderer * renderer, salle_t * salle){
         for(j = 0 ; j < salle->largeur; j++)
         {
           posSprite = (salle->mat[i][j]-1);
+          if(posSprite >= NBBLOCSTILESET)
+            posSprite=NBBLOCSTILESET -1;
           if(posSprite >= 0){
             Rect_dest.y = i * TAILLEBLOC;
             Rect_dest.x = j * TAILLEBLOC;
@@ -324,21 +327,48 @@ void afficher_entites(SDL_Renderer * renderer, salle_t * salle){
  * \brief Fonction d'affichage complet (salle et personnage)
  *
  * @param renderer le pointeur vers le SDL_Renderer à utiliser
+ * @param salle le pointeur sur la salle où afficher le joueur et les entités
  * @param personnage le pointeur sur la structure personnage à afficher
- * @param salle le pointeur sur la salle où afficher le joueur
  */
 void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * personnage){
   SDL_Texture * textureSalle;
+  SDL_Rect Rect_dest;
+  int maxw;
+  int maxh;
+  float ratioFenetre;
+  float ratioSalle;
+
+  SDL_SetRenderDrawColor(renderer, 0,0,0,255);
+  SDL_RenderClear(renderer);
+
+  SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
+
+  ratioFenetre = (maxw * 1.0) / (maxh * 1.0);
+  ratioSalle = (salle->largeur * 1.0) / (salle->hauteur * 1.0);
+
+  if(ratioFenetre<ratioSalle){
+    Rect_dest.w = maxw;
+    Rect_dest.h = Rect_dest.w /ratioSalle;
+  }
+  else{
+    Rect_dest.h = maxh;
+    Rect_dest.w = Rect_dest.h * ratioSalle;
+  }
+
+  Rect_dest.x = (maxw - Rect_dest.w)/2 ;
+  Rect_dest.y = (maxh - Rect_dest.h)/2 ;
+
+
   textureSalle=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET, (salle->largeur)* TAILLEBLOC, (salle->hauteur) * TAILLEBLOC);
   SDL_SetRenderTarget(renderer, textureSalle);
   SDL_SetTextureBlendMode(textureSalle, SDL_BLENDMODE_BLEND);
-  SDL_SetRenderDrawColor(renderer, 0,0,0,0);
+  SDL_SetRenderDrawColor(renderer, 0,0,0,255);
   SDL_RenderClear(renderer);
   afficher_salle(renderer,salle);
   afficher_entites(renderer, salle);
   afficher_personnage(renderer, personnage, salle);
   SDL_SetRenderTarget(renderer, NULL);
-  SDL_RenderCopy(renderer, textureSalle, NULL, NULL);
+  SDL_RenderCopy(renderer, textureSalle, NULL, &Rect_dest);
   SDL_RenderPresent(renderer);
   SDL_DestroyTexture(textureSalle);
 }
@@ -386,16 +416,16 @@ void miseAjourSprites(personnage_t * perso){
 /**
  * \brief Fonction qui fait évoluer les sprites de l'entite (animation)
  *
- * @param perso le pointeur sur la structure monstre (entite) à faire évoluer
+ * @param salle le pointeur vers la salle où trouver la liste d'entités avec les sprites à mettre à jour
  */
 void miseAjourSpritesEntites(salle_t * salle){
-  monstre_t entite;
+  /*monstre_t entite;
 
   enTete(salle->listeEntite);
   while(!horsListe(salle->listeEntite)){
     valeurElm(salle->listeEntite, &entite);
 
-    /*Rect_source.x = entite.spriteActuel.x;
+    Rect_source.x = entite.spriteActuel.x;
     Rect_source.y = IDLE;
     Rect_source.h = entite.spriteActuel.h;
     Rect_source.w = entite.spriteActuel.w;
@@ -435,8 +465,8 @@ void miseAjourSpritesEntites(salle_t * salle){
         perso->evoSprite = EVOSPRITES;
       }
       else (perso->evoSprite)--;
-    }*/
-  }
+    }
+  }*/
 
 }
 

@@ -7,10 +7,9 @@ Ensemble de structures utilisées dans le projets.
 
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}liste.\+h\char`\"{}}\newline
-{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L.\+h$>$}\newline
-{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L\+\_\+ttf.\+h$>$}\newline
-{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L\+\_\+image.\+h$>$}\newline
-{\ttfamily \#include $<$S\+D\+L2/\+S\+D\+L\+\_\+mixer.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L\+\_\+image.\+h$>$}\newline
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -58,7 +57,7 @@ struct \hyperlink{structporte__s}{porte\+\_\+s}
 \#define {\bfseries N\+O\+M\+\_\+\+J\+EU}~\char`\"{}Diskosieni\char`\"{}
 \item 
 \mbox{\Hypertarget{structs_8h_a67ef72cf4050f504bfafcf3e6503bb56}\label{structs_8h_a67ef72cf4050f504bfafcf3e6503bb56}} 
-\#define {\bfseries P\+L\+A\+Y\+E\+R\+S\+P\+R\+I\+T\+E\+S\+P\+A\+TH}~\char`\"{}./sprites/entite/joueur/sprite\+\_\+joueur.\+png\char`\"{}
+\#define {\bfseries P\+L\+A\+Y\+E\+R\+S\+P\+R\+I\+T\+E\+S\+P\+A\+TH}~\char`\"{}./sprites/entite/joueur/tileset.\+png\char`\"{}
 \item 
 \mbox{\Hypertarget{structs_8h_abf4193200441b7a6e1f02ebff70ea2d9}\label{structs_8h_abf4193200441b7a6e1f02ebff70ea2d9}} 
 \#define {\bfseries T\+I\+L\+E\+S\+E\+T\+P\+A\+TH}~\char`\"{}./sprites/bloc/tileset.\+png\char`\"{}
@@ -103,13 +102,13 @@ struct \hyperlink{structporte__s}{porte\+\_\+s}
 \#define {\bfseries V\+I\+T\+C\+H\+U\+T\+E\+P\+E\+RS}~1
 \item 
 \mbox{\Hypertarget{structs_8h_ae61089395a1490a8242e41d55b720357}\label{structs_8h_ae61089395a1490a8242e41d55b720357}} 
-\#define {\bfseries V\+I\+T\+A\+T\+T\+A\+C\+K\+P\+E\+RS}~1
+\#define {\bfseries V\+I\+T\+A\+T\+T\+A\+C\+K\+P\+E\+RS}~30
 \item 
 \mbox{\Hypertarget{structs_8h_aa2326924fc935f7a3415c0e3894e2ddc}\label{structs_8h_aa2326924fc935f7a3415c0e3894e2ddc}} 
-\#define {\bfseries J\+P\+CD}~2
+\#define {\bfseries J\+P\+CD}~10
 \item 
 \mbox{\Hypertarget{structs_8h_a130b65b0ce9f74f28ad552abf2d6cfac}\label{structs_8h_a130b65b0ce9f74f28ad552abf2d6cfac}} 
-\#define {\bfseries N\+B\+P\+X\+S\+A\+UT}~4$\ast$T\+A\+I\+L\+L\+E\+B\+L\+OC
+\#define {\bfseries N\+B\+P\+X\+S\+A\+UT}~5$\ast$T\+A\+I\+L\+L\+E\+B\+L\+OC
 \item 
 \mbox{\Hypertarget{structs_8h_ae63e5d862b727e84be5532481c97f6a2}\label{structs_8h_ae63e5d862b727e84be5532481c97f6a2}} 
 \#define {\bfseries E\+V\+O\+S\+P\+R\+I\+T\+ES}~3
@@ -131,9 +130,15 @@ struct \hyperlink{structporte__s}{porte\+\_\+s}
 \item 
 \mbox{\Hypertarget{structs_8h_a4fe6fd113bdaa732983693e5c6a2941c}\label{structs_8h_a4fe6fd113bdaa732983693e5c6a2941c}} 
 \#define {\bfseries K\+O\+N\+A\+M\+I\+C\+O\+DE}~\char`\"{}uuddlrlrbas\char`\"{}
+\item 
+\mbox{\Hypertarget{structs_8h_a313b7737f72ca3d3a6c3c600b7427419}\label{structs_8h_a313b7737f72ca3d3a6c3c600b7427419}} 
+\#define {\bfseries N\+B\+B\+L\+O\+C\+S\+T\+I\+L\+E\+S\+ET}~50
 \end{DoxyCompactItemize}
 \subsection*{Définitions de type}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structs_8h_a5edfa908c6d10e640e3b86305d67e920}\label{structs_8h_a5edfa908c6d10e640e3b86305d67e920}} 
+typedef enum \hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5}{id\+Ent\+\_\+e} {\bfseries id\+Ent\+\_\+t}
 \item 
 \mbox{\Hypertarget{structs_8h_a46dc52a35db08cf532828128f8cf47e7}\label{structs_8h_a46dc52a35db08cf532828128f8cf47e7}} 
 typedef struct \hyperlink{structtaille__s}{taille\+\_\+s} {\bfseries taille\+\_\+t}
@@ -153,11 +158,11 @@ typedef struct \hyperlink{structsalle__s}{salle\+\_\+s} {\bfseries salle\+\_\+t}
 \mbox{\Hypertarget{structs_8h_aeca7e7adc19e924d5fade8ea3c6937ac}\label{structs_8h_aeca7e7adc19e924d5fade8ea3c6937ac}} 
 typedef struct \hyperlink{structpersonnage__s}{personnage\+\_\+s} {\bfseries personnage\+\_\+t}
 \item 
+\mbox{\Hypertarget{structs_8h_a2475165f3195b53d2ffa1bbf1f5272b4}\label{structs_8h_a2475165f3195b53d2ffa1bbf1f5272b4}} 
+typedef struct \hyperlink{structmonstre__s}{monstre\+\_\+s} {\bfseries monstre\+\_\+t}
+\item 
 \mbox{\Hypertarget{structs_8h_af8de222b245924a766b375a60f04b3b8}\label{structs_8h_af8de222b245924a766b375a60f04b3b8}} 
 typedef struct \hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+s} {\bfseries type\+\_\+monstre\+\_\+t}
-\item 
-\mbox{\Hypertarget{structs_8h_a648a84f0c56bf2d963706cbea150092e}\label{structs_8h_a648a84f0c56bf2d963706cbea150092e}} 
-typedef struct \hyperlink{structmonstre__s}{monstre\+\_\+s} {\bfseries monstre\+\_\+t}
 \item 
 \mbox{\Hypertarget{structs_8h_a6e64a39dbfabc75ff76144f2cfaf28e5}\label{structs_8h_a6e64a39dbfabc75ff76144f2cfaf28e5}} 
 typedef struct \hyperlink{structbloc__s}{bloc\+\_\+s} {\bfseries bloc\+\_\+t}
@@ -167,6 +172,38 @@ typedef struct \hyperlink{structporte__s}{porte\+\_\+s} {\bfseries porte\+\_\+t}
 \end{DoxyCompactItemize}
 \subsection*{Énumérations}
 \begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5}{id\+Ent\+\_\+e} \{ \newline
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac139e0aad6e312681a90847f2e13b828}{V\+E\+N\+IN} = -\/24, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aebd0b7c7a3b6e7facc7a93fee9ec1641}{F\+L\+E\+C\+H\+E\+F\+EU}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a2984c611e9964f24ac74b0a91fb5cb45}{F\+L\+E\+C\+HE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5afe25ae4ef5c689f46e1c4c972243d4db}{C\+O\+E\+UR}, 
+\newline
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ab92b8e5f224ad27c30347209ffe26687}{V\+I\+F\+P\+L\+U\+ME}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a71860692dd9b2f5908ed978e304de87a}{V\+E\+R\+S\+G\+E\+A\+NT}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a5a0aa92fee7e6c6860b8389edc866bf4}{S\+I\+N\+G\+E\+G\+R\+O\+T\+TE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aa70533c2c411342b3903b427bb50a93b}{S\+E\+R\+P\+E\+N\+T\+V\+E\+RT}, 
+\newline
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac8d1edaf018012ebc8d6d829b1e707a0}{S\+E\+R\+P\+E\+N\+T\+R\+O\+SE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a79e0e40f549fda70c5c622354b91d6c3}{S\+E\+R\+P\+E\+N\+T\+B\+L\+EU}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aed5b0a078a8d93f5c60b4d0b665e22f4}{R\+O\+I\+VP}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a927f3d50ac911f37c529bc0116c3b6e3}{R\+E\+N\+A\+RD}, 
+\newline
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a54c6830bfc0b06ff5260d5af19e0b34b}{P\+O\+R\+T\+EV}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a95dfec1f079a334cae5886216ffac6d4}{P\+O\+R\+T\+E\+RL}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac293f0dcd058f51b8aadc0f184111d94}{P\+O\+R\+T\+E\+RG}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a71e347ee608d3904de54985aafa1b133}{P\+O\+R\+T\+EB}, 
+\newline
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3f1f96f2ec84a3f00d77f8751d0b5b3e}{M\+U\+R\+G\+L\+A\+CE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3333bfa12cc7fdfb6b6d47c291fc384b}{F\+L\+A\+C\+O\+N\+H\+U\+I\+LE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a68e3a4024ca3e6b42204e5a4b39ce580}{D\+O\+U\+B\+L\+E\+S\+A\+UT}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5acf73dabb3771f89f873fd5979dc41598}{D\+I\+S\+C\+O\+S\+H\+R\+O\+OM}, 
+\newline
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3c2efd0602739861adf5b9ea06c675d5}{C\+L\+E\+V\+E\+R\+TE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a77669c33af1a2b8cf921344d1b33e7b5}{C\+L\+E\+R\+O\+U\+I\+L\+LE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a5bf706cb85963f20f6fdb3316b1417b5}{C\+L\+E\+R\+O\+U\+GE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5abca7a780ec24304cec32faed01133d50}{C\+L\+E\+B\+L\+E\+UE}
+ \}\begin{DoxyCompactList}\small\item\em Id des entités présentes dans les fichiers de salle. \end{DoxyCompactList}
 \item 
 enum \hyperlink{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271}{boulean\+\_\+e} \{ \hyperlink{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271aa1e095cc966dbecf6a0d8aad75348d1a}{F\+A\+L\+SE}, 
 \hyperlink{structs_8h_a81fbe2bfb808675f1d63cbfe1335c271aa82764c3079aea4e60c80e45befbb839}{T\+R\+UE}
@@ -190,10 +227,10 @@ Ensemble de structures utilisées dans le projets.
 Thomas D\+I\+D\+I\+ER Marie-\/\+Nina M\+U\+N\+AR L2 Info Le Mans 
 \end{DoxyAuthor}
 \begin{DoxyVersion}{Version}
-2.\+1 
+2.\+2 
 \end{DoxyVersion}
 \begin{DoxyDate}{Date}
-06/04/2020 
+07/04/2020 
 \end{DoxyDate}
 
 
@@ -247,6 +284,114 @@ A\+T\+T\+A\+C\+K\+I\+NG&Etat attaque \\
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{F\+A\+L\+L\+I\+NG@{F\+A\+L\+L\+I\+NG}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!F\+A\+L\+L\+I\+NG@{F\+A\+L\+L\+I\+NG}}}\mbox{\Hypertarget{structs_8h_ac652084689fae43c9ede5782aedc0d2cad24712a6a30c1d431b927d1ba2f84b66}\label{structs_8h_ac652084689fae43c9ede5782aedc0d2cad24712a6a30c1d431b927d1ba2f84b66}} 
 F\+A\+L\+L\+I\+NG&Etat chute \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5}} 
+\index{structs.\+h@{structs.\+h}!id\+Ent\+\_\+e@{id\+Ent\+\_\+e}}
+\index{id\+Ent\+\_\+e@{id\+Ent\+\_\+e}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{id\+Ent\+\_\+e}{idEnt\_e}}
+{\footnotesize\ttfamily enum \hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5}{id\+Ent\+\_\+e}}
+
+
+
+Id des entités présentes dans les fichiers de salle. 
+
+\begin{DoxyEnumFields}{Valeurs énumérées}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\+E\+N\+IN@{V\+E\+N\+IN}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!V\+E\+N\+IN@{V\+E\+N\+IN}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac139e0aad6e312681a90847f2e13b828}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac139e0aad6e312681a90847f2e13b828}} 
+V\+E\+N\+IN&venin = -\/24 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+L\+E\+C\+H\+E\+F\+EU@{F\+L\+E\+C\+H\+E\+F\+EU}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!F\+L\+E\+C\+H\+E\+F\+EU@{F\+L\+E\+C\+H\+E\+F\+EU}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aebd0b7c7a3b6e7facc7a93fee9ec1641}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aebd0b7c7a3b6e7facc7a93fee9ec1641}} 
+F\+L\+E\+C\+H\+E\+F\+EU&une fleche de feu = -\/23 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+L\+E\+C\+HE@{F\+L\+E\+C\+HE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!F\+L\+E\+C\+HE@{F\+L\+E\+C\+HE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a2984c611e9964f24ac74b0a91fb5cb45}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a2984c611e9964f24ac74b0a91fb5cb45}} 
+F\+L\+E\+C\+HE&une flèche = -\/22 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+O\+E\+UR@{C\+O\+E\+UR}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!C\+O\+E\+UR@{C\+O\+E\+UR}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5afe25ae4ef5c689f46e1c4c972243d4db}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5afe25ae4ef5c689f46e1c4c972243d4db}} 
+C\+O\+E\+UR&un coeur = -\/21 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\+I\+F\+P\+L\+U\+ME@{V\+I\+F\+P\+L\+U\+ME}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!V\+I\+F\+P\+L\+U\+ME@{V\+I\+F\+P\+L\+U\+ME}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ab92b8e5f224ad27c30347209ffe26687}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ab92b8e5f224ad27c30347209ffe26687}} 
+V\+I\+F\+P\+L\+U\+ME&vifplume = -\/20 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\+E\+R\+S\+G\+E\+A\+NT@{V\+E\+R\+S\+G\+E\+A\+NT}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!V\+E\+R\+S\+G\+E\+A\+NT@{V\+E\+R\+S\+G\+E\+A\+NT}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a71860692dd9b2f5908ed978e304de87a}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a71860692dd9b2f5908ed978e304de87a}} 
+V\+E\+R\+S\+G\+E\+A\+NT&vers géant = -\/19 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+I\+N\+G\+E\+G\+R\+O\+T\+TE@{S\+I\+N\+G\+E\+G\+R\+O\+T\+TE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+I\+N\+G\+E\+G\+R\+O\+T\+TE@{S\+I\+N\+G\+E\+G\+R\+O\+T\+TE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a5a0aa92fee7e6c6860b8389edc866bf4}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a5a0aa92fee7e6c6860b8389edc866bf4}} 
+S\+I\+N\+G\+E\+G\+R\+O\+T\+TE&singe grotte = -\/18 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+E\+R\+P\+E\+N\+T\+V\+E\+RT@{S\+E\+R\+P\+E\+N\+T\+V\+E\+RT}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+E\+R\+P\+E\+N\+T\+V\+E\+RT@{S\+E\+R\+P\+E\+N\+T\+V\+E\+RT}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aa70533c2c411342b3903b427bb50a93b}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aa70533c2c411342b3903b427bb50a93b}} 
+S\+E\+R\+P\+E\+N\+T\+V\+E\+RT&serpent vert = -\/17 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+E\+R\+P\+E\+N\+T\+R\+O\+SE@{S\+E\+R\+P\+E\+N\+T\+R\+O\+SE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+E\+R\+P\+E\+N\+T\+R\+O\+SE@{S\+E\+R\+P\+E\+N\+T\+R\+O\+SE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac8d1edaf018012ebc8d6d829b1e707a0}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac8d1edaf018012ebc8d6d829b1e707a0}} 
+S\+E\+R\+P\+E\+N\+T\+R\+O\+SE&serpent rose = -\/16 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+E\+R\+P\+E\+N\+T\+B\+L\+EU@{S\+E\+R\+P\+E\+N\+T\+B\+L\+EU}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+E\+R\+P\+E\+N\+T\+B\+L\+EU@{S\+E\+R\+P\+E\+N\+T\+B\+L\+EU}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a79e0e40f549fda70c5c622354b91d6c3}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a79e0e40f549fda70c5c622354b91d6c3}} 
+S\+E\+R\+P\+E\+N\+T\+B\+L\+EU&serpent bleu = -\/15 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+O\+I\+VP@{R\+O\+I\+VP}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!R\+O\+I\+VP@{R\+O\+I\+VP}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aed5b0a078a8d93f5c60b4d0b665e22f4}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aed5b0a078a8d93f5c60b4d0b665e22f4}} 
+R\+O\+I\+VP&roi vifplume = -\/14 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+N\+A\+RD@{R\+E\+N\+A\+RD}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!R\+E\+N\+A\+RD@{R\+E\+N\+A\+RD}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a927f3d50ac911f37c529bc0116c3b6e3}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a927f3d50ac911f37c529bc0116c3b6e3}} 
+R\+E\+N\+A\+RD&renard = -\/13 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+O\+R\+T\+EV@{P\+O\+R\+T\+EV}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!P\+O\+R\+T\+EV@{P\+O\+R\+T\+EV}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a54c6830bfc0b06ff5260d5af19e0b34b}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a54c6830bfc0b06ff5260d5af19e0b34b}} 
+P\+O\+R\+T\+EV&porte verte = -\/12 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+O\+R\+T\+E\+RL@{P\+O\+R\+T\+E\+RL}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!P\+O\+R\+T\+E\+RL@{P\+O\+R\+T\+E\+RL}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a95dfec1f079a334cae5886216ffac6d4}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a95dfec1f079a334cae5886216ffac6d4}} 
+P\+O\+R\+T\+E\+RL&porte rouillée = -\/11 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+O\+R\+T\+E\+RG@{P\+O\+R\+T\+E\+RG}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!P\+O\+R\+T\+E\+RG@{P\+O\+R\+T\+E\+RG}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac293f0dcd058f51b8aadc0f184111d94}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac293f0dcd058f51b8aadc0f184111d94}} 
+P\+O\+R\+T\+E\+RG&porte rouge = -\/10 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+O\+R\+T\+EB@{P\+O\+R\+T\+EB}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!P\+O\+R\+T\+EB@{P\+O\+R\+T\+EB}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a71e347ee608d3904de54985aafa1b133}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a71e347ee608d3904de54985aafa1b133}} 
+P\+O\+R\+T\+EB&porte bleue = -\/9 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+U\+R\+G\+L\+A\+CE@{M\+U\+R\+G\+L\+A\+CE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!M\+U\+R\+G\+L\+A\+CE@{M\+U\+R\+G\+L\+A\+CE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3f1f96f2ec84a3f00d77f8751d0b5b3e}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3f1f96f2ec84a3f00d77f8751d0b5b3e}} 
+M\+U\+R\+G\+L\+A\+CE&mur de glace = -\/8 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+L\+A\+C\+O\+N\+H\+U\+I\+LE@{F\+L\+A\+C\+O\+N\+H\+U\+I\+LE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!F\+L\+A\+C\+O\+N\+H\+U\+I\+LE@{F\+L\+A\+C\+O\+N\+H\+U\+I\+LE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3333bfa12cc7fdfb6b6d47c291fc384b}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3333bfa12cc7fdfb6b6d47c291fc384b}} 
+F\+L\+A\+C\+O\+N\+H\+U\+I\+LE&fleches de feu = -\/7 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+O\+U\+B\+L\+E\+S\+A\+UT@{D\+O\+U\+B\+L\+E\+S\+A\+UT}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!D\+O\+U\+B\+L\+E\+S\+A\+UT@{D\+O\+U\+B\+L\+E\+S\+A\+UT}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a68e3a4024ca3e6b42204e5a4b39ce580}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a68e3a4024ca3e6b42204e5a4b39ce580}} 
+D\+O\+U\+B\+L\+E\+S\+A\+UT&double saut = -\/6 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+I\+S\+C\+O\+S\+H\+R\+O\+OM@{D\+I\+S\+C\+O\+S\+H\+R\+O\+OM}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!D\+I\+S\+C\+O\+S\+H\+R\+O\+OM@{D\+I\+S\+C\+O\+S\+H\+R\+O\+OM}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5acf73dabb3771f89f873fd5979dc41598}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5acf73dabb3771f89f873fd5979dc41598}} 
+D\+I\+S\+C\+O\+S\+H\+R\+O\+OM&discoshroom = -\/5 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+L\+E\+V\+E\+R\+TE@{C\+L\+E\+V\+E\+R\+TE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!C\+L\+E\+V\+E\+R\+TE@{C\+L\+E\+V\+E\+R\+TE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3c2efd0602739861adf5b9ea06c675d5}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3c2efd0602739861adf5b9ea06c675d5}} 
+C\+L\+E\+V\+E\+R\+TE&clé verte = -\/4 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+L\+E\+R\+O\+U\+I\+L\+LE@{C\+L\+E\+R\+O\+U\+I\+L\+LE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!C\+L\+E\+R\+O\+U\+I\+L\+LE@{C\+L\+E\+R\+O\+U\+I\+L\+LE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a77669c33af1a2b8cf921344d1b33e7b5}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a77669c33af1a2b8cf921344d1b33e7b5}} 
+C\+L\+E\+R\+O\+U\+I\+L\+LE&clé rouillée = -\/3 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+L\+E\+R\+O\+U\+GE@{C\+L\+E\+R\+O\+U\+GE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!C\+L\+E\+R\+O\+U\+GE@{C\+L\+E\+R\+O\+U\+GE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a5bf706cb85963f20f6fdb3316b1417b5}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a5bf706cb85963f20f6fdb3316b1417b5}} 
+C\+L\+E\+R\+O\+U\+GE&clé rouge = -\/2 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+L\+E\+B\+L\+E\+UE@{C\+L\+E\+B\+L\+E\+UE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!C\+L\+E\+B\+L\+E\+UE@{C\+L\+E\+B\+L\+E\+UE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5abca7a780ec24304cec32faed01133d50}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5abca7a780ec24304cec32faed01133d50}} 
+C\+L\+E\+B\+L\+E\+UE&clé bleue = -\/1 \\
 \hline
 
 \end{DoxyEnumFields}

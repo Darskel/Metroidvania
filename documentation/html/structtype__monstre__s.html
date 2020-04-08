@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Metroidvania: Référence de la structure type_monstre_s</title>
+<title>Diskosieni - Metroidvania: Référence de la structure type_monstre_s</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,9 +21,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Metroidvania
+   <div id="projectname">Diskosieni - Metroidvania
    </div>
-   <div id="projectbrief">Création d&#39;un Métroidvania dans le cadre du cours nommé &#39;Projet&#39;</div>
+   <div id="projectbrief">Création d&#39;un Metroidvania nommé Diskosieni dans le cadre du cours nommé &#39;Projet&#39;</div>
   </td>
  </tr>
  </tbody>
@@ -80,8 +80,7 @@ Attributs publics</h2></td></tr>
 <tr class="separator:a768470695da3d9377f1e7e97a3c45ed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bb66d5b722fc97f901c5eaf7d621fd4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtype__monstre__s.html#a5bb66d5b722fc97f901c5eaf7d621fd4">vit_att</a></td></tr>
 <tr class="separator:a5bb66d5b722fc97f901c5eaf7d621fd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18520dadfa451022be8dd63b86a1943c"><td class="memItemLeft" align="right" valign="top"><a id="a18520dadfa451022be8dd63b86a1943c"></a>
-char *&#160;</td><td class="memItemRight" valign="bottom"><b>nom</b></td></tr>
+<tr class="memitem:a18520dadfa451022be8dd63b86a1943c"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtype__monstre__s.html#a18520dadfa451022be8dd63b86a1943c">nom</a></td></tr>
 <tr class="separator:a18520dadfa451022be8dd63b86a1943c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad507cb527c078d7a5c565b67d842e968"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtype__monstre__s.html#ad507cb527c078d7a5c565b67d842e968">path</a></td></tr>
 <tr class="separator:ad507cb527c078d7a5c565b67d842e968"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -94,10 +93,15 @@ SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><b>sprites</b><
 <tr class="separator:aa3e5568720dc977348e6929f3df5260c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0afaa340c029c12a6939d4b09fd3966"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtaille__s.html">taille_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtype__monstre__s.html#ac0afaa340c029c12a6939d4b09fd3966">hitbox</a></td></tr>
 <tr class="separator:ac0afaa340c029c12a6939d4b09fd3966"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b2b4110520736e30d3a4853a9876469"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtaille__s.html">taille_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtype__monstre__s.html#a2b2b4110520736e30d3a4853a9876469">tailleSprite</a></td></tr>
+<tr class="separator:a2b2b4110520736e30d3a4853a9876469"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03f34ddaadae9f002130e70844f142f1"><td class="memItemLeft" align="right" valign="top">boolean_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtype__monstre__s.html#a03f34ddaadae9f002130e70844f142f1">passeEntites</a></td></tr>
 <tr class="separator:a03f34ddaadae9f002130e70844f142f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f60370f9ae95fff9ab024fbf6485df6"><td class="memItemLeft" align="right" valign="top">boolean_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtype__monstre__s.html#a0f60370f9ae95fff9ab024fbf6485df6">passeBlocs</a></td></tr>
 <tr class="separator:a0f60370f9ae95fff9ab024fbf6485df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ca7834d71e7589f5fefcbf503d1351d"><td class="memItemLeft" align="right" valign="top"><a id="a2ca7834d71e7589f5fefcbf503d1351d"></a>
+void(*&#160;</td><td class="memItemRight" valign="bottom"><b>comportement</b> )(<a class="el" href="structmonstre__s.html">monstre_t</a> *entite, <a class="el" href="structpersonnage__s.html">personnage_t</a> *perso, <a class="el" href="structsalle__s.html">salle_t</a> *salle)</td></tr>
+<tr class="separator:a2ca7834d71e7589f5fefcbf503d1351d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p>Structure représentant le type d'un monstre. </p>
@@ -128,7 +132,7 @@ SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><b>sprites</b><
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Taille de la hitbox de monstre en cases </p>
+<p>Taille de la hitbox de monstre en pixel </p>
 
 </div>
 </div>
@@ -144,6 +148,21 @@ SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><b>sprites</b><
       </table>
 </div><div class="memdoc">
 <p>Pointeur vers la texture qui contient les sprites du monstre Tableau qui contient le nombre de sprites d'animation pour chaque action du monstre </p>
+
+</div>
+</div>
+<a id="a18520dadfa451022be8dd63b86a1943c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18520dadfa451022be8dd63b86a1943c">&#9670;&nbsp;</a></span>nom</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* type_monstre_s::nom</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Nom de l'entité/monstre (permet de gérer l'inventaire lors du pick up) </p>
 
 </div>
 </div>
@@ -204,6 +223,21 @@ SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><b>sprites</b><
       </table>
 </div><div class="memdoc">
 <p>PV de base du monstre </p>
+
+</div>
+</div>
+<a id="a2b2b4110520736e30d3a4853a9876469"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b2b4110520736e30d3a4853a9876469">&#9670;&nbsp;</a></span>tailleSprite</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structtaille__s.html">taille_t</a> type_monstre_s::tailleSprite</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Taille des sprites de monstre en pixel </p>
 
 </div>
 </div>

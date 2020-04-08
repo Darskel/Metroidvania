@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Metroidvania: Référence du fichier sources/comportement.c</title>
+<title>Diskosieni - Metroidvania: Référence du fichier sources/comportement.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,9 +21,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Metroidvania
+   <div id="projectname">Diskosieni - Metroidvania
    </div>
-   <div id="projectbrief">Création d&#39;un Métroidvania dans le cadre du cours nommé &#39;Projet&#39;</div>
+   <div id="projectbrief">Création d&#39;un Metroidvania nommé Diskosieni dans le cadre du cours nommé &#39;Projet&#39;</div>
   </td>
  </tr>
  </tbody>
@@ -77,15 +77,13 @@ $(function() {
 <code>#include &quot;<a class="el" href="structs_8h_source.html">../headers/structs.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="liste_8h_source.html">../headers/liste.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="comportement_8h_source.html">../headers/comportement.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="source_8h_source.html">../headers/source.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
 <tr class="memitem:aa7e846fc01d69c6734a372054ce218ca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="comportement_8c.html#aa7e846fc01d69c6734a372054ce218ca">hitE</a> (<a class="el" href="structmonstre__s.html">monstre_t</a> *e1, <a class="el" href="structmonstre__s.html">monstre_t</a> *e2)</td></tr>
 <tr class="memdesc:aa7e846fc01d69c6734a372054ce218ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si une entité touche une autre entité  <a href="#aa7e846fc01d69c6734a372054ce218ca">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aa7e846fc01d69c6734a372054ce218ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e78db7adfb7d32b8438d54a9ca9ee6d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="comportement_8c.html#a7e78db7adfb7d32b8438d54a9ca9ee6d">hitP</a> (<a class="el" href="structmonstre__s.html">monstre_t</a> *e, <a class="el" href="structpersonnage__s.html">personnage_t</a> *p)</td></tr>
-<tr class="memdesc:a7e78db7adfb7d32b8438d54a9ca9ee6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si une entité touche une autre entité  <a href="#a7e78db7adfb7d32b8438d54a9ca9ee6d">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a7e78db7adfb7d32b8438d54a9ca9ee6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aede415007da55f94b84a40f93ec45d6f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="comportement_8c.html#aede415007da55f94b84a40f93ec45d6f">persValidDep</a> (<a class="el" href="structpersonnage__s.html">personnage_t</a> *p, <a class="el" href="structsalle__s.html">salle_t</a> *s)</td></tr>
 <tr class="memdesc:aede415007da55f94b84a40f93ec45d6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si le deplacement du personnage est valide.  <a href="#aede415007da55f94b84a40f93ec45d6f">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aede415007da55f94b84a40f93ec45d6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -98,9 +96,21 @@ Fonctions</h2></td></tr>
 <tr class="memitem:ab62b168c2d0150f4ec41bf954e111f57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="comportement_8c.html#ab62b168c2d0150f4ec41bf954e111f57">depVert</a> (<a class="el" href="structpersonnage__s.html">personnage_t</a> *p, <a class="el" href="structsalle__s.html">salle_t</a> *s, int tryJump)</td></tr>
 <tr class="memdesc:ab62b168c2d0150f4ec41bf954e111f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gère le déplacement vertical du personnage quelque soit son état.  <a href="#ab62b168c2d0150f4ec41bf954e111f57">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ab62b168c2d0150f4ec41bf954e111f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d6b0d91c298e2e657560ccdf54ad51e"><td class="memItemLeft" align="right" valign="top"><a id="a1d6b0d91c298e2e657560ccdf54ad51e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>attaquer</b> (<a class="el" href="structpersonnage__s.html">personnage_t</a> *p, <a class="el" href="structsalle__s.html">salle_t</a> *s, int tryAtk)</td></tr>
+<tr class="separator:a1d6b0d91c298e2e657560ccdf54ad51e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdb96a0c189ae3f478ddd849a12612f4"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="comportement_8c.html#abdb96a0c189ae3f478ddd849a12612f4">prendPorte</a> (<a class="el" href="structpersonnage__s.html">personnage_t</a> *p, <a class="el" href="structliste__s.html">liste_t</a> *lPortes)</td></tr>
 <tr class="memdesc:abdb96a0c189ae3f478ddd849a12612f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estime si le joueur touche une porte et rend l'endroit où elle l'emmène.  <a href="#abdb96a0c189ae3f478ddd849a12612f4">Plus de détails...</a><br /></td></tr>
 <tr class="separator:abdb96a0c189ae3f478ddd849a12612f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a999cd83e4f7ba4ae040c7b49bed4da85"><td class="memItemLeft" align="right" valign="top"><a id="a999cd83e4f7ba4ae040c7b49bed4da85"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>compFleches</b> (<a class="el" href="structmonstre__s.html">monstre_t</a> *entite, <a class="el" href="structpersonnage__s.html">personnage_t</a> *perso, <a class="el" href="structsalle__s.html">salle_t</a> *salle)</td></tr>
+<tr class="separator:a999cd83e4f7ba4ae040c7b49bed4da85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19a961efc662b4de3d824ac1fce50c73"><td class="memItemLeft" align="right" valign="top"><a id="a19a961efc662b4de3d824ac1fce50c73"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>compSerpent</b> (<a class="el" href="structmonstre__s.html">monstre_t</a> *entite, <a class="el" href="structpersonnage__s.html">personnage_t</a> *perso, <a class="el" href="structsalle__s.html">salle_t</a> *salle)</td></tr>
+<tr class="separator:a19a961efc662b4de3d824ac1fce50c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4e8889bccdb5040ff350e5cb9a54938"><td class="memItemLeft" align="right" valign="top"><a id="ae4e8889bccdb5040ff350e5cb9a54938"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>evolution</b> (<a class="el" href="structpersonnage__s.html">personnage_t</a> *p, <a class="el" href="structsalle__s.html">salle_t</a> *s)</td></tr>
+<tr class="separator:ae4e8889bccdb5040ff350e5cb9a54938"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p>Ensemble de fonctions pour le comportement des mobs et du personnage. </p>
@@ -243,44 +253,6 @@ Fonctions</h2></td></tr>
           <td></td>
           <td class="paramtype"><a class="el" href="structmonstre__s.html">monstre_t</a> *&#160;</td>
           <td class="paramname"><em>e2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Vérifie si une entité touche une autre entité </p>
-<dl class="params"><dt>Paramètres</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">e1</td><td>pointeur vers la première entité </td></tr>
-    <tr><td class="paramname">e2</td><td>pointeur vers la seconde entité</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Renvoie</dt><dd>1 (TRUE) si il y a contact, 0 (FALSE) sinon </dd></dl>
-
-</div>
-</div>
-<a id="a7e78db7adfb7d32b8438d54a9ca9ee6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e78db7adfb7d32b8438d54a9ca9ee6d">&#9670;&nbsp;</a></span>hitP()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int hitP </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structmonstre__s.html">monstre_t</a> *&#160;</td>
-          <td class="paramname"><em>e</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td>
-          <td class="paramname"><em>p</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

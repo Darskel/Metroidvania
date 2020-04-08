@@ -8,12 +8,12 @@
         #include <SDL2/SDL.h>
         #include <SDL2/SDL_ttf.h>
         #include <SDL2/SDL_image.h>
-        #include <SDL2/SDL_mixer.h>
+        //#include <SDL2/SDL_mixer.h>
     #else
         #include <SDL.h>
         #include <SDL_ttf.h>
         #include <SDL_image.h>
-        #include <SDL_mixer.h>
+        //#include <SDL_mixer.h>
     #endif
 
 #endif
@@ -38,8 +38,8 @@
  * \file structs.h
  * \brief Ensemble de structures utilisées dans le projets
  * \author Thomas DIDIER Marie-Nina MUNAR L2 Info Le Mans
- * \version 2.1
- * \date 06/04/2020
+ * \version 2.2
+ * \date 07/04/2020
 */
 
 #ifndef STRUCTS_INCLUDED
@@ -76,9 +76,9 @@
 #define VITCHUTEPERS 1
 #define VITATTACKPERS 30
 
-#define JPCD 2 //Délai avant de pouvoir de nouveau sauter
+#define JPCD 5 //Délai avant de pouvoir de nouveau sauter
 
-#define NBPXSAUT 4*TAILLEBLOC //Taille d'un saut en pixel
+#define NBPXSAUT 5*TAILLEBLOC //Taille d'un saut en pixel
 
 #define EVOSPRITES 3 //Change le sprite seulement 1 tour sur 3
 
@@ -93,6 +93,8 @@
 
 #define TAILLEKONAMI 11 //NB d'inputs du Konami code
 #define KONAMICODE "uuddlrlrbas"
+
+#define NBBLOCSTILESET 50
 
 /*
     INVENTAIRE:

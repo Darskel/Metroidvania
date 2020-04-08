@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['true',['TRUE',['../structs_8h.html#a81fbe2bfb808675f1d63cbfe1335c271aa82764c3079aea4e60c80e45befbb839',1,'structs.h']]]
+  ['jumping',['JUMPING',['../structs_8h.html#ac652084689fae43c9ede5782aedc0d2cab8cd32180a1d5897df8369b127256ad1',1,'structs.h']]]
 ];

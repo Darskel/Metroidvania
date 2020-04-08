@@ -13,8 +13,8 @@
  * \file source.c
  * \brief Fonctions de lecture d'une salle
  * \author Thomas DIDIER L2 Info Le Mans
- * \version 1.1
- * \date 13/02/2020
+ * \version 1.5
+ * \date 07/04/2020
 */
 
 /**
@@ -37,7 +37,7 @@ static int filecmp(struct dirent* f1, struct dirent* f2){
  * \brief Recherche un sprite dans un dossier (méthode dirent)
  * \details Tout sur dirent ici: http://sdz.tdct.org/sdz/parcourir-les-dossiers-avec-dirent-h.html
  *
- * @param id un entier correpondant à un id
+ * @param id un entier correpondant à un id de sprite
  * @param dirName la chaîne de caractères correspondant au chemin du dossier où chercher le sprite
  *
  * @return le path (chaîne de caractères) du sprite trouvé
@@ -208,6 +208,10 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
     return numSauv;
 }
 
+/**
+ * \brief Créé le tableau de types d'entités
+ *
+*/
 void creerTypeEntite(){
     //Serpent bleu
     int* tmp = malloc(sizeof(int) * 4);
@@ -241,13 +245,13 @@ void creerTypeEntite(){
 
     typesMonstre[-FLECHE - 1] = (type_monstre_t){
         1, //pv de base
-        2, //vit de deplacement
+        3, //vit de deplacement
         0, //vitesse d'attaque
         "fleche",//nom, //nom de l'entité
         "sprites/entite/fleche/tileset.png",//chemin, //chemin vers les sprites
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
-        1, //nombre de dégats qu'il inflige
+        2, //nombre de dégats qu'il inflige
         {3,19}, //hitbox de l'entité (hauteur,largeur)
         {10,19}, //taille sprites
         FALSE, //Passe à travers les entités
@@ -256,10 +260,22 @@ void creerTypeEntite(){
     };
 }
 
+/**
+ * \brief Permet d'obtenir le tableau des types d'entités
+ *
+ * @return le tableau de types d'entités
+*/
 type_monstre_t* obtenirTypesEntite(){
     return typesMonstre;
 }
 
+/**
+ * \brief Créé une entité et l'ajoute à la liste des entités dans la salle
+ *
+ * @param id id correspondant au type de l'entite
+ * @param s pointeur sur la structure salle où trouver la liste
+ * @param pos la position de l'entite (en cases)
+*/
 static void creerEntite(idEnt_t id, salle_t* s, position_t pos){
     monstre_t* e = malloc(sizeof(monstre_t));
     id *= -1;

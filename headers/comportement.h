@@ -3,7 +3,7 @@
 
 /**
  * \file comportement.h
- * \brief Headers de l'ensemble de fonctions pour le comportement des mobs et du personnage
+ * \brief Header de l'ensemble de fonctions pour le comportement des mobs et du personnage
  * \author Thomas DIDIER L2 Info Le Mans
  * \version 1.1
  * \date 06/04/2020

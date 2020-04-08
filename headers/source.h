@@ -9,7 +9,7 @@
 
 /**
  * \file source.h
- * \brief Headers et constantes des fonctions de lecture d'une salle
+ * \brief Header et constantes des fonctions de lecture d'une salle
  * \author Thomas DIDIER L2 Info Le Mans
  * \version 1.1
  * \date 06/04/2020

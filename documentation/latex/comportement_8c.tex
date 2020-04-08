@@ -10,12 +10,11 @@ Ensemble de fonctions pour le comportement des mobs et du personnage.
 {\ttfamily \#include \char`\"{}../headers/structs.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../headers/liste.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../headers/comportement.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../headers/source.\+h\char`\"{}}\newline
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
 int \hyperlink{comportement_8c_aa7e846fc01d69c6734a372054ce218ca}{hitE} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$e1, \hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$e2)
-\begin{DoxyCompactList}\small\item\em Vérifie si une entité touche une autre entité \end{DoxyCompactList}\item 
-int \hyperlink{comportement_8c_a7e78db7adfb7d32b8438d54a9ca9ee6d}{hitP} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$e, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$p)
 \begin{DoxyCompactList}\small\item\em Vérifie si une entité touche une autre entité \end{DoxyCompactList}\item 
 int \hyperlink{comportement_8c_aede415007da55f94b84a40f93ec45d6f}{pers\+Valid\+Dep} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$p, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$s)
 \begin{DoxyCompactList}\small\item\em Vérifie si le deplacement du personnage est valide. \end{DoxyCompactList}\item 
@@ -25,8 +24,20 @@ void \hyperlink{comportement_8c_a8797da75308a831b1bcd0b84f0470ed5}{dep\+Gauche} 
 \begin{DoxyCompactList}\small\item\em Gère le déplacement vers la gauche du personnage quelque soit son état. \end{DoxyCompactList}\item 
 void \hyperlink{comportement_8c_ab62b168c2d0150f4ec41bf954e111f57}{dep\+Vert} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$p, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$s, int try\+Jump)
 \begin{DoxyCompactList}\small\item\em Gère le déplacement vertical du personnage quelque soit son état. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{comportement_8c_a1d6b0d91c298e2e657560ccdf54ad51e}\label{comportement_8c_a1d6b0d91c298e2e657560ccdf54ad51e}} 
+void {\bfseries attaquer} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$p, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$s, int try\+Atk)
+\item 
 char $\ast$ \hyperlink{comportement_8c_abdb96a0c189ae3f478ddd849a12612f4}{prend\+Porte} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$p, \hyperlink{structliste__s}{liste\+\_\+t} $\ast$l\+Portes)
-\begin{DoxyCompactList}\small\item\em Estime si le joueur touche une porte et rend l\textquotesingle{}endroit où elle l\textquotesingle{}emmène. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Estime si le joueur touche une porte et rend l\textquotesingle{}endroit où elle l\textquotesingle{}emmène. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{comportement_8c_a999cd83e4f7ba4ae040c7b49bed4da85}\label{comportement_8c_a999cd83e4f7ba4ae040c7b49bed4da85}} 
+void {\bfseries comp\+Fleches} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
+\item 
+\mbox{\Hypertarget{comportement_8c_a19a961efc662b4de3d824ac1fce50c73}\label{comportement_8c_a19a961efc662b4de3d824ac1fce50c73}} 
+void {\bfseries comp\+Serpent} (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
+\item 
+\mbox{\Hypertarget{comportement_8c_ae4e8889bccdb5040ff350e5cb9a54938}\label{comportement_8c_ae4e8889bccdb5040ff350e5cb9a54938}} 
+void {\bfseries evolution} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$p, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$s)
+\end{DoxyCompactItemize}
 
 
 \subsection{Description détaillée}
@@ -102,26 +113,6 @@ Gère le déplacement vertical du personnage quelque soit son état.
 \index{hitE@{hitE}!comportement.\+c@{comportement.\+c}}
 \subsubsection{\texorpdfstring{hit\+E()}{hitE()}}
 {\footnotesize\ttfamily int hitE (\begin{DoxyParamCaption}\item[{\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$}]{e1,  }\item[{\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$}]{e2 }\end{DoxyParamCaption})}
-
-
-
-Vérifie si une entité touche une autre entité 
-
-
-\begin{DoxyParams}{Paramètres}
-{\em e1} & pointeur vers la première entité \\
-\hline
-{\em e2} & pointeur vers la seconde entité\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Renvoie}
-1 (T\+R\+UE) si il y a contact, 0 (F\+A\+L\+SE) sinon 
-\end{DoxyReturn}
-\mbox{\Hypertarget{comportement_8c_a7e78db7adfb7d32b8438d54a9ca9ee6d}\label{comportement_8c_a7e78db7adfb7d32b8438d54a9ca9ee6d}} 
-\index{comportement.\+c@{comportement.\+c}!hitP@{hitP}}
-\index{hitP@{hitP}!comportement.\+c@{comportement.\+c}}
-\subsubsection{\texorpdfstring{hit\+P()}{hitP()}}
-{\footnotesize\ttfamily int hitP (\begin{DoxyParamCaption}\item[{\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$}]{e,  }\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{p }\end{DoxyParamCaption})}
 
 
 

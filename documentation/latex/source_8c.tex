@@ -12,6 +12,7 @@ Fonctions de lecture d\textquotesingle{}une salle.
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}../headers/source.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../headers/liste.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../headers/comportement.\+h\char`\"{}}\newline
 \subsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
@@ -21,6 +22,11 @@ int \hyperlink{source_8c_af7916edbfbb9a2021f0a9802369c76d7}{sauvegarder} (int nu
 \begin{DoxyCompactList}\small\item\em Sauvegarde l\textquotesingle{}état de la partie. \end{DoxyCompactList}\item 
 int \hyperlink{source_8c_ae552ae3538b4ad44354aa761534d1116}{charger\+Sauvegarde} (int num\+Sauv, char $\ast$salle, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, int inventaire\mbox{[}$\,$\mbox{]}, char $\ast$nom\+Objs\mbox{[}$\,$\mbox{]})
 \begin{DoxyCompactList}\small\item\em Charge l\textquotesingle{}état de la partie. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{source_8c_a9157f2db38ecc8aca230dbf3b21145c6}\label{source_8c_a9157f2db38ecc8aca230dbf3b21145c6}} 
+void \hyperlink{source_8c_a9157f2db38ecc8aca230dbf3b21145c6}{creer\+Type\+Entite} ()
+\begin{DoxyCompactList}\small\item\em Créé le tableau de types d\textquotesingle{}entités. \end{DoxyCompactList}\item 
+\hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+t} $\ast$ \hyperlink{source_8c_acb8eb0f3e06d01c57473af3b8a7e8499}{obtenir\+Types\+Entite} ()
+\begin{DoxyCompactList}\small\item\em Permet d\textquotesingle{}obtenir le tableau des types d\textquotesingle{}entités. \end{DoxyCompactList}\item 
 int \hyperlink{source_8c_ad5237d1625ec6ab16ef2c4f0690bbfb8}{nettoyer\+Salle} (\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$salle)
 \begin{DoxyCompactList}\small\item\em Nettoie et supprime la structure salle donnée. \end{DoxyCompactList}\item 
 int \hyperlink{source_8c_acfe782df62b56721f4f3aaa311f6e3e6}{lire\+Salle} (char $\ast$nom\+Fichier, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$salle)
@@ -34,10 +40,10 @@ Fonctions de lecture d\textquotesingle{}une salle.
 Thomas D\+I\+D\+I\+ER L2 Info Le Mans 
 \end{DoxyAuthor}
 \begin{DoxyVersion}{Version}
-1.\+1 
+1.\+5 
 \end{DoxyVersion}
 \begin{DoxyDate}{Date}
-13/02/2020 
+07/04/2020 
 \end{DoxyDate}
 
 
@@ -84,7 +90,7 @@ Tout sur dirent ici\+: \href{http://sdz.tdct.org/sdz/parcourir-les-dossiers-avec
 
 
 \begin{DoxyParams}{Paramètres}
-{\em id} & un entier correpondant à un id \\
+{\em id} & un entier correpondant à un id de sprite \\
 \hline
 {\em dir\+Name} & la chaîne de caractères correspondant au chemin du dossier où chercher le sprite\\
 \hline
@@ -131,6 +137,19 @@ libère toute la mémoire utiliser et prépare le pointeur à être de nouveau u
 \end{DoxyParams}
 \begin{DoxyReturn}{Renvoie}
 0 si tout s\textquotesingle{}est bien déroulé 
+\end{DoxyReturn}
+\mbox{\Hypertarget{source_8c_acb8eb0f3e06d01c57473af3b8a7e8499}\label{source_8c_acb8eb0f3e06d01c57473af3b8a7e8499}} 
+\index{source.\+c@{source.\+c}!obtenir\+Types\+Entite@{obtenir\+Types\+Entite}}
+\index{obtenir\+Types\+Entite@{obtenir\+Types\+Entite}!source.\+c@{source.\+c}}
+\subsubsection{\texorpdfstring{obtenir\+Types\+Entite()}{obtenirTypesEntite()}}
+{\footnotesize\ttfamily \hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+t}$\ast$ obtenir\+Types\+Entite (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Permet d\textquotesingle{}obtenir le tableau des types d\textquotesingle{}entités. 
+
+\begin{DoxyReturn}{Renvoie}
+le tableau de types d\textquotesingle{}entités 
 \end{DoxyReturn}
 \mbox{\Hypertarget{source_8c_af7916edbfbb9a2021f0a9802369c76d7}\label{source_8c_af7916edbfbb9a2021f0a9802369c76d7}} 
 \index{source.\+c@{source.\+c}!sauvegarder@{sauvegarder}}

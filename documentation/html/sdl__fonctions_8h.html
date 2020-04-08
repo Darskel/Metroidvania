@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Metroidvania: Référence du fichier headers/sdl_fonctions.h</title>
+<title>Diskosieni - Metroidvania: Référence du fichier headers/sdl_fonctions.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,9 +21,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Metroidvania
+   <div id="projectname">Diskosieni - Metroidvania
    </div>
-   <div id="projectbrief">Création d&#39;un Métroidvania dans le cadre du cours nommé &#39;Projet&#39;</div>
+   <div id="projectbrief">Création d&#39;un Metroidvania nommé Diskosieni dans le cadre du cours nommé &#39;Projet&#39;</div>
   </td>
  </tr>
  </tbody>
@@ -75,10 +75,9 @@ $(function() {
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;SDL2/SDL.h&gt;</code><br />
-<code>#include &lt;SDL2/SDL_ttf.h&gt;</code><br />
-<code>#include &lt;SDL2/SDL_image.h&gt;</code><br />
-<code>#include &lt;SDL2/SDL_mixer.h&gt;</code><br />
+<code>#include &lt;SDL.h&gt;</code><br />
+<code>#include &lt;SDL_ttf.h&gt;</code><br />
+<code>#include &lt;SDL_image.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="structs_8h_source.html">../headers/structs.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="source_8h_source.html">../headers/source.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="comportement_8h_source.html">../headers/comportement.h</a>&quot;</code><br />
@@ -93,9 +92,6 @@ Fonctions</h2></td></tr>
 <tr class="memitem:af4ffdd61eb400c65a78258ee8ad1172a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8h.html#af4ffdd61eb400c65a78258ee8ad1172a">quitter_SDL</a> (SDL_Window **fenetre, SDL_Renderer **renderer)</td></tr>
 <tr class="memdesc:af4ffdd61eb400c65a78258ee8ad1172a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet de détruire la fenetre et quitter la SDL.  <a href="#af4ffdd61eb400c65a78258ee8ad1172a">Plus de détails...</a><br /></td></tr>
 <tr class="separator:af4ffdd61eb400c65a78258ee8ad1172a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a814c2dcbea63c3a94a4d2be833c2177d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8h.html#a814c2dcbea63c3a94a4d2be833c2177d">evenements</a> (SDL_Renderer *renderer, SDL_DisplayMode *mode)</td></tr>
-<tr class="memdesc:a814c2dcbea63c3a94a4d2be833c2177d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de gestions des evenements.  <a href="#a814c2dcbea63c3a94a4d2be833c2177d">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a814c2dcbea63c3a94a4d2be833c2177d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f83b4b265112950d62a81b33f26e890"><td class="memItemLeft" align="right" valign="top">SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8h.html#a8f83b4b265112950d62a81b33f26e890">initialiser_texture</a> (char *path, SDL_Renderer *renderer)</td></tr>
 <tr class="memdesc:a8f83b4b265112950d62a81b33f26e890"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet d'initialiser une texture à partir d'une image.  <a href="#a8f83b4b265112950d62a81b33f26e890">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a8f83b4b265112950d62a81b33f26e890"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,6 +125,13 @@ Fonctions</h2></td></tr>
 <tr class="memitem:a79c168095e834346bbaaf27c91cfddc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8h.html#a79c168095e834346bbaaf27c91cfddc2">konamicode</a> (<a class="el" href="structpersonnage__s.html">personnage_t</a> *perso, <a class="el" href="structsalle__s.html">salle_t</a> *salle, char *konami, int *indKon, boolean_t *kon)</td></tr>
 <tr class="memdesc:a79c168095e834346bbaaf27c91cfddc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui détecte si le Konami code a été rentré, dans la bonne salle, et qui créé l'easter egg en conséquence (modifie la matrice de la salle)  <a href="#a79c168095e834346bbaaf27c91cfddc2">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a79c168095e834346bbaaf27c91cfddc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a672ae3a027fee5a7fd52d27243a08572"><td class="memItemLeft" align="right" valign="top"><a id="a672ae3a027fee5a7fd52d27243a08572"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8h.html#a672ae3a027fee5a7fd52d27243a08572">destroy_typeentites</a> (void)</td></tr>
+<tr class="memdesc:a672ae3a027fee5a7fd52d27243a08572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de destruction des types de monstres. <br /></td></tr>
+<tr class="separator:a672ae3a027fee5a7fd52d27243a08572"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1d88b10b3071168e331039a28e8ecb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8h.html#ae1d88b10b3071168e331039a28e8ecb7">initialiser_typeentites</a> (SDL_Renderer *renderer)</td></tr>
+<tr class="memdesc:ae1d88b10b3071168e331039a28e8ecb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'initialisation des types monstres.  <a href="#ae1d88b10b3071168e331039a28e8ecb7">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae1d88b10b3071168e331039a28e8ecb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p>Header pour la librairie de fonctions et les constantes liées à l'usage de la SDL2. </p>
@@ -172,8 +175,8 @@ Fonctions</h2></td></tr>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">renderer</td><td>le pointeur vers le SDL_Renderer à utiliser </td></tr>
+    <tr><td class="paramname">salle</td><td>le pointeur sur la salle où afficher le joueur et les entités </td></tr>
     <tr><td class="paramname">personnage</td><td>le pointeur sur la structure personnage à afficher </td></tr>
-    <tr><td class="paramname">salle</td><td>le pointeur sur la salle où afficher le joueur </td></tr>
   </table>
   </dd>
 </dl>
@@ -350,43 +353,6 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a814c2dcbea63c3a94a4d2be833c2177d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a814c2dcbea63c3a94a4d2be833c2177d">&#9670;&nbsp;</a></span>evenements()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void evenements </td>
-          <td>(</td>
-          <td class="paramtype">SDL_Renderer *&#160;</td>
-          <td class="paramname"><em>renderer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">SDL_DisplayMode *&#160;</td>
-          <td class="paramname"><em>mode</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Fonction de gestions des evenements. </p>
-<dl class="params"><dt>Paramètres</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">renderer</td><td>le renderer à utiliser </td></tr>
-    <tr><td class="paramname">mode</td><td>le mode de l'écran utilisé </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a9ffbbd8791b49989f9ee4716096d2b7b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9ffbbd8791b49989f9ee4716096d2b7b">&#9670;&nbsp;</a></span>initialisation_personnage()</h2>
 
@@ -518,7 +484,7 @@ Fonctions</h2></td></tr>
 <p>Fonction d'initialisation de la salle. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">renderer</td><td>le renderer utilisé </td></tr>
+    <tr><td class="paramname">renderer</td><td>pointeur vers le renderer utilisé </td></tr>
     <tr><td class="paramname">nomFichier</td><td>une chaine de caracteres qui contient le nom du fichier de la salle </td></tr>
     <tr><td class="paramname">tileset</td><td>le pointeur vers la texture de tileset </td></tr>
   </table>
@@ -563,6 +529,32 @@ Fonctions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Renvoie</dt><dd>le pointeur sur la texture générée </dd></dl>
+
+</div>
+</div>
+<a id="ae1d88b10b3071168e331039a28e8ecb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1d88b10b3071168e331039a28e8ecb7">&#9670;&nbsp;</a></span>initialiser_typeentites()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initialiser_typeentites </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'initialisation des types monstres. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur vers le renderer utilisé par les textures </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -311,7 +311,7 @@ void afficher_entites(SDL_Renderer * renderer, salle_t * salle){
     if(entite.direction != RIGHT)
       flip=SDL_FLIP_HORIZONTAL;
     Rect_source.x = entite.spriteActuel.x;
-    Rect_source.y = IDLE;
+    Rect_source.y = entite.spriteActuel.y;
     Rect_source.h = entite.spriteActuel.h;
     Rect_source.w = entite.spriteActuel.w;
     Rect_dest.x = entite.pos.x * TAILLEBLOC + entite.delta.x;
@@ -384,7 +384,7 @@ void miseAjourSprites(personnage_t * perso){
     perso->spriteActuel.y=IDLE;
   }
   else if(perso->etat == FALLING){
-    perso->spriteActuel.x=7*(perso->spriteActuel.w);
+    perso->spriteActuel.x=(perso->nbAnim[JUMPING] - 1)*(perso->spriteActuel.w);
     perso->spriteActuel.y=JUMPING*(perso->spriteActuel.h);
   }
   if(perso->newEtat){
@@ -419,55 +419,38 @@ void miseAjourSprites(personnage_t * perso){
  * @param salle le pointeur vers la salle où trouver la liste d'entités avec les sprites à mettre à jour
  */
 void miseAjourSpritesEntites(salle_t * salle){
-  /*monstre_t entite;
+  monstre_t entite;
 
   enTete(salle->listeEntite);
   while(!horsListe(salle->listeEntite)){
     valeurElm(salle->listeEntite, &entite);
 
-    Rect_source.x = entite.spriteActuel.x;
-    Rect_source.y = IDLE;
-    Rect_source.h = entite.spriteActuel.h;
-    Rect_source.w = entite.spriteActuel.w;
-    Rect_dest.x = entite.pos.x * TAILLEBLOC + entite.delta.x;
-    Rect_dest.y = entite.pos.y * TAILLEBLOC + entite.delta.y;
-    Rect_dest.h = entite.spriteActuel.h;
-    Rect_dest.w = entite.spriteActuel.w;
+    if(entite.etat == IDLE){
+      entite.spriteActuel.x=IDLE;
+      entite.spriteActuel.y=IDLE;
+    }
+
+    else if(entite.etat == FALLING){
+      entite.spriteActuel.x=(entite.type->nbAnim[JUMPING] -1)*(entite.spriteActuel.w);
+      entite.spriteActuel.y=JUMPING*(entite.spriteActuel.h);
+    }
+
+    else{
+      if(entite.etat > IDLE && entite.etat < FALLING){
+        entite.spriteActuel.y=entite.etat * (entite.spriteActuel.h);
+        if(entite.evoSprite<=0){
+          entite.spriteActuel.x+=entite.spriteActuel.w;
+          if(entite.spriteActuel.x >= (entite.type->nbAnim[entite.etat])*entite.spriteActuel.w)
+            entite.spriteActuel.x=0;
+          entite.evoSprite = entite.type->vitesseAnim;
+        }
+        else (entite.evoSprite)--;
+      }
+    }
+
+    modifElm(salle->listeEntite, &entite);
     suivant(salle->listeEntite);
   }
-
-  if(perso->etat == IDLE){
-    perso->spriteActuel.x=IDLE;
-    perso->spriteActuel.y=IDLE;
-  }
-  else if(perso->etat == FALLING){
-    perso->spriteActuel.x=7*(perso->spriteActuel.w);
-    perso->spriteActuel.y=JUMPING*(perso->spriteActuel.h);
-  }
-  if(perso->newEtat){
-    if(perso->etat > IDLE && perso->etat < FALLING){
-      perso->spriteActuel.x=0;
-      perso->spriteActuel.y=perso->etat * (perso->spriteActuel.h);
-    }
-    if(perso->etat == ATTACKING)
-      perso->spriteActuel.w = LARGEURSPRITEPERSATTACK;
-    else
-      perso->spriteActuel.w = LARGEURSPRITEPERS;
-    perso->newEtat=FALSE;
-    perso->evoSprite=0;
-  }
-  else{
-    if(perso->etat > IDLE && perso->etat < FALLING){
-      if(perso->evoSprite<=0){
-        perso->spriteActuel.x+=perso->spriteActuel.w;
-        if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
-          perso->spriteActuel.x=0;
-        perso->evoSprite = EVOSPRITES;
-      }
-      else (perso->evoSprite)--;
-    }
-  }*/
-
 }
 
 

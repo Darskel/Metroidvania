@@ -215,7 +215,7 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
 void creerTypeEntite(){
     //Serpent bleu
     int* tmp = malloc(sizeof(int) * 4);
-    tmp[0] = 0;
+    tmp[0] = 1;
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 0;
@@ -227,12 +227,13 @@ void creerTypeEntite(){
         "serpent_bleu",//nom, //nom de l'entité
         "sprites/entite/serpent_bleu/tileset.png",//chemin, //chemin vers les sprites
         NULL, //SDL_Texture* sprites non initialisé !!!
-        tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
+        tmp, //{1,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
         {28,51}, //hitbox de l'entité (hauteur,largeur)
         {30,51}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        25, //Attend 25 frames avant de changer d'animation (plutôt lent)
         compSerpent //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -250,12 +251,13 @@ void creerTypeEntite(){
         "fleche",//nom, //nom de l'entité
         "sprites/entite/fleche/tileset.png",//chemin, //chemin vers les sprites
         NULL, //SDL_Texture* sprites non initialisé !!!
-        tmp, //Tableau de nombre d'animations par etat
+        tmp, //{1,2,0,0} //Tableau de nombre d'animations par etat
         2, //nombre de dégats qu'il inflige
         {3,19}, //hitbox de l'entité (hauteur,largeur)
-        {10,19}, //taille sprites
+        {8,19}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
         compFleches //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 }
@@ -287,6 +289,8 @@ static void creerEntite(idEnt_t id, salle_t* s, position_t pos){
     e->pos = pos;
     e->direction = LEFT;
     e->etat = RUNNING;
+
+    e->evoSprite = e->type->vitesseAnim;
 
     e->spriteActuel.h = e->type->tailleSprite.hauteur;
     e->spriteActuel.w = e->type->tailleSprite.largeur;

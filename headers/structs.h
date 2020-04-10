@@ -256,7 +256,7 @@ typedef struct type_monstre_s{
     taille_t tailleSprite; /**< Taille des sprites de monstre en pixel */
     boolean_t passeEntites; /**< Indique si le monstre peut passer à travers les entités (autres monstres/joueur) */
     boolean_t passeBlocs; /**< Indique si le monstre peut passer à travers les blocs */
-
+    int vitesseAnim; /**< Vitesse de l'animation des sprites (plus ce nombre est grand, plus la vitesse est lente (sert à evoSprite comme valeur avant décrémentation)) */
     //comportement (pointeur sur fonction)
     void (*comportement)(monstre_t* entite, personnage_t* perso, salle_t* salle);
 } type_monstre_t;
@@ -273,7 +273,7 @@ struct monstre_s{
     position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
     position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
     boolean_t direction; /**< Direction vers laquelle regarde le monstre (1: vers la gauche(LEFT), 0: vers la droite(RIGHT)) */
-
+    int evoSprite; /**< Entier qui décrémente, changement de sprite quand vaut 0 */
 };
 
 /**

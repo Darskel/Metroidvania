@@ -74,6 +74,9 @@ int main(int argc, char *argv[]){
         SDL_JoystickEventState(SDL_ENABLE);
       }
   }
+
+
+
   initialiser_typeentites(renderer);
   tileset=initialiser_texture(TILESETPATH, renderer);
   salle=initialiser_salle(renderer, NIVEAUTXT, tileset);
@@ -260,6 +263,7 @@ int main(int argc, char *argv[]){
       evolution(perso,salle);
 
       miseAjourSprites(perso);
+      miseAjourSpritesEntites(salle);
 
       if(salleChangee){
         ecranNoir(renderer,150);

@@ -302,7 +302,6 @@ void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, sal
 void afficher_entites(SDL_Renderer * renderer, salle_t * salle){
   monstre_t entite;
   SDL_Rect Rect_dest;
-  SDL_Rect Rect_source;
   SDL_RendererFlip flip=SDL_FLIP_NONE;
   enTete(salle->listeEntite);
   while(!horsListe(salle->listeEntite)){
@@ -310,15 +309,11 @@ void afficher_entites(SDL_Renderer * renderer, salle_t * salle){
     valeurElm(salle->listeEntite, &entite);
     if(entite.direction != RIGHT)
       flip=SDL_FLIP_HORIZONTAL;
-    Rect_source.x = entite.spriteActuel.x;
-    Rect_source.y = entite.spriteActuel.y;
-    Rect_source.h = entite.spriteActuel.h;
-    Rect_source.w = entite.spriteActuel.w;
     Rect_dest.x = entite.pos.x * TAILLEBLOC + entite.delta.x;
     Rect_dest.y = entite.pos.y * TAILLEBLOC + entite.delta.y;
     Rect_dest.h = entite.spriteActuel.h;
     Rect_dest.w = entite.spriteActuel.w;
-    SDL_RenderCopyEx(renderer, entite.type->sprites, &Rect_source, &Rect_dest, 0, NULL, flip);
+    SDL_RenderCopyEx(renderer, entite.type->sprites, &(entite.spriteActuel), &Rect_dest, 0, NULL, flip);
     suivant(salle->listeEntite);
   }
 }

@@ -80,7 +80,8 @@
 
 #define NBPXSAUT 5*TAILLEBLOC //Taille d'un saut en pixel
 
-#define EVOSPRITES 3 //Change le sprite seulement 1 tour sur 3
+#define EVOSPRITES 3 //Change le sprite seulement 1 frame sur 3
+#define EVOSPRITESATTACK EVOSPRITES*4 //Pareil mais pour les sprites d'attaque
 
 #define ZONEMORTE 5000 //Zone morte de la manette
 

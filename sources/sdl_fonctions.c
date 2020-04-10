@@ -400,7 +400,10 @@ void miseAjourSprites(personnage_t * perso){
         perso->spriteActuel.x+=perso->spriteActuel.w;
         if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
           perso->spriteActuel.x=0;
-        perso->evoSprite = EVOSPRITES;
+        if(perso->etat == ATTACKING)
+          perso->evoSprite = EVOSPRITESATTACK;
+        else
+          perso->evoSprite = EVOSPRITES;
       }
       else (perso->evoSprite)--;
     }

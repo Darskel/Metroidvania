@@ -68,13 +68,14 @@ int main(int argc, char *argv[]){
   }
 
   tileset=initialiser_texture(TILESETPATH, renderer);
-  menu=initialiser_texture("./menu.png", renderer);
+  menu=initialiser_texture("./sprites/menu/menu.png", renderer);
 
   while(!fin){
     frameStart = SDL_GetTicks();
     while(SDL_PollEvent(&event)){
       switch(event.type){
         case SDL_QUIT: //Appui sur la croix quitte le programme
+          //Avec message box :
           buttons = malloc(2*sizeof(SDL_MessageBoxButtonData));
           buttons[0].flags = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
           buttons[0].buttonid = 0;
@@ -82,15 +83,20 @@ int main(int argc, char *argv[]){
           buttons[1].flags = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
           buttons[1].buttonid = 1;
           buttons[1].text = "Oui";
-          messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?");
+          messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?", fullscreen);
           if(messageRes == 1)
             fin=TRUE;
           free(buttons);
           buttons=NULL;
+          //Avec menu :
+          /*
+          fin=menuConfirmation(renderer);
+          */
           break;
         case SDL_KEYUP:
           switch(event.key.keysym.sym){
             case SDLK_ESCAPE://Appui sur Echap quitte le programme
+              //Avec message box :
               buttons = malloc(2*sizeof(SDL_MessageBoxButtonData));
               buttons[0].flags = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
               buttons[0].buttonid = 0;
@@ -98,11 +104,15 @@ int main(int argc, char *argv[]){
               buttons[1].flags = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
               buttons[1].buttonid = 1;
               buttons[1].text = "Oui";
-              messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?");
+              messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?", fullscreen);
               if(messageRes == 1)
                 fin=TRUE;
               free(buttons);
               buttons=NULL;
+              //Avec menu :
+              /*
+              fin=menuConfirmation(renderer);
+              */
               break;
             case SDLK_LEFT:
             case SDLK_q:

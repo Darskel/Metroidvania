@@ -306,5 +306,44 @@ typedef struct porte_s{
     int spriteActuel; /**< Indice du sprite à afficher */
 } porte_t;
 
+typedef struct menu_s;
+
+/**
+ * \enum idEnt_e
+ * \brief Id des entités présentes dans les fichiers de salle
+*/
+typedef enum boutonetat_e{
+  RELAXED,
+  HIGHLIGHTED,
+  PRESSED
+} boutonetat_t;
+
+
+/**
+ * \struct menu_item_s
+ * \brief Structure représentant un item d'un menu
+*/
+typedef struct menu_item_s{
+  int id;
+  char * etiquette;
+  struct menu_s * parent;
+  boutonetat_t etat;
+  SDL_Texture ** texture;
+  SDL_Rect emplacement;
+} menu_item_t;
+
+/**
+ * \struct menu_s
+ * \brief Structure représentant un menu
+*/
+typedef struct menu_s{
+  char * etiquette;
+  menu_item_t ** tabBoutons;
+  int nbItems;
+  SDL_Texture * fond;
+} menu_t;
+
+
+
 
 #endif

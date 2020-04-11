@@ -545,6 +545,7 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, s
     while(SDL_PollEvent(&event)){
       switch(event.type){
         case SDL_QUIT: //Appui sur la croix quitte le programme (avec fenetre de dialogue pour confirmation)
+          //Avec message box :
           buttons = malloc(2*sizeof(SDL_MessageBoxButtonData));
           buttons[0].flags = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
           buttons[0].buttonid = 0;
@@ -552,15 +553,20 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, s
           buttons[1].flags = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
           buttons[1].buttonid = 1;
           buttons[1].text = "Oui";
-          messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?");
+          messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?", fullscreen);
           if(messageRes == 1)
             fin=TRUE;
           free(buttons);
           buttons=NULL;
+          //Avec menu :
+          /*
+          fin=menuConfirmation(*renderer);
+          */
           break;
         case SDL_KEYUP:
           switch(event.key.keysym.sym){
             case SDLK_ESCAPE://Appui sur Echap quitte le programme
+              //Avec message box :
               buttons = malloc(2*sizeof(SDL_MessageBoxButtonData));
               buttons[0].flags = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
               buttons[0].buttonid = 0;
@@ -568,11 +574,15 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, s
               buttons[1].flags = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
               buttons[1].buttonid = 1;
               buttons[1].text = "Oui";
-              messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?");
+              messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?", fullscreen);
               if(messageRes == 1)
                 fin=TRUE;
               free(buttons);
               buttons=NULL;
+              //Avec menu :
+              /*
+              fin=menuConfirmation(*renderer);
+              */
               break;
             case SDLK_LEFT:
             case SDLK_q:
@@ -796,7 +806,7 @@ void afficher_menu(SDL_Renderer * renderer, SDL_Texture * fond){
   SDL_DestroyTexture(texture);
 }
 
-int afficherMessageBox(SDL_Window * fenetre, SDL_MessageBoxButtonData * buttons, int nbButtons, char * titre, char * message){
+int afficherMessageBox(SDL_Window * fenetre, SDL_MessageBoxButtonData * buttons, int nbButtons, char * titre, char * message, int fullscreen){
   int buttonid;
 
   const SDL_MessageBoxColorScheme colorScheme = {
@@ -822,12 +832,38 @@ int afficherMessageBox(SDL_Window * fenetre, SDL_MessageBoxButtonData * buttons,
       buttons, /* .buttons */
       &colorScheme /* .colorScheme */
   };
-
+  if(fullscreen)
+    SDL_SetWindowFullscreen(fenetre, 0);
   if (SDL_ShowMessageBox(&messageboxdata, &buttonid) < 0) {
       printf("error displaying message box\n");
       return -2;
   }
-
+  if(fullscreen)
+    SDL_SetWindowFullscreen(fenetre, SDL_WINDOW_FULLSCREEN);
   return buttonid;
 
+}
+
+menu_t * creerMenuDemarrage(SDL_Renderer * renderer){
+  menu_t * menu = malloc(sizeof(menu_t));
+  return menu;
+}
+
+menu_t * creerMenuInGame(SDL_Renderer * renderer){
+  menu_t * menu = malloc(sizeof(menu_t));
+  return menu;
+}
+
+menu_t * creerMenuConfirmation(SDL_Renderer * renderer){
+  menu_t * menu = malloc(sizeof(menu_t));
+  return menu;
+}
+
+void detruireMenu(menu_t ** menu){
+
+  free(*menu);
+}
+
+boolean_t menuConfirmation(SDL_Renderer * renderer){
+  return FALSE;
 }

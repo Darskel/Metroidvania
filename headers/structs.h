@@ -97,6 +97,11 @@
 
 #define NBBLOCSTILESET 50
 
+#define TAILLEBGMENUW 1920
+#define TAILLEBGMENUH 1080
+
+
+
 /*
     INVENTAIRE:
         objet n°1 : clé rouillé

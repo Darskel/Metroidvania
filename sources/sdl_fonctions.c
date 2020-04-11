@@ -36,15 +36,14 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
     exit(EXIT_FAILURE);
   }
   printf("Frequence écran (en hz) : %i\n", mode->refresh_rate);
-  res_h=mode->w - mode->w*OFFSETWINDOW;
-  res_v=mode->h - mode->h*OFFSETWINDOW;
+  res_h=mode->w;
+  res_v=mode->h;
 
-  *fenetre = SDL_CreateWindow(NOM_JEU, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, res_h, res_v, fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : (SDL_WINDOW_SHOWN|SDL_WINDOW_RESIZABLE));
+  *fenetre = SDL_CreateWindow(NOM_JEU, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, res_h, res_v, fullscreen ? SDL_WINDOW_FULLSCREEN : (SDL_WINDOW_SHOWN|SDL_WINDOW_RESIZABLE|SDL_WINDOW_MAXIMIZED));
   if(!(*fenetre)){
     fprintf(stderr, "Erreur de creation de la fenetre : %s\n", SDL_GetError());
     exit(EXIT_FAILURE);
   }
-
   icon=IMG_Load("./sprites/autre/icone.png");
   SDL_SetWindowIcon(*fenetre,icon);
 
@@ -56,6 +55,7 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
   SDL_SetRenderDrawColor(*renderer,0,0,0,255);
   SDL_SetRenderDrawBlendMode(*renderer, SDL_BLENDMODE_BLEND);
 
+  SDL_FreeSurface(icon);
 
 }
 
@@ -213,8 +213,7 @@ void initialiser_typeentites(SDL_Renderer * renderer){
  * @return un pointeur sur la structure salle initialisée
  */
 salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, SDL_Texture * tileset){
-  salle_t ** salle=malloc(sizeof(salle_t *));
-  *salle=NULL;
+  salle_t * salle=NULL;
   char nom_bg[100];
 
   strcpy(nom_bg,DIRBG);
@@ -222,10 +221,10 @@ salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, SDL_Textu
   nom_bg[strlen(nom_bg) - 3] = '\0';
   strcat(nom_bg, "png");
 
-  lireSalle(nomFichier, salle);
-  (*salle)->background=initialiser_texture(nom_bg, renderer);
-  (*salle)->tileset=tileset;
-  return (*salle);
+  lireSalle(nomFichier, &salle);
+  salle->background=initialiser_texture(nom_bg, renderer);
+  salle->tileset=tileset;
+  return salle;
 }
 
 /**
@@ -417,36 +416,39 @@ void miseAjourSprites(personnage_t * perso){
  * @param salle le pointeur vers la salle où trouver la liste d'entités avec les sprites à mettre à jour
  */
 void miseAjourSpritesEntites(salle_t * salle){
-  monstre_t entite;
+  monstre_t * entite = NULL;
 
   enTete(salle->listeEntite);
   while(!horsListe(salle->listeEntite)){
-    valeurElm(salle->listeEntite, &entite);
+    entite=malloc(sizeof(monstre_t));
+    valeurElm(salle->listeEntite, entite);
 
-    if(entite.etat == IDLE){
-      entite.spriteActuel.x=IDLE;
-      entite.spriteActuel.y=IDLE;
+    if(entite->etat == IDLE){
+      entite->spriteActuel.x=IDLE;
+      entite->spriteActuel.y=IDLE;
     }
 
-    else if(entite.etat == FALLING){
-      entite.spriteActuel.x=(entite.type->nbAnim[JUMPING] -1)*(entite.spriteActuel.w);
-      entite.spriteActuel.y=JUMPING*(entite.spriteActuel.h);
+    else if(entite->etat == FALLING){
+      entite->spriteActuel.x=(entite->type->nbAnim[JUMPING] -1)*(entite->spriteActuel.w);
+      entite->spriteActuel.y=JUMPING*(entite->spriteActuel.h);
     }
 
     else{
-      if(entite.etat > IDLE && entite.etat < FALLING){
-        entite.spriteActuel.y=entite.etat * (entite.spriteActuel.h);
-        if(entite.evoSprite<=0){
-          entite.spriteActuel.x+=entite.spriteActuel.w;
-          if(entite.spriteActuel.x >= (entite.type->nbAnim[entite.etat])*entite.spriteActuel.w)
-            entite.spriteActuel.x=0;
-          entite.evoSprite = entite.type->vitesseAnim;
+      if(entite->etat > IDLE && entite->etat < FALLING){
+        entite->spriteActuel.y=entite->etat * (entite->spriteActuel.h);
+        if(entite->evoSprite<=0){
+          entite->spriteActuel.x+=entite->spriteActuel.w;
+          if(entite->spriteActuel.x >= (entite->type->nbAnim[entite->etat])*(entite->spriteActuel.w))
+            entite->spriteActuel.x=0;
+          entite->evoSprite = entite->type->vitesseAnim;
         }
-        else (entite.evoSprite)--;
+        else (entite->evoSprite)--;
       }
     }
 
-    modifElm(salle->listeEntite, &entite);
+    modifElm(salle->listeEntite, entite);
+    free(entite);
+    entite=NULL;
     suivant(salle->listeEntite);
   }
 }
@@ -507,4 +509,325 @@ void konamicode(personnage_t * perso, salle_t * salle, char * konami, int * indK
     }else
       *indKon = 0;
   }
+}
+
+void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, salle_t ** salle, personnage_t ** perso, SDL_Texture * tileset, SDL_Joystick * pJoystick, int fullscreen){
+  SDL_Event event;
+  Uint32 frameStart;
+  int frameTime;
+  int mousex;
+  int mousey;
+  int messageRes;
+  Sint16 x_move;
+  Sint16 y_move;
+  char * salle_nom = NULL;
+  boolean_t Gauche = FALSE;
+  boolean_t Droite = FALSE;
+  boolean_t tryJump = FALSE;
+  boolean_t tryAtk = FALSE;
+  boolean_t fin=FALSE;
+  boolean_t salleChangee=FALSE;
+  boolean_t kon = FALSE;
+  char konami[TAILLEKONAMI];
+  int indKon = 0;
+  for(int i = 0; i < TAILLEKONAMI; i++)
+    konami[i] = '\0';
+
+  SDL_MessageBoxButtonData * buttons = NULL;
+
+  SDL_SetRenderDrawColor(*renderer,0,0,0,255);
+  SDL_RenderClear(*renderer);
+  SDL_RenderPresent(*renderer);
+  initialiser_typeentites(*renderer);
+
+  while(fin==FALSE){
+    frameStart = SDL_GetTicks();
+    while(SDL_PollEvent(&event)){
+      switch(event.type){
+        case SDL_QUIT: //Appui sur la croix quitte le programme (avec fenetre de dialogue pour confirmation)
+          buttons = malloc(2*sizeof(SDL_MessageBoxButtonData));
+          buttons[0].flags = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
+          buttons[0].buttonid = 0;
+          buttons[0].text = "Non";
+          buttons[1].flags = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
+          buttons[1].buttonid = 1;
+          buttons[1].text = "Oui";
+          messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?");
+          if(messageRes == 1)
+            fin=TRUE;
+          free(buttons);
+          buttons=NULL;
+          break;
+        case SDL_KEYUP:
+          switch(event.key.keysym.sym){
+            case SDLK_ESCAPE://Appui sur Echap quitte le programme
+              buttons = malloc(2*sizeof(SDL_MessageBoxButtonData));
+              buttons[0].flags = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
+              buttons[0].buttonid = 0;
+              buttons[0].text = "Non";
+              buttons[1].flags = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
+              buttons[1].buttonid = 1;
+              buttons[1].text = "Oui";
+              messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?");
+              if(messageRes == 1)
+                fin=TRUE;
+              free(buttons);
+              buttons=NULL;
+              break;
+            case SDLK_LEFT:
+            case SDLK_q:
+              konami[indKon++] = 'l';
+              Gauche=FALSE;
+              break;
+            case SDLK_RIGHT:
+            case SDLK_d:
+              konami[indKon++] = 'r';
+              Droite=FALSE;
+              break;
+            case SDLK_UP:
+            case SDLK_z:
+            case SDLK_SPACE:
+              konami[indKon++] = 'u';
+              break;
+            case SDLK_DOWN:
+            case SDLK_s:
+              konami[indKon++] = 'd';
+              break;
+            case SDLK_a:
+              konami[indKon++] = 'a';
+              break;
+            case SDLK_b:
+              konami[indKon++] = 'b';
+              break;
+            case SDLK_RETURN:
+              konami[indKon++] = 's';
+              break;
+          }
+          break;
+        case SDL_KEYDOWN:
+          switch(event.key.keysym.sym){
+            case SDLK_LEFT:
+            case SDLK_q:
+              Gauche=TRUE;
+              break;
+            case SDLK_RIGHT:
+            case SDLK_d:
+              Droite=TRUE;
+              break;
+            case SDLK_UP:
+            case SDLK_z:
+            case SDLK_SPACE:
+            //Cette façon de faire produit la possibilité de bunny hop (saut juste après un saut, quand le bouton reste appuyé)
+              tryJump=TRUE;
+                break;
+            case SDLK_DOWN:
+            case SDLK_s:
+              break;
+            case SDLK_e:
+              tryAtk=TRUE;
+              break;
+          }
+          break;
+        case SDL_MOUSEMOTION :
+          mousex=event.motion.x;
+          mousey=event.motion.y;
+          break;
+        case SDL_JOYBUTTONDOWN :
+        switch(event.jbutton.button){
+            case 0 : //bouton A manette XBOX
+              konami[indKon++] = 'a';
+              tryJump=TRUE;
+              break;
+            case 1 : //bouton B manette XBOX
+              konami[indKon++] = 'b';
+              tryAtk=TRUE;
+              break;
+            case 7 : //bouton Start manette XBOX
+              konami[indKon++] = 's';
+              break;
+          }
+        break;
+        /*case SDL_JOYBUTTONUP :
+          break;*/
+        case SDL_JOYAXISMOTION :
+          switch(event.jaxis.axis){
+            case 0 :
+              if(event.jaxis.value>ZONEMORTE){
+                Droite = TRUE;
+              }
+              else if(event.jaxis.value<ZONEMORTE*-1){
+                Gauche = TRUE;
+              }
+              else{
+                Gauche = FALSE;
+                Droite = FALSE;
+              }
+              break;
+          }
+          break;
+        /*case SDL_JOYBALLMOTION :
+          break;*/
+        case SDL_JOYHATMOTION :
+          switch(event.jhat.value){
+            case SDL_HAT_CENTERED:
+              Gauche = FALSE;
+              Droite = FALSE;
+              break;
+            case SDL_HAT_LEFT:
+              konami[indKon++] = 'l';
+              Gauche = TRUE;
+              break;
+            case SDL_HAT_RIGHT:
+              konami[indKon++] = 'r';
+              Droite = TRUE;
+              break;
+            case SDL_HAT_UP:
+              konami[indKon++] = 'u';
+              tryJump=TRUE;
+              break;
+            case SDL_HAT_DOWN:
+              konami[indKon++] = 'd';
+              break;
+          }
+        }
+      }
+      if ( pJoystick != NULL ){
+        x_move = SDL_JoystickGetAxis(pJoystick, 0);
+        y_move = SDL_JoystickGetAxis(pJoystick, 1);
+      }
+
+      konamicode(*perso,*salle,konami,&indKon,&kon);
+
+      salle_nom=prendPorte(*perso, (*salle)->listePorte);
+      if(salle_nom != NULL){
+        destroy_salle(salle);
+        *salle=initialiser_salle(*renderer, salle_nom, tileset);
+        salleChangee=TRUE;
+        kon = FALSE;
+        free(salle_nom);
+        salle_nom=NULL;
+      }
+
+      depVert(*perso, *salle, tryJump);
+
+
+      if(Gauche){
+        depGauche(*perso, *salle);
+        if(!Droite)
+          (*perso)->direction = LEFT;
+      }
+
+      if(Droite){
+        depDroite(*perso, *salle);
+        if(!Gauche)
+          (*perso)->direction = RIGHT;
+      }
+
+      if((!Gauche&&!Droite) || (Gauche&&Droite))
+        if((*perso)->etat == RUNNING)//ajouter par Thomas: on souhaite passer de RUNNING à IDLE mais pas de JUMPING à IDLE ou bien de ATTACKING à IDLE
+          (*perso)->etat=IDLE;
+
+      tryJump=FALSE;
+
+      attaquer(*perso,*salle,tryAtk);
+
+      tryAtk=FALSE;
+
+      evolution(*perso,*salle);
+
+      miseAjourSprites(*perso);
+      miseAjourSpritesEntites(*salle);
+
+      if(salleChangee){
+        ecranNoir(*renderer,150);
+        salleChangee=FALSE;
+      }
+
+      affichage_complet(*renderer, *salle, *perso);
+
+      frameTime = SDL_GetTicks() - frameStart;
+      if(frameTime < FRAMEDELAY){
+        SDL_Delay(FRAMEDELAY - frameTime);
+      }
+    }
+    destroy_salle(salle);
+    destroy_personnage(perso);
+    destroy_typeentites();
+}
+
+void afficher_menu(SDL_Renderer * renderer, SDL_Texture * fond){
+  SDL_Texture * texture;
+  SDL_Rect Rect_dest;
+  int maxw;
+  int maxh;
+  float ratioFenetre;
+  float ratioMenu;
+
+  SDL_SetRenderDrawColor(renderer, 0,0,0,255);
+  SDL_RenderClear(renderer);
+
+  SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
+
+  ratioFenetre = (maxw * 1.0) / (maxh * 1.0);
+  ratioMenu = (TAILLEBGMENUW * 1.0) / (TAILLEBGMENUH * 1.0);
+
+  if(ratioFenetre<ratioMenu){
+    Rect_dest.w = maxw;
+    Rect_dest.h = Rect_dest.w /ratioMenu;
+  }
+  else{
+    Rect_dest.h = maxh;
+    Rect_dest.w = Rect_dest.h * ratioMenu;
+  }
+
+  Rect_dest.x = (maxw - Rect_dest.w)/2 ;
+  Rect_dest.y = (maxh - Rect_dest.h)/2 ;
+
+
+  texture=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET, TAILLEBGMENUW, TAILLEBGMENUH);
+  SDL_SetRenderTarget(renderer, texture);
+  SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+  SDL_SetRenderDrawColor(renderer, 0,0,0,255);
+  SDL_RenderClear(renderer);
+  SDL_RenderCopy(renderer, fond, NULL, NULL);
+  SDL_SetRenderTarget(renderer, NULL);
+  SDL_RenderCopy(renderer, texture, NULL, &Rect_dest);
+  SDL_RenderPresent(renderer);
+  SDL_DestroyTexture(texture);
+}
+
+int afficherMessageBox(SDL_Window * fenetre, SDL_MessageBoxButtonData * buttons, int nbButtons, char * titre, char * message){
+  int buttonid;
+
+  const SDL_MessageBoxColorScheme colorScheme = {
+      { /* .colors (.r, .g, .b) */
+          /* [SDL_MESSAGEBOX_COLOR_BACKGROUND] */
+          { 200,   200,   200 },
+          /* [SDL_MESSAGEBOX_COLOR_TEXT] */
+          {   0, 0,   0 },
+          /* [SDL_MESSAGEBOX_COLOR_BUTTON_BORDER] */
+          { 50, 50, 50 },
+          /* [SDL_MESSAGEBOX_COLOR_BUTTON_BACKGROUND] */
+          {   255, 255, 255 },
+          /* [SDL_MESSAGEBOX_COLOR_BUTTON_SELECTED] */
+          { 150, 150, 150 }
+      }
+  };
+  const SDL_MessageBoxData messageboxdata = {
+      SDL_MESSAGEBOX_INFORMATION, /* .flags */
+      fenetre, /* .window */
+      titre, /* .title */
+      message, /* .message */
+      nbButtons, /* .numbuttons */
+      buttons, /* .buttons */
+      &colorScheme /* .colorScheme */
+  };
+
+  if (SDL_ShowMessageBox(&messageboxdata, &buttonid) < 0) {
+      printf("error displaying message box\n");
+      return -2;
+  }
+
+  return buttonid;
+
 }

@@ -282,7 +282,7 @@ static void creerEntite(idEnt_t id, salle_t* s, position_t pos){
     monstre_t* e = malloc(sizeof(monstre_t));
     id *= -1;
 
-    e->type = &typesMonstre[id-1];
+    e->type = &(typesMonstre[id-1]);
     e->pv = e->type->pv_base;
 
     e->delta = (position_t){0,TAILLEBLOC - e->type->tailleSprite.hauteur%TAILLEBLOC};

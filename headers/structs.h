@@ -320,17 +320,29 @@ typedef enum boutonetat_e{
 
 
 /**
- * \struct menu_item_s
- * \brief Structure représentant un item d'un menu
+ * \struct menu_bouton_s
+ * \brief Structure représentant un bouton d'un menu
 */
-typedef struct menu_item_s{
+typedef struct menu_bouton_s{
   int id;
   char * etiquette;
   struct menu_s * parent;
   boutonetat_t etat;
   SDL_Texture ** texture;
   SDL_Rect emplacement;
-} menu_item_t;
+} menu_bouton_t;
+
+/**
+ * \struct menu_texte_s
+ * \brief Structure représentant un texte dans un menu
+*/
+typedef struct menu_texte_s{
+  int id;
+  char * etiquette;
+  struct menu_s * parent;
+  SDL_Texture * texture;
+  SDL_Rect emplacement;
+} menu_texte_t;
 
 /**
  * \struct menu_s
@@ -338,12 +350,11 @@ typedef struct menu_item_s{
 */
 typedef struct menu_s{
   char * etiquette;
-  menu_item_t ** tabBoutons;
-  int nbItems;
+  menu_bouton_t * tabBoutons;
+  int nbBoutons;
   SDL_Texture * fond;
+  menu_texte_t * tabTextes;
+  int nbTextes;
 } menu_t;
-
-
-
 
 #endif

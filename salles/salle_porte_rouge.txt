@@ -16,4 +16,4 @@
 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03
 salle_entree_grotte.txt 0 13 22 9
 salle_serpent_rose.txt 24 13 0 0
-salle_longue_transition.txt 24 5 0 0
+salle_longue_transition_glace.txt 24 5 0 9

@@ -446,6 +446,8 @@ void miseAjourSpritesEntites(salle_t * salle){
       }
     }
 
+    //printf("%d_%d\n",entite->etat,entite->spriteActuel.x);
+
     modifElm(salle->listeEntite, entite);
     free(entite);
     entite=NULL;

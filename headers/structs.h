@@ -306,7 +306,7 @@ typedef struct porte_s{
     int spriteActuel; /**< Indice du sprite à afficher */
 } porte_t;
 
-typedef struct menu_s;
+struct menu_s;
 
 /**
  * \enum idEnt_e

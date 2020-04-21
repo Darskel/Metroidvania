@@ -25,13 +25,13 @@
  *
  * @return la comparaison entre les noms de fichiers
 */
-static int filecmp(struct dirent* f1, struct dirent* f2){
+/*static int filecmp(struct dirent* f1, struct dirent* f2){
     if(f1->d_type != f2->d_type){
         return f1->d_type == DT_DIR ? -1 : 1;
     }
 
     return strcmp(f1->d_name,f2->d_name);
-}
+}*/
 
 /**
  * \brief Recherche un sprite dans un dossier (méthode dirent)
@@ -42,7 +42,7 @@ static int filecmp(struct dirent* f1, struct dirent* f2){
  *
  * @return le path (chaîne de caractères) du sprite trouvé
 */
-char* chercherSprite(int id, char* dirName){
+/*char* chercherSprite(int id, char* dirName){
     if(id <= 0)
         return NULL;
 
@@ -84,7 +84,7 @@ char* chercherSprite(int id, char* dirName){
     strcpy(res,newName);
 
     return res;
-}
+}*/
 
 /**
  * \brief Sauvegarde l'état de la partie
@@ -254,7 +254,7 @@ void creerTypeEntite(){
         tmp, //Tableau de nombre d'animations par etat
         2, //nombre de dégats qu'il inflige
         {3,19}, //hitbox de l'entité (hauteur,largeur)
-        {10,19}, //taille sprites
+        {9,19}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0, //N'attend pas avant de changer d'animation

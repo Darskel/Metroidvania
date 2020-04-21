@@ -18,7 +18,7 @@
 #define NBTYPEMONSTRE 24
 type_monstre_t typesMonstre[NBTYPEMONSTRE];
 
-char* chercherSprite(int, char*);
+//char* chercherSprite(int, char*);
 
 int sauvegarder(int, int, char*, position_t*, int[], char* []);
 int chargerSauvegarde(int, char*, personnage_t*, int[], char*[]);

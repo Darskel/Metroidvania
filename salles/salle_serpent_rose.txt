@@ -16,3 +16,4 @@
 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
 salle_porte_rouge.txt 0 4 22 9
 salle_cle_rouge.txt 24 13 0 0
+salle_longue_vifplumes.txt 24 4 0 9

@@ -37,23 +37,15 @@ int main(int argc, char *argv[]){
   int mousey;
   Sint16 x_move;
   Sint16 y_move;
-  char * salle_nom = NULL;
-  boolean_t Gauche = FALSE;
-  boolean_t Droite = FALSE;
-  boolean_t tryJump = FALSE;
-  boolean_t tryAtk = FALSE;
   boolean_t fin=FALSE;
-  boolean_t salleChangee=FALSE;
-  SDL_Texture * tileset=NULL;
   salle_t * salle=NULL;
   personnage_t * perso=NULL;
   position_t positionDepart;
   position_t positionDepartDelta;
-  boolean_t kon = FALSE;
-  char konami[TAILLEKONAMI];
-  int indKon = 0;
-  for(int i = 0; i < TAILLEKONAMI; i++)
-    konami[i] = '\0';
+  SDL_Texture * tileset=NULL;
+  SDL_Texture * menu=NULL;
+  int messageRes;
+  SDL_MessageBoxButtonData * buttons = NULL;
 
   initialisation_SDL(&fenetre, &renderer, &mode, fullscreen);
   SDL_SetRenderDrawColor(renderer,0,0,0,255);
@@ -74,54 +66,70 @@ int main(int argc, char *argv[]){
         SDL_JoystickEventState(SDL_ENABLE);
       }
   }
-  initialiser_typeentites(renderer);
+
   tileset=initialiser_texture(TILESETPATH, renderer);
-  salle=initialiser_salle(renderer, NIVEAUTXT, tileset);
-
-  positionDepart.x = 1;
-  positionDepartDelta.x = 0;
-  positionDepart.y = salle->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;
-  positionDepartDelta.y = TAILLEBLOC-1;
-
-  perso=initialisation_personnage(renderer, positionDepart, positionDepartDelta);
+  menu=initialiser_texture("./sprites/menu/menu.png", renderer);
 
   while(!fin){
-
     frameStart = SDL_GetTicks();
     while(SDL_PollEvent(&event)){
       switch(event.type){
         case SDL_QUIT: //Appui sur la croix quitte le programme
-          fin=TRUE;
+          //Avec message box :
+          buttons = malloc(2*sizeof(SDL_MessageBoxButtonData));
+          buttons[0].flags = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
+          buttons[0].buttonid = 0;
+          buttons[0].text = "Non";
+          buttons[1].flags = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
+          buttons[1].buttonid = 1;
+          buttons[1].text = "Oui";
+          messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?", fullscreen);
+          if(messageRes == 1)
+            fin=TRUE;
+          free(buttons);
+          buttons=NULL;
+          //Avec menu :
+          /*
+          fin=menuConfirmation(renderer);
+          */
           break;
         case SDL_KEYUP:
           switch(event.key.keysym.sym){
             case SDLK_ESCAPE://Appui sur Echap quitte le programme
-              fin=TRUE;
+              //Avec message box :
+              buttons = malloc(2*sizeof(SDL_MessageBoxButtonData));
+              buttons[0].flags = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
+              buttons[0].buttonid = 0;
+              buttons[0].text = "Non";
+              buttons[1].flags = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
+              buttons[1].buttonid = 1;
+              buttons[1].text = "Oui";
+              messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?", fullscreen);
+              if(messageRes == 1)
+                fin=TRUE;
+              free(buttons);
+              buttons=NULL;
+              //Avec menu :
+              /*
+              fin=menuConfirmation(renderer);
+              */
               break;
             case SDLK_LEFT:
             case SDLK_q:
-              konami[indKon++] = 'l';
-              Gauche=FALSE;
               break;
             case SDLK_RIGHT:
             case SDLK_d:
-              konami[indKon++] = 'r';
-              Droite=FALSE;
               break;
             case SDLK_UP:
             case SDLK_z:
             case SDLK_SPACE:
-              konami[indKon++] = 'u';
               break;
             case SDLK_DOWN:
             case SDLK_s:
-              konami[indKon++] = 'd';
               break;
             case SDLK_a:
-              konami[indKon++] = 'a';
               break;
             case SDLK_b:
-              konami[indKon++] = 'b';
               break;
             case SDLK_RETURN:
               salle=initialiser_salle(renderer, NIVEAUTXT, tileset);
@@ -140,23 +148,18 @@ int main(int argc, char *argv[]){
           switch(event.key.keysym.sym){
             case SDLK_LEFT:
             case SDLK_q:
-              Gauche=TRUE;
               break;
             case SDLK_RIGHT:
             case SDLK_d:
-              Droite=TRUE;
               break;
             case SDLK_UP:
             case SDLK_z:
             case SDLK_SPACE:
-            //Cette façon de faire produit la possibilité de bunny hop (saut juste après un saut, quand le bouton reste appuyé)
-              tryJump=TRUE;
                 break;
             case SDLK_DOWN:
             case SDLK_s:
               break;
             case SDLK_e:
-              tryAtk=TRUE;
               break;
           }
           break;
@@ -167,15 +170,10 @@ int main(int argc, char *argv[]){
         case SDL_JOYBUTTONDOWN :
         switch(event.jbutton.button){
             case 0 : //bouton A manette XBOX
-              konami[indKon++] = 'a';
-              tryJump=TRUE;
               break;
             case 1 : //bouton B manette XBOX
-              konami[indKon++] = 'b';
-              tryAtk=TRUE;
               break;
             case 7 : //bouton Start manette XBOX
-              konami[indKon++] = 's';
               break;
           }
         break;
@@ -185,14 +183,10 @@ int main(int argc, char *argv[]){
           switch(event.jaxis.axis){
             case 0 :
               if(event.jaxis.value>ZONEMORTE){
-                Droite = TRUE;
               }
               else if(event.jaxis.value<ZONEMORTE*-1){
-                Gauche = TRUE;
               }
               else{
-                Gauche = FALSE;
-                Droite = FALSE;
               }
               break;
           }
@@ -202,91 +196,38 @@ int main(int argc, char *argv[]){
         case SDL_JOYHATMOTION :
           switch(event.jhat.value){
             case SDL_HAT_CENTERED:
-              Gauche = FALSE;
-              Droite = FALSE;
               break;
             case SDL_HAT_LEFT:
-              konami[indKon++] = 'l';
-              Gauche = TRUE;
               break;
             case SDL_HAT_RIGHT:
-              konami[indKon++] = 'r';
-              Droite = TRUE;
               break;
             case SDL_HAT_UP:
-              konami[indKon++] = 'u';
-              tryJump=TRUE;
               break;
             case SDL_HAT_DOWN:
-              konami[indKon++] = 'd';
               break;
           }
-        }
-      }
-      if ( pJoystick != NULL ){
-        x_move = SDL_JoystickGetAxis(pJoystick, 0);
-        y_move = SDL_JoystickGetAxis(pJoystick, 1);
-      }
-
-      konamicode(perso,salle,konami,&indKon,&kon);
-
-      salle_nom=prendPorte(perso, salle->listePorte);
-      if(salle_nom != NULL){
-        destroy_salle(&salle);
-        salle=initialiser_salle(renderer, salle_nom, tileset);
-        salleChangee=TRUE;
-        kon = FALSE;
-        free(salle_nom);
-        salle_nom=NULL;
-      }
-
-      depVert(perso, salle, tryJump);
-
-
-      if(Gauche){
-        depGauche(perso, salle);
-        if(!Droite)
-          perso->direction = LEFT;
-      }
-
-      if(Droite){
-        depDroite(perso, salle);
-        if(!Gauche)
-          perso->direction = RIGHT;
-      }
-
-      if((!Gauche&&!Droite) || (Gauche&&Droite))
-        if(perso->etat == RUNNING)//ajouter par Thomas: on souhaite passer de RUNNING à IDLE mais pas de JUMPING à IDLE ou bien de ATTACKING à IDLE
-          perso->etat=IDLE;
-
-      tryJump=FALSE;
-
-      attaquer(perso,salle,tryAtk);
-
-      tryAtk=FALSE;
-
-      evolution(perso,salle);
-
-      miseAjourSprites(perso);
-
-      if(salleChangee){
-        ecranNoir(renderer,150);
-        salleChangee=FALSE;
-      }
-
-      affichage_complet(renderer, salle, perso);
-
-      frameTime = SDL_GetTicks() - frameStart;
-      if(frameTime < FRAMEDELAY){
-        SDL_Delay(FRAMEDELAY - frameTime);
       }
     }
+    if ( pJoystick != NULL ){
+      x_move = SDL_JoystickGetAxis(pJoystick, 0);
+      y_move = SDL_JoystickGetAxis(pJoystick, 1);
+    }
+
+    afficher_menu(renderer, menu);
+
+    frameTime = SDL_GetTicks() - frameStart;
+    if(frameTime < FRAMEDELAY){
+      SDL_Delay(FRAMEDELAY - frameTime);
+    }
+  }
+  if(salle!=NULL)
     destroy_salle(&salle);
+  if(perso!=NULL)
     destroy_personnage(&perso);
-    destroy_typeentites();
-    if(pJoystick != NULL)
-      SDL_JoystickClose(pJoystick);
-    quitter_SDL(&fenetre, &renderer);
+  if(pJoystick != NULL)
+    SDL_JoystickClose(pJoystick);
+  SDL_DestroyTexture(menu);
+  quitter_SDL(&fenetre, &renderer);
   fprintf(stdout, "Programme quitté normalement\n");
   return 0;
 }

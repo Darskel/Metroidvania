@@ -36,14 +36,15 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
     exit(EXIT_FAILURE);
   }
   printf("Frequence écran (en hz) : %i\n", mode->refresh_rate);
-  res_h=mode->w;
-  res_v=mode->h;
+  res_h=mode->w - mode->w*OFFSETWINDOW;
+  res_v=mode->h - mode->h*OFFSETWINDOW;
 
-  *fenetre = SDL_CreateWindow(NOM_JEU, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, res_h, res_v, fullscreen ? SDL_WINDOW_FULLSCREEN : (SDL_WINDOW_SHOWN|SDL_WINDOW_RESIZABLE|SDL_WINDOW_MAXIMIZED));
+  *fenetre = SDL_CreateWindow(NOM_JEU, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, res_h, res_v, fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : (SDL_WINDOW_SHOWN|SDL_WINDOW_RESIZABLE));
   if(!(*fenetre)){
     fprintf(stderr, "Erreur de creation de la fenetre : %s\n", SDL_GetError());
     exit(EXIT_FAILURE);
   }
+
   icon=IMG_Load("./sprites/autre/icone.png");
   SDL_SetWindowIcon(*fenetre,icon);
 
@@ -55,7 +56,6 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
   SDL_SetRenderDrawColor(*renderer,0,0,0,255);
   SDL_SetRenderDrawBlendMode(*renderer, SDL_BLENDMODE_BLEND);
 
-  SDL_FreeSurface(icon);
 
 }
 
@@ -213,7 +213,8 @@ void initialiser_typeentites(SDL_Renderer * renderer){
  * @return un pointeur sur la structure salle initialisée
  */
 salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, SDL_Texture * tileset){
-  salle_t * salle=NULL;
+  salle_t ** salle=malloc(sizeof(salle_t *));
+  *salle=NULL;
   char nom_bg[100];
 
   strcpy(nom_bg,DIRBG);
@@ -221,10 +222,10 @@ salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, SDL_Textu
   nom_bg[strlen(nom_bg) - 3] = '\0';
   strcat(nom_bg, "png");
 
-  lireSalle(nomFichier, &salle);
-  salle->background=initialiser_texture(nom_bg, renderer);
-  salle->tileset=tileset;
-  return salle;
+  lireSalle(nomFichier, salle);
+  (*salle)->background=initialiser_texture(nom_bg, renderer);
+  (*salle)->tileset=tileset;
+  return (*salle);
 }
 
 /**
@@ -301,6 +302,7 @@ void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, sal
 void afficher_entites(SDL_Renderer * renderer, salle_t * salle){
   monstre_t entite;
   SDL_Rect Rect_dest;
+  SDL_Rect Rect_source;
   SDL_RendererFlip flip=SDL_FLIP_NONE;
   enTete(salle->listeEntite);
   while(!horsListe(salle->listeEntite)){
@@ -308,11 +310,15 @@ void afficher_entites(SDL_Renderer * renderer, salle_t * salle){
     valeurElm(salle->listeEntite, &entite);
     if(entite.direction != RIGHT)
       flip=SDL_FLIP_HORIZONTAL;
+    Rect_source.x = entite.spriteActuel.x;
+    Rect_source.y = IDLE;
+    Rect_source.h = entite.spriteActuel.h;
+    Rect_source.w = entite.spriteActuel.w;
     Rect_dest.x = entite.pos.x * TAILLEBLOC + entite.delta.x;
     Rect_dest.y = entite.pos.y * TAILLEBLOC + entite.delta.y;
     Rect_dest.h = entite.spriteActuel.h;
     Rect_dest.w = entite.spriteActuel.w;
-    SDL_RenderCopyEx(renderer, entite.type->sprites, &(entite.spriteActuel), &Rect_dest, 0, NULL, flip);
+    SDL_RenderCopyEx(renderer, entite.type->sprites, &Rect_source, &Rect_dest, 0, NULL, flip);
     suivant(salle->listeEntite);
   }
 }
@@ -378,7 +384,7 @@ void miseAjourSprites(personnage_t * perso){
     perso->spriteActuel.y=IDLE;
   }
   else if(perso->etat == FALLING){
-    perso->spriteActuel.x=(perso->nbAnim[JUMPING] - 1)*(perso->spriteActuel.w);
+    perso->spriteActuel.x=7*(perso->spriteActuel.w);
     perso->spriteActuel.y=JUMPING*(perso->spriteActuel.h);
   }
   if(perso->newEtat){
@@ -399,10 +405,7 @@ void miseAjourSprites(personnage_t * perso){
         perso->spriteActuel.x+=perso->spriteActuel.w;
         if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
           perso->spriteActuel.x=0;
-        if(perso->etat == ATTACKING)
-          perso->evoSprite = EVOSPRITESATTACK;
-        else
-          perso->evoSprite = EVOSPRITES;
+        perso->evoSprite = EVOSPRITES;
       }
       else (perso->evoSprite)--;
     }
@@ -416,41 +419,55 @@ void miseAjourSprites(personnage_t * perso){
  * @param salle le pointeur vers la salle où trouver la liste d'entités avec les sprites à mettre à jour
  */
 void miseAjourSpritesEntites(salle_t * salle){
-  monstre_t * entite = NULL;
+  /*monstre_t entite;
 
   enTete(salle->listeEntite);
   while(!horsListe(salle->listeEntite)){
-    entite=malloc(sizeof(monstre_t));
-    valeurElm(salle->listeEntite, entite);
+    valeurElm(salle->listeEntite, &entite);
 
-    if(entite->etat == IDLE){
-      entite->spriteActuel.x=IDLE;
-      entite->spriteActuel.y=IDLE;
-    }
-
-    else if(entite->etat == FALLING){
-      entite->spriteActuel.x=(entite->type->nbAnim[JUMPING] -1)*(entite->spriteActuel.w);
-      entite->spriteActuel.y=JUMPING*(entite->spriteActuel.h);
-    }
-
-    else{
-      if(entite->etat > IDLE && entite->etat < FALLING){
-        entite->spriteActuel.y=entite->etat * (entite->spriteActuel.h);
-        if(entite->evoSprite<=0){
-          entite->spriteActuel.x+=entite->spriteActuel.w;
-          if(entite->spriteActuel.x >= (entite->type->nbAnim[entite->etat])*(entite->spriteActuel.w))
-            entite->spriteActuel.x=0;
-          entite->evoSprite = entite->type->vitesseAnim;
-        }
-        else (entite->evoSprite)--;
-      }
-    }
-
-    modifElm(salle->listeEntite, entite);
-    free(entite);
-    entite=NULL;
+    Rect_source.x = entite.spriteActuel.x;
+    Rect_source.y = IDLE;
+    Rect_source.h = entite.spriteActuel.h;
+    Rect_source.w = entite.spriteActuel.w;
+    Rect_dest.x = entite.pos.x * TAILLEBLOC + entite.delta.x;
+    Rect_dest.y = entite.pos.y * TAILLEBLOC + entite.delta.y;
+    Rect_dest.h = entite.spriteActuel.h;
+    Rect_dest.w = entite.spriteActuel.w;
     suivant(salle->listeEntite);
   }
+
+  if(perso->etat == IDLE){
+    perso->spriteActuel.x=IDLE;
+    perso->spriteActuel.y=IDLE;
+  }
+  else if(perso->etat == FALLING){
+    perso->spriteActuel.x=7*(perso->spriteActuel.w);
+    perso->spriteActuel.y=JUMPING*(perso->spriteActuel.h);
+  }
+  if(perso->newEtat){
+    if(perso->etat > IDLE && perso->etat < FALLING){
+      perso->spriteActuel.x=0;
+      perso->spriteActuel.y=perso->etat * (perso->spriteActuel.h);
+    }
+    if(perso->etat == ATTACKING)
+      perso->spriteActuel.w = LARGEURSPRITEPERSATTACK;
+    else
+      perso->spriteActuel.w = LARGEURSPRITEPERS;
+    perso->newEtat=FALSE;
+    perso->evoSprite=0;
+  }
+  else{
+    if(perso->etat > IDLE && perso->etat < FALLING){
+      if(perso->evoSprite<=0){
+        perso->spriteActuel.x+=perso->spriteActuel.w;
+        if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
+          perso->spriteActuel.x=0;
+        perso->evoSprite = EVOSPRITES;
+      }
+      else (perso->evoSprite)--;
+    }
+  }*/
+
 }
 
 

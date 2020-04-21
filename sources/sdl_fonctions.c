@@ -868,33 +868,33 @@ menu_t * creerMenuDemarrage(SDL_Renderer * renderer){
   tabBoutons[0].etiquette="Commencer";
   tabBoutons[0].parent=menu;
   tabBoutons[0].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/menu/commencer.png", renderer);
-  tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/menu/commencer_selectionne.png", renderer);
-  tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/menu/commencer_clique.png", renderer);
+  tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/commencer.png", renderer);
+  tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/commencer_selectionne.png", renderer);
+  tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/commencer_clique.png", renderer);
 
   tabBoutons[1].id=1;
   tabBoutons[1].etiquette="Continuer";
   tabBoutons[1].parent=menu;
   tabBoutons[1].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/menu/continuer.png", renderer);
-  tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/menu/continuer_selectionne.png", renderer);
-  tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/menu/continuer_clique.png", renderer);
+  tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/continuer.png", renderer);
+  tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/continuer_selectionne.png", renderer);
+  tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/continuer_clique.png", renderer);
 
   tabBoutons[2].id=2;
   tabBoutons[2].etiquette="Options";
   tabBoutons[2].parent=menu;
   tabBoutons[2].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[2].texture[RELAXED] = initialiser_texture("./sprites/menu/options.png", renderer);
-  tabBoutons[2].texture[HIGHLIGHTED] = initialiser_texture("./sprites/menu/options_selectionne.png", renderer);
-  tabBoutons[2].texture[PRESSED] = initialiser_texture("./sprites/menu/options_clique.png", renderer);
+  tabBoutons[2].texture[RELAXED] = initialiser_texture("./sprites/bouton/options.png", renderer);
+  tabBoutons[2].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/options_selectionne.png", renderer);
+  tabBoutons[2].texture[PRESSED] = initialiser_texture("./sprites/bouton/options_clique.png", renderer);
 
   tabBoutons[3].id=3;
   tabBoutons[3].etiquette="Quitter";
   tabBoutons[3].parent=menu;
   tabBoutons[3].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[3].texture[RELAXED] = initialiser_texture("./sprites/menu/quitter.png", renderer);
-  tabBoutons[3].texture[HIGHLIGHTED] = initialiser_texture("./sprites/menu/quitter_selectionne.png", renderer);
-  tabBoutons[3].texture[PRESSED] = initialiser_texture("./sprites/menu/quitter_clique.png", renderer);
+  tabBoutons[3].texture[RELAXED] = initialiser_texture("./sprites/bouton/quitter.png", renderer);
+  tabBoutons[3].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/quitter_selectionne.png", renderer);
+  tabBoutons[3].texture[PRESSED] = initialiser_texture("./sprites/bouton/quitter_clique.png", renderer);
 
   //CERTAINEMENT PAS TERMINE
 
@@ -931,17 +931,17 @@ menu_t * creerMenuConfirmation(SDL_Renderer * renderer){
   tabBoutons[0].etiquette="Oui";
   tabBoutons[0].parent=menu;
   tabBoutons[0].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/menu/oui.png", renderer);
-  tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/menu/oui_selectionne.png", renderer);
-  tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/menu/oui_clique.png", renderer);
+  tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/oui.png", renderer);
+  tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/oui_selectionne.png", renderer);
+  tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/oui_clique.png", renderer);
 
   tabBoutons[1].id=1;
   tabBoutons[1].etiquette="Non";
   tabBoutons[1].parent=menu;
   tabBoutons[1].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/menu/non.png", renderer);
-  tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/menu/non_selectionne.png", renderer);
-  tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/menu/non_clique.png", renderer);
+  tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/non.png", renderer);
+  tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/non_selectionne.png", renderer);
+  tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/non_clique.png", renderer);
 
   //CERTAINEMENT PAS TERMINE
 

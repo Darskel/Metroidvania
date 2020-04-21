@@ -132,14 +132,15 @@ int main(int argc, char *argv[]){
             case SDLK_b:
               break;
             case SDLK_RETURN:
-            salle=initialiser_salle(renderer, NIVEAUTXT, tileset);
-            positionDepart.x = 1;
-            positionDepartDelta.x = 0;
-            positionDepart.y = salle->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;
-            positionDepartDelta.y = TAILLEBLOC-1;
-            perso=initialisation_personnage(renderer, positionDepart, positionDepartDelta);
-            ecranNoir(renderer, 100);
-            jeu(fenetre, &renderer, mode, &salle, &perso, tileset, pJoystick, fullscreen);
+              salle=initialiser_salle(renderer, NIVEAUTXT, tileset);
+              positionDepart.x = 1;
+              positionDepartDelta.x = 0;
+              positionDepart.y = salle->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;
+              positionDepartDelta.y = TAILLEBLOC-1;
+              perso=initialisation_personnage(renderer, positionDepart, positionDepartDelta);
+              ecranNoir(renderer, 100);
+              jeu(fenetre, &renderer, mode, &salle, &perso, tileset, pJoystick, fullscreen);
+              fin = TRUE;
               break;
           }
           break;

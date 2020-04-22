@@ -10,8 +10,7 @@ ifeq ($(OS),Windows_NT)
 	SDL_DIR=C:\SDLib\SDL2
 	SDL_LIB_DIR=${SDL_DIR}\lib
 	SDL_INC_DIR=${SDL_DIR}\include
-	LIBS=-L${SDL_LIB_DIR} -lmingw32 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2 #-lSDL2_mixer
-	INCS=-I${SDL_INC_DIR}
+	LIBS=-L${SDL_LIB_DIR} -I${SDL_INC_DIR} -lmingw32 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2 #-lSDL2_mixer
 	clr=del /s *.o
 	propre=del /s *.exe
 else

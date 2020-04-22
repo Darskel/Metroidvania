@@ -118,10 +118,11 @@ SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer){
  */
 personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t positionDepart, position_t positionDepartDelta){
   personnage_t * personnage=malloc(sizeof(personnage_t));
-  personnage->pv=1;
-  personnage->pv_max=1;
+  personnage->pv_max=PVMAX;
+  personnage->pv=personnage->pv_max;
   personnage->kb=0;
   personnage->inv=0;
+  personnage->clign=FREQCLIGN;
   personnage->direction=RIGHT;
   personnage->vit_dep=VITDEPPERS;
   personnage->vit_saut=VITSAUTPERS;
@@ -264,7 +265,7 @@ void afficher_salle(SDL_Renderer * renderer, salle_t * salle){
         {
           posSprite = (salle->mat[i][j]-1);
           if(posSprite >= NBBLOCSTILESET)
-            posSprite=NBBLOCSTILESET -1;
+            posSprite=NBLOCERREUR-1;
           if(posSprite >= 0){
             Rect_dest.y = i * TAILLEBLOC;
             Rect_dest.x = j * TAILLEBLOC;
@@ -335,6 +336,8 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
   int maxh;
   float ratioFenetre;
   float ratioSalle;
+  SDL_Texture * coeurImage;
+  coeurImage = initialiser_texture("./sprites/entite/coeur/coeur-small.png", renderer);
 
   SDL_SetRenderDrawColor(renderer, 0,0,0,255);
   SDL_RenderClear(renderer);
@@ -364,11 +367,15 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
   SDL_RenderClear(renderer);
   afficher_salle(renderer,salle);
   afficher_entites(renderer, salle);
-  afficher_personnage(renderer, personnage, salle);
+  if(personnage->clign%FREQCLIGN == 0)
+    afficher_personnage(renderer, personnage, salle);
+  afficherVieCoeurs(renderer, personnage, coeurImage);
+  //afficherVieJauge(renderer, personnage);
   SDL_SetRenderTarget(renderer, NULL);
   SDL_RenderCopy(renderer, textureSalle, NULL, &Rect_dest);
   SDL_RenderPresent(renderer);
   SDL_DestroyTexture(textureSalle);
+  SDL_DestroyTexture(coeurImage);
 }
 
 /**
@@ -377,6 +384,13 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
  * @param perso le pointeur sur la structure personnage à faire évoluer
  */
 void miseAjourSprites(personnage_t * perso){
+  if(perso->inv || perso->kb){
+    perso->clign--;
+    if(perso->clign<0)
+      perso->clign=FREQCLIGN;
+  }
+  else
+    perso->clign=FREQCLIGN;
   if(perso->etat == IDLE){
     perso->spriteActuel.x=IDLE;
     perso->spriteActuel.y=IDLE;
@@ -965,4 +979,55 @@ boolean_t menuConfirmation(SDL_Renderer * renderer){
 
 void afficherMenu(SDL_Renderer * renderer, menu_t * menu){
   //A FAIRE
+}
+
+
+void afficherVieJauge(SDL_Renderer * renderer, personnage_t * personnage){
+  SDL_Rect exterieur;
+  SDL_Rect interieur;
+  int maxw;
+  int maxh;
+  SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
+  interieur.h = maxh/50;
+  exterieur.w = maxw/8 + 2;
+  exterieur.h = interieur.h + 2;
+  exterieur.x = maxw/100 + 1;
+  exterieur.y = maxh/200 + 1 + 10;
+  interieur.x = exterieur.x +1;
+  interieur.y = exterieur.y +1;
+  interieur.w = exterieur.w - exterieur.w/((personnage->pv_max*1.0)/((personnage->pv_max - personnage->pv)*1.0));
+  if(interieur.w>=2)
+    interieur.w -= 2;
+  SDL_SetRenderDrawColor(renderer,115, 23, 45, 250);
+  SDL_RenderFillRect(renderer, &exterieur);
+  SDL_SetRenderDrawColor(renderer,20, 160, 46, 255);
+  SDL_RenderFillRect(renderer, &interieur);
+  SDL_SetRenderDrawColor(renderer,0,0,0,255);
+}
+
+void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * coeurImage){
+  SDL_Rect boite;
+  SDL_Rect coeur;
+  int maxw;
+  int maxh;
+  int coeurw;
+  int coeurh;
+  int pv=0;
+  SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
+  SDL_QueryTexture(coeurImage, NULL, NULL, &coeurw, &coeurh);
+  coeur.w = coeurw;
+  coeur.h = coeurh;
+  boite.w = (coeur.w+2) *(personnage->pv_max);
+  boite.h = coeur.h +2;
+  boite.x = maxw/100;
+  boite.y = maxh/200;
+  coeur.x = boite.x +1;
+  coeur.y = boite.y +1;
+  SDL_SetRenderDrawColor(renderer, 115, 23, 45, 50);
+  SDL_RenderFillRect(renderer, &boite);
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  for(int pv=personnage->pv; pv>0; pv--){
+    SDL_RenderCopy(renderer, coeurImage, NULL, &coeur);
+    coeur.x += coeur.w +2;
+  }
 }

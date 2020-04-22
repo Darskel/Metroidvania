@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 //#include <SDL2/SDL.h>
 #include "../headers/structs.h"
 #include "../headers/liste.h"
@@ -370,7 +369,7 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
                     p->newEtat = TRUE;
                     p->jpCd = JPCD/4;
                     p->kb = 0;
-                    p->inv = 60;
+                    p->inv = TEMPINV;
                 }else{
                     //continuer chute
                     p->delta.y += p->vit_chute;
@@ -782,7 +781,7 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
         perso->direction = entite->direction;
     }else{
         entite->type->vit_dep = 1 - entite->type->vit_dep; //divise par deux la vitesse de dep du serpent
-        
+
         if(dep(entite,salle,TRUE)){
             if(entite->direction){
                 entite->direction = LEFT;
@@ -861,12 +860,13 @@ static void creerCoeur(monstre_t* m, salle_t* s){
 }
 
 void evolution(personnage_t* p, salle_t* s){
+    int r;
     if(p->inv)
         (p->inv)--;
     if(p->kb){
         if(p->direction){
             depGauche(p,s);
-        }else{           
+        }else{
             depDroite(p,s);
         }
     }
@@ -889,8 +889,7 @@ void evolution(personnage_t* p, salle_t* s){
 
             //creation des coeurs
             if(strcmp(e.type->nom,"fleche") && strcmp(e.type->nom,"fleche_feu") && strcmp(e.type->nom,"venin") && e.type->comportement != compRecuperable && e.type->comportement != compCoeur){
-                srand(time(NULL));
-                int r = rand() % 100;
+                r = rand() % 100;
                 if(r < COEURDROPRATE){
                     //creer un coeur
                     creerCoeur(&e,s);

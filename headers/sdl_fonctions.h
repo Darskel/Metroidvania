@@ -57,3 +57,5 @@ menu_t * creerMenuConfirmation(SDL_Renderer * renderer);
 void detruireMenu(menu_t ** menu);
 boolean_t menuConfirmation(SDL_Renderer * renderer);
 void afficherMenu(SDL_Renderer * renderer, menu_t * menu);
+void afficherVieJauge(SDL_Renderer * renderer, personnage_t * personnage);
+void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * coeurImage);

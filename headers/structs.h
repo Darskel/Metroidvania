@@ -95,13 +95,17 @@
 #define TAILLEKONAMI 11 //NB d'inputs du Konami code
 #define KONAMICODE "uuddlrlrbas"
 
-#define NBBLOCSTILESET 50
+#define NBBLOCSTILESET 58
+#define NBLOCERREUR 49
 
 #define TAILLEBGMENUW 1920
 #define TAILLEBGMENUH 1080
 
-#define COEURDROPRATE 100
+#define COEURDROPRATE 10
 
+#define PVMAX 3
+#define TEMPINV 60
+#define FREQCLIGN 2
 
 
 /*
@@ -223,6 +227,7 @@ typedef struct personnage_s{
     int pv_max; /**< PV max du personnage */
     boolean_t kb; /**< Indique si le joueur est en plein knockback */
     int inv; /**< Entier qui permet de décompter l'invulnérabilité du joueur */
+    int clign; /**Entier pour le clignotemment */
     int nbPxSaut; /**< Entier qui indique le nombre de pixel qu'il a fait lors de son saut (ou deuxième saut) */
     int nbFrameAtk; /**< Entier qui indique le nombre de frames qui a eu lieu depuis le début de l'attaque */
     int nbSaut; /**< Entier qui indique le nombre de saut que le personnage à fait avant de retoucher le sol */

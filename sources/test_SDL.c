@@ -47,6 +47,7 @@ int main(int argc, char *argv[]){
   int messageRes;
   SDL_MessageBoxButtonData * buttons = NULL;
 
+  srand(time(NULL));
   initialisation_SDL(&fenetre, &renderer, &mode, fullscreen);
   SDL_SetRenderDrawColor(renderer,0,0,0,255);
   SDL_RenderClear(renderer);

@@ -8,6 +8,7 @@
  * \version 1.1
  * \date 06/04/2020
 */
+#include <time.h>
 
 int hitE(monstre_t* e1, monstre_t* e2);
 int persValidDep(personnage_t* p, salle_t* s);

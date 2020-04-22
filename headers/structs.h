@@ -100,6 +100,8 @@
 #define TAILLEBGMENUW 1920
 #define TAILLEBGMENUH 1080
 
+#define COEURDROPRATE 100
+
 
 
 /*
@@ -175,10 +177,10 @@ typedef struct position_s {
 } position_t;
 
 /**
- * \enum boulean_e
+ * \enum boolean_e
  * \brief Permet d'utiliser \e TRUE et \e FALSE
 */
-typedef enum boulean_e{
+typedef enum boolean_e{
     FALSE, /**< Valeur de FALSE: 0 */
     TRUE /**< Valeur de TRUE: 1 */
 } boolean_t;
@@ -192,7 +194,7 @@ typedef enum etat_e{
     RUNNING, /**< Etat course */
     JUMPING, /**< Etat saut */
     ATTACKING, /**< Etat attaque */
-    FALLING /**< Etat chute */
+    FALLING, /**< Etat chute */
 } etat_t;
 
 /**
@@ -219,6 +221,7 @@ typedef struct salle_s{
 typedef struct personnage_s{
     int pv; /**< PV(points de vie) actuel du personnage */
     int pv_max; /**< PV max du personnage */
+    boolean_t kb; /**< Indique si le joueur est en plein knockback */
     int inv; /**< Entier qui permet de décompter l'invulnérabilité du joueur */
     int nbPxSaut; /**< Entier qui indique le nombre de pixel qu'il a fait lors de son saut (ou deuxième saut) */
     int nbFrameAtk; /**< Entier qui indique le nombre de frames qui a eu lieu depuis le début de l'attaque */

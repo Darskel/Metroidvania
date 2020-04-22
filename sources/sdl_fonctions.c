@@ -120,6 +120,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage_t * personnage=malloc(sizeof(personnage_t));
   personnage->pv=1;
   personnage->pv_max=1;
+  personnage->kb=0;
   personnage->inv=0;
   personnage->direction=RIGHT;
   personnage->vit_dep=VITDEPPERS;
@@ -185,6 +186,8 @@ void destroy_typeentites(void){
   }Pour tout les types de monstres*/
   SDL_DestroyTexture((typesMonstre[-SERPENTBLEU -1]).sprites);
   free((typesMonstre[-SERPENTBLEU -1]).nbAnim);
+  SDL_DestroyTexture((typesMonstre[-COEUR -1]).sprites);
+  free((typesMonstre[-COEUR -1]).nbAnim);
   SDL_DestroyTexture((typesMonstre[-FLECHE -1]).sprites);
   free((typesMonstre[-FLECHE -1]).nbAnim);
 }
@@ -200,6 +203,7 @@ void initialiser_typeentites(SDL_Renderer * renderer){
     typesMonstre[i].sprites = initialiser_texture(typesMonstre[i].path, renderer);
   }*/
   typesMonstre[-SERPENTBLEU -1].sprites = initialiser_texture(typesMonstre[-SERPENTBLEU -1].path, renderer);
+  typesMonstre[-COEUR - 1].sprites = initialiser_texture(typesMonstre[-COEUR -1].path, renderer);
   typesMonstre[-FLECHE - 1].sprites = initialiser_texture(typesMonstre[-FLECHE -1].path, renderer);
 }
 
@@ -722,14 +726,13 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, s
 
       depVert(*perso, *salle, tryJump);
 
-
-      if(Gauche){
+      if(Gauche && !(*perso)->kb){ // ajout de && !(*perso)->kb par Thomas: evite de changer la direction du regard pendant un knockback
         depGauche(*perso, *salle);
         if(!Droite)
           (*perso)->direction = LEFT;
       }
 
-      if(Droite){
+      if(Droite && !(*perso)->kb){ // ajout de && !(*perso)->kb par Thomas: evite de changer la direction du regard pendant un knockback
         depDroite(*perso, *salle);
         if(!Gauche)
           (*perso)->direction = RIGHT;

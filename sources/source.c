@@ -237,6 +237,30 @@ void creerTypeEntite(){
         compSerpent //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
+    //coeur
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 1;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-COEUR - 1] = (type_monstre_t){
+        1, //pv de base
+        1, //vit de deplacement
+        0, //vitesse d'attaque
+        "coeur", //nom de l'entité
+        "sprites/entite/coeur/coeur.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        1, //nombre de dégats qu'il inflige
+        {8,8}, //hitbox de l'entité (hauteur,largeur)
+        {8,8}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compCoeur //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
     //fleche
     tmp = malloc(sizeof(int) * 4);
     tmp[0] = 1;

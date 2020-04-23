@@ -92,11 +92,13 @@ SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer){
       fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
       exit(EXIT_FAILURE);
   }
+  SDL_PixelFormat* pixelFormat = tmp->format;
+  Uint32 pixelFormatEnum = pixelFormat->format;
   SDL_SetTextureBlendMode(tmp, SDL_BLENDMODE_BLEND);
-  texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,
+  texture = SDL_CreateTexture(renderer, pixelFormatEnum,
                               SDL_TEXTUREACCESS_TARGET, surface->w, surface->h);
   if(texture==NULL){
-      fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
+      fprintf(stderr, "Erreur SDL_CreateTexture : %s", SDL_GetError());
       exit(EXIT_FAILURE);
   }
   SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);

@@ -110,22 +110,22 @@
 
 /*
     INVENTAIRE:
-        objet n°1 : clé rouillé
+        objet n°1 : clé rouillée
         objet n°2 : clé rouge
         objet n°3 : clé verte
         objet n°4 : fléche de feu
         objet n°5 : clé bleu
         objet n°6 : double saut
         objet n°7 : renard
-        objet n°8 : champignon
+        objet n°8 : discoshroom
     >
-        champignon
         cle bleue
-        cle rouille
         cle rouge
+        cle rouillee
         cle verte
+        discoshroom
         double saut
-        fleche de feu
+        huile
         renard
 
 */

@@ -133,7 +133,7 @@ int main(int argc, char *argv[]){
             case SDLK_b:
               break;
             case SDLK_RETURN:
-              salle=initialiser_salle(renderer, NIVEAUTXT, tileset);
+              salle=initialiser_salle(renderer, NIVEAUTXT, tileset, perso);
               positionDepart.x = 1;
               positionDepartDelta.x = 0;
               positionDepart.y = salle->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;

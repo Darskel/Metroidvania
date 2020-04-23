@@ -26,7 +26,7 @@ int chargerSauvegarde(int, char*, personnage_t*, int[], char*[]);
 void creerTypeEntite();
 type_monstre_t* obtenirTypesEntite();
 
-int nettoyerSalle(salle_t** salle);
-int lireSalle(char*, salle_t**);
+int nettoyerSalle(salle_t**);
+int lireSalle(char*, salle_t**, personnage_t*);
 
 #endif

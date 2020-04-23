@@ -213,8 +213,345 @@ int chargerSauvegarde(int numSauv, char* salle, personnage_t* perso, int inventa
  *
 */
 void creerTypeEntite(){
-    //Serpent bleu
+
+    //clé bleue
     int* tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 1;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-CLEBLEUE - 1] = (type_monstre_t){
+        1, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "cle bleue", //nom de l'entité
+        "sprites/entite/cles/cle_bleue.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {10,11}, //hitbox de l'entité (hauteur,largeur)
+        {10,11}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //clé rouge
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 1;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-CLEROUGE - 1] = (type_monstre_t){
+        1, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "cle rouge", //nom de l'entité
+        "sprites/entite/cles/cle_rouge.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {10,11}, //hitbox de l'entité (hauteur,largeur)
+        {10,11}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //clé rouillée
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 1;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-CLEROUILLE - 1] = (type_monstre_t){
+        1, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "cle rouillee", //nom de l'entité
+        "sprites/entite/cles/cle_rouille.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {10,11}, //hitbox de l'entité (hauteur,largeur)
+        {10,11}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //clé verte
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 1;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-CLEVERTE - 1] = (type_monstre_t){
+        1, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "cle verte", //nom de l'entité
+        "sprites/entite/cles/cle_verte.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {10,11}, //hitbox de l'entité (hauteur,largeur)
+        {10,11}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //dischoshroom
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 8;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-DISCOSHROOM - 1] = (type_monstre_t){
+        1, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "discoshroom", //nom de l'entité
+        "sprites/entite/discoshroom/tileset.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {16,16}, //hitbox de l'entité (hauteur,largeur)
+        {16,16}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //double saut
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 11;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-DOUBLESAUT - 1] = (type_monstre_t){
+        1, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "double saut", //nom de l'entité
+        "sprites/entite/double-saut/tileset.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {25,25}, //hitbox de l'entité (hauteur,largeur)
+        {25,25}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //huile
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 1;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-FLACONHUILE - 1] = (type_monstre_t){
+        1, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "huile", //nom de l'entité
+        "sprites/entite/flacon_huile/flacon.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {8,8}, //hitbox de l'entité (hauteur,largeur)
+        {8,8}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //mur de glace
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 10;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-MURGLACE - 1] = (type_monstre_t){
+        2, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "mur glace", //nom de l'entité
+        "sprites/entite/mur_glace/tileset.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {32,16}, //hitbox de l'entité (hauteur,largeur)
+        {32,16}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compMurGlace //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //porte bleue
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 2;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-PORTEB - 1] = (type_monstre_t){
+        1, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "porte bleue", //nom de l'entité
+        "sprites/entite/portes/porte_bleu.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {32,13}, //hitbox de l'entité (hauteur,largeur)
+        {32,13}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compPortes //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //porte rouge
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 2;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-PORTERG - 1] = (type_monstre_t){
+        1, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "porte rouge", //nom de l'entité
+        "sprites/entite/portes/porte_rouge.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {32,13}, //hitbox de l'entité (hauteur,largeur)
+        {32,13}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compPortes //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //porte rouillée
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 2;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-PORTERL - 1] = (type_monstre_t){
+        1, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "porte rouillee", //nom de l'entité
+        "sprites/entite/portes/porte_rouillee.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {36,4}, //hitbox de l'entité (hauteur,largeur)
+        {32,13}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compPortes //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //porte verte
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 2;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-PORTEV - 1] = (type_monstre_t){
+        1, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "porte verte", //nom de l'entité
+        "sprites/entite/portes/porte_verte.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {32,13}, //hitbox de l'entité (hauteur,largeur)
+        {32,13}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compPortes //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //renard
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 1;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-RENARD - 1] = (type_monstre_t){
+        1, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "renard", //nom de l'entité
+        "sprites/entite/renard/tileset.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {13,24}, //hitbox de l'entité (hauteur,largeur)
+        {13,24}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //roi vifplume
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 2;
+    tmp[1] = 1;
+    tmp[2] = 0;
+    tmp[3] = 2;
+
+    typesMonstre[-ROIVP - 1] = (type_monstre_t){
+        6, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "roi vifplume", //nom de l'entité
+        "sprites/entite/roi_vifplume/tileset.png", //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {57,24}, //hitbox de l'entité (hauteur,largeur)
+        {57,50}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compRoiVifplume //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //Serpent bleu
+    tmp = malloc(sizeof(int) * 4);
     tmp[0] = 0;
     tmp[1] = 2;
     tmp[2] = 0;
@@ -224,7 +561,7 @@ void creerTypeEntite(){
         2, //pv de base
         VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
         0, //vitesse d'attaque
-        "serpent_bleu",//nom, //nom de l'entité
+        "serpent bleu",//nom, //nom de l'entité
         "sprites/entite/serpent_bleu/tileset.png",//chemin, //chemin vers les sprites
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
@@ -235,6 +572,126 @@ void creerTypeEntite(){
         FALSE, //Passe à travers les blocs*
         25, //Attend 25 frames avant de changer d'animation (plutôt lent)
         compSerpent //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //Serpent rose
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 0;
+    tmp[1] = 2;
+    tmp[2] = 0;
+    tmp[3] = 1;
+
+    typesMonstre[-SERPENTROSE - 1] = (type_monstre_t){
+        1, //pv de base
+        VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
+        0, //vitesse d'attaque
+        "serpent rose",//nom, //nom de l'entité
+        "sprites/entite/serpent_rose/tileset.png",//chemin, //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
+        0, //nombre de dégats qu'il inflige
+        {28,51}, //hitbox de l'entité (hauteur,largeur)
+        {30,51}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        25, //Attend 25 frames avant de changer d'animation (plutôt lent)
+        compSerpent //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //Serpent vert
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 0;
+    tmp[1] = 2;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-SERPENTVERT - 1] = (type_monstre_t){
+        2, //pv de base
+        VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
+        0, //vitesse d'attaque
+        "serpent bleu",//nom, //nom de l'entité
+        "sprites/entite/serpent_vert/tileset.png",//chemin, //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
+        1, //nombre de dégats qu'il inflige
+        {28,51}, //hitbox de l'entité (hauteur,largeur)
+        {30,51}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        25, //Attend 25 frames avant de changer d'animation (plutôt lent)
+        compSerpent //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //singe de grotte
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 0;
+    tmp[1] = 2;
+    tmp[2] = 0;
+    tmp[3] = 4;
+
+    typesMonstre[-SINGEGROTTE - 1] = (type_monstre_t){
+        4, //pv de base
+        1, //vit de deplacement
+        0, //vitesse d'attaque
+        "singe grotte",//nom, //nom de l'entité
+        "sprites/entite/singe_grotte/tileset.png",//chemin, //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
+        1, //nombre de dégats qu'il inflige
+        {26,19}, //hitbox de l'entité (hauteur,largeur) {35,25}, {32,22}, {31,25}, {31,21} quand il saute !
+        {42,25}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        25, //Attend 25 frames avant de changer d'animation (plutôt lent)
+        compSingeGrotte //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //vers géant
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 8;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-VERSGEANT - 1] = (type_monstre_t){
+        2, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "vers geant",//nom, //nom de l'entité
+        "sprites/entite/vers_geant/tileset.png",//chemin, //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
+        1, //nombre de dégats qu'il inflige
+        {0,0}, //hitbox de l'entité (hauteur,largeur) {2,5}, {8,7}, {13,8}, {17,10}, {21,10}, {25,10}, {29,10} quand il attaque ! +4,+0 à partir de [4]
+        {33,20}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        25, //Attend 25 frames avant de changer d'animation (plutôt lent)
+        compVersGeant //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //vifplume
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 2;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 8;
+
+    typesMonstre[-VIFPLUME - 1] = (type_monstre_t){
+        2, //pv de base
+        0, //vit de deplacement
+        0, //vitesse d'attaque
+        "vifplume",//nom, //nom de l'entité
+        "sprites/entite/vers_geant/tileset.png",//chemin, //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
+        1, //nombre de dégats qu'il inflige
+        {30,21}, //hitbox de l'entité (hauteur,largeur) {26,32} quand il attaque !
+        {31,37}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        25, //Attend 25 frames avant de changer d'animation (plutôt lent)
+        compVifplume //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
     //coeur
@@ -276,9 +733,57 @@ void creerTypeEntite(){
         "sprites/entite/fleche/tileset.png",//chemin, //chemin vers les sprites
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
-        2, //nombre de dégats qu'il inflige
+        1, //nombre de dégats qu'il inflige
         {3,19}, //hitbox de l'entité (hauteur,largeur)
         {9,19}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compFleches //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //fleche de feu
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 1;
+    tmp[1] = 2;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-FLECHEFEU - 1] = (type_monstre_t){
+        1, //pv de base
+        3, //vit de deplacement
+        0, //vitesse d'attaque
+        "fleche feu",//nom, //nom de l'entité
+        "sprites/entite/fleche_feu/tileset.png",//chemin, //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        2, //nombre de dégats qu'il inflige
+        {5,19}, //hitbox de l'entité (hauteur,largeur)
+        {8,19}, //taille sprites
+        FALSE, //Passe à travers les entités
+        FALSE, //Passe à travers les blocs*
+        0, //N'attend pas avant de changer d'animation
+        compFleches //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+    };
+
+    //venin
+    tmp = malloc(sizeof(int) * 4);
+    tmp[0] = 1;
+    tmp[1] = 0;
+    tmp[2] = 0;
+    tmp[3] = 0;
+
+    typesMonstre[-VENIN - 1] = (type_monstre_t){
+        1, //pv de base
+        3, //vit de deplacement
+        0, //vitesse d'attaque
+        "venin",//nom, //nom de l'entité
+        "sprites/entite/venin/crachat.png",//chemin, //chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !!!
+        tmp, //Tableau de nombre d'animations par etat
+        1, //nombre de dégats qu'il inflige
+        {6,7}, //hitbox de l'entité (hauteur,largeur)
+        {6,7}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0, //N'attend pas avant de changer d'animation
@@ -302,14 +807,25 @@ type_monstre_t* obtenirTypesEntite(){
  * @param s pointeur sur la structure salle où trouver la liste
  * @param pos la position de l'entite (en cases)
 */
-static void creerEntite(idEnt_t id, salle_t* s, position_t pos){
+static void creerEntite(idEnt_t id, salle_t* s, position_t pos, personnage_t* p){
     monstre_t* e = malloc(sizeof(monstre_t));
     id *= -1;
 
     e->type = &typesMonstre[id-1];
     e->pv = e->type->pv_base;
 
-    e->delta = (position_t){0,TAILLEBLOC - e->type->tailleSprite.hauteur%TAILLEBLOC};
+    if(e->type->comportement == compRecuperable){
+        for(int i = 0; i < TAILLE_INVENTAIRE; i++){
+            if(!strcmp(e->type->nom,p->nomObj[i])){
+                if(p->inventaire[i]){
+                    free(e);
+                    return;
+                }
+            }
+        }
+    }
+
+    e->delta = (position_t){0,(TAILLEBLOC - e->type->tailleSprite.hauteur%TAILLEBLOC)%TAILLEBLOC};
     e->pos = pos;
     e->direction = LEFT;
     e->etat = RUNNING;
@@ -350,7 +866,7 @@ int nettoyerSalle(salle_t** salle){
  * @param salle pointeur du pointeur de la structure salle à remplir avec la lecture
  * @return 0 si tout s'est bien déroulé
 */
-int lireSalle(char* nomFichier, salle_t** salle){
+int lireSalle(char* nomFichier, salle_t** salle, personnage_t* perso){
     FILE * monDoc = NULL;
     char mot[50];
     int lon, larg, val;
@@ -390,7 +906,7 @@ int lireSalle(char* nomFichier, salle_t** salle){
         fscanf(monDoc, "%d", &val);
         //gestion des entités !!!
         if(val < 0 && val >= -NBTYPEMONSTRE){
-            creerEntite(val,*salle, (position_t){i%lon,i/lon});
+            creerEntite(val,*salle, (position_t){i%lon,i/lon}, perso);
             (*salle)->mat[i/lon][i%lon] = 0;
         }else
             (*salle)->mat[i/lon][i%lon] = val > 0 ? val : 0;

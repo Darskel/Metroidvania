@@ -10,8 +10,8 @@
  * \file comportement.c
  * \brief Ensemble de fonctions pour le comportement des mobs et du personnage
  * \author Thomas DIDIER L2 Info Le Mans
- * \version 3.1
- * \date 06/04/2020
+ * \version 3.5
+ * \date 23/04/2020
 */
 
 /*static int toucher(monstre_t* e1, monstre_t* e2){
@@ -42,6 +42,7 @@ static void recupElem(monstre_t* entite, personnage_t* perso){
         if(!strcmp(entite->type->nom,perso->nomObj[i])){
             perso->inventaire[i] = 1;
             entite->pv = 0;
+            return;
         }
     }
 }
@@ -106,9 +107,9 @@ static int hitP(monstre_t* m, personnage_t* p){
     int topE, topP;
     int bottomE, bottomP;
 
-    leftE = m->pos.x*TAILLEBLOC + m->delta.x + (m->type->tailleSprite.largeur - m->type->hitbox.largeur)/2;
+    leftE = m->pos.x*TAILLEBLOC + m->delta.x;
     rightE = leftE + m->type->hitbox.largeur;
-    topE = m->pos.y*TAILLEBLOC + m->delta.y + (m->type->tailleSprite.hauteur - m->type->hitbox.hauteur)/2;
+    topE = m->pos.y*TAILLEBLOC + m->delta.y + (m->type->tailleSprite.hauteur - m->type->hitbox.hauteur);
     bottomE = topE + m->type->hitbox.hauteur;
 
     leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
@@ -698,15 +699,12 @@ static int dep(monstre_t* entite, salle_t* salle, boolean_t chute){
 }*/
 
 void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle){
-    /*if(hitP(entite,perso))
+    entite->etat = IDLE;
+    if(hitP(entite,perso))
         recupElem(entite,perso);
-
-    //gestion des sprites
-    entite->spritesActuel = (entite->spritesActuel + 1)%(entite->type->nb_sprites);*/
 }
 
 void compCoeur(monstre_t* e, personnage_t* p, salle_t* s){
-    //printf("%d_%d\n", e->pos.x * 8 + e->delta.x, e->pos.y*8 + e->delta.y);
     if(hitP(e,p)){
         p->pv += e->type->degat;
         e->pv = 0;
@@ -749,27 +747,58 @@ void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle){
     }
 }
 
-/*void compMurGlace(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
+void compPortes(monstre_t* e, personnage_t* p, salle_t* s){
+    if(!e->direction)
+        e->direction = RIGHT;
+    
+    if(!e->etat != IDLE)
+        e->etat = IDLE;
+
+    int aie = hitP(e,p);
+    if(aie && e->pv == 1){
+        int i, l;
+        int validate = 0;
+        char tmp1[10], tmp2[10];
+
+        for(l = 0; l < strlen(e->type->nom) && e->type->nom[l] != ' '; l++);
+        strcpy(tmp1, e->type->nom + l + 1);
+
+        for(i = 0; i < TAILLE_INVENTAIRE && !validate; i++){
+            strcpy(tmp2, "");
+            for(l = 0; l < strlen(p->nomObj[i]) && p->nomObj[i][l] != ' '; l++);
+            if(l < strlen(p->nomObj[i])){
+                strcpy(tmp2, p->nomObj[i] + l + 1);
+                if(!strcmp(tmp1,tmp2))
+                    validate = 1;
+            }
+        }
+        if(validate && p->inventaire[i-1]){
+            //changement d'état
+            e->pv = 2;
+        }else{
+            while(aie){
+                p->delta.x += aie;
+                aie = hitP(e,p);
+            }
+        }
+
+    }
+}
+
+void compMurGlace(monstre_t* entite, personnage_t* perso, salle_t* salle){
     if(entite->pv)
         entite->pv = 2;
-    /*ou
-    if(entite->pv >= 10)
-        entite->pv = 11;
-    else
-        (entite->pv)--;
-    */
-/*}
+}
 
-void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
+void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
     //fonction en beta
-    if(hitP(entite,perso)){
+    /*if(hitP(entite,perso)){
         perso->pv -= entite->type->degat;
     }
     if(!hitB(entite,salle)){
         dep(entite);
-    }
-    //gestion sprite
-}*/
+    }*/
+}
 
 void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
     int dir = hitP(entite,perso);
@@ -803,8 +832,8 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
     }
 }
 
-/*void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
-    if(hitP(entite,perso)){
+void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
+    /*if(hitP(entite,perso)){
         perso->pv -= entite->type->degat;
         entite->direction = 1 - entite->direction;
         //sprite
@@ -817,24 +846,22 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
                 //attaquer
             }
         }
-    }
-    //gestion sprite
+    }*/
 }
 
-void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
-    if(inRange(entite,perso,4)){
+void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle){
+    /*if(inRange(entite,perso,4)){
         //attaquer
-    }
+    }*/
 }
 
-void compVersGeant(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
+void compVersGeant(monstre_t* entite, personnage_t* perso, salle_t* salle){
 
 }
 
-void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle, liste_t* lEntites){
+void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
 
 }
-*/
 
 static void creerCoeur(monstre_t* m, salle_t* s){
     monstre_t* c = malloc(sizeof(monstre_t));
@@ -845,7 +872,7 @@ static void creerCoeur(monstre_t* m, salle_t* s){
     int rightP = leftP + m->type->hitbox.largeur;
 
     c->delta = (position_t){((leftP + rightP)/2)%8,1};
-    c->pos = (position_t){(leftP + rightP)/16,m->pos.y+2 - 3};
+    c->pos = (position_t){(leftP + rightP)/16, m->pos.y};
     c->direction = 1;
 
     c->etat = IDLE;

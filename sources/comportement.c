@@ -655,11 +655,11 @@ static int verifChuteMonstre(monstre_t* m, salle_t* s){
         return -1; //Le monstre est tombé dans le vide ?
 
     for(int i = leftM; i <= rightM; i++){
-        if(s->mat[bottomM][i])
-            return FALSE;
+        if(!s->mat[bottomM][i])
+            return TRUE;
     }
 
-    return TRUE;
+    return FALSE;
 }
 
 /**
@@ -825,26 +825,26 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
         entite->direction = dir > 0 ? 0 : 1;
         perso->direction = entite->direction;
     }else{
-        entite->type->vit_dep = 1 - entite->type->vit_dep; //divise par deux la vitesse de dep du serpent
+        entite->ut = 1 - entite->ut;
+        if(entite->ut)
+            if(dep(entite,salle,TRUE)){
+                if(entite->direction){
+                    entite->direction = LEFT;
+                    entite->delta.x -= entite->type->vit_dep;
+                    if(entite->delta.x < 0){
+                        (entite->pos.x)--;
+                        entite->delta.x += TAILLEBLOC;
+                    }
+                }else{
+                    entite->direction = RIGHT;
+                    entite->delta.x += entite->type->vit_dep;
 
-        if(dep(entite,salle,TRUE)){
-            if(entite->direction){
-                entite->direction = LEFT;
-                entite->delta.x -= entite->type->vit_dep;
-                if(entite->delta.x < 0){
-                    (entite->pos.x)--;
-                    entite->delta.x += TAILLEBLOC;
-                }
-            }else{
-                entite->direction = RIGHT;
-                entite->delta.x += entite->type->vit_dep;
-
-                if(entite->delta.x >= TAILLEBLOC){
-                    (entite->pos.x)++;
-                    entite->delta.x -= TAILLEBLOC;
+                    if(entite->delta.x >= TAILLEBLOC){
+                        (entite->pos.x)++;
+                        entite->delta.x -= TAILLEBLOC;
+                    }
                 }
             }
-        }
     }
 }
 

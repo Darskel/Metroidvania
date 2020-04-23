@@ -288,6 +288,7 @@ struct monstre_s{
     position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
     boolean_t direction; /**< Direction vers laquelle regarde le monstre (1: vers la gauche(LEFT), 0: vers la droite(RIGHT)) */
     int evoSprite; /**< Entier qui décrémente, changement de sprite quand vaut 0 */
+    int ut; /**< Variable utilitaire à fonction variable permetttant une info entière ou bouléenne sur un monstre: norme 0 = valeur de base ou rien */
 };
 
 /**

@@ -813,6 +813,7 @@ static void creerEntite(idEnt_t id, salle_t* s, position_t pos, personnage_t* p)
 
     e->type = &typesMonstre[id-1];
     e->pv = e->type->pv_base;
+    e->ut = 0;
 
     if(e->type->comportement == compRecuperable){
         for(int i = 0; i < TAILLE_INVENTAIRE; i++){

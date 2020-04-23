@@ -38,14 +38,10 @@
  * @param perso pointeur vers le personnage pour lui crediter l'objet
 */
 static void recupElem(monstre_t* entite, personnage_t* perso){
-    for(int i = 0; i < TAILLE_INVENTAIRE; i++)
-        printf("%s:%d\n",perso->nomObj[i], perso->inventaire[i]);
     for(int i = 0; i < TAILLE_INVENTAIRE; i++){
         if(!strcmp(entite->type->nom,perso->nomObj[i])){
             perso->inventaire[i] = 1;
             entite->pv = 0;
-            for(int i = 0; i < TAILLE_INVENTAIRE; i++)
-                printf("_%s:%d\n",perso->nomObj[i], perso->inventaire[i]);
             return;
         }
     }
@@ -338,6 +334,8 @@ static int verifCaseDown(personnage_t* p, salle_t* s){
  * @param tryJump booléen qui vaut TRUE(1) si le personnage essaie actuellement de sauter, FALSE(0) sinon
 */
 void depVert(personnage_t* p, salle_t* s, int tryJump){
+    int idSaut;
+    for(idSaut = 0; idSaut < TAILLE_INVENTAIRE && strcmp(p->nomObj[idSaut],"double saut"); idSaut++);
     if(p->jpCd){
         (p->jpCd)--;
     }
@@ -422,7 +420,7 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
                     p->newEtat = TRUE;
                 }
                 else
-                    if(tryJump && p->nbSaut < 1 + p->inventaire[6]){
+                    if(tryJump && p->nbSaut < 1 + p->inventaire[idSaut]){
                         //non testé
                         (p->nbSaut)++;
                         p->nbPxSaut = 0;
@@ -455,7 +453,7 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
                     p->newEtat = TRUE;
                     p->jpCd = JPCD;
                 }else
-                    if(tryJump && p->nbSaut < 1 + p->inventaire[6] && !p->jpCd){
+                    if(tryJump && p->nbSaut < 1 + p->inventaire[idSaut] && !p->jpCd){
                         (p->nbSaut)++;
                         p->nbPxSaut = 0;
                         p->etat = JUMPING;

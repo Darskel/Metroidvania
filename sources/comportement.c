@@ -57,7 +57,7 @@ static void recupElem(monstre_t* entite, personnage_t* perso){
 */
 int hitE(monstre_t* e1, monstre_t* e2){
 
-    if(strcmp(e1->type->nom,"fleche") && strcmp(e1->type->nom,"fleche_feu"))
+    if(strcmp(e1->type->nom,"fleche") && strcmp(e1->type->nom,"fleche feu"))
         return FALSE;
 
     if(!strcmp(e2->type->nom,"coeur") || !strcmp(e2->type->nom,"fleche") || !strcmp(e2->type->nom,"fleche feu") || !strcmp(e2->type->nom,"venin"))
@@ -488,7 +488,11 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
         if(p->etat == ATTACKING){
             if(p->nbFrameAtk == p->vit_att){
                 monstre_t* f = malloc(sizeof(monstre_t));
-                f->type = &typesMonstre[-FLECHE - 1];
+
+                int i;
+                for(i = 0; i < TAILLE_INVENTAIRE && strcmp(p->nomObj[i],"huile"); i++);
+                f->type = i < TAILLE_INVENTAIRE && p->inventaire[i] ? &typesMonstre[-FLECHEFEU - 1] : &typesMonstre[-FLECHE - 1];
+                
                 f->pv = f->type->pv_base;
 
                 int leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;

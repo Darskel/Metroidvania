@@ -79,42 +79,50 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
  * @param renderer le pointeur sur SDL_Renderer
  * @return le pointeur sur la texture générée
  */
-SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer){
+SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer, boolean_t estTarget){
   SDL_Surface *surface = NULL;
-  SDL_Texture *texture =NULL;
   SDL_Texture *tmp = NULL;
-  SDL_PixelFormat* pixelFormat = NULL;
-  Uint32 pixelFormatEnum;
+  SDL_Texture *texture =NULL;
+  Uint32 pixelFormatEnumTmp;
+
   surface = IMG_Load(path);
+
   if(surface==NULL){
       fprintf(stderr, "Erreur IMG_LOAD pour %s", path);
       exit(EXIT_FAILURE);
   }
+
   tmp = SDL_CreateTextureFromSurface(renderer, surface);
+
   if(tmp==NULL){
       fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
       exit(EXIT_FAILURE);
   }
+
   SDL_SetTextureBlendMode(tmp, SDL_BLENDMODE_BLEND);
 
-  pixelFormat = surface->format;
-  pixelFormatEnum = pixelFormat->format;
-  const char* surfacePixelFormatName = SDL_GetPixelFormatName(pixelFormatEnum);
-
-  texture = SDL_CreateTexture(renderer, pixelFormatEnum,
-                              SDL_TEXTUREACCESS_TARGET, surface->w, surface->h);
-  if(texture==NULL){
-      printf("Surface pixel format : %s --- %s\n", surfacePixelFormatName, path);
-      fprintf(stderr, "Erreur SDL_CreateTexture : %s", SDL_GetError());
-      exit(EXIT_FAILURE);
+  if(estTarget){
+    SDL_QueryTexture(tmp,&pixelFormatEnumTmp,NULL,NULL,NULL);
+    const char* TexturePixelFormatName = SDL_GetPixelFormatName(pixelFormatEnumTmp);
+    texture = SDL_CreateTexture(renderer, pixelFormatEnumTmp,
+                                SDL_TEXTUREACCESS_TARGET, surface->w, surface->h);
+    if(texture==NULL){
+        printf("Surface pixel format : %s --- %s\n", TexturePixelFormatName, path);
+        fprintf(stderr, "Erreur SDL_CreateTexture : %s", SDL_GetError());
+        exit(EXIT_FAILURE);
+    }
+    SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderTarget(renderer, texture); /* La cible de rendu est maintenant texture. */
+    SDL_RenderCopy(renderer, tmp, NULL, NULL); /* On copie tmp sur texture */
+    SDL_DestroyTexture(tmp);
+    SDL_FreeSurface(surface);
+    SDL_SetRenderTarget(renderer, NULL); /* La cible de rendu est de nouveau le renderer. */
+    return texture;
   }
-  SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
-  SDL_SetRenderTarget(renderer, texture); /* La cible de rendu est maintenant texture. */
-  SDL_RenderCopy(renderer, tmp, NULL, NULL); /* On copie tmp sur texture */
-  SDL_DestroyTexture(tmp);
-  SDL_FreeSurface(surface);
-  SDL_SetRenderTarget(renderer, NULL); /* La cible de rendu est de nouveau le renderer. */
-  return texture;
+  else{
+    SDL_FreeSurface(surface);
+    return tmp;
+  }
 }
 
 /**
@@ -139,7 +147,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->vit_att=VITATTACKPERS;
   personnage->pos=positionDepart;
   personnage->delta=positionDepartDelta;
-  personnage->sprites=initialiser_texture(PLAYERSPRITESPATH, renderer);
+  personnage->sprites=initialiser_texture(PLAYERSPRITESPATH, renderer, FALSE);
   personnage->spriteActuel.x=0;
   personnage->spriteActuel.y=0;
   personnage->spriteActuel.h=HAUTEURSPRITEPERS;
@@ -211,9 +219,9 @@ void initialiser_typeentites(SDL_Renderer * renderer){
   /*for(int i=0; i<NBTYPEMONSTRE; i++){
     typesMonstre[i].sprites = initialiser_texture(typesMonstre[i].path, renderer);
   }*/
-  typesMonstre[-SERPENTBLEU -1].sprites = initialiser_texture(typesMonstre[-SERPENTBLEU -1].path, renderer);
-  typesMonstre[-COEUR - 1].sprites = initialiser_texture(typesMonstre[-COEUR -1].path, renderer);
-  typesMonstre[-FLECHE - 1].sprites = initialiser_texture(typesMonstre[-FLECHE -1].path, renderer);
+  typesMonstre[-SERPENTBLEU -1].sprites = initialiser_texture(typesMonstre[-SERPENTBLEU -1].path, renderer, FALSE);
+  typesMonstre[-COEUR - 1].sprites = initialiser_texture(typesMonstre[-COEUR -1].path, renderer, FALSE);
+  typesMonstre[-FLECHE - 1].sprites = initialiser_texture(typesMonstre[-FLECHE -1].path, renderer, FALSE);
 }
 
 
@@ -235,8 +243,8 @@ salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier){
   strcat(nom_bg, "png");
 
   lireSalle(nomFichier, &salle);
-  salle->background=initialiser_texture(nom_bg, renderer);
-  salle->tileset=initialiser_texture(TILESETPATH, renderer);
+  salle->background=initialiser_texture(nom_bg, renderer, FALSE);
+  salle->tileset=initialiser_texture(TILESETPATH, renderer, FALSE);
   return salle;
 }
 
@@ -354,7 +362,7 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
   float ratioFenetre;
   float ratioSalle;
   SDL_Texture * coeurImage;
-  coeurImage = initialiser_texture("./sprites/entite/coeur/coeur-small.png", renderer);
+  coeurImage = initialiser_texture("./sprites/entite/coeur/coeur-small.png", renderer, FALSE);
 
   SDL_SetRenderDrawColor(renderer, 0,0,0,255);
   //SDL_RenderClear(renderer);
@@ -378,7 +386,7 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
   Rect_dest.y = (maxh - Rect_dest.h)/2 ;
 
 
-  textureSalle=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET, (salle->largeur)* TAILLEBLOC, (salle->hauteur) * TAILLEBLOC);
+  textureSalle=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,SDL_TEXTUREACCESS_TARGET, (salle->largeur)* TAILLEBLOC, (salle->hauteur) * TAILLEBLOC);
   SDL_SetRenderTarget(renderer, textureSalle);
   SDL_SetTextureBlendMode(textureSalle, SDL_BLENDMODE_BLEND);
   SDL_SetRenderDrawColor(renderer, 0,0,0,255);
@@ -626,7 +634,7 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
           destroy_typeentites();
           initialiser_typeentites(*renderer);
           SDL_DestroyTexture(perso->sprites);
-          perso->sprites=initialiser_texture(PLAYERSPRITESPATH, *renderer);
+          perso->sprites=initialiser_texture(PLAYERSPRITESPATH, *renderer, FALSE);
           //Si la salle devient mouvante (ou autre chose) (blocs, arrière plan), un destroy texture des textures associées est envisageable de la meme façon que pour le personnage
           break;
         case SDL_KEYUP:
@@ -867,7 +875,7 @@ void afficher_menu(SDL_Renderer * renderer, SDL_Texture * fond){
   Rect_dest.y = (maxh - Rect_dest.h)/2 ;
 
 
-  texture=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET, TAILLEBGMENUW, TAILLEBGMENUH);
+  texture=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,SDL_TEXTUREACCESS_TARGET, TAILLEBGMENUW, TAILLEBGMENUH);
   SDL_SetRenderTarget(renderer, texture);
   SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
   SDL_SetRenderDrawColor(renderer, 0,0,0,255);
@@ -926,14 +934,14 @@ menu_t * creerMenuDemarrage(SDL_Renderer * renderer){
   menu->nbTextes=nbTextes;
   menu->etiquette = "Menu Principal";
   //Fond :
-  menu->fond = initialiser_texture("./sprites/menu/menu.png", renderer);
+  menu->fond = initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
   //Texte :
   menu_texte_t * tabTextes = malloc(nbTextes * sizeof(menu_texte_t));
   menu->tabTextes=tabTextes;
   tabTextes[0].id=0;
   tabTextes[0].etiquette="Diskosieni";
   tabTextes[0].parent=menu;
-  tabTextes[0].texture = initialiser_texture("./sprites/menu/diskosieni.png", renderer);
+  tabTextes[0].texture = initialiser_texture("./sprites/menu/diskosieni.png", renderer, FALSE);
 
   //Boutons :
   menu_bouton_t * tabBoutons = malloc(nbBoutons * sizeof(menu_bouton_t));
@@ -942,33 +950,33 @@ menu_t * creerMenuDemarrage(SDL_Renderer * renderer){
   tabBoutons[0].etiquette="Commencer";
   tabBoutons[0].parent=menu;
   tabBoutons[0].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/commencer.png", renderer);
-  tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/commencer_selectionne.png", renderer);
-  tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/commencer_clique.png", renderer);
+  tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/commencer.png", renderer, FALSE);
+  tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/commencer_selectionne.png", renderer, FALSE);
+  tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/commencer_clique.png", renderer, FALSE);
 
   tabBoutons[1].id=1;
   tabBoutons[1].etiquette="Continuer";
   tabBoutons[1].parent=menu;
   tabBoutons[1].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/continuer.png", renderer);
-  tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/continuer_selectionne.png", renderer);
-  tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/continuer_clique.png", renderer);
+  tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/continuer.png", renderer, FALSE);
+  tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/continuer_selectionne.png", renderer, FALSE);
+  tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/continuer_clique.png", renderer, FALSE);
 
   tabBoutons[2].id=2;
   tabBoutons[2].etiquette="Options";
   tabBoutons[2].parent=menu;
   tabBoutons[2].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[2].texture[RELAXED] = initialiser_texture("./sprites/bouton/options.png", renderer);
-  tabBoutons[2].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/options_selectionne.png", renderer);
-  tabBoutons[2].texture[PRESSED] = initialiser_texture("./sprites/bouton/options_clique.png", renderer);
+  tabBoutons[2].texture[RELAXED] = initialiser_texture("./sprites/bouton/options.png", renderer, FALSE);
+  tabBoutons[2].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/options_selectionne.png", renderer, FALSE);
+  tabBoutons[2].texture[PRESSED] = initialiser_texture("./sprites/bouton/options_clique.png", renderer, FALSE);
 
   tabBoutons[3].id=3;
   tabBoutons[3].etiquette="Quitter";
   tabBoutons[3].parent=menu;
   tabBoutons[3].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[3].texture[RELAXED] = initialiser_texture("./sprites/bouton/quitter.png", renderer);
-  tabBoutons[3].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/quitter_selectionne.png", renderer);
-  tabBoutons[3].texture[PRESSED] = initialiser_texture("./sprites/bouton/quitter_clique.png", renderer);
+  tabBoutons[3].texture[RELAXED] = initialiser_texture("./sprites/bouton/quitter.png", renderer, FALSE);
+  tabBoutons[3].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/quitter_selectionne.png", renderer, FALSE);
+  tabBoutons[3].texture[PRESSED] = initialiser_texture("./sprites/bouton/quitter_clique.png", renderer, FALSE);
 
   //CERTAINEMENT PAS TERMINE
 
@@ -989,14 +997,14 @@ menu_t * creerMenuConfirmation(SDL_Renderer * renderer){
   menu->nbTextes=nbTextes;
   menu->etiquette = "Menu Principal";
   //Fond :
-  menu->fond = initialiser_texture("./sprites/menu/menu.png", renderer);
+  menu->fond = initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
   //Texte :
   menu_texte_t * tabTextes = malloc(nbTextes * sizeof(menu_texte_t));
   menu->tabTextes=tabTextes;
   tabTextes[0].id=0;
   tabTextes[0].etiquette="Voulez-vous quitter ?";
   tabTextes[0].parent=menu;
-  tabTextes[0].texture = initialiser_texture("./sprites/menu/voulezvousquitter.png", renderer);
+  tabTextes[0].texture = initialiser_texture("./sprites/menu/voulezvousquitter.png", renderer, FALSE);
   //Boutons :
   menu_bouton_t * tabBoutons = malloc(nbBoutons * sizeof(menu_bouton_t));
   menu->tabBoutons=tabBoutons;
@@ -1005,17 +1013,17 @@ menu_t * creerMenuConfirmation(SDL_Renderer * renderer){
   tabBoutons[0].etiquette="Oui";
   tabBoutons[0].parent=menu;
   tabBoutons[0].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/oui.png", renderer);
-  tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/oui_selectionne.png", renderer);
-  tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/oui_clique.png", renderer);
+  tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/oui.png", renderer, FALSE);
+  tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/oui_selectionne.png", renderer, FALSE);
+  tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/oui_clique.png", renderer, FALSE);
 
   tabBoutons[1].id=1;
   tabBoutons[1].etiquette="Non";
   tabBoutons[1].parent=menu;
   tabBoutons[1].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/non.png", renderer);
-  tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/non_selectionne.png", renderer);
-  tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/non_clique.png", renderer);
+  tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/non.png", renderer, FALSE);
+  tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/non_selectionne.png", renderer, FALSE);
+  tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/non_clique.png", renderer, FALSE);
 
   //CERTAINEMENT PAS TERMINE
 

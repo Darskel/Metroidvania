@@ -31,7 +31,7 @@
 
 void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_DisplayMode * mode, boolean_t fullscreen);
 void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer);
-SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer);
+SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer, boolean_t estTarget);
 personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t positionDepart, position_t positionDepartDelta);
 salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier);
 void afficher_salle(SDL_Renderer * renderer, salle_t * salle, SDL_Texture * textureSalle);

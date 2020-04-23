@@ -66,7 +66,7 @@ int main(int argc, char *argv[]){
   }
 
   //tileset=initialiser_texture(TILESETPATH, renderer);
-  menu=initialiser_texture("./sprites/menu/menu.png", renderer);
+  menu=initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
 
   while(!fin){
     frameStart = SDL_GetTicks();

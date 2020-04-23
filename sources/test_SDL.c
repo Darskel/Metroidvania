@@ -38,11 +38,7 @@ int main(int argc, char *argv[]){
   Sint16 x_move;
   Sint16 y_move;
   boolean_t fin=FALSE;
-  salle_t * salle=NULL;
-  personnage_t * perso=NULL;
-  position_t positionDepart;
-  position_t positionDepartDelta;
-  SDL_Texture * tileset=NULL;
+  //SDL_Texture * tileset=NULL;
   SDL_Texture * menu=NULL;
   int messageRes;
   SDL_MessageBoxButtonData * buttons = NULL;
@@ -50,7 +46,8 @@ int main(int argc, char *argv[]){
   srand(time(NULL));
   initialisation_SDL(&fenetre, &renderer, &mode, fullscreen);
   SDL_SetRenderDrawColor(renderer,0,0,0,255);
-  SDL_RenderClear(renderer);
+  SDL_RenderFillRect(renderer, NULL);
+  //SDL_RenderClear(renderer);
   SDL_RenderPresent(renderer);
 
   SDL_Joystick* pJoystick = NULL;
@@ -68,7 +65,7 @@ int main(int argc, char *argv[]){
       }
   }
 
-  tileset=initialiser_texture(TILESETPATH, renderer);
+  //tileset=initialiser_texture(TILESETPATH, renderer);
   menu=initialiser_texture("./sprites/menu/menu.png", renderer);
 
   while(!fin){
@@ -133,14 +130,7 @@ int main(int argc, char *argv[]){
             case SDLK_b:
               break;
             case SDLK_RETURN:
-              salle=initialiser_salle(renderer, NIVEAUTXT, tileset);
-              positionDepart.x = 1;
-              positionDepartDelta.x = 0;
-              positionDepart.y = salle->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;
-              positionDepartDelta.y = TAILLEBLOC-1;
-              perso=initialisation_personnage(renderer, positionDepart, positionDepartDelta);
-              ecranNoir(renderer, 100);
-              jeu(fenetre, &renderer, mode, &salle, &perso, tileset, pJoystick, fullscreen);
+              jeu(fenetre, &renderer, mode, pJoystick, fullscreen);
               fin = TRUE;
               break;
           }
@@ -221,13 +211,10 @@ int main(int argc, char *argv[]){
       SDL_Delay(FRAMEDELAY - frameTime);
     }
   }
-  if(salle!=NULL)
-    destroy_salle(&salle);
-  if(perso!=NULL)
-    destroy_personnage(&perso);
   if(pJoystick != NULL)
     SDL_JoystickClose(pJoystick);
   SDL_DestroyTexture(menu);
+  //SDL_DestroyTexture(tileset);
   quitter_SDL(&fenetre, &renderer);
   fprintf(stdout, "Programme quitté normalement\n");
   return 0;

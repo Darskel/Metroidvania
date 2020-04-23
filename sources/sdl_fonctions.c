@@ -130,8 +130,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->vit_att=VITATTACKPERS;
   personnage->pos=positionDepart;
   personnage->delta=positionDepartDelta;
-  SDL_Texture * texture=initialiser_texture(PLAYERSPRITESPATH, renderer);
-  personnage->sprites=texture;
+  personnage->sprites=initialiser_texture(PLAYERSPRITESPATH, renderer);
   personnage->spriteActuel.x=0;
   personnage->spriteActuel.y=0;
   personnage->spriteActuel.h=HAUTEURSPRITEPERS;
@@ -217,7 +216,7 @@ void initialiser_typeentites(SDL_Renderer * renderer){
  * @param tileset le pointeur vers la texture de tileset
  * @return un pointeur sur la structure salle initialisée
  */
-salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, SDL_Texture * tileset){
+salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier){
   salle_t * salle=NULL;
   char nom_bg[100];
 
@@ -228,7 +227,7 @@ salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, SDL_Textu
 
   lireSalle(nomFichier, &salle);
   salle->background=initialiser_texture(nom_bg, renderer);
-  salle->tileset=tileset;
+  salle->tileset=initialiser_texture(TILESETPATH, renderer);
   return salle;
 }
 
@@ -239,6 +238,7 @@ salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, SDL_Textu
  */
 void destroy_salle(salle_t ** salle){
   SDL_DestroyTexture((*salle)->background);
+  SDL_DestroyTexture((*salle)->tileset);
   nettoyerSalle(salle);
   *salle=NULL;
 }
@@ -249,7 +249,7 @@ void destroy_salle(salle_t ** salle){
  * @param renderer le pointeur vers le SDL_Renderer à utiliser
  * @param salle le pointeur sur la structure salle à afficher
  */
-void afficher_salle(SDL_Renderer * renderer, salle_t * salle){
+void afficher_salle(SDL_Renderer * renderer, salle_t * salle, SDL_Texture * textureSalle){
     int i, j;
     SDL_Rect Rect_dest;
     SDL_Rect Rect_source;
@@ -258,7 +258,9 @@ void afficher_salle(SDL_Renderer * renderer, salle_t * salle){
     Rect_dest.w   = TAILLEBLOC;
     Rect_source.h = TAILLEBLOC;
     Rect_dest.h   = TAILLEBLOC;
+    SDL_SetRenderTarget(renderer, textureSalle);
     SDL_RenderCopy(renderer, salle->background, NULL, NULL);
+    SDL_SetRenderTarget(renderer, NULL);
     for(i = 0 ; i < salle->hauteur; i++)
     {
         for(j = 0 ; j < salle->largeur; j++)
@@ -271,7 +273,9 @@ void afficher_salle(SDL_Renderer * renderer, salle_t * salle){
             Rect_dest.x = j * TAILLEBLOC;
             Rect_source.x = posSprite * TAILLEBLOC;
             Rect_source.y = 0;
+            SDL_SetRenderTarget(renderer, textureSalle);
             SDL_RenderCopy(renderer, salle->tileset, &Rect_source, &Rect_dest);
+            SDL_SetRenderTarget(renderer, NULL);
             }
         }
     }
@@ -285,7 +289,7 @@ void afficher_salle(SDL_Renderer * renderer, salle_t * salle){
  * @param personnage le pointeur sur la structure personnage à afficher
  * @param salle le pointeur sur la salle où afficher le joueur
  */
-void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, salle_t * salle){
+void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, salle_t * salle, SDL_Texture * textureSalle){
   SDL_Rect Rect_dest;
   SDL_RendererFlip flip=SDL_FLIP_NONE;
   if(personnage->direction != RIGHT)
@@ -294,7 +298,9 @@ void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, sal
   Rect_dest.y = personnage->pos.y * TAILLEBLOC + personnage->delta.y;
   Rect_dest.h = personnage->spriteActuel.h;
   Rect_dest.w = personnage->spriteActuel.w;
+  SDL_SetRenderTarget(renderer, textureSalle);
   SDL_RenderCopyEx(renderer, personnage->sprites, &(personnage->spriteActuel), &Rect_dest, 0, NULL, flip);
+  SDL_SetRenderTarget(renderer, NULL);
 }
 
 /**
@@ -303,7 +309,7 @@ void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, sal
  * @param renderer le pointeur vers le SDL_Renderer à utiliser
  * @param salle le pointeur sur la salle où afficher l'entité
  */
-void afficher_entites(SDL_Renderer * renderer, salle_t * salle){
+void afficher_entites(SDL_Renderer * renderer, salle_t * salle, SDL_Texture * textureSalle){
   monstre_t entite;
   SDL_Rect Rect_dest;
   SDL_RendererFlip flip=SDL_FLIP_NONE;
@@ -317,7 +323,9 @@ void afficher_entites(SDL_Renderer * renderer, salle_t * salle){
     Rect_dest.y = entite.pos.y * TAILLEBLOC + entite.delta.y;
     Rect_dest.h = entite.spriteActuel.h;
     Rect_dest.w = entite.spriteActuel.w;
-    SDL_RenderCopyEx(renderer, entite.type->sprites, &(entite.spriteActuel), &Rect_dest, 0, NULL, flip);
+    SDL_SetRenderTarget(renderer, textureSalle);
+    if(SDL_RenderCopyEx(renderer, entite.type->sprites, &(entite.spriteActuel), &Rect_dest, 0, NULL, flip));
+    SDL_SetRenderTarget(renderer, NULL);
     suivant(salle->listeEntite);
   }
 }
@@ -340,7 +348,8 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
   coeurImage = initialiser_texture("./sprites/entite/coeur/coeur-small.png", renderer);
 
   SDL_SetRenderDrawColor(renderer, 0,0,0,255);
-  SDL_RenderClear(renderer);
+  //SDL_RenderClear(renderer);
+  SDL_RenderFillRect(renderer, NULL);
 
   SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
 
@@ -364,12 +373,14 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
   SDL_SetRenderTarget(renderer, textureSalle);
   SDL_SetTextureBlendMode(textureSalle, SDL_BLENDMODE_BLEND);
   SDL_SetRenderDrawColor(renderer, 0,0,0,255);
-  SDL_RenderClear(renderer);
-  afficher_salle(renderer,salle);
-  afficher_entites(renderer, salle);
+  //SDL_RenderClear(renderer);
+  SDL_RenderFillRect(renderer, NULL);
+  SDL_SetRenderTarget(renderer, NULL);
+  afficher_salle(renderer,salle, textureSalle);
+  afficher_entites(renderer,salle, textureSalle);
   if(personnage->clign%FREQCLIGN == 0)
-    afficher_personnage(renderer, personnage, salle);
-  afficherVieCoeurs(renderer, personnage, coeurImage);
+    afficher_personnage(renderer, personnage, salle, textureSalle);
+  afficherVieCoeurs(renderer, personnage, coeurImage, textureSalle);
   //afficherVieJauge(renderer, personnage);
   SDL_SetRenderTarget(renderer, NULL);
   SDL_RenderCopy(renderer, textureSalle, NULL, &Rect_dest);
@@ -482,7 +493,8 @@ void miseAjourSpritesEntites(salle_t * salle){
  */
 void ecranNoir(SDL_Renderer * renderer, int ms){
     SDL_SetRenderDrawColor(renderer,0,0,0,255);
-    SDL_RenderClear(renderer);
+    SDL_RenderFillRect(renderer,NULL);
+    //SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
     SDL_Delay(ms);
 }
@@ -531,7 +543,7 @@ void konamicode(personnage_t * perso, salle_t * salle, char * konami, int * indK
   }
 }
 
-void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, salle_t ** salle, personnage_t ** perso, SDL_Texture * tileset, SDL_Joystick * pJoystick, int fullscreen){
+void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen){
   SDL_Event event;
   Uint32 frameStart;
   int frameTime;
@@ -540,6 +552,12 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, s
   int messageRes;
   Sint16 x_move;
   Sint16 y_move;
+  position_t positionDepart;
+  position_t positionDepartDelta;
+  //boolean_t windowtouched=FALSE;
+  //SDL_Texture * tileset=NULL;
+  salle_t * salle=NULL;
+  personnage_t * perso=NULL;
   char * salle_nom = NULL;
   boolean_t Gauche = FALSE;
   boolean_t Droite = FALSE;
@@ -556,9 +574,20 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, s
   SDL_MessageBoxButtonData * buttons = NULL;
 
   SDL_SetRenderDrawColor(*renderer,0,0,0,255);
-  SDL_RenderClear(*renderer);
+  //SDL_RenderClear(*renderer);
+  SDL_RenderFillRect(*renderer, NULL);
   SDL_RenderPresent(*renderer);
+
   initialiser_typeentites(*renderer);
+  //tileset=initialiser_texture(TILESETPATH, *renderer);
+
+  salle=initialiser_salle(*renderer, NIVEAUTXT);
+  positionDepart.x = 1;
+  positionDepartDelta.x = 0;
+  positionDepart.y = salle->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;
+  positionDepartDelta.y = TAILLEBLOC-1;
+  perso=initialisation_personnage(*renderer, positionDepart, positionDepartDelta);
+  ecranNoir(*renderer, 100);
 
   while(fin==FALSE){
     frameStart = SDL_GetTicks();
@@ -582,6 +611,14 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, s
           /*
           fin=menuConfirmation(*renderer);
           */
+          break;
+        case SDL_WINDOWEVENT:
+          //windowtouched=TRUE;
+          destroy_typeentites();
+          initialiser_typeentites(*renderer);
+          SDL_DestroyTexture(perso->sprites);
+          perso->sprites=initialiser_texture(PLAYERSPRITESPATH, *renderer);
+          //Si la salle devient mouvante (ou autre chose) (blocs, arrière plan), un destroy texture des textures associées est envisageable de la meme façon que pour le personnage
           break;
         case SDL_KEYUP:
           switch(event.key.keysym.sym){
@@ -726,62 +763,69 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, s
         y_move = SDL_JoystickGetAxis(pJoystick, 1);
       }
 
-      konamicode(*perso,*salle,konami,&indKon,&kon);
+      //if(windowtouched)
 
-      salle_nom=prendPorte(*perso, (*salle)->listePorte);
+
+      konamicode(perso,salle,konami,&indKon,&kon);
+
+      salle_nom=prendPorte(perso, (salle)->listePorte);
       if(salle_nom != NULL){
-        destroy_salle(salle);
-        *salle=initialiser_salle(*renderer, salle_nom, tileset);
+        destroy_salle(&salle);
+        salle=initialiser_salle(*renderer, salle_nom);
         salleChangee=TRUE;
         kon = FALSE;
         free(salle_nom);
         salle_nom=NULL;
       }
 
-      depVert(*perso, *salle, tryJump);
+      depVert(perso, salle, tryJump);
 
-      if(Gauche && !(*perso)->kb){ // ajout de && !(*perso)->kb par Thomas: evite de changer la direction du regard pendant un knockback
-        depGauche(*perso, *salle);
+      if(Gauche && !(perso)->kb){ // ajout de && !(*perso)->kb par Thomas: evite de changer la direction du regard pendant un knockback
+        depGauche(perso, salle);
         if(!Droite)
-          (*perso)->direction = LEFT;
+          (perso)->direction = LEFT;
       }
 
-      if(Droite && !(*perso)->kb){ // ajout de && !(*perso)->kb par Thomas: evite de changer la direction du regard pendant un knockback
-        depDroite(*perso, *salle);
+      if(Droite && !(perso)->kb){ // ajout de && !(*perso)->kb par Thomas: evite de changer la direction du regard pendant un knockback
+        depDroite(perso, salle);
         if(!Gauche)
-          (*perso)->direction = RIGHT;
+          (perso)->direction = RIGHT;
       }
 
       if((!Gauche&&!Droite) || (Gauche&&Droite))
-        if((*perso)->etat == RUNNING)//ajouter par Thomas: on souhaite passer de RUNNING à IDLE mais pas de JUMPING à IDLE ou bien de ATTACKING à IDLE
-          (*perso)->etat=IDLE;
+        if((perso)->etat == RUNNING)//ajouter par Thomas: on souhaite passer de RUNNING à IDLE mais pas de JUMPING à IDLE ou bien de ATTACKING à IDLE
+          (perso)->etat=IDLE;
 
       tryJump=FALSE;
 
-      attaquer(*perso,*salle,tryAtk);
+      attaquer(perso,salle,tryAtk);
 
       tryAtk=FALSE;
 
-      evolution(*perso,*salle);
+      evolution(perso,salle);
 
-      miseAjourSprites(*perso);
-      miseAjourSpritesEntites(*salle);
+      miseAjourSprites(perso);
+      miseAjourSpritesEntites(salle);
 
       if(salleChangee){
         ecranNoir(*renderer,150);
         salleChangee=FALSE;
       }
 
-      affichage_complet(*renderer, *salle, *perso);
+      SDL_SetRenderDrawColor(*renderer,0,0,0,255);
+      //SDL_RenderClear(*renderer);
+      SDL_RenderFillRect(*renderer, NULL);
+      affichage_complet(*renderer, salle, perso);
 
       frameTime = SDL_GetTicks() - frameStart;
       if(frameTime < FRAMEDELAY){
         SDL_Delay(FRAMEDELAY - frameTime);
       }
     }
-    destroy_salle(salle);
-    destroy_personnage(perso);
+    destroy_salle(&salle);
+    destroy_personnage(&perso);
     destroy_typeentites();
+    //SDL_DestroyTexture(tileset);
 }
 
 void afficher_menu(SDL_Renderer * renderer, SDL_Texture * fond){
@@ -793,7 +837,8 @@ void afficher_menu(SDL_Renderer * renderer, SDL_Texture * fond){
   float ratioMenu;
 
   SDL_SetRenderDrawColor(renderer, 0,0,0,255);
-  SDL_RenderClear(renderer);
+  //SDL_RenderClear(renderer);
+  SDL_RenderFillRect(renderer,NULL);
 
   SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
 
@@ -817,7 +862,8 @@ void afficher_menu(SDL_Renderer * renderer, SDL_Texture * fond){
   SDL_SetRenderTarget(renderer, texture);
   SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
   SDL_SetRenderDrawColor(renderer, 0,0,0,255);
-  SDL_RenderClear(renderer);
+  SDL_RenderFillRect(renderer, NULL);
+  //SDL_RenderClear(renderer);
   SDL_RenderCopy(renderer, fond, NULL, NULL);
   SDL_SetRenderTarget(renderer, NULL);
   SDL_RenderCopy(renderer, texture, NULL, &Rect_dest);
@@ -982,11 +1028,12 @@ void afficherMenu(SDL_Renderer * renderer, menu_t * menu){
 }
 
 
-void afficherVieJauge(SDL_Renderer * renderer, personnage_t * personnage){
+void afficherVieJauge(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * textureSalle){
   SDL_Rect exterieur;
   SDL_Rect interieur;
   int maxw;
   int maxh;
+  SDL_SetRenderTarget(renderer, textureSalle);
   SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
   interieur.h = maxh/50;
   exterieur.w = maxw/8 + 2;
@@ -1003,9 +1050,10 @@ void afficherVieJauge(SDL_Renderer * renderer, personnage_t * personnage){
   SDL_SetRenderDrawColor(renderer,20, 160, 46, 255);
   SDL_RenderFillRect(renderer, &interieur);
   SDL_SetRenderDrawColor(renderer,0,0,0,255);
+  SDL_SetRenderTarget(renderer, NULL);
 }
 
-void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * coeurImage){
+void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * coeurImage, SDL_Texture * textureSalle){
   SDL_Rect boite;
   SDL_Rect coeur;
   int maxw;
@@ -1013,6 +1061,7 @@ void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_T
   int coeurw;
   int coeurh;
   int pv=0;
+  SDL_SetRenderTarget(renderer, textureSalle);
   SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
   SDL_QueryTexture(coeurImage, NULL, NULL, &coeurw, &coeurh);
   coeur.w = coeurw;
@@ -1026,8 +1075,11 @@ void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_T
   SDL_SetRenderDrawColor(renderer, 115, 23, 45, 50);
   SDL_RenderFillRect(renderer, &boite);
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_SetRenderTarget(renderer, NULL);
   for(int pv=personnage->pv; pv>0; pv--){
+    SDL_SetRenderTarget(renderer, textureSalle);
     SDL_RenderCopy(renderer, coeurImage, NULL, &coeur);
+    SDL_SetRenderTarget(renderer, NULL);
     coeur.x += coeur.w +2;
   }
 }

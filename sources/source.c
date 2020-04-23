@@ -471,7 +471,7 @@ void creerTypeEntite(){
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
         {36,4}, //hitbox de l'entité (hauteur,largeur)
-        {32,13}, //taille sprites
+        {36,13}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0, //N'attend pas avant de changer d'animation

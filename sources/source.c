@@ -408,8 +408,8 @@ void creerTypeEntite(){
 
     //porte bleue
     tmp = malloc(sizeof(int) * 4);
-    tmp[0] = 2;
-    tmp[1] = 0;
+    tmp[0] = 1;
+    tmp[1] = 1;
     tmp[2] = 0;
     tmp[3] = 0;
 
@@ -422,8 +422,8 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {32,13}, //hitbox de l'entité (hauteur,largeur)
-        {32,13}, //taille sprites
+        {36,4}, //hitbox de l'entité (hauteur,largeur)
+        {36,13}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0, //N'attend pas avant de changer d'animation
@@ -432,8 +432,8 @@ void creerTypeEntite(){
 
     //porte rouge
     tmp = malloc(sizeof(int) * 4);
-    tmp[0] = 2;
-    tmp[1] = 0;
+    tmp[0] = 1;
+    tmp[1] = 1;
     tmp[2] = 0;
     tmp[3] = 0;
 
@@ -446,8 +446,8 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {32,13}, //hitbox de l'entité (hauteur,largeur)
-        {32,13}, //taille sprites
+        {36,4}, //hitbox de l'entité (hauteur,largeur)
+        {36,13}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0, //N'attend pas avant de changer d'animation
@@ -456,8 +456,8 @@ void creerTypeEntite(){
 
     //porte rouillée
     tmp = malloc(sizeof(int) * 4);
-    tmp[0] = 2;
-    tmp[1] = 0;
+    tmp[0] = 1;
+    tmp[1] = 1;
     tmp[2] = 0;
     tmp[3] = 0;
 
@@ -480,8 +480,8 @@ void creerTypeEntite(){
 
     //porte verte
     tmp = malloc(sizeof(int) * 4);
-    tmp[0] = 2;
-    tmp[1] = 0;
+    tmp[0] = 1;
+    tmp[1] = 1;
     tmp[2] = 0;
     tmp[3] = 0;
 
@@ -494,8 +494,8 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {32,13}, //hitbox de l'entité (hauteur,largeur)
-        {32,13}, //taille sprites
+        {36,4}, //hitbox de l'entité (hauteur,largeur)
+        {36,13}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0, //N'attend pas avant de changer d'animation

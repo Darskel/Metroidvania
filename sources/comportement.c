@@ -60,8 +60,15 @@ int hitE(monstre_t* e1, monstre_t* e2){
     if(strcmp(e1->type->nom,"fleche") && strcmp(e1->type->nom,"fleche_feu"))
         return FALSE;
 
-    if(!strcmp(e2->type->nom,"coeur") || !strcmp(e2->type->nom,"fleche") || !strcmp(e2->type->nom,"fleche_feu") || !strcmp(e2->type->nom,"venin"))
+    if(!strcmp(e2->type->nom,"coeur") || !strcmp(e2->type->nom,"fleche") || !strcmp(e2->type->nom,"fleche feu") || !strcmp(e2->type->nom,"venin"))
         return FALSE;
+
+    if(e2->type->comportement == compRecuperable)
+        return FALSE;
+    
+    if(e2->type->comportement == compPortes)
+        if(e2->pv == 2)
+            return FALSE;
 
     int leftE1, leftE2;
     int rightE1, rightE2;
@@ -731,8 +738,10 @@ void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle){
     while(!horsListe(salle->listeEntite)){
         valeurElm(salle->listeEntite,&tmp);
         if(hitE(entite,&tmp)){
-            tmp.pv -= entite->type->degat;
-            modifElm(salle->listeEntite,&tmp);
+            if(tmp.type->comportement != compPortes){
+                tmp.pv -= entite->type->degat;
+                modifElm(salle->listeEntite,&tmp);
+            }
             entite->pv = 0;
             entite->etat = IDLE;
             //entite->newEtat = TRUE;
@@ -751,7 +760,7 @@ void compPortes(monstre_t* e, personnage_t* p, salle_t* s){
     if(!e->direction)
         e->direction = RIGHT;
     
-    if(!e->etat != IDLE)
+    if(e->pv == 1 && e->etat != IDLE)
         e->etat = IDLE;
 
     int aie = hitP(e,p);
@@ -775,6 +784,7 @@ void compPortes(monstre_t* e, personnage_t* p, salle_t* s){
         if(validate && p->inventaire[i-1]){
             //changement d'état
             e->pv = 2;
+            e->etat = RUNNING;
         }else{
             while(aie){
                 p->delta.x += aie;

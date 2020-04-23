@@ -38,10 +38,14 @@
  * @param perso pointeur vers le personnage pour lui crediter l'objet
 */
 static void recupElem(monstre_t* entite, personnage_t* perso){
+    for(int i = 0; i < TAILLE_INVENTAIRE; i++)
+        printf("%s:%d\n",perso->nomObj[i], perso->inventaire[i]);
     for(int i = 0; i < TAILLE_INVENTAIRE; i++){
         if(!strcmp(entite->type->nom,perso->nomObj[i])){
             perso->inventaire[i] = 1;
             entite->pv = 0;
+            for(int i = 0; i < TAILLE_INVENTAIRE; i++)
+                printf("_%s:%d\n",perso->nomObj[i], perso->inventaire[i]);
             return;
         }
     }
@@ -116,7 +120,7 @@ static int hitP(monstre_t* m, personnage_t* p){
 
     leftE = m->pos.x*TAILLEBLOC + m->delta.x;
     rightE = leftE + m->type->hitbox.largeur;
-    topE = m->pos.y*TAILLEBLOC + m->delta.y + (m->type->tailleSprite.hauteur - m->type->hitbox.hauteur);
+    topE = m->pos.y*TAILLEBLOC + m->delta.y + (m->type->tailleSprite.hauteur - m->type->hitbox.hauteur) / (m->type->comportement == compPortes ? 1 : 2);
     bottomE = topE + m->type->hitbox.hauteur;
 
     leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
@@ -864,6 +868,7 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
 }
 
 void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle){
+    entite->etat = IDLE;
     /*if(inRange(entite,perso,4)){
         //attaquer
     }*/
@@ -874,7 +879,7 @@ void compVersGeant(monstre_t* entite, personnage_t* perso, salle_t* salle){
 }
 
 void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
-
+    entite->etat = IDLE;
 }
 
 static void creerCoeur(monstre_t* m, salle_t* s){
@@ -929,7 +934,7 @@ void evolution(personnage_t* p, salle_t* s){
             oterElm(s->listeEntite,supMonstre); //je reviens au précédent après avoir oté
 
             //creation des coeurs
-            if(strcmp(e.type->nom,"fleche") && strcmp(e.type->nom,"fleche_feu") && strcmp(e.type->nom,"venin") && e.type->comportement != compRecuperable && e.type->comportement != compCoeur){
+            if(e.type->comportement != compFleches && strcmp(e.type->nom,"venin") && e.type->comportement != compRecuperable && e.type->comportement != compCoeur){
                 r = rand() % 100;
                 if(r < COEURDROPRATE){
                     //creer un coeur

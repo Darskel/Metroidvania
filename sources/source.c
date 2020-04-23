@@ -582,7 +582,7 @@ void creerTypeEntite(){
     tmp[3] = 1;
 
     typesMonstre[-SERPENTROSE - 1] = (type_monstre_t){
-        1, //pv de base
+        2, //pv de base
         VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
         0, //vitesse d'attaque
         "serpent rose",//nom, //nom de l'entité
@@ -606,7 +606,7 @@ void creerTypeEntite(){
     tmp[3] = 0;
 
     typesMonstre[-SERPENTVERT - 1] = (type_monstre_t){
-        2, //pv de base
+        3, //pv de base
         VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
         0, //vitesse d'attaque
         "serpent bleu",//nom, //nom de l'entité

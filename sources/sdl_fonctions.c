@@ -81,7 +81,10 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
  */
 SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer){
   SDL_Surface *surface = NULL;
-  SDL_Texture *texture, *tmp = NULL;
+  SDL_Texture *texture =NULL;
+  SDL_Texture *tmp = NULL;
+  SDL_PixelFormat* pixelFormat = NULL;
+  Uint32 pixelFormatEnum;
   surface = IMG_Load(path);
   if(surface==NULL){
       fprintf(stderr, "Erreur IMG_LOAD pour %s", path);
@@ -92,12 +95,16 @@ SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer){
       fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
       exit(EXIT_FAILURE);
   }
-  SDL_PixelFormat* pixelFormat = tmp->format;
-  Uint32 pixelFormatEnum = pixelFormat->format;
   SDL_SetTextureBlendMode(tmp, SDL_BLENDMODE_BLEND);
+
+  pixelFormat = surface->format;
+  pixelFormatEnum = pixelFormat->format;
+  const char* surfacePixelFormatName = SDL_GetPixelFormatName(pixelFormatEnum);
+
   texture = SDL_CreateTexture(renderer, pixelFormatEnum,
                               SDL_TEXTUREACCESS_TARGET, surface->w, surface->h);
   if(texture==NULL){
+      printf("Surface pixel format : %s --- %s\n", surfacePixelFormatName, path);
       fprintf(stderr, "Erreur SDL_CreateTexture : %s", SDL_GetError());
       exit(EXIT_FAILURE);
   }

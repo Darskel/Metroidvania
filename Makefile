@@ -24,7 +24,7 @@ else
 	propre=find . -type f -executable -delete
 endif
 
-all: diskosieni# testListe testSource testSprite testaffsalle testinit testManette
+all: mrproper diskosieni # testListe testSource testSprite testaffsalle testinit testManette
 
 #map: codemap decodemap outdated/deprecated
 
@@ -63,6 +63,7 @@ all: diskosieni# testListe testSource testSprite testaffsalle testinit testManet
 diskosieni: ${o}sdl_fonctions.o ${o}test_SDL.o ${o}source.o ${o}liste.o ${o}comportement.o
 	${COMPILERICON}
 	${CC} ${ICONRES} $^ ${CFLAGS} -o $@ ${LIBS}
+	$(clr)
 
 ${o}%.o: ${c}%.c
 	${CC} $< -c -o $@ ${LIBS}

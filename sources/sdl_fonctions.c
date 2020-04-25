@@ -412,7 +412,7 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
  * @param perso le pointeur sur la structure personnage à faire évoluer
  */
 void miseAjourSprites(personnage_t * perso){
-  if(perso->inv || perso->kb){
+  if((perso->inv || perso->kb)){ //&& perso->hit ){
     perso->clign--;
     if(perso->clign<0)
       perso->clign=FREQCLIGN;
@@ -437,14 +437,22 @@ void miseAjourSprites(personnage_t * perso){
     else
       perso->spriteActuel.w = LARGEURSPRITEPERS;
     perso->newEtat=FALSE;
-    perso->evoSprite=0;
+    //perso->evoSprite=0;
   }
   else{
     if(perso->etat > IDLE && perso->etat < FALLING){
       if(perso->evoSprite<=0){
         perso->spriteActuel.x+=perso->spriteActuel.w;
-        if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
-          perso->spriteActuel.x=0;
+        if(perso->etat == JUMPING){
+          if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
+            perso->spriteActuel.x=(perso->nbAnim[perso->etat]-1)*perso->spriteActuel.w;
+          if(perso->spriteActuel.x <0)
+            perso->spriteActuel.x=0;
+        }
+        else{
+          if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
+            perso->spriteActuel.x=0;
+        }
         if(perso->etat == ATTACKING)
           perso->evoSprite = EVOSPRITESATTACK;
         else
@@ -478,20 +486,34 @@ void miseAjourSpritesEntites(salle_t * salle){
       entite->spriteActuel.x=(entite->type->nbAnim[JUMPING] -1)*(entite->spriteActuel.w);
       entite->spriteActuel.y=JUMPING*(entite->spriteActuel.h);
     }*/
-
+    if(entite->newEtat){
+      if(entite->etat > IDLE && entite->etat <= FALLING){
+        entite->spriteActuel.x=0;
+        entite->spriteActuel.y=entite->etat * (entite->spriteActuel.h);
+      }
+      entite->newEtat=FALSE;
+      //entite->evoSprite=0;
+    }
     else{
       if(entite->etat > IDLE && entite->etat <= FALLING){
         entite->spriteActuel.y=entite->etat * (entite->spriteActuel.h);
         if(entite->evoSprite<=0){
           entite->spriteActuel.x+=entite->spriteActuel.w;
+          if(entite->etat == JUMPING || entite->etat==FALLING){
+            if(entite->spriteActuel.x >= (entite->type->nbAnim[entite->etat])*entite->spriteActuel.w)
+              entite->spriteActuel.x=(entite->type->nbAnim[entite->etat]-1)*entite->spriteActuel.w;
+            if(entite->spriteActuel.x <0)
+              entite->spriteActuel.x=0;
+          }
+          else{
           if(entite->spriteActuel.x >= (entite->type->nbAnim[entite->etat])*(entite->spriteActuel.w))
             entite->spriteActuel.x=0;
+          }
           entite->evoSprite = entite->type->vitesseAnim;
         }
         else (entite->evoSprite)--;
       }
     }
-
     //printf("%d_%d\n",entite->etat,entite->spriteActuel.x);
 
     modifElm(salle->listeEntite, entite);

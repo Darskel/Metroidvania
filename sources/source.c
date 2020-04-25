@@ -546,7 +546,7 @@ void creerTypeEntite(){
         {57,50}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0, //N'attend pas avant de changer d'animation
+        25, //Attend 25 frames avant de changer d'animation (plutôt lent)
         compRoiVifplume //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -623,11 +623,12 @@ void creerTypeEntite(){
     };
 
     //singe de grotte
-    tmp = malloc(sizeof(int) * 4);
+    tmp = malloc(sizeof(int) * 5);
     tmp[0] = 1;
     tmp[1] = 0;
-    tmp[2] = 4;
+    tmp[2] = 2;
     tmp[3] = 1;
+    tmp[4] = 2;
 
     typesMonstre[-SINGEGROTTE - 1] = (type_monstre_t){
         4, //pv de base
@@ -642,7 +643,7 @@ void creerTypeEntite(){
         {35,25}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        25, //Attend 25 frames avant de changer d'animation (plutôt lent)
+        10, //Attend 10 frames avant de changer d'animation (plutôt moyen)
         compSingeGrotte //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -831,7 +832,8 @@ static void creerEntite(idEnt_t id, salle_t* s, position_t pos, personnage_t* p)
     e->pos = pos;
     e->direction = LEFT;
     e->etat = RUNNING;
-    e->newEtat = FALSE;
+    e->newEtat = TRUE;
+    e->evoSprite=0;
 
     e->spriteActuel.h = e->type->tailleSprite.hauteur;
     e->spriteActuel.w = e->type->tailleSprite.largeur;

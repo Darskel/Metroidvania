@@ -825,8 +825,8 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
         entite->direction = dir > 0 ? 0 : 1;
         perso->direction = entite->direction;
     }else{
-        entite->ut = 1 - entite->ut;
-        if(entite->ut)
+        entite->ut--;
+        if(entite->ut <= 0){
             if(dep(entite,salle,TRUE)){
                 if(entite->direction){
                     entite->direction = LEFT;
@@ -845,6 +845,8 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
                     }
                 }
             }
+            entite->ut = 30;
+        }
     }
 }
 

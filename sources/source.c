@@ -584,7 +584,7 @@ void creerTypeEntite(){
     typesMonstre[-SERPENTROSE - 1] = (type_monstre_t){
         2, //pv de base
         VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
-        0, //vitesse d'attaque
+        30, //vitesse d'attaque
         "serpent rose",//nom, //nom de l'entité
         "sprites/entite/serpent_rose/tileset.png",//chemin, //chemin vers les sprites
         NULL, //SDL_Texture* sprites non initialisé !!!
@@ -595,7 +595,7 @@ void creerTypeEntite(){
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         25, //Attend 25 frames avant de changer d'animation (plutôt lent)
-        compSerpent //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+        compSerpentRose //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
     //Serpent vert
@@ -624,10 +624,10 @@ void creerTypeEntite(){
 
     //singe de grotte
     tmp = malloc(sizeof(int) * 4);
-    tmp[0] = 0;
-    tmp[1] = 2;
-    tmp[2] = 0;
-    tmp[3] = 4;
+    tmp[0] = 1;
+    tmp[1] = 0;
+    tmp[2] = 4;
+    tmp[3] = 1;
 
     typesMonstre[-SINGEGROTTE - 1] = (type_monstre_t){
         4, //pv de base
@@ -639,7 +639,7 @@ void creerTypeEntite(){
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
         {26,19}, //hitbox de l'entité (hauteur,largeur) {35,25}, {32,22}, {31,25}, {31,21} quand il saute !
-        {42,25}, //taille sprites
+        {35,25}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         25, //Attend 25 frames avant de changer d'animation (plutôt lent)
@@ -682,7 +682,7 @@ void creerTypeEntite(){
         0, //vit de deplacement
         0, //vitesse d'attaque
         "vifplume",//nom, //nom de l'entité
-        "sprites/entite/vers_geant/tileset.png",//chemin, //chemin vers les sprites
+        "sprites/entite/vifplume/tileset.png",//chemin, //chemin vers les sprites
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
@@ -814,6 +814,7 @@ static void creerEntite(idEnt_t id, salle_t* s, position_t pos, personnage_t* p)
     e->type = &typesMonstre[id-1];
     e->pv = e->type->pv_base;
     e->ut = 0;
+    e->cdAtt = 0;
 
     if(e->type->comportement == compRecuperable){
         for(int i = 0; i < TAILLE_INVENTAIRE; i++){
@@ -830,6 +831,7 @@ static void creerEntite(idEnt_t id, salle_t* s, position_t pos, personnage_t* p)
     e->pos = pos;
     e->direction = LEFT;
     e->etat = RUNNING;
+    e->newEtat = FALSE;
 
     e->spriteActuel.h = e->type->tailleSprite.hauteur;
     e->spriteActuel.w = e->type->tailleSprite.largeur;

@@ -116,7 +116,7 @@ static int hitP(monstre_t* m, personnage_t* p){
 
     leftE = m->pos.x*TAILLEBLOC + m->delta.x;
     rightE = leftE + m->type->hitbox.largeur;
-    topE = m->pos.y*TAILLEBLOC + m->delta.y + (m->type->tailleSprite.hauteur - m->type->hitbox.hauteur) / (m->type->comportement == compPortes ? 1 : 2);
+    topE = m->pos.y*TAILLEBLOC + m->delta.y + (m->type->tailleSprite.hauteur - m->type->hitbox.hauteur);
     bottomE = topE + m->type->hitbox.hauteur;
 
     leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
@@ -606,8 +606,8 @@ static int hitB(monstre_t* m, salle_t* s){
     int bottomM;
 
     leftM = m->pos.x*TAILLEBLOC + m->delta.x;
-    rightM = leftM + m->type->hitbox.largeur - (m->type->tailleSprite.largeur - m->type->hitbox.largeur)/2;
-    topM = m->pos.y*TAILLEBLOC + m->delta.y + 1;
+    rightM = leftM + m->type->hitbox.largeur - (m->type->tailleSprite.largeur - m->type->hitbox.largeur);
+    topM = m->pos.y*TAILLEBLOC + m->delta.y + (m->type->tailleSprite.hauteur - m->type->hitbox.hauteur);
     bottomM = topM + m->type->hitbox.hauteur;
 
     if(leftM < 0 || topM < 0)
@@ -693,23 +693,40 @@ static int dep(monstre_t* entite, salle_t* salle, boolean_t chute){
     return FALSE;
 }
 
-//Commentés par MN car ne compile pas (structures pas à jour notamment)
-/*
-  static int inRange(monstre_t* entite, personnage_t* perso, int radius){
-    //verif si il n'y a pas de bloc bloquant entre
-    int delta = perso->pos.x - entite->pos.x;
+static int inRange(monstre_t* entite, personnage_t* perso, salle_t* salle, int radius){
+    int leftE, leftP;
+    int rightE, rightP;
+    int topE, topP;
+    int bottomE, bottomP;
 
-    if(delta < radius && delta > -radius)
-        return 1;
-    if(delta > radius || delta < -radius)
-        return 0;
+    leftE = entite->pos.x*TAILLEBLOC + entite->delta.x;
+    rightE = leftE + entite->type->hitbox.largeur;
+    topE = entite->pos.y*TAILLEBLOC + entite->delta.y + (entite->type->tailleSprite.hauteur - entite->type->hitbox.hauteur);
+    bottomE = topE + entite->type->hitbox.hauteur;
 
-    int deltaF = perso->delta.delta_x.numerateur - entite->delta.delta_x.numerateur;
+    leftP = perso->pos.x*TAILLEBLOC + perso->delta.x + OFFSETHITBOX;
+    rightP = leftP + perso->hitbox.largeur;
+    topP = perso->pos.y*TAILLEBLOC + perso->delta.y + 1;
+    bottomP = topP + perso->hitbox.hauteur;
 
-    if((delta > 0 && deltaF < 0) || (delta < 0 && deltaF > 0))
-        return 1;
-    return 0;
-}*/
+    if(leftE - radius < rightP && leftP < leftE && !entite->direction){
+        for(int i = rightP/TAILLEBLOC; i < leftE/TAILLEBLOC; i++)
+            for(int j = topE/TAILLEBLOC; j < bottomE/TAILLEBLOC; j++)
+                if(salle->mat[j][i])
+                    return FALSE;
+        return TRUE;
+    }
+
+    if(rightE + radius > leftP && rightP > rightE && entite->direction){
+        for(int i = rightE/TAILLEBLOC; i < leftP/TAILLEBLOC; i++)
+            for(int j = topE/TAILLEBLOC; j < bottomE/TAILLEBLOC; j++)
+                if(salle->mat[j][i])
+                    return FALSE;
+        return TRUE;
+    }
+
+    return FALSE;
+}
 
 void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle){
     entite->etat = IDLE;
@@ -750,7 +767,7 @@ void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle){
             }
             entite->pv = 0;
             entite->etat = IDLE;
-            //entite->newEtat = TRUE;
+            entite->newEtat = TRUE;
         }
         suivant(salle->listeEntite);
     }
@@ -758,7 +775,7 @@ void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle){
     if(dep(entite,salle,FALSE)){
         entite->pv = 0;
         entite->etat = IDLE;
-        //entite->newEtat = TRUE;
+        entite->newEtat = TRUE;
     }
 }
 
@@ -821,6 +838,7 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
     if(dir && !perso->inv && !perso->kb){
         perso->pv -= entite->type->degat;
         perso->kb = 1;
+        perso->hit = TRUE;
         perso->etat = IDLE;
         entite->direction = dir > 0 ? 0 : 1;
         perso->direction = entite->direction;
@@ -851,27 +869,161 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
 }
 
 void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
-    /*if(hitP(entite,perso)){
-        perso->pv -= entite->type->degat;
-        entite->direction = 1 - entite->direction;
-        //sprite
-    }else{
-        if(hitB(entite,salle)){
-            entite->direction = 1 - entite->direction;
-            //sprite
+    int dir = hitP(entite,perso);
+    if(dir && !perso->inv && !perso->kb){
+        perso->kb = 1;
+        perso->hit = FALSE;
+        perso->etat = IDLE;
+        entite->direction = dir > 0 ? 0 : 1;
+        perso->direction = entite->direction;
+    }
+
+    if(entite->cdAtt > 0)
+        entite->cdAtt--;
+
+    if(!entite->cdAtt && (entite->etat == ATTACKING || inRange(entite,perso,salle,10*TAILLEBLOC))){
+        if(entite->etat != ATTACKING){
+            entite->ut = 10;
+            entite->etat = ATTACKING;
+            entite->newEtat = TRUE;
         }else{
-            if(inRange(entite,perso,6)){
-                //attaquer
+            if(!(--(entite->ut))){
+                monstre_t* f = malloc(sizeof(monstre_t));
+                f->type = &typesMonstre[-VENIN - 1];
+                
+                f->pv = f->type->pv_base;
+
+                int leftP = entite->pos.x*TAILLEBLOC + entite->delta.x + OFFSETHITBOX;
+                int rightP = leftP + entite->type->hitbox.largeur;
+
+                if(entite->direction){
+                    f->delta = (position_t){rightP%8,1};
+                    f->pos = (position_t){rightP/8,entite->pos.y+2};
+                    f->direction = RIGHT;
+                }else{
+                    f->delta = (position_t){leftP%8,1};
+                    f->pos = (position_t){leftP/8 - 1,entite->pos.y+2};
+                    f->direction = LEFT;
+                }
+
+                f->delta.x += f->type->vit_dep * f->direction ? 1 : -1;
+
+                if(f->direction){
+                    if(f->delta.x >= TAILLEBLOC){
+                        (f->pos.x)++;
+                        f->delta.x -= TAILLEBLOC;
+                    }
+                }else{
+                    if(f->delta.x < 0){
+                        (f->pos.x)--;
+                        f->delta.x += TAILLEBLOC;
+                    }
+                }
+
+                f->etat = IDLE;
+
+                f->spriteActuel.h = f->type->tailleSprite.hauteur;
+                f->spriteActuel.w = f->type->tailleSprite.largeur;
+                f->spriteActuel.x = 0;
+                f->spriteActuel.y = f->etat * f->spriteActuel.h;
+
+                enTete(salle->listeEntite);
+                ajoutDroit(salle->listeEntite, f);
+
+                entite->etat = RUNNING;
+                entite->newEtat = TRUE;
+                entite->cdAtt = entite->type->vit_att;
             }
         }
-    }*/
+    }else{
+        entite->ut--;
+        if(entite->ut <= 0){
+            if(dep(entite,salle,TRUE)){
+                if(entite->direction){
+                    entite->direction = LEFT;
+                    entite->delta.x -= entite->type->vit_dep;
+                    if(entite->delta.x < 0){
+                        (entite->pos.x)--;
+                        entite->delta.x += TAILLEBLOC;
+                    }
+                }else{
+                    entite->direction = RIGHT;
+                    entite->delta.x += entite->type->vit_dep;
+
+                    if(entite->delta.x >= TAILLEBLOC){
+                        (entite->pos.x)++;
+                        entite->delta.x -= TAILLEBLOC;
+                    }
+                }
+            }
+            entite->ut = 2;
+        }
+    }
 }
 
 void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle){
-    entite->etat = IDLE;
-    /*if(inRange(entite,perso,4)){
-        //attaquer
-    }*/
+    int dir = hitP(entite,perso);
+    if(dir && !perso->inv && !perso->kb){
+        perso->pv -= entite->type->degat;
+        perso->kb = 1;
+        perso->etat = IDLE;
+        perso->hit = TRUE;
+        entite->newEtat = TRUE;
+        perso->direction = dir > 0 ? 0 : 1;
+    }
+
+    if(entite->pos.x * TAILLEBLOC + entite->delta.x > perso->pos.x * TAILLEBLOC + perso->delta.x)
+        entite->direction = LEFT;
+    else
+        entite->direction = RIGHT;
+
+    switch(entite->etat){
+        case RUNNING:
+            entite->etat = IDLE;
+            break;
+        case IDLE:
+            if(inRange(entite,perso,salle,3*TAILLEBLOC)){
+                entite->etat = ATTACKING;
+                entite->newEtat = TRUE;
+                entite->ut = 10;
+            }
+            break;
+        case JUMPING:
+            entite->delta.y -= entite->type->vit_dep;
+            if(entite->delta.y < 0){
+                (entite->pos.y)--;
+                entite->delta.y += TAILLEBLOC;
+            }
+            if(hitB(entite,salle)){
+                entite->etat = FALLING;
+                entite->newEtat = TRUE;
+                (entite->pos.y)++;
+                entite->delta.y -= TAILLEBLOC;
+            }
+            break;
+        case ATTACKING:
+            entite->ut--;
+            if(!entite->ut){
+                entite->etat = JUMPING;
+                entite->newEtat = TRUE;
+            }
+            break;
+        case FALLING:
+            entite->delta.y += entite->type->vit_dep;
+            if(entite->delta.y >= TAILLEBLOC){
+                (entite->pos.y)++;
+                entite->delta.y -= TAILLEBLOC;
+            }
+            if(hitB(entite,salle)){
+                entite->etat = IDLE;
+                entite->newEtat = TRUE;
+                (entite->pos.y)--;
+                entite->delta.y += TAILLEBLOC;
+            }
+            break;
+        default:
+            break;
+    }
 }
 
 void compVersGeant(monstre_t* entite, personnage_t* perso, salle_t* salle){
@@ -907,8 +1059,12 @@ static void creerCoeur(monstre_t* m, salle_t* s){
 
 void evolution(personnage_t* p, salle_t* s){
     int r;
+    
     if(p->inv)
         (p->inv)--;
+    else
+        p->hit = FALSE;
+    
     if(p->kb){
         if(p->direction){
             depGauche(p,s);
@@ -916,6 +1072,13 @@ void evolution(personnage_t* p, salle_t* s){
             depDroite(p,s);
         }
     }
+
+
+
+    //CHEATCODE !
+    for(int i = 0; i < TAILLE_INVENTAIRE; i++)
+        p->inventaire[i] = 1;
+    
     s->listeEntite->indTmp = 0;
     monstre_t e;
     enTete(s->listeEntite);

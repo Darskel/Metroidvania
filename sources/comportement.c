@@ -825,7 +825,9 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
         entite->direction = dir > 0 ? 0 : 1;
         perso->direction = entite->direction;
     }else{
-        entite->ut--;
+        //(entite->ut)--;
+        printf("%p_%p:",entite, &(entite->ut));
+        printf("%d\n",entite->ut);
         if(entite->ut <= 0){
             if(dep(entite,salle,TRUE)){
                 if(entite->direction){
@@ -845,7 +847,7 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
                     }
                 }
             }
-            entite->ut = 30;
+            //entite->ut = 2;
         }
     }
 }

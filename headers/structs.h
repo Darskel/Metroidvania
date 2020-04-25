@@ -111,22 +111,22 @@
 
 /*
     INVENTAIRE:
-        objet n°1 : clé rouillé
+        objet n°1 : clé rouillée
         objet n°2 : clé rouge
         objet n°3 : clé verte
         objet n°4 : fléche de feu
         objet n°5 : clé bleu
         objet n°6 : double saut
         objet n°7 : renard
-        objet n°8 : champignon
+        objet n°8 : discoshroom
     >
-        champignon
         cle bleue
-        cle rouille
         cle rouge
+        cle rouillee
         cle verte
+        discoshroom
         double saut
-        fleche de feu
+        huile
         renard
 
 */
@@ -225,6 +225,7 @@ typedef struct salle_s{
 */
 typedef struct personnage_s{
     int pv; /**< PV(points de vie) actuel du personnage */
+    boolean_t hit; /**< Indique si le personnage a été touché lors de la frame actuelle */
     int pv_max; /**< PV max du personnage */
     boolean_t kb; /**< Indique si le joueur est en plein knockback */
     int inv; /**< Entier qui permet de décompter l'invulnérabilité du joueur */
@@ -284,11 +285,14 @@ struct monstre_s{
     type_monstre_t * type; /**< Type de monstre */
     int pv; /**< PV actuels du monstre */
     etat_t etat; /**< Etat actuel du monstre */
+    boolean_t newEtat; /**< Booléen qui signifie qu'un changement d'état vient de s'effectuer */
     SDL_Rect spriteActuel; /**< Rectangle qui correspond à la taille du sprite actuel dans la texture */
     position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
     position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
     boolean_t direction; /**< Direction vers laquelle regarde le monstre (1: vers la gauche(LEFT), 0: vers la droite(RIGHT)) */
     int evoSprite; /**< Entier qui décrémente, changement de sprite quand vaut 0 */
+    int cdAtt; /**< Variable indiquant le temps restant avant la prochaine attaque */
+    int ut; /**< Variable utilitaire à fonction variable permetttant une info entière ou bouléenne sur un monstre: norme 0 = valeur de base ou rien */
 };
 
 /**

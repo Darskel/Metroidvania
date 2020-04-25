@@ -169,13 +169,13 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->forme='h';
   for(int i = 0; i < TAILLE_INVENTAIRE; i++)
         personnage->inventaire[i] = 0;
-  personnage->nomObj[0] = "champignon";
-  personnage->nomObj[1] = "cle bleue";
-  personnage->nomObj[2] = "cle rouille";
-  personnage->nomObj[3] = "cle rouge";
-  personnage->nomObj[4] = "cle verte";
+  personnage->nomObj[0] = "cle bleue";
+  personnage->nomObj[1] = "cle rouge";
+  personnage->nomObj[2] = "cle rouillee";
+  personnage->nomObj[3] = "cle verte";
+  personnage->nomObj[4] = "discoshroom";
   personnage->nomObj[5] = "double saut";
-  personnage->nomObj[6] = "fleche de feu";
+  personnage->nomObj[6] = "huile";
   personnage->nomObj[7] = "renard";
   return personnage;
 }
@@ -197,16 +197,16 @@ void destroy_personnage(personnage_t ** personnage){
  *
  */
 void destroy_typeentites(void){
-  /*for(int i=0; i<NBTYPEMONSTRE; i++){
+  for(int i=0; i<NBTYPEMONSTRE; i++){
     SDL_DestroyTexture((typesMonstre[i]).sprites);
     free((typesMonstre[i]).nbAnim);
-  }Pour tout les types de monstres*/
-  SDL_DestroyTexture((typesMonstre[-SERPENTBLEU -1]).sprites);
+  }//Pour tout les types de monstres*/
+  /*SDL_DestroyTexture((typesMonstre[-SERPENTBLEU -1]).sprites);
   free((typesMonstre[-SERPENTBLEU -1]).nbAnim);
   SDL_DestroyTexture((typesMonstre[-COEUR -1]).sprites);
   free((typesMonstre[-COEUR -1]).nbAnim);
   SDL_DestroyTexture((typesMonstre[-FLECHE -1]).sprites);
-  free((typesMonstre[-FLECHE -1]).nbAnim);
+  free((typesMonstre[-FLECHE -1]).nbAnim);*/
 }
 
 /**
@@ -216,12 +216,12 @@ void destroy_typeentites(void){
  */
 void initialiser_typeentites(SDL_Renderer * renderer){
   creerTypeEntite();
-  /*for(int i=0; i<NBTYPEMONSTRE; i++){
-    typesMonstre[i].sprites = initialiser_texture(typesMonstre[i].path, renderer);
-  }*/
-  typesMonstre[-SERPENTBLEU -1].sprites = initialiser_texture(typesMonstre[-SERPENTBLEU -1].path, renderer, FALSE);
-  typesMonstre[-COEUR - 1].sprites = initialiser_texture(typesMonstre[-COEUR -1].path, renderer, FALSE);
-  typesMonstre[-FLECHE - 1].sprites = initialiser_texture(typesMonstre[-FLECHE -1].path, renderer, FALSE);
+  for(int i=0; i<NBTYPEMONSTRE; i++){
+    typesMonstre[i].sprites = initialiser_texture(typesMonstre[i].path, renderer, FALSE);
+  }//*/
+  /*typesMonstre[-SERPENTBLEU -1].sprites = initialiser_texture(typesMonstre[-SERPENTBLEU -1].path, renderer);
+  typesMonstre[-COEUR - 1].sprites = initialiser_texture(typesMonstre[-COEUR -1].path, renderer);
+  typesMonstre[-FLECHE - 1].sprites = initialiser_texture(typesMonstre[-FLECHE -1].path, renderer);*/
 }
 
 
@@ -233,7 +233,7 @@ void initialiser_typeentites(SDL_Renderer * renderer){
  * @param tileset le pointeur vers la texture de tileset
  * @return un pointeur sur la structure salle initialisée
  */
-salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier){
+salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, personnage_t* perso){
   salle_t * salle=NULL;
   char nom_bg[100];
 
@@ -242,7 +242,7 @@ salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier){
   nom_bg[strlen(nom_bg) - 3] = '\0';
   strcat(nom_bg, "png");
 
-  lireSalle(nomFichier, &salle);
+  lireSalle(nomFichier, &salle, perso);
   salle->background=initialiser_texture(nom_bg, renderer, FALSE);
   salle->tileset=initialiser_texture(TILESETPATH, renderer, FALSE);
   return salle;
@@ -598,13 +598,13 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
   initialiser_typeentites(*renderer);
   //tileset=initialiser_texture(TILESETPATH, *renderer);
 
-  salle=initialiser_salle(*renderer, NIVEAUTXT);
+  salle=initialiser_salle(*renderer, NIVEAUTXT, perso);
   positionDepart.x = 1;
   positionDepartDelta.x = 0;
   positionDepart.y = salle->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;
   positionDepartDelta.y = TAILLEBLOC-1;
-  perso=initialisation_personnage(*renderer, positionDepart, positionDepartDelta);
   ecranNoir(*renderer, 100);
+  perso=initialisation_personnage(*renderer, positionDepart, positionDepartDelta);
 
   while(fin==FALSE){
     frameStart = SDL_GetTicks();
@@ -788,7 +788,7 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
       salle_nom=prendPorte(perso, (salle)->listePorte);
       if(salle_nom != NULL){
         destroy_salle(&salle);
-        salle=initialiser_salle(*renderer, salle_nom);
+        salle=initialiser_salle(*renderer, salle_nom, perso);
         salleChangee=TRUE;
         kon = FALSE;
         free(salle_nom);

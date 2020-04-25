@@ -24,6 +24,7 @@ void evolution(personnage_t* p, salle_t* s);
 void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle);
 void compCoeur(monstre_t* entite, personnage_t* perso, salle_t* salle);
 void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle);
+void compPortes(monstre_t* entite, personnage_t* perso, salle_t* salle);
 void compMurGlace(monstre_t* entite, personnage_t* perso, salle_t* salle);
 void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle);
 void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle);

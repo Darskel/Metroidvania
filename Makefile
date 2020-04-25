@@ -4,13 +4,17 @@ CC = gcc
 h = ./headers/
 c = ./sources/
 o = ./o/
+i = ./icon/
 
 ifeq ($(OS),Windows_NT)
 	#CFLAGS += -D WIN32
 	SDL_DIR=C:\SDLib\SDL2
 	SDL_LIB_DIR=${SDL_DIR}\lib
 	SDL_INC_DIR=${SDL_DIR}\include
-	ICON=icon.res #-mwindows pour retirer la console lors du lancement de l'application
+	RETIRERCONSOLE= -mwindows #pour retirer la console à l'exécution du programme
+	ICONRES=${i}icon.res
+	ICONRC=${i}icon.rc
+	COMPILERICON=windres.exe -i ${ICONRC} -o ${ICONRES} --input-format=rc -O coff
 	LIBS=-L${SDL_LIB_DIR} -I${SDL_INC_DIR} -lmingw32 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2 #-lSDL2_mixer
 	clr=del /s *.o
 	propre=del /s *.exe
@@ -57,8 +61,8 @@ all: diskosieni# testListe testSource testSprite testaffsalle testinit testManet
 #	${CC} $^ -o $@  ${LIBS}
 
 diskosieni: ${o}sdl_fonctions.o ${o}test_SDL.o ${o}source.o ${o}liste.o ${o}comportement.o
-	${CC} ${ICON} $^ ${CFLAGS} -o $@ ${LIBS}
-
+	${COMPILERICON}
+	${CC} ${ICONRES} $^ ${CFLAGS} -o $@ ${LIBS}
 
 ${o}%.o: ${c}%.c
 	${CC} $< -c -o $@ ${LIBS}

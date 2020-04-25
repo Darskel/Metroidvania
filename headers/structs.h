@@ -106,6 +106,7 @@
 #define PVMAX 3
 #define TEMPINV 60
 #define FREQCLIGN 2
+#define INVUDELAY 6
 
 
 /*

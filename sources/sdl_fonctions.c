@@ -395,7 +395,7 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
   SDL_SetRenderTarget(renderer, NULL);
   afficher_salle(renderer,salle, textureSalle);
   afficher_entites(renderer,salle, textureSalle);
-  if(personnage->clign%FREQCLIGN == 0)
+  if(personnage->clign%FREQCLIGN == 0 || (personnage->kb == FALSE && personnage->inv<INVUDELAY))
     afficher_personnage(renderer, personnage, salle, textureSalle);
   afficherVieCoeurs(renderer, personnage, coeurImage, textureSalle);
   //afficherVieJauge(renderer, personnage);
@@ -474,13 +474,13 @@ void miseAjourSpritesEntites(salle_t * salle){
       entite->spriteActuel.y=IDLE;
     }
 
-    else if(entite->etat == FALLING){
+    /*else if(entite->etat == FALLING){
       entite->spriteActuel.x=(entite->type->nbAnim[JUMPING] -1)*(entite->spriteActuel.w);
       entite->spriteActuel.y=JUMPING*(entite->spriteActuel.h);
-    }
+    }*/
 
     else{
-      if(entite->etat > IDLE && entite->etat < FALLING){
+      if(entite->etat > IDLE && entite->etat <= FALLING){
         entite->spriteActuel.y=entite->etat * (entite->spriteActuel.h);
         if(entite->evoSprite<=0){
           entite->spriteActuel.x+=entite->spriteActuel.w;

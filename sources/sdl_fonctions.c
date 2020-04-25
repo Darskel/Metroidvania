@@ -169,6 +169,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->forme='h';
   for(int i = 0; i < TAILLE_INVENTAIRE; i++)
         personnage->inventaire[i] = 0;
+  personnage->inventaireTileset = initialiser_texture(INVENTAIREPATH, renderer, FALSE);
   personnage->nomObj[0] = "cle bleue";
   personnage->nomObj[1] = "cle rouge";
   personnage->nomObj[2] = "cle rouillee";
@@ -180,6 +181,42 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   return personnage;
 }
 
+void afficherInventaire(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * textureSalle){
+  SDL_Rect boite;
+  SDL_Rect objPlacement;
+  SDL_Rect objTileset;
+  int maxw;
+  int maxh;
+  SDL_SetRenderTarget(renderer, textureSalle);
+  SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
+  objPlacement.w = INVENTAIRESIZE;
+  objPlacement.h = INVENTAIRESIZE;
+  objTileset.w = INVENTAIRESIZE;
+  objTileset.h = INVENTAIRESIZE;
+  boite.w = INVENTAIRESIZE * (TAILLE_INVENTAIRE+2);
+  boite.h = INVENTAIRESIZE + 2;
+  boite.x = maxw - maxw/100 - boite.w;
+  boite.y = maxh/200;
+  objPlacement.x= boite.x + 2;
+  objPlacement.y= boite.y + 1;
+  objTileset.x=0;
+  objTileset.y=0;
+  SDL_SetRenderDrawColor(renderer, 10, 10, 10, 200);
+  SDL_RenderFillRect(renderer, &boite);
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_SetRenderTarget(renderer, NULL);
+  for(int i=0; i<TAILLE_INVENTAIRE; i++){
+    if(personnage->inventaire[i]){
+      SDL_SetRenderTarget(renderer, textureSalle);
+      SDL_RenderCopy(renderer, personnage->inventaireTileset, &objTileset, &objPlacement);
+      SDL_SetRenderTarget(renderer, NULL);
+      objPlacement.x += INVENTAIRESIZE + 2;
+    }
+    objTileset.x += INVENTAIRESIZE;
+  }
+}
+
+
 /**
  * \brief Fonction de destruction de la structure personnage
  *
@@ -187,6 +224,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
  */
 void destroy_personnage(personnage_t ** personnage){
   SDL_DestroyTexture((*personnage)->sprites);
+  SDL_DestroyTexture((*personnage)->inventaireTileset);
   free((*personnage)->nbAnim);
   free(*personnage);
   *personnage=NULL;
@@ -354,7 +392,7 @@ void afficher_entites(SDL_Renderer * renderer, salle_t * salle, SDL_Texture * te
  * @param salle le pointeur sur la salle où afficher le joueur et les entités
  * @param personnage le pointeur sur la structure personnage à afficher
  */
-void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * personnage){
+void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * personnage, int * inventaireAffiche){
   SDL_Texture * textureSalle;
   SDL_Rect Rect_dest;
   int maxw;
@@ -399,6 +437,11 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
     afficher_personnage(renderer, personnage, salle, textureSalle);
   afficherVieCoeurs(renderer, personnage, coeurImage, textureSalle);
   //afficherVieJauge(renderer, personnage);
+  if(*inventaireAffiche > 0){
+    afficherInventaire(renderer, personnage, textureSalle);
+    if(*inventaireAffiche < INVENTAIRETIME)
+      (*inventaireAffiche)--;
+  }
   SDL_SetRenderTarget(renderer, NULL);
   SDL_RenderCopy(renderer, textureSalle, NULL, &Rect_dest);
   SDL_RenderPresent(renderer);
@@ -591,6 +634,7 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
   int messageRes;
   Sint16 x_move;
   Sint16 y_move;
+  int inventaireAffiche=0;
   position_t positionDepart;
   position_t positionDepartDelta;
   //boolean_t windowtouched=FALSE;
@@ -701,6 +745,9 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
               break;
             case SDLK_a:
               konami[indKon++] = 'a';
+            case SDLK_i:
+              if(inventaireAffiche==INVENTAIRETIME)
+                inventaireAffiche--;
               break;
             case SDLK_b:
               konami[indKon++] = 'b';
@@ -732,6 +779,10 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
             case SDLK_e:
               tryAtk=TRUE;
               break;
+            case SDLK_i:
+            case SDLK_a:
+              inventaireAffiche=INVENTAIRETIME;
+              break;
           }
           break;
         case SDL_MOUSEMOTION :
@@ -748,13 +799,22 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
               konami[indKon++] = 'b';
               tryAtk=TRUE;
               break;
+            case 3 : //bouton Y manette XBOX
+              inventaireAffiche=INVENTAIRETIME;
+              break;
             case 7 : //bouton Start manette XBOX
               konami[indKon++] = 's';
               break;
           }
         break;
-        /*case SDL_JOYBUTTONUP :
-          break;*/
+        case SDL_JOYBUTTONUP :
+          switch(event.jbutton.button){
+            case 3 : //bouton Y manette XBOX
+              if(inventaireAffiche==INVENTAIRETIME)
+                inventaireAffiche--;
+              break;
+          }
+          break;
         case SDL_JOYAXISMOTION :
           switch(event.jaxis.axis){
             case 0 :
@@ -854,7 +914,7 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
       SDL_SetRenderDrawColor(*renderer,0,0,0,255);
       //SDL_RenderClear(*renderer);
       SDL_RenderFillRect(*renderer, NULL);
-      affichage_complet(*renderer, salle, perso);
+      affichage_complet(*renderer, salle, perso, &inventaireAffiche);
 
       frameTime = SDL_GetTicks() - frameStart;
       if(frameTime < FRAMEDELAY){
@@ -1111,7 +1171,7 @@ void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_T
   boite.y = maxh/200;
   coeur.x = boite.x +1;
   coeur.y = boite.y +1;
-  SDL_SetRenderDrawColor(renderer, 115, 23, 45, 50);
+  SDL_SetRenderDrawColor(renderer, 10, 10, 10, 100);
   SDL_RenderFillRect(renderer, &boite);
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_SetRenderTarget(renderer, NULL);

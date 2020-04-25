@@ -49,6 +49,9 @@
 #define RIGHT 1
 
 #define TAILLE_INVENTAIRE 8
+#define INVENTAIRESIZE 10
+#define INVENTAIREPATH "./sprites/inventaire/tileset.png"
+#define INVENTAIRETIME 60
 
 #define NOM_JEU "Diskosieni"
 
@@ -250,6 +253,7 @@ typedef struct personnage_s{
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du personage */
     char forme; /**< Forme du personnage H = humain, F = renard */
     int inventaire[TAILLE_INVENTAIRE]; /**<Tableau qui contient les informations sur l'inventaire actuel du personnage */
+    SDL_Texture * inventaireTileset;
     char* nomObj[TAILLE_INVENTAIRE]; /**<Tableau qui contient les noms des objets de l'inventaire */
 } personnage_t;
 

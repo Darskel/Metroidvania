@@ -65,7 +65,7 @@ int hitE(monstre_t* e1, monstre_t* e2){
 
     if(e2->type->comportement == compRecuperable)
         return FALSE;
-    
+
     if(e2->type->comportement == compPortes)
         if(e2->pv == 2)
             return FALSE;
@@ -494,7 +494,7 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
                 int i;
                 for(i = 0; i < TAILLE_INVENTAIRE && strcmp(p->nomObj[i],"huile"); i++);
                 f->type = i < TAILLE_INVENTAIRE && p->inventaire[i] ? &typesMonstre[-FLECHEFEU - 1] : &typesMonstre[-FLECHE - 1];
-                
+
                 f->pv = f->type->pv_base;
 
                 int leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
@@ -782,7 +782,7 @@ void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle){
 void compPortes(monstre_t* e, personnage_t* p, salle_t* s){
     if(!e->direction)
         e->direction = RIGHT;
-    
+
     if(e->pv == 1 && e->etat != IDLE)
         e->etat = IDLE;
 
@@ -890,7 +890,7 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
             if(!(--(entite->ut))){
                 monstre_t* f = malloc(sizeof(monstre_t));
                 f->type = &typesMonstre[-VENIN - 1];
-                
+
                 f->pv = f->type->pv_base;
 
                 int leftP = entite->pos.x*TAILLEBLOC + entite->delta.x + OFFSETHITBOX;
@@ -1059,12 +1059,12 @@ static void creerCoeur(monstre_t* m, salle_t* s){
 
 void evolution(personnage_t* p, salle_t* s){
     int r;
-    
+
     if(p->inv)
         (p->inv)--;
     else
         p->hit = FALSE;
-    
+
     if(p->kb){
         if(p->direction){
             depGauche(p,s);
@@ -1078,7 +1078,7 @@ void evolution(personnage_t* p, salle_t* s){
     //CHEATCODE !
     for(int i = 0; i < TAILLE_INVENTAIRE; i++)
         p->inventaire[i] = 1;
-    
+
     s->listeEntite->indTmp = 0;
     monstre_t e;
     enTete(s->listeEntite);

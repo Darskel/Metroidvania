@@ -37,7 +37,7 @@ salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, personnag
 void afficher_salle(SDL_Renderer * renderer, salle_t * salle, SDL_Texture * textureSalle);
 void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, salle_t * salle, SDL_Texture * textureSalle);
 void afficher_entites(SDL_Renderer * renderer, salle_t * salle, SDL_Texture * textureSalle);
-void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * personnage);
+void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * personnage, int * inventaireAffiche);
 void miseAjourSprites(personnage_t * personnage);
 void miseAjourSpritesEntites(salle_t * salle);
 void destroy_salle(salle_t ** salle);
@@ -60,3 +60,4 @@ boolean_t menuConfirmation(SDL_Renderer * renderer);
 void afficherMenu(SDL_Renderer * renderer, menu_t * menu);
 void afficherVieJauge(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * textureSalle);
 void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * coeurImage, SDL_Texture * textureSalle);
+void afficherInventaire(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * textureSalle);

@@ -33,7 +33,7 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
 void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer);
 SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer, boolean_t estTarget);
 personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t positionDepart, position_t positionDepartDelta);
-salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier);
+salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, personnage_t* perso);
 void afficher_salle(SDL_Renderer * renderer, salle_t * salle, SDL_Texture * textureSalle);
 void afficher_personnage(SDL_Renderer * renderer, personnage_t * personnage, salle_t * salle, SDL_Texture * textureSalle);
 void afficher_entites(SDL_Renderer * renderer, salle_t * salle, SDL_Texture * textureSalle);

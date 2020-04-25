@@ -10,7 +10,7 @@ ifeq ($(OS),Windows_NT)
 	SDL_DIR=C:\SDLib\SDL2
 	SDL_LIB_DIR=${SDL_DIR}\lib
 	SDL_INC_DIR=${SDL_DIR}\include
-	ICON=icon.res #-mwindows pour retirer la console lors du lancement de l'application
+	ICON= #icon.res #-mwindows pour retirer la console lors du lancement de l'application
 	LIBS=-L${SDL_LIB_DIR} -I${SDL_INC_DIR} -lmingw32 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2 #-lSDL2_mixer
 	clr=del /s *.o
 	propre=del /s *.exe

@@ -920,7 +920,8 @@ void evolution(personnage_t* p, salle_t* s){
     while(!horsListe(s->listeEntite)){
         valeurElm(s->listeEntite,&e);
         if(e.pv > 0){
-            e.type->comportement(&e,p,s);
+            if(e.type->comportement)
+                e.type->comportement(&e,p,s);
 
             enTete(s->listeEntite);
             for(int i = 0; i < s->listeEntite->indTmp; i++)

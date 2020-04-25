@@ -818,7 +818,7 @@ static void creerEntite(idEnt_t id, salle_t* s, position_t pos, personnage_t* p)
     if(e->type->comportement == compRecuperable){
         for(int i = 0; i < TAILLE_INVENTAIRE; i++){
             if(!strcmp(e->type->nom,p->nomObj[i])){
-                if(p->inventaire[i]){
+                if(p && p->inventaire[i]){
                     free(e);
                     return;
                 }

@@ -772,8 +772,11 @@ void compCoeur(monstre_t* e, personnage_t* p, salle_t* s){
                 e->delta.y -= TAILLEBLOC;
             }
             if(hitB(e,s)){
-                (e->pos.y)--;
-                e->delta.y = 7;
+                e->delta.y -= e->type->vit_dep;
+                if(e->delta.y < 0){
+                    e->delta.y += TAILLEBLOC;
+                    (e->pos.y)--;
+                }
             }
             e->type->vit_dep = 3;
         }else

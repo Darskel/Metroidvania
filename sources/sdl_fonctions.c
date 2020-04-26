@@ -908,6 +908,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
       if(perso->pv == 0){
         fin=TRUE;
         mort=TRUE;
+        SDL_Delay(1000);
       }
 
       miseAjourSprites(perso);

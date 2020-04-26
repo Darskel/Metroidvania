@@ -554,7 +554,7 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
 }
 
 void transformation(personnage_t* p){
-    if(p->etat == IDLE)
+    if(p->etat != ATTACKING)
         if(p->forme == 'H'){
             p->forme = 'R';
             p->hitbox = (taille_t){HAUTEURHITBOXREN,LARGEURHITBOXREN};

@@ -26,10 +26,10 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
     fprintf(stderr, "Echec de l'initalisation de la SDL (%s)\n", SDL_GetError());
     exit(EXIT_FAILURE);
   }
-  /*if(TTF_Init () ==  -1){
+  if(TTF_Init () ==  -1){
     fprintf(stderr, "Erreur d’initialisation de TTF_Init : %s\n", TTF_GetError ());
     exit(EXIT_FAILURE);
-  }*/
+  }
 
   if(SDL_GetDesktopDisplayMode(0, mode)){
     fprintf(stderr, "Echec de la récupération des infos de l'écran (%s)\n", SDL_GetError());
@@ -68,6 +68,7 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
 void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
   SDL_DestroyRenderer(*renderer);
   SDL_DestroyWindow(*fenetre);
+  TTF_Quit();
   SDL_Quit();
 }
 
@@ -625,7 +626,7 @@ void konamicode(personnage_t * perso, salle_t * salle, char * konami, int * indK
   }
 }
 
-void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen){
+boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen){
   SDL_Event event;
   Uint32 frameStart;
   int frameTime;
@@ -647,6 +648,7 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
   boolean_t tryJump = FALSE;
   boolean_t tryAtk = FALSE;
   boolean_t fin=FALSE;
+  boolean_t mort=FALSE;
   boolean_t salleChangee=FALSE;
   boolean_t kon = FALSE;
   char konami[TAILLEKONAMI];
@@ -903,6 +905,11 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
 
       evolution(perso,salle);
 
+      if(perso->pv == 0){
+        fin=TRUE;
+        mort=TRUE;
+      }
+
       miseAjourSprites(perso);
       miseAjourSpritesEntites(salle);
 
@@ -924,50 +931,12 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
     destroy_salle(&salle);
     destroy_personnage(&perso);
     destroy_typeentites();
+    SDL_SetRenderDrawColor(*renderer,0,0,0,255);
+    SDL_RenderClear(*renderer);
+    SDL_RenderFillRect(*renderer, NULL);
+    SDL_RenderPresent(*renderer);
     //SDL_DestroyTexture(tileset);
-}
-
-void afficher_menu(SDL_Renderer * renderer, SDL_Texture * fond){
-  SDL_Texture * texture;
-  SDL_Rect Rect_dest;
-  int maxw;
-  int maxh;
-  float ratioFenetre;
-  float ratioMenu;
-
-  SDL_SetRenderDrawColor(renderer, 0,0,0,255);
-  //SDL_RenderClear(renderer);
-  SDL_RenderFillRect(renderer,NULL);
-
-  SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
-
-  ratioFenetre = (maxw * 1.0) / (maxh * 1.0);
-  ratioMenu = (TAILLEBGMENUW * 1.0) / (TAILLEBGMENUH * 1.0);
-
-  if(ratioFenetre<ratioMenu){
-    Rect_dest.w = maxw;
-    Rect_dest.h = Rect_dest.w /ratioMenu;
-  }
-  else{
-    Rect_dest.h = maxh;
-    Rect_dest.w = Rect_dest.h * ratioMenu;
-  }
-
-  Rect_dest.x = (maxw - Rect_dest.w)/2 ;
-  Rect_dest.y = (maxh - Rect_dest.h)/2 ;
-
-
-  texture=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,SDL_TEXTUREACCESS_TARGET, TAILLEBGMENUW, TAILLEBGMENUH);
-  SDL_SetRenderTarget(renderer, texture);
-  SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
-  SDL_SetRenderDrawColor(renderer, 0,0,0,255);
-  SDL_RenderFillRect(renderer, NULL);
-  //SDL_RenderClear(renderer);
-  SDL_RenderCopy(renderer, fond, NULL, NULL);
-  SDL_SetRenderTarget(renderer, NULL);
-  SDL_RenderCopy(renderer, texture, NULL, &Rect_dest);
-  SDL_RenderPresent(renderer);
-  SDL_DestroyTexture(texture);
+    return mort;
 }
 
 int afficherMessageBox(SDL_Window * fenetre, SDL_MessageBoxButtonData * buttons, int nbButtons, char * titre, char * message, int fullscreen){
@@ -1181,4 +1150,183 @@ void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_T
     SDL_SetRenderTarget(renderer, NULL);
     coeur.x += coeur.w +2;
   }
+}
+
+void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen){
+  SDL_Rect Rect_dest;
+  int maxw;
+  int maxh;
+  int textew;
+  int texteh;
+  int mult;
+  SDL_Event event;
+  boolean_t fin=FALSE;
+  SDL_Texture * texte=creerTexte(renderer, "./font/BitCasual.ttf", FONTSIZE, "GAME OVER", 255, 255, 200);
+
+  while(!fin){
+    while(SDL_PollEvent(&event)){
+      switch(event.type){
+        case SDL_KEYUP :
+          switch(event.key.keysym.sym){
+            case SDLK_RETURN :
+            case SDLK_ESCAPE :
+            case SDLK_SPACE :
+            fin=TRUE;
+            break;
+          }
+          break;
+        case SDL_JOYBUTTONUP:
+          switch(event.jbutton.button){
+            case 0 : //bouton A manette XBOX
+            case 7 : //bouton Start manette XBOX
+              fin = TRUE;
+              break;
+            }
+          break;
+        case SDL_MOUSEBUTTONUP:
+        case SDL_QUIT:
+          fin=TRUE;
+          break;
+      }
+    }
+    SDL_SetRenderDrawColor(renderer, 20,0,0,255);
+    SDL_RenderFillRect(renderer,NULL);
+    SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
+    SDL_QueryTexture(texte, NULL, NULL, &textew, &texteh);
+    mult = (maxw + maxh)/(2*(textew + texteh));
+    textew *= mult;
+    texteh *= mult;
+    Rect_dest.x = maxw/2 - textew/2;
+    if(Rect_dest.x < 0)
+      Rect_dest.x = 0;
+    Rect_dest.y = maxh/2 - texteh/2;
+    if(Rect_dest.y < 0)
+      Rect_dest.y = 0;
+    Rect_dest.w = textew < maxw ? textew : maxw;
+    Rect_dest.h = texteh < maxh ? texteh : maxh;
+
+    SDL_RenderCopy(renderer, texte, NULL, &Rect_dest);
+    SDL_RenderPresent(renderer);
+  }
+  SDL_DestroyTexture(texte);
+  SDL_Delay(500);
+}
+
+TTF_Font * creerPolice(char * path, int taille){
+  TTF_Font * font = TTF_OpenFont(path, taille);
+  return font;
+}
+
+void detruirePolice(TTF_Font ** font){
+  TTF_CloseFont(*font);
+  *font=NULL;
+}
+
+SDL_Texture * creerTexte(SDL_Renderer * renderer, char * Fontpath, int taille, char* texte, int r, int g, int b){
+  SDL_Color color = {r,g,b};
+  TTF_Font * font=creerPolice(Fontpath, taille);
+  SDL_Surface * surface = TTF_RenderText_Solid(font, texte, color);
+  SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
+  SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+  SDL_FreeSurface(surface);
+  detruirePolice(&font);
+  return texture;
+}
+
+void afficher_menu(SDL_Renderer * renderer){
+  SDL_Texture * diskosieni=NULL;
+  SDL_Texture * texte=NULL;
+  SDL_Rect Rect_dest;
+  int maxw;
+  int maxh;
+  int textew;
+  int texteh;
+  int mult;
+  int diskosieniw;
+  int diskosienih;
+
+  SDL_SetRenderDrawColor(renderer, 0,0,0,255);
+  SDL_RenderFillRect(renderer,NULL);
+
+  diskosieni=creerTexte(renderer, "./font/PixelMordred.ttf", FONTSIZE, NOM_JEU, 240, 100, 0);
+  texte=creerTexte(renderer, "./font/BitCasual.ttf", FONTSIZE, "Press Start", 255, 255, 100);
+
+  SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
+  SDL_QueryTexture(texte, NULL, NULL, &textew, &texteh);
+  SDL_QueryTexture(diskosieni, NULL, NULL, &diskosieniw, &diskosienih);
+
+  mult = (maxw + maxh)/(4*(textew + texteh));
+  textew *= mult;
+  texteh *= mult;
+
+  Rect_dest.x = maxw/2 - textew/2;
+  if(Rect_dest.x < 0)
+    Rect_dest.x = 0;
+  Rect_dest.y = 4 * (maxh/5);
+  if(Rect_dest.y < 0)
+    Rect_dest.y = 0;
+  Rect_dest.w = textew < maxw ? textew : maxw;
+  Rect_dest.h = texteh < maxh ? texteh : maxh;
+  SDL_RenderCopy(renderer, texte, NULL, &Rect_dest);
+
+  mult = (maxw + maxh)/(2*(diskosieniw + diskosienih));
+  diskosieniw *= mult;
+  diskosienih *= mult;
+
+  Rect_dest.x = maxw/2 - diskosieniw/2;
+  if(Rect_dest.x < 0)
+    Rect_dest.x = 0;
+  Rect_dest.y = (maxh/5);
+  if(Rect_dest.y < 0)
+    Rect_dest.y = 0;
+  Rect_dest.w = diskosieniw < maxw ? diskosieniw : maxw;
+  Rect_dest.h = diskosienih < maxh ? diskosienih : maxh;
+  SDL_RenderCopy(renderer, diskosieni, NULL, &Rect_dest);
+
+  SDL_RenderPresent(renderer);
+  SDL_DestroyTexture(texte);
+  SDL_DestroyTexture(diskosieni);
+}
+
+void afficher_menu_image(SDL_Renderer * renderer, SDL_Texture * fond){
+  SDL_Texture * texture;
+  SDL_Rect Rect_dest;
+  int maxw;
+  int maxh;
+  float ratioFenetre;
+  float ratioMenu;
+
+  SDL_SetRenderDrawColor(renderer, 0,0,0,255);
+  //SDL_RenderClear(renderer);
+  SDL_RenderFillRect(renderer,NULL);
+
+  SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
+
+  ratioFenetre = (maxw * 1.0) / (maxh * 1.0);
+  ratioMenu = (TAILLEBGMENUW * 1.0) / (TAILLEBGMENUH * 1.0);
+
+  if(ratioFenetre<ratioMenu){
+    Rect_dest.w = maxw;
+    Rect_dest.h = Rect_dest.w /ratioMenu;
+  }
+  else{
+    Rect_dest.h = maxh;
+    Rect_dest.w = Rect_dest.h * ratioMenu;
+  }
+
+  Rect_dest.x = (maxw - Rect_dest.w)/2 ;
+  Rect_dest.y = (maxh - Rect_dest.h)/2 ;
+
+
+  texture=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,SDL_TEXTUREACCESS_TARGET, TAILLEBGMENUW, TAILLEBGMENUH);
+  SDL_SetRenderTarget(renderer, texture);
+  SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+  SDL_SetRenderDrawColor(renderer, 0,0,0,255);
+  SDL_RenderFillRect(renderer, NULL);
+  //SDL_RenderClear(renderer);
+  SDL_RenderCopy(renderer, fond, NULL, NULL);
+  SDL_SetRenderTarget(renderer, NULL);
+  SDL_RenderCopy(renderer, texture, NULL, &Rect_dest);
+  SDL_RenderPresent(renderer);
+  SDL_DestroyTexture(texture);
 }

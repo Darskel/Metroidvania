@@ -30,6 +30,7 @@ void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle);
 void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle);
 void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle);
 void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle);
+void compVenin(monstre_t* entite, personnage_t* perso, salle_t* salle);
 void compVersGeant(monstre_t* entite, personnage_t* perso, salle_t* salle);
 void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle);
 

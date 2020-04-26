@@ -584,7 +584,7 @@ void creerTypeEntite(){
     typesMonstre[-SERPENTROSE - 1] = (type_monstre_t){
         2, //pv de base
         VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
-        30, //vitesse d'attaque
+        60, //vitesse d'attaque
         "serpent rose",//nom, //nom de l'entité
         "sprites/entite/serpent_rose/tileset.png",//chemin, //chemin vers les sprites
         NULL, //SDL_Texture* sprites non initialisé !!!
@@ -673,17 +673,17 @@ void creerTypeEntite(){
 
     //vifplume
     tmp = malloc(sizeof(int) * 4);
-    tmp[0] = 2;
-    tmp[1] = 0;
+    tmp[0] = 1;
+    tmp[1] = 8;
     tmp[2] = 0;
-    tmp[3] = 8;
+    tmp[3] = 1;
 
     typesMonstre[-VIFPLUME - 1] = (type_monstre_t){
         2, //pv de base
-        0, //vit de deplacement
-        0, //vitesse d'attaque
-        "vifplume",//nom, //nom de l'entité
-        "sprites/entite/vifplume/tileset.png",//chemin, //chemin vers les sprites
+        2, //vit de deplacement
+        50, //vitesse d'attaque
+        "vifplume", //nom de l'entité
+        "sprites/entite/vifplume/tileset.png", //chemin vers les sprites
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
@@ -691,7 +691,7 @@ void creerTypeEntite(){
         {31,37}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        25, //Attend 25 frames avant de changer d'animation (plutôt lent)
+        8, //Attend 25 frames avant de changer d'animation (plutôt lent)
         compVifplume //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -788,7 +788,7 @@ void creerTypeEntite(){
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0, //N'attend pas avant de changer d'animation
-        compFleches //comportement à rajouter avec un la fonction (pointeur sur la fonction)
+        compVenin //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 }
 

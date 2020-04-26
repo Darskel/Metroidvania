@@ -71,6 +71,9 @@
 #define HAUTEURHITBOXPERS 32
 #define LARGEURHITBOXPERS 13
 
+#define HAUTEURHITBOXREN 12
+#define LARGEURHITBOXREN 24
+
 #define OFFSETHITBOX 6 //Différence de x (en pixel) entre le début du sprite et le début de l'hitbox
 
 //Vitesses en pixel par secondes :
@@ -251,7 +254,7 @@ typedef struct personnage_s{
     boolean_t newEtat; /**< Booléen qui signifie qu'un changement d'état vient de s'effectuer */
     int evoSprite; /**< Entier qui décrémente, changement de sprite quand vaut 0 */
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du personage */
-    char forme; /**< Forme du personnage H = humain, F = renard */
+    char forme; /**< Forme du personnage H = humain, R = renard */
     int inventaire[TAILLE_INVENTAIRE]; /**<Tableau qui contient les informations sur l'inventaire actuel du personnage */
     SDL_Texture * inventaireTileset;
     char* nomObj[TAILLE_INVENTAIRE]; /**<Tableau qui contient les noms des objets de l'inventaire */

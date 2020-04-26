@@ -17,10 +17,12 @@ ifeq ($(OS),Windows_NT)
 	COMPILERICON=windres.exe -i ${ICONRC} -o ${ICONRES} --input-format=rc -O coff
 	LIBS=-L${SDL_LIB_DIR} -I${SDL_INC_DIR} -lmingw32 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2 #-lSDL2_mixer
 	clr=del /s *.o
+	clrres=del /s *.res
 	propre=del /s *.exe
 else
 	LIBS=`sdl2-config --cflags -libs` -lSDL2_image -lSDL2_ttf -lSDL2 #-lSDL2_mixer
 	clr=rm -rf ./o/*.o
+	clrres=rm -rf ./icon/*.res
 	propre=find . -type f -executable -delete
 endif
 
@@ -64,12 +66,14 @@ diskosieni: ${o}sdl_fonctions.o ${o}test_SDL.o ${o}source.o ${o}liste.o ${o}comp
 	${COMPILERICON}
 	${CC} ${ICONRES} $^ ${CFLAGS} -o $@ ${LIBS}
 	$(clr)
+	$(clrres)
 
 ${o}%.o: ${c}%.c
 	${CC} $< -c -o $@ ${LIBS}
 
 clean:
 	$(clr)
+	$(clrres)
 
 mrproper: clean
 	$(propre)

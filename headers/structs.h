@@ -255,6 +255,7 @@ typedef struct personnage_s{
     taille_t hitbox; /**< Taille de la hitbox du personnage en pixel */
     etat_t etat; /**< Etat du personnage (idle/running/jumping/attacking/falling) */
     boolean_t newEtat; /**< Booléen qui signifie qu'un changement d'état vient de s'effectuer */
+    boolean_t newItem; /**< Booléen qui signifie que l'on vient de récolter un item */
     int evoSprite; /**< Entier qui décrémente, changement de sprite quand vaut 0 */
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du personage */
     char forme; /**< Forme du personnage H = humain, R = renard */

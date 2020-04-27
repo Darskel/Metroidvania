@@ -158,6 +158,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->hitbox.largeur=LARGEURHITBOXPERS;
   personnage->etat = IDLE;
   personnage->newEtat = FALSE;
+  personnage->newItem = FALSE;
   personnage->evoSprite = 0;
   personnage->nbPxSaut = 0;
   personnage->nbSaut=0;
@@ -940,6 +941,12 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
         SDL_Delay(1000);
       }
 
+      if(perso->newItem){
+        inventaireAffiche=INVENTAIRETIME-1;
+        perso->newItem = FALSE;
+      }
+
+
       miseAjourSprites(perso);
       miseAjourSpritesEntites(salle);
 
@@ -947,6 +954,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
         ecranNoir(*renderer,150);
         salleChangee=FALSE;
       }
+
 
       SDL_SetRenderDrawColor(*renderer,0,0,0,255);
       //SDL_RenderClear(*renderer);

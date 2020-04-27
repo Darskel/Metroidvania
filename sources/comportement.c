@@ -41,6 +41,7 @@ static void recupElem(monstre_t* entite, personnage_t* perso){
     for(int i = 0; i < TAILLE_INVENTAIRE; i++){
         if(!strcmp(entite->type->nom,perso->nomObj[i])){
             perso->inventaire[i] = 1;
+            perso->newItem=TRUE;
             entite->pv = 0;
             return;
         }
@@ -1112,7 +1113,7 @@ void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
                             (entite->pos.x)++;
                             entite->delta.x -= TAILLEBLOC;
                         }
-                    }                    
+                    }
                 }
             }
             break;

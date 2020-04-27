@@ -513,7 +513,7 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
                     f->direction = LEFT;
                 }
 
-                f->delta.x += f->type->vit_dep * f->direction ? 1 : -1;
+                /*f->delta.x += f->type->vit_dep * f->direction ? 1 : -1;
 
                 if(f->direction){
                     if(f->delta.x >= TAILLEBLOC){
@@ -525,7 +525,7 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
                         (f->pos.x)--;
                         f->delta.x += TAILLEBLOC;
                     }
-                }
+                }*/
 
                 f->etat = RUNNING;
 
@@ -795,9 +795,9 @@ void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle){
             if(tmp.type->comportement != compPortes){
                 tmp.pv -= entite->type->degat;
                 modifElm(salle->listeEntite,&tmp);
-            }
+            }else
+                entite->etat = IDLE;
             entite->pv = 0;
-            entite->etat = IDLE;
             entite->newEtat = TRUE;
         }
         suivant(salle->listeEntite);

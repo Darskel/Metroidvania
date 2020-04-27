@@ -515,7 +515,7 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {28,51}, //hitbox de l'entité (hauteur,largeur)
+        {18,51}, //hitbox de l'entité (hauteur,largeur)
         {30,51}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
@@ -758,14 +758,28 @@ static void creerEntite(idEnt_t id, salle_t* s, position_t pos, personnage_t* p)
     e->direction = LEFT;
     e->etat = RUNNING;
     e->newEtat = TRUE;
-    e->evoSprite=0;
+    e->evoSprite = 0;
 
     e->spriteActuel.h = e->type->tailleSprite.hauteur;
     e->spriteActuel.w = e->type->tailleSprite.largeur;
     e->spriteActuel.x = 0;
     e->spriteActuel.y = e->etat * e->spriteActuel.h;
 
-    ajoutDroit(s->listeEntite, e);
+    monstre_t tmp;
+
+    enTete(s->listeEntite);
+    do{
+        valeurElm(s->listeEntite,&tmp);
+        suivant(s->listeEntite);
+    }while(tmp.type->comportement != compPortes && !horsListe(s->listeEntite));
+
+    if(e->type->comportement == compPortes)
+        ajoutDroit(s->listeEntite, e);
+    else{
+        if(horsListe(s->listeEntite))
+            enQueue(s->listeEntite);
+        ajoutGauche(s->listeEntite, e);
+    }
 }
 
 /**

@@ -140,6 +140,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->pv=personnage->pv_max;
   personnage->kb=0;
   personnage->inv=0;
+  personnage->hit = FALSE;
   personnage->clign=FREQCLIGN;
   personnage->direction=RIGHT;
   personnage->vit_dep=VITDEPPERS;

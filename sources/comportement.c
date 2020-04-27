@@ -663,7 +663,7 @@ static int verifChuteMonstre(monstre_t* m, salle_t* s){
     leftM = m->pos.x*TAILLEBLOC + m->delta.x;
     rightM = leftM + m->type->hitbox.largeur - (m->type->tailleSprite.largeur - m->type->hitbox.largeur)/2;
     bottomM = m->pos.y*TAILLEBLOC + m->delta.y;
-    bottomM += m->type->hitbox.hauteur + 1;
+    bottomM += m->type->hitbox.hauteur + (m->type->tailleSprite.hauteur - m->type->hitbox.hauteur);
 
     leftM /= TAILLEBLOC;
     rightM = rightM/TAILLEBLOC + (rightM%TAILLEBLOC ? 1 : 0) - 1;
@@ -864,7 +864,7 @@ void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
 
 void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
     int dir = hitP(entite,perso);
-    if(dir && !perso->inv && !perso->kb){
+    if(dir && !perso->hit){
         perso->pv -= entite->type->degat;
         perso->kb = 1;
         perso->hit = TRUE;
@@ -899,7 +899,7 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
 
 void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
     int dir = hitP(entite,perso);
-    if(dir && !perso->inv && !perso->kb){
+    if(dir && !perso->hit){
         perso->kb = 1;
         perso->hit = FALSE;
         perso->etat = IDLE;
@@ -992,7 +992,7 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
 
 void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle){
     int dir = hitP(entite,perso);
-    if(dir && !perso->inv && !perso->kb){
+    if(dir && !perso->hit){
         perso->pv -= entite->type->degat;
         perso->kb = 1;
         perso->etat = IDLE;
@@ -1057,7 +1057,7 @@ void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle){
 
 void compVenin(monstre_t* entite, personnage_t* perso, salle_t* salle){
     int dir = hitP(entite,perso);
-    if(dir && !perso->inv && !perso->kb){
+    if(dir && !perso->hit){
         perso->pv -= entite->type->degat;
         perso->kb = 1;
         perso->hit = TRUE;
@@ -1075,7 +1075,7 @@ void compVersGeant(monstre_t* entite, personnage_t* perso, salle_t* salle){
 
 void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
     int dir = hitP(entite,perso);
-    if(dir && !perso->inv && !perso->kb){
+    if(dir && !perso->hit){
         perso->pv -= entite->type->degat;
         perso->kb = 1;
         perso->etat = IDLE;
@@ -1180,20 +1180,17 @@ static void creerCoeur(monstre_t* m, salle_t* s){
 void evolution(personnage_t* p, salle_t* s){
     int r;
 
-    if(p->inv)
-        (p->inv)--;
-    else
-        p->hit = FALSE;
-
     if(p->kb){
         if(p->direction){
             depGauche(p,s);
         }else{
             depDroite(p,s);
         }
-    }
-
-
+    }else
+        if(p->inv)
+            (p->inv)--;
+        else
+            p->hit = FALSE;
 
     //CHEATCODE !
     for(int i = 0; i < TAILLE_INVENTAIRE; i++)

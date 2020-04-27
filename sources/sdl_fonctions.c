@@ -1384,8 +1384,10 @@ int chargerSauvegardeMenu(SDL_Renderer * renderer, int numSauv, personnage_t ** 
   }
   else{
     *salle=initialiser_salle(renderer, NIVEAUTXT, *perso);
+    (*perso)->pos.y=(*salle)->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;
+    (*perso)->apparition.x = (*perso)->pos.x;
+    (*perso)->apparition.y = (*perso)->pos.y;
   }
-  //(*perso)->pos.y=(*salle)->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;
 
   ecranNoir(renderer, 100);
   free(sallepath);

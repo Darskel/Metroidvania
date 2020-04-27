@@ -637,10 +637,11 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
   Sint16 x_move;
   Sint16 y_move;
   int inventaireAffiche=0;
-  position_t positionDepart;
-  position_t positionDepartDelta;
+  //position_t positionDepart;
+  //position_t positionDepartDelta;
   //boolean_t windowtouched=FALSE;
   //SDL_Texture * tileset=NULL;
+  int save=0;
   salle_t * salle=NULL;
   personnage_t * perso=NULL;
   char * salle_nom = NULL;
@@ -667,13 +668,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
   initialiser_typeentites(*renderer);
   //tileset=initialiser_texture(TILESETPATH, *renderer);
 
-  salle=initialiser_salle(*renderer, NIVEAUTXT, perso);
-  positionDepart.x = 1;
-  positionDepartDelta.x = 0;
-  positionDepart.y = salle->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;
-  positionDepartDelta.y = TAILLEBLOC-1;
-  ecranNoir(*renderer, 100);
-  perso=initialisation_personnage(*renderer, positionDepart, positionDepartDelta);
+  chargerSauvegardeMenu(*renderer, 0, &perso, &salle);
 
   while(fin==FALSE){
     frameStart = SDL_GetTicks();
@@ -726,6 +721,41 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
               /*
               fin=menuConfirmation(*renderer);
               */
+              break;
+            case SDLK_0:
+            case SDLK_KP_0:
+              save=chargerSauvegardeMenu(*renderer, 0, &perso, &salle);
+              printf("Chargement sauvegarde %d\n", save);
+              break;
+            case SDLK_1:
+            case SDLK_KP_1:
+              save=chargerSauvegardeMenu(*renderer, 1, &perso, &salle);
+              printf("Chargement sauvegarde %d\n", save);
+              break;
+            case SDLK_2:
+            case SDLK_KP_2:
+              save=chargerSauvegardeMenu(*renderer, 2, &perso, &salle);
+              printf("Chargement sauvegarde %d\n", save);
+              break;
+            case SDLK_3:
+            case SDLK_KP_3:
+              save=chargerSauvegardeMenu(*renderer, 3, &perso, &salle);
+              printf("Chargement sauvegarde %d\n", save);
+              break;
+            case SDLK_7:
+            case SDLK_KP_7:
+              save=sauvegarderMenu(1, perso, salle);
+              printf("Sauvegarde dans le slot %d\n", save);
+              break;
+            case SDLK_8:
+            case SDLK_KP_8:
+              save=sauvegarderMenu(2, perso, salle);
+              printf("Sauvegarde dans le slot %d\n", save);
+              break;
+            case SDLK_9:
+            case SDLK_KP_9:
+              save=sauvegarderMenu(3, perso, salle);
+              printf("Sauvegarde dans le slot %d\n", save);
               break;
             case SDLK_LEFT:
             case SDLK_q:
@@ -864,8 +894,6 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
         x_move = SDL_JoystickGetAxis(pJoystick, 0);
         y_move = SDL_JoystickGetAxis(pJoystick, 1);
       }
-
-      //if(windowtouched)
 
 
       konamicode(perso,salle,konami,&indKon,&kon);
@@ -1331,4 +1359,39 @@ void afficher_menu_image(SDL_Renderer * renderer, SDL_Texture * fond){
   SDL_RenderCopy(renderer, texture, NULL, &Rect_dest);
   SDL_RenderPresent(renderer);
   SDL_DestroyTexture(texture);
+}
+
+int chargerSauvegardeMenu(SDL_Renderer * renderer, int numSauv, personnage_t ** perso, salle_t ** salle){
+  position_t delta;
+  position_t blocs;
+  int sauv;
+  char * sallepath=malloc(sizeof(char)*TAILLEPATHFICHIER);
+  sallepath[0]='\0';
+
+  if(*perso != NULL)
+    destroy_personnage(perso);
+  if(*salle != NULL)
+    destroy_salle(salle);
+  delta.x=0;
+  delta.y=TAILLEBLOC-1;
+  blocs.x =1;
+  blocs.y =0;
+  *perso=initialisation_personnage(renderer, delta, blocs);
+  sauv=chargerSauvegarde(numSauv, *perso, sallepath);
+  if(sauv > 0){
+    sallepath=realloc(sallepath, sizeof(char)*(strlen(sallepath)+1));
+    *salle=initialiser_salle(renderer, sallepath, *perso);
+  }
+  else{
+    *salle=initialiser_salle(renderer, NIVEAUTXT, *perso);
+  }
+  //(*perso)->pos.y=(*salle)->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;
+
+  ecranNoir(renderer, 100);
+  free(sallepath);
+  return sauv;
+}
+
+int sauvegarderMenu(int numSauv, personnage_t * perso, salle_t * salle){
+  return sauvegarder(numSauv, perso, salle->nomFichier, perso->pos);
 }

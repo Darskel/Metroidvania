@@ -59,6 +59,7 @@ int sauvegarder(int numSauv, personnage_t* perso, char* salle, position_t dep){
     if(!file)
         return -2; // Le fichier n'a pas pû être ouvert ou créé
 
+    printf("Path salle sauvegardée : %s\n", salle);
     //Ecrit les hp, la salle et la position de réaparition
     fprintf(file, "Health Point: %d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", perso->pv, salle, dep.x, dep.y);
 
@@ -116,6 +117,8 @@ int chargerSauvegarde(int numSauv, personnage_t* perso, char* salle){
 
     fscanf(file, "ealth Point:%d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", &(perso->pv), salle, &(perso->pos.x), &(perso->pos.y));
 
+    printf("Path salle chargée : %s\n", salle);
+    
     for(int i = 0; i < TAILLE_INVENTAIRE; i++){
         fscanf(file,"%[^:]: ", tmp);
         if(!strcmp(tmp,perso->nomObj[i]))

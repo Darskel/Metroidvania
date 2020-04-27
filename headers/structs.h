@@ -56,6 +56,7 @@
 #define NOM_JEU "Diskosieni"
 
 //Path :
+#define TAILLEPATHFICHIER 50
 #define PLAYERSPRITESPATH "./sprites/entite/joueur/tileset.png"
 #define TILESETPATH "./sprites/bloc/tileset.png"
 #define DIRBG "./sprites/salles/"

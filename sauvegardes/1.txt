@@ -1,10 +1,12 @@
-Health Point: 20
-Nom de la salle: 1.txt
+Health Point: 3
+Nom de la salle: salle_debut.txt
 Position: 1 1
 Inventaire:
-	arc: 1
-	cle: 0
-	fleche: 1
-	fleche feu: 0
-	pioche: 0
-	zoo: 1
+	cle bleue: 1
+	cle rouge: 1
+	cle rouillee: 1
+	cle verte: 1
+	discoshroom: 1
+	double saut: 1
+	huile: 1
+	renard: 1

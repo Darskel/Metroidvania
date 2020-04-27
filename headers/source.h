@@ -20,13 +20,13 @@ type_monstre_t typesMonstre[NBTYPEMONSTRE];
 
 //char* chercherSprite(int, char*);
 
-int sauvegarder(int, int, char*, position_t*, int[], char* []);
-int chargerSauvegarde(int, char*, personnage_t*, int[], char*[]);
+int sauvegarder(int numSauv, personnage_t* perso, char* salle, position_t dep);
+int chargerSauvegarde(int numSauv, personnage_t* perso, char* salle);
 
 void creerTypeEntite();
 type_monstre_t* obtenirTypesEntite();
 
-int nettoyerSalle(salle_t**);
-int lireSalle(char*, salle_t**, personnage_t*);
+int nettoyerSalle(salle_t** salle);
+int lireSalle(char* nomFichier, salle_t** salle, personnage_t* perso);
 
 #endif

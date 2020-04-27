@@ -114,6 +114,7 @@
 #define FREQCLIGN 2
 #define INVUDELAY 6
 
+#define FONTSIZE 25
 
 /*
     INVENTAIRE:

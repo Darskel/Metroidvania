@@ -66,7 +66,7 @@ int main(int argc, char *argv[]){
   }
 
   //tileset=initialiser_texture(TILESETPATH, renderer);
-  menu=initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
+  //menu=initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
 
   while(!fin){
     frameStart = SDL_GetTicks();
@@ -130,8 +130,10 @@ int main(int argc, char *argv[]){
             case SDLK_b:
               break;
             case SDLK_RETURN:
-              jeu(fenetre, &renderer, mode, pJoystick, fullscreen);
-              fin = TRUE;
+              if (jeu(fenetre, &renderer, mode, pJoystick, fullscreen))
+                gameover(fenetre, renderer, mode, pJoystick, fullscreen);
+              else
+                fin = TRUE;
               break;
           }
           break;
@@ -158,6 +160,12 @@ int main(int argc, char *argv[]){
           mousex=event.motion.x;
           mousey=event.motion.y;
           break;
+        case SDL_MOUSEBUTTONUP:
+          if (jeu(fenetre, &renderer, mode, pJoystick, fullscreen))
+            gameover(fenetre, renderer, mode, pJoystick, fullscreen);
+          else
+            fin = TRUE;
+          break;
         case SDL_JOYBUTTONDOWN :
         switch(event.jbutton.button){
             case 0 : //bouton A manette XBOX
@@ -168,8 +176,17 @@ int main(int argc, char *argv[]){
               break;
           }
         break;
-        /*case SDL_JOYBUTTONUP :
-          break;*/
+        case SDL_JOYBUTTONUP :
+          switch(event.jbutton.button){
+            case 0 : //bouton A manette XBOX
+            case 7 : //bouton Start manette XBOX
+              if (jeu(fenetre, &renderer, mode, pJoystick, fullscreen))
+                gameover(fenetre, renderer, mode, pJoystick, fullscreen);
+              else
+                fin = TRUE;
+              break;
+            }
+          break;
         case SDL_JOYAXISMOTION :
           switch(event.jaxis.axis){
             case 0 :
@@ -204,7 +221,7 @@ int main(int argc, char *argv[]){
       y_move = SDL_JoystickGetAxis(pJoystick, 1);
     }
 
-    afficher_menu(renderer, menu);
+    afficher_menu(renderer);
 
     frameTime = SDL_GetTicks() - frameStart;
     if(frameTime < FRAMEDELAY){
@@ -213,7 +230,7 @@ int main(int argc, char *argv[]){
   }
   if(pJoystick != NULL)
     SDL_JoystickClose(pJoystick);
-  SDL_DestroyTexture(menu);
+  //SDL_DestroyTexture(menu);
   //SDL_DestroyTexture(tileset);
   quitter_SDL(&fenetre, &renderer);
   fprintf(stdout, "Programme quitté normalement\n");

@@ -20,7 +20,7 @@ ifeq ($(OS),Windows_NT)
 	clrres=del /s *.res
 	propre=del /s *.exe
 else
-	LIBS=`sdl2-config --cflags -libs` -lSDL2_image -lSDL2_ttf -lSDL2 #-lSDL2_mixer
+	LIBS=`sdl2-config --cflags --libs` -lSDL2_image -lSDL2_ttf -lSDL2 #-lSDL2_mixer
 	clr=rm -rf ./o/*.o
 	clrres=rm -rf ./icon/*.res
 	propre=find . -type f -executable -delete

@@ -249,6 +249,7 @@ typedef struct personnage_s{
     int vit_att; /**< Vitesse d'attaque du personnage (en nombre de frame) */
     position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
     position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
+    position_t apparition; /**< Position d'apparition (utilisé pour les sauvegardes) */
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du personnage */
     SDL_Rect spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
     taille_t hitbox; /**< Taille de la hitbox du personnage en pixel */

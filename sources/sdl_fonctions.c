@@ -1393,5 +1393,5 @@ int chargerSauvegardeMenu(SDL_Renderer * renderer, int numSauv, personnage_t ** 
 }
 
 int sauvegarderMenu(int numSauv, personnage_t * perso, salle_t * salle){
-  return sauvegarder(numSauv, perso, salle->nomFichier, perso->pos);
+  return sauvegarder(numSauv, perso, salle->nomFichier);
 }

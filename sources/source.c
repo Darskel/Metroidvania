@@ -23,11 +23,10 @@
  * @param numSauv numéro de la sauvegarde (entre 1 et 3)
  * @param perso pointeur vers le personnage (structure personnage)
  * @param salle nom de la dernière salle visité par le personnage principal
- * @param dep position(position_t) d'arrivé dans la salle (position de départ après chargement)
  *
  * @return un code erreur en fonction de l'erreur: -1 = Mauvais numéro de sauvegarde, -2 = impossible d'ouvrir ou créer le fichier; ou le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès)
 */
-int sauvegarder(int numSauv, personnage_t* perso, char* salle, position_t dep){
+int sauvegarder(int numSauv, personnage_t* perso, char* salle){
     if(numSauv < 1 || numSauv > 3)
         return -1; // Mauvais numéro de sauvegarde
 
@@ -61,7 +60,7 @@ int sauvegarder(int numSauv, personnage_t* perso, char* salle, position_t dep){
 
     printf("Path salle sauvegardée : %s\n", salle);
     //Ecrit les hp, la salle et la position de réaparition
-    fprintf(file, "Health Point: %d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", perso->pv, salle, dep.x, dep.y);
+    fprintf(file, "Health Point: %d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", perso->pv, salle, perso->apparition.x, perso->apparition.y);
 
     for(int i = 0; i < TAILLE_INVENTAIRE; i++)
         fprintf(file, "\t%s: %d\n", perso->nomObj[i], perso->inventaire[i] ? 1 : 0);

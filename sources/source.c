@@ -479,7 +479,7 @@ void creerTypeEntite(){
 
     //Serpent bleu
     tmp = malloc(sizeof(int) * 4);
-    tmp[0] = 0;
+    tmp[0] = 1;
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 0;
@@ -503,7 +503,7 @@ void creerTypeEntite(){
 
     //Serpent rose
     tmp = malloc(sizeof(int) * 4);
-    tmp[0] = 0;
+    tmp[0] = 1;
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 1;
@@ -527,7 +527,7 @@ void creerTypeEntite(){
 
     //Serpent vert
     tmp = malloc(sizeof(int) * 4);
-    tmp[0] = 0;
+    tmp[0] = 1;
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 0;

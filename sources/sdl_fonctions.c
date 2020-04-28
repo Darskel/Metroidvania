@@ -482,28 +482,21 @@ void miseAjourSprites(personnage_t * perso){
   }
   else
     perso->clign=FREQCLIGN;
-  if(perso->etat == IDLE){
-    perso->spriteActuel.x=IDLE;
-    perso->spriteActuel.y=IDLE;
-  }
+
   else if(perso->etat == FALLING){
     perso->spriteActuel.x=(perso->nbAnim[JUMPING] - 1)*(perso->spriteActuel.w);
     perso->spriteActuel.y=JUMPING*(perso->spriteActuel.h);
   }
   if(perso->newEtat){
-    if(perso->etat > IDLE && perso->etat < FALLING){
+    if(perso->etat >= IDLE && perso->etat < FALLING){
       perso->spriteActuel.x=0;
       perso->spriteActuel.y=perso->etat * (perso->spriteActuel.h);
     }
-    if(perso->etat == ATTACKING)
-      perso->spriteActuel.w = LARGEURSPRITEPERSATTACK;
-    else
-      perso->spriteActuel.w = LARGEURSPRITEPERS;
     perso->newEtat=FALSE;
     //perso->evoSprite=0;
   }
   else{
-    if(perso->etat > IDLE && perso->etat < FALLING){
+    if(perso->etat >= IDLE && perso->etat < FALLING){
       if(perso->evoSprite<=0){
         perso->spriteActuel.x+=perso->spriteActuel.w;
         if(perso->etat == JUMPING){
@@ -524,7 +517,10 @@ void miseAjourSprites(personnage_t * perso){
       else (perso->evoSprite)--;
     }
   }
-
+  if(perso->etat == ATTACKING)
+    perso->spriteActuel.w = LARGEURSPRITEPERSATTACK;
+  else
+    perso->spriteActuel.w = LARGEURSPRITEPERS;
 }
 
 /**
@@ -540,17 +536,12 @@ void miseAjourSpritesEntites(salle_t * salle){
     entite=malloc(sizeof(monstre_t));
     valeurElm(salle->listeEntite, entite);
 
-    if(entite->etat == IDLE){
-      entite->spriteActuel.x=IDLE;
-      entite->spriteActuel.y=IDLE;
-    }
-
     /*else if(entite->etat == FALLING){
       entite->spriteActuel.x=(entite->type->nbAnim[JUMPING] -1)*(entite->spriteActuel.w);
       entite->spriteActuel.y=JUMPING*(entite->spriteActuel.h);
     }*/
     if(entite->newEtat){
-      if(entite->etat > IDLE && entite->etat <= FALLING){
+      if(entite->etat >= IDLE && entite->etat <= FALLING){
         entite->spriteActuel.x=0;
         entite->spriteActuel.y=entite->etat * (entite->spriteActuel.h);
       }
@@ -558,7 +549,7 @@ void miseAjourSpritesEntites(salle_t * salle){
       //entite->evoSprite=0;
     }
     else{
-      if(entite->etat > IDLE && entite->etat <= FALLING){
+      if(entite->etat >= IDLE && entite->etat <= FALLING){
         entite->spriteActuel.y=entite->etat * (entite->spriteActuel.h);
         if(entite->evoSprite<=0){
           entite->spriteActuel.x+=entite->spriteActuel.w;

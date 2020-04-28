@@ -510,19 +510,21 @@ void miseAjourSprites(personnage_t * perso){
     if(perso->etat >= IDLE && perso->etat < FALLING){
       if(perso->evoSprite<=0){
         perso->spriteActuel.x+=perso->spriteActuel.w;
-        if(perso->etat == JUMPING){
-          if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
-            perso->spriteActuel.x=(perso->nbAnim[perso->etat]-1)*perso->spriteActuel.w;
-          if(perso->spriteActuel.x <0)
-            perso->spriteActuel.x=0;
-        }
-        else{
-          if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
-            perso->spriteActuel.x=0;
-        }
         perso->evoSprite=perso->vitAnim[perso->etat];
       }
       else (perso->evoSprite)--;
+    }
+  }
+  if(perso->etat >= IDLE && perso->etat < FALLING){
+    if(perso->etat == JUMPING){
+      if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
+        perso->spriteActuel.x=(perso->nbAnim[perso->etat]-1)*perso->spriteActuel.w;
+      if(perso->spriteActuel.x <0)
+        perso->spriteActuel.x=0;
+    }
+    else{
+      if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
+        perso->spriteActuel.x=0;
     }
   }
   if(perso->etat == ATTACKING)

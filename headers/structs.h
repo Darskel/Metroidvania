@@ -83,7 +83,7 @@
 #define VITCHUTEPERS 1
 #define VITATTACKPERS 30
 
-#define JPCD 5 //Délai avant de pouvoir de nouveau sauter
+#define JPCD 4 //Délai avant de pouvoir de nouveau sauter
 
 #define NBPXSAUT 5*TAILLEBLOC //Taille d'un saut en pixel
 
@@ -94,8 +94,6 @@
 
 //Fichier du niveau de départ :
 #define NIVEAUTXT "salle_debut.txt"
-
-#define OFFSETWINDOW 0.05 //5% de la taille de l'écran en moins (pour mode fenêtré)
 
 #define FRAMEDELAY 17 //Correspond à du 59fps
 

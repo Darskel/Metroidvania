@@ -487,11 +487,13 @@ void miseAjourSprites(personnage_t * perso){
     perso->spriteActuel.x=(perso->nbAnim[JUMPING] - 1)*(perso->spriteActuel.w);
     perso->spriteActuel.y=JUMPING*(perso->spriteActuel.h);
   }
+  else{
+    perso->spriteActuel.y=perso->etat * (perso->spriteActuel.h);
+  }
+
   if(perso->newEtat){
-    if(perso->etat >= IDLE && perso->etat < FALLING){
+    if(perso->etat >= IDLE && perso->etat < FALLING)
       perso->spriteActuel.x=0;
-      perso->spriteActuel.y=perso->etat * (perso->spriteActuel.h);
-    }
     perso->newEtat=FALSE;
     //perso->evoSprite=0;
   }
@@ -540,10 +542,11 @@ void miseAjourSpritesEntites(salle_t * salle){
       entite->spriteActuel.x=(entite->type->nbAnim[JUMPING] -1)*(entite->spriteActuel.w);
       entite->spriteActuel.y=JUMPING*(entite->spriteActuel.h);
     }*/
+    entite->spriteActuel.y=entite->etat * (entite->spriteActuel.h);
+
     if(entite->newEtat){
       if(entite->etat >= IDLE && entite->etat <= FALLING){
         entite->spriteActuel.x=0;
-        entite->spriteActuel.y=entite->etat * (entite->spriteActuel.h);
       }
       entite->newEtat=FALSE;
       //entite->evoSprite=0;
@@ -932,8 +935,10 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
       }
 
       if((!Gauche&&!Droite) || (Gauche&&Droite))
-        if((perso)->etat == RUNNING)//ajouter par Thomas: on souhaite passer de RUNNING à IDLE mais pas de JUMPING à IDLE ou bien de ATTACKING à IDLE
+        if((perso)->etat == RUNNING){//ajouter par Thomas: on souhaite passer de RUNNING à IDLE mais pas de JUMPING à IDLE ou bien de ATTACKING à IDLE
           (perso)->etat=IDLE;
+          perso->newEtat=TRUE;
+        }
 
       tryJump=FALSE;
 

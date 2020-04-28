@@ -595,7 +595,8 @@ char* prendPorte(personnage_t* p, liste_t* lPortes){
 
         if(rightPe >= rightPo && leftPe <= leftPo && topPe <= topPo && bottomPe >= bottomPo){
             p->pos = porte.pos_arrivee;
-            p->delta.x = 2;
+            p->delta.x = 1;
+            p->delta.y = TAILLEBLOC -1;
             p->apparition = porte.pos_arrivee;
             salle = malloc(sizeof(char)*(strlen(porte.salleSuivante)+1));
             strcpy(salle,porte.salleSuivante);

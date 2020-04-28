@@ -483,7 +483,7 @@ void miseAjourSprites(personnage_t * perso){
   else
     perso->clign=FREQCLIGN;
 
-  else if(perso->etat == FALLING){
+  if(perso->etat == FALLING){
     perso->spriteActuel.x=(perso->nbAnim[JUMPING] - 1)*(perso->spriteActuel.w);
     perso->spriteActuel.y=JUMPING*(perso->spriteActuel.h);
   }
@@ -1398,6 +1398,7 @@ int chargerSauvegardeMenu(SDL_Renderer * renderer, int numSauv, personnage_t ** 
   if(sauv > 0){
     sallepath=realloc(sallepath, sizeof(char)*(strlen(sallepath)+1));
     *salle=initialiser_salle(renderer, sallepath, *perso);
+    (*perso)->delta.y = TAILLEBLOC -1;
   }
   else{
     *salle=initialiser_salle(renderer, NIVEAUTXT, *perso);

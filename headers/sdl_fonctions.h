@@ -40,6 +40,7 @@ void afficher_entites(SDL_Renderer * renderer, salle_t * salle, SDL_Texture * te
 void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * personnage, int * inventaireAffiche);
 void miseAjourSprites(personnage_t * personnage);
 void miseAjourSpritesEntites(salle_t * salle);
+void evoSalle(salle_t * salle);
 void destroy_salle(salle_t ** salle);
 void destroy_personnage(personnage_t ** perso);
 void ecranNoir(SDL_Renderer * renderer, int ms);

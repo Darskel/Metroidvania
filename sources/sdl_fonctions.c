@@ -286,7 +286,23 @@ salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, personnag
   lireSalle(nomFichier, &salle, perso);
   salle->background=initialiser_texture(nom_bg, renderer, FALSE);
   salle->tileset=initialiser_texture(TILESETPATH, renderer, FALSE);
+
+  SDL_QueryTexture(salle->background, NULL, NULL, &(salle->spriteActuel.w), &(salle->spriteActuel.h));
+  salle->spriteActuel.w /= salle->nbsprites;
+  salle->spriteActuel.y=0;
+  salle->spriteActuel.x=0;
+
   return salle;
+}
+
+void evoSalle(salle_t * salle){
+  salle->etatanim--;
+  if(salle->etatanim<0){
+    salle->spriteActuel.x += salle->spriteActuel.w;
+    if(salle->spriteActuel.x>=salle->spriteActuel.w*salle->nbsprites)
+      salle->spriteActuel.x=0;
+    salle->etatanim=salle->animDelay;
+  }
 }
 
 /**
@@ -316,8 +332,9 @@ void afficher_salle(SDL_Renderer * renderer, salle_t * salle, SDL_Texture * text
     Rect_dest.w   = TAILLEBLOC;
     Rect_source.h = TAILLEBLOC;
     Rect_dest.h   = TAILLEBLOC;
+
     SDL_SetRenderTarget(renderer, textureSalle);
-    SDL_RenderCopy(renderer, salle->background, NULL, NULL);
+    SDL_RenderCopy(renderer, salle->background, &(salle->spriteActuel), NULL);
     SDL_SetRenderTarget(renderer, NULL);
     for(i = 0 ; i < salle->hauteur; i++)
     {
@@ -934,6 +951,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
       tryAtk=FALSE;
 
       evolution(perso,salle);
+      evoSalle(salle);
 
       if(perso->pv == 0){
         fin=TRUE;

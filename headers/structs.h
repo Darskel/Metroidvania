@@ -222,7 +222,10 @@ typedef struct salle_s{
     int ** mat; /**< Matrice de positionnement des objets */
     SDL_Texture * background; /**< Image d'arrière-plan de la salle */
     SDL_Texture * tileset; /**< Image qui contient tout les sprites de la tileset associée à la salle */
-    int spriteActuel; /**< Indice du sprite à afficher */
+    SDL_Rect spriteActuel; /**< Sprite d'arrière plan à afficher */
+    int nbsprites; /**< Nombre de sprites de l'arrière plan */
+    int animDelay; /**< Delai avant le changement de sprites d'arrière plan (vitesse animation) */
+    int etatanim; /**< Etat du delai de l'animation du bg (entre 0 et animDelay) */
     liste_t * listePorte; /**< Liste des portes de la salle */
     liste_t * listeEntite; /**< Liste des entités de la salle */
 } salle_t;

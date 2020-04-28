@@ -816,6 +816,7 @@ int lireSalle(char* nomFichier, salle_t** salle, personnage_t* perso){
     FILE * monDoc = NULL;
     char mot[50];
     int lon, larg, val;
+    int nbanim, vitanim;
     int cx1, cx2, cy1, cy2;
 
     if(*salle!=NULL)
@@ -832,6 +833,12 @@ int lireSalle(char* nomFichier, salle_t** salle, personnage_t* perso){
     *salle = malloc(sizeof(salle_t));
     (*salle)->nomFichier = malloc(sizeof(char) * (strlen(nomFichier)+1));
     strcpy((*salle)->nomFichier, nomFichier);
+
+    //Nb anims
+    fscanf(monDoc, "%d %d", &nbanim, &vitanim);
+    (*salle)->animDelay=vitanim;
+    (*salle)->etatanim=(*salle)->animDelay;
+    (*salle)->nbsprites=nbanim;
 
     //taille matrice
     fscanf(monDoc, "%d %d", &lon, &larg);

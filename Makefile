@@ -68,8 +68,8 @@ diskosieni: ${o}sdl_fonctions.o ${o}test_SDL.o ${o}source.o ${o}liste.o ${o}comp
 	$(clr)
 	$(clrres)
 
-testSauvegardes: ${o}testSauvegardes.o ${o}source.o ${o}comportement.o ${o}liste.o
-	${CC} $^ ${CFLAGS} -o $@ ${LIBS}
+#testSauvegardes: ${o}testSauvegardes.o ${o}source.o ${o}comportement.o ${o}liste.o
+#	${CC} $^ ${CFLAGS} -o $@ ${LIBS}
 
 ${o}%.o: ${c}%.c
 	${CC} $< -c -o $@ ${LIBS}

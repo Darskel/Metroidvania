@@ -150,16 +150,15 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->pos=positionDepart;
   personnage->delta=positionDepartDelta;
   personnage->sprites=initialiser_texture(PLAYERSPRITESPATH, renderer, FALSE);
-  personnage->spriteActuel.x=0;
-  personnage->spriteActuel.y=0;
   personnage->spriteActuel.h=HAUTEURSPRITEPERS;
   personnage->spriteActuel.w=LARGEURSPRITEPERS;
   personnage->hitbox.hauteur=HAUTEURHITBOXPERS;
   personnage->hitbox.largeur=LARGEURHITBOXPERS;
   personnage->etat = IDLE;
-  personnage->newEtat = FALSE;
+  personnage->newEtat = TRUE;
+  personnage->spriteActuel.x=0;
+  personnage->spriteActuel.y=personnage->etat * personnage->spriteActuel.w;
   personnage->newItem = FALSE;
-  personnage->evoSprite = 0;
   personnage->nbPxSaut = 0;
   personnage->nbSaut=0;
   personnage->jpCd = 0;
@@ -168,7 +167,14 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   nbAnim[1]=8;
   nbAnim[2]=8;
   nbAnim[3]=3;
+  int * vitAnim = malloc(4*sizeof(int));
+  vitAnim[0]=40;
+  vitAnim[1]=3;
+  vitAnim[2]=5;
+  vitAnim[3]=20;
   personnage->nbAnim=nbAnim;
+  personnage->vitAnim=vitAnim;
+  personnage->evoSprite = personnage->vitAnim[personnage->etat];
   personnage->forme='h';
   for(int i = 0; i < TAILLE_INVENTAIRE; i++)
         personnage->inventaire[i] = 0;
@@ -229,6 +235,7 @@ void destroy_personnage(personnage_t ** personnage){
   SDL_DestroyTexture((*personnage)->sprites);
   SDL_DestroyTexture((*personnage)->inventaireTileset);
   free((*personnage)->nbAnim);
+  free((*personnage)->vitAnim);
   free(*personnage);
   *personnage=NULL;
 }
@@ -475,7 +482,7 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
  * @param perso le pointeur sur la structure personnage à faire évoluer
  */
 void miseAjourSprites(personnage_t * perso){
-  if((perso->inv || perso->kb)){ //&& perso->hit ){
+  if((perso->inv || perso->kb)&& perso->hit){
     perso->clign--;
     if(perso->clign<0)
       perso->clign=FREQCLIGN;
@@ -492,11 +499,13 @@ void miseAjourSprites(personnage_t * perso){
   }
 
   if(perso->newEtat){
-    if(perso->etat >= IDLE && perso->etat < FALLING)
+    if(perso->etat >= IDLE && perso->etat < FALLING){
       perso->spriteActuel.x=0;
+      perso->evoSprite=perso->vitAnim[perso->etat];
+    }
     perso->newEtat=FALSE;
-    //perso->evoSprite=0;
   }
+
   else{
     if(perso->etat >= IDLE && perso->etat < FALLING){
       if(perso->evoSprite<=0){
@@ -511,10 +520,7 @@ void miseAjourSprites(personnage_t * perso){
           if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
             perso->spriteActuel.x=0;
         }
-        if(perso->etat == ATTACKING)
-          perso->evoSprite = EVOSPRITESATTACK;
-        else
-          perso->evoSprite = EVOSPRITES;
+        perso->evoSprite=perso->vitAnim[perso->etat];
       }
       else (perso->evoSprite)--;
     }

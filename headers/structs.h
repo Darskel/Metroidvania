@@ -87,9 +87,6 @@
 
 #define NBPXSAUT 5*TAILLEBLOC //Taille d'un saut en pixel
 
-#define EVOSPRITES 3 //Change le sprite seulement 1 frame sur 3
-#define EVOSPRITESATTACK EVOSPRITES*4 //Pareil mais pour les sprites d'attaque
-
 #define ZONEMORTE 5000 //Zone morte de la manette
 
 //Fichier du niveau de départ :
@@ -259,6 +256,7 @@ typedef struct personnage_s{
     boolean_t newItem; /**< Booléen qui signifie que l'on vient de récolter un item */
     int evoSprite; /**< Entier qui décrémente, changement de sprite quand vaut 0 */
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du personage */
+    int * vitAnim; /**< Tableau qui contient le delai de changement d'animation pour chaque action du personage */
     char forme; /**< Forme du personnage H = humain, R = renard */
     int inventaire[TAILLE_INVENTAIRE]; /**<Tableau qui contient les informations sur l'inventaire actuel du personnage */
     SDL_Texture * inventaireTileset;

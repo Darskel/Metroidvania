@@ -115,7 +115,7 @@
 #define PULSARWAV "audio/Pulsar.wav"
 #define BEGINWAV "audio/Begin.wav"
 #define MYSTERIOUSWAV "audio/Mysterious.wav"
-#define VOLUMEAUDIO 0.5 * SDL_MIX_MAXVOLUME
+#define VOLUMEAUDIO 0.25 * SDL_MIX_MAXVOLUME
 
 
 /*

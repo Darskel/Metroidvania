@@ -38,6 +38,9 @@ int main(int argc, char *argv[]){
   Sint16 x_move;
   Sint16 y_move;
   boolean_t fin=FALSE;
+  boolean_t start=FALSE;
+  audiodata_t ** audiodata = malloc(sizeof(audiodata_t *));
+  *audiodata = NULL;
   //SDL_Texture * tileset=NULL;
   SDL_Texture * menu=NULL;
   int messageRes;
@@ -67,6 +70,9 @@ int main(int argc, char *argv[]){
 
   //tileset=initialiser_texture(TILESETPATH, renderer);
   //menu=initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
+
+  *audiodata = chargerWAVreplay(BEGINWAV);
+  togglePauseMusic(*audiodata);
 
   while(!fin){
     frameStart = SDL_GetTicks();
@@ -130,10 +136,7 @@ int main(int argc, char *argv[]){
             case SDLK_b:
               break;
             case SDLK_RETURN:
-              if (jeu(fenetre, &renderer, mode, pJoystick, fullscreen))
-                gameover(fenetre, renderer, mode, pJoystick, fullscreen);
-              else
-                fin = TRUE;
+              start=TRUE;
               break;
           }
           break;
@@ -161,10 +164,7 @@ int main(int argc, char *argv[]){
           mousey=event.motion.y;
           break;
         case SDL_MOUSEBUTTONUP:
-          if (jeu(fenetre, &renderer, mode, pJoystick, fullscreen))
-            gameover(fenetre, renderer, mode, pJoystick, fullscreen);
-          else
-            fin = TRUE;
+          start=TRUE;
           break;
         case SDL_JOYBUTTONDOWN :
         switch(event.jbutton.button){
@@ -180,10 +180,7 @@ int main(int argc, char *argv[]){
           switch(event.jbutton.button){
             case 0 : //bouton A manette XBOX
             case 7 : //bouton Start manette XBOX
-              if (jeu(fenetre, &renderer, mode, pJoystick, fullscreen))
-                gameover(fenetre, renderer, mode, pJoystick, fullscreen);
-              else
-                fin = TRUE;
+              start=TRUE;
               break;
             }
           break;
@@ -221,6 +218,20 @@ int main(int argc, char *argv[]){
       y_move = SDL_JoystickGetAxis(pJoystick, 1);
     }
 
+    if(start){
+      start=FALSE;
+      finMusique(audiodata);
+      if (jeu(fenetre, &renderer, mode, pJoystick, fullscreen, audiodata)){
+        gameover(fenetre, renderer, mode, pJoystick, fullscreen, audiodata);
+        *audiodata = chargerWAVreplay(BEGINWAV);
+        togglePauseMusic(*audiodata);
+      }
+      else{
+        fin = TRUE;
+      }
+
+    }
+
     afficher_menu(renderer);
 
     frameTime = SDL_GetTicks() - frameStart;
@@ -232,6 +243,9 @@ int main(int argc, char *argv[]){
     SDL_JoystickClose(pJoystick);
   //SDL_DestroyTexture(menu);
   //SDL_DestroyTexture(tileset);
+  if(*audiodata != NULL)
+    finMusique(audiodata);
+  free(audiodata);
   quitter_SDL(&fenetre, &renderer);
   fprintf(stdout, "Programme quitté normalement\n");
   return 0;

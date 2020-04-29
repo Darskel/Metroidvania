@@ -112,6 +112,12 @@
 
 #define FONTSIZE 25
 
+#define PULSARWAV "audio/Pulsar.wav"
+#define BEGINWAV "audio/Begin.wav"
+#define MYSTERIOUSWAV "audio/Mysterious.wav"
+#define VOLUMEAUDIO 0.5 * SDL_MIX_MAXVOLUME
+
+
 /*
     INVENTAIRE:
         objet n°1 : clé rouillée
@@ -165,6 +171,17 @@ typedef enum idEnt_e{
     CLEBLEUE,       /**< clé bleue = -1 */
 } idEnt_t;
 
+
+typedef struct audiodata_s{
+  SDL_AudioDeviceID deviceId;
+  SDL_AudioSpec wav_spec;
+  Uint32 wav_length;
+  Uint8 *wav_buffer;
+  Uint32 audioPos;
+  Uint32 audioLen;
+  Uint8 *audioBufferPos;
+  int volume;
+}audiodata_t;
 
 /**
  * \struct taille_s

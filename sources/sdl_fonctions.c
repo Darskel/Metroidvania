@@ -66,12 +66,166 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
  * @param renderer le pointeur sur le pointeur de la renderer SDL_Renderer à détruire
  */
 void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
+  /*finMorceau(&audioBufferSpec);
+  finAudio();*/
   SDL_DestroyRenderer(*renderer);
   SDL_DestroyWindow(*fenetre);
   TTF_Quit();
   SDL_Quit();
 }
 
+/*void Audiocallback(void *userdata, Uint8 *stream, int len) {
+  userdata_t * userdataS = (userdata_t *)(userdata);
+
+  SDL_memset(stream, 0, len);
+
+	if (userdataS->audioLen <= 0 || userdataS->audioPos+len > userdataS->audioBufferLen){
+    userdataS->audioPos=0;
+    userdataS->audioBufferPos = userdataS->audioBuffer;
+    userdataS->audioLen=userdataS->audioBufferLen;
+  }
+  else if (userdataS->audioPos < userdataS->audioBufferLen) {
+      printf("\nCallback du morceau - INFOS OBTENUES :\nFICHIER : %s\nAUDIOBUFFERLEN : %li\nAUDIOPOS : %li\nAUDIOLEN : %li\nVOLUME : %d\nLEN : %d\nAUDIOBUFFER : %li\nAUDIOBUFFERPOS : %li\n\n", userdataS->fichier, userdataS->audioBufferLen, userdataS->audioPos, userdataS->audioLen, userdataS->volume, len, userdataS->audioBuffer, userdataS->audioBufferPos);
+      SDL_MixAudioFormat(stream, userdataS->audioBufferPos, userdataS->audioBufferSpec.format, len, userdataS->volume);
+      userdataS->audioPos += len;
+      userdataS->audioBufferPos += len;
+      userdataS->audioLen -= len;
+  }
+
+}
+
+void audio_Init(void){
+  SDL_AudioSpec desiree;
+
+  desiree.freq = 22050;
+  desiree.format = AUDIO_S16LSB;
+  desiree.channels = 2;
+  desiree.samples = 1024;
+  desiree.callback = Audiocallback;
+  desiree.userdata = audioBufferSpec.userdata;
+
+  if (SDL_OpenAudio(&desiree, &(audioBufferSpec)) < 0)
+    {
+        fprintf(stderr, "Erreur d'ouverture audio: %s\n", SDL_GetError());
+        exit(EXIT_FAILURE);
+    }
+  userdata_t * userdata = (userdata_t *)(audioBufferSpec.userdata);
+  printf("\nChargement audio - INFOS OBTENUES :\nFICHIER : %s\nAUDIOBUFFERLEN : %li\nAUDIOPOS : %li\nAUDIOLEN : %li\nVOLUME : %d\nAUDIOBUFFER : %li\nAUDIOBUFFERPOS : %li\n\n", userdata->fichier, userdata->audioBufferLen, userdata->audioPos, userdata->audioLen, userdata->volume, userdata->audioBuffer, userdata->audioBufferPos);
+
+}
+
+void chargementWAV(char * fichier, SDL_AudioSpec * audioSpec){
+  if(audioSpec->userdata != NULL)
+    finMorceau(audioSpec);
+
+  userdata_t * userdata = malloc(sizeof(userdata_t));
+
+  userdata->audioPos = 0;
+  userdata->audioLen = 0;
+  userdata->audioBufferLen = 0;
+  userdata->audioBuffer = NULL;
+  userdata->audioBufferPos = NULL;
+  userdata->audioBufferSpec = *audioSpec;
+  userdata->fichier = malloc(sizeof(char) * (strlen(fichier)+1));
+  userdata->volume = VOLUMEAUDIO;
+
+  if(!SDL_LoadWAV(fichier, audioSpec, &(userdata->audioBuffer), &(userdata->audioBufferLen)))
+    {
+      printf("Erreur lors du chargement du fichier WAV.\n");
+      exit(EXIT_FAILURE);
+    }
+  userdata->audioLen = userdata->audioBufferLen;
+  userdata->audioBufferPos = userdata->audioBuffer;
+  strcpy(userdata->fichier, fichier);
+
+  printf("\nChargement morceau - INFOS OBTENUES :\nFICHIER : %s\nAUDIOBUFFERLEN : %li\nAUDIOPOS : %li\nAUDIOLEN : %li\nVOLUME : %d\nAUDIOBUFFER : %li\nAUDIOBUFFERPOS : %li\n\n", userdata->fichier, userdata->audioBufferLen, userdata->audioPos, userdata->audioLen, userdata->volume, userdata->audioBuffer, userdata->audioBufferPos);
+
+  audioSpec->userdata = (void *)userdata;
+}
+
+void finMorceau(SDL_AudioSpec * audioSpec){
+  userdata_t * userdata = (userdata_t *)(audioSpec->userdata);
+  printf("fin musique \n");
+  SDL_FreeWAV(userdata->audioBuffer);
+  free(userdata->fichier);
+  free(userdata);
+  audioSpec->userdata=NULL;
+}
+*/
+
+audiodata_t * chargerWAVreplay(char * fichier){
+  audiodata_t * audiodata = malloc(sizeof(audiodata_t));
+  SDL_AudioDeviceID deviceId;
+  SDL_AudioSpec wav_spec;
+  Uint32 wav_length=0;
+  Uint8 *wav_buffer=NULL;
+  int success=0;
+  SDL_AudioSpec desired;
+  desired.freq = 44100;
+  desired.format = AUDIO_S16LSB;
+  desired.channels = 1;
+  desired.samples = 4096;
+  desired.callback = Audiocallback;
+  desired.userdata = audiodata;
+
+  if (SDL_LoadWAV(fichier, &wav_spec, &wav_buffer, &wav_length)){
+    deviceId = SDL_OpenAudioDevice(NULL, 0, &desired, NULL, 0);
+    if (!deviceId)
+      printf("Le driver audio n'a pas pu être initialise : %s\n", SDL_GetError());
+  }
+  else
+    printf("Le chargement du fichier WAV a echoue: %s\n", SDL_GetError());
+
+  audiodata->deviceId=deviceId;
+  audiodata->wav_spec=wav_spec;
+  audiodata->wav_length=wav_length;
+  audiodata->wav_buffer=wav_buffer;
+  audiodata->audioPos=0;
+  audiodata->audioLen=audiodata->wav_length;
+  audiodata->audioBufferPos=audiodata->wav_buffer;
+  audiodata->volume=VOLUMEAUDIO;
+  return audiodata;
+}
+
+void Audiocallback(void *userdata, Uint8 *stream, int len) {
+  audiodata_t * audiodata = (audiodata_t *)(userdata);
+
+  SDL_memset(stream, 0, len);
+
+	if (audiodata->audioLen <= 0 || audiodata->audioPos+len > audiodata->wav_length){
+    audiodata->audioPos=0;
+    audiodata->audioBufferPos = audiodata->wav_buffer;
+    audiodata->audioLen=audiodata->wav_length;
+  }
+  else if (audiodata->audioPos < audiodata->wav_length){
+      //printf("\nCallback du morceau - INFOS OBTENUES :\nWAVLEN : %li\nAWAVBUFFER : %li\nVOLUME : %d\nLEN : %d\nAUDIOLEN : %li\nAUDIOPOS : %li\nAUDIOBUFFERPOS : %li\n\n", audiodata->wav_length, audiodata->wav_buffer, audiodata->volume, len, audiodata->audioLen, audiodata->audioPos, audiodata->audioBufferPos);
+      SDL_MixAudioFormat(stream, audiodata->audioBufferPos, audiodata->wav_spec.format, len, audiodata->volume);
+      audiodata->audioPos+=len;
+      audiodata->audioBufferPos += len;
+      audiodata->audioLen -= len;
+  }
+}
+
+
+void finMusique(audiodata_t ** audiodata){
+  SDL_CloseAudioDevice((*audiodata)->deviceId);
+  SDL_FreeWAV((*audiodata)->wav_buffer);
+  free(*audiodata);
+  *audiodata=NULL;
+}
+void lectureMusique(audiodata_t * audiodata){
+  SDL_PauseAudioDevice(audiodata->deviceId, 0);
+}
+void pauseMusique(audiodata_t * audiodata){
+  SDL_PauseAudioDevice(audiodata->deviceId, 1);
+}
+void togglePauseMusic(audiodata_t * audiodata){
+  SDL_AudioStatus audiostatus = SDL_GetAudioDeviceStatus(audiodata->deviceId);
+  if(audiostatus == SDL_AUDIO_PLAYING)
+    pauseMusique(audiodata);
+  else
+    lectureMusique(audiodata);
+}
 
 /**
  * \brief Fonction qui permet d'initialiser une texture à partir d'une image
@@ -647,7 +801,7 @@ void konamicode(personnage_t * perso, salle_t * salle, char * konami, int * indK
   }
 }
 
-boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen){
+boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen, audiodata_t ** audiodata){
   SDL_Event event;
   Uint32 frameStart;
   int frameTime;
@@ -689,6 +843,9 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
   //tileset=initialiser_texture(TILESETPATH, *renderer);
 
   chargerSauvegardeMenu(*renderer, 0, &perso, &salle);
+
+  *audiodata = chargerWAVreplay(PULSARWAV);
+  togglePauseMusic(*audiodata);
 
   while(fin==FALSE){
     frameStart = SDL_GetTicks();
@@ -807,6 +964,9 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
               break;
             case SDLK_RETURN:
               konami[indKon++] = 's';
+              break;
+            case SDLK_p:
+              togglePauseMusic(*audiodata);
               break;
           }
           break;
@@ -996,6 +1156,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
     SDL_RenderFillRect(*renderer, NULL);
     SDL_RenderPresent(*renderer);
     //SDL_DestroyTexture(tileset);
+    finMusique(audiodata);
     return mort;
 }
 
@@ -1212,7 +1373,7 @@ void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_T
   }
 }
 
-void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen){
+void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen, audiodata_t ** audiodata){
   SDL_Rect Rect_dest;
   int maxw;
   int maxh;
@@ -1222,6 +1383,9 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
   SDL_Event event;
   boolean_t fin=FALSE;
   SDL_Texture * texte=creerTexte(renderer, "./font/BitCasual.ttf", FONTSIZE, "GAME OVER", 255, 255, 200);
+
+  *audiodata = chargerWAVreplay(MYSTERIOUSWAV);
+  togglePauseMusic(*audiodata);
 
   while(!fin){
     while(SDL_PollEvent(&event)){
@@ -1268,6 +1432,7 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
     SDL_RenderCopy(renderer, texte, NULL, &Rect_dest);
     SDL_RenderPresent(renderer);
   }
+  finMusique(audiodata);
   SDL_DestroyTexture(texte);
   SDL_Delay(500);
 }

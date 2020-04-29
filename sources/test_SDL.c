@@ -49,6 +49,8 @@ int main(int argc, char *argv[]){
   SDL_RenderFillRect(renderer, NULL);
   //SDL_RenderClear(renderer);
   SDL_RenderPresent(renderer);
+  chargement_musique();
+  play_musique();
 
   SDL_Joystick* pJoystick = NULL;
   int numJoystick = SDL_NumJoysticks();
@@ -66,9 +68,12 @@ int main(int argc, char *argv[]){
   }
 
   //tileset=initialiser_texture(TILESETPATH, renderer);
-  menu=initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
+  menu=initialiser_texture("./sprites/menu/menu.png", renderer);
 
+
+    fin_musique();
   while(!fin){
+
     frameStart = SDL_GetTicks();
     while(SDL_PollEvent(&event)){
       switch(event.type){
@@ -210,10 +215,13 @@ int main(int argc, char *argv[]){
     if(frameTime < FRAMEDELAY){
       SDL_Delay(FRAMEDELAY - frameTime);
     }
+
   }
+
   if(pJoystick != NULL)
     SDL_JoystickClose(pJoystick);
   SDL_DestroyTexture(menu);
+
   //SDL_DestroyTexture(tileset);
   quitter_SDL(&fenetre, &renderer);
   fprintf(stdout, "Programme quitté normalement\n");

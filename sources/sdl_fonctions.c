@@ -1,5 +1,12 @@
 #include "../headers/sdl_fonctions.h"
 
+
+
+static Uint8 *audio_pos; // global pointer to the audio buffer to be played
+static Uint32 audio_len; // remaining length of the sample we have to play
+static Uint8 *wav_buffer; // buffer containing our audio file
+
+#define FILE_PATH "audio/exemple.wav"
 /**
  * \file sdl_fonctions.c
  * \brief Fichier qui regroupent les fonctions utilisées pour la gestion des graphismes et des évènements (SDL2)
@@ -57,6 +64,9 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
 
   SDL_FreeSurface(icon);
 
+  if(SDL_Init(SDL_INIT_AUDIO) < 0)
+    exit(EXIT_FAILURE);
+
 }
 
 /**
@@ -71,7 +81,55 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
   SDL_Quit();
 }
 
+void my_audio_callback(void *userdata, Uint8 *stream, int len) {
 
+	if (audio_len ==0)
+		return;
+
+	len = ( len > audio_len ? audio_len : len );
+	SDL_MixAudio(stream, audio_pos, len, SDL_MIX_MAXVOLUME);
+
+	audio_pos += len;
+	audio_len -= len;
+}
+
+void chargement_musique(){
+
+  	static Uint32 wav_length;
+  	static Uint8 *wav_buffer;
+  	static SDL_AudioSpec wav_spec;
+    void * x;
+
+  	if( SDL_LoadWAV(FILE_PATH, &wav_spec, &wav_buffer, &wav_length) == NULL ){
+  	  return ;
+  	}
+
+  	wav_spec.callback = my_audio_callback;
+  	wav_spec.userdata = NULL;
+
+  	audio_pos = wav_buffer;
+  	audio_len = wav_length;
+
+  	if ( SDL_OpenAudio(&wav_spec, NULL) < 0 ){
+  	  fprintf(stderr, "Couldn't open audio: %s\n", SDL_GetError());
+  	  exit(EXIT_FAILURE);
+  	}
+  }
+
+void play_musique(){
+
+      printf("musique \n");
+      SDL_PauseAudio(0);
+      SDL_Delay(5000);
+
+}
+
+void fin_musique(){
+
+  printf("fin musique \n");
+  SDL_CloseAudio();
+	SDL_FreeWAV(wav_buffer);
+}
 /**
  * \brief Fonction qui permet d'initialiser une texture à partir d'une image
  *
@@ -79,50 +137,33 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
  * @param renderer le pointeur sur SDL_Renderer
  * @return le pointeur sur la texture générée
  */
-SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer, boolean_t estTarget){
+SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer){
   SDL_Surface *surface = NULL;
-  SDL_Texture *tmp = NULL;
-  SDL_Texture *texture =NULL;
-  Uint32 pixelFormatEnumTmp;
-
+  SDL_Texture *texture, *tmp = NULL;
   surface = IMG_Load(path);
-
   if(surface==NULL){
       fprintf(stderr, "Erreur IMG_LOAD pour %s", path);
       exit(EXIT_FAILURE);
   }
-
   tmp = SDL_CreateTextureFromSurface(renderer, surface);
-
   if(tmp==NULL){
       fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
       exit(EXIT_FAILURE);
   }
-
   SDL_SetTextureBlendMode(tmp, SDL_BLENDMODE_BLEND);
-
-  if(estTarget){
-    SDL_QueryTexture(tmp,&pixelFormatEnumTmp,NULL,NULL,NULL);
-    const char* TexturePixelFormatName = SDL_GetPixelFormatName(pixelFormatEnumTmp);
-    texture = SDL_CreateTexture(renderer, pixelFormatEnumTmp,
-                                SDL_TEXTUREACCESS_TARGET, surface->w, surface->h);
-    if(texture==NULL){
-        printf("Surface pixel format : %s --- %s\n", TexturePixelFormatName, path);
-        fprintf(stderr, "Erreur SDL_CreateTexture : %s", SDL_GetError());
-        exit(EXIT_FAILURE);
-    }
-    SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
-    SDL_SetRenderTarget(renderer, texture); /* La cible de rendu est maintenant texture. */
-    SDL_RenderCopy(renderer, tmp, NULL, NULL); /* On copie tmp sur texture */
-    SDL_DestroyTexture(tmp);
-    SDL_FreeSurface(surface);
-    SDL_SetRenderTarget(renderer, NULL); /* La cible de rendu est de nouveau le renderer. */
-    return texture;
+  texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,
+                              SDL_TEXTUREACCESS_TARGET, surface->w, surface->h);
+  if(texture==NULL){
+      fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
+      exit(EXIT_FAILURE);
   }
-  else{
-    SDL_FreeSurface(surface);
-    return tmp;
-  }
+  SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+  SDL_SetRenderTarget(renderer, texture); /* La cible de rendu est maintenant texture. */
+  SDL_RenderCopy(renderer, tmp, NULL, NULL); /* On copie tmp sur texture */
+  SDL_DestroyTexture(tmp);
+  SDL_FreeSurface(surface);
+  SDL_SetRenderTarget(renderer, NULL); /* La cible de rendu est de nouveau le renderer. */
+  return texture;
 }
 
 /**
@@ -147,7 +188,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->vit_att=VITATTACKPERS;
   personnage->pos=positionDepart;
   personnage->delta=positionDepartDelta;
-  personnage->sprites=initialiser_texture(PLAYERSPRITESPATH, renderer, FALSE);
+  personnage->sprites=initialiser_texture(PLAYERSPRITESPATH, renderer);
   personnage->spriteActuel.x=0;
   personnage->spriteActuel.y=0;
   personnage->spriteActuel.h=HAUTEURSPRITEPERS;
@@ -169,53 +210,16 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->forme='h';
   for(int i = 0; i < TAILLE_INVENTAIRE; i++)
         personnage->inventaire[i] = 0;
-  personnage->inventaireTileset = initialiser_texture(INVENTAIREPATH, renderer, FALSE);
-  personnage->nomObj[0] = "cle bleue";
-  personnage->nomObj[1] = "cle rouge";
-  personnage->nomObj[2] = "cle rouillee";
-  personnage->nomObj[3] = "cle verte";
-  personnage->nomObj[4] = "discoshroom";
+  personnage->nomObj[0] = "champignon";
+  personnage->nomObj[1] = "cle bleue";
+  personnage->nomObj[2] = "cle rouille";
+  personnage->nomObj[3] = "cle rouge";
+  personnage->nomObj[4] = "cle verte";
   personnage->nomObj[5] = "double saut";
-  personnage->nomObj[6] = "huile";
+  personnage->nomObj[6] = "fleche de feu";
   personnage->nomObj[7] = "renard";
   return personnage;
 }
-
-void afficherInventaire(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * textureSalle){
-  SDL_Rect boite;
-  SDL_Rect objPlacement;
-  SDL_Rect objTileset;
-  int maxw;
-  int maxh;
-  SDL_SetRenderTarget(renderer, textureSalle);
-  SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
-  objPlacement.w = INVENTAIRESIZE;
-  objPlacement.h = INVENTAIRESIZE;
-  objTileset.w = INVENTAIRESIZE;
-  objTileset.h = INVENTAIRESIZE;
-  boite.w = INVENTAIRESIZE * (TAILLE_INVENTAIRE+2);
-  boite.h = INVENTAIRESIZE + 2;
-  boite.x = maxw - maxw/100 - boite.w;
-  boite.y = maxh/200;
-  objPlacement.x= boite.x + 2;
-  objPlacement.y= boite.y + 1;
-  objTileset.x=0;
-  objTileset.y=0;
-  SDL_SetRenderDrawColor(renderer, 10, 10, 10, 200);
-  SDL_RenderFillRect(renderer, &boite);
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-  SDL_SetRenderTarget(renderer, NULL);
-  for(int i=0; i<TAILLE_INVENTAIRE; i++){
-    if(personnage->inventaire[i]){
-      SDL_SetRenderTarget(renderer, textureSalle);
-      SDL_RenderCopy(renderer, personnage->inventaireTileset, &objTileset, &objPlacement);
-      SDL_SetRenderTarget(renderer, NULL);
-      objPlacement.x += INVENTAIRESIZE + 2;
-    }
-    objTileset.x += INVENTAIRESIZE;
-  }
-}
-
 
 /**
  * \brief Fonction de destruction de la structure personnage
@@ -224,7 +228,6 @@ void afficherInventaire(SDL_Renderer * renderer, personnage_t * personnage, SDL_
  */
 void destroy_personnage(personnage_t ** personnage){
   SDL_DestroyTexture((*personnage)->sprites);
-  SDL_DestroyTexture((*personnage)->inventaireTileset);
   free((*personnage)->nbAnim);
   free(*personnage);
   *personnage=NULL;
@@ -235,16 +238,16 @@ void destroy_personnage(personnage_t ** personnage){
  *
  */
 void destroy_typeentites(void){
-  for(int i=0; i<NBTYPEMONSTRE; i++){
+  /*for(int i=0; i<NBTYPEMONSTRE; i++){
     SDL_DestroyTexture((typesMonstre[i]).sprites);
     free((typesMonstre[i]).nbAnim);
-  }//Pour tout les types de monstres*/
-  /*SDL_DestroyTexture((typesMonstre[-SERPENTBLEU -1]).sprites);
+  }Pour tout les types de monstres*/
+  SDL_DestroyTexture((typesMonstre[-SERPENTBLEU -1]).sprites);
   free((typesMonstre[-SERPENTBLEU -1]).nbAnim);
   SDL_DestroyTexture((typesMonstre[-COEUR -1]).sprites);
   free((typesMonstre[-COEUR -1]).nbAnim);
   SDL_DestroyTexture((typesMonstre[-FLECHE -1]).sprites);
-  free((typesMonstre[-FLECHE -1]).nbAnim);*/
+  free((typesMonstre[-FLECHE -1]).nbAnim);
 }
 
 /**
@@ -254,12 +257,12 @@ void destroy_typeentites(void){
  */
 void initialiser_typeentites(SDL_Renderer * renderer){
   creerTypeEntite();
-  for(int i=0; i<NBTYPEMONSTRE; i++){
-    typesMonstre[i].sprites = initialiser_texture(typesMonstre[i].path, renderer, FALSE);
-  }//*/
-  /*typesMonstre[-SERPENTBLEU -1].sprites = initialiser_texture(typesMonstre[-SERPENTBLEU -1].path, renderer);
+  /*for(int i=0; i<NBTYPEMONSTRE; i++){
+    typesMonstre[i].sprites = initialiser_texture(typesMonstre[i].path, renderer);
+  }*/
+  typesMonstre[-SERPENTBLEU -1].sprites = initialiser_texture(typesMonstre[-SERPENTBLEU -1].path, renderer);
   typesMonstre[-COEUR - 1].sprites = initialiser_texture(typesMonstre[-COEUR -1].path, renderer);
-  typesMonstre[-FLECHE - 1].sprites = initialiser_texture(typesMonstre[-FLECHE -1].path, renderer);*/
+  typesMonstre[-FLECHE - 1].sprites = initialiser_texture(typesMonstre[-FLECHE -1].path, renderer);
 }
 
 
@@ -271,7 +274,7 @@ void initialiser_typeentites(SDL_Renderer * renderer){
  * @param tileset le pointeur vers la texture de tileset
  * @return un pointeur sur la structure salle initialisée
  */
-salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, personnage_t* perso){
+salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier){
   salle_t * salle=NULL;
   char nom_bg[100];
 
@@ -280,9 +283,9 @@ salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, personnag
   nom_bg[strlen(nom_bg) - 3] = '\0';
   strcat(nom_bg, "png");
 
-  lireSalle(nomFichier, &salle, perso);
-  salle->background=initialiser_texture(nom_bg, renderer, FALSE);
-  salle->tileset=initialiser_texture(TILESETPATH, renderer, FALSE);
+  lireSalle(nom_bg, nomFichier, &salle);
+  salle->background=initialiser_texture(nom_bg, renderer);
+  salle->tileset=initialiser_texture(TILESETPATH, renderer);
   return salle;
 }
 
@@ -392,7 +395,7 @@ void afficher_entites(SDL_Renderer * renderer, salle_t * salle, SDL_Texture * te
  * @param salle le pointeur sur la salle où afficher le joueur et les entités
  * @param personnage le pointeur sur la structure personnage à afficher
  */
-void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * personnage, int * inventaireAffiche){
+void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * personnage){
   SDL_Texture * textureSalle;
   SDL_Rect Rect_dest;
   int maxw;
@@ -400,7 +403,8 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
   float ratioFenetre;
   float ratioSalle;
   SDL_Texture * coeurImage;
-  coeurImage = initialiser_texture("./sprites/entite/coeur/coeur-small.png", renderer, FALSE);
+  coeurImage = initialiser_texture("./sprites/entite/coeur/coeur-small.png", renderer);
+
 
   SDL_SetRenderDrawColor(renderer, 0,0,0,255);
   //SDL_RenderClear(renderer);
@@ -424,7 +428,7 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
   Rect_dest.y = (maxh - Rect_dest.h)/2 ;
 
 
-  textureSalle=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,SDL_TEXTUREACCESS_TARGET, (salle->largeur)* TAILLEBLOC, (salle->hauteur) * TAILLEBLOC);
+  textureSalle=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET, (salle->largeur)* TAILLEBLOC, (salle->hauteur) * TAILLEBLOC);
   SDL_SetRenderTarget(renderer, textureSalle);
   SDL_SetTextureBlendMode(textureSalle, SDL_BLENDMODE_BLEND);
   SDL_SetRenderDrawColor(renderer, 0,0,0,255);
@@ -433,15 +437,10 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
   SDL_SetRenderTarget(renderer, NULL);
   afficher_salle(renderer,salle, textureSalle);
   afficher_entites(renderer,salle, textureSalle);
-  if(personnage->clign%FREQCLIGN == 0 || (personnage->kb == FALSE && personnage->inv<INVUDELAY))
+  if(personnage->clign%FREQCLIGN == 0)
     afficher_personnage(renderer, personnage, salle, textureSalle);
   afficherVieCoeurs(renderer, personnage, coeurImage, textureSalle);
   //afficherVieJauge(renderer, personnage);
-  if(*inventaireAffiche > 0){
-    afficherInventaire(renderer, personnage, textureSalle);
-    if(*inventaireAffiche < INVENTAIRETIME)
-      (*inventaireAffiche)--;
-  }
   SDL_SetRenderTarget(renderer, NULL);
   SDL_RenderCopy(renderer, textureSalle, NULL, &Rect_dest);
   SDL_RenderPresent(renderer);
@@ -455,7 +454,7 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
  * @param perso le pointeur sur la structure personnage à faire évoluer
  */
 void miseAjourSprites(personnage_t * perso){
-  if((perso->inv || perso->kb)){ //&& perso->hit ){
+  if(perso->inv || perso->kb){
     perso->clign--;
     if(perso->clign<0)
       perso->clign=FREQCLIGN;
@@ -480,22 +479,14 @@ void miseAjourSprites(personnage_t * perso){
     else
       perso->spriteActuel.w = LARGEURSPRITEPERS;
     perso->newEtat=FALSE;
-    //perso->evoSprite=0;
+    perso->evoSprite=0;
   }
   else{
     if(perso->etat > IDLE && perso->etat < FALLING){
       if(perso->evoSprite<=0){
         perso->spriteActuel.x+=perso->spriteActuel.w;
-        if(perso->etat == JUMPING){
-          if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
-            perso->spriteActuel.x=(perso->nbAnim[perso->etat]-1)*perso->spriteActuel.w;
-          if(perso->spriteActuel.x <0)
-            perso->spriteActuel.x=0;
-        }
-        else{
-          if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
-            perso->spriteActuel.x=0;
-        }
+        if(perso->spriteActuel.x >= (perso->nbAnim[perso->etat])*perso->spriteActuel.w)
+          perso->spriteActuel.x=0;
         if(perso->etat == ATTACKING)
           perso->evoSprite = EVOSPRITESATTACK;
         else
@@ -525,38 +516,24 @@ void miseAjourSpritesEntites(salle_t * salle){
       entite->spriteActuel.y=IDLE;
     }
 
-    /*else if(entite->etat == FALLING){
+    else if(entite->etat == FALLING){
       entite->spriteActuel.x=(entite->type->nbAnim[JUMPING] -1)*(entite->spriteActuel.w);
       entite->spriteActuel.y=JUMPING*(entite->spriteActuel.h);
-    }*/
-    if(entite->newEtat){
-      if(entite->etat > IDLE && entite->etat <= FALLING){
-        entite->spriteActuel.x=0;
-        entite->spriteActuel.y=entite->etat * (entite->spriteActuel.h);
-      }
-      entite->newEtat=FALSE;
-      //entite->evoSprite=0;
     }
+
     else{
-      if(entite->etat > IDLE && entite->etat <= FALLING){
+      if(entite->etat > IDLE && entite->etat < FALLING){
         entite->spriteActuel.y=entite->etat * (entite->spriteActuel.h);
         if(entite->evoSprite<=0){
           entite->spriteActuel.x+=entite->spriteActuel.w;
-          if(entite->etat == JUMPING || entite->etat==FALLING){
-            if(entite->spriteActuel.x >= (entite->type->nbAnim[entite->etat])*entite->spriteActuel.w)
-              entite->spriteActuel.x=(entite->type->nbAnim[entite->etat]-1)*entite->spriteActuel.w;
-            if(entite->spriteActuel.x <0)
-              entite->spriteActuel.x=0;
-          }
-          else{
           if(entite->spriteActuel.x >= (entite->type->nbAnim[entite->etat])*(entite->spriteActuel.w))
             entite->spriteActuel.x=0;
-          }
           entite->evoSprite = entite->type->vitesseAnim;
         }
         else (entite->evoSprite)--;
       }
     }
+
     //printf("%d_%d\n",entite->etat,entite->spriteActuel.x);
 
     modifElm(salle->listeEntite, entite);
@@ -634,7 +611,6 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
   int messageRes;
   Sint16 x_move;
   Sint16 y_move;
-  int inventaireAffiche=0;
   position_t positionDepart;
   position_t positionDepartDelta;
   //boolean_t windowtouched=FALSE;
@@ -664,16 +640,18 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
   initialiser_typeentites(*renderer);
   //tileset=initialiser_texture(TILESETPATH, *renderer);
 
-  salle=initialiser_salle(*renderer, NIVEAUTXT, perso);
+  salle=initialiser_salle(*renderer, NIVEAUTXT);
   positionDepart.x = 1;
   positionDepartDelta.x = 0;
   positionDepart.y = salle->hauteur - HAUTEURHITBOXPERS/TAILLEBLOC -2;
   positionDepartDelta.y = TAILLEBLOC-1;
-  ecranNoir(*renderer, 100);
   perso=initialisation_personnage(*renderer, positionDepart, positionDepartDelta);
+  ecranNoir(*renderer, 100);
+
 
   while(fin==FALSE){
     frameStart = SDL_GetTicks();
+
     while(SDL_PollEvent(&event)){
       switch(event.type){
         case SDL_QUIT: //Appui sur la croix quitte le programme (avec fenetre de dialogue pour confirmation)
@@ -700,7 +678,7 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
           destroy_typeentites();
           initialiser_typeentites(*renderer);
           SDL_DestroyTexture(perso->sprites);
-          perso->sprites=initialiser_texture(PLAYERSPRITESPATH, *renderer, FALSE);
+          perso->sprites=initialiser_texture(PLAYERSPRITESPATH, *renderer);
           //Si la salle devient mouvante (ou autre chose) (blocs, arrière plan), un destroy texture des textures associées est envisageable de la meme façon que pour le personnage
           break;
         case SDL_KEYUP:
@@ -745,9 +723,6 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
               break;
             case SDLK_a:
               konami[indKon++] = 'a';
-            case SDLK_i:
-              if(inventaireAffiche==INVENTAIRETIME)
-                inventaireAffiche--;
               break;
             case SDLK_b:
               konami[indKon++] = 'b';
@@ -779,10 +754,6 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
             case SDLK_e:
               tryAtk=TRUE;
               break;
-            case SDLK_i:
-            case SDLK_a:
-              inventaireAffiche=INVENTAIRETIME;
-              break;
           }
           break;
         case SDL_MOUSEMOTION :
@@ -799,22 +770,13 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
               konami[indKon++] = 'b';
               tryAtk=TRUE;
               break;
-            case 3 : //bouton Y manette XBOX
-              inventaireAffiche=INVENTAIRETIME;
-              break;
             case 7 : //bouton Start manette XBOX
               konami[indKon++] = 's';
               break;
           }
         break;
-        case SDL_JOYBUTTONUP :
-          switch(event.jbutton.button){
-            case 3 : //bouton Y manette XBOX
-              if(inventaireAffiche==INVENTAIRETIME)
-                inventaireAffiche--;
-              break;
-          }
-          break;
+        /*case SDL_JOYBUTTONUP :
+          break;*/
         case SDL_JOYAXISMOTION :
           switch(event.jaxis.axis){
             case 0 :
@@ -870,7 +832,7 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
       salle_nom=prendPorte(perso, (salle)->listePorte);
       if(salle_nom != NULL){
         destroy_salle(&salle);
-        salle=initialiser_salle(*renderer, salle_nom, perso);
+        salle=initialiser_salle(*renderer, salle_nom);
         salleChangee=TRUE;
         kon = FALSE;
         free(salle_nom);
@@ -914,7 +876,7 @@ void jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, S
       SDL_SetRenderDrawColor(*renderer,0,0,0,255);
       //SDL_RenderClear(*renderer);
       SDL_RenderFillRect(*renderer, NULL);
-      affichage_complet(*renderer, salle, perso, &inventaireAffiche);
+      affichage_complet(*renderer, salle, perso);
 
       frameTime = SDL_GetTicks() - frameStart;
       if(frameTime < FRAMEDELAY){
@@ -957,7 +919,7 @@ void afficher_menu(SDL_Renderer * renderer, SDL_Texture * fond){
   Rect_dest.y = (maxh - Rect_dest.h)/2 ;
 
 
-  texture=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,SDL_TEXTUREACCESS_TARGET, TAILLEBGMENUW, TAILLEBGMENUH);
+  texture=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET, TAILLEBGMENUW, TAILLEBGMENUH);
   SDL_SetRenderTarget(renderer, texture);
   SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
   SDL_SetRenderDrawColor(renderer, 0,0,0,255);
@@ -1016,14 +978,14 @@ menu_t * creerMenuDemarrage(SDL_Renderer * renderer){
   menu->nbTextes=nbTextes;
   menu->etiquette = "Menu Principal";
   //Fond :
-  menu->fond = initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
+  menu->fond = initialiser_texture("./sprites/menu/menu.png", renderer);
   //Texte :
   menu_texte_t * tabTextes = malloc(nbTextes * sizeof(menu_texte_t));
   menu->tabTextes=tabTextes;
   tabTextes[0].id=0;
   tabTextes[0].etiquette="Diskosieni";
   tabTextes[0].parent=menu;
-  tabTextes[0].texture = initialiser_texture("./sprites/menu/diskosieni.png", renderer, FALSE);
+  tabTextes[0].texture = initialiser_texture("./sprites/menu/diskosieni.png", renderer);
 
   //Boutons :
   menu_bouton_t * tabBoutons = malloc(nbBoutons * sizeof(menu_bouton_t));
@@ -1032,33 +994,33 @@ menu_t * creerMenuDemarrage(SDL_Renderer * renderer){
   tabBoutons[0].etiquette="Commencer";
   tabBoutons[0].parent=menu;
   tabBoutons[0].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/commencer.png", renderer, FALSE);
-  tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/commencer_selectionne.png", renderer, FALSE);
-  tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/commencer_clique.png", renderer, FALSE);
+  tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/commencer.png", renderer);
+  tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/commencer_selectionne.png", renderer);
+  tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/commencer_clique.png", renderer);
 
   tabBoutons[1].id=1;
   tabBoutons[1].etiquette="Continuer";
   tabBoutons[1].parent=menu;
   tabBoutons[1].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/continuer.png", renderer, FALSE);
-  tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/continuer_selectionne.png", renderer, FALSE);
-  tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/continuer_clique.png", renderer, FALSE);
+  tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/continuer.png", renderer);
+  tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/continuer_selectionne.png", renderer);
+  tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/continuer_clique.png", renderer);
 
   tabBoutons[2].id=2;
   tabBoutons[2].etiquette="Options";
   tabBoutons[2].parent=menu;
   tabBoutons[2].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[2].texture[RELAXED] = initialiser_texture("./sprites/bouton/options.png", renderer, FALSE);
-  tabBoutons[2].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/options_selectionne.png", renderer, FALSE);
-  tabBoutons[2].texture[PRESSED] = initialiser_texture("./sprites/bouton/options_clique.png", renderer, FALSE);
+  tabBoutons[2].texture[RELAXED] = initialiser_texture("./sprites/bouton/options.png", renderer);
+  tabBoutons[2].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/options_selectionne.png", renderer);
+  tabBoutons[2].texture[PRESSED] = initialiser_texture("./sprites/bouton/options_clique.png", renderer);
 
   tabBoutons[3].id=3;
   tabBoutons[3].etiquette="Quitter";
   tabBoutons[3].parent=menu;
   tabBoutons[3].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[3].texture[RELAXED] = initialiser_texture("./sprites/bouton/quitter.png", renderer, FALSE);
-  tabBoutons[3].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/quitter_selectionne.png", renderer, FALSE);
-  tabBoutons[3].texture[PRESSED] = initialiser_texture("./sprites/bouton/quitter_clique.png", renderer, FALSE);
+  tabBoutons[3].texture[RELAXED] = initialiser_texture("./sprites/bouton/quitter.png", renderer);
+  tabBoutons[3].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/quitter_selectionne.png", renderer);
+  tabBoutons[3].texture[PRESSED] = initialiser_texture("./sprites/bouton/quitter_clique.png", renderer);
 
   //CERTAINEMENT PAS TERMINE
 
@@ -1079,14 +1041,14 @@ menu_t * creerMenuConfirmation(SDL_Renderer * renderer){
   menu->nbTextes=nbTextes;
   menu->etiquette = "Menu Principal";
   //Fond :
-  menu->fond = initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
+  menu->fond = initialiser_texture("./sprites/menu/menu.png", renderer);
   //Texte :
   menu_texte_t * tabTextes = malloc(nbTextes * sizeof(menu_texte_t));
   menu->tabTextes=tabTextes;
   tabTextes[0].id=0;
   tabTextes[0].etiquette="Voulez-vous quitter ?";
   tabTextes[0].parent=menu;
-  tabTextes[0].texture = initialiser_texture("./sprites/menu/voulezvousquitter.png", renderer, FALSE);
+  tabTextes[0].texture = initialiser_texture("./sprites/menu/voulezvousquitter.png", renderer);
   //Boutons :
   menu_bouton_t * tabBoutons = malloc(nbBoutons * sizeof(menu_bouton_t));
   menu->tabBoutons=tabBoutons;
@@ -1095,17 +1057,17 @@ menu_t * creerMenuConfirmation(SDL_Renderer * renderer){
   tabBoutons[0].etiquette="Oui";
   tabBoutons[0].parent=menu;
   tabBoutons[0].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/oui.png", renderer, FALSE);
-  tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/oui_selectionne.png", renderer, FALSE);
-  tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/oui_clique.png", renderer, FALSE);
+  tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/oui.png", renderer);
+  tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/oui_selectionne.png", renderer);
+  tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/oui_clique.png", renderer);
 
   tabBoutons[1].id=1;
   tabBoutons[1].etiquette="Non";
   tabBoutons[1].parent=menu;
   tabBoutons[1].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/non.png", renderer, FALSE);
-  tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/non_selectionne.png", renderer, FALSE);
-  tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/non_clique.png", renderer, FALSE);
+  tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/non.png", renderer);
+  tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/non_selectionne.png", renderer);
+  tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/non_clique.png", renderer);
 
   //CERTAINEMENT PAS TERMINE
 
@@ -1171,7 +1133,7 @@ void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_T
   boite.y = maxh/200;
   coeur.x = boite.x +1;
   coeur.y = boite.y +1;
-  SDL_SetRenderDrawColor(renderer, 10, 10, 10, 100);
+  SDL_SetRenderDrawColor(renderer, 115, 23, 45, 50);
   SDL_RenderFillRect(renderer, &boite);
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_SetRenderTarget(renderer, NULL);

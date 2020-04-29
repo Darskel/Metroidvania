@@ -528,7 +528,10 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
                 }*/
 
                 f->etat = RUNNING;
-
+                f->newEtat = TRUE;
+                f->evoSprite = 0;
+                f->cdAtt = 0;
+                f->ut = 0;
                 f->spriteActuel.h = f->type->tailleSprite.hauteur;
                 f->spriteActuel.w = f->type->tailleSprite.largeur;
                 f->spriteActuel.x = 0;
@@ -1170,6 +1173,10 @@ static void creerCoeur(monstre_t* m, salle_t* s){
     c->direction = 1;
 
     c->etat = IDLE;
+    c->newEtat = TRUE;
+    c->evoSprite = 0;
+    c->cdAtt = 0;
+    c->ut = 0;
 
     c->spriteActuel.h = c->type->tailleSprite.hauteur;
     c->spriteActuel.w = c->type->tailleSprite.largeur;

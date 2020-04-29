@@ -74,84 +74,6 @@ void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
   SDL_Quit();
 }
 
-/*void Audiocallback(void *userdata, Uint8 *stream, int len) {
-  userdata_t * userdataS = (userdata_t *)(userdata);
-
-  SDL_memset(stream, 0, len);
-
-	if (userdataS->audioLen <= 0 || userdataS->audioPos+len > userdataS->audioBufferLen){
-    userdataS->audioPos=0;
-    userdataS->audioBufferPos = userdataS->audioBuffer;
-    userdataS->audioLen=userdataS->audioBufferLen;
-  }
-  else if (userdataS->audioPos < userdataS->audioBufferLen) {
-      printf("\nCallback du morceau - INFOS OBTENUES :\nFICHIER : %s\nAUDIOBUFFERLEN : %li\nAUDIOPOS : %li\nAUDIOLEN : %li\nVOLUME : %d\nLEN : %d\nAUDIOBUFFER : %li\nAUDIOBUFFERPOS : %li\n\n", userdataS->fichier, userdataS->audioBufferLen, userdataS->audioPos, userdataS->audioLen, userdataS->volume, len, userdataS->audioBuffer, userdataS->audioBufferPos);
-      SDL_MixAudioFormat(stream, userdataS->audioBufferPos, userdataS->audioBufferSpec.format, len, userdataS->volume);
-      userdataS->audioPos += len;
-      userdataS->audioBufferPos += len;
-      userdataS->audioLen -= len;
-  }
-
-}
-
-void audio_Init(void){
-  SDL_AudioSpec desiree;
-
-  desiree.freq = 22050;
-  desiree.format = AUDIO_S16LSB;
-  desiree.channels = 2;
-  desiree.samples = 1024;
-  desiree.callback = Audiocallback;
-  desiree.userdata = audioBufferSpec.userdata;
-
-  if (SDL_OpenAudio(&desiree, &(audioBufferSpec)) < 0)
-    {
-        fprintf(stderr, "Erreur d'ouverture audio: %s\n", SDL_GetError());
-        exit(EXIT_FAILURE);
-    }
-  userdata_t * userdata = (userdata_t *)(audioBufferSpec.userdata);
-  printf("\nChargement audio - INFOS OBTENUES :\nFICHIER : %s\nAUDIOBUFFERLEN : %li\nAUDIOPOS : %li\nAUDIOLEN : %li\nVOLUME : %d\nAUDIOBUFFER : %li\nAUDIOBUFFERPOS : %li\n\n", userdata->fichier, userdata->audioBufferLen, userdata->audioPos, userdata->audioLen, userdata->volume, userdata->audioBuffer, userdata->audioBufferPos);
-
-}
-
-void chargementWAV(char * fichier, SDL_AudioSpec * audioSpec){
-  if(audioSpec->userdata != NULL)
-    finMorceau(audioSpec);
-
-  userdata_t * userdata = malloc(sizeof(userdata_t));
-
-  userdata->audioPos = 0;
-  userdata->audioLen = 0;
-  userdata->audioBufferLen = 0;
-  userdata->audioBuffer = NULL;
-  userdata->audioBufferPos = NULL;
-  userdata->audioBufferSpec = *audioSpec;
-  userdata->fichier = malloc(sizeof(char) * (strlen(fichier)+1));
-  userdata->volume = VOLUMEAUDIO;
-
-  if(!SDL_LoadWAV(fichier, audioSpec, &(userdata->audioBuffer), &(userdata->audioBufferLen)))
-    {
-      printf("Erreur lors du chargement du fichier WAV.\n");
-      exit(EXIT_FAILURE);
-    }
-  userdata->audioLen = userdata->audioBufferLen;
-  userdata->audioBufferPos = userdata->audioBuffer;
-  strcpy(userdata->fichier, fichier);
-
-  printf("\nChargement morceau - INFOS OBTENUES :\nFICHIER : %s\nAUDIOBUFFERLEN : %li\nAUDIOPOS : %li\nAUDIOLEN : %li\nVOLUME : %d\nAUDIOBUFFER : %li\nAUDIOBUFFERPOS : %li\n\n", userdata->fichier, userdata->audioBufferLen, userdata->audioPos, userdata->audioLen, userdata->volume, userdata->audioBuffer, userdata->audioBufferPos);
-
-  audioSpec->userdata = (void *)userdata;
-}
-
-void finMorceau(SDL_AudioSpec * audioSpec){
-  userdata_t * userdata = (userdata_t *)(audioSpec->userdata);
-  printf("fin musique \n");
-  SDL_FreeWAV(userdata->audioBuffer);
-  free(userdata->fichier);
-  free(userdata);
-  audioSpec->userdata=NULL;
-}
-*/
 
 audiodata_t * chargerWAVreplay(char * fichier){
   audiodata_t * audiodata = malloc(sizeof(audiodata_t));
@@ -163,7 +85,7 @@ audiodata_t * chargerWAVreplay(char * fichier){
   SDL_AudioSpec desired;
   desired.freq = 44100;
   desired.format = AUDIO_S16LSB;
-  desired.channels = 1;
+  desired.channels = 2;
   desired.samples = 4096;
   desired.callback = Audiocallback;
   desired.userdata = audiodata;
@@ -844,7 +766,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
 
   chargerSauvegardeMenu(*renderer, 0, &perso, &salle);
 
-  *audiodata = chargerWAVreplay(PULSARWAV);
+  *audiodata = chargerWAVreplay(LONGAWAYWAV);
   togglePauseMusic(*audiodata);
 
   while(fin==FALSE){
@@ -1384,7 +1306,7 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
   boolean_t fin=FALSE;
   SDL_Texture * texte=creerTexte(renderer, "./font/BitCasual.ttf", FONTSIZE, "GAME OVER", 255, 255, 200);
 
-  *audiodata = chargerWAVreplay(MYSTERIOUSWAV);
+  *audiodata = chargerWAVreplay(FUTURISTICWAV);
   togglePauseMusic(*audiodata);
 
   while(!fin){

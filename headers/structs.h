@@ -115,6 +115,9 @@
 #define PULSARWAV "audio/Pulsar.wav"
 #define BEGINWAV "audio/Begin.wav"
 #define MYSTERIOUSWAV "audio/Mysterious.wav"
+#define FUTURISTICWAV "audio/Futuristic.wav"
+#define ENDLESSPAINWAV "audio/EndlessPain.wav"
+#define LONGAWAYWAV "audio/LongAway.wav"
 #define VOLUMEAUDIO 0.25 * SDL_MIX_MAXVOLUME
 
 

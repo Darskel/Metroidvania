@@ -49,8 +49,6 @@ int main(int argc, char *argv[]){
   SDL_RenderFillRect(renderer, NULL);
   //SDL_RenderClear(renderer);
   SDL_RenderPresent(renderer);
-  chargement_musique();
-  play_musique();
 
   SDL_Joystick* pJoystick = NULL;
   int numJoystick = SDL_NumJoysticks();
@@ -70,8 +68,6 @@ int main(int argc, char *argv[]){
   //tileset=initialiser_texture(TILESETPATH, renderer);
   menu=initialiser_texture("./sprites/menu/menu.png", renderer);
 
-
-    fin_musique();
   while(!fin){
 
     frameStart = SDL_GetTicks();

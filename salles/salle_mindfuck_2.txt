@@ -15,5 +15,5 @@
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-salle_portail.txt 24 14 0 9
-salle_roi_vifplume.txt 0 14 38 14
+salle_mindfuck_4.txt 0 14 23 9
+salle_avant_boss.txt 24 14 32 14

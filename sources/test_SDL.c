@@ -39,8 +39,7 @@ int main(int argc, char *argv[]){
   Sint16 y_move;
   boolean_t fin=FALSE;
   boolean_t start=FALSE;
-  audiodata_t ** audiodata = malloc(sizeof(audiodata_t *));
-  *audiodata = NULL;
+  Mix_Music * musique = NULL;
   //SDL_Texture * tileset=NULL;
   SDL_Texture * menu=NULL;
   int messageRes;
@@ -71,8 +70,8 @@ int main(int argc, char *argv[]){
   //tileset=initialiser_texture(TILESETPATH, renderer);
   //menu=initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
 
-  *audiodata = chargerWAVreplay(BEGINWAV);
-  togglePauseMusic(*audiodata);
+  musique = chargerMusique(BEGINWAV);
+  lancerMusiqueInfini(musique, VOLUMEAUDIO);
 
   while(!fin){
 
@@ -135,6 +134,9 @@ int main(int argc, char *argv[]){
             case SDLK_a:
               break;
             case SDLK_b:
+              break;
+            case SDLK_p:
+              togglePauseMusique();
               break;
             case SDLK_RETURN:
               start=TRUE;
@@ -221,11 +223,10 @@ int main(int argc, char *argv[]){
 
     if(start){
       start=FALSE;
-      finMusique(audiodata);
-      if (jeu(fenetre, &renderer, mode, pJoystick, fullscreen, audiodata)){
-        gameover(fenetre, renderer, mode, pJoystick, fullscreen, audiodata);
-        *audiodata = chargerWAVreplay(BEGINWAV);
-        togglePauseMusic(*audiodata);
+      Mix_HaltMusic();
+      if (jeu(fenetre, &renderer, mode, pJoystick, fullscreen)){
+        gameover(fenetre, renderer, mode, pJoystick, fullscreen);
+        lancerMusiqueInfini(musique, VOLUMEAUDIO);
       }
       else{
         fin = TRUE;
@@ -246,9 +247,9 @@ int main(int argc, char *argv[]){
     SDL_JoystickClose(pJoystick);
   //SDL_DestroyTexture(menu);
   //SDL_DestroyTexture(tileset);
-  if(*audiodata != NULL)
-    finMusique(audiodata);
-  free(audiodata);
+  Mix_HaltMusic();
+  if(musique != NULL)
+    Mix_FreeMusic(musique);
   quitter_SDL(&fenetre, &renderer);
   fprintf(stdout, "Programme quitté normalement\n");
   return 0;

@@ -15,12 +15,12 @@ ifeq ($(OS),Windows_NT)
 	ICONRES=${i}icon.res
 	ICONRC=${i}icon.rc
 	COMPILERICON=windres.exe -i ${ICONRC} -o ${ICONRES} --input-format=rc -O coff
-	LIBS=-L${SDL_LIB_DIR} -I${SDL_INC_DIR} -lmingw32 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2 #-lSDL2_mixer
+	LIBS=-L${SDL_LIB_DIR} -I${SDL_INC_DIR} -lmingw32 -lSDL2main -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2
 	clr=del /s *.o
 	clrres=del /s *.res
 	propre=del /s *.exe
 else
-	LIBS=`sdl2-config --cflags --libs` -lSDL2_image -lSDL2_ttf -lSDL2 #-lSDL2_mixer
+	LIBS=`sdl2-config --cflags --libs` -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2
 	clr=rm -rf ./o/*.o
 	clrres=rm -rf ./icon/*.res
 	propre=find . -type f -executable -delete

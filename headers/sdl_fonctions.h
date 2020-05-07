@@ -8,12 +8,12 @@
     #include <SDL2/SDL.h>
     #include <SDL2/SDL_ttf.h>
     #include <SDL2/SDL_image.h>
-    //#include <SDL2/SDL_mixer.h>
+    #include <SDL2/SDL_mixer.h>
 #else
     #include <SDL.h>
     #include <SDL_ttf.h>
     #include <SDL_image.h>
-    //#include <SDL_mixer.h>
+    #include <SDL_mixer.h>
 #endif
 
 #endif
@@ -30,6 +30,11 @@
  * \date 06/04/2020
 */
 
+#define NBSOUNDS 8
+Mix_Chunk * EffetsSonores[NBSOUNDS];
+
+void initialiserChunks(void);
+void detruireChunks(void);
 void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_DisplayMode * mode, boolean_t fullscreen);
 void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer);
 SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer, boolean_t estTarget);
@@ -50,7 +55,7 @@ void destroy_typeentites(void);
 void initialiser_typeentites(SDL_Renderer * renderer);
 int chargerSauvegardeMenu(SDL_Renderer * renderer, int numSauv, personnage_t ** perso, salle_t ** salle);
 int sauvegarderMenu(int numSauv, personnage_t * perso, salle_t * salle);
-boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen, audiodata_t ** audiodata);
+boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen);
 void afficher_menu(SDL_Renderer * renderer);
 int afficherMessageBox(SDL_Window * fenetre, SDL_MessageBoxButtonData * buttons, int nbButtons, char * titre, char * message, int fullscreen);
 menu_t * creerMenuDemarrage(SDL_Renderer * renderer);
@@ -62,14 +67,21 @@ void afficherMenu(SDL_Renderer * renderer, menu_t * menu);
 void afficherVieJauge(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * textureSalle);
 void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * coeurImage, SDL_Texture * textureSalle);
 void afficherInventaire(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * textureSalle);
-void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen, audiodata_t ** audiodata);
+void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen);
 void afficher_menu_image(SDL_Renderer * renderer, SDL_Texture * fond);
 TTF_Font * creerPolice(char * path, int taille);
 void detruirePolice(TTF_Font ** font);
 SDL_Texture * creerTexte(SDL_Renderer * renderer, char * Fontpath, int taille, char* texte, int r, int g, int b);
-void Audiocallback(void *userdata, Uint8 *stream, int len);
+Mix_Music * chargerMusique(char * path);
+void lancerMusiqueInfini(Mix_Music * musique, int volume);
+void lancerMusiqueNBFois(Mix_Music * musique, int volume , int nbFois);
+void togglePauseMusique(void);
+void ExploitationBinaireSons(unsigned int nbBinaire);
+
+//Ancienne version de l'audio sans SDL_Mixer
+/*void Audiocallback(void *userdata, Uint8 *stream, int len);
 audiodata_t * chargerWAVreplay(char * fichier);
 void finMusique(audiodata_t ** audiodata);
 void lectureMusique(audiodata_t * audiodata);
 void pauseMusique(audiodata_t * audiodata);
-void togglePauseMusic(audiodata_t * audiodata);
+void togglePauseMusic(audiodata_t * audiodata);*/

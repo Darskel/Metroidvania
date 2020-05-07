@@ -8,12 +8,12 @@
         #include <SDL2/SDL.h>
         #include <SDL2/SDL_ttf.h>
         #include <SDL2/SDL_image.h>
-        //#include <SDL2/SDL_mixer.h>
+        #include <SDL2/SDL_mixer.h>
     #else
         #include <SDL.h>
         #include <SDL_ttf.h>
         #include <SDL_image.h>
-        //#include <SDL_mixer.h>
+        #include <SDL_mixer.h>
     #endif
 
 #endif
@@ -118,7 +118,8 @@
 #define FUTURISTICWAV "audio/Futuristic.wav"
 #define ENDLESSPAINWAV "audio/EndlessPain.wav"
 #define LONGAWAYWAV "audio/LongAway.wav"
-#define VOLUMEAUDIO 0.25 * SDL_MIX_MAXVOLUME
+#define VOLUMEAUDIO 0.25 * MIX_MAX_VOLUME
+#define NBCHANNELS 10 //Nombre de sons jouables en même temps
 
 
 /*
@@ -174,8 +175,20 @@ typedef enum idEnt_e{
     CLEBLEUE,       /**< clé bleue = -1 */
 } idEnt_t;
 
+typedef enum idSounds_e{
+  SOUND_TOUCHE, //Son quand le personnage est touché
+  SOUND_ARC, //Son quand le personnage tire à l'arc
+  SOUND_SERPENT, //Son quand le serpent rose crache
+  SOUND_SINGE, //Son quand le singe crie
+  SOUND_VIFPLUME, //Son quand le vifplume crie
+  SOUND_MURGLACE, //Son quand le mur de glace fond
+  SOUND_DOOR, //Son quand une porte s'ouvre
+  SOUND_ITEM, //Son quand on ramasse un item
+} idSounds_t;
 
-typedef struct audiodata_s{
+
+
+/*typedef struct audiodata_s{
   SDL_AudioDeviceID deviceId;
   SDL_AudioSpec wav_spec;
   Uint32 wav_length;
@@ -184,7 +197,7 @@ typedef struct audiodata_s{
   Uint32 audioLen;
   Uint8 *audioBufferPos;
   int volume;
-}audiodata_t;
+}audiodata_t;*/
 
 /**
  * \struct taille_s
@@ -281,6 +294,7 @@ typedef struct personnage_s{
     int inventaire[TAILLE_INVENTAIRE]; /**<Tableau qui contient les informations sur l'inventaire actuel du personnage */
     SDL_Texture * inventaireTileset;
     char* nomObj[TAILLE_INVENTAIRE]; /**<Tableau qui contient les noms des objets de l'inventaire */
+    unsigned int sounds; /**< Nombre binaire correspondant aux effets sonores à jouer pour la frame en cours */
 } personnage_t;
 
 typedef struct monstre_s monstre_t;

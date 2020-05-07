@@ -508,6 +508,11 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
                     f->pos = (position_t){rightP/8,p->pos.y+2};
                     f->direction = RIGHT;
                 }else{
+                    p->delta.x += 5;
+                    if(p->delta.x >= TAILLEBLOC){
+                        p->delta.x -= TAILLEBLOC;
+                        p->pos.x++;
+                    }
                     f->delta = (position_t){leftP%8,1};
                     f->pos = (position_t){leftP/8 - 1,p->pos.y+2};
                     f->direction = LEFT;
@@ -552,6 +557,13 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
                 p->etat = ATTACKING;
                 p->newEtat = TRUE;
                 p->nbFrameAtk = 0;
+                if(!p->direction){
+                    p->delta.x -= 5;
+                    if(p->delta.x < 0){
+                        p->delta.x += TAILLEBLOC;
+                        p->pos.x--;
+                    }
+                }
             }
         }
     }

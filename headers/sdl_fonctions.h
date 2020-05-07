@@ -76,6 +76,7 @@ Mix_Music * chargerMusique(char * path);
 void lancerMusiqueInfini(Mix_Music * musique, int volume);
 void lancerMusiqueNBFois(Mix_Music * musique, int volume , int nbFois);
 void togglePauseMusique(void);
+void ExploitationBinaireSons(unsigned int nbBinaire);
 
 //Ancienne version de l'audio sans SDL_Mixer
 /*void Audiocallback(void *userdata, Uint8 *stream, int len);

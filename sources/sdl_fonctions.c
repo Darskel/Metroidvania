@@ -55,6 +55,14 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
   SDL_SetRenderDrawColor(*renderer,0,0,0,255);
   SDL_SetRenderDrawBlendMode(*renderer, SDL_BLENDMODE_BLEND);
 
+  if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0){ //Tout les sons du jeu doivent être enregistrés en 44100 de fréquence et en stéréo
+    fprintf(stderr, "Erreur d'initialisation de SDL_Mixer : %s\n", Mix_GetError());
+    exit(EXIT_FAILURE);
+  }
+
+  Mix_AllocateChannels(NBCHANNELS);
+  initialiserChunks();
+
   SDL_FreeSurface(icon);
 
 }
@@ -66,16 +74,77 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
  * @param renderer le pointeur sur le pointeur de la renderer SDL_Renderer à détruire
  */
 void quitter_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer){
-  /*finMorceau(&audioBufferSpec);
-  finAudio();*/
+  detruireChunks();
+  Mix_AllocateChannels(0);
   SDL_DestroyRenderer(*renderer);
   SDL_DestroyWindow(*fenetre);
   TTF_Quit();
+  Mix_CloseAudio();
   SDL_Quit();
 }
 
+void initialiserChunks(void){
+  EffetsSonores[SOUND_TOUCHE]=Mix_LoadWAV("audio/Touche.wav");
+  EffetsSonores[SOUND_ARC]=Mix_LoadWAV("audio/Arc.wav");
+  EffetsSonores[SOUND_SERPENT]=Mix_LoadWAV("audio/Serpent.wav");
+  EffetsSonores[SOUND_SINGE]=Mix_LoadWAV("audio/Singe.wav");
+  EffetsSonores[SOUND_VIFPLUME]=Mix_LoadWAV("audio/Vifplume.wav");
+  EffetsSonores[SOUND_MURGLACE]=Mix_LoadWAV("audio/Murglace.wav");
+  EffetsSonores[SOUND_DOOR]=Mix_LoadWAV("audio/Door.wav");
+  EffetsSonores[SOUND_ITEM]=Mix_LoadWAV("audio/Item.wav");
+}
 
-audiodata_t * chargerWAVreplay(char * fichier){
+void detruireChunks(void){
+  for(int i=0; i<NBSOUNDS; i++){
+    Mix_FreeChunk(EffetsSonores[i]);
+    EffetsSonores[i]=NULL;
+  }
+}
+
+//Pour jouer un son : Mix_PlayChannel(-1, son, 0);
+
+void ExploitationBinaireSons(unsigned int nbBinaire){
+  for(int i=0; i<NBSOUNDS; i++){
+    if(nbBinaire & 1)
+      Mix_PlayChannel(-1, EffetsSonores[i], 0);
+    nbBinaire = nbBinaire >> 1;
+  }
+}
+
+Mix_Music * chargerMusique(char * path){
+  Mix_Music * musique = Mix_LoadMUS(path);
+  return musique;
+}
+
+//Pour décharger une musique : Mix_FreeMusic(Mix_Music * musique)
+
+void lancerMusiqueInfini(Mix_Music * musique, int volume){
+  int result;
+  Mix_VolumeMusic(volume);
+  result = Mix_PlayMusic(musique, -1);
+}
+
+void lancerMusiqueNBFois(Mix_Music * musique, int volume , int nbFois){
+  int result;
+  Mix_VolumeMusic(volume);
+  result = Mix_PlayMusic(musique, nbFois);
+}
+
+void togglePauseMusique(void){
+  if(Mix_PausedMusic())
+    Mix_ResumeMusic();
+  else if(Mix_PlayingMusic())
+    Mix_PauseMusic();
+}
+
+//Pour mettre pause : Mix_PauseMusic();
+//Pour reprendre : Mix_ResumeMusic();
+//Pour revenir au début : Mix_RewindMusic();
+//Pour arrêter la musique : Mix_HaltMusic();
+
+
+//Ancienne version sans SDL_Mixer
+/*audiodata_t * chargerWAVreplay(char * fichier){
   audiodata_t * audiodata = malloc(sizeof(audiodata_t));
   SDL_AudioDeviceID deviceId;
   SDL_AudioSpec wav_spec;
@@ -147,7 +216,7 @@ void togglePauseMusic(audiodata_t * audiodata){
     pauseMusique(audiodata);
   else
     lectureMusique(audiodata);
-}
+}*/
 
 /**
  * \brief Fonction qui permet d'initialiser une texture à partir d'une image
@@ -238,6 +307,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->nbPxSaut = 0;
   personnage->nbSaut=0;
   personnage->jpCd = 0;
+  personnage->sounds = 0;
   int * nbAnim = malloc(4*sizeof(int));
   nbAnim[0]=1;
   nbAnim[1]=8;
@@ -723,7 +793,7 @@ void konamicode(personnage_t * perso, salle_t * salle, char * konami, int * indK
   }
 }
 
-boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen, audiodata_t ** audiodata){
+boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen){
   SDL_Event event;
   Uint32 frameStart;
   int frameTime;
@@ -733,6 +803,8 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
   Sint16 x_move;
   Sint16 y_move;
   int inventaireAffiche=0;
+  idSounds_t son = 0;
+  Mix_Music * musique = NULL;
   //position_t positionDepart;
   //position_t positionDepartDelta;
   //boolean_t windowtouched=FALSE;
@@ -766,8 +838,8 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
 
   chargerSauvegardeMenu(*renderer, 0, &perso, &salle);
 
-  *audiodata = chargerWAVreplay(LONGAWAYWAV);
-  togglePauseMusic(*audiodata);
+  musique = chargerMusique(LONGAWAYWAV);
+  lancerMusiqueInfini(musique, VOLUMEAUDIO);
 
   while(fin==FALSE){
     frameStart = SDL_GetTicks();
@@ -887,8 +959,14 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
             case SDLK_RETURN:
               konami[indKon++] = 's';
               break;
+            case SDLK_n:
+              Mix_PlayChannel(-1, EffetsSonores[son], 0);
+              son++;
+              if(son>=NBSOUNDS)
+                son=0;
+              break;
             case SDLK_p:
-              togglePauseMusic(*audiodata);
+              togglePauseMusique();
               break;
           }
           break;
@@ -1039,6 +1117,8 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
       evolution(perso,salle);
       evoSalle(salle);
 
+      ExploitationBinaireSons(perso->sounds);
+
       if(perso->pv == 0){
         fin=TRUE;
         mort=TRUE;
@@ -1049,7 +1129,6 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
         inventaireAffiche=INVENTAIRETIME-1;
         perso->newItem = FALSE;
       }
-
 
       miseAjourSprites(perso);
       miseAjourSpritesEntites(salle);
@@ -1078,7 +1157,9 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
     SDL_RenderFillRect(*renderer, NULL);
     SDL_RenderPresent(*renderer);
     //SDL_DestroyTexture(tileset);
-    finMusique(audiodata);
+    Mix_HaltMusic();
+    if(musique != NULL)
+      Mix_FreeMusic(musique);
     return mort;
 }
 
@@ -1295,19 +1376,20 @@ void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_T
   }
 }
 
-void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen, audiodata_t ** audiodata){
+void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen){
   SDL_Rect Rect_dest;
   int maxw;
   int maxh;
   int textew;
   int texteh;
   int mult;
+  Mix_Music * musique = NULL;
   SDL_Event event;
   boolean_t fin=FALSE;
   SDL_Texture * texte=creerTexte(renderer, "./font/BitCasual.ttf", FONTSIZE, "GAME OVER", 255, 255, 200);
 
-  *audiodata = chargerWAVreplay(FUTURISTICWAV);
-  togglePauseMusic(*audiodata);
+  musique = chargerMusique(FUTURISTICWAV);
+  lancerMusiqueInfini(musique, VOLUMEAUDIO);
 
   while(!fin){
     while(SDL_PollEvent(&event)){
@@ -1319,6 +1401,9 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
             case SDLK_SPACE :
             fin=TRUE;
             break;
+            case SDLK_p :
+              togglePauseMusique();
+              break;
           }
           break;
         case SDL_JOYBUTTONUP:
@@ -1354,7 +1439,9 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
     SDL_RenderCopy(renderer, texte, NULL, &Rect_dest);
     SDL_RenderPresent(renderer);
   }
-  finMusique(audiodata);
+  Mix_HaltMusic();
+  if(musique != NULL)
+    Mix_FreeMusic(musique);
   SDL_DestroyTexture(texte);
   SDL_Delay(500);
 }

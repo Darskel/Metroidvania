@@ -1230,6 +1230,15 @@ void evolution(personnage_t* p, salle_t* s){
             enTete(s->listeEntite);
             for(int i = 0; i < s->listeEntite->indTmp; i++)
                 suivant(s->listeEntite);
+            
+            if(!strcmp(e.type->nom,"serpent rose")){
+                monstre_t tmp;
+                valeurElm(s->listeEntite,&tmp);
+                if(strcmp(e.type->nom,"serpent rose")){
+                    suivant(s->listeEntite);
+                    (s->listeEntite->indTmp)++;
+                }
+            }
 
             modifElm(s->listeEntite,&e);
             (s->listeEntite->indTmp)++;

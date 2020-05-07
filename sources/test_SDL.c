@@ -75,6 +75,7 @@ int main(int argc, char *argv[]){
   togglePauseMusic(*audiodata);
 
   while(!fin){
+
     frameStart = SDL_GetTicks();
     while(SDL_PollEvent(&event)){
       switch(event.type){
@@ -238,7 +239,9 @@ int main(int argc, char *argv[]){
     if(frameTime < FRAMEDELAY){
       SDL_Delay(FRAMEDELAY - frameTime);
     }
+
   }
+
   if(pJoystick != NULL)
     SDL_JoystickClose(pJoystick);
   //SDL_DestroyTexture(menu);

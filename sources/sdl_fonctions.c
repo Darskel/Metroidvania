@@ -797,8 +797,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
   SDL_Event event;
   Uint32 frameStart;
   int frameTime;
-  int mousex;
-  int mousey;
+  SDL_Point souris;
   int messageRes;
   Sint16 x_move;
   Sint16 y_move;
@@ -811,6 +810,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
   //SDL_Texture * tileset=NULL;
   int save=0;
   salle_t * salle=NULL;
+  char nom_bg[100];
   personnage_t * perso=NULL;
   char * salle_nom = NULL;
   boolean_t Gauche = FALSE;
@@ -870,7 +870,15 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
           initialiser_typeentites(*renderer);
           SDL_DestroyTexture(perso->sprites);
           perso->sprites=initialiser_texture(PLAYERSPRITESPATH, *renderer, FALSE);
-          //Si la salle devient mouvante (ou autre chose) (blocs, arrière plan), un destroy texture des textures associées est envisageable de la meme façon que pour le personnage
+          SDL_DestroyTexture(salle->background);
+          strcpy(nom_bg,DIRBG);
+          strcat(nom_bg, salle->nomFichier);
+          nom_bg[strlen(nom_bg) - 3] = '\0';
+          strcat(nom_bg, "png");
+          salle->background=initialiser_texture(nom_bg, *renderer, FALSE);
+          SDL_DestroyTexture(salle->tileset);
+          salle->tileset=initialiser_texture(TILESETPATH, *renderer, FALSE);
+          //Si la salle devient mouvante (ou autre chose) (blocs), un destroy texture des textures associées est envisageable de la meme façon que pour le personnage
           break;
         case SDL_KEYUP:
           switch(event.key.keysym.sym){
@@ -999,8 +1007,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
           }
           break;
         case SDL_MOUSEMOTION :
-          mousex=event.motion.x;
-          mousey=event.motion.y;
+          SDL_GetMouseState(&(souris.x), &(souris.y));
           break;
         case SDL_JOYBUTTONDOWN :
         switch(event.jbutton.button){
@@ -1203,57 +1210,71 @@ int afficherMessageBox(SDL_Window * fenetre, SDL_MessageBoxButtonData * buttons,
 
 menu_t * creerMenuDemarrage(SDL_Renderer * renderer){
   menu_t * menu = malloc(sizeof(menu_t));
-  int nbBoutons = 4;
+  int nbBoutons = 3;
   int nbTextes = 1;
+  int fondw, fondh;
+
+  //Général :
   menu->nbBoutons=nbBoutons;
+  menu->idBoutonChoisi=2;
+  menu->idBoutonValide=0;
   menu->nbTextes=nbTextes;
   menu->etiquette = "Menu Principal";
+  menu->tabTextes = malloc(nbTextes * sizeof(menu_texte_t));
+  menu->tabBoutons = malloc(nbBoutons * sizeof(menu_bouton_t));
+
+  //Etiquettes :
+  menu->tabTextes[0].etiquette=NOM_JEU;
+  menu->tabBoutons[0].etiquette="Commencer";
+  menu->tabBoutons[1].etiquette="Continuer";
+  menu->tabBoutons[2].etiquette="Quitter";
+
+  //Textures :
+  creerTexturesMenuDemarrage(renderer, menu);
+
   //Fond :
-  menu->fond = initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
+  SDL_QueryTexture(menu->fond, NULL, NULL, &fondw, &fondh);
+  menu->nbSprites = 7;
+  fondw /= menu->nbSprites;
+  menu->spriteActuel.x = 0;
+  menu->spriteActuel.y = 0;
+  menu->spriteActuel.w = fondw;
+  menu->spriteActuel.h = fondh;
+  menu->animDelay = 30;
+  menu->etatanim = menu->animDelay;
+
   //Texte :
-  menu_texte_t * tabTextes = malloc(nbTextes * sizeof(menu_texte_t));
-  menu->tabTextes=tabTextes;
-  tabTextes[0].id=0;
-  tabTextes[0].etiquette="Diskosieni";
-  tabTextes[0].parent=menu;
-  tabTextes[0].texture = initialiser_texture("./sprites/menu/diskosieni.png", renderer, FALSE);
+  menu->tabTextes[0].id=1;
+
+  menu->tabTextes[0].parent=menu;
+  SDL_QueryTexture(menu->tabTextes[0].texture, NULL, NULL, &(menu->tabTextes[0].emplacement.w), &(menu->tabTextes[0].emplacement.h));
+  menu->tabTextes[0].emplacement.x=0;
+  menu->tabTextes[0].emplacement.y=0;
 
   //Boutons :
-  menu_bouton_t * tabBoutons = malloc(nbBoutons * sizeof(menu_bouton_t));
-  menu->tabBoutons=tabBoutons;
-  tabBoutons[0].id=0;
-  tabBoutons[0].etiquette="Commencer";
-  tabBoutons[0].parent=menu;
-  tabBoutons[0].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/commencer.png", renderer, FALSE);
-  tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/commencer_selectionne.png", renderer, FALSE);
-  tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/commencer_clique.png", renderer, FALSE);
+  menu->tabBoutons[0].id=2;
 
-  tabBoutons[1].id=1;
-  tabBoutons[1].etiquette="Continuer";
-  tabBoutons[1].parent=menu;
-  tabBoutons[1].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/continuer.png", renderer, FALSE);
-  tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/continuer_selectionne.png", renderer, FALSE);
-  tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/continuer_clique.png", renderer, FALSE);
+  menu->tabBoutons[0].parent=menu;
+  menu->tabBoutons[0].etat=RELAXED;
+  SDL_QueryTexture(menu->tabBoutons[0].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[0].emplacement.w), &(menu->tabBoutons[0].emplacement.h));
+  menu->tabBoutons[0].emplacement.x=0;
+  menu->tabBoutons[0].emplacement.y=0;
 
-  tabBoutons[2].id=2;
-  tabBoutons[2].etiquette="Options";
-  tabBoutons[2].parent=menu;
-  tabBoutons[2].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[2].texture[RELAXED] = initialiser_texture("./sprites/bouton/options.png", renderer, FALSE);
-  tabBoutons[2].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/options_selectionne.png", renderer, FALSE);
-  tabBoutons[2].texture[PRESSED] = initialiser_texture("./sprites/bouton/options_clique.png", renderer, FALSE);
+  menu->tabBoutons[1].id=3;
 
-  tabBoutons[3].id=3;
-  tabBoutons[3].etiquette="Quitter";
-  tabBoutons[3].parent=menu;
-  tabBoutons[3].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[3].texture[RELAXED] = initialiser_texture("./sprites/bouton/quitter.png", renderer, FALSE);
-  tabBoutons[3].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/quitter_selectionne.png", renderer, FALSE);
-  tabBoutons[3].texture[PRESSED] = initialiser_texture("./sprites/bouton/quitter_clique.png", renderer, FALSE);
+  menu->tabBoutons[1].parent=menu;
+  menu->tabBoutons[1].etat=RELAXED;
+  SDL_QueryTexture(menu->tabBoutons[1].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[1].emplacement.w), &(menu->tabBoutons[1].emplacement.h));
+  menu->tabBoutons[1].emplacement.x=0;
+  menu->tabBoutons[1].emplacement.y=0;
 
-  //CERTAINEMENT PAS TERMINE
+  menu->tabBoutons[2].id=4;
+
+  menu->tabBoutons[2].parent=menu;
+  menu->tabBoutons[2].etat=RELAXED;
+  SDL_QueryTexture(menu->tabBoutons[2].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[2].emplacement.w), &(menu->tabBoutons[2].emplacement.h));
+  menu->tabBoutons[2].emplacement.x=0;
+  menu->tabBoutons[2].emplacement.y=0;
 
   return menu;
 }
@@ -1268,55 +1289,130 @@ menu_t * creerMenuConfirmation(SDL_Renderer * renderer){
   menu_t * menu = malloc(sizeof(menu_t));
   int nbBoutons = 2;
   int nbTextes = 1;
+  int fondw, fondh;
+
+  //Général :
   menu->nbBoutons=nbBoutons;
+  menu->idBoutonChoisi=2;
+  menu->idBoutonValide=0;
   menu->nbTextes=nbTextes;
-  menu->etiquette = "Menu Principal";
+  menu->etiquette = "Menu Confirmation";
+  menu->tabTextes = malloc(nbTextes * sizeof(menu_texte_t));
+  menu->tabBoutons = malloc(nbBoutons * sizeof(menu_bouton_t));
+
+  //Etiquette :
+  menu->tabTextes[0].etiquette="Voulez-vous quitter ?";
+  menu->tabBoutons[0].etiquette="Oui";
+  menu->tabBoutons[1].etiquette="Non";
+
+  //Textures :
+  creerTexturesMenuConfirmation(renderer, menu);
+
   //Fond :
-  menu->fond = initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
+  SDL_QueryTexture(menu->fond, NULL, NULL, &fondw, &fondh);
+  menu->nbSprites = 7;
+  fondw /= menu->nbSprites;
+  menu->spriteActuel.x = 0;
+  menu->spriteActuel.y = 0;
+  menu->spriteActuel.w = fondw;
+  menu->spriteActuel.h = fondh;
+  menu->animDelay = 30;
+  menu->etatanim = menu->animDelay;
+
   //Texte :
-  menu_texte_t * tabTextes = malloc(nbTextes * sizeof(menu_texte_t));
-  menu->tabTextes=tabTextes;
-  tabTextes[0].id=0;
-  tabTextes[0].etiquette="Voulez-vous quitter ?";
-  tabTextes[0].parent=menu;
-  tabTextes[0].texture = initialiser_texture("./sprites/menu/voulezvousquitter.png", renderer, FALSE);
+  menu->tabTextes[0].id=1;
+
+  menu->tabTextes[0].parent=menu;
+  SDL_QueryTexture(menu->tabTextes[0].texture, NULL, NULL, &(menu->tabTextes[0].emplacement.w), &(menu->tabTextes[0].emplacement.h));
+  menu->tabTextes[0].emplacement.x=0;
+  menu->tabTextes[0].emplacement.y=0;
+
   //Boutons :
-  menu_bouton_t * tabBoutons = malloc(nbBoutons * sizeof(menu_bouton_t));
-  menu->tabBoutons=tabBoutons;
+  menu->tabBoutons[0].id=2;
 
-  tabBoutons[0].id=0;
-  tabBoutons[0].etiquette="Oui";
-  tabBoutons[0].parent=menu;
-  tabBoutons[0].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/oui.png", renderer, FALSE);
-  tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/oui_selectionne.png", renderer, FALSE);
-  tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/oui_clique.png", renderer, FALSE);
+  menu->tabBoutons[0].parent=menu;
+  menu->tabBoutons[0].etat=RELAXED;
+  SDL_QueryTexture(menu->tabBoutons[0].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[0].emplacement.w), &(menu->tabBoutons[0].emplacement.h));
+  menu->tabBoutons[0].emplacement.x=0;
+  menu->tabBoutons[0].emplacement.y=0;
 
-  tabBoutons[1].id=1;
-  tabBoutons[1].etiquette="Non";
-  tabBoutons[1].parent=menu;
-  tabBoutons[1].texture = malloc(3 * sizeof(SDL_Texture *));
-  tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/non.png", renderer, FALSE);
-  tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/non_selectionne.png", renderer, FALSE);
-  tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/non_clique.png", renderer, FALSE);
+  menu->tabBoutons[1].id=3;
 
-  //CERTAINEMENT PAS TERMINE
+  menu->tabBoutons[1].parent=menu;
+  menu->tabBoutons[1].etat=RELAXED;
+  SDL_QueryTexture(menu->tabBoutons[1].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[1].emplacement.w), &(menu->tabBoutons[1].emplacement.h));
+  menu->tabBoutons[1].emplacement.x=0;
+  menu->tabBoutons[1].emplacement.y=0;
 
   return menu;
 }
 
 void detruireMenu(menu_t ** menu){
-  //A FAIRE
+  detruireTexturesMenu(*menu);
+  free((*menu)->tabTextes);
+  free((*menu)->tabBoutons);
   free(*menu);
+  *menu=NULL;
+}
+
+void detruireTexturesMenu(menu_t * menu){
+  for(int i=0; i<menu->nbBoutons; i++){
+    SDL_DestroyTexture(menu->tabBoutons[i].texture[RELAXED]);
+    SDL_DestroyTexture(menu->tabBoutons[i].texture[HIGHLIGHTED]);
+    SDL_DestroyTexture(menu->tabBoutons[i].texture[PRESSED]);
+    SDL_DestroyTexture(menu->tabBoutons[i].texture[UNAVAILABLE]);
+    free(menu->tabBoutons[i].texture);
+  }
+  for(int j=0; j<menu->nbTextes; j++){
+    SDL_DestroyTexture(menu->tabTextes[j].texture);
+  }
+  SDL_DestroyTexture(menu->fond);
+}
+
+void creerTexturesMenuDemarrage(SDL_Renderer * renderer, menu_t * menu){
+  menu->fond = initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
+  menu->tabTextes[0].texture = creerTexte(renderer, "./font/PixelMordred.ttf", FONTSIZE, menu->tabTextes[0].etiquette, 255, 255, 200);
+
+  menu->tabBoutons[0].texture = malloc(NBETATSBOUTONS * sizeof(SDL_Texture *));
+  menu->tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/commencer/nouvelle_partie.png", renderer, FALSE);
+  menu->tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/commencer/nouvelle_partie_selectionnee.png", renderer, FALSE);
+  menu->tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/commencer/nouvelle_partie_clique.png", renderer, FALSE);
+  menu->tabBoutons[0].texture[UNAVAILABLE] = initialiser_texture("./sprites/bouton/commencer/nouvelle_partie_impossible.png", renderer, FALSE);
+
+  menu->tabBoutons[1].texture = malloc(NBETATSBOUTONS * sizeof(SDL_Texture *));
+  menu->tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/continuer/continuer.png", renderer, FALSE);
+  menu->tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/continuer/continuer_selectionne.png", renderer, FALSE);
+  menu->tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/continuer/continuer_clique.png", renderer, FALSE);
+  menu->tabBoutons[1].texture[UNAVAILABLE] = initialiser_texture("./sprites/bouton/continuer/continuer_impossible.png", renderer, FALSE);
+
+  menu->tabBoutons[2].texture = malloc(NBETATSBOUTONS * sizeof(SDL_Texture *));
+  menu->tabBoutons[2].texture[RELAXED] = initialiser_texture("./sprites/bouton/quitter/quitter.png", renderer, FALSE);
+  menu->tabBoutons[2].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/quitter/quitter_selectionne.png", renderer, FALSE);
+  menu->tabBoutons[2].texture[PRESSED] = initialiser_texture("./sprites/bouton/quitter/quitter_clique.png", renderer, FALSE);
+  menu->tabBoutons[2].texture[UNAVAILABLE] = initialiser_texture("./sprites/bouton/quitter/quitter_impossible.png", renderer, FALSE);
+}
+
+void creerTexturesMenuConfirmation(SDL_Renderer * renderer, menu_t * menu){
+  menu->fond = initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
+  menu->tabTextes[0].texture = creerTexte(renderer, "./font/BitCasual.ttf", FONTSIZE, menu->tabTextes[0].etiquette, 255, 255, 100);
+
+  menu->tabBoutons[0].texture = malloc(NBETATSBOUTONS * sizeof(SDL_Texture *));
+  menu->tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/oui/oui.png", renderer, FALSE);
+  menu->tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/oui/oui_selectionne.png", renderer, FALSE);
+  menu->tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/oui/oui_clique.png", renderer, FALSE);
+  menu->tabBoutons[0].texture[UNAVAILABLE] = NULL;
+
+  menu->tabBoutons[1].texture = malloc(NBETATSBOUTONS * sizeof(SDL_Texture *));
+  menu->tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/non/non.png", renderer, FALSE);
+  menu->tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/non/non_selectionne.png", renderer, FALSE);
+  menu->tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/non/non_clique.png", renderer, FALSE);
+  menu->tabBoutons[1].texture[UNAVAILABLE] = NULL;
+
 }
 
 boolean_t menuConfirmation(SDL_Renderer * renderer){
   //A FAIRE
   return FALSE;
-}
-
-void afficherMenu(SDL_Renderer * renderer, menu_t * menu){
-  //A FAIRE
 }
 
 
@@ -1467,10 +1563,114 @@ SDL_Texture * creerTexte(SDL_Renderer * renderer, char * Fontpath, int taille, c
   return texture;
 }
 
+void afficher_menu_demarrage(SDL_Renderer * renderer, menu_t * menu){
+  int maxw=0;
+  int maxh=0;
+  int objw=0;
+  int objh=0;
+  int mult=0;
+
+  SDL_SetRenderDrawColor(renderer, 0,0,0,255);
+  SDL_RenderFillRect(renderer,NULL);
+
+  SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
+
+  SDL_RenderCopy(renderer, menu->fond, &(menu->spriteActuel), NULL);
+
+  for(int i=0; i<menu->nbTextes; i++){
+    objw=menu->tabTextes[i].emplacement.w;
+    objh=menu->tabTextes[i].emplacement.h;
+    mult = (maxw + maxh)/(3*(objw + objh));
+    objw *= mult;
+    objh *= mult;
+    menu->tabTextes[i].emplacement.x = maxw/3 - objw/2;
+    if(menu->tabTextes[i].emplacement.x < 0)
+      menu->tabTextes[i].emplacement.x = 0;
+    menu->tabTextes[i].emplacement.y = menu->tabTextes[i].id * (maxh/(menu->nbBoutons + menu->nbTextes *3));
+    if(menu->tabTextes[i].emplacement.y < 0)
+      menu->tabTextes[i].emplacement.y = 0;
+    menu->tabTextes[i].emplacement.w = objw < maxw ? objw : maxw;
+    menu->tabTextes[i].emplacement.h = objh < maxh ? objh : maxh;
+    SDL_RenderCopy(renderer, menu->tabTextes[i].texture, NULL, &(menu->tabTextes[i].emplacement));
+  }
+
+  for(int j=0; j<menu->nbBoutons; j++){
+    objw=menu->tabBoutons[j].emplacement.w;
+    objh=menu->tabBoutons[j].emplacement.h;
+    mult = (maxw + maxh)/(4*(objw + objh));
+    objw *= mult;
+    objh *= mult;
+    menu->tabBoutons[j].emplacement.x = maxw/2 - objw/2;
+    if(menu->tabBoutons[j].emplacement.x < 0)
+      menu->tabBoutons[j].emplacement.x = 0;
+    menu->tabBoutons[j].emplacement.y = menu->tabBoutons[j].id * (maxh/(menu->nbBoutons + menu->nbTextes*2));
+    if(menu->tabBoutons[j].emplacement.y < 0)
+      menu->tabBoutons[j].emplacement.y = 0;
+    menu->tabBoutons[j].emplacement.w = objw < maxw ? objw : maxw;
+    menu->tabBoutons[j].emplacement.h = objh < maxh ? objh : maxh;
+
+    SDL_RenderCopy(renderer, menu->tabBoutons[j].texture[menu->tabBoutons[j].etat], NULL, &(menu->tabBoutons[j].emplacement));
+  }
+
+  SDL_RenderPresent(renderer);
+}
+
+void TouchesMenu(int direction, SDL_Point souris, boolean_t bougeSouris, menu_t * menu){ //direction vaut -1 pour haut, 1 pour bas et 0 pour immobile, si immobile, la souris est prise en compte
+  if(direction == 1){
+    menu->idBoutonChoisi +=1;
+    if(menu->idBoutonChoisi >= menu->nbTextes + menu->nbBoutons +1)
+      menu->idBoutonChoisi = menu->nbTextes + 1;
+  }
+  else if(direction == -1){
+    menu->idBoutonChoisi -=1;
+    if(menu->idBoutonChoisi <= menu->nbTextes)
+      menu->idBoutonChoisi = menu->nbTextes + menu->nbBoutons;
+  }
+  else{
+    if(bougeSouris){
+      for(int i=0; i<menu->nbBoutons; i++){
+        if(SDL_PointInRect(&souris, &(menu->tabBoutons[i].emplacement))){
+          menu->idBoutonChoisi = menu->tabBoutons[i].id;
+        }
+      }
+    }
+  }
+}
+
+int evoMenu(menu_t * menu, boolean_t clique){
+  //Boutons :
+  int idBoutonValide=0;
+  for(int i=0; i<menu->nbBoutons; i++){
+    menu->tabBoutons[i].etat=RELAXED;
+    if(menu->idBoutonChoisi>0){
+      if(menu->idBoutonChoisi == menu->tabBoutons[i].id){
+        if(clique){
+          menu->tabBoutons[i].etat=PRESSED;
+          idBoutonValide=menu->idBoutonChoisi;
+        }
+        else{
+          menu->tabBoutons[i].etat=HIGHLIGHTED;
+        }
+      }
+    }
+  }
+  //Background :
+  if(menu->etatanim <= 0){
+    menu->spriteActuel.x += menu->spriteActuel.w;
+    if(menu->spriteActuel.x >= menu->spriteActuel.w * menu->nbSprites)
+      menu->spriteActuel.x=0;
+    menu->etatanim = menu->animDelay;
+  }
+  else
+    menu->etatanim --;
+  return idBoutonValide;
+}
+
 void afficher_menu(SDL_Renderer * renderer){
   SDL_Texture * diskosieni=NULL;
   SDL_Texture * texte=NULL;
   SDL_Rect Rect_dest;
+
   int maxw;
   int maxh;
   int textew;

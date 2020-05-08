@@ -110,7 +110,11 @@
 #define FREQCLIGN 2
 #define INVUDELAY 6
 
-#define FONTSIZE 25
+#define FONTSIZE 30
+
+#define NBETATSBOUTONS 4
+
+#define ANIMDELAYMENU 20
 
 #define PULSARWAV "audio/Pulsar.wav"
 #define BEGINWAV "audio/Begin.wav"
@@ -372,7 +376,8 @@ struct menu_s;
 typedef enum boutonetat_e{
   RELAXED,
   HIGHLIGHTED,
-  PRESSED
+  PRESSED,
+  UNAVAILABLE
 } boutonetat_t;
 
 
@@ -409,7 +414,13 @@ typedef struct menu_s{
   char * etiquette;
   menu_bouton_t * tabBoutons;
   int nbBoutons;
+  int idBoutonChoisi;
+  int idBoutonValide;
   SDL_Texture * fond;
+  int nbSprites;
+  SDL_Rect spriteActuel;
+  int animDelay;
+  int etatanim;
   menu_texte_t * tabTextes;
   int nbTextes;
 } menu_t;

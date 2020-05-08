@@ -56,14 +56,15 @@ void initialiser_typeentites(SDL_Renderer * renderer);
 int chargerSauvegardeMenu(SDL_Renderer * renderer, int numSauv, personnage_t ** perso, salle_t ** salle);
 int sauvegarderMenu(int numSauv, personnage_t * perso, salle_t * salle);
 boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen);
-void afficher_menu(SDL_Renderer * renderer);
 int afficherMessageBox(SDL_Window * fenetre, SDL_MessageBoxButtonData * buttons, int nbButtons, char * titre, char * message, int fullscreen);
 menu_t * creerMenuDemarrage(SDL_Renderer * renderer);
 menu_t * creerMenuInGame(SDL_Renderer * renderer);
 menu_t * creerMenuConfirmation(SDL_Renderer * renderer);
 void detruireMenu(menu_t ** menu);
 boolean_t menuConfirmation(SDL_Renderer * renderer);
-void afficherMenu(SDL_Renderer * renderer, menu_t * menu);
+void afficher_menu_demarrage(SDL_Renderer * renderer, menu_t * menu);
+void TouchesMenu(int direction, SDL_Point souris, boolean_t bougeSouris, menu_t * menu);
+int evoMenu(menu_t * menu, boolean_t clique);
 void afficherVieJauge(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * textureSalle);
 void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * coeurImage, SDL_Texture * textureSalle);
 void afficherInventaire(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * textureSalle);
@@ -77,6 +78,9 @@ void lancerMusiqueInfini(Mix_Music * musique, int volume);
 void lancerMusiqueNBFois(Mix_Music * musique, int volume , int nbFois);
 void togglePauseMusique(void);
 void ExploitationBinaireSons(unsigned int nbBinaire);
+void detruireTexturesMenu(menu_t * menu);
+void creerTexturesMenuDemarrage(SDL_Renderer * renderer, menu_t * menu);
+void creerTexturesMenuConfirmation(SDL_Renderer * renderer, menu_t * menu);
 
 //Ancienne version de l'audio sans SDL_Mixer
 /*void Audiocallback(void *userdata, Uint8 *stream, int len);

@@ -33,15 +33,21 @@ int main(int argc, char *argv[]){
   SDL_Event event;
   Uint32 frameStart;
   int frameTime;
-  int mousex;
-  int mousey;
+  SDL_Point souris;
+  souris.x=0;
+  souris.y=0;
+  int direction=0;
+  boolean_t clique=FALSE;
+  boolean_t quitter=FALSE;
+  boolean_t bougeSouris=FALSE;
   Sint16 x_move;
   Sint16 y_move;
   boolean_t fin=FALSE;
   boolean_t start=FALSE;
+
   Mix_Music * musique = NULL;
+  menu_t * menu=NULL;
   //SDL_Texture * tileset=NULL;
-  SDL_Texture * menu=NULL;
   int messageRes;
   SDL_MessageBoxButtonData * buttons = NULL;
 
@@ -69,77 +75,49 @@ int main(int argc, char *argv[]){
 
   //tileset=initialiser_texture(TILESETPATH, renderer);
   //menu=initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
-
+  menu = creerMenuDemarrage(renderer);
   musique = chargerMusique(BEGINWAV);
   lancerMusiqueInfini(musique, VOLUMEAUDIO);
-
+  SDL_GetMouseState(&(souris.x), &(souris.y));
   while(!fin){
 
     frameStart = SDL_GetTicks();
+    direction=0;
+    clique=FALSE;
+    quitter=FALSE;
+    bougeSouris = FALSE;
     while(SDL_PollEvent(&event)){
       switch(event.type){
         case SDL_QUIT: //Appui sur la croix quitte le programme
-          //Avec message box :
-          buttons = malloc(2*sizeof(SDL_MessageBoxButtonData));
-          buttons[0].flags = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
-          buttons[0].buttonid = 0;
-          buttons[0].text = "Non";
-          buttons[1].flags = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
-          buttons[1].buttonid = 1;
-          buttons[1].text = "Oui";
-          messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?", fullscreen);
-          if(messageRes == 1)
-            fin=TRUE;
-          free(buttons);
-          buttons=NULL;
-          //Avec menu :
-          /*
-          fin=menuConfirmation(renderer);
-          */
+          quitter=TRUE;
+          break;
+        case SDL_WINDOWEVENT:
+          detruireTexturesMenu(menu);
+          creerTexturesMenuDemarrage(renderer, menu);
           break;
         case SDL_KEYUP:
           switch(event.key.keysym.sym){
             case SDLK_ESCAPE://Appui sur Echap quitte le programme
-              //Avec message box :
-              buttons = malloc(2*sizeof(SDL_MessageBoxButtonData));
-              buttons[0].flags = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
-              buttons[0].buttonid = 0;
-              buttons[0].text = "Non";
-              buttons[1].flags = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
-              buttons[1].buttonid = 1;
-              buttons[1].text = "Oui";
-              messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?", fullscreen);
-              if(messageRes == 1)
-                fin=TRUE;
-              free(buttons);
-              buttons=NULL;
-              //Avec menu :
-              /*
-              fin=menuConfirmation(renderer);
-              */
-              break;
-            case SDLK_LEFT:
-            case SDLK_q:
-              break;
-            case SDLK_RIGHT:
-            case SDLK_d:
+              quitter=TRUE;
               break;
             case SDLK_UP:
             case SDLK_z:
-            case SDLK_SPACE:
+            case SDLK_LEFT:
+            case SDLK_q:
+              direction=-1;
               break;
+            case SDLK_RIGHT:
+            case SDLK_d:
             case SDLK_DOWN:
             case SDLK_s:
-              break;
-            case SDLK_a:
-              break;
-            case SDLK_b:
+              direction=1;
               break;
             case SDLK_p:
               togglePauseMusique();
               break;
             case SDLK_RETURN:
-              start=TRUE;
+              clique=TRUE;
+              //start=TRUE;
               break;
           }
           break;
@@ -163,11 +141,11 @@ int main(int argc, char *argv[]){
           }
           break;
         case SDL_MOUSEMOTION :
-          mousex=event.motion.x;
-          mousey=event.motion.y;
+          bougeSouris = TRUE;
           break;
         case SDL_MOUSEBUTTONUP:
-          start=TRUE;
+          clique=TRUE;
+          //start=TRUE;
           break;
         case SDL_JOYBUTTONDOWN :
         switch(event.jbutton.button){
@@ -183,21 +161,12 @@ int main(int argc, char *argv[]){
           switch(event.jbutton.button){
             case 0 : //bouton A manette XBOX
             case 7 : //bouton Start manette XBOX
-              start=TRUE;
+              clique=TRUE;
+              //start=TRUE;
               break;
             }
           break;
         case SDL_JOYAXISMOTION :
-          switch(event.jaxis.axis){
-            case 0 :
-              if(event.jaxis.value>ZONEMORTE){
-              }
-              else if(event.jaxis.value<ZONEMORTE*-1){
-              }
-              else{
-              }
-              break;
-          }
           break;
         /*case SDL_JOYBALLMOTION :
           break;*/
@@ -206,12 +175,12 @@ int main(int argc, char *argv[]){
             case SDL_HAT_CENTERED:
               break;
             case SDL_HAT_LEFT:
+            case SDL_HAT_UP:
+              direction=-1;
               break;
             case SDL_HAT_RIGHT:
-              break;
-            case SDL_HAT_UP:
-              break;
             case SDL_HAT_DOWN:
+              direction=1;
               break;
           }
       }
@@ -221,20 +190,46 @@ int main(int argc, char *argv[]){
       y_move = SDL_JoystickGetAxis(pJoystick, 1);
     }
 
+    if(menu->idBoutonValide==2)
+      start = TRUE;
+    else if(menu->idBoutonValide==4)
+      quitter = TRUE;
+
     if(start){
       start=FALSE;
+      SDL_Delay(30);
       Mix_HaltMusic();
       if (jeu(fenetre, &renderer, mode, pJoystick, fullscreen)){
         gameover(fenetre, renderer, mode, pJoystick, fullscreen);
         lancerMusiqueInfini(musique, VOLUMEAUDIO);
+        bougeSouris=TRUE;
       }
       else{
         fin = TRUE;
       }
-
     }
 
-    afficher_menu(renderer);
+    if(quitter){
+      buttons = malloc(2*sizeof(SDL_MessageBoxButtonData));
+      buttons[0].flags = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
+      buttons[0].buttonid = 0;
+      buttons[0].text = "Non";
+      buttons[1].flags = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
+      buttons[1].buttonid = 1;
+      buttons[1].text = "Oui";
+      messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?", fullscreen);
+      if(messageRes == 1)
+        fin=TRUE;
+      free(buttons);
+      buttons=NULL;
+    }
+
+    SDL_GetMouseState(&(souris.x), &(souris.y));
+
+    TouchesMenu(direction, souris, bougeSouris, menu);
+
+    menu->idBoutonValide=evoMenu(menu, clique);
+    afficher_menu_demarrage(renderer, menu);
 
     frameTime = SDL_GetTicks() - frameStart;
     if(frameTime < FRAMEDELAY){
@@ -248,6 +243,7 @@ int main(int argc, char *argv[]){
   //SDL_DestroyTexture(menu);
   //SDL_DestroyTexture(tileset);
   Mix_HaltMusic();
+  detruireMenu(&menu);
   if(musique != NULL)
     Mix_FreeMusic(musique);
   quitter_SDL(&fenetre, &renderer);

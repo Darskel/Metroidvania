@@ -30,7 +30,7 @@
     return SDL_IntersectRect(&rect1,&rect2);
 }*/
 
-static int pow(int a, int b){
+static int puissance(int a, int b){
     int som = 1;
 
     for(int i = 0; i < b; i++)
@@ -51,8 +51,8 @@ static void recupElem(monstre_t* entite, personnage_t* perso){
             perso->inventaire[i] = 1;
             perso->newItem=TRUE;
             entite->pv = 0;
-            if(!(perso->sounds & pow(2,SOUND_ITEM)))
-                perso->sounds += pow(2,SOUND_ITEM);
+            if(!(perso->sounds & puissance(2,SOUND_ITEM)))
+                perso->sounds += puissance(2,SOUND_ITEM);
             return;
         }
     }
@@ -560,14 +560,14 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
                 p->newEtat = TRUE;
                 p->nbFrameAtk = 0;
 
-                if(!(p->sounds & pow(2,SOUND_ARC)))
-                    p->sounds += pow(2,SOUND_ARC);
+                if(!(p->sounds & puissance(2,SOUND_ARC)))
+                    p->sounds += puissance(2,SOUND_ARC);
             }else{
                 (p->nbFrameAtk)++;
             }
         }else{
-            if(p->sounds & pow(2,SOUND_ARC))
-                p->sounds -= pow(2,SOUND_ARC);
+            if(p->sounds & puissance(2,SOUND_ARC))
+                p->sounds -= puissance(2,SOUND_ARC);
 
             if(tryAtk && p->etat <= RUNNING){
                 p->etat = ATTACKING;
@@ -798,8 +798,8 @@ void compCoeur(monstre_t* e, personnage_t* p, salle_t* s){
     if(hitP(e,p)){
         p->pv += e->type->degat;
         e->pv = 0;
-        if(!(p->sounds & pow(2,SOUND_ITEM)))
-            p->sounds += pow(2,SOUND_ITEM);
+        if(!(p->sounds & puissance(2,SOUND_ITEM)))
+            p->sounds += puissance(2,SOUND_ITEM);
     }else{
         if(e->type->vit_dep == 1){
             e->delta.y += e->type->vit_dep;
@@ -833,8 +833,8 @@ void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle){
                 entite->etat = IDLE;
             entite->pv = 0;
             entite->newEtat = TRUE;
-            if(!(perso->sounds & pow(2,SOUND_TOUCHE)))
-                perso->sounds += pow(2,SOUND_TOUCHE);
+            if(!(perso->sounds & puissance(2,SOUND_TOUCHE)))
+                perso->sounds += puissance(2,SOUND_TOUCHE);
         }
         suivant(salle->listeEntite);
     }
@@ -875,8 +875,8 @@ void compPortes(monstre_t* e, personnage_t* p, salle_t* s){
             //changement d'état
             e->pv = 2;
             e->etat = RUNNING;
-            if(!(p->sounds & pow(2,SOUND_DOOR)))
-                p->sounds += pow(2,SOUND_DOOR);
+            if(!(p->sounds & puissance(2,SOUND_DOOR)))
+                p->sounds += puissance(2,SOUND_DOOR);
         }else{
             while(aie){
                 p->delta.x += aie;
@@ -911,8 +911,8 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
         perso->etat = IDLE;
         entite->direction = dir > 0 ? 0 : 1;
         perso->direction = entite->direction;
-        if(!(perso->sounds & pow(2,SOUND_TOUCHE)))
-            perso->sounds += pow(2,SOUND_TOUCHE);
+        if(!(perso->sounds & puissance(2,SOUND_TOUCHE)))
+            perso->sounds += puissance(2,SOUND_TOUCHE);
     }else{
         entite->ut--;
         if(entite->ut <= 0){
@@ -947,8 +947,8 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
         perso->etat = IDLE;
         entite->direction = dir > 0 ? 0 : 1;
         perso->direction = entite->direction;
-        if(!(perso->sounds & pow(2,SOUND_TOUCHE)))
-            perso->sounds += pow(2,SOUND_TOUCHE);
+        if(!(perso->sounds & puissance(2,SOUND_TOUCHE)))
+            perso->sounds += puissance(2,SOUND_TOUCHE);
     }
 
     if(entite->cdAtt > 0)
@@ -959,8 +959,8 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
             entite->ut = 10;
             entite->etat = ATTACKING;
             entite->newEtat = TRUE;
-            if(!(perso->sounds & pow(2,SOUND_SERPENT)))
-                perso->sounds += pow(2,SOUND_SERPENT);
+            if(!(perso->sounds & puissance(2,SOUND_SERPENT)))
+                perso->sounds += puissance(2,SOUND_SERPENT);
         }else{
             if(!(--(entite->ut))){
                 monstre_t* f = malloc(sizeof(monstre_t));
@@ -1045,8 +1045,8 @@ void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle){
         perso->hit = TRUE;
         entite->newEtat = TRUE;
         perso->direction = dir > 0 ? 0 : 1;
-        if(!(perso->sounds & pow(2,SOUND_TOUCHE)))
-            perso->sounds += pow(2,SOUND_TOUCHE);
+        if(!(perso->sounds & puissance(2,SOUND_TOUCHE)))
+            perso->sounds += puissance(2,SOUND_TOUCHE);
     }
 
     if(entite->pos.x * TAILLEBLOC + entite->delta.x > perso->pos.x * TAILLEBLOC + perso->delta.x)
@@ -1063,8 +1063,8 @@ void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle){
                 entite->etat = ATTACKING;
                 entite->newEtat = TRUE;
                 entite->ut = 10;
-                if(!(perso->sounds & pow(2,SOUND_SINGE)))
-                    perso->sounds += pow(2,SOUND_SINGE);
+                if(!(perso->sounds & puissance(2,SOUND_SINGE)))
+                    perso->sounds += puissance(2,SOUND_SINGE);
             }
             break;
         case JUMPING:
@@ -1114,8 +1114,8 @@ void compVenin(monstre_t* entite, personnage_t* perso, salle_t* salle){
         perso->etat = IDLE;
         entite->pv = 0;
         perso->direction = dir > 0 ? 0 : 1;
-        if(!(perso->sounds & pow(2,SOUND_TOUCHE)))
-            perso->sounds += pow(2,SOUND_TOUCHE);
+        if(!(perso->sounds & puissance(2,SOUND_TOUCHE)))
+            perso->sounds += puissance(2,SOUND_TOUCHE);
     }else
         if(dep(entite,salle,FALSE))
             entite->pv = 0;
@@ -1136,8 +1136,8 @@ void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
         entite->ut = 0;
         entite->newEtat = TRUE;
         perso->direction = dir > 0 ? 0 : 1;
-        if(!(perso->sounds & pow(2,SOUND_TOUCHE)))
-            perso->sounds += pow(2,SOUND_TOUCHE);
+        if(!(perso->sounds & puissance(2,SOUND_TOUCHE)))
+            perso->sounds += puissance(2,SOUND_TOUCHE);
     }
 
     switch(entite->etat){
@@ -1193,8 +1193,8 @@ void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
                 entite->newEtat = TRUE;
                 entite->ut = 20;
                 entite->cdAtt = entite->type->vit_att;
-                if(!(perso->sounds & pow(2,SOUND_VIFPLUME)))
-                    perso->sounds += pow(2,SOUND_VIFPLUME);
+                if(!(perso->sounds & puissance(2,SOUND_VIFPLUME)))
+                    perso->sounds += puissance(2,SOUND_VIFPLUME);
             }
             break;
         case ATTACKING:
@@ -1240,7 +1240,7 @@ static void creerCoeur(monstre_t* m, salle_t* s){
 void evolution(personnage_t* p, salle_t* s){
     int r;
 
-    p->sounds = 0 + (p->sounds & pow(2,SOUND_ARC));
+    p->sounds = 0 + (p->sounds & puissance(2,SOUND_ARC));
 
     if(p->kb){
         if(p->direction){

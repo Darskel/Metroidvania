@@ -1274,7 +1274,7 @@ void evolution(personnage_t* p, salle_t* s){
             if(!strcmp(e.type->nom,"serpent rose")){
                 monstre_t tmp;
                 valeurElm(s->listeEntite,&tmp);
-                if(strcmp(e.type->nom,"serpent rose")){
+                if(strcmp(tmp.type->nom,"serpent rose")){
                     suivant(s->listeEntite);
                     (s->listeEntite->indTmp)++;
                 }

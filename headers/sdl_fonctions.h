@@ -30,7 +30,7 @@
  * \date 06/04/2020
 */
 
-#define NBSOUNDS 8
+#define NBSOUNDS 9
 Mix_Chunk * EffetsSonores[NBSOUNDS];
 
 void initialiserChunks(void);
@@ -56,20 +56,18 @@ void initialiser_typeentites(SDL_Renderer * renderer);
 int chargerSauvegardeMenu(SDL_Renderer * renderer, int numSauv, personnage_t ** perso, salle_t ** salle);
 int sauvegarderMenu(int numSauv, personnage_t * perso, salle_t * salle);
 boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen);
-int afficherMessageBox(SDL_Window * fenetre, SDL_MessageBoxButtonData * buttons, int nbButtons, char * titre, char * message, int fullscreen);
 menu_t * creerMenuDemarrage(SDL_Renderer * renderer);
 menu_t * creerMenuInGame(SDL_Renderer * renderer);
-menu_t * creerMenuConfirmation(SDL_Renderer * renderer);
+menu_t * creerMenuConfirmation(SDL_Renderer * renderer, char * question);
 void detruireMenu(menu_t ** menu);
-boolean_t menuConfirmation(SDL_Renderer * renderer);
-void afficher_menu_demarrage(SDL_Renderer * renderer, menu_t * menu);
+boolean_t menuConfirmation(SDL_Renderer * renderer, char * question, int tailleTexte, int tailleBoutons);
+void afficher_menu(SDL_Renderer * renderer, menu_t * menu, int tailleTexte, int tailleBoutons, boolean_t sens);
 void TouchesMenu(int direction, SDL_Point souris, boolean_t bougeSouris, menu_t * menu);
-int evoMenu(menu_t * menu, boolean_t clique);
+int evoMenu(menu_t * menu, int clique);
 void afficherVieJauge(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * textureSalle);
 void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * coeurImage, SDL_Texture * textureSalle);
 void afficherInventaire(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * textureSalle);
 void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen);
-void afficher_menu_image(SDL_Renderer * renderer, SDL_Texture * fond);
 TTF_Font * creerPolice(char * path, int taille);
 void detruirePolice(TTF_Font ** font);
 SDL_Texture * creerTexte(SDL_Renderer * renderer, char * Fontpath, int taille, char* texte, int r, int g, int b);

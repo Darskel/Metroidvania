@@ -92,6 +92,7 @@ void initialiserChunks(void){
   EffetsSonores[SOUND_MURGLACE]=Mix_LoadWAV("audio/Murglace.wav");
   EffetsSonores[SOUND_DOOR]=Mix_LoadWAV("audio/Door.wav");
   EffetsSonores[SOUND_ITEM]=Mix_LoadWAV("audio/Item.wav");
+  EffetsSonores[SOUND_MENU]=Mix_LoadWAV("audio/Menu.wav");
 }
 
 void detruireChunks(void){
@@ -798,7 +799,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
   Uint32 frameStart;
   int frameTime;
   SDL_Point souris;
-  int messageRes;
+  boolean_t messageRes;
   Sint16 x_move;
   Sint16 y_move;
   int inventaireAffiche=0;
@@ -818,6 +819,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
   boolean_t tryJump = FALSE;
   boolean_t tryAtk = FALSE;
   boolean_t fin=FALSE;
+  boolean_t quitter=FALSE;
   boolean_t mort=FALSE;
   boolean_t salleChangee=FALSE;
   boolean_t kon = FALSE;
@@ -825,8 +827,6 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
   int indKon = 0;
   for(int i = 0; i < TAILLEKONAMI; i++)
     konami[i] = '\0';
-
-  SDL_MessageBoxButtonData * buttons = NULL;
 
   SDL_SetRenderDrawColor(*renderer,0,0,0,255);
   //SDL_RenderClear(*renderer);
@@ -840,29 +840,15 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
 
   musique = chargerMusique(LONGAWAYWAV);
   lancerMusiqueInfini(musique, VOLUMEAUDIO);
+  quitter=FALSE;
+  messageRes=FALSE;
 
   while(fin==FALSE){
     frameStart = SDL_GetTicks();
     while(SDL_PollEvent(&event)){
       switch(event.type){
         case SDL_QUIT: //Appui sur la croix quitte le programme (avec fenetre de dialogue pour confirmation)
-          //Avec message box :
-          buttons = malloc(2*sizeof(SDL_MessageBoxButtonData));
-          buttons[0].flags = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
-          buttons[0].buttonid = 0;
-          buttons[0].text = "Non";
-          buttons[1].flags = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
-          buttons[1].buttonid = 1;
-          buttons[1].text = "Oui";
-          messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?", fullscreen);
-          if(messageRes == 1)
-            fin=TRUE;
-          free(buttons);
-          buttons=NULL;
-          //Avec menu :
-          /*
-          fin=menuConfirmation(*renderer);
-          */
+          quitter=TRUE;
           break;
         case SDL_WINDOWEVENT:
           //windowtouched=TRUE;
@@ -883,23 +869,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
         case SDL_KEYUP:
           switch(event.key.keysym.sym){
             case SDLK_ESCAPE://Appui sur Echap quitte le programme
-              //Avec message box :
-              buttons = malloc(2*sizeof(SDL_MessageBoxButtonData));
-              buttons[0].flags = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
-              buttons[0].buttonid = 0;
-              buttons[0].text = "Non";
-              buttons[1].flags = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
-              buttons[1].buttonid = 1;
-              buttons[1].text = "Oui";
-              messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?", fullscreen);
-              if(messageRes == 1)
-                fin=TRUE;
-              free(buttons);
-              buttons=NULL;
-              //Avec menu :
-              /*
-              fin=menuConfirmation(*renderer);
-              */
+              quitter=TRUE;
               break;
             case SDLK_0:
             case SDLK_KP_0:
@@ -1145,6 +1115,14 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
         salleChangee=FALSE;
       }
 
+      if(quitter){
+        messageRes=menuConfirmation(*renderer, "Voulez-vous quitter la partie ?", 2,5);
+        if(messageRes)
+          fin=TRUE;
+        else
+          quitter=FALSE;
+      }
+
 
       SDL_SetRenderDrawColor(*renderer,0,0,0,255);
       //SDL_RenderClear(*renderer);
@@ -1168,44 +1146,6 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
     if(musique != NULL)
       Mix_FreeMusic(musique);
     return mort;
-}
-
-int afficherMessageBox(SDL_Window * fenetre, SDL_MessageBoxButtonData * buttons, int nbButtons, char * titre, char * message, int fullscreen){
-  int buttonid;
-
-  const SDL_MessageBoxColorScheme colorScheme = {
-      { /* .colors (.r, .g, .b) */
-          /* [SDL_MESSAGEBOX_COLOR_BACKGROUND] */
-          { 200,   200,   200 },
-          /* [SDL_MESSAGEBOX_COLOR_TEXT] */
-          {   0, 0,   0 },
-          /* [SDL_MESSAGEBOX_COLOR_BUTTON_BORDER] */
-          { 50, 50, 50 },
-          /* [SDL_MESSAGEBOX_COLOR_BUTTON_BACKGROUND] */
-          {   255, 255, 255 },
-          /* [SDL_MESSAGEBOX_COLOR_BUTTON_SELECTED] */
-          { 150, 150, 150 }
-      }
-  };
-  const SDL_MessageBoxData messageboxdata = {
-      SDL_MESSAGEBOX_INFORMATION, /* .flags */
-      fenetre, /* .window */
-      titre, /* .title */
-      message, /* .message */
-      nbButtons, /* .numbuttons */
-      buttons, /* .buttons */
-      &colorScheme /* .colorScheme */
-  };
-  if(fullscreen)
-    SDL_SetWindowFullscreen(fenetre, 0);
-  if (SDL_ShowMessageBox(&messageboxdata, &buttonid) < 0) {
-      printf("error displaying message box\n");
-      return -2;
-  }
-  if(fullscreen)
-    SDL_SetWindowFullscreen(fenetre, SDL_WINDOW_FULLSCREEN);
-  return buttonid;
-
 }
 
 menu_t * creerMenuDemarrage(SDL_Renderer * renderer){
@@ -1250,6 +1190,10 @@ menu_t * creerMenuDemarrage(SDL_Renderer * renderer){
   SDL_QueryTexture(menu->tabTextes[0].texture, NULL, NULL, &(menu->tabTextes[0].emplacement.w), &(menu->tabTextes[0].emplacement.h));
   menu->tabTextes[0].emplacement.x=0;
   menu->tabTextes[0].emplacement.y=0;
+  if(menu->tabTextes[0].emplacement.w>fondw)
+    menu->tabTextes[0].emplacement.w=fondw;
+  if(menu->tabTextes[0].emplacement.h>fondh)
+    menu->tabTextes[0].emplacement.h=fondh;
 
   //Boutons :
   menu->tabBoutons[0].id=2;
@@ -1259,6 +1203,10 @@ menu_t * creerMenuDemarrage(SDL_Renderer * renderer){
   SDL_QueryTexture(menu->tabBoutons[0].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[0].emplacement.w), &(menu->tabBoutons[0].emplacement.h));
   menu->tabBoutons[0].emplacement.x=0;
   menu->tabBoutons[0].emplacement.y=0;
+  if(menu->tabBoutons[0].emplacement.w>fondw)
+    menu->tabBoutons[0].emplacement.w=fondw;
+  if(menu->tabBoutons[0].emplacement.h>fondh)
+    menu->tabBoutons[0].emplacement.h=fondh;
 
   menu->tabBoutons[1].id=3;
 
@@ -1267,14 +1215,20 @@ menu_t * creerMenuDemarrage(SDL_Renderer * renderer){
   SDL_QueryTexture(menu->tabBoutons[1].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[1].emplacement.w), &(menu->tabBoutons[1].emplacement.h));
   menu->tabBoutons[1].emplacement.x=0;
   menu->tabBoutons[1].emplacement.y=0;
+  if(menu->tabBoutons[1].emplacement.w>fondw)
+    menu->tabBoutons[1].emplacement.w=fondw;
+  if(menu->tabBoutons[1].emplacement.h>fondh)
+    menu->tabBoutons[1].emplacement.h=fondh;
 
   menu->tabBoutons[2].id=4;
 
   menu->tabBoutons[2].parent=menu;
   menu->tabBoutons[2].etat=RELAXED;
   SDL_QueryTexture(menu->tabBoutons[2].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[2].emplacement.w), &(menu->tabBoutons[2].emplacement.h));
-  menu->tabBoutons[2].emplacement.x=0;
-  menu->tabBoutons[2].emplacement.y=0;
+  if(menu->tabBoutons[2].emplacement.w>fondw)
+    menu->tabBoutons[2].emplacement.w=fondw;
+  if(menu->tabBoutons[2].emplacement.h>fondh)
+    menu->tabBoutons[2].emplacement.h=fondh;
 
   return menu;
 }
@@ -1285,7 +1239,7 @@ menu_t * creerMenuInGame(SDL_Renderer * renderer){
   return menu;
 }
 
-menu_t * creerMenuConfirmation(SDL_Renderer * renderer){
+menu_t * creerMenuConfirmation(SDL_Renderer * renderer, char * question){
   menu_t * menu = malloc(sizeof(menu_t));
   int nbBoutons = 2;
   int nbTextes = 1;
@@ -1293,7 +1247,7 @@ menu_t * creerMenuConfirmation(SDL_Renderer * renderer){
 
   //Général :
   menu->nbBoutons=nbBoutons;
-  menu->idBoutonChoisi=2;
+  menu->idBoutonChoisi=3;
   menu->idBoutonValide=0;
   menu->nbTextes=nbTextes;
   menu->etiquette = "Menu Confirmation";
@@ -1301,7 +1255,7 @@ menu_t * creerMenuConfirmation(SDL_Renderer * renderer){
   menu->tabBoutons = malloc(nbBoutons * sizeof(menu_bouton_t));
 
   //Etiquette :
-  menu->tabTextes[0].etiquette="Voulez-vous quitter ?";
+  menu->tabTextes[0].etiquette=question;
   menu->tabBoutons[0].etiquette="Oui";
   menu->tabBoutons[1].etiquette="Non";
 
@@ -1326,23 +1280,33 @@ menu_t * creerMenuConfirmation(SDL_Renderer * renderer){
   SDL_QueryTexture(menu->tabTextes[0].texture, NULL, NULL, &(menu->tabTextes[0].emplacement.w), &(menu->tabTextes[0].emplacement.h));
   menu->tabTextes[0].emplacement.x=0;
   menu->tabTextes[0].emplacement.y=0;
+  if(menu->tabTextes[0].emplacement.w>fondw)
+    menu->tabTextes[0].emplacement.w=fondw;
+  if(menu->tabTextes[0].emplacement.h>fondh)
+    menu->tabTextes[0].emplacement.h=fondh;
 
   //Boutons :
   menu->tabBoutons[0].id=2;
-
   menu->tabBoutons[0].parent=menu;
   menu->tabBoutons[0].etat=RELAXED;
   SDL_QueryTexture(menu->tabBoutons[0].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[0].emplacement.w), &(menu->tabBoutons[0].emplacement.h));
   menu->tabBoutons[0].emplacement.x=0;
   menu->tabBoutons[0].emplacement.y=0;
+  if(menu->tabBoutons[0].emplacement.w>fondw)
+    menu->tabBoutons[0].emplacement.w=fondw;
+  if(menu->tabBoutons[0].emplacement.h>fondh)
+    menu->tabBoutons[0].emplacement.h=fondh;
 
   menu->tabBoutons[1].id=3;
-
   menu->tabBoutons[1].parent=menu;
   menu->tabBoutons[1].etat=RELAXED;
   SDL_QueryTexture(menu->tabBoutons[1].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[1].emplacement.w), &(menu->tabBoutons[1].emplacement.h));
   menu->tabBoutons[1].emplacement.x=0;
   menu->tabBoutons[1].emplacement.y=0;
+  if(menu->tabBoutons[1].emplacement.w>fondw)
+    menu->tabBoutons[1].emplacement.w=fondw;
+  if(menu->tabBoutons[1].emplacement.h>fondh)
+    menu->tabBoutons[1].emplacement.h=fondh;
 
   return menu;
 }
@@ -1410,9 +1374,165 @@ void creerTexturesMenuConfirmation(SDL_Renderer * renderer, menu_t * menu){
 
 }
 
-boolean_t menuConfirmation(SDL_Renderer * renderer){
-  //A FAIRE
-  return FALSE;
+boolean_t menuConfirmation(SDL_Renderer * renderer, char * question, int tailleTexte, int tailleBoutons){
+
+  SDL_Event event;
+  Uint32 frameStart;
+  int frameTime;
+  SDL_Point souris;
+  souris.x=0;
+  souris.y=0;
+  int direction=0;
+  int clique=0;
+  boolean_t bougeSouris=FALSE;
+  Sint16 x_move;
+  Sint16 y_move;
+  boolean_t fin=FALSE;
+  boolean_t quitter=FALSE;
+
+  menu_t * menu=NULL;
+
+  menu = creerMenuConfirmation(renderer, question);
+  SDL_GetMouseState(&(souris.x), &(souris.y));
+  while(!fin){
+
+    frameStart = SDL_GetTicks();
+    direction=0;
+    quitter=FALSE;
+    bougeSouris = FALSE;
+    while(SDL_PollEvent(&event)){
+      switch(event.type){
+        case SDL_QUIT: //Appui sur la croix quitte le programme
+          quitter=TRUE;
+          fin=TRUE;
+          break;
+        case SDL_WINDOWEVENT:
+          detruireTexturesMenu(menu);
+          creerTexturesMenuConfirmation(renderer, menu);
+          break;
+        case SDL_KEYUP:
+          switch(event.key.keysym.sym){
+            case SDLK_ESCAPE://Appui sur Echap quitte le programme
+              quitter=FALSE;
+              fin=TRUE;
+              break;
+            case SDLK_UP:
+            case SDLK_z:
+            case SDLK_LEFT:
+            case SDLK_q:
+              direction=-1;
+              break;
+            case SDLK_RIGHT:
+            case SDLK_d:
+            case SDLK_DOWN:
+            case SDLK_s:
+              direction=1;
+              break;
+            case SDLK_p:
+              togglePauseMusique();
+              break;
+            case SDLK_RETURN:
+              clique=2;
+              break;
+          }
+          break;
+        case SDL_KEYDOWN:
+          switch(event.key.keysym.sym){
+            case SDLK_LEFT:
+            case SDLK_q:
+              break;
+            case SDLK_RIGHT:
+            case SDLK_d:
+              break;
+            case SDLK_UP:
+            case SDLK_z:
+            case SDLK_SPACE:
+                break;
+            case SDLK_DOWN:
+            case SDLK_s:
+              break;
+            case SDLK_e:
+              break;
+            case SDLK_RETURN:
+              clique=1;
+              break;
+          }
+          break;
+        case SDL_MOUSEMOTION :
+          bougeSouris = TRUE;
+          break;
+        case SDL_MOUSEBUTTONUP:
+          clique=2;
+          break;
+        case SDL_MOUSEBUTTONDOWN:
+          clique=1;
+          break;
+        case SDL_JOYBUTTONDOWN :
+        switch(event.jbutton.button){
+            case 0 : //bouton A manette XBOX
+            case 7 : //bouton Start manette XBOX
+              clique=1;
+              break;
+          }
+        break;
+        case SDL_JOYBUTTONUP :
+          switch(event.jbutton.button){
+            case 0 : //bouton A manette XBOX
+            case 7 : //bouton Start manette XBOX
+              clique=2;
+              break;
+            }
+          break;
+        case SDL_JOYAXISMOTION :
+          break;
+        /*case SDL_JOYBALLMOTION :
+          break;*/
+        case SDL_JOYHATMOTION :
+          switch(event.jhat.value){
+            case SDL_HAT_CENTERED:
+              break;
+            case SDL_HAT_LEFT:
+            case SDL_HAT_UP:
+              direction=-1;
+              break;
+            case SDL_HAT_RIGHT:
+            case SDL_HAT_DOWN:
+              direction=1;
+              break;
+          }
+      }
+    }
+
+    if(menu->idBoutonValide>menu->nbTextes){
+      Mix_PlayChannel(-1, EffetsSonores[SOUND_MENU], 0);
+      fin=TRUE;
+    }
+
+    if(menu->idBoutonValide==2)
+      quitter = TRUE;
+    else if(menu->idBoutonValide==3)
+      quitter = FALSE;
+
+    SDL_GetMouseState(&(souris.x), &(souris.y));
+
+    TouchesMenu(direction, souris, bougeSouris, menu);
+
+    menu->idBoutonValide=evoMenu(menu, clique);
+
+    if(clique == 2)
+      clique=0;
+
+    afficher_menu(renderer, menu, tailleTexte, tailleBoutons, FALSE);
+
+    frameTime = SDL_GetTicks() - frameStart;
+    if(frameTime < FRAMEDELAY){
+      SDL_Delay(FRAMEDELAY - frameTime);
+    }
+
+  }
+
+  detruireMenu(&menu);
+  return quitter;
 }
 
 
@@ -1563,53 +1683,102 @@ SDL_Texture * creerTexte(SDL_Renderer * renderer, char * Fontpath, int taille, c
   return texture;
 }
 
-void afficher_menu_demarrage(SDL_Renderer * renderer, menu_t * menu){
+void afficher_menu(SDL_Renderer * renderer, menu_t * menu, int tailleTexte, int tailleBoutons, boolean_t sens){ //Si sens vaut TRUE, disposition verticale des boutons, sinon horizontale
   int maxw=0;
   int maxh=0;
-  int objw=0;
-  int objh=0;
+  int fondw=0;
+  int fondh=0;
   int mult=0;
+  float ratioFenetre, ratioMenu;
+  SDL_Rect Rect_dest_fond;
+  SDL_Rect Rect_dest_obj;
 
   SDL_SetRenderDrawColor(renderer, 0,0,0,255);
   SDL_RenderFillRect(renderer,NULL);
 
   SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
+  fondw=menu->spriteActuel.w;
+  fondh=menu->spriteActuel.h;
 
-  SDL_RenderCopy(renderer, menu->fond, &(menu->spriteActuel), NULL);
+  ratioFenetre = (maxw * 1.0) / (maxh * 1.0);
+  ratioMenu = (fondw * 1.0) / (fondh * 1.0);
+
+  if(ratioFenetre<ratioMenu){
+    Rect_dest_fond.w = maxw;
+    Rect_dest_fond.h = Rect_dest_fond.w /ratioMenu;
+  }
+  else{
+    Rect_dest_fond.h = maxh;
+    Rect_dest_fond.w = Rect_dest_fond.h * ratioMenu;
+  }
+
+  Rect_dest_fond.x = (maxw - Rect_dest_fond.w)/2 ;
+  Rect_dest_fond.y = (maxh - Rect_dest_fond.h)/2 ;
+
+
+  SDL_RenderCopy(renderer, menu->fond, &(menu->spriteActuel), &Rect_dest_fond);
+
+  fondw=Rect_dest_fond.w;
+  fondh=Rect_dest_fond.h;
 
   for(int i=0; i<menu->nbTextes; i++){
-    objw=menu->tabTextes[i].emplacement.w;
-    objh=menu->tabTextes[i].emplacement.h;
-    mult = (maxw + maxh)/(3*(objw + objh));
-    objw *= mult;
-    objh *= mult;
-    menu->tabTextes[i].emplacement.x = maxw/3 - objw/2;
-    if(menu->tabTextes[i].emplacement.x < 0)
-      menu->tabTextes[i].emplacement.x = 0;
-    menu->tabTextes[i].emplacement.y = menu->tabTextes[i].id * (maxh/(menu->nbBoutons + menu->nbTextes *3));
-    if(menu->tabTextes[i].emplacement.y < 0)
-      menu->tabTextes[i].emplacement.y = 0;
-    menu->tabTextes[i].emplacement.w = objw < maxw ? objw : maxw;
-    menu->tabTextes[i].emplacement.h = objh < maxh ? objh : maxh;
-    SDL_RenderCopy(renderer, menu->tabTextes[i].texture, NULL, &(menu->tabTextes[i].emplacement));
+    Rect_dest_obj.w=menu->tabTextes[i].emplacement.w;
+    Rect_dest_obj.h=menu->tabTextes[i].emplacement.h;
+    mult = (fondw + fondh)/(tailleTexte *(Rect_dest_obj.w + Rect_dest_obj.h));
+    Rect_dest_obj.w *= mult;
+    Rect_dest_obj.h *= mult;
+    if(Rect_dest_obj.w > fondw)
+      Rect_dest_obj.w = fondw;
+    if(Rect_dest_obj.h > fondh)
+      Rect_dest_obj.h = fondh;
+
+    Rect_dest_obj.x = 2* fondw/6 - Rect_dest_obj.w/2;
+    if(Rect_dest_obj.x < 0)
+      Rect_dest_obj.x = 0;
+    Rect_dest_obj.y = (menu->tabTextes[i].id) * (fondh/(menu->nbBoutons+menu->nbTextes+1) + Rect_dest_obj.h/(menu->nbTextes*2)) - Rect_dest_obj.h/(menu->nbTextes);
+    if(Rect_dest_obj.y < 0)
+      Rect_dest_obj.y = 0;
+    menu->tabTextes[i].emplacement.w = Rect_dest_obj.w;
+    menu->tabTextes[i].emplacement.h = Rect_dest_obj.h;
+    menu->tabTextes[i].emplacement.x = Rect_dest_obj.x;
+    menu->tabTextes[i].emplacement.y = Rect_dest_obj.y;
+    SDL_RenderCopy(renderer, menu->tabTextes[i].texture, NULL, &(Rect_dest_obj));
   }
 
   for(int j=0; j<menu->nbBoutons; j++){
-    objw=menu->tabBoutons[j].emplacement.w;
-    objh=menu->tabBoutons[j].emplacement.h;
-    mult = (maxw + maxh)/(4*(objw + objh));
-    objw *= mult;
-    objh *= mult;
-    menu->tabBoutons[j].emplacement.x = maxw/2 - objw/2;
-    if(menu->tabBoutons[j].emplacement.x < 0)
-      menu->tabBoutons[j].emplacement.x = 0;
-    menu->tabBoutons[j].emplacement.y = menu->tabBoutons[j].id * (maxh/(menu->nbBoutons + menu->nbTextes*2));
-    if(menu->tabBoutons[j].emplacement.y < 0)
-      menu->tabBoutons[j].emplacement.y = 0;
-    menu->tabBoutons[j].emplacement.w = objw < maxw ? objw : maxw;
-    menu->tabBoutons[j].emplacement.h = objh < maxh ? objh : maxh;
-
-    SDL_RenderCopy(renderer, menu->tabBoutons[j].texture[menu->tabBoutons[j].etat], NULL, &(menu->tabBoutons[j].emplacement));
+    Rect_dest_obj.w=menu->tabBoutons[j].emplacement.w;
+    Rect_dest_obj.h=menu->tabBoutons[j].emplacement.h;
+    mult = (fondw + fondh)/(tailleBoutons *(Rect_dest_obj.w + Rect_dest_obj.h));
+    Rect_dest_obj.w *= mult;
+    Rect_dest_obj.h *= mult;
+    if(Rect_dest_obj.w > fondw)
+      Rect_dest_obj.w = fondw;
+    if(Rect_dest_obj.h > fondh)
+      Rect_dest_obj.h = fondh;
+    if(sens){
+      Rect_dest_obj.x = fondw/2 - Rect_dest_obj.w/2;
+      if(Rect_dest_obj.x < 0)
+        Rect_dest_obj.x = 0;
+      Rect_dest_obj.y = (menu->tabBoutons[j].id) * (fondh/(menu->nbBoutons+menu->nbTextes+1)+ Rect_dest_obj.h/(menu->nbBoutons*4)) - Rect_dest_obj.h/(menu->nbBoutons);
+      if(Rect_dest_obj.y < 0)
+        Rect_dest_obj.y = 0;
+    }
+    else{
+      if(menu->nbBoutons%2)
+        Rect_dest_obj.x = j * (fondw/(menu->nbBoutons+1) + menu->tabBoutons[j].emplacement.w/(menu->nbBoutons+1)) + menu->tabBoutons[j].emplacement.w/(menu->nbBoutons+1);
+      else
+        Rect_dest_obj.x = j * (fondw/(menu->nbBoutons) + menu->tabBoutons[j].emplacement.w/(menu->nbBoutons)) + menu->tabBoutons[j].emplacement.w;
+      if(Rect_dest_obj.x < 0)
+        Rect_dest_obj.x = 0;
+      Rect_dest_obj.y = 2* fondh/3 - Rect_dest_obj.h/2;
+      if(Rect_dest_obj.y < 0)
+        Rect_dest_obj.y = 0;
+    }
+    menu->tabBoutons[j].emplacement.w = Rect_dest_obj.w;
+    menu->tabBoutons[j].emplacement.h = Rect_dest_obj.h;
+    menu->tabBoutons[j].emplacement.x = Rect_dest_obj.x;
+    menu->tabBoutons[j].emplacement.y = Rect_dest_obj.y;
+    SDL_RenderCopy(renderer, menu->tabBoutons[j].texture[menu->tabBoutons[j].etat], NULL, &(Rect_dest_obj));
   }
 
   SDL_RenderPresent(renderer);
@@ -1637,15 +1806,17 @@ void TouchesMenu(int direction, SDL_Point souris, boolean_t bougeSouris, menu_t 
   }
 }
 
-int evoMenu(menu_t * menu, boolean_t clique){
+int evoMenu(menu_t * menu, int clique){
   //Boutons :
   int idBoutonValide=0;
   for(int i=0; i<menu->nbBoutons; i++){
     menu->tabBoutons[i].etat=RELAXED;
     if(menu->idBoutonChoisi>0){
       if(menu->idBoutonChoisi == menu->tabBoutons[i].id){
-        if(clique){
+        if(clique==1){
           menu->tabBoutons[i].etat=PRESSED;
+        }
+        else if(clique==2){
           idBoutonValide=menu->idBoutonChoisi;
         }
         else{
@@ -1664,105 +1835,6 @@ int evoMenu(menu_t * menu, boolean_t clique){
   else
     menu->etatanim --;
   return idBoutonValide;
-}
-
-void afficher_menu(SDL_Renderer * renderer){
-  SDL_Texture * diskosieni=NULL;
-  SDL_Texture * texte=NULL;
-  SDL_Rect Rect_dest;
-
-  int maxw;
-  int maxh;
-  int textew;
-  int texteh;
-  int mult;
-  int diskosieniw;
-  int diskosienih;
-
-  SDL_SetRenderDrawColor(renderer, 0,0,0,255);
-  SDL_RenderFillRect(renderer,NULL);
-
-  diskosieni=creerTexte(renderer, "./font/PixelMordred.ttf", FONTSIZE, NOM_JEU, 240, 100, 0);
-  texte=creerTexte(renderer, "./font/BitCasual.ttf", FONTSIZE, "Press Start", 255, 255, 100);
-
-  SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
-  SDL_QueryTexture(texte, NULL, NULL, &textew, &texteh);
-  SDL_QueryTexture(diskosieni, NULL, NULL, &diskosieniw, &diskosienih);
-
-  mult = (maxw + maxh)/(4*(textew + texteh));
-  textew *= mult;
-  texteh *= mult;
-
-  Rect_dest.x = maxw/2 - textew/2;
-  if(Rect_dest.x < 0)
-    Rect_dest.x = 0;
-  Rect_dest.y = 4 * (maxh/5);
-  if(Rect_dest.y < 0)
-    Rect_dest.y = 0;
-  Rect_dest.w = textew < maxw ? textew : maxw;
-  Rect_dest.h = texteh < maxh ? texteh : maxh;
-  SDL_RenderCopy(renderer, texte, NULL, &Rect_dest);
-
-  mult = (maxw + maxh)/(2*(diskosieniw + diskosienih));
-  diskosieniw *= mult;
-  diskosienih *= mult;
-
-  Rect_dest.x = maxw/2 - diskosieniw/2;
-  if(Rect_dest.x < 0)
-    Rect_dest.x = 0;
-  Rect_dest.y = (maxh/5);
-  if(Rect_dest.y < 0)
-    Rect_dest.y = 0;
-  Rect_dest.w = diskosieniw < maxw ? diskosieniw : maxw;
-  Rect_dest.h = diskosienih < maxh ? diskosienih : maxh;
-  SDL_RenderCopy(renderer, diskosieni, NULL, &Rect_dest);
-
-  SDL_RenderPresent(renderer);
-  SDL_DestroyTexture(texte);
-  SDL_DestroyTexture(diskosieni);
-}
-
-void afficher_menu_image(SDL_Renderer * renderer, SDL_Texture * fond){
-  SDL_Texture * texture;
-  SDL_Rect Rect_dest;
-  int maxw;
-  int maxh;
-  float ratioFenetre;
-  float ratioMenu;
-
-  SDL_SetRenderDrawColor(renderer, 0,0,0,255);
-  //SDL_RenderClear(renderer);
-  SDL_RenderFillRect(renderer,NULL);
-
-  SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
-
-  ratioFenetre = (maxw * 1.0) / (maxh * 1.0);
-  ratioMenu = (TAILLEBGMENUW * 1.0) / (TAILLEBGMENUH * 1.0);
-
-  if(ratioFenetre<ratioMenu){
-    Rect_dest.w = maxw;
-    Rect_dest.h = Rect_dest.w /ratioMenu;
-  }
-  else{
-    Rect_dest.h = maxh;
-    Rect_dest.w = Rect_dest.h * ratioMenu;
-  }
-
-  Rect_dest.x = (maxw - Rect_dest.w)/2 ;
-  Rect_dest.y = (maxh - Rect_dest.h)/2 ;
-
-
-  texture=SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,SDL_TEXTUREACCESS_TARGET, TAILLEBGMENUW, TAILLEBGMENUH);
-  SDL_SetRenderTarget(renderer, texture);
-  SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
-  SDL_SetRenderDrawColor(renderer, 0,0,0,255);
-  SDL_RenderFillRect(renderer, NULL);
-  //SDL_RenderClear(renderer);
-  SDL_RenderCopy(renderer, fond, NULL, NULL);
-  SDL_SetRenderTarget(renderer, NULL);
-  SDL_RenderCopy(renderer, texture, NULL, &Rect_dest);
-  SDL_RenderPresent(renderer);
-  SDL_DestroyTexture(texture);
 }
 
 int chargerSauvegardeMenu(SDL_Renderer * renderer, int numSauv, personnage_t ** perso, salle_t ** salle){

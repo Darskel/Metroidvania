@@ -188,6 +188,7 @@ typedef enum idSounds_e{
   SOUND_MURGLACE, //Son quand le mur de glace fond
   SOUND_DOOR, //Son quand une porte s'ouvre
   SOUND_ITEM, //Son quand on ramasse un item
+  SOUND_MENU //Son quand on valide un bouton dans le menu
 } idSounds_t;
 
 

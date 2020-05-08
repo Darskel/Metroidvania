@@ -16,3 +16,4 @@ Door.wav - metal_interaction1 by qubodup : https://opengameart.org/content/metal
 Murglace.wav - freeze by artisticdude : https://opengameart.org/content/freeze-spell-0
 Item.wav - power_up_02.ogg by rubberduck : https://opengameart.org/content/50-cc0-retro-synth-sfx
 Touche.wav - swish_4 by artisticdude (submitted by Ogrebane) : https://opengameart.org/content/battle-sound-effects
+Menu.wav - misc_menu_4.wav by Lekif : https://opengameart.org/content/gui-sound-effects

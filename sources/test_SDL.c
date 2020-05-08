@@ -37,7 +37,7 @@ int main(int argc, char *argv[]){
   souris.x=0;
   souris.y=0;
   int direction=0;
-  boolean_t clique=FALSE;
+  int clique=0;
   boolean_t quitter=FALSE;
   boolean_t bougeSouris=FALSE;
   Sint16 x_move;
@@ -48,8 +48,7 @@ int main(int argc, char *argv[]){
   Mix_Music * musique = NULL;
   menu_t * menu=NULL;
   //SDL_Texture * tileset=NULL;
-  int messageRes;
-  SDL_MessageBoxButtonData * buttons = NULL;
+  boolean_t messageRes;
 
   srand(time(NULL));
   initialisation_SDL(&fenetre, &renderer, &mode, fullscreen);
@@ -83,8 +82,8 @@ int main(int argc, char *argv[]){
 
     frameStart = SDL_GetTicks();
     direction=0;
-    clique=FALSE;
     quitter=FALSE;
+    messageRes=FALSE;
     bougeSouris = FALSE;
     while(SDL_PollEvent(&event)){
       switch(event.type){
@@ -116,7 +115,7 @@ int main(int argc, char *argv[]){
               togglePauseMusique();
               break;
             case SDLK_RETURN:
-              clique=TRUE;
+              clique=2;
               //start=TRUE;
               break;
           }
@@ -138,22 +137,28 @@ int main(int argc, char *argv[]){
               break;
             case SDLK_e:
               break;
+            case SDLK_RETURN:
+              clique=1;
+              //start=TRUE;
+              break;
           }
           break;
         case SDL_MOUSEMOTION :
           bougeSouris = TRUE;
           break;
         case SDL_MOUSEBUTTONUP:
-          clique=TRUE;
+          clique=2;
+          //start=TRUE;
+          break;
+        case SDL_MOUSEBUTTONDOWN:
+          clique=1;
           //start=TRUE;
           break;
         case SDL_JOYBUTTONDOWN :
         switch(event.jbutton.button){
             case 0 : //bouton A manette XBOX
-              break;
-            case 1 : //bouton B manette XBOX
-              break;
             case 7 : //bouton Start manette XBOX
+              clique=1;
               break;
           }
         break;
@@ -161,7 +166,7 @@ int main(int argc, char *argv[]){
           switch(event.jbutton.button){
             case 0 : //bouton A manette XBOX
             case 7 : //bouton Start manette XBOX
-              clique=TRUE;
+              clique=2;
               //start=TRUE;
               break;
             }
@@ -190,6 +195,9 @@ int main(int argc, char *argv[]){
       y_move = SDL_JoystickGetAxis(pJoystick, 1);
     }
 
+    if(menu->idBoutonValide>menu->nbTextes)
+      Mix_PlayChannel(-1, EffetsSonores[SOUND_MENU], 0);
+
     if(menu->idBoutonValide==2)
       start = TRUE;
     else if(menu->idBoutonValide==4)
@@ -210,18 +218,9 @@ int main(int argc, char *argv[]){
     }
 
     if(quitter){
-      buttons = malloc(2*sizeof(SDL_MessageBoxButtonData));
-      buttons[0].flags = SDL_MESSAGEBOX_BUTTON_ESCAPEKEY_DEFAULT;
-      buttons[0].buttonid = 0;
-      buttons[0].text = "Non";
-      buttons[1].flags = SDL_MESSAGEBOX_BUTTON_RETURNKEY_DEFAULT;
-      buttons[1].buttonid = 1;
-      buttons[1].text = "Oui";
-      messageRes=afficherMessageBox(fenetre, buttons, 2, "Quitter ?", "Voulez-vous quitter ?", fullscreen);
-      if(messageRes == 1)
+      messageRes=menuConfirmation(renderer, "Voulez vous quitter ?", 3,5);
+      if(messageRes)
         fin=TRUE;
-      free(buttons);
-      buttons=NULL;
     }
 
     SDL_GetMouseState(&(souris.x), &(souris.y));
@@ -229,7 +228,11 @@ int main(int argc, char *argv[]){
     TouchesMenu(direction, souris, bougeSouris, menu);
 
     menu->idBoutonValide=evoMenu(menu, clique);
-    afficher_menu_demarrage(renderer, menu);
+
+    if(clique == 2)
+      clique=0;
+
+    afficher_menu(renderer, menu, 3, 4, TRUE);
 
     frameTime = SDL_GetTicks() - frameStart;
     if(frameTime < FRAMEDELAY){

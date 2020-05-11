@@ -10,5 +10,4 @@
 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0
 14 14 14 14 14 14 14 14 14 14
-
-salle_entree_grotte.txt 0 8 22 -1
+salle_entree_grotte.txt 0 8 32 0

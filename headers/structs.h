@@ -4,17 +4,10 @@
 #ifndef SDL_H
 #define SDL_H
 
-    #if defined(_WIN32)
-        #include <SDL2/SDL.h>
-        #include <SDL2/SDL_ttf.h>
-        #include <SDL2/SDL_image.h>
-        #include <SDL2/SDL_mixer.h>
-    #else
-        #include <SDL.h>
-        #include <SDL_ttf.h>
-        #include <SDL_image.h>
-        #include <SDL_mixer.h>
-    #endif
+#include <SDL.h>
+#include <SDL_ttf.h>
+#include <SDL_image.h>
+#include <SDL_mixer.h>
 
 #endif
 
@@ -90,14 +83,14 @@
 #define ZONEMORTE 5000 //Zone morte de la manette
 
 //Fichier du niveau de départ :
-#define NIVEAUTXT "salle_debut.txt"
+#define NIVEAUTXT "salle_yourte.txt"
 
 #define FRAMEDELAY 17 //Correspond à du 59fps
 
 #define TAILLEKONAMI 11 //NB d'inputs du Konami code
 #define KONAMICODE "uuddlrlrbas"
 
-#define NBBLOCSTILESET 58
+#define NBBLOCSTILESET 60
 #define NBLOCERREUR 49
 
 #define TAILLEBGMENUW 1920
@@ -122,7 +115,12 @@
 #define FUTURISTICWAV "audio/Futuristic.wav"
 #define ENDLESSPAINWAV "audio/EndlessPain.wav"
 #define LONGAWAYWAV "audio/LongAway.wav"
-#define VOLUMEAUDIO 0.25 * MIX_MAX_VOLUME
+#define VOLUMEAUDIO_BEGIN 1.0 * MIX_MAX_VOLUME
+#define VOLUMEAUDIO_LONGAWAY 0.20 * MIX_MAX_VOLUME
+#define VOLUMEAUDIO_FUTURISTIC 0.20 * MIX_MAX_VOLUME
+#define VOLUMEAUDIO_ENDLESSPAIN 0.20 * MIX_MAX_VOLUME
+#define VOLUMEAUDIO_MYSTERIOUS 0.20 * MIX_MAX_VOLUME
+#define VOLUMEAUDIO_PULSAR 0.20 * MIX_MAX_VOLUME
 #define NBCHANNELS 10 //Nombre de sons jouables en même temps
 
 
@@ -368,7 +366,6 @@ typedef struct porte_s{
     int spriteActuel; /**< Indice du sprite à afficher */
 } porte_t;
 
-struct menu_s;
 
 /**
  * \enum idEnt_e
@@ -389,7 +386,6 @@ typedef enum boutonetat_e{
 typedef struct menu_bouton_s{
   int id;
   char * etiquette;
-  struct menu_s * parent;
   boutonetat_t etat;
   SDL_Texture ** texture;
   SDL_Rect emplacement;
@@ -402,7 +398,6 @@ typedef struct menu_bouton_s{
 typedef struct menu_texte_s{
   int id;
   char * etiquette;
-  struct menu_s * parent;
   SDL_Texture * texture;
   SDL_Rect emplacement;
 } menu_texte_t;

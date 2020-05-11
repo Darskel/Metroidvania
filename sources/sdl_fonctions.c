@@ -764,7 +764,7 @@ void konamicode(personnage_t * perso, salle_t * salle, char * konami, int * indK
   int indVerif;
   //tester konamicode
   if(*indKon){
-    if(!strcmp(salle->nomFichier,"salle_entree_grotte.txt") && !(*kon)){
+    if(!(*kon)){
       for(indVerif = 0; (indVerif < *indKon) && (konami[indVerif] == verifCode[indVerif]); indVerif++);
       if(*indKon != indVerif){
         *indKon = 0;
@@ -774,16 +774,8 @@ void konamicode(personnage_t * perso, salle_t * salle, char * konami, int * indK
         if(*indKon == TAILLEKONAMI){
           //effectuer code
           printf("Konami code effectué !\n");
-          salle->mat[9][9] = 34;
-          salle->mat[10][9] = 1;
-          salle->mat[10][8] = 34;
-          salle->mat[10][10] = 34;
-          if(!persValidDep(perso,salle)){
-            perso->pos.x = 5;
-            perso->delta.x = TAILLEBLOC - 1 + OFFSETHITBOX;
-            if(perso->delta.x >= TAILLEBLOC)
-              perso->delta.x %= TAILLEBLOC;
-          }
+          for(int i = 0; i < TAILLE_INVENTAIRE; i++)
+              perso->inventaire[i] = 1;
           *kon = TRUE;
           for(int i = 0; i < TAILLEKONAMI; i++)
             konami[i] = '\0';
@@ -839,7 +831,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
   chargerSauvegardeMenu(*renderer, 0, &perso, &salle);
 
   musique = chargerMusique(LONGAWAYWAV);
-  lancerMusiqueInfini(musique, VOLUMEAUDIO);
+  lancerMusiqueInfini(musique, VOLUMEAUDIO_LONGAWAY);
   quitter=FALSE;
   messageRes=FALSE;
 
@@ -1150,18 +1142,15 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
 
 menu_t * creerMenuDemarrage(SDL_Renderer * renderer){
   menu_t * menu = malloc(sizeof(menu_t));
-  int nbBoutons = 3;
-  int nbTextes = 1;
-  int fondw, fondh;
 
   //Général :
-  menu->nbBoutons=nbBoutons;
+  menu->nbBoutons=3;
   menu->idBoutonChoisi=2;
   menu->idBoutonValide=0;
-  menu->nbTextes=nbTextes;
+  menu->nbTextes=1;
   menu->etiquette = "Menu Principal";
-  menu->tabTextes = malloc(nbTextes * sizeof(menu_texte_t));
-  menu->tabBoutons = malloc(nbBoutons * sizeof(menu_bouton_t));
+  menu->tabTextes = malloc(menu->nbTextes * sizeof(menu_texte_t));
+  menu->tabBoutons = malloc(menu->nbBoutons * sizeof(menu_bouton_t));
 
   //Etiquettes :
   menu->tabTextes[0].etiquette=NOM_JEU;
@@ -1169,66 +1158,25 @@ menu_t * creerMenuDemarrage(SDL_Renderer * renderer){
   menu->tabBoutons[1].etiquette="Continuer";
   menu->tabBoutons[2].etiquette="Quitter";
 
-  //Textures :
-  creerTexturesMenuDemarrage(renderer, menu);
-
   //Fond :
-  SDL_QueryTexture(menu->fond, NULL, NULL, &fondw, &fondh);
   menu->nbSprites = 7;
-  fondw /= menu->nbSprites;
   menu->spriteActuel.x = 0;
   menu->spriteActuel.y = 0;
-  menu->spriteActuel.w = fondw;
-  menu->spriteActuel.h = fondh;
   menu->animDelay = 30;
   menu->etatanim = menu->animDelay;
 
   //Texte :
-  menu->tabTextes[0].id=1;
-
-  menu->tabTextes[0].parent=menu;
-  SDL_QueryTexture(menu->tabTextes[0].texture, NULL, NULL, &(menu->tabTextes[0].emplacement.w), &(menu->tabTextes[0].emplacement.h));
-  menu->tabTextes[0].emplacement.x=0;
-  menu->tabTextes[0].emplacement.y=0;
-  if(menu->tabTextes[0].emplacement.w>fondw)
-    menu->tabTextes[0].emplacement.w=fondw;
-  if(menu->tabTextes[0].emplacement.h>fondh)
-    menu->tabTextes[0].emplacement.h=fondh;
+  for(int i=0; i<menu->nbTextes; i++)
+    menu->tabTextes[i].id=i+1;
 
   //Boutons :
-  menu->tabBoutons[0].id=2;
+  for(int i=0; i<menu->nbBoutons; i++){
+    menu->tabBoutons[i].id=i+1+menu->nbTextes;
+    menu->tabBoutons[i].etat=RELAXED;
+  }
 
-  menu->tabBoutons[0].parent=menu;
-  menu->tabBoutons[0].etat=RELAXED;
-  SDL_QueryTexture(menu->tabBoutons[0].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[0].emplacement.w), &(menu->tabBoutons[0].emplacement.h));
-  menu->tabBoutons[0].emplacement.x=0;
-  menu->tabBoutons[0].emplacement.y=0;
-  if(menu->tabBoutons[0].emplacement.w>fondw)
-    menu->tabBoutons[0].emplacement.w=fondw;
-  if(menu->tabBoutons[0].emplacement.h>fondh)
-    menu->tabBoutons[0].emplacement.h=fondh;
-
-  menu->tabBoutons[1].id=3;
-
-  menu->tabBoutons[1].parent=menu;
-  menu->tabBoutons[1].etat=RELAXED;
-  SDL_QueryTexture(menu->tabBoutons[1].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[1].emplacement.w), &(menu->tabBoutons[1].emplacement.h));
-  menu->tabBoutons[1].emplacement.x=0;
-  menu->tabBoutons[1].emplacement.y=0;
-  if(menu->tabBoutons[1].emplacement.w>fondw)
-    menu->tabBoutons[1].emplacement.w=fondw;
-  if(menu->tabBoutons[1].emplacement.h>fondh)
-    menu->tabBoutons[1].emplacement.h=fondh;
-
-  menu->tabBoutons[2].id=4;
-
-  menu->tabBoutons[2].parent=menu;
-  menu->tabBoutons[2].etat=RELAXED;
-  SDL_QueryTexture(menu->tabBoutons[2].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[2].emplacement.w), &(menu->tabBoutons[2].emplacement.h));
-  if(menu->tabBoutons[2].emplacement.w>fondw)
-    menu->tabBoutons[2].emplacement.w=fondw;
-  if(menu->tabBoutons[2].emplacement.h>fondh)
-    menu->tabBoutons[2].emplacement.h=fondh;
+  //Textures :
+  creerTexturesMenuDemarrage(renderer, menu);
 
   return menu;
 }
@@ -1241,72 +1189,40 @@ menu_t * creerMenuInGame(SDL_Renderer * renderer){
 
 menu_t * creerMenuConfirmation(SDL_Renderer * renderer, char * question){
   menu_t * menu = malloc(sizeof(menu_t));
-  int nbBoutons = 2;
-  int nbTextes = 1;
-  int fondw, fondh;
 
   //Général :
-  menu->nbBoutons=nbBoutons;
+  menu->nbBoutons=2;
   menu->idBoutonChoisi=3;
   menu->idBoutonValide=0;
-  menu->nbTextes=nbTextes;
+  menu->nbTextes=1;
   menu->etiquette = "Menu Confirmation";
-  menu->tabTextes = malloc(nbTextes * sizeof(menu_texte_t));
-  menu->tabBoutons = malloc(nbBoutons * sizeof(menu_bouton_t));
+  menu->tabTextes = malloc(menu->nbTextes * sizeof(menu_texte_t));
+  menu->tabBoutons = malloc(menu->nbBoutons * sizeof(menu_bouton_t));
 
   //Etiquette :
   menu->tabTextes[0].etiquette=question;
   menu->tabBoutons[0].etiquette="Oui";
   menu->tabBoutons[1].etiquette="Non";
 
-  //Textures :
-  creerTexturesMenuConfirmation(renderer, menu);
-
   //Fond :
-  SDL_QueryTexture(menu->fond, NULL, NULL, &fondw, &fondh);
   menu->nbSprites = 7;
-  fondw /= menu->nbSprites;
   menu->spriteActuel.x = 0;
   menu->spriteActuel.y = 0;
-  menu->spriteActuel.w = fondw;
-  menu->spriteActuel.h = fondh;
   menu->animDelay = 30;
   menu->etatanim = menu->animDelay;
 
   //Texte :
-  menu->tabTextes[0].id=1;
-
-  menu->tabTextes[0].parent=menu;
-  SDL_QueryTexture(menu->tabTextes[0].texture, NULL, NULL, &(menu->tabTextes[0].emplacement.w), &(menu->tabTextes[0].emplacement.h));
-  menu->tabTextes[0].emplacement.x=0;
-  menu->tabTextes[0].emplacement.y=0;
-  if(menu->tabTextes[0].emplacement.w>fondw)
-    menu->tabTextes[0].emplacement.w=fondw;
-  if(menu->tabTextes[0].emplacement.h>fondh)
-    menu->tabTextes[0].emplacement.h=fondh;
+  for(int i=0; i<menu->nbTextes; i++)
+    menu->tabTextes[i].id=i+1;
 
   //Boutons :
-  menu->tabBoutons[0].id=2;
-  menu->tabBoutons[0].parent=menu;
-  menu->tabBoutons[0].etat=RELAXED;
-  SDL_QueryTexture(menu->tabBoutons[0].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[0].emplacement.w), &(menu->tabBoutons[0].emplacement.h));
-  menu->tabBoutons[0].emplacement.x=0;
-  menu->tabBoutons[0].emplacement.y=0;
-  if(menu->tabBoutons[0].emplacement.w>fondw)
-    menu->tabBoutons[0].emplacement.w=fondw;
-  if(menu->tabBoutons[0].emplacement.h>fondh)
-    menu->tabBoutons[0].emplacement.h=fondh;
+  for(int i=0; i<menu->nbBoutons; i++){
+    menu->tabBoutons[i].id=i+1+menu->nbTextes;
+    menu->tabBoutons[i].etat=RELAXED;
+  }
 
-  menu->tabBoutons[1].id=3;
-  menu->tabBoutons[1].parent=menu;
-  menu->tabBoutons[1].etat=RELAXED;
-  SDL_QueryTexture(menu->tabBoutons[1].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[1].emplacement.w), &(menu->tabBoutons[1].emplacement.h));
-  menu->tabBoutons[1].emplacement.x=0;
-  menu->tabBoutons[1].emplacement.y=0;
-  if(menu->tabBoutons[1].emplacement.w>fondw)
-    menu->tabBoutons[1].emplacement.w=fondw;
-  if(menu->tabBoutons[1].emplacement.h>fondh)
-    menu->tabBoutons[1].emplacement.h=fondh;
+  //Textures :
+  creerTexturesMenuConfirmation(renderer, menu);
 
   return menu;
 }
@@ -1321,10 +1237,9 @@ void detruireMenu(menu_t ** menu){
 
 void detruireTexturesMenu(menu_t * menu){
   for(int i=0; i<menu->nbBoutons; i++){
-    SDL_DestroyTexture(menu->tabBoutons[i].texture[RELAXED]);
-    SDL_DestroyTexture(menu->tabBoutons[i].texture[HIGHLIGHTED]);
-    SDL_DestroyTexture(menu->tabBoutons[i].texture[PRESSED]);
-    SDL_DestroyTexture(menu->tabBoutons[i].texture[UNAVAILABLE]);
+    for(int j=0; j<NBETATSBOUTONS; j++)
+      if(menu->tabBoutons[i].texture[j] != NULL)
+        SDL_DestroyTexture(menu->tabBoutons[i].texture[j]);
     free(menu->tabBoutons[i].texture);
   }
   for(int j=0; j<menu->nbTextes; j++){
@@ -1334,44 +1249,106 @@ void detruireTexturesMenu(menu_t * menu){
 }
 
 void creerTexturesMenuDemarrage(SDL_Renderer * renderer, menu_t * menu){
+  int fondw=0;
+  int fondh=0;
   menu->fond = initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
+  SDL_QueryTexture(menu->fond, NULL, NULL, &fondw, &fondh);
+  fondw /= menu->nbSprites;
+  menu->spriteActuel.w = fondw;
+  menu->spriteActuel.h = fondh;
+
   menu->tabTextes[0].texture = creerTexte(renderer, "./font/PixelMordred.ttf", FONTSIZE, menu->tabTextes[0].etiquette, 255, 255, 200);
+  SDL_QueryTexture(menu->tabTextes[0].texture, NULL, NULL, &(menu->tabTextes[0].emplacement.w), &(menu->tabTextes[0].emplacement.h));
+  menu->tabTextes[0].emplacement.x=0;
+  menu->tabTextes[0].emplacement.y=0;
+  if(menu->tabTextes[0].emplacement.w>=fondw)
+    menu->tabTextes[0].emplacement.w==fondw-1;
+  if(menu->tabTextes[0].emplacement.h>=fondh)
+    menu->tabTextes[0].emplacement.h=fondh-1;
 
   menu->tabBoutons[0].texture = malloc(NBETATSBOUTONS * sizeof(SDL_Texture *));
   menu->tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/commencer/nouvelle_partie.png", renderer, FALSE);
   menu->tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/commencer/nouvelle_partie_selectionnee.png", renderer, FALSE);
   menu->tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/commencer/nouvelle_partie_clique.png", renderer, FALSE);
   menu->tabBoutons[0].texture[UNAVAILABLE] = initialiser_texture("./sprites/bouton/commencer/nouvelle_partie_impossible.png", renderer, FALSE);
+  SDL_QueryTexture(menu->tabBoutons[0].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[0].emplacement.w), &(menu->tabBoutons[0].emplacement.h));
+  menu->tabBoutons[0].emplacement.x=0;
+  menu->tabBoutons[0].emplacement.y=0;
+  if(menu->tabBoutons[0].emplacement.w>=fondw)
+    menu->tabBoutons[0].emplacement.w=fondw-1;
+  if(menu->tabBoutons[0].emplacement.h>=fondh)
+    menu->tabBoutons[0].emplacement.h=fondh-1;
 
   menu->tabBoutons[1].texture = malloc(NBETATSBOUTONS * sizeof(SDL_Texture *));
   menu->tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/continuer/continuer.png", renderer, FALSE);
   menu->tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/continuer/continuer_selectionne.png", renderer, FALSE);
   menu->tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/continuer/continuer_clique.png", renderer, FALSE);
   menu->tabBoutons[1].texture[UNAVAILABLE] = initialiser_texture("./sprites/bouton/continuer/continuer_impossible.png", renderer, FALSE);
+  SDL_QueryTexture(menu->tabBoutons[1].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[1].emplacement.w), &(menu->tabBoutons[1].emplacement.h));
+  menu->tabBoutons[1].emplacement.x=0;
+  menu->tabBoutons[1].emplacement.y=0;
+  if(menu->tabBoutons[1].emplacement.w>=fondw)
+    menu->tabBoutons[1].emplacement.w=fondw-1;
+  if(menu->tabBoutons[1].emplacement.h>=fondh)
+    menu->tabBoutons[1].emplacement.h=fondh-1;
 
   menu->tabBoutons[2].texture = malloc(NBETATSBOUTONS * sizeof(SDL_Texture *));
   menu->tabBoutons[2].texture[RELAXED] = initialiser_texture("./sprites/bouton/quitter/quitter.png", renderer, FALSE);
   menu->tabBoutons[2].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/quitter/quitter_selectionne.png", renderer, FALSE);
   menu->tabBoutons[2].texture[PRESSED] = initialiser_texture("./sprites/bouton/quitter/quitter_clique.png", renderer, FALSE);
   menu->tabBoutons[2].texture[UNAVAILABLE] = initialiser_texture("./sprites/bouton/quitter/quitter_impossible.png", renderer, FALSE);
+  SDL_QueryTexture(menu->tabBoutons[2].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[2].emplacement.w), &(menu->tabBoutons[2].emplacement.h));
+  if(menu->tabBoutons[2].emplacement.w>=fondw)
+    menu->tabBoutons[2].emplacement.w=fondw-1;
+  if(menu->tabBoutons[2].emplacement.h>=fondh)
+    menu->tabBoutons[2].emplacement.h=fondh-1;
+
 }
 
 void creerTexturesMenuConfirmation(SDL_Renderer * renderer, menu_t * menu){
+  int fondw=0;
+  int fondh=0;
   menu->fond = initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
+  SDL_QueryTexture(menu->fond, NULL, NULL, &fondw, &fondh);
+  fondw /= menu->nbSprites;
+  menu->spriteActuel.w = fondw;
+  menu->spriteActuel.h = fondh;
+
+
   menu->tabTextes[0].texture = creerTexte(renderer, "./font/BitCasual.ttf", FONTSIZE, menu->tabTextes[0].etiquette, 255, 255, 100);
+  SDL_QueryTexture(menu->tabTextes[0].texture, NULL, NULL, &(menu->tabTextes[0].emplacement.w), &(menu->tabTextes[0].emplacement.h));
+  menu->tabTextes[0].emplacement.x=0;
+  menu->tabTextes[0].emplacement.y=0;
+  if(menu->tabTextes[0].emplacement.w>=fondw)
+    menu->tabTextes[0].emplacement.w=fondw-1;
+  if(menu->tabTextes[0].emplacement.h>=fondh)
+    menu->tabTextes[0].emplacement.h=fondh-1;
 
   menu->tabBoutons[0].texture = malloc(NBETATSBOUTONS * sizeof(SDL_Texture *));
   menu->tabBoutons[0].texture[RELAXED] = initialiser_texture("./sprites/bouton/oui/oui.png", renderer, FALSE);
   menu->tabBoutons[0].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/oui/oui_selectionne.png", renderer, FALSE);
   menu->tabBoutons[0].texture[PRESSED] = initialiser_texture("./sprites/bouton/oui/oui_clique.png", renderer, FALSE);
   menu->tabBoutons[0].texture[UNAVAILABLE] = NULL;
+  SDL_QueryTexture(menu->tabBoutons[0].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[0].emplacement.w), &(menu->tabBoutons[0].emplacement.h));
+  menu->tabBoutons[0].emplacement.x=0;
+  menu->tabBoutons[0].emplacement.y=0;
+  if(menu->tabBoutons[0].emplacement.w>=fondw)
+    menu->tabBoutons[0].emplacement.w=fondw-1;
+  if(menu->tabBoutons[0].emplacement.h>=fondh)
+    menu->tabBoutons[0].emplacement.h=fondh-1;
 
   menu->tabBoutons[1].texture = malloc(NBETATSBOUTONS * sizeof(SDL_Texture *));
   menu->tabBoutons[1].texture[RELAXED] = initialiser_texture("./sprites/bouton/non/non.png", renderer, FALSE);
   menu->tabBoutons[1].texture[HIGHLIGHTED] = initialiser_texture("./sprites/bouton/non/non_selectionne.png", renderer, FALSE);
   menu->tabBoutons[1].texture[PRESSED] = initialiser_texture("./sprites/bouton/non/non_clique.png", renderer, FALSE);
   menu->tabBoutons[1].texture[UNAVAILABLE] = NULL;
-
+  SDL_QueryTexture(menu->tabBoutons[1].texture[RELAXED], NULL, NULL, &(menu->tabBoutons[1].emplacement.w), &(menu->tabBoutons[1].emplacement.h));
+  menu->tabBoutons[1].emplacement.x=0;
+  menu->tabBoutons[1].emplacement.y=0;
+  if(menu->tabBoutons[1].emplacement.w>=fondw)
+    menu->tabBoutons[1].emplacement.w=fondw-1;
+  if(menu->tabBoutons[1].emplacement.h>=fondh)
+    menu->tabBoutons[1].emplacement.h=fondh-1;
 }
 
 boolean_t menuConfirmation(SDL_Renderer * renderer, char * question, int tailleTexte, int tailleBoutons){
@@ -1412,7 +1389,7 @@ boolean_t menuConfirmation(SDL_Renderer * renderer, char * question, int tailleT
           break;
         case SDL_KEYUP:
           switch(event.key.keysym.sym){
-            case SDLK_ESCAPE://Appui sur Echap quitte le programme
+            case SDLK_ESCAPE://Appui sur Echap cancel
               quitter=FALSE;
               fin=TRUE;
               break;
@@ -1513,6 +1490,8 @@ boolean_t menuConfirmation(SDL_Renderer * renderer, char * question, int tailleT
     else if(menu->idBoutonValide==3)
       quitter = FALSE;
 
+    afficher_menu(renderer, menu, tailleTexte, tailleBoutons, FALSE);
+
     SDL_GetMouseState(&(souris.x), &(souris.y));
 
     TouchesMenu(direction, souris, bougeSouris, menu);
@@ -1521,8 +1500,6 @@ boolean_t menuConfirmation(SDL_Renderer * renderer, char * question, int tailleT
 
     if(clique == 2)
       clique=0;
-
-    afficher_menu(renderer, menu, tailleTexte, tailleBoutons, FALSE);
 
     frameTime = SDL_GetTicks() - frameStart;
     if(frameTime < FRAMEDELAY){
@@ -1605,7 +1582,7 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
   SDL_Texture * texte=creerTexte(renderer, "./font/BitCasual.ttf", FONTSIZE, "GAME OVER", 255, 255, 200);
 
   musique = chargerMusique(FUTURISTICWAV);
-  lancerMusiqueInfini(musique, VOLUMEAUDIO);
+  lancerMusiqueInfini(musique, VOLUMEAUDIO_FUTURISTIC);
 
   while(!fin){
     while(SDL_PollEvent(&event)){
@@ -1688,7 +1665,8 @@ void afficher_menu(SDL_Renderer * renderer, menu_t * menu, int tailleTexte, int 
   int maxh=0;
   int fondw=0;
   int fondh=0;
-  int mult=0;
+  float mult=1.0;
+  int i,j;
   float ratioFenetre, ratioMenu;
   SDL_Rect Rect_dest_fond;
   SDL_Rect Rect_dest_obj;
@@ -1715,27 +1693,32 @@ void afficher_menu(SDL_Renderer * renderer, menu_t * menu, int tailleTexte, int 
   Rect_dest_fond.x = (maxw - Rect_dest_fond.w)/2 ;
   Rect_dest_fond.y = (maxh - Rect_dest_fond.h)/2 ;
 
-
   SDL_RenderCopy(renderer, menu->fond, &(menu->spriteActuel), &Rect_dest_fond);
 
   fondw=Rect_dest_fond.w;
   fondh=Rect_dest_fond.h;
-
-  for(int i=0; i<menu->nbTextes; i++){
+  for(i=0; i<menu->nbTextes; i++){
     Rect_dest_obj.w=menu->tabTextes[i].emplacement.w;
     Rect_dest_obj.h=menu->tabTextes[i].emplacement.h;
-    mult = (fondw + fondh)/(tailleTexte *(Rect_dest_obj.w + Rect_dest_obj.h));
+    mult = (fondw + fondh)/(1.0*(tailleTexte *(Rect_dest_obj.w + Rect_dest_obj.h)));
+
     Rect_dest_obj.w *= mult;
     Rect_dest_obj.h *= mult;
-    if(Rect_dest_obj.w > fondw)
-      Rect_dest_obj.w = fondw;
-    if(Rect_dest_obj.h > fondh)
-      Rect_dest_obj.h = fondh;
 
-    Rect_dest_obj.x = 2* fondw/6 - Rect_dest_obj.w/2;
+    if(Rect_dest_obj.w >= fondw)
+      Rect_dest_obj.w = fondw-1;
+    if(Rect_dest_obj.h >= fondh)
+      Rect_dest_obj.h = fondh-1;
+
+    if(Rect_dest_obj.w <1)
+      Rect_dest_obj.w = 1;
+    if(Rect_dest_obj.h <1)
+      Rect_dest_obj.h = 1;
+
+    Rect_dest_obj.x = 2* fondw/6 - Rect_dest_obj.w/2 + Rect_dest_fond.x;
     if(Rect_dest_obj.x < 0)
       Rect_dest_obj.x = 0;
-    Rect_dest_obj.y = (menu->tabTextes[i].id) * (fondh/(menu->nbBoutons+menu->nbTextes+1) + Rect_dest_obj.h/(menu->nbTextes*2)) - Rect_dest_obj.h/(menu->nbTextes);
+    Rect_dest_obj.y = (menu->tabTextes[i].id) * (fondh/(menu->nbBoutons+menu->nbTextes+1) + Rect_dest_obj.h/(menu->nbTextes*2)) - Rect_dest_obj.h/(menu->nbTextes) + Rect_dest_fond.y;
     if(Rect_dest_obj.y < 0)
       Rect_dest_obj.y = 0;
     menu->tabTextes[i].emplacement.w = Rect_dest_obj.w;
@@ -1745,32 +1728,38 @@ void afficher_menu(SDL_Renderer * renderer, menu_t * menu, int tailleTexte, int 
     SDL_RenderCopy(renderer, menu->tabTextes[i].texture, NULL, &(Rect_dest_obj));
   }
 
-  for(int j=0; j<menu->nbBoutons; j++){
+  for(j=0; j<menu->nbBoutons; j++){
     Rect_dest_obj.w=menu->tabBoutons[j].emplacement.w;
     Rect_dest_obj.h=menu->tabBoutons[j].emplacement.h;
-    mult = (fondw + fondh)/(tailleBoutons *(Rect_dest_obj.w + Rect_dest_obj.h));
+
+    mult = (fondw + fondh)/(1.0*(tailleBoutons *(Rect_dest_obj.w + Rect_dest_obj.h)));
+
     Rect_dest_obj.w *= mult;
     Rect_dest_obj.h *= mult;
-    if(Rect_dest_obj.w > fondw)
-      Rect_dest_obj.w = fondw;
-    if(Rect_dest_obj.h > fondh)
-      Rect_dest_obj.h = fondh;
+
+    if(Rect_dest_obj.w >= fondw)
+      Rect_dest_obj.w = fondw-1;
+    if(Rect_dest_obj.h >= fondh)
+      Rect_dest_obj.h = fondh-1;
+
+    if(Rect_dest_obj.w <1)
+      Rect_dest_obj.w = 1;
+    if(Rect_dest_obj.h <1)
+      Rect_dest_obj.h = 1;
+
     if(sens){
-      Rect_dest_obj.x = fondw/2 - Rect_dest_obj.w/2;
+      Rect_dest_obj.x = fondw/2 - Rect_dest_obj.w/2 + Rect_dest_fond.x;
       if(Rect_dest_obj.x < 0)
         Rect_dest_obj.x = 0;
-      Rect_dest_obj.y = (menu->tabBoutons[j].id) * (fondh/(menu->nbBoutons+menu->nbTextes+1)+ Rect_dest_obj.h/(menu->nbBoutons*4)) - Rect_dest_obj.h/(menu->nbBoutons);
+      Rect_dest_obj.y = ((fondh - (menu->tabTextes[menu->nbTextes-1].emplacement.y - Rect_dest_fond.y + menu->tabTextes[menu->nbTextes-1].emplacement.h) - (menu->nbBoutons*Rect_dest_obj.h))/(menu->nbBoutons+1))*(j+1) + Rect_dest_obj.h*j + (menu->tabTextes[menu->nbTextes-1].emplacement.y + menu->tabTextes[menu->nbTextes-1].emplacement.h);
       if(Rect_dest_obj.y < 0)
         Rect_dest_obj.y = 0;
     }
     else{
-      if(menu->nbBoutons%2)
-        Rect_dest_obj.x = j * (fondw/(menu->nbBoutons+1) + menu->tabBoutons[j].emplacement.w/(menu->nbBoutons+1)) + menu->tabBoutons[j].emplacement.w/(menu->nbBoutons+1);
-      else
-        Rect_dest_obj.x = j * (fondw/(menu->nbBoutons) + menu->tabBoutons[j].emplacement.w/(menu->nbBoutons)) + menu->tabBoutons[j].emplacement.w;
+        Rect_dest_obj.x = ((fondw - (menu->nbBoutons*Rect_dest_obj.w))/(menu->nbBoutons+1))*(j+1) + Rect_dest_obj.w*j + Rect_dest_fond.x;
       if(Rect_dest_obj.x < 0)
         Rect_dest_obj.x = 0;
-      Rect_dest_obj.y = 2* fondh/3 - Rect_dest_obj.h/2;
+      Rect_dest_obj.y = 2* fondh/3 - Rect_dest_obj.h/2 + Rect_dest_fond.y;
       if(Rect_dest_obj.y < 0)
         Rect_dest_obj.y = 0;
     }

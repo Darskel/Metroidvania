@@ -20,6 +20,6 @@
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-salle_eboulement.txt 0 18 28 24
+salle_eboulement.txt 0 18 27 24
 salle_singes.txt 34 7 0 14
-salle_mindfuck_1.txt 34 18 0 14
+zone_mindfuck_1.txt 34 18 0 9

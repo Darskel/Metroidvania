@@ -44,6 +44,7 @@ int main(int argc, char *argv[]){
   Sint16 y_move;
   boolean_t fin=FALSE;
   boolean_t start=FALSE;
+  char * question=NULL;
 
   Mix_Music * musique = NULL;
   menu_t * menu=NULL;
@@ -76,7 +77,7 @@ int main(int argc, char *argv[]){
   //menu=initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
   menu = creerMenuDemarrage(renderer);
   musique = chargerMusique(BEGINWAV);
-  lancerMusiqueInfini(musique, VOLUMEAUDIO);
+  lancerMusiqueInfini(musique, VOLUMEAUDIO_BEGIN);
   SDL_GetMouseState(&(souris.x), &(souris.y));
   while(!fin){
 
@@ -209,7 +210,7 @@ int main(int argc, char *argv[]){
       Mix_HaltMusic();
       if (jeu(fenetre, &renderer, mode, pJoystick, fullscreen)){
         gameover(fenetre, renderer, mode, pJoystick, fullscreen);
-        lancerMusiqueInfini(musique, VOLUMEAUDIO);
+        lancerMusiqueInfini(musique, VOLUMEAUDIO_BEGIN);
         bougeSouris=TRUE;
       }
       else{
@@ -218,10 +219,12 @@ int main(int argc, char *argv[]){
     }
 
     if(quitter){
-      messageRes=menuConfirmation(renderer, "Voulez vous quitter ?", 3,5);
+      messageRes=menuConfirmation(renderer, "Voulez-vous quitter ?", 3,5);
       if(messageRes)
         fin=TRUE;
     }
+
+    afficher_menu(renderer, menu, 3, 4, TRUE);
 
     SDL_GetMouseState(&(souris.x), &(souris.y));
 
@@ -231,8 +234,6 @@ int main(int argc, char *argv[]){
 
     if(clique == 2)
       clique=0;
-
-    afficher_menu(renderer, menu, 3, 4, TRUE);
 
     frameTime = SDL_GetTicks() - frameStart;
     if(frameTime < FRAMEDELAY){

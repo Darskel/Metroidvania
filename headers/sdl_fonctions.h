@@ -1,20 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifndef SYSTEM_INCLUDED
-#define SYSTEM_INCLUDED
 
-#if defined(_WIN32)
-    #include <SDL2/SDL.h>
-    #include <SDL2/SDL_ttf.h>
-    #include <SDL2/SDL_image.h>
-    #include <SDL2/SDL_mixer.h>
-#else
-    #include <SDL.h>
-    #include <SDL_ttf.h>
-    #include <SDL_image.h>
-    #include <SDL_mixer.h>
-#endif
+#ifndef SDL_H
+#define SDL_H
+
+#include <SDL.h>
+#include <SDL_ttf.h>
+#include <SDL_image.h>
+#include <SDL_mixer.h>
 
 #endif
 #include "../headers/structs.h"

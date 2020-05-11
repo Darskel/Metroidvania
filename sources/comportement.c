@@ -1254,9 +1254,6 @@ void evolution(personnage_t* p, salle_t* s){
         else
             p->hit = FALSE;
 
-    //CHEATCODE !
-    for(int i = 0; i < TAILLE_INVENTAIRE; i++)
-        p->inventaire[i] = 1;
 
     s->listeEntite->indTmp = 0;
     monstre_t e;
@@ -1270,7 +1267,7 @@ void evolution(personnage_t* p, salle_t* s){
             enTete(s->listeEntite);
             for(int i = 0; i < s->listeEntite->indTmp; i++)
                 suivant(s->listeEntite);
-            
+
             if(!strcmp(e.type->nom,"serpent rose")){
                 monstre_t tmp;
                 valeurElm(s->listeEntite,&tmp);

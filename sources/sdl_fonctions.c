@@ -60,6 +60,9 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
     exit(EXIT_FAILURE);
   }
 
+  pourcentageVol = 0.2;
+  Mix_VolumeMusic(pourcentageVol * MIX_MAX_VOLUME);
+
   Mix_AllocateChannels(NBCHANNELS);
   initialiserChunks();
 
@@ -119,16 +122,12 @@ Mix_Music * chargerMusique(char * path){
 
 //Pour décharger une musique : Mix_FreeMusic(Mix_Music * musique)
 
-void lancerMusiqueInfini(Mix_Music * musique, int volume){
-  int result;
-  Mix_VolumeMusic(volume);
-  result = Mix_PlayMusic(musique, -1);
+void lancerMusiqueInfini(Mix_Music * musique){
+  Mix_PlayMusic(musique, -1);
 }
 
-void lancerMusiqueNBFois(Mix_Music * musique, int volume , int nbFois){
-  int result;
-  Mix_VolumeMusic(volume);
-  result = Mix_PlayMusic(musique, nbFois);
+void lancerMusiqueNBFois(Mix_Music * musique, int nbFois){
+  Mix_PlayMusic(musique, nbFois);
 }
 
 void togglePauseMusique(void){
@@ -136,6 +135,20 @@ void togglePauseMusique(void){
     Mix_ResumeMusic();
   else if(Mix_PlayingMusic())
     Mix_PauseMusic();
+}
+
+void baisserSon(void){
+  pourcentageVol-=0.01;
+  if(pourcentageVol<0)
+    pourcentageVol=0;
+  Mix_VolumeMusic(pourcentageVol * MIX_MAX_VOLUME);
+}
+
+void MonterSon(void){
+  pourcentageVol+=0.01;
+  if(pourcentageVol>100)
+    pourcentageVol=100;
+  Mix_VolumeMusic(pourcentageVol * MIX_MAX_VOLUME);
 }
 
 //Pour mettre pause : Mix_PauseMusic();
@@ -831,7 +844,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
   chargerSauvegardeMenu(*renderer, 0, &perso, &salle);
 
   musique = chargerMusique(LONGAWAYWAV);
-  lancerMusiqueInfini(musique, VOLUMEAUDIO_LONGAWAY);
+  lancerMusiqueInfini(musique);
   quitter=FALSE;
   messageRes=FALSE;
 
@@ -965,6 +978,12 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
             case SDLK_i:
             case SDLK_a:
               inventaireAffiche=INVENTAIRETIME;
+              break;
+            case SDLK_PAGEUP:
+              MonterSon();
+              break;
+            case SDLK_PAGEDOWN:
+              baisserSon();
               break;
           }
           break;
@@ -1430,6 +1449,12 @@ boolean_t menuConfirmation(SDL_Renderer * renderer, char * question, int tailleT
               break;
             case SDLK_e:
               break;
+            case SDLK_PAGEUP:
+              MonterSon();
+              break;
+            case SDLK_PAGEDOWN:
+              baisserSon();
+              break;
             case SDLK_RETURN:
               clique=1;
               break;
@@ -1582,7 +1607,7 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
   SDL_Texture * texte=creerTexte(renderer, "./font/BitCasual.ttf", FONTSIZE, "GAME OVER", 255, 255, 200);
 
   musique = chargerMusique(FUTURISTICWAV);
-  lancerMusiqueInfini(musique, VOLUMEAUDIO_FUTURISTIC);
+  lancerMusiqueInfini(musique);
 
   while(!fin){
     while(SDL_PollEvent(&event)){
@@ -1599,6 +1624,15 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
               break;
           }
           break;
+        case SDL_KEYDOWN :
+          switch(event.key.keysym.sym){
+            case SDLK_PAGEUP:
+              MonterSon();
+              break;
+            case SDLK_PAGEDOWN:
+              baisserSon();
+              break;
+          }
         case SDL_JOYBUTTONUP:
           switch(event.jbutton.button){
             case 0 : //bouton A manette XBOX

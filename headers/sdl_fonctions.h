@@ -26,6 +26,7 @@
 
 #define NBSOUNDS 9
 Mix_Chunk * EffetsSonores[NBSOUNDS];
+float pourcentageVol;
 
 void initialiserChunks(void);
 void detruireChunks(void);
@@ -66,9 +67,11 @@ TTF_Font * creerPolice(char * path, int taille);
 void detruirePolice(TTF_Font ** font);
 SDL_Texture * creerTexte(SDL_Renderer * renderer, char * Fontpath, int taille, char* texte, int r, int g, int b);
 Mix_Music * chargerMusique(char * path);
-void lancerMusiqueInfini(Mix_Music * musique, int volume);
-void lancerMusiqueNBFois(Mix_Music * musique, int volume , int nbFois);
+void lancerMusiqueInfini(Mix_Music * musique);
+void lancerMusiqueNBFois(Mix_Music * musique, int nbFois);
 void togglePauseMusique(void);
+void MonterSon(void);
+void baisserSon(void);
 void ExploitationBinaireSons(unsigned int nbBinaire);
 void detruireTexturesMenu(menu_t * menu);
 void creerTexturesMenuDemarrage(SDL_Renderer * renderer, menu_t * menu);

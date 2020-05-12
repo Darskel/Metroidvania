@@ -115,13 +115,7 @@
 #define FUTURISTICWAV "audio/Futuristic.wav"
 #define ENDLESSPAINWAV "audio/EndlessPain.wav"
 #define LONGAWAYWAV "audio/LongAway.wav"
-#define VOLUMEAUDIO_BEGIN 1.0 * MIX_MAX_VOLUME
-#define VOLUMEAUDIO_LONGAWAY 0.20 * MIX_MAX_VOLUME
-#define VOLUMEAUDIO_FUTURISTIC 0.20 * MIX_MAX_VOLUME
-#define VOLUMEAUDIO_ENDLESSPAIN 0.20 * MIX_MAX_VOLUME
-#define VOLUMEAUDIO_MYSTERIOUS 0.20 * MIX_MAX_VOLUME
-#define VOLUMEAUDIO_PULSAR 0.20 * MIX_MAX_VOLUME
-#define NBCHANNELS 10 //Nombre de sons jouables en même temps
+#define NBCHANNELS 20 //Nombre de sons jouables en même temps
 
 
 /*

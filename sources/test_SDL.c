@@ -77,7 +77,7 @@ int main(int argc, char *argv[]){
   //menu=initialiser_texture("./sprites/menu/menu.png", renderer, FALSE);
   menu = creerMenuDemarrage(renderer);
   musique = chargerMusique(BEGINWAV);
-  lancerMusiqueInfini(musique, VOLUMEAUDIO_BEGIN);
+  lancerMusiqueInfini(musique);
   SDL_GetMouseState(&(souris.x), &(souris.y));
   while(!fin){
 
@@ -137,6 +137,12 @@ int main(int argc, char *argv[]){
             case SDLK_s:
               break;
             case SDLK_e:
+              break;
+            case SDLK_PAGEUP:
+              MonterSon();
+              break;
+            case SDLK_PAGEDOWN:
+              baisserSon();
               break;
             case SDLK_RETURN:
               clique=1;
@@ -210,7 +216,7 @@ int main(int argc, char *argv[]){
       Mix_HaltMusic();
       if (jeu(fenetre, &renderer, mode, pJoystick, fullscreen)){
         gameover(fenetre, renderer, mode, pJoystick, fullscreen);
-        lancerMusiqueInfini(musique, VOLUMEAUDIO_BEGIN);
+        lancerMusiqueInfini(musique);
         bougeSouris=TRUE;
       }
       else{

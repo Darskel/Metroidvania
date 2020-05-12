@@ -46,6 +46,8 @@ int main(int argc, char *argv[]){
   boolean_t start=FALSE;
   char * question=NULL;
 
+  int volumeAffiche=0;
+
   Mix_Music * musique = NULL;
   menu_t * menu=NULL;
   //SDL_Texture * tileset=NULL;
@@ -140,9 +142,11 @@ int main(int argc, char *argv[]){
               break;
             case SDLK_PAGEUP:
               MonterSon();
+              volumeAffiche=VOLUMETIME;
               break;
             case SDLK_PAGEDOWN:
               baisserSon();
+              volumeAffiche=VOLUMETIME;
               break;
             case SDLK_RETURN:
               clique=1;
@@ -231,6 +235,14 @@ int main(int argc, char *argv[]){
     }
 
     afficher_menu(renderer, menu, 3, 4, TRUE);
+
+    if(volumeAffiche > 0){
+      afficherVolume(renderer);
+      if(volumeAffiche <= VOLUMETIME)
+        (volumeAffiche)--;
+    }
+
+    SDL_RenderPresent(renderer);
 
     SDL_GetMouseState(&(souris.x), &(souris.y));
 

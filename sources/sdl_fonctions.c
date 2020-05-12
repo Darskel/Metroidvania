@@ -385,6 +385,33 @@ void afficherInventaire(SDL_Renderer * renderer, personnage_t * personnage, SDL_
   }
 }
 
+void afficherVolume(SDL_Renderer * renderer){
+  SDL_Rect boite;
+  SDL_Rect objPlacement;
+  SDL_Texture * pourcentageVolText=NULL;
+  char * volume = malloc(5*sizeof(char));
+  sprintf(volume, "%3i%c", (int)(pourcentageVol*100), '%');
+  int maxw;
+  int maxh;
+  pourcentageVolText = creerTexte(renderer, "./font/BitCasual.ttf", FONTSIZE, volume, 255, 255, 200);
+  free(volume);
+  SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
+  objPlacement.h = maxh/VOLUMEBOXSIZE;
+  objPlacement.w = maxw/VOLUMEBOXSIZE;
+  boite.h =  maxh/VOLUMEBOXSIZE +5;
+  boite.w =  maxw/VOLUMEBOXSIZE +5;
+  boite.x = maxw/100;
+  boite.y = maxh - maxh/100 - boite.h;
+  objPlacement.x= boite.x + 2;
+  objPlacement.y= boite.y + 2;
+  SDL_SetRenderDrawColor(renderer, 10, 10, 10, 200);
+  SDL_RenderFillRect(renderer, &boite);
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_RenderCopy(renderer, pourcentageVolText, NULL, &objPlacement);
+  SDL_DestroyTexture(pourcentageVolText);
+}
+
+
 
 /**
  * \brief Fonction de destruction de la structure personnage
@@ -629,9 +656,10 @@ void affichage_complet(SDL_Renderer * renderer, salle_t * salle, personnage_t * 
     if(*inventaireAffiche < INVENTAIRETIME)
       (*inventaireAffiche)--;
   }
+
   SDL_SetRenderTarget(renderer, NULL);
   SDL_RenderCopy(renderer, textureSalle, NULL, &Rect_dest);
-  SDL_RenderPresent(renderer);
+
   SDL_DestroyTexture(textureSalle);
   SDL_DestroyTexture(coeurImage);
 }
@@ -808,6 +836,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
   Sint16 x_move;
   Sint16 y_move;
   int inventaireAffiche=0;
+  int volumeAffiche=0;
   idSounds_t son = 0;
   Mix_Music * musique = NULL;
   //position_t positionDepart;
@@ -943,10 +972,6 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
               konami[indKon++] = 's';
               break;
             case SDLK_n:
-              Mix_PlayChannel(-1, EffetsSonores[son], 0);
-              son++;
-              if(son>=NBSOUNDS)
-                son=0;
               break;
             case SDLK_p:
               togglePauseMusique();
@@ -981,9 +1006,11 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
               break;
             case SDLK_PAGEUP:
               MonterSon();
+              volumeAffiche=VOLUMETIME;
               break;
             case SDLK_PAGEDOWN:
               baisserSon();
+              volumeAffiche=VOLUMETIME;
               break;
           }
           break;
@@ -1139,6 +1166,14 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
       //SDL_RenderClear(*renderer);
       SDL_RenderFillRect(*renderer, NULL);
       affichage_complet(*renderer, salle, perso, &inventaireAffiche);
+
+      if(volumeAffiche > 0){
+        afficherVolume(*renderer);
+        if(volumeAffiche <= VOLUMETIME)
+          (volumeAffiche)--;
+      }
+
+      SDL_RenderPresent(*renderer);
 
       frameTime = SDL_GetTicks() - frameStart;
       if(frameTime < FRAMEDELAY){
@@ -1380,6 +1415,7 @@ boolean_t menuConfirmation(SDL_Renderer * renderer, char * question, int tailleT
   souris.y=0;
   int direction=0;
   int clique=0;
+  int volumeAffiche=0;
   boolean_t bougeSouris=FALSE;
   Sint16 x_move;
   Sint16 y_move;
@@ -1451,9 +1487,11 @@ boolean_t menuConfirmation(SDL_Renderer * renderer, char * question, int tailleT
               break;
             case SDLK_PAGEUP:
               MonterSon();
+              volumeAffiche = VOLUMETIME;
               break;
             case SDLK_PAGEDOWN:
               baisserSon();
+              volumeAffiche = VOLUMETIME;
               break;
             case SDLK_RETURN:
               clique=1;
@@ -1516,6 +1554,14 @@ boolean_t menuConfirmation(SDL_Renderer * renderer, char * question, int tailleT
       quitter = FALSE;
 
     afficher_menu(renderer, menu, tailleTexte, tailleBoutons, FALSE);
+
+    if(volumeAffiche > 0){
+      afficherVolume(renderer);
+      if(volumeAffiche <= VOLUMETIME)
+        (volumeAffiche)--;
+    }
+
+    SDL_RenderPresent(renderer);
 
     SDL_GetMouseState(&(souris.x), &(souris.y));
 
@@ -1602,14 +1648,18 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
   int texteh;
   int mult;
   Mix_Music * musique = NULL;
+  int volumeAffiche=0;
   SDL_Event event;
+  Uint32 frameStart;
+  int frameTime;
   boolean_t fin=FALSE;
-  SDL_Texture * texte=creerTexte(renderer, "./font/BitCasual.ttf", FONTSIZE, "GAME OVER", 255, 255, 200);
+  SDL_Texture * texte=creerTexte(renderer, "./font/BitCasual.ttf", FONTSIZE*2, "GAME OVER", 255, 255, 200);
 
   musique = chargerMusique(FUTURISTICWAV);
   lancerMusiqueInfini(musique);
 
   while(!fin){
+    frameStart = SDL_GetTicks();
     while(SDL_PollEvent(&event)){
       switch(event.type){
         case SDL_KEYUP :
@@ -1628,9 +1678,11 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
           switch(event.key.keysym.sym){
             case SDLK_PAGEUP:
               MonterSon();
+              volumeAffiche=VOLUMETIME;
               break;
             case SDLK_PAGEDOWN:
               baisserSon();
+              volumeAffiche=VOLUMETIME;
               break;
           }
         case SDL_JOYBUTTONUP:
@@ -1651,7 +1703,7 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
     SDL_RenderFillRect(renderer,NULL);
     SDL_GetRendererOutputSize(renderer, &maxw, &maxh);
     SDL_QueryTexture(texte, NULL, NULL, &textew, &texteh);
-    mult = (maxw + maxh)/(2*(textew + texteh));
+    mult = (2*(maxw + maxh))/(3*(textew + texteh));
     textew *= mult;
     texteh *= mult;
     Rect_dest.x = maxw/2 - textew/2;
@@ -1664,7 +1716,20 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
     Rect_dest.h = texteh < maxh ? texteh : maxh;
 
     SDL_RenderCopy(renderer, texte, NULL, &Rect_dest);
+
+    if(volumeAffiche > 0){
+      afficherVolume(renderer);
+      if(volumeAffiche <= VOLUMETIME)
+        (volumeAffiche)--;
+    }
+
     SDL_RenderPresent(renderer);
+
+    frameTime = SDL_GetTicks() - frameStart;
+    if(frameTime < FRAMEDELAY){
+      SDL_Delay(FRAMEDELAY - frameTime);
+    }
+
   }
   Mix_HaltMusic();
   if(musique != NULL)
@@ -1803,8 +1868,6 @@ void afficher_menu(SDL_Renderer * renderer, menu_t * menu, int tailleTexte, int 
     menu->tabBoutons[j].emplacement.y = Rect_dest_obj.y;
     SDL_RenderCopy(renderer, menu->tabBoutons[j].texture[menu->tabBoutons[j].etat], NULL, &(Rect_dest_obj));
   }
-
-  SDL_RenderPresent(renderer);
 }
 
 void TouchesMenu(int direction, SDL_Point souris, boolean_t bougeSouris, menu_t * menu){ //direction vaut -1 pour haut, 1 pour bas et 0 pour immobile, si immobile, la souris est prise en compte

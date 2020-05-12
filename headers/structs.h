@@ -46,6 +46,9 @@
 #define INVENTAIREPATH "./sprites/inventaire/tileset.png"
 #define INVENTAIRETIME 60
 
+#define VOLUMEBOXSIZE 28
+#define VOLUMETIME 60
+
 #define NOM_JEU "Diskosieni"
 
 //Path :

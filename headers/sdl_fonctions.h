@@ -62,6 +62,7 @@ int evoMenu(menu_t * menu, int clique);
 void afficherVieJauge(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * textureSalle);
 void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * coeurImage, SDL_Texture * textureSalle);
 void afficherInventaire(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * textureSalle);
+void afficherVolume(SDL_Renderer * renderer);
 void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mode, SDL_Joystick * pJoystick, int fullscreen);
 TTF_Font * creerPolice(char * path, int taille);
 void detruirePolice(TTF_Font ** font);

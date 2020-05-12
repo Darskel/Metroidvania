@@ -115,6 +115,7 @@
 #define FUTURISTICWAV "audio/Futuristic.wav"
 #define ENDLESSPAINWAV "audio/EndlessPain.wav"
 #define LONGAWAYWAV "audio/LongAway.wav"
+#define DEFAULTVOLUME 0.2
 #define NBCHANNELS 20 //Nombre de sons jouables en même temps
 
 

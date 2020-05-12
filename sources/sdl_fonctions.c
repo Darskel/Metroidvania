@@ -60,7 +60,7 @@ void initialisation_SDL(SDL_Window ** fenetre, SDL_Renderer ** renderer, SDL_Dis
     exit(EXIT_FAILURE);
   }
 
-  pourcentageVol = 0.2;
+  pourcentageVol = DEFAULTVOLUME;
   Mix_VolumeMusic(pourcentageVol * MIX_MAX_VOLUME);
 
   Mix_AllocateChannels(NBCHANNELS);
@@ -146,8 +146,8 @@ void baisserSon(void){
 
 void MonterSon(void){
   pourcentageVol+=0.01;
-  if(pourcentageVol>100)
-    pourcentageVol=100;
+  if(pourcentageVol>1)
+    pourcentageVol=1;
   Mix_VolumeMusic(pourcentageVol * MIX_MAX_VOLUME);
 }
 

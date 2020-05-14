@@ -11,7 +11,7 @@
 #include <time.h>
 
 int hitE(monstre_t* e1, monstre_t* e2);
-int persValidDep(personnage_t* p, salle_t* s);
+int persValid(personnage_t* p, salle_t* s);
 
 void depDroite(personnage_t* p, salle_t* s);
 void depGauche(personnage_t* p, salle_t* s);
@@ -20,6 +20,7 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk);
 char* prendPorte(personnage_t* p, liste_t* lPortes);
 
 void evolution(personnage_t* p, salle_t* s);
+void transformation(personnage_t* p, salle_t * s);
 
 void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle);
 void compCoeur(monstre_t* entite, personnage_t* perso, salle_t* salle);

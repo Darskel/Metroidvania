@@ -54,6 +54,7 @@
 //Path :
 #define TAILLEPATHFICHIER 50
 #define PLAYERSPRITESPATH "./sprites/entite/joueur/tileset.png"
+#define RENARDSPRITESPATH "./sprites/entite/renard/tileset.png"
 #define TILESETPATH "./sprites/bloc/tileset.png"
 #define DIRBG "./sprites/salles/"
 
@@ -61,8 +62,13 @@
 #define TAILLEBLOC 8
 #define HAUTEURPORTE 36
 #define LARGEURPORTE 13
+
+#define LARGEURSPRITERENARD 24
+#define HAUTEURSPRITERENARD 13
+
 #define HAUTEURSPRITEPERS 33
 #define LARGEURSPRITEPERS 25
+
 #define LARGEURSPRITEPERSATTACK 30
 
 #define HAUTEURHITBOXPERS 32
@@ -71,7 +77,8 @@
 #define HAUTEURHITBOXREN 12
 #define LARGEURHITBOXREN 24
 
-#define OFFSETHITBOX 6 //Différence de x (en pixel) entre le début du sprite et le début de l'hitbox
+#define OFFSETHITBOXH 6 //Différence de x (en pixel) entre le début du sprite et le début de l'hitbox
+#define OFFSETHITBOXR 0
 
 //Vitesses en pixel par secondes :
 #define VITDEPPERS 1
@@ -101,7 +108,7 @@
 
 #define COEURDROPRATE 10
 
-#define PVMAX 3
+#define PVMAX 10
 #define TEMPINV 60
 #define FREQCLIGN 2
 #define INVUDELAY 6
@@ -283,15 +290,18 @@ typedef struct personnage_s{
     position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
     position_t apparition; /**< Position d'apparition (utilisé pour les sauvegardes) */
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du personnage */
+    SDL_Texture * spritesR;
     SDL_Rect spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
-    taille_t hitbox; /**< Taille de la hitbox du personnage en pixel */
+    SDL_Rect * hitbox; /**< Taille de la hitbox du personnage en pixel */
+    int hitboxActuelle;
+    int nbHitbox;
     etat_t etat; /**< Etat du personnage (idle/running/jumping/attacking/falling) */
     boolean_t newEtat; /**< Booléen qui signifie qu'un changement d'état vient de s'effectuer */
     boolean_t newItem; /**< Booléen qui signifie que l'on vient de récolter un item */
     int evoSprite; /**< Entier qui décrémente, changement de sprite quand vaut 0 */
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du personage */
     int * vitAnim; /**< Tableau qui contient le delai de changement d'animation pour chaque action du personage */
-    char forme; /**< Forme du personnage H = humain, R = renard */
+    char forme; /**< Forme du personnage h = humain, r = renard */
     int inventaire[TAILLE_INVENTAIRE]; /**<Tableau qui contient les informations sur l'inventaire actuel du personnage */
     SDL_Texture * inventaireTileset;
     char* nomObj[TAILLE_INVENTAIRE]; /**<Tableau qui contient les noms des objets de l'inventaire */
@@ -313,10 +323,12 @@ typedef struct type_monstre_s{
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du monstre */
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du monstre */
     int degat; /**< Nombre de dégâts faits par le monstre */
-    taille_t hitbox; /**< Taille de la hitbox de monstre en pixel */
+    SDL_Rect * hitbox; /**< Taille de la hitbox de monstre en pixel */
+    int nbHitbox;
     taille_t tailleSprite; /**< Taille des sprites de monstre en pixel */
     boolean_t passeEntites; /**< Indique si le monstre peut passer à travers les entités (autres monstres/joueur) */
     boolean_t passeBlocs; /**< Indique si le monstre peut passer à travers les blocs */
+    int radius;
     int vitesseAnim; /**< Vitesse de l'animation des sprites (plus ce nombre est grand, plus la vitesse est lente (sert à evoSprite comme valeur avant décrémentation)) */
     //comportement (pointeur sur fonction)
     void (*comportement)(monstre_t* entite, personnage_t* perso, salle_t* salle);

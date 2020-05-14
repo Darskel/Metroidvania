@@ -140,11 +140,11 @@ int main(int argc, char *argv[]){
               break;
             case SDLK_e:
               break;
-            case SDLK_PAGEUP:
+            case SDLK_KP_PLUS:
               MonterSon();
               volumeAffiche=VOLUMETIME;
               break;
-            case SDLK_PAGEDOWN:
+            case SDLK_KP_MINUS:
               baisserSon();
               volumeAffiche=VOLUMETIME;
               break;

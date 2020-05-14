@@ -294,6 +294,7 @@ SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer, boolean_
  * @return le pointeur sur la structure initialisée
  */
 personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t positionDepart, position_t positionDepartDelta){
+  SDL_Rect * tabhitbox=NULL;
   personnage_t * personnage=malloc(sizeof(personnage_t));
   personnage->pv_max=PVMAX;
   personnage->pv=personnage->pv_max;
@@ -309,10 +310,11 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->pos=positionDepart;
   personnage->delta=positionDepartDelta;
   personnage->sprites=initialiser_texture(PLAYERSPRITESPATH, renderer, FALSE);
+  personnage->spritesR=initialiser_texture(RENARDSPRITESPATH, renderer, FALSE);
   personnage->spriteActuel.h=HAUTEURSPRITEPERS;
   personnage->spriteActuel.w=LARGEURSPRITEPERS;
-  personnage->hitbox.hauteur=HAUTEURHITBOXPERS;
-  personnage->hitbox.largeur=LARGEURHITBOXPERS;
+  personnage->nbHitbox=2;
+  personnage->hitboxActuelle=0;
   personnage->etat = IDLE;
   personnage->newEtat = TRUE;
   personnage->spriteActuel.x=0;
@@ -347,6 +349,51 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   personnage->nomObj[5] = "double saut";
   personnage->nomObj[6] = "huile";
   personnage->nomObj[7] = "renard";
+
+  tabhitbox = malloc(sizeof(SDL_Rect)*personnage->nbHitbox*5);
+  tabhitbox[IDLE*personnage->nbHitbox+0].x=OFFSETHITBOXH;
+  tabhitbox[IDLE*personnage->nbHitbox+0].y=1;
+  tabhitbox[IDLE*personnage->nbHitbox+0].h=HAUTEURHITBOXPERS;
+  tabhitbox[IDLE*personnage->nbHitbox+0].w=LARGEURHITBOXPERS;
+  tabhitbox[IDLE*personnage->nbHitbox+1].x=OFFSETHITBOXR;
+  tabhitbox[IDLE*personnage->nbHitbox+1].y=0;
+  tabhitbox[IDLE*personnage->nbHitbox+1].h=HAUTEURHITBOXREN;
+  tabhitbox[IDLE*personnage->nbHitbox+1].w=LARGEURHITBOXREN;
+  tabhitbox[RUNNING*personnage->nbHitbox+0].x=OFFSETHITBOXH;
+  tabhitbox[RUNNING*personnage->nbHitbox+0].y=1;
+  tabhitbox[RUNNING*personnage->nbHitbox+0].h=HAUTEURHITBOXPERS;
+  tabhitbox[RUNNING*personnage->nbHitbox+0].w=LARGEURHITBOXPERS;
+  tabhitbox[RUNNING*personnage->nbHitbox+1].x=OFFSETHITBOXR;
+  tabhitbox[RUNNING*personnage->nbHitbox+1].y=0;
+  tabhitbox[RUNNING*personnage->nbHitbox+1].h=HAUTEURHITBOXREN;
+  tabhitbox[RUNNING*personnage->nbHitbox+1].w=LARGEURHITBOXREN;
+  tabhitbox[JUMPING*personnage->nbHitbox+0].x=OFFSETHITBOXH;
+  tabhitbox[JUMPING*personnage->nbHitbox+0].y=1;
+  tabhitbox[JUMPING*personnage->nbHitbox+0].h=HAUTEURHITBOXPERS;
+  tabhitbox[JUMPING*personnage->nbHitbox+0].w=LARGEURHITBOXPERS;
+  tabhitbox[JUMPING*personnage->nbHitbox+1].x=OFFSETHITBOXR;
+  tabhitbox[JUMPING*personnage->nbHitbox+1].y=0;
+  tabhitbox[JUMPING*personnage->nbHitbox+1].h=HAUTEURHITBOXREN;
+  tabhitbox[JUMPING*personnage->nbHitbox+1].w=LARGEURHITBOXREN;
+  tabhitbox[ATTACKING*personnage->nbHitbox+0].x=OFFSETHITBOXH;
+  tabhitbox[ATTACKING*personnage->nbHitbox+0].y=1;
+  tabhitbox[ATTACKING*personnage->nbHitbox+0].h=HAUTEURHITBOXPERS;
+  tabhitbox[ATTACKING*personnage->nbHitbox+0].w=LARGEURHITBOXPERS;
+  tabhitbox[ATTACKING*personnage->nbHitbox+1].x=OFFSETHITBOXR;
+  tabhitbox[ATTACKING*personnage->nbHitbox+1].y=0;
+  tabhitbox[ATTACKING*personnage->nbHitbox+1].h=HAUTEURHITBOXREN;
+  tabhitbox[ATTACKING*personnage->nbHitbox+1].w=LARGEURHITBOXREN;
+  tabhitbox[FALLING*personnage->nbHitbox+0].x=OFFSETHITBOXH;
+  tabhitbox[FALLING*personnage->nbHitbox+0].y=1;
+  tabhitbox[FALLING*personnage->nbHitbox+0].h=HAUTEURHITBOXPERS;
+  tabhitbox[FALLING*personnage->nbHitbox+0].w=LARGEURHITBOXPERS;
+  tabhitbox[FALLING*personnage->nbHitbox+1].x=OFFSETHITBOXR;
+  tabhitbox[FALLING*personnage->nbHitbox+1].y=0;
+  tabhitbox[FALLING*personnage->nbHitbox+1].h=HAUTEURHITBOXREN;
+  tabhitbox[FALLING*personnage->nbHitbox+1].w=LARGEURHITBOXREN;
+
+  personnage->hitbox=tabhitbox;
+
   return personnage;
 }
 
@@ -420,9 +467,11 @@ void afficherVolume(SDL_Renderer * renderer){
  */
 void destroy_personnage(personnage_t ** personnage){
   SDL_DestroyTexture((*personnage)->sprites);
+  SDL_DestroyTexture((*personnage)->spritesR);
   SDL_DestroyTexture((*personnage)->inventaireTileset);
   free((*personnage)->nbAnim);
   free((*personnage)->vitAnim);
+  free((*personnage)->hitbox);
   free(*personnage);
   *personnage=NULL;
 }
@@ -435,13 +484,8 @@ void destroy_typeentites(void){
   for(int i=0; i<NBTYPEMONSTRE; i++){
     SDL_DestroyTexture((typesMonstre[i]).sprites);
     free((typesMonstre[i]).nbAnim);
-  }//Pour tout les types de monstres*/
-  /*SDL_DestroyTexture((typesMonstre[-SERPENTBLEU -1]).sprites);
-  free((typesMonstre[-SERPENTBLEU -1]).nbAnim);
-  SDL_DestroyTexture((typesMonstre[-COEUR -1]).sprites);
-  free((typesMonstre[-COEUR -1]).nbAnim);
-  SDL_DestroyTexture((typesMonstre[-FLECHE -1]).sprites);
-  free((typesMonstre[-FLECHE -1]).nbAnim);*/
+    free((typesMonstre[i]).hitbox);
+  }
 }
 
 /**
@@ -453,10 +497,7 @@ void initialiser_typeentites(SDL_Renderer * renderer){
   creerTypeEntite();
   for(int i=0; i<NBTYPEMONSTRE; i++){
     typesMonstre[i].sprites = initialiser_texture(typesMonstre[i].path, renderer, FALSE);
-  }//*/
-  /*typesMonstre[-SERPENTBLEU -1].sprites = initialiser_texture(typesMonstre[-SERPENTBLEU -1].path, renderer);
-  typesMonstre[-COEUR - 1].sprites = initialiser_texture(typesMonstre[-COEUR -1].path, renderer);
-  typesMonstre[-FLECHE - 1].sprites = initialiser_texture(typesMonstre[-FLECHE -1].path, renderer);*/
+  }
 }
 
 
@@ -715,10 +756,12 @@ void miseAjourSprites(personnage_t * perso){
         perso->spriteActuel.x=0;
     }
   }
-  if(perso->etat == ATTACKING)
-    perso->spriteActuel.w = LARGEURSPRITEPERSATTACK;
-  else
-    perso->spriteActuel.w = LARGEURSPRITEPERS;
+  if(perso->forme=='h'){
+    if(perso->etat == ATTACKING)
+      perso->spriteActuel.w = LARGEURSPRITEPERSATTACK;
+    else
+      perso->spriteActuel.w = LARGEURSPRITEPERS;
+  }
 }
 
 /**
@@ -837,6 +880,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
   Sint16 y_move;
   int inventaireAffiche=0;
   int volumeAffiche=0;
+  boolean_t transformationR=FALSE;
   idSounds_t son = 0;
   Mix_Music * musique = NULL;
   //position_t positionDepart;
@@ -889,7 +933,15 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
           destroy_typeentites();
           initialiser_typeentites(*renderer);
           SDL_DestroyTexture(perso->sprites);
-          perso->sprites=initialiser_texture(PLAYERSPRITESPATH, *renderer, FALSE);
+          SDL_DestroyTexture(perso->spritesR);
+          if(perso->forme=='r'){
+            perso->spritesR=initialiser_texture(PLAYERSPRITESPATH, *renderer, FALSE);
+            perso->sprites=initialiser_texture(RENARDSPRITESPATH, *renderer, FALSE);
+          }
+          else{
+            perso->sprites=initialiser_texture(PLAYERSPRITESPATH, *renderer, FALSE);
+            perso->spritesR=initialiser_texture(RENARDSPRITESPATH, *renderer, FALSE);
+          }
           SDL_DestroyTexture(salle->background);
           strcpy(nom_bg,DIRBG);
           strcat(nom_bg, salle->nomFichier);
@@ -973,6 +1025,9 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
               break;
             case SDLK_n:
               break;
+            case SDLK_r:
+              transformationR=TRUE;
+              break;
             case SDLK_p:
               togglePauseMusique();
               break;
@@ -1004,11 +1059,11 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
             case SDLK_a:
               inventaireAffiche=INVENTAIRETIME;
               break;
-            case SDLK_PAGEUP:
+            case SDLK_KP_PLUS:
               MonterSon();
               volumeAffiche=VOLUMETIME;
               break;
-            case SDLK_PAGEDOWN:
+            case SDLK_KP_MINUS:
               baisserSon();
               volumeAffiche=VOLUMETIME;
               break;
@@ -1103,7 +1158,6 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
         salle_nom=NULL;
       }
 
-      depVert(perso, salle, tryJump);
 
       if(Gauche && !(perso)->kb){ // ajout de && !(*perso)->kb par Thomas: evite de changer la direction du regard pendant un knockback
         depGauche(perso, salle);
@@ -1122,6 +1176,8 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
           (perso)->etat=IDLE;
           perso->newEtat=TRUE;
         }
+
+      depVert(perso, salle, tryJump);
 
       tryJump=FALSE;
 
@@ -1145,6 +1201,12 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
         perso->newItem = FALSE;
       }
 
+
+      if(transformationR){
+        transformation(perso, salle);
+        transformationR=FALSE;
+      }
+
       miseAjourSprites(perso);
       miseAjourSpritesEntites(salle);
 
@@ -1160,8 +1222,6 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
         else
           quitter=FALSE;
       }
-
-
       SDL_SetRenderDrawColor(*renderer,0,0,0,255);
       //SDL_RenderClear(*renderer);
       SDL_RenderFillRect(*renderer, NULL);
@@ -1180,6 +1240,7 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
         SDL_Delay(FRAMEDELAY - frameTime);
       }
     }
+
     destroy_salle(&salle);
     destroy_personnage(&perso);
     destroy_typeentites();
@@ -1485,11 +1546,11 @@ boolean_t menuConfirmation(SDL_Renderer * renderer, char * question, int tailleT
               break;
             case SDLK_e:
               break;
-            case SDLK_PAGEUP:
+            case SDLK_KP_PLUS:
               MonterSon();
               volumeAffiche = VOLUMETIME;
               break;
-            case SDLK_PAGEDOWN:
+            case SDLK_KP_MINUS:
               baisserSon();
               volumeAffiche = VOLUMETIME;
               break;
@@ -1676,11 +1737,11 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
           break;
         case SDL_KEYDOWN :
           switch(event.key.keysym.sym){
-            case SDLK_PAGEUP:
+            case SDLK_KP_PLUS:
               MonterSon();
               volumeAffiche=VOLUMETIME;
               break;
-            case SDLK_PAGEDOWN:
+            case SDLK_KP_MINUS:
               baisserSon();
               volumeAffiche=VOLUMETIME;
               break;

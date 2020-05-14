@@ -147,6 +147,8 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
+    SDL_Rect * hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,11,10};
 
     typesMonstre[-CLEBLEUE - 1] = (type_monstre_t){
         1, //pv de base
@@ -157,10 +159,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {10,11}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {10,11}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -171,6 +175,8 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,11,10};
 
     typesMonstre[-CLEROUGE - 1] = (type_monstre_t){
         1, //pv de base
@@ -181,10 +187,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {10,11}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {10,11}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -195,6 +203,8 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,11,10};
 
     typesMonstre[-CLEROUILLE - 1] = (type_monstre_t){
         1, //pv de base
@@ -205,10 +215,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {10,11}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {10,11}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -219,6 +231,8 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,11,10};
 
     typesMonstre[-CLEVERTE - 1] = (type_monstre_t){
         1, //pv de base
@@ -229,10 +243,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {10,11}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {10,11}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -243,6 +259,8 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,16,16};
 
     typesMonstre[-DISCOSHROOM - 1] = (type_monstre_t){
         1, //pv de base
@@ -253,10 +271,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {16,16}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {16,16}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -267,6 +287,8 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 *1);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,25,25};
 
     typesMonstre[-DOUBLESAUT - 1] = (type_monstre_t){
         1, //pv de base
@@ -277,10 +299,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {25,25}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {25,25}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -291,6 +315,8 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 *1);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,8,8};
 
     typesMonstre[-FLACONHUILE - 1] = (type_monstre_t){
         1, //pv de base
@@ -301,10 +327,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {8,8}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {8,8}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -315,6 +343,8 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,16,32};
 
     typesMonstre[-MURGLACE - 1] = (type_monstre_t){
         2, //pv de base
@@ -325,10 +355,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {32,16}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {32,16}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compMurGlace //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -339,6 +371,9 @@ void creerTypeEntite(){
     tmp[1] = 1;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 2);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,4,36};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,4,36};
 
     typesMonstre[-PORTEB - 1] = (type_monstre_t){
         1, //pv de base
@@ -349,10 +384,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {36,4}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {36,13}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compPortes //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -363,6 +400,9 @@ void creerTypeEntite(){
     tmp[1] = 1;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 2);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,4,36};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,4,36};
 
     typesMonstre[-PORTERG - 1] = (type_monstre_t){
         1, //pv de base
@@ -373,10 +413,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {36,4}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {36,13}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compPortes //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -387,6 +429,9 @@ void creerTypeEntite(){
     tmp[1] = 1;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 2);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,4,36};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,4,36};
 
     typesMonstre[-PORTERL - 1] = (type_monstre_t){
         1, //pv de base
@@ -397,10 +442,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {36,4}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {36,13}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compPortes //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -411,6 +458,9 @@ void creerTypeEntite(){
     tmp[1] = 1;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 2);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,4,36};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,4,36};
 
     typesMonstre[-PORTEV - 1] = (type_monstre_t){
         1, //pv de base
@@ -421,10 +471,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {36,4}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {36,13}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compPortes //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -435,6 +487,8 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,24,13};
 
     typesMonstre[-RENARD - 1] = (type_monstre_t){
         1, //pv de base
@@ -445,10 +499,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {13,24}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {13,24}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -459,6 +515,11 @@ void creerTypeEntite(){
     tmp[1] = 1;
     tmp[2] = 0;
     tmp[3] = 2;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 4);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,24,57};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,24,57};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,24,57};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,24,57};
 
     typesMonstre[-ROIVP - 1] = (type_monstre_t){
         6, //pv de base
@@ -469,10 +530,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {57,24}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {57,50}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        25*TAILLEBLOC,
         25, //Attend 25 frames avant de changer d'animation (plutôt lent)
         compRoiVifplume //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -483,6 +546,9 @@ void creerTypeEntite(){
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 *2);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,51,28};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,51,28};
 
     typesMonstre[-SERPENTBLEU - 1] = (type_monstre_t){
         2, //pv de base
@@ -493,10 +559,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        {28,51}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {30,51}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         25, //Attend 25 frames avant de changer d'animation (plutôt lent)
         compSerpent //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -507,20 +575,27 @@ void creerTypeEntite(){
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 1;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 4);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,51,28};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,51,28};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,51,28};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,51,28};
 
     typesMonstre[-SERPENTROSE - 1] = (type_monstre_t){
         2, //pv de base
         VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
-        60, //vitesse d'attaque
+        100, //vitesse d'attaque
         "serpent rose",//nom, //nom de l'entité
         "sprites/entite/serpent_rose/tileset.png",//chemin, //chemin vers les sprites
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        {18,51}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {30,51}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        25*TAILLEBLOC,
         25, //Attend 25 frames avant de changer d'animation (plutôt lent)
         compSerpentRose //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -531,6 +606,9 @@ void creerTypeEntite(){
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 *2);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,51,28};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,51,28};
 
     typesMonstre[-SERPENTVERT - 1] = (type_monstre_t){
         3, //pv de base
@@ -541,10 +619,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        {28,51}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {30,51}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         25, //Attend 25 frames avant de changer d'animation (plutôt lent)
         compSerpent //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -556,6 +636,13 @@ void creerTypeEntite(){
     tmp[2] = 2;
     tmp[3] = 1;
     tmp[4] = 2;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 5);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,19,26};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,19,26};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,21,31};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,25,35};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,25,31};
+
 
     typesMonstre[-SINGEGROTTE - 1] = (type_monstre_t){
         4, //pv de base
@@ -566,10 +653,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        {26,19}, //hitbox de l'entité (hauteur,largeur) {35,25}, {32,22}, {31,25}, {31,21} quand il saute !
+        hittmp, //hitbox de l'entité (hauteur,largeur) {35,25}, {32,22}, {31,25}, {31,21} quand il saute !
+        1,
         {35,25}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        25*TAILLEBLOC,
         10, //Attend 10 frames avant de changer d'animation (plutôt moyen)
         compSingeGrotte //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -580,6 +669,8 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-VERSGEANT - 1] = (type_monstre_t){
         2, //pv de base
@@ -590,10 +681,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        {0,0}, //hitbox de l'entité (hauteur,largeur) {2,5}, {8,7}, {13,8}, {17,10}, {21,10}, {25,10}, {29,10} quand il attaque ! +4,+0 à partir de [4]
+        hittmp, //hitbox de l'entité (hauteur,largeur) {2,5}, {8,7}, {13,8}, {17,10}, {21,10}, {25,10}, {29,10} quand il attaque ! +4,+0 à partir de [4]
+        1,
         {33,20}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         25, //Attend 25 frames avant de changer d'animation (plutôt lent)
         compVersGeant //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -604,6 +697,11 @@ void creerTypeEntite(){
     tmp[1] = 8;
     tmp[2] = 0;
     tmp[3] = 1;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 4);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,21,30};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,32,26};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,21,30};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,32,26};
 
     typesMonstre[-VIFPLUME - 1] = (type_monstre_t){
         2, //pv de base
@@ -614,10 +712,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        {30,21}, //hitbox de l'entité (hauteur,largeur) {26,32} quand il attaque !
+        hittmp, //hitbox de l'entité (hauteur,largeur) {26,32} quand il attaque !
+        1,
         {31,37}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        25*TAILLEBLOC,
         8, //Attend 25 frames avant de changer d'animation (plutôt lent)
         compVifplume //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -628,6 +728,8 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,8,8};
 
     typesMonstre[-COEUR - 1] = (type_monstre_t){
         1, //pv de base
@@ -638,10 +740,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        {8,8}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {8,8}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compCoeur //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -652,6 +756,9 @@ void creerTypeEntite(){
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 2);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,19,3};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,19,3};
 
     typesMonstre[-FLECHE - 1] = (type_monstre_t){
         1, //pv de base
@@ -662,10 +769,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        {3,19}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {9,19}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compFleches //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -676,6 +785,9 @@ void creerTypeEntite(){
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 2);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,19,5};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,19,5};
 
     typesMonstre[-FLECHEFEU - 1] = (type_monstre_t){
         1, //pv de base
@@ -686,10 +798,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         2, //nombre de dégats qu'il inflige
-        {5,19}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {8,19}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compFleches //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -700,6 +814,8 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,7,6};
 
     typesMonstre[-VENIN - 1] = (type_monstre_t){
         1, //pv de base
@@ -710,10 +826,12 @@ void creerTypeEntite(){
         NULL, //SDL_Texture* sprites non initialisé !!!
         tmp, //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        {6,7}, //hitbox de l'entité (hauteur,largeur)
+        hittmp, //hitbox de l'entité (hauteur,largeur)
+        1,
         {6,7}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
+        0,
         0, //N'attend pas avant de changer d'animation
         compVenin //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };

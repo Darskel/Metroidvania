@@ -19,13 +19,13 @@
 
     rect1.x = TAILLE_BLOCK*e1->pos.x + e1->delta.x;
     rect1.y = TAILLE_BLOCK*e1->pos.y + e1->delta.y;
-    rect1.w = e1->type->hitbox.largeur;
-    rect1.h = e1->type->hitbox.hauteur;
+    rect1.w = e1->type->hitbox.w;
+    rect1.h = e1->type->hitbox.h;
 
     rect2.x = TAILLE_BLOCK*e2->pos.x + e2->delta.x;
     rect2.y = TAILLE_BLOCK*e2->pos.y + e2->delta.y;
-    rect2.w = e2->type->hitbox.largeur;
-    rect2.h = e2->type->hitbox.hauteur;
+    rect2.w = e2->type->hitbox.w;
+    rect2.h = e2->type->hitbox.h;
 
     return SDL_IntersectRect(&rect1,&rect2);
 }*/
@@ -67,6 +67,8 @@ static void recupElem(monstre_t* entite, personnage_t* perso){
  * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
 */
 int hitE(monstre_t* e1, monstre_t* e2){
+    SDL_Rect e1H;
+    SDL_Rect e2H;
 
     if(strcmp(e1->type->nom,"fleche") && strcmp(e1->type->nom,"fleche feu"))
         return FALSE;
@@ -81,34 +83,35 @@ int hitE(monstre_t* e1, monstre_t* e2){
         if(e2->pv == 2)
             return FALSE;
 
-    int leftE1, leftE2;
-    int rightE1, rightE2;
-    int topE1, topE2;
-    int bottomE1, bottomE2;
+    for(int i=0; i<e1->type->nbHitbox; i++){
+      e1H.w=e1->type->hitbox[e1->etat*e1->type->nbHitbox+i].w;
+      e1H.h=e1->type->hitbox[e1->etat*e1->type->nbHitbox+i].h;
+      e1H.y=e1->pos.y*TAILLEBLOC + e1->delta.y + e1->type->hitbox[e1->etat*e1->type->nbHitbox+i].y;
+      e1H.x=e1->pos.x*TAILLEBLOC + e1->delta.x;
+      if(e1->direction){
+        e1H.x+=e1->type->tailleSprite.largeur - e1->type->hitbox[e1->etat*e1->type->nbHitbox+i].x - e1H.w ;
+      }
+      else{
+        e1H.x+=e1->type->hitbox[e1->etat*e1->type->nbHitbox+i].x;
+      }
 
-    leftE1 = e1->pos.x*TAILLEBLOC + e1->delta.x + (e1->type->tailleSprite.largeur - e1->type->hitbox.largeur)/2;
-    topE1 = e1->pos.y*TAILLEBLOC + e1->delta.y + (e1->type->tailleSprite.hauteur - e1->type->hitbox.hauteur)/2;
-    rightE1 = leftE1 + e1->type->hitbox.largeur;
-    bottomE1 = topE1 + e1->type->hitbox.hauteur;
+      for(int j=0; j<e2->type->nbHitbox; j++){
+        e2H.w=e2->type->hitbox[e2->etat*e2->type->nbHitbox+j].w;
+        e2H.h=e2->type->hitbox[e2->etat*e2->type->nbHitbox+j].h;
+        e2H.y=e2->pos.y*TAILLEBLOC + e2->delta.y + e2->type->hitbox[e2->etat*e2->type->nbHitbox+j].y;
+        e2H.x=e2->pos.x*TAILLEBLOC + e2->delta.x;
+        if(e2->direction){
+          e2H.x+=e2->type->tailleSprite.largeur - e2->type->hitbox[e2->etat*e2->type->nbHitbox+j].x - e2H.w ;
+        }
+        else{
+          e2H.x+=e2->type->hitbox[e2->etat*e2->type->nbHitbox+j].x;
+        }
+        if(SDL_HasIntersection(&e1H, &e2H))
+          return TRUE;
+      }
+    }
 
-    leftE2 = e2->pos.x*TAILLEBLOC + e2->delta.x + (e2->type->tailleSprite.largeur - e2->type->hitbox.largeur)/2;
-    topE2 = e2->pos.y*TAILLEBLOC + e2->delta.y + (e2->type->tailleSprite.hauteur - e2->type->hitbox.hauteur)/2;
-    rightE2 = leftE2 + e2->type->hitbox.largeur;
-    bottomE2 = topE2 + e2->type->hitbox.hauteur;
-
-    if(bottomE1 <= topE2)
-        return FALSE;
-
-    if(topE1 >= bottomE2)
-        return FALSE;
-
-    if(rightE1 <= leftE2)
-        return FALSE;
-
-    if(leftE1 >= rightE2)
-        return FALSE;
-
-    return TRUE;
+    return FALSE;
 }
 
 /**
@@ -119,44 +122,44 @@ int hitE(monstre_t* e1, monstre_t* e2){
  *
  * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
 */
-static int hitP(monstre_t* m, personnage_t* p){
-    int leftE, leftP;
-    int rightE, rightP;
-    int topE, topP;
-    int bottomE, bottomP;
+int hitP(monstre_t* m, personnage_t* p){
+    SDL_Rect mH;
+    SDL_Rect pH;
+    int intersection = 0;
 
-    leftE = m->pos.x*TAILLEBLOC + m->delta.x;
-    rightE = leftE + m->type->hitbox.largeur;
-    topE = m->pos.y*TAILLEBLOC + m->delta.y + (m->type->tailleSprite.hauteur - m->type->hitbox.hauteur);
-    bottomE = topE + m->type->hitbox.hauteur;
+    pH.w=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].w;
+    pH.h=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].h;
+    pH.y=p->pos.y*TAILLEBLOC + p->delta.y + p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].y;
+    pH.x=p->pos.x*TAILLEBLOC + p->delta.x;
+    if(p->direction){
+      pH.x+=p->spriteActuel.w - p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x - pH.w ;
+    }
+    else{
+      pH.x+=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x;
+    }
 
-    leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
-    rightP = leftP + p->hitbox.largeur;
-    topP = p->pos.y*TAILLEBLOC + p->delta.y + 1;
-    bottomP = topP + p->hitbox.hauteur;
+    for(int i=0; i<m->type->nbHitbox && !intersection; i++){
+      mH.w=m->type->hitbox[m->etat*m->type->nbHitbox+i].w;
+      mH.h=m->type->hitbox[m->etat*m->type->nbHitbox+i].h;
+      mH.y=m->pos.y*TAILLEBLOC + m->delta.y + m->type->hitbox[m->etat*m->type->nbHitbox+i].y;
+      mH.x=m->pos.x*TAILLEBLOC + m->delta.x;
+      if(m->direction){
+        mH.x+=m->type->tailleSprite.largeur - m->type->hitbox[m->etat*m->type->nbHitbox+i].x - mH.w ;
+      }
+      else{
+        mH.x+=m->type->hitbox[m->etat*m->type->nbHitbox+i].x;
+      }
+      if(SDL_HasIntersection(&mH, &pH)){
+        intersection = 1;
+        if(pH.x + pH.w/2 < mH.x + mH.w/2)
+          intersection = -1;
+      }
+    }
 
-    if(bottomE <= topP)
-        return FALSE;
+    return intersection;
 
-    if(topE >= bottomP)
-        return FALSE;
-
-    if(rightE <= leftP)
-        return FALSE;
-
-    if(leftE >= rightP)
-        return FALSE;
-
-    int centerE = (leftE + rightE) / 2;
-
-    if(centerE > leftP)
-        if(centerE > rightP)
-            return -1;
-        else
-            return centerE - leftP > rightP - centerE ? -1 : 1;
-    else
-        return 1;
 }
+
 
 /**
  * \brief Vérifie si le deplacement du personnage est valide
@@ -166,39 +169,37 @@ static int hitP(monstre_t* m, personnage_t* p){
  *
  * @return 1 (TRUE) si le déplacement est valide, 0 (FALSE) sinon
 */
-int persValidDep(personnage_t* p, salle_t* s){
-    int leftP;
-    int rightP;
-    int topP;
-    int bottomP;
+int persValid(personnage_t* p, salle_t* s){
+    SDL_Rect pH;
+    SDL_Rect bloc;
+    bloc.w=TAILLEBLOC;
+    bloc.h=TAILLEBLOC;
 
-    leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
-    rightP = leftP + p->hitbox.largeur;
-    topP = p->pos.y*TAILLEBLOC + p->delta.y + 1;
-    bottomP = topP + p->hitbox.hauteur;
+    pH.w=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].w;
+    pH.h=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].h;
+    pH.y=p->pos.y*TAILLEBLOC + p->delta.y + p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].y;
+    pH.x=p->pos.x*TAILLEBLOC + p->delta.x;
+    if(p->direction){
+      pH.x+=p->spriteActuel.w - p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x - pH.w ;
+    }
+    else{
+      pH.x+=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x;
+    }
 
-    if(leftP < 0 || topP < 0)
+    if(pH.y + pH.h >= s->hauteur*TAILLEBLOC|| pH.x + pH.w >= s->largeur*TAILLEBLOC || pH.x < 0 || pH.y < 0)
         return FALSE;
 
-    leftP /= 8;
-    rightP = rightP/8 + (rightP%8 ? 1 : 0) - 1;
-    topP /= 8;
-    bottomP = bottomP/8 + (bottomP%8 ? 1 : 0) - 1;
-
-    //printf("_l%d_r%d_t%d_b%d_\n",leftP,rightP,topP,bottomP);
-
-    if(bottomP >= s->hauteur || rightP >= s->largeur)
-        return FALSE;
-
-    //printf("_l%d_r%d_t%d_b%d_\n",leftP,rightP,topP,bottomP);
-
-    for(int i = leftP; i <= rightP; i++)
-        for(int j = topP; j <= bottomP; j++)
-            if(s->mat[j][i]){
-                //printf("_%d,%d:%d_\n",j,i,s->mat[j][i]);
-                return FALSE;
+    for(int i = 0; i < s->largeur; i++){
+        for(int j = 0; j < s->hauteur; j++){
+          if(s->mat[j][i]){
+            bloc.x=i*bloc.w;
+            bloc.y=j*bloc.h;
+            if(SDL_HasIntersection(&pH, &bloc)){
+              return FALSE;
             }
-
+          }
+        }
+    }
     return TRUE;
 }
 
@@ -209,6 +210,8 @@ int persValidDep(personnage_t* p, salle_t* s){
  * @param s pointeur vers la salle
 */
 void depDroite(personnage_t* p, salle_t* s){
+    int oldposx=p->pos.x;
+    int olddeltax=p->delta.x;
     switch(p->etat){
         case IDLE:
         case RUNNING:
@@ -217,23 +220,17 @@ void depDroite(personnage_t* p, salle_t* s){
             p->delta.x += p->vit_dep;
             if(p->delta.x >= TAILLEBLOC){
                 (p->pos.x)++;
-                //p->delta.x = 0;
                 p->delta.x -= TAILLEBLOC;
             }
-            if(persValidDep(p,s)){
-              //Modifié par MN :
+            if(persValid(p,s)){
               if(p->etat==IDLE){
                 p->etat = RUNNING;
                 p->newEtat = TRUE;
               }
-              //
             }
             else{
-                p->delta.x = TAILLEBLOC - 1 + OFFSETHITBOX;
-                if(p->delta.x >= TAILLEBLOC)
-                    p->delta.x %= TAILLEBLOC;
-                else
-                    (p->pos.x)--;
+                p->delta.x = olddeltax;
+                p->pos.x = oldposx;
             }
             break;
         default:
@@ -248,6 +245,8 @@ void depDroite(personnage_t* p, salle_t* s){
  * @param s pointeur vers la salle
 */
 void depGauche(personnage_t* p, salle_t* s){
+  int oldposx=p->pos.x;
+  int olddeltax=p->delta.x;
     switch(p->etat){
         case IDLE:
         case RUNNING:
@@ -256,19 +255,17 @@ void depGauche(personnage_t* p, salle_t* s){
             p->delta.x -= p->vit_dep;
             if(p->delta.x < 0){
                 (p->pos.x)--;
-                //p->delta.x = TAILLEBLOC -1;
                 p->delta.x += TAILLEBLOC;
             }
-            if(persValidDep(p,s)){
-              //Modifié par MN :
+            if(persValid(p,s)){
               if(p->etat==IDLE){
                 p->etat = RUNNING;
                 p->newEtat = TRUE;
               }
-              //
             }
             else{
-                p->delta.x = TAILLEBLOC - OFFSETHITBOX;
+                p->pos.x = oldposx;
+                p->delta.x = olddeltax;
             }
             break;
         default:
@@ -283,28 +280,28 @@ void depGauche(personnage_t* p, salle_t* s){
  * @param s pointeur vers la salle
  * @return 1 (TRUE) si le il y a un bloc, 0 (FALSE) sinon
 */
-static int verifCaseUp(personnage_t* p, salle_t* s){
+/*static int verifCaseUp(personnage_t* p, salle_t* s){
     int leftP;
     int rightP;
     int topP;
 
-    leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
-    rightP = leftP + p->hitbox.largeur;
-    topP = p->pos.y*TAILLEBLOC + p->delta.y;
+    leftP = p->pos.x*TAILLEBLOC + p->delta.x + p->hitbox.x;
+    rightP = leftP + p->hitbox.w;
+    topP = p->pos.y*TAILLEBLOC + p->hitbox.y + p->delta.y;
 
     if(topP < 0)
         return TRUE;
 
-    leftP /= 8;
-    rightP = rightP/8 + (rightP%8 ? 1 : 0) - 1;
-    topP /= 8;
+    leftP /= TAILLEBLOC;
+    rightP = rightP/TAILLEBLOC;
+    topP = topP/TAILLEBLOC - (topP%TAILLEBLOC ? 1 : 0);
 
     for(int i = leftP; i <= rightP; i++)
         if(s->mat[topP][i])
             return TRUE;
 
     return FALSE;
-}
+}*/
 
 /**
  * \brief Vérifie la case en dessous du personnage
@@ -313,19 +310,18 @@ static int verifCaseUp(personnage_t* p, salle_t* s){
  * @param s pointeur vers la salle
  * @return 1 (TRUE) si le il y a un bloc, 0 (FALSE) sinon
 */
-static int verifCaseDown(personnage_t* p, salle_t* s){
+/*static int verifCaseDown(personnage_t* p, salle_t* s){
     int leftP;
     int rightP;
     int bottomP;
 
-    leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
-    rightP = leftP + p->hitbox.largeur;
-    bottomP = p->pos.y*TAILLEBLOC + p->delta.y + 1;
-    bottomP += p->hitbox.hauteur + 1;
+    leftP = p->pos.x*TAILLEBLOC + p->delta.x + p->hitbox.x;
+    rightP = leftP + p->hitbox.w;
+    bottomP = p->pos.y*TAILLEBLOC + p->delta.y + p->hitbox.y + p->hitbox.h;
 
     leftP /= TAILLEBLOC;
-    rightP = rightP/TAILLEBLOC + (rightP%TAILLEBLOC ? 1 : 0) - 1;
-    bottomP = bottomP/TAILLEBLOC + (bottomP%TAILLEBLOC ? 1 : 0) - 1;
+    rightP = rightP/TAILLEBLOC;
+    bottomP = bottomP/TAILLEBLOC + (bottomP%TAILLEBLOC ? 1 : 0);
 
     if(bottomP >= s->hauteur )
         return -1; //Le personnage est tombé dans un trou
@@ -335,7 +331,7 @@ static int verifCaseDown(personnage_t* p, salle_t* s){
             return TRUE;
 
     return FALSE;
-}
+}*/
 
 /**
  * \brief Gère le déplacement vertical du personnage quelque soit son état
@@ -346,152 +342,187 @@ static int verifCaseDown(personnage_t* p, salle_t* s){
 */
 void depVert(personnage_t* p, salle_t* s, int tryJump){
     int idSaut;
+    int oldposy = p->pos.y;
+    int olddeltay = p->delta.y;
+    etat_t oldetat = p->etat;
+    int tailleSaut = NBPXSAUT;
+    if(p->forme=='r')
+      tailleSaut = 3*TAILLEBLOC;
     for(idSaut = 0; idSaut < TAILLE_INVENTAIRE && strcmp(p->nomObj[idSaut],"double saut"); idSaut++);
     if(p->jpCd){
         (p->jpCd)--;
     }
-    if(p->kb)
+    if(p->kb){
         switch(p->etat){
             case IDLE:
             case RUNNING:
                 p->etat = JUMPING;
                 p->newEtat = TRUE;
                 p->nbPxSaut = 0;
+                p->nbSaut = 1;
                 break;
             case JUMPING:
-                if(verifCaseUp(p,s)){
+                if(p->nbPxSaut >= (tailleSaut / 3)){
+                  p->etat = FALLING;
+                  p->newEtat = TRUE;
+                }else{
+                  if(p->direction==LEFT)
+                    depDroite(p,s);
+                  if(p->direction==RIGHT)
+                    depGauche(p,s);
+                  p->delta.y -= p->vit_saut*2;
+                  if(p->delta.y < 0){
+                    (p->pos.y)--;
+                    p->delta.y += TAILLEBLOC;
+                  }
+                  if(!persValid(p,s)){
+                    p->pos.y= oldposy;
+                    p->delta.y= olddeltay;
+                    if(p->direction==LEFT)
+                      depDroite(p,s);
+                    if(p->direction==RIGHT)
+                      depGauche(p,s);
                     p->etat = FALLING;
                     p->newEtat = TRUE;
-                }
-                else{
-                    if((p->nbPxSaut >= (NBPXSAUT / 4) && p->forme == 'H') || p->nbPxSaut >= (NBPXSAUT / 4)/4){
-                        p->etat = FALLING;
-                        p->newEtat = TRUE;
-                    }else{
-                        p->delta.y -= p->vit_saut;
-                        if(p->delta.y < 0){
-                            (p->pos.y)--;
-                            p->delta.y += TAILLEBLOC;
-                        }
-                        if(!persValidDep(p,s)){
-                            //traitement si le pixel juste au dessus est accessible mais pas la position d'arrivé
-                            //aka trouver le position de cognement
-                            (p->pos.y)++;
-                            p->delta.y = 1;
-                        }else{
-                            p->nbPxSaut += p->vit_saut;
-                        }
+                  }else{
+                      oldposy=p->pos.y;
+                      olddeltay=p->delta.y;
+                      p->nbPxSaut += p->vit_saut*2;
                     }
-                }
+                  }
                 break;
             case FALLING:
-                if(verifCaseDown(p,s)){
-                    p->etat = IDLE; //défini comme tel pour éviter de sortir de etat_t mais on ne sait pas si il est IDLE ou RUNNING
-                    p->newEtat = TRUE;
-                    p->jpCd = JPCD/4;
-                    p->kb = 0;
-                    p->inv = TEMPINV;
-                }else{
-                    //continuer chute
-                    p->delta.y += p->vit_chute;
-                    if(p->delta.y >= TAILLEBLOC){
-                        (p->pos.y)++;
-                        p->delta.y -= TAILLEBLOC;
-                    }
-                    if(!persValidDep(p,s)){
-                        //traitement si le pixel juste en dessous est accessible mais pas la position d'arrivé
-                        //aka trouver le position de cognement
-                        (p->pos.y)--;
-                        p->delta.y = 1;
-                    }
+                //continuer chute
+                if(p->direction==LEFT)
+                  depDroite(p,s);
+                if(p->direction==RIGHT)
+                  depGauche(p,s);
+                p->delta.y += p->vit_chute*2;
+                if(p->delta.y >= TAILLEBLOC){
+                  (p->pos.y)++;
+                  p->delta.y -= TAILLEBLOC;
+                }
+                if(!persValid(p,s)){
+                  p->pos.y=oldposy;
+                  p->delta.y = olddeltay;
+                  if(p->direction==LEFT)
+                    depDroite(p,s);
+                  if(p->direction==RIGHT)
+                    depGauche(p,s);
+                  p->etat = IDLE; //défini comme tel pour éviter de sortir de etat_t mais on ne sait pas si il est IDLE ou RUNNING
+                  p->newEtat = TRUE;
+                  p->nbPxSaut = 0;
+                  p->kb = 0;
+                  p->inv = TEMPINV;
+                  p->nbSaut = 0;
+                }
+                else{
+                  oldposy=p->pos.y;
+                  olddeltay=p->delta.y;
                 }
                 break;
-            default:
-                break;
-        }
-    else
+            }
+          }
+    else{
         switch(p->etat){
             case IDLE:
             case RUNNING:
+            case ATTACKING:
                 if(tryJump && !p->jpCd){
                     p->etat = JUMPING;
                     p->newEtat = TRUE;
                     p->nbSaut = 1;
                     p->nbPxSaut = 0;
-                }else
-                    if(!verifCaseDown(p,s)){
-                        p->etat = FALLING;
-                        p->nbSaut = 1;
-                        p->newEtat = TRUE;
+                }else{
+                    p->etat = JUMPING;
+                    p->delta.y += p->vit_chute;
+                    if(p->delta.y >= TAILLEBLOC){
+                        (p->pos.y)++;
+                        p->delta.y -= TAILLEBLOC;
                     }
+                    if(persValid(p,s)){
+                      p->etat = FALLING;
+                      p->nbSaut = 1;
+                      p->nbPxSaut = 0;
+                      p->newEtat = TRUE;
+                      oldposy=p->pos.y;
+                      olddeltay=p->delta.y;
+                    }
+                    else{
+                      p->etat = oldetat;
+                      p->pos.y=oldposy;
+                      p->delta.y=olddeltay;
+                    }
+                  }
                 break;
             case JUMPING:
-                if(verifCaseUp(p,s)){
-                    p->etat = FALLING;
-                    p->newEtat = TRUE;
-                }
-                else
-                    if(tryJump && p->nbSaut < 1 + p->inventaire[idSaut]){
-                        //non testé
-                        (p->nbSaut)++;
-                        p->nbPxSaut = 0;
-                        //trouver comment gerer l'animation de resaut
-                    }
-                    else
-                        if(p->nbPxSaut >= NBPXSAUT){
+                if(tryJump && p->nbSaut < 1 + p->inventaire[idSaut]){
+                    (p->nbSaut)++;
+                    p->nbPxSaut = 0;
+                  }
+                else{
+                    if(p->nbPxSaut >= tailleSaut){
                             p->etat = FALLING;
                             p->newEtat = TRUE;
+                            p->nbPxSaut = 0;
                         }else{
                             p->delta.y -= p->vit_saut;
                             if(p->delta.y < 0){
                                 (p->pos.y)--;
                                 p->delta.y += TAILLEBLOC;
                             }
-                            if(!persValidDep(p,s)){
-                                //traitement si le pixel juste au dessus est accessible mais pas la position d'arrivé
-                                //aka trouver le position de cognement
-                                (p->pos.y)++;
-                                p->delta.y = 1;
+                            if(!persValid(p,s)){
+                                p->pos.y = oldposy;
+                                p->delta.y = olddeltay;
+                                p->etat = FALLING;
+                                p->newEtat = TRUE;
+                                p->nbPxSaut = 0;
                             }else{
                                 p->nbPxSaut += p->vit_saut;
+                                oldposy=p->pos.y;
+                                olddeltay=p->delta.y;
                             }
                         }
+                    }
                 break;
             case FALLING:
-                if(verifCaseDown(p,s)){
-                    p->etat = IDLE; //défini comme tel pour éviter de sortir de etat_t mais on ne sait pas si il est IDLE ou RUNNING
-                    p->nbSaut = 0;
-                    p->newEtat = TRUE;
-                    p->jpCd = JPCD;
-                }else
-                    if(tryJump && p->nbSaut < 1 + p->inventaire[idSaut] && !p->jpCd){
-                        (p->nbSaut)++;
-                        p->nbPxSaut = 0;
-                        p->etat = JUMPING;
-                        p->newEtat = TRUE;
-                    }
-                    else{
-                        //continuer chute
-                        p->delta.y += p->vit_chute;
-                        if(p->delta.y >= TAILLEBLOC){
-                            (p->pos.y)++;
-                            p->delta.y -= TAILLEBLOC;
+                  if(tryJump && p->nbSaut < 1 + p->inventaire[idSaut] && !p->jpCd){
+                      (p->nbSaut)++;
+                      p->nbPxSaut = 0;
+                      p->etat = JUMPING;
+                      p->newEtat = TRUE;
+                  }
+                  else{
+                      //continuer chute
+                      p->delta.y += p->vit_chute;
+                      if(p->delta.y >= TAILLEBLOC){
+                          (p->pos.y)++;
+                          p->delta.y -= TAILLEBLOC;
+                      }
+                      if(!persValid(p,s)){
+                          //traitement si le pixel juste en dessous est accessible mais pas la position d'arrivé
+                          //aka trouver le position de cognement
+                          p->pos.y= oldposy;
+                          p->delta.y = olddeltay;
+                          p->etat = IDLE; //défini comme tel pour éviter de sortir de etat_t mais on ne sait pas si il est IDLE ou RUNNING
+                          p->nbSaut = 0;
+                          p->nbPxSaut = 0;
+                          p->newEtat = TRUE;
+                          p->jpCd = JPCD;
                         }
-                        if(!persValidDep(p,s)){
-                            //traitement si le pixel juste en dessous est accessible mais pas la position d'arrivé
-                            //aka trouver le position de cognement
-                            (p->pos.y)--;
-                            p->delta.y = 1;
-                        }
+                      else{
+                        oldposy=p->pos.y;
+                        olddeltay=p->delta.y;
+                      }
                     }
-                break;
-            default:
                 break;
         }
+      }
 }
 
 void attaquer(personnage_t* p, salle_t* s, int tryAtk){
-    if(p->forme == 'R')
+  SDL_Rect pH;
+    if(p->forme == 'r')
         return;
     if(p->kb && (p->etat == ATTACKING || tryAtk)){
         if(p->etat == ATTACKING){
@@ -510,37 +541,37 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
 
                 f->pv = f->type->pv_base;
 
-                int leftP = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
-                int rightP = leftP + p->hitbox.largeur;
 
+                pH.w=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].w;
+                pH.h=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].h;
+                pH.y=p->pos.y*TAILLEBLOC + p->delta.y + p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].y;
+                pH.x=p->pos.x*TAILLEBLOC + p->delta.x;
                 if(p->direction){
-                    f->delta = (position_t){rightP%8,1};
-                    f->pos = (position_t){rightP/8,p->pos.y+2};
-                    f->direction = RIGHT;
-                }else{
-                    p->delta.x += 5;
-                    if(p->delta.x >= TAILLEBLOC){
-                        p->delta.x -= TAILLEBLOC;
-                        p->pos.x++;
-                    }
-                    f->delta = (position_t){leftP%8,1};
-                    f->pos = (position_t){leftP/8 - 1,p->pos.y+2};
-                    f->direction = LEFT;
+                  pH.x+=p->spriteActuel.w - p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x - pH.w ;
+                  f->delta.x=0;
+                  f->delta.y=(pH.y + pH.h/2)%TAILLEBLOC;
+                  f->pos.x=(pH.x + pH.w)/TAILLEBLOC;
+                  f->pos.y=(pH.y + pH.h/2)/TAILLEBLOC -1;
+                  f->delta.y+=2;
+                  if(f->delta.y>=TAILLEBLOC) {
+                    f->delta.y-=TAILLEBLOC;
+                    f->pos.y++;
+                  }
+                  f->direction = RIGHT;
                 }
-
-                /*f->delta.x += f->type->vit_dep * f->direction ? 1 : -1;
-
-                if(f->direction){
-                    if(f->delta.x >= TAILLEBLOC){
-                        (f->pos.x)++;
-                        f->delta.x -= TAILLEBLOC;
-                    }
-                }else{
-                    if(f->delta.x < 0){
-                        (f->pos.x)--;
-                        f->delta.x += TAILLEBLOC;
-                    }
-                }*/
+                else{
+                  pH.x+=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x;
+                  f->delta.x=0;
+                  f->delta.y=(pH.y + pH.h/2)%TAILLEBLOC;
+                  f->pos.x=(pH.x)/TAILLEBLOC;
+                  f->pos.y=(pH.y + pH.h/2)/TAILLEBLOC -1;
+                  f->delta.y+=2;
+                  if(f->delta.y>=TAILLEBLOC) {
+                    f->delta.y-=TAILLEBLOC;
+                    f->pos.y++;
+                  }
+                  f->direction = LEFT;
+                }
 
                 f->etat = RUNNING;
                 f->newEtat = TRUE;
@@ -573,27 +604,71 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
                 p->etat = ATTACKING;
                 p->newEtat = TRUE;
                 p->nbFrameAtk = 0;
-                if(!p->direction){
-                    p->delta.x -= 5;
-                    if(p->delta.x < 0){
-                        p->delta.x += TAILLEBLOC;
-                        p->pos.x--;
-                    }
                 }
             }
         }
-    }
 }
 
-void transformation(personnage_t* p){
-    if(p->etat != ATTACKING)
-        if(p->forme == 'H'){
-            p->forme = 'R';
-            p->hitbox = (taille_t){HAUTEURHITBOXREN,LARGEURHITBOXREN};
-        }else{
-            p->forme = 'H';
-            p->hitbox = (taille_t){HAUTEURHITBOXPERS,LARGEURHITBOXPERS};
+void transformation(personnage_t* p, salle_t* s){
+  SDL_Texture * temp=NULL;
+  int deltaytmp=0;
+  if(p->inventaire[7]){
+    if(p->etat != ATTACKING){
+        if(p->forme == 'h'){
+            p->forme = 'r';
+            p->hitboxActuelle=1;
+            if(persValid(p,s)){
+              p->etat=IDLE;
+              p->newEtat=TRUE;
+              p->nbAnim[IDLE]=1;
+              p->nbAnim[RUNNING]=5;
+              p->nbAnim[JUMPING]=3;
+              p->nbAnim[ATTACKING]=0;
+              p->spriteActuel.x=0;
+              p->spriteActuel.y=IDLE;
+              p->spriteActuel.w=LARGEURSPRITERENARD;
+              p->spriteActuel.h=HAUTEURSPRITERENARD;
+              p->evoSprite=p->vitAnim[p->etat];
+              temp=p->sprites;
+              p->sprites=p->spritesR;
+              p->spritesR=temp;
+            }
+            else{
+              p->forme = 'h';
+              p->hitboxActuelle=0;
+            }
+        }else if(p->forme == 'r'){
+            p->forme = 'h';
+            p->pos.y-=3;
+            deltaytmp=p->delta.y;
+            p->delta.y=TAILLEBLOC-1;
+            p->hitboxActuelle=0;
+
+            if(persValid(p,s)){
+              p->etat=IDLE;
+              p->newEtat=TRUE;
+              p->nbAnim[IDLE]=1;
+              p->nbAnim[RUNNING]=8;
+              p->nbAnim[JUMPING]=8;
+              p->nbAnim[ATTACKING]=3;
+              p->spriteActuel.x=0;
+              p->spriteActuel.y=IDLE;
+              p->spriteActuel.w=LARGEURSPRITEPERS;
+              p->spriteActuel.h=HAUTEURSPRITEPERS;
+              p->evoSprite=p->vitAnim[p->etat];
+              temp=p->sprites;
+              p->sprites=p->spritesR;
+              p->spritesR=temp;
+            }
+          else{
+            p->forme = 'r';
+            p->hitboxActuelle=1;
+            p->pos.y+=3;
+            p->delta.y=deltaytmp;
+          }
         }
+    }
+  }
 }
 
 /**
@@ -604,6 +679,9 @@ void transformation(personnage_t* p){
  * @return une chaine de caractères correspondant au fichier texte à charger (nouvelle salle)
 */
 char* prendPorte(personnage_t* p, liste_t* lPortes){
+    SDL_Rect pH;
+    SDL_Rect porteH;
+
     if(strcmp(lPortes->type,"porte"))
         return NULL;
 
@@ -614,19 +692,25 @@ char* prendPorte(personnage_t* p, liste_t* lPortes){
     enTete(lPortes);
     while(!horsListe(lPortes)){
         valeurElm(lPortes,&porte);
-        int leftPo = porte.pos.x * TAILLEBLOC;
-        int rightPo = leftPo + TAILLEBLOC;
-        int topPo = porte.pos.y * TAILLEBLOC;
-        int bottomPo = topPo + TAILLEBLOC;
+        porteH.x = porte.pos.x * TAILLEBLOC+ TAILLEBLOC/2;
+        porteH.w = TAILLEBLOC/4;
+        porteH.y = porte.pos.y * TAILLEBLOC;
+        porteH.h = TAILLEBLOC;
 
-        int leftPe = p->pos.x*TAILLEBLOC + p->delta.x + OFFSETHITBOX;
-        int rightPe = leftPe + p->hitbox.largeur;
-        int topPe = p->pos.y*TAILLEBLOC + p->delta.y + 1;
-        int bottomPe = topPe + p->hitbox.hauteur;
+        pH.w=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].w;
+        pH.h=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].h;
+        pH.y=p->pos.y*TAILLEBLOC + p->delta.y + p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].y;
+        pH.x=p->pos.x*TAILLEBLOC + p->delta.x;
+        if(p->direction){
+          pH.x+=p->spriteActuel.w - p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x - pH.w ;
+        }
+        else{
+          pH.x+=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x;
+        }
 
-        if(rightPe >= rightPo && leftPe <= leftPo && topPe <= topPo && bottomPe >= bottomPo){
+        if(SDL_HasIntersection(&(porteH),&(pH))){
             p->pos = porte.pos_arrivee;
-            p->delta.x = 1;
+            p->delta.x = 0;
             p->delta.y = TAILLEBLOC -1;
             p->apparition = porte.pos_arrivee;
             salle = malloc(sizeof(char)*(strlen(porte.salleSuivante)+1));
@@ -647,39 +731,39 @@ char* prendPorte(personnage_t* p, liste_t* lPortes){
  * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
 */
 static int hitB(monstre_t* m, salle_t* s){
-    int leftM;
-    int rightM;
-    int topM;
-    int bottomM;
+  SDL_Rect mH;
+  SDL_Rect bloc;
+  bloc.w=TAILLEBLOC;
+  bloc.h=TAILLEBLOC;
 
-    leftM = m->pos.x*TAILLEBLOC + m->delta.x;
-    rightM = leftM + m->type->hitbox.largeur;
-    topM = m->pos.y*TAILLEBLOC + m->delta.y + (m->type->tailleSprite.hauteur - m->type->hitbox.hauteur);
-    bottomM = topM + m->type->hitbox.hauteur;
+  for(int i=0; i<m->type->nbHitbox; i++){
+    mH.w=m->type->hitbox[m->etat*m->type->nbHitbox+i].w;
+    mH.h=m->type->hitbox[m->etat*m->type->nbHitbox+i].h;
+    mH.y=m->pos.y*TAILLEBLOC + m->delta.y + m->type->hitbox[m->etat*m->type->nbHitbox+i].y;
+    mH.x=m->pos.x*TAILLEBLOC + m->delta.x;
+    if(m->direction){
+      mH.x+=m->type->tailleSprite.largeur - m->type->hitbox[m->etat*m->type->nbHitbox+i].x - mH.w ;
+    }
+    else{
+      mH.x+=m->type->hitbox[m->etat*m->type->nbHitbox+i].x;
+    }
 
-    if(m->direction)
-        rightM -= (m->type->tailleSprite.largeur - m->type->hitbox.largeur);
-    else
-        leftM += (m->type->tailleSprite.largeur - m->type->hitbox.largeur);
-
-    if(leftM < 0 || topM < 0)
+    if(mH.y + mH.h >= s->hauteur*TAILLEBLOC|| mH.x + mH.w >= s->largeur*TAILLEBLOC || mH.x < 0 || mH.y < 0)
         return TRUE;
 
-    leftM /= 8;
-    rightM = rightM/8 + (rightM%8 ? 1 : 0) - 1;
-    topM /= 8;
-    bottomM = bottomM/8 + (bottomM%8 ? 1 : 0) - 1;
-
-    if(bottomM >= s->hauteur || rightM >= s->largeur)
-        return TRUE;
-
-    for(int i = leftM; i <= rightM; i++)
-        for(int j = topM; j <= bottomM; j++)
-            if(s->mat[j][i]){
-                return TRUE;
+    for(int i = 0; i < s->largeur; i++){
+        for(int j = 0; j < s->hauteur; j++){
+          if(s->mat[j][i]){
+            bloc.x=i*bloc.w;
+            bloc.y=j*bloc.h;
+            if(SDL_HasIntersection(&mH, &bloc)){
+              return TRUE;
             }
-
-    return FALSE;
+          }
+        }
+    }
+  }
+  return FALSE;
 }
 
 /**
@@ -689,19 +773,18 @@ static int hitB(monstre_t* m, salle_t* s){
  * @param s pointeur vers la salle
  * @return 1 (TRUE) si le monstre doit chuter, 0 (FALSE) sinon
 */
-static int verifChuteMonstre(monstre_t* m, salle_t* s){
+/*static int verifChuteMonstre(monstre_t* m, salle_t* s){
     int leftM;
     int rightM;
     int bottomM;
 
-    leftM = m->pos.x*TAILLEBLOC + m->delta.x;
-    rightM = leftM + m->type->hitbox.largeur - (m->type->tailleSprite.largeur - m->type->hitbox.largeur)/2;
-    bottomM = m->pos.y*TAILLEBLOC + m->delta.y;
-    bottomM += m->type->hitbox.hauteur + (m->type->tailleSprite.hauteur - m->type->hitbox.hauteur);
+    leftM = m->pos.x*TAILLEBLOC + m->delta.x + m->type->hitbox.x;
+    rightM = leftM + m->type->hitbox.w;
+    bottomM = m->pos.y*TAILLEBLOC + m->delta.y + m->type->hitbox.y + m->type->hitbox.h;
 
     leftM /= TAILLEBLOC;
-    rightM = rightM/TAILLEBLOC + (rightM%TAILLEBLOC ? 1 : 0) - 1;
-    bottomM = bottomM/TAILLEBLOC + (bottomM%TAILLEBLOC == 7 ? 1 : 0);
+    rightM = rightM/TAILLEBLOC;
+    bottomM = bottomM/TAILLEBLOC - (bottomM%TAILLEBLOC ? 1 : 0);
 
     if(bottomM >= s->hauteur)
         return -1; //Le monstre est tombé dans le vide ?
@@ -712,7 +795,7 @@ static int verifChuteMonstre(monstre_t* m, salle_t* s){
     }
 
     return FALSE;
-}
+}*/
 
 /**
  * \brief Gère le déplacement d'une entite (monstre)
@@ -721,6 +804,10 @@ static int verifChuteMonstre(monstre_t* m, salle_t* s){
  * @param salle le pointeur vers la structure salle où se trouve l'entite
 */
 static int dep(monstre_t* entite, salle_t* salle, boolean_t chute){
+    int oldposx=entite->pos.x;
+    int olddeltax=entite->delta.x;
+    int oldposy = entite->pos.y;
+    int olddeltay = entite->delta.y;
     if(entite->pv){
         if(entite->direction){
             entite->delta.x += entite->type->vit_dep;
@@ -728,8 +815,23 @@ static int dep(monstre_t* entite, salle_t* salle, boolean_t chute){
                 (entite->pos.x)++;
                 entite->delta.x -= TAILLEBLOC;
             }
-            if(hitB(entite,salle) || (verifChuteMonstre(entite,salle) && chute))
+            if(!hitB(entite,salle))
                 return TRUE;
+            else{
+              entite->pos.x=oldposx;
+              entite->delta.x=olddeltax;
+            }
+            entite->delta.y ++;
+            if(entite->delta.y >= TAILLEBLOC){
+                (entite->pos.y)++;
+                entite->delta.y -= TAILLEBLOC;
+            }
+            if(!hitB(entite,salle) && chute)
+              return TRUE;
+            else{
+              entite->pos.y=oldposy;
+              entite->delta.y=olddeltay;
+            }
             return FALSE;
         }else{
             entite->delta.x -= entite->type->vit_dep;
@@ -737,54 +839,77 @@ static int dep(monstre_t* entite, salle_t* salle, boolean_t chute){
                 (entite->pos.x)--;
                 entite->delta.x += TAILLEBLOC;
             }
-            if(hitB(entite,salle) || (verifChuteMonstre(entite,salle) && chute))
+            if(!hitB(entite,salle))
                 return TRUE;
+            else{
+              entite->pos.x=oldposx;
+              entite->delta.x=olddeltax;
+            }
+            entite->delta.y += entite->type->vit_dep;
+            if(entite->delta.y >= TAILLEBLOC){
+                (entite->pos.y)++;
+                entite->delta.y -= TAILLEBLOC;
+            }
+            if(!hitB(entite,salle) && chute)
+              return TRUE;
+          else{
+              entite->pos.y=oldposy;
+              entite->delta.y=olddeltay;
+            }
             return FALSE;
         }
     }
     return FALSE;
 }
 
-static int inRange(monstre_t* entite, personnage_t* perso, salle_t* salle, int radius, boolean_t checkUpside){
-    int leftE, leftP;
-    int rightE, rightP;
-    int topE, topP;
-    int bottomE, bottomP;
+static int inRange(monstre_t* m, personnage_t* perso, salle_t* salle, boolean_t checkUpside){
+    SDL_Rect pH;
+    SDL_Rect mH;
+    SDL_Rect bloc;
+    bloc.w=TAILLEBLOC;
+    bloc.h=TAILLEBLOC;
 
-    leftE = entite->pos.x*TAILLEBLOC + entite->delta.x;
-    rightE = leftE + entite->type->hitbox.largeur;
-    topE = entite->pos.y*TAILLEBLOC + entite->delta.y + (entite->type->tailleSprite.hauteur - entite->type->hitbox.hauteur);
-    bottomE = topE + entite->type->hitbox.hauteur;
+    pH.w=perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].w;
+    pH.h=perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].h;
+    pH.y=perso->pos.y*TAILLEBLOC + perso->delta.y + perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].y;
+    pH.x=perso->pos.x*TAILLEBLOC + perso->delta.x;
+    if(perso->direction){
+      pH.x+=perso->spriteActuel.w - perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].x - pH.w ;
+    }
+    else{
+      pH.x+=perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].x;
+    }
 
-    if(entite->direction)
-        rightE -= (entite->type->tailleSprite.largeur - entite->type->hitbox.largeur);
-    else
-        leftE += (entite->type->tailleSprite.largeur - entite->type->hitbox.largeur);
-
-    leftP = perso->pos.x*TAILLEBLOC + perso->delta.x + OFFSETHITBOX;
-    rightP = leftP + perso->hitbox.largeur;
-    topP = perso->pos.y*TAILLEBLOC + perso->delta.y + 1;
-    bottomP = topP + perso->hitbox.hauteur;
-
-    if(!checkUpside && bottomP < topE)
+    for(int i=0; i<m->type->nbHitbox; i++){
+      mH.w=m->type->hitbox[m->etat*m->type->nbHitbox+i].w + m->type->radius;
+      mH.h=m->type->hitbox[m->etat*m->type->nbHitbox+i].h;
+      mH.y=m->pos.y*TAILLEBLOC + m->delta.y + m->type->hitbox[m->etat*m->type->nbHitbox+i].y;
+      mH.x=m->pos.x*TAILLEBLOC + m->delta.x;
+      if(!m->direction){
+        mH.x+=m->type->tailleSprite.largeur - m->type->hitbox[m->etat*m->type->nbHitbox+i].x - mH.w;
+      }
+      else{
+        mH.x+=m->type->hitbox[m->etat*m->type->nbHitbox+i].x;
+      }
+      if(!checkUpside && ((pH.y + pH.h) < (mH.y) || (pH.y) > (mH.y + mH.h)))
         return FALSE;
 
-    if(leftE - radius < rightP && leftP < leftE && !entite->direction){
-        for(int i = rightP/TAILLEBLOC; i < leftE/TAILLEBLOC; i++)
-            for(int j = topE/TAILLEBLOC; j < bottomE/TAILLEBLOC; j++)
-                if(salle->mat[j][i])
-                    return FALSE;
-        return TRUE;
-    }
-
-    if(rightE + radius > leftP && rightP > rightE && entite->direction){
-        for(int i = rightE/TAILLEBLOC; i < leftP/TAILLEBLOC; i++)
-            for(int j = topE/TAILLEBLOC; j < bottomE/TAILLEBLOC; j++)
-                if(salle->mat[j][i])
-                    return FALSE;
-        return TRUE;
-    }
-
+        for(int i = 0; i < salle->largeur; i++){
+            for(int j = 0; j < salle->hauteur; j++){
+              if(salle->mat[j][i]){
+                bloc.x=i*bloc.w;
+                bloc.y=j*bloc.h;
+                if(SDL_HasIntersection(&mH, &bloc)){
+                  if(!((m->direction && (bloc.x>pH.x)) || (!m->direction && (bloc.x<pH.x))))
+                    if(SDL_HasIntersection(&mH, &pH))
+                      return TRUE;
+                }
+              }
+            }
+          }
+        if(SDL_HasIntersection(&mH, &pH))
+          return TRUE;
+      }
     return FALSE;
 }
 
@@ -839,7 +964,7 @@ void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle){
         suivant(salle->listeEntite);
     }
 
-    if(dep(entite,salle,FALSE)){
+    if(!dep(entite,salle,FALSE)){
         entite->pv = 0;
         entite->etat = IDLE;
         entite->newEtat = TRUE;
@@ -909,14 +1034,20 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
         perso->kb = 1;
         perso->hit = TRUE;
         perso->etat = IDLE;
-        entite->direction = dir > 0 ? 0 : 1;
-        perso->direction = entite->direction;
+
+        if(dir==-1)
+          perso->direction=RIGHT;
+        else
+          perso->direction=LEFT;
+
+        entite->direction = perso->direction;
+
         if(!(perso->sounds & puissance(2,SOUND_TOUCHE)))
             perso->sounds += puissance(2,SOUND_TOUCHE);
     }else{
         entite->ut--;
         if(entite->ut <= 0){
-            if(dep(entite,salle,TRUE)){
+            if(!dep(entite,salle,FALSE)){
                 if(entite->direction){
                     entite->direction = LEFT;
                     entite->delta.x -= entite->type->vit_dep;
@@ -940,21 +1071,26 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
 }
 
 void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
+  SDL_Rect mH;
     int dir = hitP(entite,perso);
     if(dir && !perso->hit){
         perso->kb = 1;
         perso->hit = FALSE;
         perso->etat = IDLE;
-        entite->direction = dir > 0 ? 0 : 1;
-        perso->direction = entite->direction;
-        if(!(perso->sounds & puissance(2,SOUND_TOUCHE)))
-            perso->sounds += puissance(2,SOUND_TOUCHE);
+
+        if(dir==-1)
+          perso->direction=RIGHT;
+        else
+          perso->direction=LEFT;
+
+        entite->direction = perso->direction;
+
     }
 
     if(entite->cdAtt > 0)
         entite->cdAtt--;
 
-    if(!entite->cdAtt && (entite->etat == ATTACKING || inRange(entite,perso,salle,10*TAILLEBLOC,FALSE))){
+    if(!entite->cdAtt && (entite->etat == ATTACKING || inRange(entite,perso,salle,FALSE))){
         if(entite->etat != ATTACKING){
             entite->ut = 10;
             entite->etat = ATTACKING;
@@ -968,31 +1104,35 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
 
                 f->pv = f->type->pv_base;
 
-                int leftP = entite->pos.x*TAILLEBLOC + entite->delta.x + OFFSETHITBOX;
-                int rightP = leftP + entite->type->hitbox.largeur;
-
+                mH.w=entite->type->hitbox[entite->etat*entite->type->nbHitbox+0].w;
+                mH.h=entite->type->hitbox[entite->etat*entite->type->nbHitbox+0].h;
+                mH.y=entite->pos.y*TAILLEBLOC + entite->delta.y + entite->type->hitbox[entite->etat*entite->type->nbHitbox+0].y;
+                mH.x=entite->pos.x*TAILLEBLOC + entite->delta.x;
                 if(entite->direction){
-                    f->delta = (position_t){rightP%8,1};
-                    f->pos = (position_t){rightP/8,entite->pos.y+2};
-                    f->direction = RIGHT;
-                }else{
-                    f->delta = (position_t){leftP%8,1};
-                    f->pos = (position_t){leftP/8 - 1,entite->pos.y+2};
-                    f->direction = LEFT;
+                  f->direction = RIGHT;
+                  mH.x+=entite->type->tailleSprite.largeur - entite->type->hitbox[entite->etat*entite->type->nbHitbox+0].x - mH.w ;
+                  f->delta.x=0;
+                  f->delta.y=(mH.y + mH.h/2)%TAILLEBLOC;
+                  f->pos.x=(mH.x + mH.w)/TAILLEBLOC;
+                  f->pos.y=(mH.y + mH.h/2)/TAILLEBLOC -1;
+                  f->delta.y+=2;
+                  if(f->delta.y>=TAILLEBLOC) {
+                    f->delta.y-=TAILLEBLOC;
+                    f->pos.y++;
+                  }
                 }
-
-                f->delta.x += f->type->vit_dep * f->direction ? 1 : -1;
-
-                if(f->direction){
-                    if(f->delta.x >= TAILLEBLOC){
-                        (f->pos.x)++;
-                        f->delta.x -= TAILLEBLOC;
-                    }
-                }else{
-                    if(f->delta.x < 0){
-                        (f->pos.x)--;
-                        f->delta.x += TAILLEBLOC;
-                    }
+                else{
+                  f->direction = LEFT;
+                  mH.x+=entite->type->hitbox[entite->etat*entite->type->nbHitbox+0].x;
+                  f->delta.x=0;
+                  f->delta.y=(mH.y + mH.h/2)%TAILLEBLOC;
+                  f->pos.x=(mH.x)/TAILLEBLOC;
+                  f->pos.y=(mH.y + mH.h/2)/TAILLEBLOC -1;
+                  f->delta.y+=2;
+                  if(f->delta.y>=TAILLEBLOC) {
+                    f->delta.y-=TAILLEBLOC;
+                    f->pos.y++;
+                  }
                 }
 
                 f->etat = IDLE;
@@ -1013,7 +1153,7 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
     }else{
         entite->ut--;
         if(entite->ut <= 0){
-            if(dep(entite,salle,TRUE)){
+            if(!dep(entite,salle,FALSE)){
                 if(entite->direction){
                     entite->direction = LEFT;
                     entite->delta.x -= entite->type->vit_dep;
@@ -1038,18 +1178,31 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
 
 void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle){
     int dir = hitP(entite,perso);
+    int tmp;
     if(dir && !perso->hit){
         perso->pv -= entite->type->degat;
         perso->kb = 1;
         perso->etat = IDLE;
         perso->hit = TRUE;
         entite->newEtat = TRUE;
-        perso->direction = dir > 0 ? 0 : 1;
+
+        if(dir==-1)
+          perso->direction=RIGHT;
+        else
+          perso->direction=LEFT;
+
+        entite->direction = perso->direction;
+
         if(!(perso->sounds & puissance(2,SOUND_TOUCHE)))
             perso->sounds += puissance(2,SOUND_TOUCHE);
     }
-
-    if(entite->pos.x * TAILLEBLOC + entite->delta.x > perso->pos.x * TAILLEBLOC + perso->delta.x)
+    if(perso->direction){
+      tmp=perso->spriteActuel.w - perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].x - perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].w ;
+    }
+    else{
+      tmp=perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].x;
+    }
+    if(entite->pos.x * TAILLEBLOC + entite->delta.x + entite->type->hitbox[entite->etat*entite->type->nbHitbox+0].x> perso->pos.x * TAILLEBLOC + perso->delta.x + tmp)
         entite->direction = LEFT;
     else
         entite->direction = RIGHT;
@@ -1059,7 +1212,7 @@ void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle){
             entite->etat = IDLE;
             break;
         case IDLE:
-            if(inRange(entite,perso,salle,4*TAILLEBLOC,TRUE)){
+            if(inRange(entite,perso,salle,TRUE)){
                 entite->etat = ATTACKING;
                 entite->newEtat = TRUE;
                 entite->ut = 10;
@@ -1117,7 +1270,7 @@ void compVenin(monstre_t* entite, personnage_t* perso, salle_t* salle){
         if(!(perso->sounds & puissance(2,SOUND_TOUCHE)))
             perso->sounds += puissance(2,SOUND_TOUCHE);
     }else
-        if(dep(entite,salle,FALSE))
+        if(!dep(entite,salle,FALSE))
             entite->pv = 0;
 }
 
@@ -1127,6 +1280,7 @@ void compVersGeant(monstre_t* entite, personnage_t* perso, salle_t* salle){
 
 void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
     int dir = hitP(entite,perso);
+    int tmp;
     if(dir && !perso->hit){
         perso->pv -= entite->type->degat;
         perso->kb = 1;
@@ -1135,60 +1289,41 @@ void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
         entite->etat = IDLE;
         entite->ut = 0;
         entite->newEtat = TRUE;
-        perso->direction = dir > 0 ? 0 : 1;
+
+        if(dir==-1)
+          perso->direction=RIGHT;
+        else
+          perso->direction=LEFT;
+
+        entite->direction = perso->direction;
         if(!(perso->sounds & puissance(2,SOUND_TOUCHE)))
             perso->sounds += puissance(2,SOUND_TOUCHE);
     }
+
+    if(perso->direction){
+      tmp=perso->spriteActuel.w - perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].x - perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].w ;
+    }
+    else{
+      tmp=perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].x;
+    }
+    if(entite->pos.x * TAILLEBLOC + entite->delta.x + entite->type->hitbox[entite->etat*entite->type->nbHitbox+0].x> perso->pos.x * TAILLEBLOC + perso->delta.x + tmp)
+        entite->direction = LEFT;
+    else
+        entite->direction = RIGHT;
 
     switch(entite->etat){
         case RUNNING:
             if(entite->ut != 1){
                 entite->etat = IDLE;
-                entite->delta.x -= (entite->type->tailleSprite.largeur - entite->type->hitbox.largeur);
-                while(entite->delta.x < 0){
-                    entite->delta.x += TAILLEBLOC;
-                    (entite->pos.x)--;
-                }
             }
             else{
-                if(dep(entite,salle,TRUE)){
+                if(!dep(entite,salle,FALSE)){
                     entite->etat = IDLE;
-                    if(entite->direction){
-                        entite->delta.x -= entite->type->vit_dep;
-                        if(entite->delta.x < 0){
-                            (entite->pos.x)--;
-                            entite->delta.x += TAILLEBLOC;
-                        }
-                    }else{
-                        entite->delta.x += entite->type->vit_dep;
-                        if(entite->delta.x >= TAILLEBLOC){
-                            (entite->pos.x)++;
-                            entite->delta.x -= TAILLEBLOC;
-                        }
-                    }
                 }
             }
             break;
         case IDLE:
-            if(entite->pos.x * TAILLEBLOC + entite->delta.x > perso->pos.x * TAILLEBLOC + perso->delta.x && entite->direction == RIGHT){
-                entite->direction = LEFT;
-                entite->delta.x -= (entite->type->tailleSprite.largeur - entite->type->hitbox.largeur);
-                while(entite->delta.x < 0){
-                    entite->delta.x += TAILLEBLOC;
-                    (entite->pos.x)--;
-                }
-            }
-
-            if(entite->pos.x * TAILLEBLOC + entite->delta.x < perso->pos.x * TAILLEBLOC + perso->delta.x && entite->direction == LEFT){
-                entite->direction = RIGHT;
-                entite->delta.x += (entite->type->tailleSprite.largeur - entite->type->hitbox.largeur);
-                while(entite->delta.x >= TAILLEBLOC){
-                    entite->delta.x -= TAILLEBLOC;
-                    (entite->pos.x)++;
-                }
-            }
-
-            if((--(entite->cdAtt)) <= 0 && inRange(entite,perso,salle,8*TAILLEBLOC,FALSE)){
+            if((--(entite->cdAtt)) <= 0 && inRange(entite,perso,salle,FALSE)){
                 entite->etat = ATTACKING;
                 entite->newEtat = TRUE;
                 entite->ut = 20;
@@ -1211,30 +1346,35 @@ void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
 }
 
 static void creerCoeur(monstre_t* m, salle_t* s){
-    monstre_t* c = malloc(sizeof(monstre_t));
-    c->type = &typesMonstre[-COEUR - 1];
-    c->pv = c->type->pv_base;
+  SDL_Rect mH;
+  monstre_t* c = malloc(sizeof(monstre_t));
+  c->type = &typesMonstre[-COEUR - 1];
+  c->pv = c->type->pv_base;
 
-    int leftP = m->pos.x*TAILLEBLOC + m->delta.x + OFFSETHITBOX;
-    int rightP = leftP + m->type->hitbox.largeur;
+  mH.w=m->type->hitbox[m->etat*m->type->nbHitbox+0].w;
+  mH.h=m->type->hitbox[m->etat*m->type->nbHitbox+0].h;
+  mH.y=m->pos.y*TAILLEBLOC + m->delta.y + m->type->hitbox[m->etat*m->type->nbHitbox+0].y;
+  mH.x=m->pos.x*TAILLEBLOC + m->delta.x;
+  c->direction = LEFT;
+  mH.x+=m->type->hitbox[m->etat*m->type->nbHitbox+0].x;
+  c->delta.x=(mH.x+mH.w/2)%TAILLEBLOC;
+  c->delta.y=m->delta.y;
+  c->pos.x=(mH.x+mH.w/2)/TAILLEBLOC;
+  c->pos.y=m->pos.y;
 
-    c->delta = (position_t){((leftP + rightP)/2)%8,1};
-    c->pos = (position_t){(leftP + rightP)/16, m->pos.y};
-    c->direction = 1;
+  c->etat = IDLE;
+  c->newEtat = TRUE;
+  c->evoSprite = 0;
+  c->cdAtt = 0;
+  c->ut = 0;
 
-    c->etat = IDLE;
-    c->newEtat = TRUE;
-    c->evoSprite = 0;
-    c->cdAtt = 0;
-    c->ut = 0;
+  c->spriteActuel.h = c->type->tailleSprite.hauteur;
+  c->spriteActuel.w = c->type->tailleSprite.largeur;
+  c->spriteActuel.x = 0;
+  c->spriteActuel.y = c->etat * c->spriteActuel.h;
 
-    c->spriteActuel.h = c->type->tailleSprite.hauteur;
-    c->spriteActuel.w = c->type->tailleSprite.largeur;
-    c->spriteActuel.x = 0;
-    c->spriteActuel.y = c->etat * c->spriteActuel.h;
-
-    enTete(s->listeEntite);
-    ajoutDroit(s->listeEntite, c);
+  enTete(s->listeEntite);
+  ajoutDroit(s->listeEntite, c);
 }
 
 void evolution(personnage_t* p, salle_t* s){
@@ -1242,18 +1382,12 @@ void evolution(personnage_t* p, salle_t* s){
 
     p->sounds = 0 + (p->sounds & puissance(2,SOUND_ARC));
 
-    if(p->kb){
-        if(p->direction){
-            depGauche(p,s);
-        }else{
-            depDroite(p,s);
-        }
-    }else
+    if(!p->kb){
         if(p->inv)
             (p->inv)--;
         else
             p->hit = FALSE;
-
+    }
 
     s->listeEntite->indTmp = 0;
     monstre_t e;

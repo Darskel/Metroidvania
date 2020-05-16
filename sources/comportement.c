@@ -552,7 +552,7 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
                   f->delta.y=(pH.y + pH.h/2)%TAILLEBLOC;
                   f->pos.x=(pH.x + pH.w)/TAILLEBLOC;
                   f->pos.y=(pH.y + pH.h/2)/TAILLEBLOC -1;
-                  f->delta.y+=2;
+                  f->delta.y++;
                   if(f->delta.y>=TAILLEBLOC) {
                     f->delta.y-=TAILLEBLOC;
                     f->pos.y++;

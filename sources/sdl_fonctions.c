@@ -333,7 +333,7 @@ personnage_t * initialisation_personnage(SDL_Renderer * renderer, position_t pos
   vitAnim[0]=40;
   vitAnim[1]=3;
   vitAnim[2]=5;
-  vitAnim[3]=20;
+  vitAnim[3]=12;
   personnage->nbAnim=nbAnim;
   personnage->vitAnim=vitAnim;
   personnage->evoSprite = personnage->vitAnim[personnage->etat];

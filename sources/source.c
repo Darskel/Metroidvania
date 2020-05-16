@@ -277,7 +277,7 @@ void creerTypeEntite(){
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0,
-        0, //N'attend pas avant de changer d'animation
+        20, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -305,7 +305,7 @@ void creerTypeEntite(){
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0,
-        0, //N'attend pas avant de changer d'animation
+        20, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -775,7 +775,7 @@ void creerTypeEntite(){
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0,
-        0, //N'attend pas avant de changer d'animation
+        5, //N'attend pas avant de changer d'animation
         compFleches //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -804,7 +804,7 @@ void creerTypeEntite(){
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0,
-        0, //N'attend pas avant de changer d'animation
+        5, //N'attend pas avant de changer d'animation
         compFleches //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 

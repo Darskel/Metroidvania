@@ -803,11 +803,9 @@ static int hitB(monstre_t* m, salle_t* s){
  * @param entite le pointeur vers la structure monstre à déplacer
  * @param salle le pointeur vers la structure salle où se trouve l'entite
 */
-static int dep(monstre_t* entite, salle_t* salle, boolean_t chute){
+boolean_t depH(monstre_t* entite, salle_t* salle){
     int oldposx=entite->pos.x;
     int olddeltax=entite->delta.x;
-    int oldposy = entite->pos.y;
-    int olddeltay = entite->delta.y;
     if(entite->pv){
         if(entite->direction){
             entite->delta.x += entite->type->vit_dep;
@@ -815,48 +813,55 @@ static int dep(monstre_t* entite, salle_t* salle, boolean_t chute){
                 (entite->pos.x)++;
                 entite->delta.x -= TAILLEBLOC;
             }
-            if(!hitB(entite,salle))
-                return TRUE;
-            else{
-              entite->pos.x=oldposx;
-              entite->delta.x=olddeltax;
-            }
-            entite->delta.y ++;
-            if(entite->delta.y >= TAILLEBLOC){
-                (entite->pos.y)++;
-                entite->delta.y -= TAILLEBLOC;
-            }
-            if(!hitB(entite,salle) && chute)
-              return TRUE;
-            else{
-              entite->pos.y=oldposy;
-              entite->delta.y=olddeltay;
-            }
-            return FALSE;
+
         }else{
             entite->delta.x -= entite->type->vit_dep;
             if(entite->delta.x < 0){
                 (entite->pos.x)--;
                 entite->delta.x += TAILLEBLOC;
             }
-            if(!hitB(entite,salle))
-                return TRUE;
-            else{
-              entite->pos.x=oldposx;
-              entite->delta.x=olddeltax;
-            }
-            entite->delta.y += entite->type->vit_dep;
-            if(entite->delta.y >= TAILLEBLOC){
-                (entite->pos.y)++;
-                entite->delta.y -= TAILLEBLOC;
-            }
-            if(!hitB(entite,salle) && chute)
-              return TRUE;
+
+        }
+        if(!hitB(entite,salle))
+            return TRUE;
+        else{
+          entite->pos.x=oldposx;
+          entite->delta.x=olddeltax;
+          return FALSE;
+        }
+    }
+    return FALSE;
+}
+
+boolean_t depV(monstre_t* entite, salle_t* salle, boolean_t chute){
+    int oldposy = entite->pos.y;
+    int olddeltay = entite->delta.y;
+    if(entite->pv){
+        entite->delta.y += entite->type->vit_dep*3;
+        if(entite->delta.y >= TAILLEBLOC){
+            (entite->pos.y)++;
+            entite->delta.y -= TAILLEBLOC;
+        }
+        if(chute){
+          if(!hitB(entite,salle))
+            return TRUE;
           else{
-              entite->pos.y=oldposy;
-              entite->delta.y=olddeltay;
-            }
+            entite->pos.y=oldposy;
+            entite->delta.y=olddeltay;
+            return TRUE;
+          }
+        }
+        else{
+          if(hitB(entite,salle)){
+            entite->pos.y=oldposy;
+            entite->delta.y=olddeltay;
+            return TRUE;
+          }
+          else{
+            entite->pos.y=oldposy;
+            entite->delta.y=olddeltay;
             return FALSE;
+          }
         }
     }
     return FALSE;
@@ -902,7 +907,7 @@ static int inRange(monstre_t* m, personnage_t* perso, salle_t* salle, boolean_t 
                 if(SDL_HasIntersection(&mH, &bloc)){
                   if(!((m->direction && (bloc.x>pH.x)) || (!m->direction && (bloc.x<pH.x))))
                     if(SDL_HasIntersection(&mH, &pH))
-                      return TRUE;
+                      return FALSE;
                 }
               }
             }
@@ -947,27 +952,28 @@ void compCoeur(monstre_t* e, personnage_t* p, salle_t* s){
 
 void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle){
     monstre_t tmp;
+
+    if(!depH(entite,salle)){
+        entite->pv = 0;
+        entite->etat = IDLE;
+        entite->newEtat = TRUE;
+    }
+
     enTete(salle->listeEntite);
     while(!horsListe(salle->listeEntite)){
         valeurElm(salle->listeEntite,&tmp);
         if(hitE(entite,&tmp)){
             if(tmp.type->comportement != compPortes){
+              if(!(perso->sounds & puissance(2,SOUND_TOUCHE)))
+                  perso->sounds += puissance(2,SOUND_TOUCHE);
                 tmp.pv -= entite->type->degat;
                 modifElm(salle->listeEntite,&tmp);
-            }else
-                entite->etat = IDLE;
+            }
             entite->pv = 0;
             entite->newEtat = TRUE;
-            if(!(perso->sounds & puissance(2,SOUND_TOUCHE)))
-                perso->sounds += puissance(2,SOUND_TOUCHE);
+
         }
         suivant(salle->listeEntite);
-    }
-
-    if(!dep(entite,salle,FALSE)){
-        entite->pv = 0;
-        entite->etat = IDLE;
-        entite->newEtat = TRUE;
     }
 }
 
@@ -1047,23 +1053,17 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
     }else{
         entite->ut--;
         if(entite->ut <= 0){
-            if(!dep(entite,salle,FALSE)){
-                if(entite->direction){
+            if(!(depH(entite,salle))){
+                if(entite->direction)
                     entite->direction = LEFT;
-                    entite->delta.x -= entite->type->vit_dep;
-                    if(entite->delta.x < 0){
-                        (entite->pos.x)--;
-                        entite->delta.x += TAILLEBLOC;
-                    }
-                }else{
+                else
                     entite->direction = RIGHT;
-                    entite->delta.x += entite->type->vit_dep;
-
-                    if(entite->delta.x >= TAILLEBLOC){
-                        (entite->pos.x)++;
-                        entite->delta.x -= TAILLEBLOC;
-                    }
-                }
+            }
+            else if(!(depV(entite,salle,FALSE))){
+              if(entite->direction)
+                  entite->direction = LEFT;
+              else
+                  entite->direction = RIGHT;
             }
             entite->ut = 2;
         }
@@ -1153,25 +1153,19 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
     }else{
         entite->ut--;
         if(entite->ut <= 0){
-            if(!dep(entite,salle,FALSE)){
-                if(entite->direction){
-                    entite->direction = LEFT;
-                    entite->delta.x -= entite->type->vit_dep;
-                    if(entite->delta.x < 0){
-                        (entite->pos.x)--;
-                        entite->delta.x += TAILLEBLOC;
-                    }
-                }else{
-                    entite->direction = RIGHT;
-                    entite->delta.x += entite->type->vit_dep;
-
-                    if(entite->delta.x >= TAILLEBLOC){
-                        (entite->pos.x)++;
-                        entite->delta.x -= TAILLEBLOC;
-                    }
-                }
-            }
-            entite->ut = 2;
+          if(!(depH(entite,salle))){
+              if(entite->direction)
+                  entite->direction = LEFT;
+              else
+                  entite->direction = RIGHT;
+          }
+          else if(!(depV(entite,salle,FALSE))){
+            if(entite->direction)
+                entite->direction = LEFT;
+            else
+                entite->direction = RIGHT;
+          }
+          entite->ut = 2;
         }
     }
 }
@@ -1270,7 +1264,7 @@ void compVenin(monstre_t* entite, personnage_t* perso, salle_t* salle){
         if(!(perso->sounds & puissance(2,SOUND_TOUCHE)))
             perso->sounds += puissance(2,SOUND_TOUCHE);
     }else
-        if(!dep(entite,salle,FALSE))
+        if(!depH(entite,salle))
             entite->pv = 0;
 }
 
@@ -1317,9 +1311,12 @@ void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
                 entite->etat = IDLE;
             }
             else{
-                if(!dep(entite,salle,FALSE)){
-                    entite->etat = IDLE;
-                }
+              if(!(depH(entite,salle))){
+                entite->etat=IDLE;
+              }
+              else if(!(depV(entite,salle,FALSE))){
+                entite->etat=IDLE;
+              }
             }
             break;
         case IDLE:

@@ -116,6 +116,7 @@
 #define FONTSIZE 30
 
 #define NBETATSBOUTONS 4
+#define NBETATS 5
 
 #define ANIMDELAYMENU 20
 

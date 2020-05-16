@@ -84,27 +84,27 @@ int hitE(monstre_t* e1, monstre_t* e2){
             return FALSE;
 
     for(int i=0; i<e1->type->nbHitbox; i++){
-      e1H.w=e1->type->hitbox[e1->etat*e1->type->nbHitbox+i].w;
-      e1H.h=e1->type->hitbox[e1->etat*e1->type->nbHitbox+i].h;
-      e1H.y=e1->pos.y*TAILLEBLOC + e1->delta.y + e1->type->hitbox[e1->etat*e1->type->nbHitbox+i].y;
+      e1H.w=e1->type->hitbox[e1->etat + i*NBETATS].w;
+      e1H.h=e1->type->hitbox[e1->etat + i*NBETATS].h;
+      e1H.y=e1->pos.y*TAILLEBLOC + e1->delta.y + e1->type->hitbox[e1->etat + i*NBETATS].y;
       e1H.x=e1->pos.x*TAILLEBLOC + e1->delta.x;
       if(e1->direction){
-        e1H.x+=e1->type->tailleSprite.largeur - e1->type->hitbox[e1->etat*e1->type->nbHitbox+i].x - e1H.w ;
+        e1H.x+=e1->type->tailleSprite.largeur - e1->type->hitbox[e1->etat + i*NBETATS].x - e1H.w ;
       }
       else{
-        e1H.x+=e1->type->hitbox[e1->etat*e1->type->nbHitbox+i].x;
+        e1H.x+=e1->type->hitbox[e1->etat + i*NBETATS].x;
       }
 
       for(int j=0; j<e2->type->nbHitbox; j++){
-        e2H.w=e2->type->hitbox[e2->etat*e2->type->nbHitbox+j].w;
-        e2H.h=e2->type->hitbox[e2->etat*e2->type->nbHitbox+j].h;
-        e2H.y=e2->pos.y*TAILLEBLOC + e2->delta.y + e2->type->hitbox[e2->etat*e2->type->nbHitbox+j].y;
+        e2H.w=e2->type->hitbox[e2->etat + j*NBETATS].w;
+        e2H.h=e2->type->hitbox[e2->etat + j*NBETATS].h;
+        e2H.y=e2->pos.y*TAILLEBLOC + e2->delta.y + e2->type->hitbox[e2->etat + j*NBETATS].y;
         e2H.x=e2->pos.x*TAILLEBLOC + e2->delta.x;
         if(e2->direction){
-          e2H.x+=e2->type->tailleSprite.largeur - e2->type->hitbox[e2->etat*e2->type->nbHitbox+j].x - e2H.w ;
+          e2H.x+=e2->type->tailleSprite.largeur - e2->type->hitbox[e2->etat + j*NBETATS].x - e2H.w ;
         }
         else{
-          e2H.x+=e2->type->hitbox[e2->etat*e2->type->nbHitbox+j].x;
+          e2H.x+=e2->type->hitbox[e2->etat + j*NBETATS].x;
         }
         if(SDL_HasIntersection(&e1H, &e2H))
           return TRUE;
@@ -127,27 +127,27 @@ int hitP(monstre_t* m, personnage_t* p){
     SDL_Rect pH;
     int intersection = 0;
 
-    pH.w=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].w;
-    pH.h=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].h;
-    pH.y=p->pos.y*TAILLEBLOC + p->delta.y + p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].y;
+    pH.w=p->hitbox[p->etat + p->hitboxActuelle*NBETATS].w;
+    pH.h=p->hitbox[p->etat + p->hitboxActuelle*NBETATS].h;
+    pH.y=p->pos.y*TAILLEBLOC + p->delta.y + p->hitbox[p->etat + p->hitboxActuelle*NBETATS].y;
     pH.x=p->pos.x*TAILLEBLOC + p->delta.x;
     if(p->direction){
-      pH.x+=p->spriteActuel.w - p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x - pH.w ;
+      pH.x+=p->spriteActuel.w - p->hitbox[p->etat + p->hitboxActuelle*NBETATS].x - pH.w ;
     }
     else{
-      pH.x+=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x;
+      pH.x+=p->hitbox[p->etat + p->hitboxActuelle*NBETATS].x;
     }
 
     for(int i=0; i<m->type->nbHitbox && !intersection; i++){
-      mH.w=m->type->hitbox[m->etat*m->type->nbHitbox+i].w;
-      mH.h=m->type->hitbox[m->etat*m->type->nbHitbox+i].h;
-      mH.y=m->pos.y*TAILLEBLOC + m->delta.y + m->type->hitbox[m->etat*m->type->nbHitbox+i].y;
+      mH.w=m->type->hitbox[m->etat+ i*NBETATS].w;
+      mH.h=m->type->hitbox[m->etat+ i*NBETATS].h;
+      mH.y=m->pos.y*TAILLEBLOC + m->delta.y + m->type->hitbox[m->etat+ i*NBETATS].y;
       mH.x=m->pos.x*TAILLEBLOC + m->delta.x;
       if(m->direction){
-        mH.x+=m->type->tailleSprite.largeur - m->type->hitbox[m->etat*m->type->nbHitbox+i].x - mH.w ;
+        mH.x+=m->type->tailleSprite.largeur - m->type->hitbox[m->etat+ i*NBETATS].x - mH.w ;
       }
       else{
-        mH.x+=m->type->hitbox[m->etat*m->type->nbHitbox+i].x;
+        mH.x+=m->type->hitbox[m->etat+ i*NBETATS].x;
       }
       if(SDL_HasIntersection(&mH, &pH)){
         intersection = 1;
@@ -175,15 +175,15 @@ int persValid(personnage_t* p, salle_t* s){
     bloc.w=TAILLEBLOC;
     bloc.h=TAILLEBLOC;
 
-    pH.w=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].w;
-    pH.h=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].h;
-    pH.y=p->pos.y*TAILLEBLOC + p->delta.y + p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].y;
+    pH.w=p->hitbox[p->etat + p->hitboxActuelle*NBETATS].w;
+    pH.h=p->hitbox[p->etat + p->hitboxActuelle*NBETATS].h;
+    pH.y=p->pos.y*TAILLEBLOC + p->delta.y + p->hitbox[p->etat + p->hitboxActuelle*NBETATS].y;
     pH.x=p->pos.x*TAILLEBLOC + p->delta.x;
     if(p->direction){
-      pH.x+=p->spriteActuel.w - p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x - pH.w ;
+      pH.x+=p->spriteActuel.w - p->hitbox[p->etat + p->hitboxActuelle*NBETATS].x - pH.w ;
     }
     else{
-      pH.x+=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x;
+      pH.x+=p->hitbox[p->etat + p->hitboxActuelle*NBETATS].x;
     }
 
     if(pH.y + pH.h >= s->hauteur*TAILLEBLOC|| pH.x + pH.w >= s->largeur*TAILLEBLOC || pH.x < 0 || pH.y < 0)
@@ -542,12 +542,12 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
                 f->pv = f->type->pv_base;
 
 
-                pH.w=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].w;
-                pH.h=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].h;
-                pH.y=p->pos.y*TAILLEBLOC + p->delta.y + p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].y;
+                pH.w=p->hitbox[p->etat + p->hitboxActuelle*NBETATS].w;
+                pH.h=p->hitbox[p->etat + p->hitboxActuelle*NBETATS].h;
+                pH.y=p->pos.y*TAILLEBLOC + p->delta.y + p->hitbox[p->etat + p->hitboxActuelle*NBETATS].y;
                 pH.x=p->pos.x*TAILLEBLOC + p->delta.x;
                 if(p->direction){
-                  pH.x+=p->spriteActuel.w - p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x - pH.w ;
+                  pH.x+=p->spriteActuel.w - p->hitbox[p->etat + p->hitboxActuelle*NBETATS].x - pH.w ;
                   f->delta.x=0;
                   f->delta.y=(pH.y + pH.h/2)%TAILLEBLOC;
                   f->pos.x=(pH.x + pH.w)/TAILLEBLOC;
@@ -560,7 +560,7 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
                   f->direction = RIGHT;
                 }
                 else{
-                  pH.x+=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x;
+                  pH.x+=p->hitbox[p->etat + p->hitboxActuelle*NBETATS].x;
                   f->delta.x=0;
                   f->delta.y=(pH.y + pH.h/2)%TAILLEBLOC;
                   f->pos.x=(pH.x)/TAILLEBLOC;
@@ -697,15 +697,15 @@ char* prendPorte(personnage_t* p, liste_t* lPortes){
         porteH.y = porte.pos.y * TAILLEBLOC;
         porteH.h = TAILLEBLOC;
 
-        pH.w=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].w;
-        pH.h=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].h;
-        pH.y=p->pos.y*TAILLEBLOC + p->delta.y + p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].y;
+        pH.w=p->hitbox[p->etat + p->hitboxActuelle*NBETATS].w;
+        pH.h=p->hitbox[p->etat + p->hitboxActuelle*NBETATS].h;
+        pH.y=p->pos.y*TAILLEBLOC + p->delta.y + p->hitbox[p->etat + p->hitboxActuelle*NBETATS].y;
         pH.x=p->pos.x*TAILLEBLOC + p->delta.x;
         if(p->direction){
-          pH.x+=p->spriteActuel.w - p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x - pH.w ;
+          pH.x+=p->spriteActuel.w - p->hitbox[p->etat + p->hitboxActuelle*NBETATS].x - pH.w ;
         }
         else{
-          pH.x+=p->hitbox[p->etat*p->nbHitbox+p->hitboxActuelle].x;
+          pH.x+=p->hitbox[p->etat + p->hitboxActuelle*NBETATS].x;
         }
 
         if(SDL_HasIntersection(&(porteH),&(pH))){
@@ -737,15 +737,15 @@ static int hitB(monstre_t* m, salle_t* s){
   bloc.h=TAILLEBLOC;
 
   for(int i=0; i<m->type->nbHitbox; i++){
-    mH.w=m->type->hitbox[m->etat*m->type->nbHitbox+i].w;
-    mH.h=m->type->hitbox[m->etat*m->type->nbHitbox+i].h;
-    mH.y=m->pos.y*TAILLEBLOC + m->delta.y + m->type->hitbox[m->etat*m->type->nbHitbox+i].y;
+    mH.w=m->type->hitbox[m->etat+ i*NBETATS].w;
+    mH.h=m->type->hitbox[m->etat+ i*NBETATS].h;
+    mH.y=m->pos.y*TAILLEBLOC + m->delta.y + m->type->hitbox[m->etat+ i*NBETATS].y;
     mH.x=m->pos.x*TAILLEBLOC + m->delta.x;
     if(m->direction){
-      mH.x+=m->type->tailleSprite.largeur - m->type->hitbox[m->etat*m->type->nbHitbox+i].x - mH.w ;
+      mH.x+=m->type->tailleSprite.largeur - m->type->hitbox[m->etat+ i*NBETATS].x - mH.w ;
     }
     else{
-      mH.x+=m->type->hitbox[m->etat*m->type->nbHitbox+i].x;
+      mH.x+=m->type->hitbox[m->etat+ i*NBETATS].x;
     }
 
     if(mH.y + mH.h >= s->hauteur*TAILLEBLOC|| mH.x + mH.w >= s->largeur*TAILLEBLOC || mH.x < 0 || mH.y < 0)
@@ -874,27 +874,27 @@ static int inRange(monstre_t* m, personnage_t* perso, salle_t* salle, boolean_t 
     bloc.w=TAILLEBLOC;
     bloc.h=TAILLEBLOC;
 
-    pH.w=perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].w;
-    pH.h=perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].h;
-    pH.y=perso->pos.y*TAILLEBLOC + perso->delta.y + perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].y;
+    pH.w=perso->hitbox[perso->etat + perso->hitboxActuelle*NBETATS].w;
+    pH.h=perso->hitbox[perso->etat + perso->hitboxActuelle*NBETATS].h;
+    pH.y=perso->pos.y*TAILLEBLOC + perso->delta.y + perso->hitbox[perso->etat + perso->hitboxActuelle*NBETATS].y;
     pH.x=perso->pos.x*TAILLEBLOC + perso->delta.x;
     if(perso->direction){
-      pH.x+=perso->spriteActuel.w - perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].x - pH.w ;
+      pH.x+=perso->spriteActuel.w - perso->hitbox[perso->etat + perso->hitboxActuelle*NBETATS].x - pH.w ;
     }
     else{
-      pH.x+=perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].x;
+      pH.x+=perso->hitbox[perso->etat + perso->hitboxActuelle*NBETATS].x;
     }
 
     for(int i=0; i<m->type->nbHitbox; i++){
-      mH.w=m->type->hitbox[m->etat*m->type->nbHitbox+i].w + m->type->radius;
-      mH.h=m->type->hitbox[m->etat*m->type->nbHitbox+i].h;
-      mH.y=m->pos.y*TAILLEBLOC + m->delta.y + m->type->hitbox[m->etat*m->type->nbHitbox+i].y;
+      mH.w=m->type->hitbox[m->etat+ i*NBETATS].w + m->type->radius;
+      mH.h=m->type->hitbox[m->etat+ i*NBETATS].h;
+      mH.y=m->pos.y*TAILLEBLOC + m->delta.y + m->type->hitbox[m->etat+ i*NBETATS].y;
       mH.x=m->pos.x*TAILLEBLOC + m->delta.x;
       if(!m->direction){
-        mH.x+=m->type->tailleSprite.largeur - m->type->hitbox[m->etat*m->type->nbHitbox+i].x - mH.w;
+        mH.x+=m->type->tailleSprite.largeur - m->type->hitbox[m->etat+ i*NBETATS].x - mH.w;
       }
       else{
-        mH.x+=m->type->hitbox[m->etat*m->type->nbHitbox+i].x;
+        mH.x+=m->type->hitbox[m->etat+ i*NBETATS].x;
       }
       if(!checkUpside && ((pH.y + pH.h) < (mH.y) || (pH.y) > (mH.y + mH.h)))
         return FALSE;
@@ -1104,13 +1104,13 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
 
                 f->pv = f->type->pv_base;
 
-                mH.w=entite->type->hitbox[entite->etat*entite->type->nbHitbox+0].w;
-                mH.h=entite->type->hitbox[entite->etat*entite->type->nbHitbox+0].h;
-                mH.y=entite->pos.y*TAILLEBLOC + entite->delta.y + entite->type->hitbox[entite->etat*entite->type->nbHitbox+0].y;
+                mH.w=entite->type->hitbox[entite->etat].w;
+                mH.h=entite->type->hitbox[entite->etat].h;
+                mH.y=entite->pos.y*TAILLEBLOC + entite->delta.y + entite->type->hitbox[entite->etat].y;
                 mH.x=entite->pos.x*TAILLEBLOC + entite->delta.x;
                 if(entite->direction){
                   f->direction = RIGHT;
-                  mH.x+=entite->type->tailleSprite.largeur - entite->type->hitbox[entite->etat*entite->type->nbHitbox+0].x - mH.w ;
+                  mH.x+=entite->type->tailleSprite.largeur - entite->type->hitbox[entite->etat].x - mH.w ;
                   f->delta.x=0;
                   f->delta.y=(mH.y + mH.h/2)%TAILLEBLOC;
                   f->pos.x=(mH.x + mH.w)/TAILLEBLOC;
@@ -1123,7 +1123,7 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
                 }
                 else{
                   f->direction = LEFT;
-                  mH.x+=entite->type->hitbox[entite->etat*entite->type->nbHitbox+0].x;
+                  mH.x+=entite->type->hitbox[entite->etat].x;
                   f->delta.x=0;
                   f->delta.y=(mH.y + mH.h/2)%TAILLEBLOC;
                   f->pos.x=(mH.x)/TAILLEBLOC;
@@ -1191,12 +1191,12 @@ void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle){
             perso->sounds += puissance(2,SOUND_TOUCHE);
     }
     if(perso->direction){
-      tmp=perso->spriteActuel.w - perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].x - perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].w ;
+      tmp=perso->spriteActuel.w - perso->hitbox[perso->etat + perso->hitboxActuelle*NBETATS].x - perso->hitbox[perso->etat + perso->hitboxActuelle*NBETATS].w ;
     }
     else{
-      tmp=perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].x;
+      tmp=perso->hitbox[perso->etat + perso->hitboxActuelle*NBETATS].x;
     }
-    if(entite->pos.x * TAILLEBLOC + entite->delta.x + entite->type->hitbox[entite->etat*entite->type->nbHitbox+0].x> perso->pos.x * TAILLEBLOC + perso->delta.x + tmp)
+    if(entite->pos.x * TAILLEBLOC + entite->delta.x + entite->type->hitbox[entite->etat].x> perso->pos.x * TAILLEBLOC + perso->delta.x + tmp)
         entite->direction = LEFT;
     else
         entite->direction = RIGHT;
@@ -1295,12 +1295,12 @@ void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
     }
 
     if(perso->direction){
-      tmp=perso->spriteActuel.w - perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].x - perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].w ;
+      tmp=perso->spriteActuel.w - perso->hitbox[perso->etat + perso->hitboxActuelle*NBETATS].x - perso->hitbox[perso->etat + perso->hitboxActuelle*NBETATS].w ;
     }
     else{
-      tmp=perso->hitbox[perso->etat*perso->nbHitbox+perso->hitboxActuelle].x;
+      tmp=perso->hitbox[perso->etat + perso->hitboxActuelle*NBETATS].x;
     }
-    if(entite->pos.x * TAILLEBLOC + entite->delta.x + entite->type->hitbox[entite->etat*entite->type->nbHitbox+0].x> perso->pos.x * TAILLEBLOC + perso->delta.x + tmp)
+    if(entite->pos.x * TAILLEBLOC + entite->delta.x + entite->type->hitbox[entite->etat].x> perso->pos.x * TAILLEBLOC + perso->delta.x + tmp)
         entite->direction = LEFT;
     else
         entite->direction = RIGHT;
@@ -1348,12 +1348,12 @@ static void creerCoeur(monstre_t* m, salle_t* s){
   c->type = &typesMonstre[-COEUR - 1];
   c->pv = c->type->pv_base;
 
-  mH.w=m->type->hitbox[m->etat*m->type->nbHitbox+0].w;
-  mH.h=m->type->hitbox[m->etat*m->type->nbHitbox+0].h;
-  mH.y=m->pos.y*TAILLEBLOC + m->delta.y + m->type->hitbox[m->etat*m->type->nbHitbox+0].y;
+  mH.w=m->type->hitbox[m->etat].w;
+  mH.h=m->type->hitbox[m->etat].h;
+  mH.y=m->pos.y*TAILLEBLOC + m->delta.y + m->type->hitbox[m->etat].y;
   mH.x=m->pos.x*TAILLEBLOC + m->delta.x;
   c->direction = LEFT;
-  mH.x+=m->type->hitbox[m->etat*m->type->nbHitbox+0].x;
+  mH.x+=m->type->hitbox[m->etat].x;
   c->delta.x=(mH.x+mH.w/2)%TAILLEBLOC;
   c->delta.y=m->delta.y;
   c->pos.x=(mH.x+mH.w/2)/TAILLEBLOC;

@@ -147,8 +147,12 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
-    SDL_Rect * hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    SDL_Rect * hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,11,10};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-CLEBLEUE - 1] = (type_monstre_t){
         1, //pv de base
@@ -175,8 +179,12 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,11,10};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-CLEROUGE - 1] = (type_monstre_t){
         1, //pv de base
@@ -203,8 +211,12 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,11,10};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-CLEROUILLE - 1] = (type_monstre_t){
         1, //pv de base
@@ -231,8 +243,12 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,11,10};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-CLEVERTE - 1] = (type_monstre_t){
         1, //pv de base
@@ -259,8 +275,12 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,16,16};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-DISCOSHROOM - 1] = (type_monstre_t){
         1, //pv de base
@@ -287,8 +307,12 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 *1);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,25,25};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-DOUBLESAUT - 1] = (type_monstre_t){
         1, //pv de base
@@ -315,8 +339,12 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 *1);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,8,8};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-FLACONHUILE - 1] = (type_monstre_t){
         1, //pv de base
@@ -343,8 +371,12 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,16,32};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-MURGLACE - 1] = (type_monstre_t){
         2, //pv de base
@@ -371,9 +403,12 @@ void creerTypeEntite(){
     tmp[1] = 1;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 2);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,4,36};
-    hittmp[RUNNING+0]=(SDL_Rect){0,0,4,36};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,13,36};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-PORTEB - 1] = (type_monstre_t){
         1, //pv de base
@@ -400,9 +435,12 @@ void creerTypeEntite(){
     tmp[1] = 1;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 2);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,4,36};
-    hittmp[RUNNING+0]=(SDL_Rect){0,0,4,36};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,13,36};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-PORTERG - 1] = (type_monstre_t){
         1, //pv de base
@@ -429,9 +467,12 @@ void creerTypeEntite(){
     tmp[1] = 1;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 2);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,4,36};
-    hittmp[RUNNING+0]=(SDL_Rect){0,0,4,36};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,13,36};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-PORTERL - 1] = (type_monstre_t){
         1, //pv de base
@@ -458,9 +499,12 @@ void creerTypeEntite(){
     tmp[1] = 1;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 2);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,4,36};
-    hittmp[RUNNING+0]=(SDL_Rect){0,0,4,36};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,13,36};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-PORTEV - 1] = (type_monstre_t){
         1, //pv de base
@@ -487,8 +531,12 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,24,13};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-RENARD - 1] = (type_monstre_t){
         1, //pv de base
@@ -515,11 +563,17 @@ void creerTypeEntite(){
     tmp[1] = 1;
     tmp[2] = 0;
     tmp[3] = 2;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 4);
-    hittmp[IDLE+0]=(SDL_Rect){0,0,24,57};
-    hittmp[RUNNING+0]=(SDL_Rect){0,0,24,57};
-    hittmp[JUMPING+0]=(SDL_Rect){0,0,24,57};
-    hittmp[ATTACKING+0]=(SDL_Rect){0,0,24,57};
+    hittmp = malloc(sizeof(SDL_Rect) * 2 * NBETATS);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,22,57};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,22,57};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,22,57};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,22,57};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[IDLE+NBETATS]=(SDL_Rect){16,4,6,49};
+    hittmp[RUNNING+NBETATS]=(SDL_Rect){20,34,30,11};
+    hittmp[JUMPING+NBETATS]=(SDL_Rect){0,0,22,57};
+    hittmp[ATTACKING+NBETATS]=(SDL_Rect){21,8,16,44};
+    hittmp[FALLING+NBETATS]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-ROIVP - 1] = (type_monstre_t){
         6, //pv de base
@@ -531,7 +585,7 @@ void creerTypeEntite(){
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
         hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        2,
         {57,50}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
@@ -542,13 +596,21 @@ void creerTypeEntite(){
 
     //Serpent bleu
     tmp = malloc(sizeof(int) * 4);
-    tmp[0] = 0;
+    tmp[0] = 1;
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 *2);
-    hittmp[IDLE+0]=(SDL_Rect){0,0,51,28};
-    hittmp[RUNNING+0]=(SDL_Rect){0,0,51,28};
+    hittmp = malloc(sizeof(SDL_Rect) * 2 *NBETATS);
+    hittmp[IDLE+0]=(SDL_Rect){35,1,14,29};
+    hittmp[RUNNING+0]=(SDL_Rect){35,1,14,29};
+    hittmp[JUMPING+0]=(SDL_Rect){35,1,14,29};
+    hittmp[ATTACKING+0]=(SDL_Rect){35,1,14,29};
+    hittmp[FALLING+0]=(SDL_Rect){35,1,14,29};
+    hittmp[IDLE+NBETATS]=(SDL_Rect){0,23,49,7};
+    hittmp[RUNNING+NBETATS]=(SDL_Rect){0,23,49,7};
+    hittmp[JUMPING+NBETATS]=(SDL_Rect){0,23,49,7};
+    hittmp[ATTACKING+NBETATS]=(SDL_Rect){0,23,49,7};
+    hittmp[FALLING+NBETATS]=(SDL_Rect){0,23,49,7};
 
     typesMonstre[-SERPENTBLEU - 1] = (type_monstre_t){
         2, //pv de base
@@ -560,7 +622,7 @@ void creerTypeEntite(){
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
         hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        2,
         {30,51}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
@@ -575,11 +637,17 @@ void creerTypeEntite(){
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 1;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 4);
-    hittmp[IDLE+0]=(SDL_Rect){0,0,51,28};
-    hittmp[RUNNING+0]=(SDL_Rect){0,0,51,28};
-    hittmp[JUMPING+0]=(SDL_Rect){0,0,51,28};
-    hittmp[ATTACKING+0]=(SDL_Rect){0,0,51,28};
+    hittmp = malloc(sizeof(SDL_Rect) * 2 *NBETATS);
+    hittmp[IDLE+0]=(SDL_Rect){35,1,14,29};
+    hittmp[RUNNING+0]=(SDL_Rect){35,1,14,29};
+    hittmp[JUMPING+0]=(SDL_Rect){35,1,14,29};
+    hittmp[ATTACKING+0]=(SDL_Rect){35,1,14,29};
+    hittmp[FALLING+0]=(SDL_Rect){35,1,14,29};
+    hittmp[IDLE+NBETATS]=(SDL_Rect){0,23,49,7};
+    hittmp[RUNNING+NBETATS]=(SDL_Rect){0,23,49,7};
+    hittmp[JUMPING+NBETATS]=(SDL_Rect){0,23,49,7};
+    hittmp[ATTACKING+NBETATS]=(SDL_Rect){0,23,49,7};
+    hittmp[FALLING+NBETATS]=(SDL_Rect){0,23,49,7};
 
     typesMonstre[-SERPENTROSE - 1] = (type_monstre_t){
         2, //pv de base
@@ -591,7 +659,7 @@ void creerTypeEntite(){
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
         hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        2,
         {30,51}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
@@ -602,13 +670,21 @@ void creerTypeEntite(){
 
     //Serpent vert
     tmp = malloc(sizeof(int) * 4);
-    tmp[0] = 0;
+    tmp[0] = 1;
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 *2);
-    hittmp[IDLE+0]=(SDL_Rect){0,0,51,28};
-    hittmp[RUNNING+0]=(SDL_Rect){0,0,51,28};
+    hittmp = malloc(sizeof(SDL_Rect) * 2 *NBETATS);
+    hittmp[IDLE+0]=(SDL_Rect){35,1,14,29};
+    hittmp[RUNNING+0]=(SDL_Rect){35,1,14,29};
+    hittmp[JUMPING+0]=(SDL_Rect){35,1,14,29};
+    hittmp[ATTACKING+0]=(SDL_Rect){35,1,14,29};
+    hittmp[FALLING+0]=(SDL_Rect){35,1,14,29};
+    hittmp[IDLE+NBETATS]=(SDL_Rect){0,23,49,7};
+    hittmp[RUNNING+NBETATS]=(SDL_Rect){0,23,49,7};
+    hittmp[JUMPING+NBETATS]=(SDL_Rect){0,23,49,7};
+    hittmp[ATTACKING+NBETATS]=(SDL_Rect){0,23,49,7};
+    hittmp[FALLING+NBETATS]=(SDL_Rect){0,23,49,7};
 
     typesMonstre[-SERPENTVERT - 1] = (type_monstre_t){
         3, //pv de base
@@ -620,7 +696,7 @@ void creerTypeEntite(){
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
         hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        2,
         {30,51}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
@@ -636,7 +712,7 @@ void creerTypeEntite(){
     tmp[2] = 2;
     tmp[3] = 1;
     tmp[4] = 2;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 5);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,19,26};
     hittmp[RUNNING+0]=(SDL_Rect){0,0,19,26};
     hittmp[JUMPING+0]=(SDL_Rect){0,0,21,31};
@@ -669,8 +745,12 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
-    hittmp[IDLE+0]=(SDL_Rect){0,0,0,0};
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
+    hittmp[IDLE+0]=(SDL_Rect){0,0,1,1};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-VERSGEANT - 1] = (type_monstre_t){
         2, //pv de base
@@ -697,11 +777,12 @@ void creerTypeEntite(){
     tmp[1] = 8;
     tmp[2] = 0;
     tmp[3] = 1;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 4);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,21,30};
     hittmp[RUNNING+0]=(SDL_Rect){0,0,32,26};
     hittmp[JUMPING+0]=(SDL_Rect){0,0,21,30};
     hittmp[ATTACKING+0]=(SDL_Rect){0,0,32,26};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-VIFPLUME - 1] = (type_monstre_t){
         2, //pv de base
@@ -728,8 +809,12 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,8,8};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-COEUR - 1] = (type_monstre_t){
         1, //pv de base
@@ -756,9 +841,12 @@ void creerTypeEntite(){
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 2);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,19,3};
     hittmp[RUNNING+0]=(SDL_Rect){0,0,19,3};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-FLECHE - 1] = (type_monstre_t){
         1, //pv de base
@@ -785,9 +873,12 @@ void creerTypeEntite(){
     tmp[1] = 2;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 2);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,19,5};
     hittmp[RUNNING+0]=(SDL_Rect){0,0,19,5};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-FLECHEFEU - 1] = (type_monstre_t){
         1, //pv de base
@@ -814,8 +905,12 @@ void creerTypeEntite(){
     tmp[1] = 0;
     tmp[2] = 0;
     tmp[3] = 0;
-    hittmp = malloc(sizeof(SDL_Rect) * 1 * 1);
+    hittmp = malloc(sizeof(SDL_Rect) * 1 * NBETATS);
     hittmp[IDLE+0]=(SDL_Rect){0,0,7,6};
+    hittmp[RUNNING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[ATTACKING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[JUMPING+0]=(SDL_Rect){0,0,0,0};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-VENIN - 1] = (type_monstre_t){
         1, //pv de base

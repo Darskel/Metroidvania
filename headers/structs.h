@@ -108,7 +108,7 @@
 
 #define COEURDROPRATE 10
 
-#define PVMAX 10
+#define PVMAX 5
 #define TEMPINV 60
 #define FREQCLIGN 2
 #define INVUDELAY 6

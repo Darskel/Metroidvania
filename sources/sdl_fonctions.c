@@ -1875,12 +1875,12 @@ void afficher_menu(SDL_Renderer * renderer, menu_t * menu, int tailleTexte, int 
     if(Rect_dest_obj.h <1)
       Rect_dest_obj.h = 1;
 
-    Rect_dest_obj.x = 2* fondw/6 - Rect_dest_obj.w/2 + Rect_dest_fond.x;
-    if(Rect_dest_obj.x < 0)
-      Rect_dest_obj.x = 0;
+    Rect_dest_obj.x = 1* fondw/3 - Rect_dest_obj.w/2 + Rect_dest_fond.x;
+    if(Rect_dest_obj.x < Rect_dest_fond.x)
+      Rect_dest_obj.x = Rect_dest_fond.x;
     Rect_dest_obj.y = (menu->tabTextes[i].id) * (fondh/(menu->nbBoutons+menu->nbTextes+1) + Rect_dest_obj.h/(menu->nbTextes*2)) - Rect_dest_obj.h/(menu->nbTextes) + Rect_dest_fond.y;
-    if(Rect_dest_obj.y < 0)
-      Rect_dest_obj.y = 0;
+    if(Rect_dest_obj.y < Rect_dest_fond.y)
+      Rect_dest_obj.y = Rect_dest_fond.y;
     menu->tabTextes[i].emplacement.w = Rect_dest_obj.w;
     menu->tabTextes[i].emplacement.h = Rect_dest_obj.h;
     menu->tabTextes[i].emplacement.x = Rect_dest_obj.x;
@@ -1909,19 +1909,19 @@ void afficher_menu(SDL_Renderer * renderer, menu_t * menu, int tailleTexte, int 
 
     if(sens){
       Rect_dest_obj.x = fondw/2 - Rect_dest_obj.w/2 + Rect_dest_fond.x;
-      if(Rect_dest_obj.x < 0)
-        Rect_dest_obj.x = 0;
+      if(Rect_dest_obj.x < Rect_dest_fond.x)
+        Rect_dest_obj.x = Rect_dest_fond.x;
       Rect_dest_obj.y = ((fondh - (menu->tabTextes[menu->nbTextes-1].emplacement.y - Rect_dest_fond.y + menu->tabTextes[menu->nbTextes-1].emplacement.h) - (menu->nbBoutons*Rect_dest_obj.h))/(menu->nbBoutons+1))*(j+1) + Rect_dest_obj.h*j + (menu->tabTextes[menu->nbTextes-1].emplacement.y + menu->tabTextes[menu->nbTextes-1].emplacement.h);
-      if(Rect_dest_obj.y < 0)
-        Rect_dest_obj.y = 0;
+      if(Rect_dest_obj.y < Rect_dest_fond.y)
+        Rect_dest_obj.y = Rect_dest_fond.y;
     }
     else{
         Rect_dest_obj.x = ((fondw - (menu->nbBoutons*Rect_dest_obj.w))/(menu->nbBoutons+1))*(j+1) + Rect_dest_obj.w*j + Rect_dest_fond.x;
-      if(Rect_dest_obj.x < 0)
-        Rect_dest_obj.x = 0;
+      if(Rect_dest_obj.x < Rect_dest_fond.x)
+        Rect_dest_obj.x = Rect_dest_fond.x;
       Rect_dest_obj.y = 2* fondh/3 - Rect_dest_obj.h/2 + Rect_dest_fond.y;
-      if(Rect_dest_obj.y < 0)
-        Rect_dest_obj.y = 0;
+      if(Rect_dest_obj.y < Rect_dest_fond.y)
+        Rect_dest_obj.y = Rect_dest_fond.y;
     }
     menu->tabBoutons[j].emplacement.w = Rect_dest_obj.w;
     menu->tabBoutons[j].emplacement.h = Rect_dest_obj.h;

@@ -1,0 +1,12 @@
+Health Point: 4
+Nom de la salle: salle_entree_grotte.txt
+Position: 32 0
+Inventaire:
+	cle bleue: 1
+	cle rouge: 1
+	cle rouillee: 1
+	cle verte: 1
+	discoshroom: 1
+	double saut: 1
+	huile: 1
+	renard: 1

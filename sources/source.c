@@ -12,7 +12,7 @@
 /**
  * \file source.c
  * \brief Fonctions de lecture d'une salle
- * \author Thomas DIDIER & Marie-Nina MUNAR L2 Info Le Mans
+ * \author Alexis FOURNIS Marie-Nina MUNAR & Thomas DIDIER L2 Info Le Mans
  * \version 3.0
  * \date 17/05/2020
 */
@@ -299,7 +299,7 @@ void creerTypeEntite(){
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0, //Champ de vision
-        18, //Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
+        8, //Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -331,7 +331,7 @@ void creerTypeEntite(){
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0, //Champ de vision
-        15, //Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
+        3, //Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -659,13 +659,13 @@ void creerTypeEntite(){
         "sprites/entite/serpent_rose/tileset.png",//chemin vers les sprites
         NULL, //SDL_Texture* sprites non initialisé !
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
-        0, //nombre de dégats qu'il inflige
+        1, //nombre de dégats qu'il inflige
         hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
         2, //Nombre de rectangles d'hitbox différents pour l'entité
         {30,51}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        25*TAILLEBLOC, //Champ de vision
+        12*TAILLEBLOC, //Champ de vision
         25, //Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
         compSerpentRose //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -719,7 +719,7 @@ void creerTypeEntite(){
     hittmp[RUNNING+0]=(SDL_Rect){0,0,19,26};
     hittmp[JUMPING+0]=(SDL_Rect){0,0,21,31};
     hittmp[ATTACKING+0]=(SDL_Rect){0,0,25,35};
-    hittmp[FALLING+0]=(SDL_Rect){0,0,25,31};
+    hittmp[FALLING+0]=(SDL_Rect){0,0,25,36};
 
 
     typesMonstre[-SINGEGROTTE - 1] = (type_monstre_t){

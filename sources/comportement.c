@@ -9,7 +9,7 @@
 /**
  * \file comportement.c
  * \brief Ensemble de fonctions pour le comportement des mobs et du personnage
- * \author Marie-Nina MUNAR & Thomas DIDIER L2 Info Le Mans
+ * \author Alexis FOURNIS Marie-Nina MUNAR & Thomas DIDIER L2 Info Le Mans
  * \version 4.0
  * \date 17/05/2020
 */
@@ -1089,8 +1089,9 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
   SDL_Rect mH;
     int dir = hitP(entite,perso);
     if(dir && !perso->hit){
+        perso->pv -= entite->type->degat;
         perso->kb = 1;
-        perso->hit = FALSE;
+        perso->hit = TRUE;
         perso->etat = IDLE;
 
         if(dir==-1)

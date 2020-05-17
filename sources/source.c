@@ -297,7 +297,7 @@ void creerTypeEntite(){
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0,
-        20, //N'attend pas avant de changer d'animation
+        18, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -329,7 +329,7 @@ void creerTypeEntite(){
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
         0,
-        20, //N'attend pas avant de changer d'animation
+        15, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -576,7 +576,7 @@ void creerTypeEntite(){
     hittmp[FALLING+NBETATS]=(SDL_Rect){0,0,0,0};
 
     typesMonstre[-ROIVP - 1] = (type_monstre_t){
-        6, //pv de base
+        7, //pv de base
         0, //vit de deplacement
         0, //vitesse d'attaque
         "roi vifplume", //nom de l'entité
@@ -957,6 +957,7 @@ static void creerEntite(idEnt_t id, salle_t* s, position_t pos, personnage_t* p)
     e->ut = 0;
     e->cdAtt = 0;
 
+
     if(e->type->comportement == compRecuperable){
         for(int i = 0; i < TAILLE_INVENTAIRE; i++){
             if(!strcmp(e->type->nom,p->nomObj[i])){
@@ -968,7 +969,8 @@ static void creerEntite(idEnt_t id, salle_t* s, position_t pos, personnage_t* p)
         }
     }
 
-    e->delta = (position_t){0,(TAILLEBLOC - e->type->tailleSprite.hauteur%TAILLEBLOC)%TAILLEBLOC};
+    e->delta.x =0;
+    e->delta.y = (TAILLEBLOC - e->type->tailleSprite.hauteur%TAILLEBLOC)%TAILLEBLOC;
     e->pos = pos;
     e->direction = LEFT;
     e->etat = RUNNING;

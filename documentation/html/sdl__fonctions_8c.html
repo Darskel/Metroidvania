@@ -1,0 +1,1959 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Diskosieni - Metroidvania: Référence du fichier sources/sdl_fonctions.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Diskosieni - Metroidvania
+   </div>
+   <div id="projectbrief">Création d&#39;un Metroidvania nommé Diskosieni dans le cadre du cours nommé &#39;Projet&#39;</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_08d237fc27d4ecd563f71c5d52f2fecc.html">sources</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier sdl_fonctions.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fichier qui regroupent les fonctions utilisées pour la gestion des graphismes et des évènements (SDL2)  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="sdl__fonctions_8h_source.html">../headers/sdl_fonctions.h</a>&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ac7a206e3c72f0892f43e2e1dae5daf06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#ac7a206e3c72f0892f43e2e1dae5daf06">initialisation_SDL</a> (SDL_Window **fenetre, SDL_Renderer **renderer, SDL_DisplayMode *mode, boolean_t fullscreen)</td></tr>
+<tr class="memdesc:ac7a206e3c72f0892f43e2e1dae5daf06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'initalisation de la SDL et de création de la fenetre et du renderer ainsi que du remplissage du mode d'écran (en parametre)  <a href="#ac7a206e3c72f0892f43e2e1dae5daf06">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac7a206e3c72f0892f43e2e1dae5daf06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4ffdd61eb400c65a78258ee8ad1172a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#af4ffdd61eb400c65a78258ee8ad1172a">quitter_SDL</a> (SDL_Window **fenetre, SDL_Renderer **renderer)</td></tr>
+<tr class="memdesc:af4ffdd61eb400c65a78258ee8ad1172a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet de détruire la fenetre et quitter la SDL.  <a href="#af4ffdd61eb400c65a78258ee8ad1172a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af4ffdd61eb400c65a78258ee8ad1172a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54d802a7a572c533c2e4bd7ad794fb32"><td class="memItemLeft" align="right" valign="top"><a id="a54d802a7a572c533c2e4bd7ad794fb32"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a54d802a7a572c533c2e4bd7ad794fb32">initialiserChunks</a> (void)</td></tr>
+<tr class="memdesc:a54d802a7a572c533c2e4bd7ad794fb32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise les effets sonores dans le tableau en variable globale. <br /></td></tr>
+<tr class="separator:a54d802a7a572c533c2e4bd7ad794fb32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a221e365c376888d8b614f77332692179"><td class="memItemLeft" align="right" valign="top"><a id="a221e365c376888d8b614f77332692179"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a221e365c376888d8b614f77332692179">detruireChunks</a> (void)</td></tr>
+<tr class="memdesc:a221e365c376888d8b614f77332692179"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detruit les effets sonores dans le tableau en variable globale. <br /></td></tr>
+<tr class="separator:a221e365c376888d8b614f77332692179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2b5e87dc24bdc1398d7b2bcb1c0cb83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#ab2b5e87dc24bdc1398d7b2bcb1c0cb83">ExploitationBinaireSons</a> (unsigned int nbBinaire)</td></tr>
+<tr class="memdesc:ab2b5e87dc24bdc1398d7b2bcb1c0cb83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de décoder un binaire pour récupérer les sons à jouer.  <a href="#ab2b5e87dc24bdc1398d7b2bcb1c0cb83">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab2b5e87dc24bdc1398d7b2bcb1c0cb83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3832de2405da428643b637a6bad134b8"><td class="memItemLeft" align="right" valign="top">Mix_Music *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a3832de2405da428643b637a6bad134b8">chargerMusique</a> (char *path)</td></tr>
+<tr class="memdesc:a3832de2405da428643b637a6bad134b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Charge une musique à partir de son emplacement.  <a href="#a3832de2405da428643b637a6bad134b8">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3832de2405da428643b637a6bad134b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b5de16bf10565d14839539ce9b09421"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a0b5de16bf10565d14839539ce9b09421">lancerMusiqueInfini</a> (Mix_Music *musique)</td></tr>
+<tr class="memdesc:a0b5de16bf10565d14839539ce9b09421"><td class="mdescLeft">&#160;</td><td class="mdescRight">Jouer une musique à l'infini.  <a href="#a0b5de16bf10565d14839539ce9b09421">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a0b5de16bf10565d14839539ce9b09421"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8374dc964f3a6270a41915a3a1823823"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a8374dc964f3a6270a41915a3a1823823">lancerMusiqueNBFois</a> (Mix_Music *musique, int nbFois)</td></tr>
+<tr class="memdesc:a8374dc964f3a6270a41915a3a1823823"><td class="mdescLeft">&#160;</td><td class="mdescRight">Jouer une musique un nombre précis de fois.  <a href="#a8374dc964f3a6270a41915a3a1823823">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a8374dc964f3a6270a41915a3a1823823"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9958e5153c984bfd82ddf91f87e477e"><td class="memItemLeft" align="right" valign="top"><a id="ae9958e5153c984bfd82ddf91f87e477e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#ae9958e5153c984bfd82ddf91f87e477e">togglePauseMusique</a> (void)</td></tr>
+<tr class="memdesc:ae9958e5153c984bfd82ddf91f87e477e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Passe de la pause au lancement de la musique. <br /></td></tr>
+<tr class="separator:ae9958e5153c984bfd82ddf91f87e477e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01aaf2573302fa682a52b8bdb19b8560"><td class="memItemLeft" align="right" valign="top"><a id="a01aaf2573302fa682a52b8bdb19b8560"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a01aaf2573302fa682a52b8bdb19b8560">baisserSon</a> (void)</td></tr>
+<tr class="memdesc:a01aaf2573302fa682a52b8bdb19b8560"><td class="mdescLeft">&#160;</td><td class="mdescRight">Baisse le son de la musique. <br /></td></tr>
+<tr class="separator:a01aaf2573302fa682a52b8bdb19b8560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af34e8415e8182fcf4602984c4faa7acf"><td class="memItemLeft" align="right" valign="top"><a id="af34e8415e8182fcf4602984c4faa7acf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#af34e8415e8182fcf4602984c4faa7acf">MonterSon</a> (void)</td></tr>
+<tr class="memdesc:af34e8415e8182fcf4602984c4faa7acf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Monte le son de la musique. <br /></td></tr>
+<tr class="separator:af34e8415e8182fcf4602984c4faa7acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80026632ff5770fc7da3ed6a4b76e148"><td class="memItemLeft" align="right" valign="top">SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a80026632ff5770fc7da3ed6a4b76e148">initialiser_texture</a> (char *path, SDL_Renderer *renderer, boolean_t estTarget)</td></tr>
+<tr class="memdesc:a80026632ff5770fc7da3ed6a4b76e148"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui permet d'initialiser une texture à partir d'une image.  <a href="#a80026632ff5770fc7da3ed6a4b76e148">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a80026632ff5770fc7da3ed6a4b76e148"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ffbbd8791b49989f9ee4716096d2b7b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a9ffbbd8791b49989f9ee4716096d2b7b">initialisation_personnage</a> (SDL_Renderer *renderer, <a class="el" href="structposition__s.html">position_t</a> positionDepart, <a class="el" href="structposition__s.html">position_t</a> positionDepartDelta)</td></tr>
+<tr class="memdesc:a9ffbbd8791b49989f9ee4716096d2b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'initialisation de la structure personnage.  <a href="#a9ffbbd8791b49989f9ee4716096d2b7b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9ffbbd8791b49989f9ee4716096d2b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31f5e2ec7dd9c75d5f59ef2139ccd4d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a31f5e2ec7dd9c75d5f59ef2139ccd4d2">afficherInventaire</a> (SDL_Renderer *renderer, <a class="el" href="structpersonnage__s.html">personnage_t</a> *personnage, SDL_Texture *textureSalle)</td></tr>
+<tr class="memdesc:a31f5e2ec7dd9c75d5f59ef2139ccd4d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'affichage de l'inventaire.  <a href="#a31f5e2ec7dd9c75d5f59ef2139ccd4d2">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a31f5e2ec7dd9c75d5f59ef2139ccd4d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fc6f14b6e9a769a578a5885c9a75d76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a2fc6f14b6e9a769a578a5885c9a75d76">afficherVolume</a> (SDL_Renderer *renderer)</td></tr>
+<tr class="memdesc:a2fc6f14b6e9a769a578a5885c9a75d76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'affichage du volume sonore.  <a href="#a2fc6f14b6e9a769a578a5885c9a75d76">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a2fc6f14b6e9a769a578a5885c9a75d76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a135b8f01937ed48bb6435d1122ea5936"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a135b8f01937ed48bb6435d1122ea5936">destroy_personnage</a> (<a class="el" href="structpersonnage__s.html">personnage_t</a> **personnage)</td></tr>
+<tr class="memdesc:a135b8f01937ed48bb6435d1122ea5936"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de destruction de la structure personnage.  <a href="#a135b8f01937ed48bb6435d1122ea5936">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a135b8f01937ed48bb6435d1122ea5936"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a672ae3a027fee5a7fd52d27243a08572"><td class="memItemLeft" align="right" valign="top"><a id="a672ae3a027fee5a7fd52d27243a08572"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a672ae3a027fee5a7fd52d27243a08572">destroy_typeentites</a> (void)</td></tr>
+<tr class="memdesc:a672ae3a027fee5a7fd52d27243a08572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de destruction des types de monstres. <br /></td></tr>
+<tr class="separator:a672ae3a027fee5a7fd52d27243a08572"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1d88b10b3071168e331039a28e8ecb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#ae1d88b10b3071168e331039a28e8ecb7">initialiser_typeentites</a> (SDL_Renderer *renderer)</td></tr>
+<tr class="memdesc:ae1d88b10b3071168e331039a28e8ecb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'initialisation des types de monstres.  <a href="#ae1d88b10b3071168e331039a28e8ecb7">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae1d88b10b3071168e331039a28e8ecb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c1464416b7688910f318a59982210d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsalle__s.html">salle_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a6c1464416b7688910f318a59982210d8">initialiser_salle</a> (SDL_Renderer *renderer, char *nomFichier, <a class="el" href="structpersonnage__s.html">personnage_t</a> *perso)</td></tr>
+<tr class="memdesc:a6c1464416b7688910f318a59982210d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'initialisation de la salle.  <a href="#a6c1464416b7688910f318a59982210d8">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6c1464416b7688910f318a59982210d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bb24e50196af6088ec379249abe83ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a3bb24e50196af6088ec379249abe83ba">evoSalle</a> (<a class="el" href="structsalle__s.html">salle_t</a> *salle)</td></tr>
+<tr class="memdesc:a3bb24e50196af6088ec379249abe83ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui fait évoluer la salle.  <a href="#a3bb24e50196af6088ec379249abe83ba">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3bb24e50196af6088ec379249abe83ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a178137e264817341b869df39374cd384"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a178137e264817341b869df39374cd384">destroy_salle</a> (<a class="el" href="structsalle__s.html">salle_t</a> **salle)</td></tr>
+<tr class="memdesc:a178137e264817341b869df39374cd384"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de destruction de la structure salle.  <a href="#a178137e264817341b869df39374cd384">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a178137e264817341b869df39374cd384"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00dfdb88930d557dfba9cd4e3f847cfc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a00dfdb88930d557dfba9cd4e3f847cfc">afficher_salle</a> (SDL_Renderer *renderer, <a class="el" href="structsalle__s.html">salle_t</a> *salle, SDL_Texture *textureSalle)</td></tr>
+<tr class="memdesc:a00dfdb88930d557dfba9cd4e3f847cfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'affichage de la salle (fait en coopération avec Yannis Allain)  <a href="#a00dfdb88930d557dfba9cd4e3f847cfc">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a00dfdb88930d557dfba9cd4e3f847cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73f7995c29a5bd9a4ec0097b9654d74d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a73f7995c29a5bd9a4ec0097b9654d74d">afficher_personnage</a> (SDL_Renderer *renderer, <a class="el" href="structpersonnage__s.html">personnage_t</a> *personnage, <a class="el" href="structsalle__s.html">salle_t</a> *salle, SDL_Texture *textureSalle)</td></tr>
+<tr class="memdesc:a73f7995c29a5bd9a4ec0097b9654d74d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'affichage du personnage.  <a href="#a73f7995c29a5bd9a4ec0097b9654d74d">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a73f7995c29a5bd9a4ec0097b9654d74d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a475b0b9786dcfb41679639fecf788207"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a475b0b9786dcfb41679639fecf788207">afficher_entites</a> (SDL_Renderer *renderer, <a class="el" href="structsalle__s.html">salle_t</a> *salle, SDL_Texture *textureSalle)</td></tr>
+<tr class="memdesc:a475b0b9786dcfb41679639fecf788207"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'affichage des entités.  <a href="#a475b0b9786dcfb41679639fecf788207">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a475b0b9786dcfb41679639fecf788207"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a303cdd690802321ee779410bc3ceae4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a303cdd690802321ee779410bc3ceae4a">affichage_complet</a> (SDL_Renderer *renderer, <a class="el" href="structsalle__s.html">salle_t</a> *salle, <a class="el" href="structpersonnage__s.html">personnage_t</a> *personnage, int *inventaireAffiche)</td></tr>
+<tr class="memdesc:a303cdd690802321ee779410bc3ceae4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'affichage complet (salle, personnage, etc)  <a href="#a303cdd690802321ee779410bc3ceae4a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a303cdd690802321ee779410bc3ceae4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a396831b1f2c72df8576cefe4399be4a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a396831b1f2c72df8576cefe4399be4a5">miseAjourSprites</a> (<a class="el" href="structpersonnage__s.html">personnage_t</a> *perso)</td></tr>
+<tr class="memdesc:a396831b1f2c72df8576cefe4399be4a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui fait évoluer les sprites du personnage (animation)  <a href="#a396831b1f2c72df8576cefe4399be4a5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a396831b1f2c72df8576cefe4399be4a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62c08b78dfc29e87435d4feaa50e2f0d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a62c08b78dfc29e87435d4feaa50e2f0d">miseAjourSpritesEntites</a> (<a class="el" href="structsalle__s.html">salle_t</a> *salle)</td></tr>
+<tr class="memdesc:a62c08b78dfc29e87435d4feaa50e2f0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui fait évoluer les sprites de l'entite (animation)  <a href="#a62c08b78dfc29e87435d4feaa50e2f0d">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a62c08b78dfc29e87435d4feaa50e2f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb46b3ed18a1969155b218f8b0179308"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#afb46b3ed18a1969155b218f8b0179308">ecranNoir</a> (SDL_Renderer *renderer, int ms)</td></tr>
+<tr class="memdesc:afb46b3ed18a1969155b218f8b0179308"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'affichage d'un écran noir d'une durée choisie.  <a href="#afb46b3ed18a1969155b218f8b0179308">Plus de détails...</a><br /></td></tr>
+<tr class="separator:afb46b3ed18a1969155b218f8b0179308"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79c168095e834346bbaaf27c91cfddc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a79c168095e834346bbaaf27c91cfddc2">konamicode</a> (<a class="el" href="structpersonnage__s.html">personnage_t</a> *perso, <a class="el" href="structsalle__s.html">salle_t</a> *salle, char *konami, int *indKon, boolean_t *kon)</td></tr>
+<tr class="memdesc:a79c168095e834346bbaaf27c91cfddc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui détecte si le Konami code a été rentré et qui applique le cheat code en conséquence.  <a href="#a79c168095e834346bbaaf27c91cfddc2">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a79c168095e834346bbaaf27c91cfddc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b26e56066f868312bf10a531452dd79"><td class="memItemLeft" align="right" valign="top">boolean_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a6b26e56066f868312bf10a531452dd79">jeu</a> (SDL_Window *fenetre, SDL_Renderer **renderer, SDL_DisplayMode mode, SDL_Joystick *pJoystick, int fullscreen)</td></tr>
+<tr class="memdesc:a6b26e56066f868312bf10a531452dd79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui lance le jeu et gère les inputs, lance les fonctions d'affichage.  <a href="#a6b26e56066f868312bf10a531452dd79">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6b26e56066f868312bf10a531452dd79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9559fbf6c398c258b61416f49d270eb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmenu__s.html">menu_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a9559fbf6c398c258b61416f49d270eb6">creerMenuDemarrage</a> (SDL_Renderer *renderer)</td></tr>
+<tr class="memdesc:a9559fbf6c398c258b61416f49d270eb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui créer le menu de démarrage du jeu.  <a href="#a9559fbf6c398c258b61416f49d270eb6">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9559fbf6c398c258b61416f49d270eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af61c1f36adae27384ea6d99e9844edca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmenu__s.html">menu_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#af61c1f36adae27384ea6d99e9844edca">creerMenuInGame</a> (SDL_Renderer *renderer)</td></tr>
+<tr class="memdesc:af61c1f36adae27384ea6d99e9844edca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui créer le menu in-game du jeu.  <a href="#af61c1f36adae27384ea6d99e9844edca">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af61c1f36adae27384ea6d99e9844edca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bbc930fae75bbf110ede7f89d728a62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmenu__s.html">menu_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a4bbc930fae75bbf110ede7f89d728a62">creerMenuConfirmation</a> (SDL_Renderer *renderer, char *question)</td></tr>
+<tr class="memdesc:a4bbc930fae75bbf110ede7f89d728a62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui créer un menu de confirmation.  <a href="#a4bbc930fae75bbf110ede7f89d728a62">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a4bbc930fae75bbf110ede7f89d728a62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8cb56fc0aafd3a2d9af5477f6823c3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#aa8cb56fc0aafd3a2d9af5477f6823c3b">detruireMenu</a> (<a class="el" href="structmenu__s.html">menu_t</a> **menu)</td></tr>
+<tr class="memdesc:aa8cb56fc0aafd3a2d9af5477f6823c3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui détruit un menu.  <a href="#aa8cb56fc0aafd3a2d9af5477f6823c3b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa8cb56fc0aafd3a2d9af5477f6823c3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ee6bb50de173b257e025743a456f048"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a5ee6bb50de173b257e025743a456f048">detruireTexturesMenu</a> (<a class="el" href="structmenu__s.html">menu_t</a> *menu)</td></tr>
+<tr class="memdesc:a5ee6bb50de173b257e025743a456f048"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui détruit les textures d'un menu.  <a href="#a5ee6bb50de173b257e025743a456f048">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5ee6bb50de173b257e025743a456f048"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae897e48addd88fad05249dec3d890d7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#ae897e48addd88fad05249dec3d890d7e">creerTexturesMenuDemarrage</a> (SDL_Renderer *renderer, <a class="el" href="structmenu__s.html">menu_t</a> *menu)</td></tr>
+<tr class="memdesc:ae897e48addd88fad05249dec3d890d7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui créer les textures du menu de démarrage du jeu.  <a href="#ae897e48addd88fad05249dec3d890d7e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae897e48addd88fad05249dec3d890d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7ddf89003eab633450cb0100223dd61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#ad7ddf89003eab633450cb0100223dd61">creerTexturesMenuConfirmation</a> (SDL_Renderer *renderer, <a class="el" href="structmenu__s.html">menu_t</a> *menu)</td></tr>
+<tr class="memdesc:ad7ddf89003eab633450cb0100223dd61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui créer les textures d'un menu de confirmation'.  <a href="#ad7ddf89003eab633450cb0100223dd61">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad7ddf89003eab633450cb0100223dd61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91cffe2cfb94aef79db0ededf3bc0d88"><td class="memItemLeft" align="right" valign="top">boolean_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a91cffe2cfb94aef79db0ededf3bc0d88">menuConfirmation</a> (SDL_Renderer *renderer, char *question, int tailleTexte, int tailleBoutons)</td></tr>
+<tr class="memdesc:a91cffe2cfb94aef79db0ededf3bc0d88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui lance un menu de confirmation.  <a href="#a91cffe2cfb94aef79db0ededf3bc0d88">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a91cffe2cfb94aef79db0ededf3bc0d88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94e33ae3646517c344ff00b785edfec9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a94e33ae3646517c344ff00b785edfec9">afficherVieJauge</a> (SDL_Renderer *renderer, <a class="el" href="structpersonnage__s.html">personnage_t</a> *personnage, SDL_Texture *textureSalle)</td></tr>
+<tr class="memdesc:a94e33ae3646517c344ff00b785edfec9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'affichage de la vie sous forme de jauge.  <a href="#a94e33ae3646517c344ff00b785edfec9">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a94e33ae3646517c344ff00b785edfec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08c53cc40921e55828bdf8ca86e0a028"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a08c53cc40921e55828bdf8ca86e0a028">afficherVieCoeurs</a> (SDL_Renderer *renderer, <a class="el" href="structpersonnage__s.html">personnage_t</a> *personnage, SDL_Texture *coeurImage, SDL_Texture *textureSalle)</td></tr>
+<tr class="memdesc:a08c53cc40921e55828bdf8ca86e0a028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'affichage de la vie sous forme de coeurs.  <a href="#a08c53cc40921e55828bdf8ca86e0a028">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a08c53cc40921e55828bdf8ca86e0a028"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1912ff18815e32e97a54cbad8066c7bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a1912ff18815e32e97a54cbad8066c7bc">gameover</a> (SDL_Window *fenetre, SDL_Renderer *renderer, SDL_DisplayMode mode, SDL_Joystick *pJoystick, int fullscreen)</td></tr>
+<tr class="memdesc:a1912ff18815e32e97a54cbad8066c7bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui lance un gameover.  <a href="#a1912ff18815e32e97a54cbad8066c7bc">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a1912ff18815e32e97a54cbad8066c7bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab60eb43c14063dd5b58920fae6d8762"><td class="memItemLeft" align="right" valign="top">TTF_Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#aab60eb43c14063dd5b58920fae6d8762">creerPolice</a> (char *path, int taille)</td></tr>
+<tr class="memdesc:aab60eb43c14063dd5b58920fae6d8762"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui créé une police.  <a href="#aab60eb43c14063dd5b58920fae6d8762">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aab60eb43c14063dd5b58920fae6d8762"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20809382ac67dc2f005aeedf67c4dc36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a20809382ac67dc2f005aeedf67c4dc36">detruirePolice</a> (TTF_Font **font)</td></tr>
+<tr class="memdesc:a20809382ac67dc2f005aeedf67c4dc36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui détruit une police.  <a href="#a20809382ac67dc2f005aeedf67c4dc36">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a20809382ac67dc2f005aeedf67c4dc36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0a7a8472f3cb246ffcc25228d742c6f"><td class="memItemLeft" align="right" valign="top">SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#ac0a7a8472f3cb246ffcc25228d742c6f">creerTexte</a> (SDL_Renderer *renderer, char *Fontpath, int taille, char *texte, int r, int g, int b)</td></tr>
+<tr class="memdesc:ac0a7a8472f3cb246ffcc25228d742c6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui créé un texte.  <a href="#ac0a7a8472f3cb246ffcc25228d742c6f">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac0a7a8472f3cb246ffcc25228d742c6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28469cec6f810fe8f142860fffb0917c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a28469cec6f810fe8f142860fffb0917c">afficher_menu</a> (SDL_Renderer *renderer, <a class="el" href="structmenu__s.html">menu_t</a> *menu, int tailleTexte, int tailleBoutons, boolean_t sens)</td></tr>
+<tr class="memdesc:a28469cec6f810fe8f142860fffb0917c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui affiche un menu.  <a href="#a28469cec6f810fe8f142860fffb0917c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a28469cec6f810fe8f142860fffb0917c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59b9e7efa825b397eac099f072462065"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a59b9e7efa825b397eac099f072462065">TouchesMenu</a> (int direction, SDL_Point souris, boolean_t bougeSouris, <a class="el" href="structmenu__s.html">menu_t</a> *menu)</td></tr>
+<tr class="memdesc:a59b9e7efa825b397eac099f072462065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui gère si il y a changement de boutons ou selection dans le menu.  <a href="#a59b9e7efa825b397eac099f072462065">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a59b9e7efa825b397eac099f072462065"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ef01a630d1944e0d3801024b9a6b78a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#a5ef01a630d1944e0d3801024b9a6b78a">evoMenu</a> (<a class="el" href="structmenu__s.html">menu_t</a> *menu, int clique)</td></tr>
+<tr class="memdesc:a5ef01a630d1944e0d3801024b9a6b78a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui gère si un bouton à été validé  <a href="#a5ef01a630d1944e0d3801024b9a6b78a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5ef01a630d1944e0d3801024b9a6b78a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae95c4a9b071ed53dcce78308e546e7d3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#ae95c4a9b071ed53dcce78308e546e7d3">chargerSauvegardeMenu</a> (SDL_Renderer *renderer, int numSauv, <a class="el" href="structpersonnage__s.html">personnage_t</a> **perso, <a class="el" href="structsalle__s.html">salle_t</a> **salle)</td></tr>
+<tr class="memdesc:ae95c4a9b071ed53dcce78308e546e7d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Charge une sauvegarde.  <a href="#ae95c4a9b071ed53dcce78308e546e7d3">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae95c4a9b071ed53dcce78308e546e7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbc303ab096908ca65a0ee9d0c1be6ed"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sdl__fonctions_8c.html#abbc303ab096908ca65a0ee9d0c1be6ed">sauvegarderMenu</a> (int numSauv, <a class="el" href="structpersonnage__s.html">personnage_t</a> *perso, <a class="el" href="structsalle__s.html">salle_t</a> *salle)</td></tr>
+<tr class="memdesc:abbc303ab096908ca65a0ee9d0c1be6ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sauvegarde dans un slot de sauvegarde.  <a href="#abbc303ab096908ca65a0ee9d0c1be6ed">Plus de détails...</a><br /></td></tr>
+<tr class="separator:abbc303ab096908ca65a0ee9d0c1be6ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Fichier qui regroupent les fonctions utilisées pour la gestion des graphismes et des évènements (SDL2) </p>
+<dl class="section author"><dt>Auteur</dt><dd>Marie-Nina MUNAR L2 Info Le Mans </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>5.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>17/05/2020 </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a303cdd690802321ee779410bc3ceae4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a303cdd690802321ee779410bc3ceae4a">&#9670;&nbsp;</a></span>affichage_complet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void affichage_complet </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structsalle__s.html">salle_t</a> *&#160;</td>
+          <td class="paramname"><em>salle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td>
+          <td class="paramname"><em>personnage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>inventaireAffiche</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'affichage complet (salle, personnage, etc) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur vers le SDL_Renderer à utiliser </td></tr>
+    <tr><td class="paramname">salle</td><td>le pointeur sur la salle où afficher le joueur et les entités </td></tr>
+    <tr><td class="paramname">personnage</td><td>le pointeur sur la structure personnage à afficher </td></tr>
+    <tr><td class="paramname">inventaireAffiche</td><td>un booleen pour savoir si on affiche ou non l'inventaire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a475b0b9786dcfb41679639fecf788207"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a475b0b9786dcfb41679639fecf788207">&#9670;&nbsp;</a></span>afficher_entites()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_entites </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structsalle__s.html">salle_t</a> *&#160;</td>
+          <td class="paramname"><em>salle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Texture *&#160;</td>
+          <td class="paramname"><em>textureSalle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'affichage des entités. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur vers le SDL_Renderer à utiliser </td></tr>
+    <tr><td class="paramname">salle</td><td>le pointeur sur la salle où afficher l'entité </td></tr>
+    <tr><td class="paramname">textureSalle</td><td>le pointeur sur la texture de cible </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a28469cec6f810fe8f142860fffb0917c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28469cec6f810fe8f142860fffb0917c">&#9670;&nbsp;</a></span>afficher_menu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_menu </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmenu__s.html">menu_t</a> *&#160;</td>
+          <td class="paramname"><em>menu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tailleTexte</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tailleBoutons</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boolean_t&#160;</td>
+          <td class="paramname"><em>sens</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui affiche un menu. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le renderer utilisé </td></tr>
+    <tr><td class="paramname">menu</td><td>le menu à afficher </td></tr>
+    <tr><td class="paramname">tailleTexte</td><td>la taille du texte (multiplicateur) </td></tr>
+    <tr><td class="paramname">tailleBoutons</td><td>la taille des boutons (multiplicateur) </td></tr>
+    <tr><td class="paramname">sens</td><td>si les boutons du menu sont affichés verticalement (1) ou horizontalement (0) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a73f7995c29a5bd9a4ec0097b9654d74d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73f7995c29a5bd9a4ec0097b9654d74d">&#9670;&nbsp;</a></span>afficher_personnage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_personnage </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td>
+          <td class="paramname"><em>personnage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structsalle__s.html">salle_t</a> *&#160;</td>
+          <td class="paramname"><em>salle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Texture *&#160;</td>
+          <td class="paramname"><em>textureSalle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'affichage du personnage. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur vers le SDL_Renderer à utiliser </td></tr>
+    <tr><td class="paramname">personnage</td><td>le pointeur sur la structure personnage à afficher </td></tr>
+    <tr><td class="paramname">salle</td><td>le pointeur sur la salle où afficher le joueur </td></tr>
+    <tr><td class="paramname">textureSalle</td><td>le pointeur sur la texture de cible </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a00dfdb88930d557dfba9cd4e3f847cfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00dfdb88930d557dfba9cd4e3f847cfc">&#9670;&nbsp;</a></span>afficher_salle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_salle </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structsalle__s.html">salle_t</a> *&#160;</td>
+          <td class="paramname"><em>salle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Texture *&#160;</td>
+          <td class="paramname"><em>textureSalle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'affichage de la salle (fait en coopération avec Yannis Allain) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur vers le SDL_Renderer à utiliser </td></tr>
+    <tr><td class="paramname">salle</td><td>le pointeur sur la structure salle à afficher </td></tr>
+    <tr><td class="paramname">textureSalle</td><td>le pointeur sur la texture de cible </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a31f5e2ec7dd9c75d5f59ef2139ccd4d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31f5e2ec7dd9c75d5f59ef2139ccd4d2">&#9670;&nbsp;</a></span>afficherInventaire()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficherInventaire </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td>
+          <td class="paramname"><em>personnage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Texture *&#160;</td>
+          <td class="paramname"><em>textureSalle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'affichage de l'inventaire. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le renderer utilisé </td></tr>
+    <tr><td class="paramname">personnage</td><td>la structure personnage qui contient l'inventaire </td></tr>
+    <tr><td class="paramname">textureSalle</td><td>la texture sur laquelle afficher l'inventaire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a08c53cc40921e55828bdf8ca86e0a028"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08c53cc40921e55828bdf8ca86e0a028">&#9670;&nbsp;</a></span>afficherVieCoeurs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficherVieCoeurs </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td>
+          <td class="paramname"><em>personnage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Texture *&#160;</td>
+          <td class="paramname"><em>coeurImage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Texture *&#160;</td>
+          <td class="paramname"><em>textureSalle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'affichage de la vie sous forme de coeurs. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur vers le SDL_Renderer à utiliser </td></tr>
+    <tr><td class="paramname">personnage</td><td>le pointeur sur le personnage (points de vie) </td></tr>
+    <tr><td class="paramname">coeurImage</td><td>la texture de l'image d'un coeur </td></tr>
+    <tr><td class="paramname">textureSalle</td><td>le pointeur sur la texture de cible </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a94e33ae3646517c344ff00b785edfec9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94e33ae3646517c344ff00b785edfec9">&#9670;&nbsp;</a></span>afficherVieJauge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficherVieJauge </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td>
+          <td class="paramname"><em>personnage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Texture *&#160;</td>
+          <td class="paramname"><em>textureSalle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'affichage de la vie sous forme de jauge. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur vers le SDL_Renderer à utiliser </td></tr>
+    <tr><td class="paramname">personnage</td><td>le pointeur sur le personnage (points de vie) </td></tr>
+    <tr><td class="paramname">textureSalle</td><td>le pointeur sur la texture de cible </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2fc6f14b6e9a769a578a5885c9a75d76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fc6f14b6e9a769a578a5885c9a75d76">&#9670;&nbsp;</a></span>afficherVolume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficherVolume </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'affichage du volume sonore. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le renderer utilisé </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3832de2405da428643b637a6bad134b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3832de2405da428643b637a6bad134b8">&#9670;&nbsp;</a></span>chargerMusique()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mix_Music* chargerMusique </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Charge une musique à partir de son emplacement. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>l'emplacement de la musique à charger </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>le pointeur sur la musique chargée </dd></dl>
+
+</div>
+</div>
+<a id="ae95c4a9b071ed53dcce78308e546e7d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae95c4a9b071ed53dcce78308e546e7d3">&#9670;&nbsp;</a></span>chargerSauvegardeMenu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int chargerSauvegardeMenu </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numSauv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> **&#160;</td>
+          <td class="paramname"><em>perso</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structsalle__s.html">salle_t</a> **&#160;</td>
+          <td class="paramname"><em>salle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Charge une sauvegarde. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le renderer à utiliser </td></tr>
+    <tr><td class="paramname">numSauv</td><td>la sauvegarde utilisée </td></tr>
+    <tr><td class="paramname">perso</td><td>le personnage à remplir </td></tr>
+    <tr><td class="paramname">salle</td><td>la salle à remplir </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>la sauvegarde chargée si réussite </dd></dl>
+
+</div>
+</div>
+<a id="a4bbc930fae75bbf110ede7f89d728a62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bbc930fae75bbf110ede7f89d728a62">&#9670;&nbsp;</a></span>creerMenuConfirmation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmenu__s.html">menu_t</a>* creerMenuConfirmation </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>question</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui créer un menu de confirmation. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur sur le renderer utilisé </td></tr>
+    <tr><td class="paramname">question</td><td>la question posée </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>le pointeur sur le menu créé </dd></dl>
+
+</div>
+</div>
+<a id="a9559fbf6c398c258b61416f49d270eb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9559fbf6c398c258b61416f49d270eb6">&#9670;&nbsp;</a></span>creerMenuDemarrage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmenu__s.html">menu_t</a>* creerMenuDemarrage </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui créer le menu de démarrage du jeu. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur sur le renderer utilisé </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>le pointeur sur le menu créé </dd></dl>
+
+</div>
+</div>
+<a id="af61c1f36adae27384ea6d99e9844edca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af61c1f36adae27384ea6d99e9844edca">&#9670;&nbsp;</a></span>creerMenuInGame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmenu__s.html">menu_t</a>* creerMenuInGame </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui créer le menu in-game du jeu. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur sur le renderer utilisé </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>le pointeur sur le menu créé </dd></dl>
+
+</div>
+</div>
+<a id="aab60eb43c14063dd5b58920fae6d8762"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab60eb43c14063dd5b58920fae6d8762">&#9670;&nbsp;</a></span>creerPolice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TTF_Font* creerPolice </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>taille</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui créé une police. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>de la police ttf </td></tr>
+    <tr><td class="paramname">taille</td><td>la taille de la police </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>un pointeur sur la police créée </dd></dl>
+
+</div>
+</div>
+<a id="ac0a7a8472f3cb246ffcc25228d742c6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0a7a8472f3cb246ffcc25228d742c6f">&#9670;&nbsp;</a></span>creerTexte()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* creerTexte </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>Fontpath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>taille</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>texte</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui créé un texte. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le renderer utilisé </td></tr>
+    <tr><td class="paramname">Fontpath</td><td>le chemin vers la police utilisée </td></tr>
+    <tr><td class="paramname">taille</td><td>la taille de la police </td></tr>
+    <tr><td class="paramname">texte</td><td>le texte à créer </td></tr>
+    <tr><td class="paramname">r</td><td>la donnée entière du rouge </td></tr>
+    <tr><td class="paramname">g</td><td>la donnée entière du vert </td></tr>
+    <tr><td class="paramname">b</td><td>la donnée entière du bleu </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>un pointeur sur la texture créée </dd></dl>
+
+</div>
+</div>
+<a id="ad7ddf89003eab633450cb0100223dd61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7ddf89003eab633450cb0100223dd61">&#9670;&nbsp;</a></span>creerTexturesMenuConfirmation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void creerTexturesMenuConfirmation </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmenu__s.html">menu_t</a> *&#160;</td>
+          <td class="paramname"><em>menu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui créer les textures d'un menu de confirmation'. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur sur le renderer utilisé </td></tr>
+    <tr><td class="paramname">menu</td><td>le pointeur sur le menu qui va contenir les textures </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae897e48addd88fad05249dec3d890d7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae897e48addd88fad05249dec3d890d7e">&#9670;&nbsp;</a></span>creerTexturesMenuDemarrage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void creerTexturesMenuDemarrage </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmenu__s.html">menu_t</a> *&#160;</td>
+          <td class="paramname"><em>menu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui créer les textures du menu de démarrage du jeu. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur sur le renderer utilisé </td></tr>
+    <tr><td class="paramname">menu</td><td>le pointeur sur le menu qui va contenir les textures </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a135b8f01937ed48bb6435d1122ea5936"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a135b8f01937ed48bb6435d1122ea5936">&#9670;&nbsp;</a></span>destroy_personnage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void destroy_personnage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> **&#160;</td>
+          <td class="paramname"><em>personnage</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction de destruction de la structure personnage. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">personnage</td><td>pointeur sur le pointeur de la structure à détruire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a178137e264817341b869df39374cd384"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a178137e264817341b869df39374cd384">&#9670;&nbsp;</a></span>destroy_salle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void destroy_salle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsalle__s.html">salle_t</a> **&#160;</td>
+          <td class="paramname"><em>salle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction de destruction de la structure salle. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">salle</td><td>pointeur sur le pointeur de la structure salle à détruire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa8cb56fc0aafd3a2d9af5477f6823c3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8cb56fc0aafd3a2d9af5477f6823c3b">&#9670;&nbsp;</a></span>detruireMenu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void detruireMenu </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmenu__s.html">menu_t</a> **&#160;</td>
+          <td class="paramname"><em>menu</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui détruit un menu. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">menu</td><td>le pointeur sur le pointeur sur le menu à detruire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a20809382ac67dc2f005aeedf67c4dc36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20809382ac67dc2f005aeedf67c4dc36">&#9670;&nbsp;</a></span>detruirePolice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void detruirePolice </td>
+          <td>(</td>
+          <td class="paramtype">TTF_Font **&#160;</td>
+          <td class="paramname"><em>font</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui détruit une police. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">font</td><td>le pointeur sur le pointeur de la police à detruire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5ee6bb50de173b257e025743a456f048"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ee6bb50de173b257e025743a456f048">&#9670;&nbsp;</a></span>detruireTexturesMenu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void detruireTexturesMenu </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmenu__s.html">menu_t</a> *&#160;</td>
+          <td class="paramname"><em>menu</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui détruit les textures d'un menu. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">menu</td><td>le pointeur sur le menu qui contient les textures </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="afb46b3ed18a1969155b218f8b0179308"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb46b3ed18a1969155b218f8b0179308">&#9670;&nbsp;</a></span>ecranNoir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ecranNoir </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ms</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'affichage d'un écran noir d'une durée choisie. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur vers le SDL_Renderer à utiliser </td></tr>
+    <tr><td class="paramname">ms</td><td>un entier correspondant à la durée d'affichage de l'écran noir (en millisecondes) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5ef01a630d1944e0d3801024b9a6b78a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ef01a630d1944e0d3801024b9a6b78a">&#9670;&nbsp;</a></span>evoMenu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int evoMenu </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmenu__s.html">menu_t</a> *&#160;</td>
+          <td class="paramname"><em>menu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>clique</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui gère si un bouton à été validé </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">menu</td><td>le menu à faire évoluer </td></tr>
+    <tr><td class="paramname">clique</td><td>qui indique si le bouton a été cliqué ou non </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>l'id du bouton validé ou 0 si aucun n'a été validé </dd></dl>
+
+</div>
+</div>
+<a id="a3bb24e50196af6088ec379249abe83ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bb24e50196af6088ec379249abe83ba">&#9670;&nbsp;</a></span>evoSalle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void evoSalle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsalle__s.html">salle_t</a> *&#160;</td>
+          <td class="paramname"><em>salle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui fait évoluer la salle. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">salle</td><td>pointeur sur la salle à faire évoluer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab2b5e87dc24bdc1398d7b2bcb1c0cb83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2b5e87dc24bdc1398d7b2bcb1c0cb83">&#9670;&nbsp;</a></span>ExploitationBinaireSons()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ExploitationBinaireSons </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>nbBinaire</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet de décoder un binaire pour récupérer les sons à jouer. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nbBinaire</td><td>le binaire à décoder </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1912ff18815e32e97a54cbad8066c7bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1912ff18815e32e97a54cbad8066c7bc">&#9670;&nbsp;</a></span>gameover()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gameover </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>fenetre</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_DisplayMode&#160;</td>
+          <td class="paramname"><em>mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Joystick *&#160;</td>
+          <td class="paramname"><em>pJoystick</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fullscreen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui lance un gameover. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fenetre</td><td>le pointeur vers fenetre utilisée </td></tr>
+    <tr><td class="paramname">renderer</td><td>le pointeur vers le pointeur sur le renderer utilisé </td></tr>
+    <tr><td class="paramname">mode</td><td>le mode qui contient des informations sur l'écran </td></tr>
+    <tr><td class="paramname">pJoystick</td><td>contient les informations sur le joystick ou NULL si aucun n'est utilisé </td></tr>
+    <tr><td class="paramname">fullscreen</td><td>un entier qui indique si le jeu est en plein écran (1) ou non (0) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9ffbbd8791b49989f9ee4716096d2b7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ffbbd8791b49989f9ee4716096d2b7b">&#9670;&nbsp;</a></span>initialisation_personnage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpersonnage__s.html">personnage_t</a>* initialisation_personnage </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structposition__s.html">position_t</a>&#160;</td>
+          <td class="paramname"><em>positionDepart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structposition__s.html">position_t</a>&#160;</td>
+          <td class="paramname"><em>positionDepartDelta</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'initialisation de la structure personnage. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le renderer utilisé </td></tr>
+    <tr><td class="paramname">positionDepart</td><td>la position de depart du joueur (en blocs) </td></tr>
+    <tr><td class="paramname">positionDepartDelta</td><td>la position de depart du joueur (en pixels à ajouter) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>le pointeur sur la structure personnage initialisée </dd></dl>
+
+</div>
+</div>
+<a id="ac7a206e3c72f0892f43e2e1dae5daf06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7a206e3c72f0892f43e2e1dae5daf06">&#9670;&nbsp;</a></span>initialisation_SDL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initialisation_SDL </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window **&#160;</td>
+          <td class="paramname"><em>fenetre</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Renderer **&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_DisplayMode *&#160;</td>
+          <td class="paramname"><em>mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boolean_t&#160;</td>
+          <td class="paramname"><em>fullscreen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'initalisation de la SDL et de création de la fenetre et du renderer ainsi que du remplissage du mode d'écran (en parametre) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fenetre</td><td>pointeur sur un pointeur de SDL_Window qui correspond à la fenêtre initialiser </td></tr>
+    <tr><td class="paramname">renderer</td><td>pointeur sur un pointeur de SDL_Renderer qui correspond au renderer à initialiser </td></tr>
+    <tr><td class="paramname">mode</td><td>pointeur sur un SDL_DisplayMode qui va contenir les informations sur l'écran </td></tr>
+    <tr><td class="paramname">fullscreen</td><td>entier qui vaut 0 si on souhaite créer une fenetre simple et 1 si on la veut en plein écran </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6c1464416b7688910f318a59982210d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c1464416b7688910f318a59982210d8">&#9670;&nbsp;</a></span>initialiser_salle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structsalle__s.html">salle_t</a>* initialiser_salle </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomFichier</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td>
+          <td class="paramname"><em>perso</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'initialisation de la salle. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>pointeur vers le renderer utilisé </td></tr>
+    <tr><td class="paramname">nomFichier</td><td>une chaine de caracteres qui contient le nom du fichier de la salle </td></tr>
+    <tr><td class="paramname">perso</td><td>le pointeur sur le personnage à mettre dans la salle </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>un pointeur sur la structure salle initialisée </dd></dl>
+
+</div>
+</div>
+<a id="a80026632ff5770fc7da3ed6a4b76e148"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80026632ff5770fc7da3ed6a4b76e148">&#9670;&nbsp;</a></span>initialiser_texture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* initialiser_texture </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boolean_t&#160;</td>
+          <td class="paramname"><em>estTarget</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui permet d'initialiser une texture à partir d'une image. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>chaine de caracteres qui correspond au chemin de l'image </td></tr>
+    <tr><td class="paramname">renderer</td><td>le pointeur sur SDL_Renderer </td></tr>
+    <tr><td class="paramname">estTarget</td><td>precise si la texture sera utilisée en tant que cible (1) ou non (0) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>le pointeur sur la texture générée </dd></dl>
+
+</div>
+</div>
+<a id="ae1d88b10b3071168e331039a28e8ecb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1d88b10b3071168e331039a28e8ecb7">&#9670;&nbsp;</a></span>initialiser_typeentites()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initialiser_typeentites </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'initialisation des types de monstres. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur vers le renderer utilisé par les textures </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6b26e56066f868312bf10a531452dd79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b26e56066f868312bf10a531452dd79">&#9670;&nbsp;</a></span>jeu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean_t jeu </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window *&#160;</td>
+          <td class="paramname"><em>fenetre</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Renderer **&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_DisplayMode&#160;</td>
+          <td class="paramname"><em>mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Joystick *&#160;</td>
+          <td class="paramname"><em>pJoystick</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fullscreen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui lance le jeu et gère les inputs, lance les fonctions d'affichage. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fenetre</td><td>le pointeur vers fenetre utilisée </td></tr>
+    <tr><td class="paramname">renderer</td><td>le pointeur vers le pointeur sur le renderer utilisé </td></tr>
+    <tr><td class="paramname">mode</td><td>le mode qui contient des informations sur l'écran </td></tr>
+    <tr><td class="paramname">pJoystick</td><td>contient les informations sur le joystick ou NULL si aucun n'est utilisé </td></tr>
+    <tr><td class="paramname">fullscreen</td><td>un entier qui indique si le jeu est en plein écran (1) ou non (0) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>un booleen indiquant si on est sorti parceque le personnage est mort (1) ou non (0) </dd></dl>
+
+</div>
+</div>
+<a id="a79c168095e834346bbaaf27c91cfddc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79c168095e834346bbaaf27c91cfddc2">&#9670;&nbsp;</a></span>konamicode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void konamicode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td>
+          <td class="paramname"><em>perso</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structsalle__s.html">salle_t</a> *&#160;</td>
+          <td class="paramname"><em>salle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>konami</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>indKon</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boolean_t *&#160;</td>
+          <td class="paramname"><em>kon</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui détecte si le Konami code a été rentré et qui applique le cheat code en conséquence. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">perso</td><td>le pointeur vers la structure personnage </td></tr>
+    <tr><td class="paramname">salle</td><td>le pointeur vers la structure salle </td></tr>
+    <tr><td class="paramname">konami</td><td>le tableau de caractère correspondant au code en cours (inputs) </td></tr>
+    <tr><td class="paramname">indKon</td><td>le pointeur vers l'entier qui correspond au nombre de caractères actuellement dans le code entré </td></tr>
+    <tr><td class="paramname">kon</td><td>le pointeur vers un booléen qui vaut FALSE si le Konami code n'a pas été entré et TRUE si c'est le cas </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0b5de16bf10565d14839539ce9b09421"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b5de16bf10565d14839539ce9b09421">&#9670;&nbsp;</a></span>lancerMusiqueInfini()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lancerMusiqueInfini </td>
+          <td>(</td>
+          <td class="paramtype">Mix_Music *&#160;</td>
+          <td class="paramname"><em>musique</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Jouer une musique à l'infini. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">musique</td><td>le pointeur sur la musique à jouer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8374dc964f3a6270a41915a3a1823823"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8374dc964f3a6270a41915a3a1823823">&#9670;&nbsp;</a></span>lancerMusiqueNBFois()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lancerMusiqueNBFois </td>
+          <td>(</td>
+          <td class="paramtype">Mix_Music *&#160;</td>
+          <td class="paramname"><em>musique</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nbFois</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Jouer une musique un nombre précis de fois. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">musique</td><td>le pointeur sur la musique à jouer </td></tr>
+    <tr><td class="paramname">nbFois</td><td>le nombre de fois que l'on joue la musique </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a91cffe2cfb94aef79db0ededf3bc0d88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91cffe2cfb94aef79db0ededf3bc0d88">&#9670;&nbsp;</a></span>menuConfirmation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean_t menuConfirmation </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>renderer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>question</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tailleTexte</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tailleBoutons</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui lance un menu de confirmation. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">renderer</td><td>le pointeur sur le renderer utilisé </td></tr>
+    <tr><td class="paramname">question</td><td>la question posée au joueur </td></tr>
+    <tr><td class="paramname">tailleTexte</td><td>la taille du texte dans le menu (multiplicateur) </td></tr>
+    <tr><td class="paramname">tailleBoutons</td><td>la taille des boutons dans le menu (multiplicateur) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a396831b1f2c72df8576cefe4399be4a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a396831b1f2c72df8576cefe4399be4a5">&#9670;&nbsp;</a></span>miseAjourSprites()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void miseAjourSprites </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td>
+          <td class="paramname"><em>perso</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui fait évoluer les sprites du personnage (animation) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">perso</td><td>le pointeur sur la structure personnage à faire évoluer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a62c08b78dfc29e87435d4feaa50e2f0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62c08b78dfc29e87435d4feaa50e2f0d">&#9670;&nbsp;</a></span>miseAjourSpritesEntites()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void miseAjourSpritesEntites </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsalle__s.html">salle_t</a> *&#160;</td>
+          <td class="paramname"><em>salle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui fait évoluer les sprites de l'entite (animation) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">salle</td><td>le pointeur vers la salle où trouver la liste d'entités avec les sprites à mettre à jour </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af4ffdd61eb400c65a78258ee8ad1172a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4ffdd61eb400c65a78258ee8ad1172a">&#9670;&nbsp;</a></span>quitter_SDL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void quitter_SDL </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Window **&#160;</td>
+          <td class="paramname"><em>fenetre</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Renderer **&#160;</td>
+          <td class="paramname"><em>renderer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui permet de détruire la fenetre et quitter la SDL. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fenetre</td><td>le pointeur sur le pointeur de la fenetre SDL_Window à détruire </td></tr>
+    <tr><td class="paramname">renderer</td><td>le pointeur sur le pointeur de la renderer SDL_Renderer à détruire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abbc303ab096908ca65a0ee9d0c1be6ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbc303ab096908ca65a0ee9d0c1be6ed">&#9670;&nbsp;</a></span>sauvegarderMenu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sauvegarderMenu </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numSauv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td>
+          <td class="paramname"><em>perso</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structsalle__s.html">salle_t</a> *&#160;</td>
+          <td class="paramname"><em>salle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sauvegarde dans un slot de sauvegarde. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numSauv</td><td>le slot de la sauvegarde à utiliser </td></tr>
+    <tr><td class="paramname">perso</td><td>le personnage à sauvegarder </td></tr>
+    <tr><td class="paramname">salle</td><td>la salle à sauvegarder </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>la sauvegarde sauvegardée si réussite </dd></dl>
+
+</div>
+</div>
+<a id="a59b9e7efa825b397eac099f072462065"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59b9e7efa825b397eac099f072462065">&#9670;&nbsp;</a></span>TouchesMenu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TouchesMenu </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>direction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SDL_Point&#160;</td>
+          <td class="paramname"><em>souris</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">boolean_t&#160;</td>
+          <td class="paramname"><em>bougeSouris</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmenu__s.html">menu_t</a> *&#160;</td>
+          <td class="paramname"><em>menu</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui gère si il y a changement de boutons ou selection dans le menu. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">direction</td><td>la direction du changement de bouton (gauche ou droite, haut ou bas, avancer ou reculer) </td></tr>
+    <tr><td class="paramname">souris</td><td>le point qui correspond à la position du pointeur de la souris sur l'écran </td></tr>
+    <tr><td class="paramname">bougeSouris</td><td>un booléenqui indique si la souris a bougé ou non </td></tr>
+    <tr><td class="paramname">menu</td><td>le menu à faire évoluer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

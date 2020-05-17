@@ -24,9 +24,9 @@
  * \date 17/05/2020
 */
 
-#define NBSOUNDS 9 /** Nombre de sons différents*/
-Mix_Chunk * EffetsSonores[NBSOUNDS]; /**Tableau en variable globale des effets sonores du jeu */
-float pourcentageVol; /** Pourcentage de volume de la musique (en variable globale)*/
+#define NBSOUNDS 9 /**< Nombre de sons différents*/
+Mix_Chunk * EffetsSonores[NBSOUNDS]; /**<Tableau en variable globale des effets sonores du jeu */
+float pourcentageVol; /**< Pourcentage de volume de la musique (en variable globale)*/
 
 void initialiserChunks(void);
 void detruireChunks(void);

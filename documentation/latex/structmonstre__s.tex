@@ -1,0 +1,113 @@
+\hypertarget{structmonstre__s}{}\section{Référence de la structure monstre\+\_\+s}
+\label{structmonstre__s}\index{monstre\+\_\+s@{monstre\+\_\+s}}
+
+
+Structure représentant un monstre.  
+
+
+
+
+{\ttfamily \#include $<$structs.\+h$>$}
+
+\subsection*{Attributs publics}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+t} $\ast$ \hyperlink{structmonstre__s_af58fb0da12d89fbdce602578f457560e}{type}
+\item 
+int \hyperlink{structmonstre__s_a1e26c0e85b90352f9496f331ec74e98d}{pv}
+\item 
+etat\+\_\+t \hyperlink{structmonstre__s_a38d270db8b7dd326f1e014eb3b72b740}{etat}
+\item 
+boolean\+\_\+t \hyperlink{structmonstre__s_a137937d4822ae2db1615ceeae7209e10}{new\+Etat}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{structmonstre__s_a7c57e6c890e0709f09b1df09c71a8daa}{sprite\+Actuel}
+\item 
+\hyperlink{structposition__s}{position\+\_\+t} \hyperlink{structmonstre__s_a972c2fb3087127d04bd3719d62c1030e}{pos}
+\item 
+\hyperlink{structposition__s}{position\+\_\+t} \hyperlink{structmonstre__s_a9a4bad53b10cc5379c594dd689750b0c}{delta}
+\item 
+boolean\+\_\+t \hyperlink{structmonstre__s_aa1a2d6868b660addc5855614f1849540}{direction}
+\item 
+int \hyperlink{structmonstre__s_a3815defb3b0db5e3b9fc71b77ddabeca}{evo\+Sprite}
+\item 
+int \hyperlink{structmonstre__s_ae6f4f8090a2bde0f555b00fc108c9130}{cd\+Att}
+\item 
+int \hyperlink{structmonstre__s_a0829b1dda3db793b717fa93466a686c6}{ut}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Structure représentant un monstre. 
+
+\subsection{Documentation des données membres}
+\mbox{\Hypertarget{structmonstre__s_ae6f4f8090a2bde0f555b00fc108c9130}\label{structmonstre__s_ae6f4f8090a2bde0f555b00fc108c9130}} 
+\index{monstre\+\_\+s@{monstre\+\_\+s}!cd\+Att@{cd\+Att}}
+\index{cd\+Att@{cd\+Att}!monstre\+\_\+s@{monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{cd\+Att}{cdAtt}}
+{\footnotesize\ttfamily int monstre\+\_\+s\+::cd\+Att}
+
+Variable indiquant le temps restant avant la prochaine attaque \mbox{\Hypertarget{structmonstre__s_a9a4bad53b10cc5379c594dd689750b0c}\label{structmonstre__s_a9a4bad53b10cc5379c594dd689750b0c}} 
+\index{monstre\+\_\+s@{monstre\+\_\+s}!delta@{delta}}
+\index{delta@{delta}!monstre\+\_\+s@{monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{delta}{delta}}
+{\footnotesize\ttfamily \hyperlink{structposition__s}{position\+\_\+t} monstre\+\_\+s\+::delta}
+
+Position en pixel à l\textquotesingle{}intérieur de la case de matrice \mbox{\Hypertarget{structmonstre__s_aa1a2d6868b660addc5855614f1849540}\label{structmonstre__s_aa1a2d6868b660addc5855614f1849540}} 
+\index{monstre\+\_\+s@{monstre\+\_\+s}!direction@{direction}}
+\index{direction@{direction}!monstre\+\_\+s@{monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{direction}{direction}}
+{\footnotesize\ttfamily boolean\+\_\+t monstre\+\_\+s\+::direction}
+
+Direction vers laquelle regarde le monstre (1\+: vers la gauche(\+L\+E\+F\+T), 0\+: vers la droite(\+R\+I\+G\+H\+T)) \mbox{\Hypertarget{structmonstre__s_a38d270db8b7dd326f1e014eb3b72b740}\label{structmonstre__s_a38d270db8b7dd326f1e014eb3b72b740}} 
+\index{monstre\+\_\+s@{monstre\+\_\+s}!etat@{etat}}
+\index{etat@{etat}!monstre\+\_\+s@{monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{etat}{etat}}
+{\footnotesize\ttfamily etat\+\_\+t monstre\+\_\+s\+::etat}
+
+Etat actuel du monstre \mbox{\Hypertarget{structmonstre__s_a3815defb3b0db5e3b9fc71b77ddabeca}\label{structmonstre__s_a3815defb3b0db5e3b9fc71b77ddabeca}} 
+\index{monstre\+\_\+s@{monstre\+\_\+s}!evo\+Sprite@{evo\+Sprite}}
+\index{evo\+Sprite@{evo\+Sprite}!monstre\+\_\+s@{monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{evo\+Sprite}{evoSprite}}
+{\footnotesize\ttfamily int monstre\+\_\+s\+::evo\+Sprite}
+
+Entier qui décrémente, changement de sprite quand vaut 0 \mbox{\Hypertarget{structmonstre__s_a137937d4822ae2db1615ceeae7209e10}\label{structmonstre__s_a137937d4822ae2db1615ceeae7209e10}} 
+\index{monstre\+\_\+s@{monstre\+\_\+s}!new\+Etat@{new\+Etat}}
+\index{new\+Etat@{new\+Etat}!monstre\+\_\+s@{monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{new\+Etat}{newEtat}}
+{\footnotesize\ttfamily boolean\+\_\+t monstre\+\_\+s\+::new\+Etat}
+
+Booléen qui signifie qu\textquotesingle{}un changement d\textquotesingle{}état vient de s\textquotesingle{}effectuer \mbox{\Hypertarget{structmonstre__s_a972c2fb3087127d04bd3719d62c1030e}\label{structmonstre__s_a972c2fb3087127d04bd3719d62c1030e}} 
+\index{monstre\+\_\+s@{monstre\+\_\+s}!pos@{pos}}
+\index{pos@{pos}!monstre\+\_\+s@{monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{pos}{pos}}
+{\footnotesize\ttfamily \hyperlink{structposition__s}{position\+\_\+t} monstre\+\_\+s\+::pos}
+
+Position actuel du personnage (position entière en cases de matrice) \mbox{\Hypertarget{structmonstre__s_a1e26c0e85b90352f9496f331ec74e98d}\label{structmonstre__s_a1e26c0e85b90352f9496f331ec74e98d}} 
+\index{monstre\+\_\+s@{monstre\+\_\+s}!pv@{pv}}
+\index{pv@{pv}!monstre\+\_\+s@{monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{pv}{pv}}
+{\footnotesize\ttfamily int monstre\+\_\+s\+::pv}
+
+PV actuels du monstre \mbox{\Hypertarget{structmonstre__s_a7c57e6c890e0709f09b1df09c71a8daa}\label{structmonstre__s_a7c57e6c890e0709f09b1df09c71a8daa}} 
+\index{monstre\+\_\+s@{monstre\+\_\+s}!sprite\+Actuel@{sprite\+Actuel}}
+\index{sprite\+Actuel@{sprite\+Actuel}!monstre\+\_\+s@{monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{sprite\+Actuel}{spriteActuel}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect monstre\+\_\+s\+::sprite\+Actuel}
+
+Rectangle qui correspond à la taille du sprite actuel dans la texture \mbox{\Hypertarget{structmonstre__s_af58fb0da12d89fbdce602578f457560e}\label{structmonstre__s_af58fb0da12d89fbdce602578f457560e}} 
+\index{monstre\+\_\+s@{monstre\+\_\+s}!type@{type}}
+\index{type@{type}!monstre\+\_\+s@{monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+t}$\ast$ monstre\+\_\+s\+::type}
+
+Type de monstre \mbox{\Hypertarget{structmonstre__s_a0829b1dda3db793b717fa93466a686c6}\label{structmonstre__s_a0829b1dda3db793b717fa93466a686c6}} 
+\index{monstre\+\_\+s@{monstre\+\_\+s}!ut@{ut}}
+\index{ut@{ut}!monstre\+\_\+s@{monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{ut}{ut}}
+{\footnotesize\ttfamily int monstre\+\_\+s\+::ut}
+
+Variable utilitaire à fonction variable permetttant une info entière ou bouléenne sur un monstre\+: norme 0 = valeur de base ou rien 
+
+La documentation de cette structure a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+headers/\hyperlink{structs_8h}{structs.\+h}\end{DoxyCompactItemize}

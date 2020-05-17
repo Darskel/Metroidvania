@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Diskosieni - Metroidvania:  Fichier source de headers/source.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Diskosieni - Metroidvania
+   </div>
+   <div id="projectbrief">Création d&#39;un Metroidvania nommé Diskosieni dans le cadre du cours nommé &#39;Projet&#39;</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html">headers</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">source.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="source_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SOURCE_INCLUDED</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SOURCE_INCLUDED</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;../headers/structs.h&quot;</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define DIR_SAUV &quot;sauvegardes&quot;</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define DIR_SALLE &quot;./salles/&quot;</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define BLOC_ERR &quot;./autre/erreur.png&quot;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define BASE 100</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="source_8h.html#a5e5589d805ecf7f88f190412ee903b09">   18</a></span>&#160;<span class="preprocessor">#define NBTYPEMONSTRE 24 </span></div><div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="source_8h.html#aa9eab917d84e6c73c1df1e93b570fe28">   19</a></span>&#160;<span class="preprocessor">type_monstre_t typesMonstre[NBTYPEMONSTRE]; </span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">//char* chercherSprite(int, char*);</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordtype">int</span> <a class="code" href="source_8h.html#a4b26824e6770c4252fb8cdbcd7af94bb">sauvegarder</a>(<span class="keywordtype">int</span> numSauv, <a class="code" href="structpersonnage__s.html">personnage_t</a>* perso, <span class="keywordtype">char</span>* salle);</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">int</span> <a class="code" href="source_8h.html#a37c46e9a766d1755723c50775e96b93e">chargerSauvegarde</a>(<span class="keywordtype">int</span> numSauv, <a class="code" href="structpersonnage__s.html">personnage_t</a>* perso, <span class="keywordtype">char</span>* salle);</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">void</span> <a class="code" href="source_8h.html#a9157f2db38ecc8aca230dbf3b21145c6">creerTypeEntite</a>();</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<a class="code" href="structtype__monstre__s.html">type_monstre_t</a>* <a class="code" href="source_8h.html#acb8eb0f3e06d01c57473af3b8a7e8499">obtenirTypesEntite</a>();</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">int</span> <a class="code" href="source_8h.html#ad5237d1625ec6ab16ef2c4f0690bbfb8">nettoyerSalle</a>(<a class="code" href="structsalle__s.html">salle_t</a>** salle);</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">int</span> <a class="code" href="source_8h.html#af2f9321f8e58b86da53155dd56df56ff">lireSalle</a>(<span class="keywordtype">char</span>* nomFichier, <a class="code" href="structsalle__s.html">salle_t</a>** salle, <a class="code" href="structpersonnage__s.html">personnage_t</a>* perso);</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="structsalle__s_html"><div class="ttname"><a href="structsalle__s.html">salle_s</a></div><div class="ttdoc">Structure représentant les salles et leur contenu. </div><div class="ttdef"><b>Definition:</b> structs.h:238</div></div>
+<div class="ttc" id="source_8h_html_acb8eb0f3e06d01c57473af3b8a7e8499"><div class="ttname"><a href="source_8h.html#acb8eb0f3e06d01c57473af3b8a7e8499">obtenirTypesEntite</a></div><div class="ttdeci">type_monstre_t * obtenirTypesEntite()</div><div class="ttdoc">Permet d&amp;#39;obtenir le tableau des types d&amp;#39;entités. </div><div class="ttdef"><b>Definition:</b> source.c:942</div></div>
+<div class="ttc" id="source_8h_html_af2f9321f8e58b86da53155dd56df56ff"><div class="ttname"><a href="source_8h.html#af2f9321f8e58b86da53155dd56df56ff">lireSalle</a></div><div class="ttdeci">int lireSalle(char *nomFichier, salle_t **salle, personnage_t *perso)</div><div class="ttdoc">Modifie la structure salle pour la nouvelle salle. </div><div class="ttdef"><b>Definition:</b> source.c:1044</div></div>
+<div class="ttc" id="structtype__monstre__s_html"><div class="ttname"><a href="structtype__monstre__s.html">type_monstre_s</a></div><div class="ttdoc">Structure représentant le type d&amp;#39;un monstre. </div><div class="ttdef"><b>Definition:</b> structs.h:301</div></div>
+<div class="ttc" id="source_8h_html_a37c46e9a766d1755723c50775e96b93e"><div class="ttname"><a href="source_8h.html#a37c46e9a766d1755723c50775e96b93e">chargerSauvegarde</a></div><div class="ttdeci">int chargerSauvegarde(int numSauv, personnage_t *perso, char *salle)</div><div class="ttdoc">Charge l&amp;#39;état de la partie. </div><div class="ttdef"><b>Definition:</b> source.c:82</div></div>
+<div class="ttc" id="source_8h_html_a4b26824e6770c4252fb8cdbcd7af94bb"><div class="ttname"><a href="source_8h.html#a4b26824e6770c4252fb8cdbcd7af94bb">sauvegarder</a></div><div class="ttdeci">int sauvegarder(int numSauv, personnage_t *perso, char *salle)</div><div class="ttdoc">Sauvegarde l&amp;#39;état de la partie. </div><div class="ttdef"><b>Definition:</b> source.c:29</div></div>
+<div class="ttc" id="source_8h_html_a9157f2db38ecc8aca230dbf3b21145c6"><div class="ttname"><a href="source_8h.html#a9157f2db38ecc8aca230dbf3b21145c6">creerTypeEntite</a></div><div class="ttdeci">void creerTypeEntite()</div><div class="ttdoc">Créé le tableau de types d&amp;#39;entités. </div><div class="ttdef"><b>Definition:</b> source.c:144</div></div>
+<div class="ttc" id="structpersonnage__s_html"><div class="ttname"><a href="structpersonnage__s.html">personnage_s</a></div><div class="ttdoc">Structure représentant le personnage et ses caractéristques, contient également une variable de gesti...</div><div class="ttdef"><b>Definition:</b> structs.h:257</div></div>
+<div class="ttc" id="source_8h_html_ad5237d1625ec6ab16ef2c4f0690bbfb8"><div class="ttname"><a href="source_8h.html#ad5237d1625ec6ab16ef2c4f0690bbfb8">nettoyerSalle</a></div><div class="ttdeci">int nettoyerSalle(salle_t **salle)</div><div class="ttdoc">Nettoie et supprime la structure salle donnée. </div><div class="ttdef"><b>Definition:</b> source.c:1021</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

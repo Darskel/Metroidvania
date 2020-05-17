@@ -1,0 +1,192 @@
+\hypertarget{source_8h}{}\section{Référence du fichier headers/source.h}
+\label{source_8h}\index{headers/source.\+h@{headers/source.\+h}}
+
+
+Header et constantes des fonctions de lecture d\textquotesingle{}une salle.  
+
+
+{\ttfamily \#include \char`\"{}../headers/structs.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{source_8h_ab146d4d97ad31f63e0e77b770cfb08a8}\label{source_8h_ab146d4d97ad31f63e0e77b770cfb08a8}} 
+\#define {\bfseries D\+I\+R\+\_\+\+S\+A\+UV}~\char`\"{}sauvegardes\char`\"{}
+\item 
+\mbox{\Hypertarget{source_8h_ae0bb01ef886639a9465ccb684dd2f6bc}\label{source_8h_ae0bb01ef886639a9465ccb684dd2f6bc}} 
+\#define {\bfseries D\+I\+R\+\_\+\+S\+A\+L\+LE}~\char`\"{}./salles/\char`\"{}
+\item 
+\mbox{\Hypertarget{source_8h_a94a7171631034736f17160005eedf950}\label{source_8h_a94a7171631034736f17160005eedf950}} 
+\#define {\bfseries B\+L\+O\+C\+\_\+\+E\+RR}~\char`\"{}./autre/erreur.\+png\char`\"{}
+\item 
+\mbox{\Hypertarget{source_8h_a79bcfb6bde984f42d1124b068a509af7}\label{source_8h_a79bcfb6bde984f42d1124b068a509af7}} 
+\#define {\bfseries B\+A\+SE}~100
+\item 
+\#define \hyperlink{source_8h_a5e5589d805ecf7f88f190412ee903b09}{N\+B\+T\+Y\+P\+E\+M\+O\+N\+S\+T\+RE}~24
+\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{source_8h_a4b26824e6770c4252fb8cdbcd7af94bb}{sauvegarder} (int num\+Sauv, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, char $\ast$salle)
+\begin{DoxyCompactList}\small\item\em Sauvegarde l\textquotesingle{}état de la partie. \end{DoxyCompactList}\item 
+int \hyperlink{source_8h_a37c46e9a766d1755723c50775e96b93e}{charger\+Sauvegarde} (int num\+Sauv, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, char $\ast$salle)
+\begin{DoxyCompactList}\small\item\em Charge l\textquotesingle{}état de la partie. \end{DoxyCompactList}\item 
+void \hyperlink{source_8h_a9157f2db38ecc8aca230dbf3b21145c6}{creer\+Type\+Entite} ()
+\begin{DoxyCompactList}\small\item\em Créé le tableau de types d\textquotesingle{}entités. \end{DoxyCompactList}\item 
+\hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+t} $\ast$ \hyperlink{source_8h_acb8eb0f3e06d01c57473af3b8a7e8499}{obtenir\+Types\+Entite} ()
+\begin{DoxyCompactList}\small\item\em Permet d\textquotesingle{}obtenir le tableau des types d\textquotesingle{}entités. \end{DoxyCompactList}\item 
+int \hyperlink{source_8h_ad5237d1625ec6ab16ef2c4f0690bbfb8}{nettoyer\+Salle} (\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$salle)
+\begin{DoxyCompactList}\small\item\em Nettoie et supprime la structure salle donnée. \end{DoxyCompactList}\item 
+int \hyperlink{source_8h_af2f9321f8e58b86da53155dd56df56ff}{lire\+Salle} (char $\ast$nom\+Fichier, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$salle, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso)
+\begin{DoxyCompactList}\small\item\em Modifie la structure salle pour la nouvelle salle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+t} \hyperlink{source_8h_aa9eab917d84e6c73c1df1e93b570fe28}{types\+Monstre} \mbox{[}\hyperlink{source_8h_a5e5589d805ecf7f88f190412ee903b09}{N\+B\+T\+Y\+P\+E\+M\+O\+N\+S\+T\+RE}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Header et constantes des fonctions de lecture d\textquotesingle{}une salle. 
+
+\begin{DoxyAuthor}{Auteur}
+Thomas D\+I\+D\+I\+ER \& Marie-\/\+Nina M\+U\+N\+AR L2 Info Le Mans 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+2 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+17/05/2020 
+\end{DoxyDate}
+
+
+\subsection{Documentation des macros}
+\mbox{\Hypertarget{source_8h_a5e5589d805ecf7f88f190412ee903b09}\label{source_8h_a5e5589d805ecf7f88f190412ee903b09}} 
+\index{source.\+h@{source.\+h}!N\+B\+T\+Y\+P\+E\+M\+O\+N\+S\+T\+RE@{N\+B\+T\+Y\+P\+E\+M\+O\+N\+S\+T\+RE}}
+\index{N\+B\+T\+Y\+P\+E\+M\+O\+N\+S\+T\+RE@{N\+B\+T\+Y\+P\+E\+M\+O\+N\+S\+T\+RE}!source.\+h@{source.\+h}}
+\subsubsection{\texorpdfstring{N\+B\+T\+Y\+P\+E\+M\+O\+N\+S\+T\+RE}{NBTYPEMONSTRE}}
+{\footnotesize\ttfamily \#define N\+B\+T\+Y\+P\+E\+M\+O\+N\+S\+T\+RE~24}
+
+Nombre de type de monstres 
+
+\subsection{Documentation des fonctions}
+\mbox{\Hypertarget{source_8h_a37c46e9a766d1755723c50775e96b93e}\label{source_8h_a37c46e9a766d1755723c50775e96b93e}} 
+\index{source.\+h@{source.\+h}!charger\+Sauvegarde@{charger\+Sauvegarde}}
+\index{charger\+Sauvegarde@{charger\+Sauvegarde}!source.\+h@{source.\+h}}
+\subsubsection{\texorpdfstring{charger\+Sauvegarde()}{chargerSauvegarde()}}
+{\footnotesize\ttfamily int charger\+Sauvegarde (\begin{DoxyParamCaption}\item[{int}]{num\+Sauv,  }\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{perso,  }\item[{char $\ast$}]{salle }\end{DoxyParamCaption})}
+
+
+
+Charge l\textquotesingle{}état de la partie. 
+
+Les paramètres num\+Sauv et nom\+Objs doivent être définis avant, les autres paramètres seront remplis par cette fonction
+
+
+\begin{DoxyParams}{Paramètres}
+{\em num\+Sauv} & numéro de la sauvegarde (entre 1 et 3) \\
+\hline
+{\em perso} & personnage (structure personnage\+\_\+t) à remplir \\
+\hline
+{\em salle} & nom de la salle à charger\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+un code erreur en fonction de l\textquotesingle{}erreur\+: -\/1 = Mauvais numéro de sauvegarde, -\/2 = impossible d\textquotesingle{}ouvrir ou créer le fichier; le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès), ou 0 si le fichier de sauvegarde est vide 
+\end{DoxyReturn}
+\mbox{\Hypertarget{source_8h_a9157f2db38ecc8aca230dbf3b21145c6}\label{source_8h_a9157f2db38ecc8aca230dbf3b21145c6}} 
+\index{source.\+h@{source.\+h}!creer\+Type\+Entite@{creer\+Type\+Entite}}
+\index{creer\+Type\+Entite@{creer\+Type\+Entite}!source.\+h@{source.\+h}}
+\subsubsection{\texorpdfstring{creer\+Type\+Entite()}{creerTypeEntite()}}
+{\footnotesize\ttfamily void creer\+Type\+Entite (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Créé le tableau de types d\textquotesingle{}entités. 
+
+chaque entité est créée en dur dans le code \mbox{\Hypertarget{source_8h_af2f9321f8e58b86da53155dd56df56ff}\label{source_8h_af2f9321f8e58b86da53155dd56df56ff}} 
+\index{source.\+h@{source.\+h}!lire\+Salle@{lire\+Salle}}
+\index{lire\+Salle@{lire\+Salle}!source.\+h@{source.\+h}}
+\subsubsection{\texorpdfstring{lire\+Salle()}{lireSalle()}}
+{\footnotesize\ttfamily int lire\+Salle (\begin{DoxyParamCaption}\item[{char $\ast$}]{nom\+Fichier,  }\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$}]{salle,  }\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{perso }\end{DoxyParamCaption})}
+
+
+
+Modifie la structure salle pour la nouvelle salle. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em nom\+Fichier} & chaîne de caractères correspondant au nom du fichier à lire \\
+\hline
+{\em salle} & pointeur du pointeur de la structure salle à remplir avec la lecture \\
+\hline
+{\em perso} & le personnage à inclure dans la salle\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+0 si tout s\textquotesingle{}est bien déroulé 
+\end{DoxyReturn}
+\mbox{\Hypertarget{source_8h_ad5237d1625ec6ab16ef2c4f0690bbfb8}\label{source_8h_ad5237d1625ec6ab16ef2c4f0690bbfb8}} 
+\index{source.\+h@{source.\+h}!nettoyer\+Salle@{nettoyer\+Salle}}
+\index{nettoyer\+Salle@{nettoyer\+Salle}!source.\+h@{source.\+h}}
+\subsubsection{\texorpdfstring{nettoyer\+Salle()}{nettoyerSalle()}}
+{\footnotesize\ttfamily int nettoyer\+Salle (\begin{DoxyParamCaption}\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$}]{salle }\end{DoxyParamCaption})}
+
+
+
+Nettoie et supprime la structure salle donnée. 
+
+libère toute la mémoire utiliser et prépare le pointeur à être de nouveau utilisé
+
+
+\begin{DoxyParams}{Paramètres}
+{\em salle} & pointeur sur le pointeur de la structure salle à nettoyer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+0 si tout s\textquotesingle{}est bien déroulé 
+\end{DoxyReturn}
+\mbox{\Hypertarget{source_8h_acb8eb0f3e06d01c57473af3b8a7e8499}\label{source_8h_acb8eb0f3e06d01c57473af3b8a7e8499}} 
+\index{source.\+h@{source.\+h}!obtenir\+Types\+Entite@{obtenir\+Types\+Entite}}
+\index{obtenir\+Types\+Entite@{obtenir\+Types\+Entite}!source.\+h@{source.\+h}}
+\subsubsection{\texorpdfstring{obtenir\+Types\+Entite()}{obtenirTypesEntite()}}
+{\footnotesize\ttfamily \hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+t}$\ast$ obtenir\+Types\+Entite (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Permet d\textquotesingle{}obtenir le tableau des types d\textquotesingle{}entités. 
+
+\begin{DoxyReturn}{Renvoie}
+le tableau de types d\textquotesingle{}entités 
+\end{DoxyReturn}
+\mbox{\Hypertarget{source_8h_a4b26824e6770c4252fb8cdbcd7af94bb}\label{source_8h_a4b26824e6770c4252fb8cdbcd7af94bb}} 
+\index{source.\+h@{source.\+h}!sauvegarder@{sauvegarder}}
+\index{sauvegarder@{sauvegarder}!source.\+h@{source.\+h}}
+\subsubsection{\texorpdfstring{sauvegarder()}{sauvegarder()}}
+{\footnotesize\ttfamily int sauvegarder (\begin{DoxyParamCaption}\item[{int}]{num\+Sauv,  }\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{perso,  }\item[{char $\ast$}]{salle }\end{DoxyParamCaption})}
+
+
+
+Sauvegarde l\textquotesingle{}état de la partie. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em num\+Sauv} & numéro de la sauvegarde (entre 1 et 3) \\
+\hline
+{\em perso} & pointeur vers le personnage (structure personnage) \\
+\hline
+{\em salle} & nom de la dernière salle visité par le personnage principal\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+un code erreur en fonction de l\textquotesingle{}erreur\+: -\/1 = Mauvais numéro de sauvegarde, -\/2 = impossible d\textquotesingle{}ouvrir ou créer le fichier; ou le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès) 
+\end{DoxyReturn}
+
+
+\subsection{Documentation des variables}
+\mbox{\Hypertarget{source_8h_aa9eab917d84e6c73c1df1e93b570fe28}\label{source_8h_aa9eab917d84e6c73c1df1e93b570fe28}} 
+\index{source.\+h@{source.\+h}!types\+Monstre@{types\+Monstre}}
+\index{types\+Monstre@{types\+Monstre}!source.\+h@{source.\+h}}
+\subsubsection{\texorpdfstring{types\+Monstre}{typesMonstre}}
+{\footnotesize\ttfamily \hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+t} types\+Monstre\mbox{[}\hyperlink{source_8h_a5e5589d805ecf7f88f190412ee903b09}{N\+B\+T\+Y\+P\+E\+M\+O\+N\+S\+T\+RE}\mbox{]}}
+
+Tableau en variable globale des types de monstres 

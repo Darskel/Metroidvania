@@ -1,0 +1,121 @@
+\hypertarget{structmenu__s}{}\section{Référence de la structure menu\+\_\+s}
+\label{structmenu__s}\index{menu\+\_\+s@{menu\+\_\+s}}
+
+
+Structure représentant un menu.  
+
+
+
+
+{\ttfamily \#include $<$structs.\+h$>$}
+
+\subsection*{Attributs publics}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{structmenu__s_a23bc02d966064967f230d451c2bb92e2}{etiquette}
+\item 
+\hyperlink{structmenu__bouton__s}{menu\+\_\+bouton\+\_\+t} $\ast$ \hyperlink{structmenu__s_a0f2f124fed40b189dfce498589c686ed}{tab\+Boutons}
+\item 
+int \hyperlink{structmenu__s_a19e82f63dd8d79abd915eef8942983b7}{nb\+Boutons}
+\item 
+int \hyperlink{structmenu__s_a19649b307665fbc360e9aa9afd02561f}{id\+Bouton\+Choisi}
+\item 
+int \hyperlink{structmenu__s_a0fb7af2c7e862a54742c26c6e34f6a06}{id\+Bouton\+Valide}
+\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{structmenu__s_ab50ffcca733b1e0335a823c2c5a72530}{fond}
+\item 
+int \hyperlink{structmenu__s_a799866db5fd1be6862202346d260333d}{nb\+Sprites}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{structmenu__s_a441c56b239a287ebcd898db8625659b3}{sprite\+Actuel}
+\item 
+int \hyperlink{structmenu__s_afaacd979fb5f5ab3b1bc99dcf986dbbd}{anim\+Delay}
+\item 
+int \hyperlink{structmenu__s_a27260e298d7eabcbdcef22b7cfdf15c8}{etatanim}
+\item 
+\hyperlink{structmenu__texte__s}{menu\+\_\+texte\+\_\+t} $\ast$ \hyperlink{structmenu__s_adcc943c449636cca0974499cb03d289b}{tab\+Textes}
+\item 
+int \hyperlink{structmenu__s_afdbe31467b3f6d712b7f3b0a783987de}{nb\+Textes}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Structure représentant un menu. 
+
+\subsection{Documentation des données membres}
+\mbox{\Hypertarget{structmenu__s_afaacd979fb5f5ab3b1bc99dcf986dbbd}\label{structmenu__s_afaacd979fb5f5ab3b1bc99dcf986dbbd}} 
+\index{menu\+\_\+s@{menu\+\_\+s}!anim\+Delay@{anim\+Delay}}
+\index{anim\+Delay@{anim\+Delay}!menu\+\_\+s@{menu\+\_\+s}}
+\subsubsection{\texorpdfstring{anim\+Delay}{animDelay}}
+{\footnotesize\ttfamily int menu\+\_\+s\+::anim\+Delay}
+
+Delai entre le changement d\textquotesingle{}animation du menu \mbox{\Hypertarget{structmenu__s_a27260e298d7eabcbdcef22b7cfdf15c8}\label{structmenu__s_a27260e298d7eabcbdcef22b7cfdf15c8}} 
+\index{menu\+\_\+s@{menu\+\_\+s}!etatanim@{etatanim}}
+\index{etatanim@{etatanim}!menu\+\_\+s@{menu\+\_\+s}}
+\subsubsection{\texorpdfstring{etatanim}{etatanim}}
+{\footnotesize\ttfamily int menu\+\_\+s\+::etatanim}
+
+Nombre qui va de 0 à anim\+Delay \mbox{\Hypertarget{structmenu__s_a23bc02d966064967f230d451c2bb92e2}\label{structmenu__s_a23bc02d966064967f230d451c2bb92e2}} 
+\index{menu\+\_\+s@{menu\+\_\+s}!etiquette@{etiquette}}
+\index{etiquette@{etiquette}!menu\+\_\+s@{menu\+\_\+s}}
+\subsubsection{\texorpdfstring{etiquette}{etiquette}}
+{\footnotesize\ttfamily char$\ast$ menu\+\_\+s\+::etiquette}
+
+Etiquette du menu \mbox{\Hypertarget{structmenu__s_ab50ffcca733b1e0335a823c2c5a72530}\label{structmenu__s_ab50ffcca733b1e0335a823c2c5a72530}} 
+\index{menu\+\_\+s@{menu\+\_\+s}!fond@{fond}}
+\index{fond@{fond}!menu\+\_\+s@{menu\+\_\+s}}
+\subsubsection{\texorpdfstring{fond}{fond}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ menu\+\_\+s\+::fond}
+
+Texture du fond du menu \mbox{\Hypertarget{structmenu__s_a19649b307665fbc360e9aa9afd02561f}\label{structmenu__s_a19649b307665fbc360e9aa9afd02561f}} 
+\index{menu\+\_\+s@{menu\+\_\+s}!id\+Bouton\+Choisi@{id\+Bouton\+Choisi}}
+\index{id\+Bouton\+Choisi@{id\+Bouton\+Choisi}!menu\+\_\+s@{menu\+\_\+s}}
+\subsubsection{\texorpdfstring{id\+Bouton\+Choisi}{idBoutonChoisi}}
+{\footnotesize\ttfamily int menu\+\_\+s\+::id\+Bouton\+Choisi}
+
+Id du bouton actuellement choisi \mbox{\Hypertarget{structmenu__s_a0fb7af2c7e862a54742c26c6e34f6a06}\label{structmenu__s_a0fb7af2c7e862a54742c26c6e34f6a06}} 
+\index{menu\+\_\+s@{menu\+\_\+s}!id\+Bouton\+Valide@{id\+Bouton\+Valide}}
+\index{id\+Bouton\+Valide@{id\+Bouton\+Valide}!menu\+\_\+s@{menu\+\_\+s}}
+\subsubsection{\texorpdfstring{id\+Bouton\+Valide}{idBoutonValide}}
+{\footnotesize\ttfamily int menu\+\_\+s\+::id\+Bouton\+Valide}
+
+id du bouton actuellement validé \mbox{\Hypertarget{structmenu__s_a19e82f63dd8d79abd915eef8942983b7}\label{structmenu__s_a19e82f63dd8d79abd915eef8942983b7}} 
+\index{menu\+\_\+s@{menu\+\_\+s}!nb\+Boutons@{nb\+Boutons}}
+\index{nb\+Boutons@{nb\+Boutons}!menu\+\_\+s@{menu\+\_\+s}}
+\subsubsection{\texorpdfstring{nb\+Boutons}{nbBoutons}}
+{\footnotesize\ttfamily int menu\+\_\+s\+::nb\+Boutons}
+
+Nombre de boutons dans le menu \mbox{\Hypertarget{structmenu__s_a799866db5fd1be6862202346d260333d}\label{structmenu__s_a799866db5fd1be6862202346d260333d}} 
+\index{menu\+\_\+s@{menu\+\_\+s}!nb\+Sprites@{nb\+Sprites}}
+\index{nb\+Sprites@{nb\+Sprites}!menu\+\_\+s@{menu\+\_\+s}}
+\subsubsection{\texorpdfstring{nb\+Sprites}{nbSprites}}
+{\footnotesize\ttfamily int menu\+\_\+s\+::nb\+Sprites}
+
+Nombre de sprites du fond du menu \mbox{\Hypertarget{structmenu__s_afdbe31467b3f6d712b7f3b0a783987de}\label{structmenu__s_afdbe31467b3f6d712b7f3b0a783987de}} 
+\index{menu\+\_\+s@{menu\+\_\+s}!nb\+Textes@{nb\+Textes}}
+\index{nb\+Textes@{nb\+Textes}!menu\+\_\+s@{menu\+\_\+s}}
+\subsubsection{\texorpdfstring{nb\+Textes}{nbTextes}}
+{\footnotesize\ttfamily int menu\+\_\+s\+::nb\+Textes}
+
+Nombre de textes du menu \mbox{\Hypertarget{structmenu__s_a441c56b239a287ebcd898db8625659b3}\label{structmenu__s_a441c56b239a287ebcd898db8625659b3}} 
+\index{menu\+\_\+s@{menu\+\_\+s}!sprite\+Actuel@{sprite\+Actuel}}
+\index{sprite\+Actuel@{sprite\+Actuel}!menu\+\_\+s@{menu\+\_\+s}}
+\subsubsection{\texorpdfstring{sprite\+Actuel}{spriteActuel}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect menu\+\_\+s\+::sprite\+Actuel}
+
+Sprite actuellement affiché au fond du menu \mbox{\Hypertarget{structmenu__s_a0f2f124fed40b189dfce498589c686ed}\label{structmenu__s_a0f2f124fed40b189dfce498589c686ed}} 
+\index{menu\+\_\+s@{menu\+\_\+s}!tab\+Boutons@{tab\+Boutons}}
+\index{tab\+Boutons@{tab\+Boutons}!menu\+\_\+s@{menu\+\_\+s}}
+\subsubsection{\texorpdfstring{tab\+Boutons}{tabBoutons}}
+{\footnotesize\ttfamily \hyperlink{structmenu__bouton__s}{menu\+\_\+bouton\+\_\+t}$\ast$ menu\+\_\+s\+::tab\+Boutons}
+
+Tableau de boutons \mbox{\Hypertarget{structmenu__s_adcc943c449636cca0974499cb03d289b}\label{structmenu__s_adcc943c449636cca0974499cb03d289b}} 
+\index{menu\+\_\+s@{menu\+\_\+s}!tab\+Textes@{tab\+Textes}}
+\index{tab\+Textes@{tab\+Textes}!menu\+\_\+s@{menu\+\_\+s}}
+\subsubsection{\texorpdfstring{tab\+Textes}{tabTextes}}
+{\footnotesize\ttfamily \hyperlink{structmenu__texte__s}{menu\+\_\+texte\+\_\+t}$\ast$ menu\+\_\+s\+::tab\+Textes}
+
+Tableau des textes du menu 
+
+La documentation de cette structure a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+headers/\hyperlink{structs_8h}{structs.\+h}\end{DoxyCompactItemize}

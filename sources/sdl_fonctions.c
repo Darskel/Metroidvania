@@ -279,7 +279,7 @@ void togglePauseMusic(audiodata_t * audiodata){
  *
  * @param path chaine de caracteres qui correspond au chemin de l'image
  * @param renderer le pointeur sur SDL_Renderer
- * @param precise si la texture sera utilisée en tant que cible (1) ou non (0)
+ * @param estTarget precise si la texture sera utilisée en tant que cible (1) ou non (0)
  * @return le pointeur sur la texture générée
  */
 SDL_Texture * initialiser_texture(char * path, SDL_Renderer * renderer, boolean_t estTarget){
@@ -585,6 +585,11 @@ salle_t * initialiser_salle(SDL_Renderer * renderer, char* nomFichier, personnag
   return salle;
 }
 
+/**
+ * \brief Fonction qui fait évoluer la salle
+ *
+ * @param salle pointeur sur la salle à faire évoluer
+ */
 void evoSalle(salle_t * salle){
   salle->etatanim--;
   if(salle->etatanim<0){
@@ -1465,7 +1470,7 @@ void detruireTexturesMenu(menu_t * menu){
  * \brief Fonction qui créer les textures du menu de démarrage du jeu
  *
  * @param renderer le pointeur sur le renderer utilisé
- * @param le pointeur sur le menu qui va contenir les textures
+ * @param menu le pointeur sur le menu qui va contenir les textures
  */
 void creerTexturesMenuDemarrage(SDL_Renderer * renderer, menu_t * menu){
   int fondw=0;
@@ -1528,7 +1533,7 @@ void creerTexturesMenuDemarrage(SDL_Renderer * renderer, menu_t * menu){
  * \brief Fonction qui créer les textures d'un menu de confirmation'
  *
  * @param renderer le pointeur sur le renderer utilisé
- * @param le pointeur sur le menu qui va contenir les textures
+ * @param menu le pointeur sur le menu qui va contenir les textures
  */
 void creerTexturesMenuConfirmation(SDL_Renderer * renderer, menu_t * menu){
   int fondw=0;
@@ -1799,6 +1804,7 @@ void afficherVieJauge(SDL_Renderer * renderer, personnage_t * personnage, SDL_Te
  *
  * @param renderer le pointeur vers le SDL_Renderer à utiliser
  * @param personnage le pointeur sur le personnage (points de vie)
+ * @param coeurImage la texture de l'image d'un coeur
  * @param textureSalle le pointeur sur la texture de cible
  */
 void afficherVieCoeurs(SDL_Renderer * renderer, personnage_t * personnage, SDL_Texture * coeurImage, SDL_Texture * textureSalle){

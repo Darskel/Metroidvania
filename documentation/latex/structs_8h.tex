@@ -1,0 +1,823 @@
+\hypertarget{structs_8h}{}\section{Référence du fichier headers/structs.h}
+\label{structs_8h}\index{headers/structs.\+h@{headers/structs.\+h}}
+
+
+Ensemble de structures utilisées dans le projets.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}liste.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$S\+D\+L.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L\+\_\+mixer.\+h$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structtaille__s}{taille\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Taille avec hauteur et largeur. \end{DoxyCompactList}\item 
+struct \hyperlink{structposition__s}{position\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Une position représentée par deux valeurs entières. \end{DoxyCompactList}\item 
+struct \hyperlink{structsalle__s}{salle\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Structure représentant les salles et leur contenu. \end{DoxyCompactList}\item 
+struct \hyperlink{structpersonnage__s}{personnage\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Structure représentant le personnage et ses caractéristques, contient également une variable de gestion des effets sonores du jeu. \end{DoxyCompactList}\item 
+struct \hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Structure représentant le type d\textquotesingle{}un monstre. \end{DoxyCompactList}\item 
+struct \hyperlink{structmonstre__s}{monstre\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Structure représentant un monstre. \end{DoxyCompactList}\item 
+struct \hyperlink{structbloc__s}{bloc\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Structure représentant un bloc. \end{DoxyCompactList}\item 
+struct \hyperlink{structporte__s}{porte\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Structure représentant une porte. \end{DoxyCompactList}\item 
+struct \hyperlink{structmenu__bouton__s}{menu\+\_\+bouton\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Structure représentant un bouton d\textquotesingle{}un menu. \end{DoxyCompactList}\item 
+struct \hyperlink{structmenu__texte__s}{menu\+\_\+texte\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Structure représentant un texte dans un menu. \end{DoxyCompactList}\item 
+struct \hyperlink{structmenu__s}{menu\+\_\+s}
+\begin{DoxyCompactList}\small\item\em Structure représentant un menu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structs_8h_a14862d1ea290aaf4ce47601ceb2830ad}\label{structs_8h_a14862d1ea290aaf4ce47601ceb2830ad}} 
+\#define {\bfseries S\+T\+R\+U\+C\+T\+S\+\_\+\+I\+N\+C\+L\+U\+D\+ED}
+\item 
+\#define \hyperlink{structs_8h_a437ef08681e7210d6678427030446a54}{L\+E\+FT}~0
+\item 
+\#define \hyperlink{structs_8h_a80fb826a684cf3f0d306b22aa100ddac}{R\+I\+G\+HT}~1
+\item 
+\#define \hyperlink{structs_8h_a5fdcc1659ee790f8bdd196e7745ab403}{T\+A\+I\+L\+L\+E\+\_\+\+I\+N\+V\+E\+N\+T\+A\+I\+RE}~8
+\item 
+\#define \hyperlink{structs_8h_af290d1b95e4e97332784455b2ecbdd93}{I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+S\+I\+ZE}~10
+\item 
+\mbox{\Hypertarget{structs_8h_a5e6bff97020f08860a615c8b674d4ec8}\label{structs_8h_a5e6bff97020f08860a615c8b674d4ec8}} 
+\#define {\bfseries I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+P\+A\+TH}~\char`\"{}./sprites/inventaire/tileset.\+png\char`\"{}
+\item 
+\#define \hyperlink{structs_8h_af0fe3a3886ace08abcc691cb18085ae9}{I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+T\+I\+ME}~60
+\item 
+\#define \hyperlink{structs_8h_ad413eeeadfc5d9621c71cc52075c1550}{V\+O\+L\+U\+M\+E\+B\+O\+X\+S\+I\+ZE}~28
+\item 
+\#define \hyperlink{structs_8h_aa0d0f8a2c7c78ac4381a5ea26487ac5b}{V\+O\+L\+U\+M\+E\+T\+I\+ME}~60
+\item 
+\mbox{\Hypertarget{structs_8h_a73b3bbc51c65bf165939cc7b57e9eb4b}\label{structs_8h_a73b3bbc51c65bf165939cc7b57e9eb4b}} 
+\#define {\bfseries N\+O\+M\+\_\+\+J\+EU}~\char`\"{}Diskosieni\char`\"{}
+\item 
+\#define \hyperlink{structs_8h_a26f26823c4957459884e9f8b8c7fd8e7}{T\+A\+I\+L\+L\+E\+P\+A\+T\+H\+F\+I\+C\+H\+I\+ER}~75
+\item 
+\mbox{\Hypertarget{structs_8h_a67ef72cf4050f504bfafcf3e6503bb56}\label{structs_8h_a67ef72cf4050f504bfafcf3e6503bb56}} 
+\#define {\bfseries P\+L\+A\+Y\+E\+R\+S\+P\+R\+I\+T\+E\+S\+P\+A\+TH}~\char`\"{}./sprites/entite/joueur/tileset.\+png\char`\"{}
+\item 
+\mbox{\Hypertarget{structs_8h_a4b651daa482ce6ce00423ffd2b298fdf}\label{structs_8h_a4b651daa482ce6ce00423ffd2b298fdf}} 
+\#define {\bfseries R\+E\+N\+A\+R\+D\+S\+P\+R\+I\+T\+E\+S\+P\+A\+TH}~\char`\"{}./sprites/entite/renard/tileset.\+png\char`\"{}
+\item 
+\mbox{\Hypertarget{structs_8h_abf4193200441b7a6e1f02ebff70ea2d9}\label{structs_8h_abf4193200441b7a6e1f02ebff70ea2d9}} 
+\#define {\bfseries T\+I\+L\+E\+S\+E\+T\+P\+A\+TH}~\char`\"{}./sprites/bloc/tileset.\+png\char`\"{}
+\item 
+\mbox{\Hypertarget{structs_8h_afb631ee3c4f196aaae2d314dc3b72983}\label{structs_8h_afb631ee3c4f196aaae2d314dc3b72983}} 
+\#define {\bfseries D\+I\+R\+BG}~\char`\"{}./sprites/salles/\char`\"{}
+\item 
+\#define \hyperlink{structs_8h_a1f3f48a893d39a15c49bb4661352eff5}{T\+A\+I\+L\+L\+E\+B\+L\+OC}~8
+\item 
+\#define \hyperlink{structs_8h_adee98db21c24ed30e252c29fbcef08cb}{H\+A\+U\+T\+E\+U\+R\+P\+O\+R\+TE}~36
+\item 
+\#define \hyperlink{structs_8h_a20e7a98af95c2205f9daf298cc667008}{L\+A\+R\+G\+E\+U\+R\+P\+O\+R\+TE}~13
+\item 
+\#define \hyperlink{structs_8h_a15e057920f27a957e81250085cc1e4e1}{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+R\+E\+N\+A\+RD}~24
+\item 
+\#define \hyperlink{structs_8h_a51477305f6c144a480885eb73c383696}{H\+A\+U\+T\+E\+U\+R\+S\+P\+R\+I\+T\+E\+R\+E\+N\+A\+RD}~13
+\item 
+\#define \hyperlink{structs_8h_a7423af0a1479f13d79cd0c49c79e5962}{H\+A\+U\+T\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+RS}~33
+\item 
+\#define \hyperlink{structs_8h_a4a23858655a03f63cb0b6052c986eae4}{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+RS}~25
+\item 
+\#define \hyperlink{structs_8h_aaf2c88ec7d9ef42adfe6f37a67874ac5}{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+R\+S\+A\+T\+T\+A\+CK}~30
+\item 
+\#define \hyperlink{structs_8h_aad6128d7fab77d16eba9a5f25c0b19b1}{H\+A\+U\+T\+E\+U\+R\+H\+I\+T\+B\+O\+X\+P\+E\+RS}~32
+\item 
+\#define \hyperlink{structs_8h_a12acd8af9860b9af2a26c52f756a338e}{L\+A\+R\+G\+E\+U\+R\+H\+I\+T\+B\+O\+X\+P\+E\+RS}~13
+\item 
+\#define \hyperlink{structs_8h_a6fbeac5e29677c50600b60b27e344ea0}{H\+A\+U\+T\+E\+U\+R\+H\+I\+T\+B\+O\+X\+R\+EN}~12
+\item 
+\#define \hyperlink{structs_8h_ac015d8c4e8a2d8bf1435ce955a604533}{L\+A\+R\+G\+E\+U\+R\+H\+I\+T\+B\+O\+X\+R\+EN}~24
+\item 
+\#define \hyperlink{structs_8h_a255df5df578ec4f5a3cc1a10d2ba90f6}{O\+F\+F\+S\+E\+T\+H\+I\+T\+B\+O\+XH}~6
+\item 
+\#define \hyperlink{structs_8h_a6dcb8420dba97d657875e47d243f5306}{O\+F\+F\+S\+E\+T\+H\+I\+T\+B\+O\+XR}~0
+\item 
+\#define \hyperlink{structs_8h_a52280fbbe28eda3540ba23e3fc3195e2}{V\+I\+T\+D\+E\+P\+P\+E\+RS}~1
+\item 
+\#define \hyperlink{structs_8h_a246757ac96450448d775864c3f543e03}{V\+I\+T\+S\+A\+U\+T\+P\+E\+RS}~2
+\item 
+\#define \hyperlink{structs_8h_a51fffba4988e62b540adbeb5ce5d0993}{V\+I\+T\+C\+H\+U\+T\+E\+P\+E\+RS}~1
+\item 
+\#define \hyperlink{structs_8h_ae61089395a1490a8242e41d55b720357}{V\+I\+T\+A\+T\+T\+A\+C\+K\+P\+E\+RS}~30
+\item 
+\#define \hyperlink{structs_8h_aa2326924fc935f7a3415c0e3894e2ddc}{J\+P\+CD}~4
+\item 
+\#define \hyperlink{structs_8h_a130b65b0ce9f74f28ad552abf2d6cfac}{N\+B\+P\+X\+S\+A\+UT}~5$\ast$\hyperlink{structs_8h_a1f3f48a893d39a15c49bb4661352eff5}{T\+A\+I\+L\+L\+E\+B\+L\+OC}
+\item 
+\#define \hyperlink{structs_8h_aae845c1a50d8597e702fcc6fc4d08205}{Z\+O\+N\+E\+M\+O\+R\+TE}~5000
+\item 
+\#define \hyperlink{structs_8h_a7fd7da7c096dd160453b799184da9002}{N\+I\+V\+E\+A\+U\+T\+XT}~\char`\"{}salle\+\_\+yourte.\+txt\char`\"{}
+\item 
+\#define \hyperlink{structs_8h_abd4b5f839f90f855c5f289c24667eea5}{F\+R\+A\+M\+E\+D\+E\+L\+AY}~17
+\item 
+\#define \hyperlink{structs_8h_a252d76aa96596f6536b71713b8f2d895}{T\+A\+I\+L\+L\+E\+K\+O\+N\+A\+MI}~11
+\item 
+\#define \hyperlink{structs_8h_a4fe6fd113bdaa732983693e5c6a2941c}{K\+O\+N\+A\+M\+I\+C\+O\+DE}~\char`\"{}uuddlrlrbas\char`\"{}
+\item 
+\#define \hyperlink{structs_8h_a313b7737f72ca3d3a6c3c600b7427419}{N\+B\+B\+L\+O\+C\+S\+T\+I\+L\+E\+S\+ET}~60
+\item 
+\#define \hyperlink{structs_8h_a4c729527445e513e9d31120e499be0c5}{N\+B\+L\+O\+C\+E\+R\+R\+E\+UR}~49
+\item 
+\#define \hyperlink{structs_8h_a5c69a254991c8be73f994c57220f1673}{C\+O\+E\+U\+R\+D\+R\+O\+P\+R\+A\+TE}~10
+\item 
+\#define \hyperlink{structs_8h_aa488baa46cc1b381347107ae3ba0a68d}{P\+V\+M\+AX}~4
+\item 
+\#define \hyperlink{structs_8h_aff3e76c7173cd786015ab1108e5f2657}{T\+E\+M\+P\+I\+NV}~60
+\item 
+\#define \hyperlink{structs_8h_af852ef65e0bf9575c401e7e695fdecdd}{F\+R\+E\+Q\+C\+L\+I\+GN}~2
+\item 
+\#define \hyperlink{structs_8h_ace0a39e258e6332249e3accd966c1796}{I\+N\+V\+U\+D\+E\+L\+AY}~6
+\item 
+\#define \hyperlink{structs_8h_a5d52eeb41a03aeda6974d60772531f96}{F\+O\+N\+T\+S\+I\+ZE}~30
+\item 
+\#define \hyperlink{structs_8h_a2fcf88944ac6de244b966d21cf4779c2}{N\+B\+E\+T\+A\+T\+S\+B\+O\+U\+T\+O\+NS}~4
+\item 
+\#define \hyperlink{structs_8h_a40d5678ade5e6aee9b9876458fff6e84}{N\+B\+E\+T\+A\+TS}~5
+\item 
+\#define \hyperlink{structs_8h_a7c2efea2ebf5c931359388126361cc97}{A\+N\+I\+M\+D\+E\+L\+A\+Y\+M\+E\+NU}~20
+\item 
+\mbox{\Hypertarget{structs_8h_a8db4d5cf0a595530436f0dda82cac0d1}\label{structs_8h_a8db4d5cf0a595530436f0dda82cac0d1}} 
+\#define {\bfseries P\+U\+L\+S\+A\+R\+W\+AV}~\char`\"{}audio/Pulsar.\+wav\char`\"{}
+\item 
+\mbox{\Hypertarget{structs_8h_a001afbbc3c399afc435d6d7d8267c658}\label{structs_8h_a001afbbc3c399afc435d6d7d8267c658}} 
+\#define {\bfseries B\+E\+G\+I\+N\+W\+AV}~\char`\"{}audio/Begin.\+wav\char`\"{}
+\item 
+\mbox{\Hypertarget{structs_8h_ae57412547c6bdd9425f7392b988f8a5a}\label{structs_8h_ae57412547c6bdd9425f7392b988f8a5a}} 
+\#define {\bfseries M\+Y\+S\+T\+E\+R\+I\+O\+U\+S\+W\+AV}~\char`\"{}audio/Mysterious.\+wav\char`\"{}
+\item 
+\mbox{\Hypertarget{structs_8h_adf3e8fada7f541d57b3fe270d66f9d1b}\label{structs_8h_adf3e8fada7f541d57b3fe270d66f9d1b}} 
+\#define {\bfseries F\+U\+T\+U\+R\+I\+S\+T\+I\+C\+W\+AV}~\char`\"{}audio/Futuristic.\+wav\char`\"{}
+\item 
+\mbox{\Hypertarget{structs_8h_aff6cd197e92677c05381a507e039450b}\label{structs_8h_aff6cd197e92677c05381a507e039450b}} 
+\#define {\bfseries E\+N\+D\+L\+E\+S\+S\+P\+A\+I\+N\+W\+AV}~\char`\"{}audio/Endless\+Pain.\+wav\char`\"{}
+\item 
+\mbox{\Hypertarget{structs_8h_a80b6011879308cf7b3045316284bc269}\label{structs_8h_a80b6011879308cf7b3045316284bc269}} 
+\#define {\bfseries L\+O\+N\+G\+A\+W\+A\+Y\+W\+AV}~\char`\"{}audio/Long\+Away.\+wav\char`\"{}
+\item 
+\#define \hyperlink{structs_8h_a7acbecd3c32fb1305b543d53d2f7a9cc}{D\+E\+F\+A\+U\+L\+T\+V\+O\+L\+U\+ME}~0.\+2
+\item 
+\#define \hyperlink{structs_8h_ab86ead624339c976d05c0894bd35f54e}{N\+B\+C\+H\+A\+N\+N\+E\+LS}~20
+\end{DoxyCompactItemize}
+\subsection*{Définitions de type}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structs_8h_a5edfa908c6d10e640e3b86305d67e920}\label{structs_8h_a5edfa908c6d10e640e3b86305d67e920}} 
+typedef enum \hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5}{id\+Ent\+\_\+e} {\bfseries id\+Ent\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_ada0444d923e8de565429292eb333c3bd}\label{structs_8h_ada0444d923e8de565429292eb333c3bd}} 
+typedef enum \hyperlink{structs_8h_a26099d1d9a1ef474190622be823aa76c}{id\+Sounds\+\_\+e} {\bfseries id\+Sounds\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_a46dc52a35db08cf532828128f8cf47e7}\label{structs_8h_a46dc52a35db08cf532828128f8cf47e7}} 
+typedef struct \hyperlink{structtaille__s}{taille\+\_\+s} {\bfseries taille\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_ad0edf461c60578ea071dc06a4b3a57b1}\label{structs_8h_ad0edf461c60578ea071dc06a4b3a57b1}} 
+typedef struct \hyperlink{structposition__s}{position\+\_\+s} {\bfseries position\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_a2a02d96e075245599abe33736619ec15}\label{structs_8h_a2a02d96e075245599abe33736619ec15}} 
+typedef enum \hyperlink{structs_8h_a74dcbee810ba5df4945e9b7c5f92e2e9}{boolean\+\_\+e} {\bfseries boolean\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_a3095e9752f46c8a3dffac01c790d38b3}\label{structs_8h_a3095e9752f46c8a3dffac01c790d38b3}} 
+typedef enum \hyperlink{structs_8h_ac652084689fae43c9ede5782aedc0d2c}{etat\+\_\+e} {\bfseries etat\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_ada6d98da4b79a612ca12f1778d890b4b}\label{structs_8h_ada6d98da4b79a612ca12f1778d890b4b}} 
+typedef struct \hyperlink{structsalle__s}{salle\+\_\+s} {\bfseries salle\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_aeca7e7adc19e924d5fade8ea3c6937ac}\label{structs_8h_aeca7e7adc19e924d5fade8ea3c6937ac}} 
+typedef struct \hyperlink{structpersonnage__s}{personnage\+\_\+s} {\bfseries personnage\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_a2475165f3195b53d2ffa1bbf1f5272b4}\label{structs_8h_a2475165f3195b53d2ffa1bbf1f5272b4}} 
+typedef struct \hyperlink{structmonstre__s}{monstre\+\_\+s} {\bfseries monstre\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_af8de222b245924a766b375a60f04b3b8}\label{structs_8h_af8de222b245924a766b375a60f04b3b8}} 
+typedef struct \hyperlink{structtype__monstre__s}{type\+\_\+monstre\+\_\+s} {\bfseries type\+\_\+monstre\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_a6e64a39dbfabc75ff76144f2cfaf28e5}\label{structs_8h_a6e64a39dbfabc75ff76144f2cfaf28e5}} 
+typedef struct \hyperlink{structbloc__s}{bloc\+\_\+s} {\bfseries bloc\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_a80cfff8fa904c28ac9883e5657918c3e}\label{structs_8h_a80cfff8fa904c28ac9883e5657918c3e}} 
+typedef struct \hyperlink{structporte__s}{porte\+\_\+s} {\bfseries porte\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_a4e571caf67be3e74aa58a9402541b262}\label{structs_8h_a4e571caf67be3e74aa58a9402541b262}} 
+typedef enum \hyperlink{structs_8h_a2bfd39097e1c768d485310d850b99457}{boutonetat\+\_\+e} {\bfseries boutonetat\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_a52de748056cdfc78499cb8036161028a}\label{structs_8h_a52de748056cdfc78499cb8036161028a}} 
+typedef struct \hyperlink{structmenu__bouton__s}{menu\+\_\+bouton\+\_\+s} {\bfseries menu\+\_\+bouton\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_aa176ebe7b46249416ebca13822a6f073}\label{structs_8h_aa176ebe7b46249416ebca13822a6f073}} 
+typedef struct \hyperlink{structmenu__texte__s}{menu\+\_\+texte\+\_\+s} {\bfseries menu\+\_\+texte\+\_\+t}
+\item 
+\mbox{\Hypertarget{structs_8h_a370b4722ee857b85c5caa7ca00cb196d}\label{structs_8h_a370b4722ee857b85c5caa7ca00cb196d}} 
+typedef struct \hyperlink{structmenu__s}{menu\+\_\+s} {\bfseries menu\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Énumérations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5}{id\+Ent\+\_\+e} \{ \newline
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac139e0aad6e312681a90847f2e13b828}{V\+E\+N\+IN} = -\/24, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aebd0b7c7a3b6e7facc7a93fee9ec1641}{F\+L\+E\+C\+H\+E\+F\+EU}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a2984c611e9964f24ac74b0a91fb5cb45}{F\+L\+E\+C\+HE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5afe25ae4ef5c689f46e1c4c972243d4db}{C\+O\+E\+UR}, 
+\newline
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ab92b8e5f224ad27c30347209ffe26687}{V\+I\+F\+P\+L\+U\+ME}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a71860692dd9b2f5908ed978e304de87a}{V\+E\+R\+S\+G\+E\+A\+NT}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a5a0aa92fee7e6c6860b8389edc866bf4}{S\+I\+N\+G\+E\+G\+R\+O\+T\+TE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aa70533c2c411342b3903b427bb50a93b}{S\+E\+R\+P\+E\+N\+T\+V\+E\+RT}, 
+\newline
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac8d1edaf018012ebc8d6d829b1e707a0}{S\+E\+R\+P\+E\+N\+T\+R\+O\+SE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a79e0e40f549fda70c5c622354b91d6c3}{S\+E\+R\+P\+E\+N\+T\+B\+L\+EU}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aed5b0a078a8d93f5c60b4d0b665e22f4}{R\+O\+I\+VP}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a927f3d50ac911f37c529bc0116c3b6e3}{R\+E\+N\+A\+RD}, 
+\newline
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a54c6830bfc0b06ff5260d5af19e0b34b}{P\+O\+R\+T\+EV}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a95dfec1f079a334cae5886216ffac6d4}{P\+O\+R\+T\+E\+RL}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac293f0dcd058f51b8aadc0f184111d94}{P\+O\+R\+T\+E\+RG}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a71e347ee608d3904de54985aafa1b133}{P\+O\+R\+T\+EB}, 
+\newline
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3f1f96f2ec84a3f00d77f8751d0b5b3e}{M\+U\+R\+G\+L\+A\+CE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3333bfa12cc7fdfb6b6d47c291fc384b}{F\+L\+A\+C\+O\+N\+H\+U\+I\+LE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a68e3a4024ca3e6b42204e5a4b39ce580}{D\+O\+U\+B\+L\+E\+S\+A\+UT}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5acf73dabb3771f89f873fd5979dc41598}{D\+I\+S\+C\+O\+S\+H\+R\+O\+OM}, 
+\newline
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3c2efd0602739861adf5b9ea06c675d5}{C\+L\+E\+V\+E\+R\+TE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a77669c33af1a2b8cf921344d1b33e7b5}{C\+L\+E\+R\+O\+U\+I\+L\+LE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a5bf706cb85963f20f6fdb3316b1417b5}{C\+L\+E\+R\+O\+U\+GE}, 
+\hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5abca7a780ec24304cec32faed01133d50}{C\+L\+E\+B\+L\+E\+UE}
+ \}\begin{DoxyCompactList}\small\item\em Id des entités présentes dans les fichiers de salle. \end{DoxyCompactList}
+\item 
+enum \hyperlink{structs_8h_a26099d1d9a1ef474190622be823aa76c}{id\+Sounds\+\_\+e} \{ \newline
+\hyperlink{structs_8h_a26099d1d9a1ef474190622be823aa76cafb8a21b2a6f9b3b3f6b39c931ee5a03e}{S\+O\+U\+N\+D\+\_\+\+T\+O\+U\+C\+HE}, 
+\hyperlink{structs_8h_a26099d1d9a1ef474190622be823aa76caefaba871e1cc71b60a76741bba672e59}{S\+O\+U\+N\+D\+\_\+\+A\+RC}, 
+\hyperlink{structs_8h_a26099d1d9a1ef474190622be823aa76ca2b98dca05192fcb8a6d1e6613dbf4ced}{S\+O\+U\+N\+D\+\_\+\+S\+E\+R\+P\+E\+NT}, 
+\hyperlink{structs_8h_a26099d1d9a1ef474190622be823aa76cab6745633088f499d4afa48c94a771f87}{S\+O\+U\+N\+D\+\_\+\+S\+I\+N\+GE}, 
+\newline
+\hyperlink{structs_8h_a26099d1d9a1ef474190622be823aa76caa864a6cca507d1b32b8f20f27b077e90}{S\+O\+U\+N\+D\+\_\+\+V\+I\+F\+P\+L\+U\+ME}, 
+\hyperlink{structs_8h_a26099d1d9a1ef474190622be823aa76ca08a540c146e737a6d9f4c71b1995e5df}{S\+O\+U\+N\+D\+\_\+\+M\+U\+R\+G\+L\+A\+CE}, 
+\hyperlink{structs_8h_a26099d1d9a1ef474190622be823aa76cab920e766bb262fe9d8d412cba5b5fad7}{S\+O\+U\+N\+D\+\_\+\+D\+O\+OR}, 
+\hyperlink{structs_8h_a26099d1d9a1ef474190622be823aa76ca1c25c5530029523ec7ac169cea3865a3}{S\+O\+U\+N\+D\+\_\+\+I\+T\+EM}, 
+\newline
+\hyperlink{structs_8h_a26099d1d9a1ef474190622be823aa76cab47ef3a8edb9093fe3705533a754327d}{S\+O\+U\+N\+D\+\_\+\+M\+E\+NU}
+ \}\begin{DoxyCompactList}\small\item\em Id des sons produits par le jeu. \end{DoxyCompactList}
+\item 
+enum \hyperlink{structs_8h_a74dcbee810ba5df4945e9b7c5f92e2e9}{boolean\+\_\+e} \{ \hyperlink{structs_8h_a74dcbee810ba5df4945e9b7c5f92e2e9aa1e095cc966dbecf6a0d8aad75348d1a}{F\+A\+L\+SE}, 
+\hyperlink{structs_8h_a74dcbee810ba5df4945e9b7c5f92e2e9aa82764c3079aea4e60c80e45befbb839}{T\+R\+UE}
+ \}\begin{DoxyCompactList}\small\item\em Permet d\textquotesingle{}utiliser {\itshape T\+R\+UE} et {\itshape F\+A\+L\+SE}. \end{DoxyCompactList}
+\item 
+enum \hyperlink{structs_8h_ac652084689fae43c9ede5782aedc0d2c}{etat\+\_\+e} \{ \newline
+\hyperlink{structs_8h_ac652084689fae43c9ede5782aedc0d2cafd6a0e4343048b10646dd2976cc5ad18}{I\+D\+LE}, 
+\hyperlink{structs_8h_ac652084689fae43c9ede5782aedc0d2ca1061be6c3fb88d32829cba6f6b2be304}{R\+U\+N\+N\+I\+NG}, 
+\hyperlink{structs_8h_ac652084689fae43c9ede5782aedc0d2cab8cd32180a1d5897df8369b127256ad1}{J\+U\+M\+P\+I\+NG}, 
+\hyperlink{structs_8h_ac652084689fae43c9ede5782aedc0d2ca05f520974a8946a4b11907b698557a8b}{A\+T\+T\+A\+C\+K\+I\+NG}, 
+\newline
+\hyperlink{structs_8h_ac652084689fae43c9ede5782aedc0d2cad24712a6a30c1d431b927d1ba2f84b66}{F\+A\+L\+L\+I\+NG}
+ \}\begin{DoxyCompactList}\small\item\em Nom des différents états possibles du personnage et des entités (utiles pour l\textquotesingle{}animation de sprites et la gestion des déplacements et des hitbox) \end{DoxyCompactList}
+\item 
+enum \hyperlink{structs_8h_a2bfd39097e1c768d485310d850b99457}{boutonetat\+\_\+e} \{ \hyperlink{structs_8h_a2bfd39097e1c768d485310d850b99457a97496574afa27cde13dd9c3e16b1a6a3}{R\+E\+L\+A\+X\+ED}, 
+\hyperlink{structs_8h_a2bfd39097e1c768d485310d850b99457a66246ffe5218e07c6088a32a4706a572}{H\+I\+G\+H\+L\+I\+G\+H\+T\+ED}, 
+\hyperlink{structs_8h_a2bfd39097e1c768d485310d850b99457a5ef9a100ac8b4b8d6dec477c377b7901}{P\+R\+E\+S\+S\+ED}, 
+\hyperlink{structs_8h_a2bfd39097e1c768d485310d850b99457a3fde93396dcd04d746a8cd3b6b5914bb}{U\+N\+A\+V\+A\+I\+L\+A\+B\+LE}
+ \}\begin{DoxyCompactList}\small\item\em Id des états de boutons. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Ensemble de structures utilisées dans le projets. 
+
+\begin{DoxyAuthor}{Auteur}
+Marie-\/\+Nina M\+U\+N\+AR \& Thomas D\+I\+D\+I\+ER L2 Info Le Mans 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+17/05/2020 
+\end{DoxyDate}
+
+
+\subsection{Documentation des macros}
+\mbox{\Hypertarget{structs_8h_a7c2efea2ebf5c931359388126361cc97}\label{structs_8h_a7c2efea2ebf5c931359388126361cc97}} 
+\index{structs.\+h@{structs.\+h}!A\+N\+I\+M\+D\+E\+L\+A\+Y\+M\+E\+NU@{A\+N\+I\+M\+D\+E\+L\+A\+Y\+M\+E\+NU}}
+\index{A\+N\+I\+M\+D\+E\+L\+A\+Y\+M\+E\+NU@{A\+N\+I\+M\+D\+E\+L\+A\+Y\+M\+E\+NU}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{A\+N\+I\+M\+D\+E\+L\+A\+Y\+M\+E\+NU}{ANIMDELAYMENU}}
+{\footnotesize\ttfamily \#define A\+N\+I\+M\+D\+E\+L\+A\+Y\+M\+E\+NU~20}
+
+Delai de changement d\textquotesingle{}états pour les boutons \mbox{\Hypertarget{structs_8h_a5c69a254991c8be73f994c57220f1673}\label{structs_8h_a5c69a254991c8be73f994c57220f1673}} 
+\index{structs.\+h@{structs.\+h}!C\+O\+E\+U\+R\+D\+R\+O\+P\+R\+A\+TE@{C\+O\+E\+U\+R\+D\+R\+O\+P\+R\+A\+TE}}
+\index{C\+O\+E\+U\+R\+D\+R\+O\+P\+R\+A\+TE@{C\+O\+E\+U\+R\+D\+R\+O\+P\+R\+A\+TE}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{C\+O\+E\+U\+R\+D\+R\+O\+P\+R\+A\+TE}{COEURDROPRATE}}
+{\footnotesize\ttfamily \#define C\+O\+E\+U\+R\+D\+R\+O\+P\+R\+A\+TE~10}
+
+Pourcentage de probabilité de drop d\textquotesingle{}un coeur \mbox{\Hypertarget{structs_8h_a7acbecd3c32fb1305b543d53d2f7a9cc}\label{structs_8h_a7acbecd3c32fb1305b543d53d2f7a9cc}} 
+\index{structs.\+h@{structs.\+h}!D\+E\+F\+A\+U\+L\+T\+V\+O\+L\+U\+ME@{D\+E\+F\+A\+U\+L\+T\+V\+O\+L\+U\+ME}}
+\index{D\+E\+F\+A\+U\+L\+T\+V\+O\+L\+U\+ME@{D\+E\+F\+A\+U\+L\+T\+V\+O\+L\+U\+ME}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{D\+E\+F\+A\+U\+L\+T\+V\+O\+L\+U\+ME}{DEFAULTVOLUME}}
+{\footnotesize\ttfamily \#define D\+E\+F\+A\+U\+L\+T\+V\+O\+L\+U\+ME~0.\+2}
+
+Volume par défaut de la musique \mbox{\Hypertarget{structs_8h_a5d52eeb41a03aeda6974d60772531f96}\label{structs_8h_a5d52eeb41a03aeda6974d60772531f96}} 
+\index{structs.\+h@{structs.\+h}!F\+O\+N\+T\+S\+I\+ZE@{F\+O\+N\+T\+S\+I\+ZE}}
+\index{F\+O\+N\+T\+S\+I\+ZE@{F\+O\+N\+T\+S\+I\+ZE}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{F\+O\+N\+T\+S\+I\+ZE}{FONTSIZE}}
+{\footnotesize\ttfamily \#define F\+O\+N\+T\+S\+I\+ZE~30}
+
+Taille de la police lors de la création du texte \mbox{\Hypertarget{structs_8h_abd4b5f839f90f855c5f289c24667eea5}\label{structs_8h_abd4b5f839f90f855c5f289c24667eea5}} 
+\index{structs.\+h@{structs.\+h}!F\+R\+A\+M\+E\+D\+E\+L\+AY@{F\+R\+A\+M\+E\+D\+E\+L\+AY}}
+\index{F\+R\+A\+M\+E\+D\+E\+L\+AY@{F\+R\+A\+M\+E\+D\+E\+L\+AY}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{F\+R\+A\+M\+E\+D\+E\+L\+AY}{FRAMEDELAY}}
+{\footnotesize\ttfamily \#define F\+R\+A\+M\+E\+D\+E\+L\+AY~17}
+
+Correspond à du 59fps \mbox{\Hypertarget{structs_8h_af852ef65e0bf9575c401e7e695fdecdd}\label{structs_8h_af852ef65e0bf9575c401e7e695fdecdd}} 
+\index{structs.\+h@{structs.\+h}!F\+R\+E\+Q\+C\+L\+I\+GN@{F\+R\+E\+Q\+C\+L\+I\+GN}}
+\index{F\+R\+E\+Q\+C\+L\+I\+GN@{F\+R\+E\+Q\+C\+L\+I\+GN}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{F\+R\+E\+Q\+C\+L\+I\+GN}{FREQCLIGN}}
+{\footnotesize\ttfamily \#define F\+R\+E\+Q\+C\+L\+I\+GN~2}
+
+Fréquence de clignotement lors de l\textquotesingle{}invincibilité \mbox{\Hypertarget{structs_8h_aad6128d7fab77d16eba9a5f25c0b19b1}\label{structs_8h_aad6128d7fab77d16eba9a5f25c0b19b1}} 
+\index{structs.\+h@{structs.\+h}!H\+A\+U\+T\+E\+U\+R\+H\+I\+T\+B\+O\+X\+P\+E\+RS@{H\+A\+U\+T\+E\+U\+R\+H\+I\+T\+B\+O\+X\+P\+E\+RS}}
+\index{H\+A\+U\+T\+E\+U\+R\+H\+I\+T\+B\+O\+X\+P\+E\+RS@{H\+A\+U\+T\+E\+U\+R\+H\+I\+T\+B\+O\+X\+P\+E\+RS}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{H\+A\+U\+T\+E\+U\+R\+H\+I\+T\+B\+O\+X\+P\+E\+RS}{HAUTEURHITBOXPERS}}
+{\footnotesize\ttfamily \#define H\+A\+U\+T\+E\+U\+R\+H\+I\+T\+B\+O\+X\+P\+E\+RS~32}
+
+Hauteur en pixel de la hitbox du personnage \mbox{\Hypertarget{structs_8h_a6fbeac5e29677c50600b60b27e344ea0}\label{structs_8h_a6fbeac5e29677c50600b60b27e344ea0}} 
+\index{structs.\+h@{structs.\+h}!H\+A\+U\+T\+E\+U\+R\+H\+I\+T\+B\+O\+X\+R\+EN@{H\+A\+U\+T\+E\+U\+R\+H\+I\+T\+B\+O\+X\+R\+EN}}
+\index{H\+A\+U\+T\+E\+U\+R\+H\+I\+T\+B\+O\+X\+R\+EN@{H\+A\+U\+T\+E\+U\+R\+H\+I\+T\+B\+O\+X\+R\+EN}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{H\+A\+U\+T\+E\+U\+R\+H\+I\+T\+B\+O\+X\+R\+EN}{HAUTEURHITBOXREN}}
+{\footnotesize\ttfamily \#define H\+A\+U\+T\+E\+U\+R\+H\+I\+T\+B\+O\+X\+R\+EN~12}
+
+Hauteur en pixel de la hitbox du renard \mbox{\Hypertarget{structs_8h_adee98db21c24ed30e252c29fbcef08cb}\label{structs_8h_adee98db21c24ed30e252c29fbcef08cb}} 
+\index{structs.\+h@{structs.\+h}!H\+A\+U\+T\+E\+U\+R\+P\+O\+R\+TE@{H\+A\+U\+T\+E\+U\+R\+P\+O\+R\+TE}}
+\index{H\+A\+U\+T\+E\+U\+R\+P\+O\+R\+TE@{H\+A\+U\+T\+E\+U\+R\+P\+O\+R\+TE}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{H\+A\+U\+T\+E\+U\+R\+P\+O\+R\+TE}{HAUTEURPORTE}}
+{\footnotesize\ttfamily \#define H\+A\+U\+T\+E\+U\+R\+P\+O\+R\+TE~36}
+
+Hauteur en pixel d\textquotesingle{}une porte \mbox{\Hypertarget{structs_8h_a7423af0a1479f13d79cd0c49c79e5962}\label{structs_8h_a7423af0a1479f13d79cd0c49c79e5962}} 
+\index{structs.\+h@{structs.\+h}!H\+A\+U\+T\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+RS@{H\+A\+U\+T\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+RS}}
+\index{H\+A\+U\+T\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+RS@{H\+A\+U\+T\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+RS}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{H\+A\+U\+T\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+RS}{HAUTEURSPRITEPERS}}
+{\footnotesize\ttfamily \#define H\+A\+U\+T\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+RS~33}
+
+Hauteur en pixel du personnage \mbox{\Hypertarget{structs_8h_a51477305f6c144a480885eb73c383696}\label{structs_8h_a51477305f6c144a480885eb73c383696}} 
+\index{structs.\+h@{structs.\+h}!H\+A\+U\+T\+E\+U\+R\+S\+P\+R\+I\+T\+E\+R\+E\+N\+A\+RD@{H\+A\+U\+T\+E\+U\+R\+S\+P\+R\+I\+T\+E\+R\+E\+N\+A\+RD}}
+\index{H\+A\+U\+T\+E\+U\+R\+S\+P\+R\+I\+T\+E\+R\+E\+N\+A\+RD@{H\+A\+U\+T\+E\+U\+R\+S\+P\+R\+I\+T\+E\+R\+E\+N\+A\+RD}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{H\+A\+U\+T\+E\+U\+R\+S\+P\+R\+I\+T\+E\+R\+E\+N\+A\+RD}{HAUTEURSPRITERENARD}}
+{\footnotesize\ttfamily \#define H\+A\+U\+T\+E\+U\+R\+S\+P\+R\+I\+T\+E\+R\+E\+N\+A\+RD~13}
+
+Hauteur en pixel du renard \mbox{\Hypertarget{structs_8h_af290d1b95e4e97332784455b2ecbdd93}\label{structs_8h_af290d1b95e4e97332784455b2ecbdd93}} 
+\index{structs.\+h@{structs.\+h}!I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+S\+I\+ZE@{I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+S\+I\+ZE}}
+\index{I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+S\+I\+ZE@{I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+S\+I\+ZE}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+S\+I\+ZE}{INVENTAIRESIZE}}
+{\footnotesize\ttfamily \#define I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+S\+I\+ZE~10}
+
+Taille de l\textquotesingle{}inventaire (hauteur) en pixel \mbox{\Hypertarget{structs_8h_af0fe3a3886ace08abcc691cb18085ae9}\label{structs_8h_af0fe3a3886ace08abcc691cb18085ae9}} 
+\index{structs.\+h@{structs.\+h}!I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+T\+I\+ME@{I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+T\+I\+ME}}
+\index{I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+T\+I\+ME@{I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+T\+I\+ME}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+T\+I\+ME}{INVENTAIRETIME}}
+{\footnotesize\ttfamily \#define I\+N\+V\+E\+N\+T\+A\+I\+R\+E\+T\+I\+ME~60}
+
+Temps d\textquotesingle{}affichage de l\textquotesingle{}inventaire après arrêt d\textquotesingle{}appui du bouton \mbox{\Hypertarget{structs_8h_ace0a39e258e6332249e3accd966c1796}\label{structs_8h_ace0a39e258e6332249e3accd966c1796}} 
+\index{structs.\+h@{structs.\+h}!I\+N\+V\+U\+D\+E\+L\+AY@{I\+N\+V\+U\+D\+E\+L\+AY}}
+\index{I\+N\+V\+U\+D\+E\+L\+AY@{I\+N\+V\+U\+D\+E\+L\+AY}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{I\+N\+V\+U\+D\+E\+L\+AY}{INVUDELAY}}
+{\footnotesize\ttfamily \#define I\+N\+V\+U\+D\+E\+L\+AY~6}
+
+Delai de l\textquotesingle{}invulnérabilité \mbox{\Hypertarget{structs_8h_aa2326924fc935f7a3415c0e3894e2ddc}\label{structs_8h_aa2326924fc935f7a3415c0e3894e2ddc}} 
+\index{structs.\+h@{structs.\+h}!J\+P\+CD@{J\+P\+CD}}
+\index{J\+P\+CD@{J\+P\+CD}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{J\+P\+CD}{JPCD}}
+{\footnotesize\ttfamily \#define J\+P\+CD~4}
+
+Délai avant de pouvoir de nouveau sauter \mbox{\Hypertarget{structs_8h_a4fe6fd113bdaa732983693e5c6a2941c}\label{structs_8h_a4fe6fd113bdaa732983693e5c6a2941c}} 
+\index{structs.\+h@{structs.\+h}!K\+O\+N\+A\+M\+I\+C\+O\+DE@{K\+O\+N\+A\+M\+I\+C\+O\+DE}}
+\index{K\+O\+N\+A\+M\+I\+C\+O\+DE@{K\+O\+N\+A\+M\+I\+C\+O\+DE}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{K\+O\+N\+A\+M\+I\+C\+O\+DE}{KONAMICODE}}
+{\footnotesize\ttfamily \#define K\+O\+N\+A\+M\+I\+C\+O\+DE~\char`\"{}uuddlrlrbas\char`\"{}}
+
+Inputs du Konami code \mbox{\Hypertarget{structs_8h_a12acd8af9860b9af2a26c52f756a338e}\label{structs_8h_a12acd8af9860b9af2a26c52f756a338e}} 
+\index{structs.\+h@{structs.\+h}!L\+A\+R\+G\+E\+U\+R\+H\+I\+T\+B\+O\+X\+P\+E\+RS@{L\+A\+R\+G\+E\+U\+R\+H\+I\+T\+B\+O\+X\+P\+E\+RS}}
+\index{L\+A\+R\+G\+E\+U\+R\+H\+I\+T\+B\+O\+X\+P\+E\+RS@{L\+A\+R\+G\+E\+U\+R\+H\+I\+T\+B\+O\+X\+P\+E\+RS}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{L\+A\+R\+G\+E\+U\+R\+H\+I\+T\+B\+O\+X\+P\+E\+RS}{LARGEURHITBOXPERS}}
+{\footnotesize\ttfamily \#define L\+A\+R\+G\+E\+U\+R\+H\+I\+T\+B\+O\+X\+P\+E\+RS~13}
+
+Largeur en pixel de la hitbox du personnage \mbox{\Hypertarget{structs_8h_ac015d8c4e8a2d8bf1435ce955a604533}\label{structs_8h_ac015d8c4e8a2d8bf1435ce955a604533}} 
+\index{structs.\+h@{structs.\+h}!L\+A\+R\+G\+E\+U\+R\+H\+I\+T\+B\+O\+X\+R\+EN@{L\+A\+R\+G\+E\+U\+R\+H\+I\+T\+B\+O\+X\+R\+EN}}
+\index{L\+A\+R\+G\+E\+U\+R\+H\+I\+T\+B\+O\+X\+R\+EN@{L\+A\+R\+G\+E\+U\+R\+H\+I\+T\+B\+O\+X\+R\+EN}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{L\+A\+R\+G\+E\+U\+R\+H\+I\+T\+B\+O\+X\+R\+EN}{LARGEURHITBOXREN}}
+{\footnotesize\ttfamily \#define L\+A\+R\+G\+E\+U\+R\+H\+I\+T\+B\+O\+X\+R\+EN~24}
+
+Largeur en pixel de la hitbox du renard \mbox{\Hypertarget{structs_8h_a20e7a98af95c2205f9daf298cc667008}\label{structs_8h_a20e7a98af95c2205f9daf298cc667008}} 
+\index{structs.\+h@{structs.\+h}!L\+A\+R\+G\+E\+U\+R\+P\+O\+R\+TE@{L\+A\+R\+G\+E\+U\+R\+P\+O\+R\+TE}}
+\index{L\+A\+R\+G\+E\+U\+R\+P\+O\+R\+TE@{L\+A\+R\+G\+E\+U\+R\+P\+O\+R\+TE}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{L\+A\+R\+G\+E\+U\+R\+P\+O\+R\+TE}{LARGEURPORTE}}
+{\footnotesize\ttfamily \#define L\+A\+R\+G\+E\+U\+R\+P\+O\+R\+TE~13}
+
+Largeur en pixel d\textquotesingle{}une porte \mbox{\Hypertarget{structs_8h_a4a23858655a03f63cb0b6052c986eae4}\label{structs_8h_a4a23858655a03f63cb0b6052c986eae4}} 
+\index{structs.\+h@{structs.\+h}!L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+RS@{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+RS}}
+\index{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+RS@{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+RS}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+RS}{LARGEURSPRITEPERS}}
+{\footnotesize\ttfamily \#define L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+RS~25}
+
+Largeur en pixel du personnage \mbox{\Hypertarget{structs_8h_aaf2c88ec7d9ef42adfe6f37a67874ac5}\label{structs_8h_aaf2c88ec7d9ef42adfe6f37a67874ac5}} 
+\index{structs.\+h@{structs.\+h}!L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+R\+S\+A\+T\+T\+A\+CK@{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+R\+S\+A\+T\+T\+A\+CK}}
+\index{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+R\+S\+A\+T\+T\+A\+CK@{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+R\+S\+A\+T\+T\+A\+CK}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+R\+S\+A\+T\+T\+A\+CK}{LARGEURSPRITEPERSATTACK}}
+{\footnotesize\ttfamily \#define L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+P\+E\+R\+S\+A\+T\+T\+A\+CK~30}
+
+Largeur en pixel du personnage \mbox{\Hypertarget{structs_8h_a15e057920f27a957e81250085cc1e4e1}\label{structs_8h_a15e057920f27a957e81250085cc1e4e1}} 
+\index{structs.\+h@{structs.\+h}!L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+R\+E\+N\+A\+RD@{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+R\+E\+N\+A\+RD}}
+\index{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+R\+E\+N\+A\+RD@{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+R\+E\+N\+A\+RD}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+R\+E\+N\+A\+RD}{LARGEURSPRITERENARD}}
+{\footnotesize\ttfamily \#define L\+A\+R\+G\+E\+U\+R\+S\+P\+R\+I\+T\+E\+R\+E\+N\+A\+RD~24}
+
+Largeur en pixel du renard \mbox{\Hypertarget{structs_8h_a437ef08681e7210d6678427030446a54}\label{structs_8h_a437ef08681e7210d6678427030446a54}} 
+\index{structs.\+h@{structs.\+h}!L\+E\+FT@{L\+E\+FT}}
+\index{L\+E\+FT@{L\+E\+FT}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{L\+E\+FT}{LEFT}}
+{\footnotesize\ttfamily \#define L\+E\+FT~0}
+
+Valeur d\textquotesingle{}une direction à gauche \mbox{\Hypertarget{structs_8h_a313b7737f72ca3d3a6c3c600b7427419}\label{structs_8h_a313b7737f72ca3d3a6c3c600b7427419}} 
+\index{structs.\+h@{structs.\+h}!N\+B\+B\+L\+O\+C\+S\+T\+I\+L\+E\+S\+ET@{N\+B\+B\+L\+O\+C\+S\+T\+I\+L\+E\+S\+ET}}
+\index{N\+B\+B\+L\+O\+C\+S\+T\+I\+L\+E\+S\+ET@{N\+B\+B\+L\+O\+C\+S\+T\+I\+L\+E\+S\+ET}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{N\+B\+B\+L\+O\+C\+S\+T\+I\+L\+E\+S\+ET}{NBBLOCSTILESET}}
+{\footnotesize\ttfamily \#define N\+B\+B\+L\+O\+C\+S\+T\+I\+L\+E\+S\+ET~60}
+
+Nombre de blocs du tileset de blocs \mbox{\Hypertarget{structs_8h_ab86ead624339c976d05c0894bd35f54e}\label{structs_8h_ab86ead624339c976d05c0894bd35f54e}} 
+\index{structs.\+h@{structs.\+h}!N\+B\+C\+H\+A\+N\+N\+E\+LS@{N\+B\+C\+H\+A\+N\+N\+E\+LS}}
+\index{N\+B\+C\+H\+A\+N\+N\+E\+LS@{N\+B\+C\+H\+A\+N\+N\+E\+LS}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{N\+B\+C\+H\+A\+N\+N\+E\+LS}{NBCHANNELS}}
+{\footnotesize\ttfamily \#define N\+B\+C\+H\+A\+N\+N\+E\+LS~20}
+
+Nombre de sons jouables en même temps \mbox{\Hypertarget{structs_8h_a40d5678ade5e6aee9b9876458fff6e84}\label{structs_8h_a40d5678ade5e6aee9b9876458fff6e84}} 
+\index{structs.\+h@{structs.\+h}!N\+B\+E\+T\+A\+TS@{N\+B\+E\+T\+A\+TS}}
+\index{N\+B\+E\+T\+A\+TS@{N\+B\+E\+T\+A\+TS}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{N\+B\+E\+T\+A\+TS}{NBETATS}}
+{\footnotesize\ttfamily \#define N\+B\+E\+T\+A\+TS~5}
+
+Nombre d\textquotesingle{}états différents des entités/joueurs \mbox{\Hypertarget{structs_8h_a2fcf88944ac6de244b966d21cf4779c2}\label{structs_8h_a2fcf88944ac6de244b966d21cf4779c2}} 
+\index{structs.\+h@{structs.\+h}!N\+B\+E\+T\+A\+T\+S\+B\+O\+U\+T\+O\+NS@{N\+B\+E\+T\+A\+T\+S\+B\+O\+U\+T\+O\+NS}}
+\index{N\+B\+E\+T\+A\+T\+S\+B\+O\+U\+T\+O\+NS@{N\+B\+E\+T\+A\+T\+S\+B\+O\+U\+T\+O\+NS}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{N\+B\+E\+T\+A\+T\+S\+B\+O\+U\+T\+O\+NS}{NBETATSBOUTONS}}
+{\footnotesize\ttfamily \#define N\+B\+E\+T\+A\+T\+S\+B\+O\+U\+T\+O\+NS~4}
+
+Nombre d\textquotesingle{}états différents des boutons de menu \mbox{\Hypertarget{structs_8h_a4c729527445e513e9d31120e499be0c5}\label{structs_8h_a4c729527445e513e9d31120e499be0c5}} 
+\index{structs.\+h@{structs.\+h}!N\+B\+L\+O\+C\+E\+R\+R\+E\+UR@{N\+B\+L\+O\+C\+E\+R\+R\+E\+UR}}
+\index{N\+B\+L\+O\+C\+E\+R\+R\+E\+UR@{N\+B\+L\+O\+C\+E\+R\+R\+E\+UR}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{N\+B\+L\+O\+C\+E\+R\+R\+E\+UR}{NBLOCERREUR}}
+{\footnotesize\ttfamily \#define N\+B\+L\+O\+C\+E\+R\+R\+E\+UR~49}
+
+Indice du bloc d\textquotesingle{}erreur de la tileset \mbox{\Hypertarget{structs_8h_a130b65b0ce9f74f28ad552abf2d6cfac}\label{structs_8h_a130b65b0ce9f74f28ad552abf2d6cfac}} 
+\index{structs.\+h@{structs.\+h}!N\+B\+P\+X\+S\+A\+UT@{N\+B\+P\+X\+S\+A\+UT}}
+\index{N\+B\+P\+X\+S\+A\+UT@{N\+B\+P\+X\+S\+A\+UT}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{N\+B\+P\+X\+S\+A\+UT}{NBPXSAUT}}
+{\footnotesize\ttfamily \#define N\+B\+P\+X\+S\+A\+UT~5$\ast$\hyperlink{structs_8h_a1f3f48a893d39a15c49bb4661352eff5}{T\+A\+I\+L\+L\+E\+B\+L\+OC}}
+
+Taille d\textquotesingle{}un saut en pixel \mbox{\Hypertarget{structs_8h_a7fd7da7c096dd160453b799184da9002}\label{structs_8h_a7fd7da7c096dd160453b799184da9002}} 
+\index{structs.\+h@{structs.\+h}!N\+I\+V\+E\+A\+U\+T\+XT@{N\+I\+V\+E\+A\+U\+T\+XT}}
+\index{N\+I\+V\+E\+A\+U\+T\+XT@{N\+I\+V\+E\+A\+U\+T\+XT}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{N\+I\+V\+E\+A\+U\+T\+XT}{NIVEAUTXT}}
+{\footnotesize\ttfamily \#define N\+I\+V\+E\+A\+U\+T\+XT~\char`\"{}salle\+\_\+yourte.\+txt\char`\"{}}
+
+Fichier du niveau de départ \mbox{\Hypertarget{structs_8h_a255df5df578ec4f5a3cc1a10d2ba90f6}\label{structs_8h_a255df5df578ec4f5a3cc1a10d2ba90f6}} 
+\index{structs.\+h@{structs.\+h}!O\+F\+F\+S\+E\+T\+H\+I\+T\+B\+O\+XH@{O\+F\+F\+S\+E\+T\+H\+I\+T\+B\+O\+XH}}
+\index{O\+F\+F\+S\+E\+T\+H\+I\+T\+B\+O\+XH@{O\+F\+F\+S\+E\+T\+H\+I\+T\+B\+O\+XH}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{O\+F\+F\+S\+E\+T\+H\+I\+T\+B\+O\+XH}{OFFSETHITBOXH}}
+{\footnotesize\ttfamily \#define O\+F\+F\+S\+E\+T\+H\+I\+T\+B\+O\+XH~6}
+
+Différence de x (en pixel) entre le début du sprite et le début de l\textquotesingle{}hitbox \mbox{\Hypertarget{structs_8h_a6dcb8420dba97d657875e47d243f5306}\label{structs_8h_a6dcb8420dba97d657875e47d243f5306}} 
+\index{structs.\+h@{structs.\+h}!O\+F\+F\+S\+E\+T\+H\+I\+T\+B\+O\+XR@{O\+F\+F\+S\+E\+T\+H\+I\+T\+B\+O\+XR}}
+\index{O\+F\+F\+S\+E\+T\+H\+I\+T\+B\+O\+XR@{O\+F\+F\+S\+E\+T\+H\+I\+T\+B\+O\+XR}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{O\+F\+F\+S\+E\+T\+H\+I\+T\+B\+O\+XR}{OFFSETHITBOXR}}
+{\footnotesize\ttfamily \#define O\+F\+F\+S\+E\+T\+H\+I\+T\+B\+O\+XR~0}
+
+Différence de x (en pixel) entre le début du sprite et le début de l\textquotesingle{}hitbox du renard \mbox{\Hypertarget{structs_8h_aa488baa46cc1b381347107ae3ba0a68d}\label{structs_8h_aa488baa46cc1b381347107ae3ba0a68d}} 
+\index{structs.\+h@{structs.\+h}!P\+V\+M\+AX@{P\+V\+M\+AX}}
+\index{P\+V\+M\+AX@{P\+V\+M\+AX}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{P\+V\+M\+AX}{PVMAX}}
+{\footnotesize\ttfamily \#define P\+V\+M\+AX~4}
+
+Points de vie maximum du joueur \mbox{\Hypertarget{structs_8h_a80fb826a684cf3f0d306b22aa100ddac}\label{structs_8h_a80fb826a684cf3f0d306b22aa100ddac}} 
+\index{structs.\+h@{structs.\+h}!R\+I\+G\+HT@{R\+I\+G\+HT}}
+\index{R\+I\+G\+HT@{R\+I\+G\+HT}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{R\+I\+G\+HT}{RIGHT}}
+{\footnotesize\ttfamily \#define R\+I\+G\+HT~1}
+
+Valeur d\textquotesingle{}une direction à droite \mbox{\Hypertarget{structs_8h_a5fdcc1659ee790f8bdd196e7745ab403}\label{structs_8h_a5fdcc1659ee790f8bdd196e7745ab403}} 
+\index{structs.\+h@{structs.\+h}!T\+A\+I\+L\+L\+E\+\_\+\+I\+N\+V\+E\+N\+T\+A\+I\+RE@{T\+A\+I\+L\+L\+E\+\_\+\+I\+N\+V\+E\+N\+T\+A\+I\+RE}}
+\index{T\+A\+I\+L\+L\+E\+\_\+\+I\+N\+V\+E\+N\+T\+A\+I\+RE@{T\+A\+I\+L\+L\+E\+\_\+\+I\+N\+V\+E\+N\+T\+A\+I\+RE}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{T\+A\+I\+L\+L\+E\+\_\+\+I\+N\+V\+E\+N\+T\+A\+I\+RE}{TAILLE\_INVENTAIRE}}
+{\footnotesize\ttfamily \#define T\+A\+I\+L\+L\+E\+\_\+\+I\+N\+V\+E\+N\+T\+A\+I\+RE~8}
+
+Nombre d\textquotesingle{}item dans l\textquotesingle{}inventaire du joueur \mbox{\Hypertarget{structs_8h_a1f3f48a893d39a15c49bb4661352eff5}\label{structs_8h_a1f3f48a893d39a15c49bb4661352eff5}} 
+\index{structs.\+h@{structs.\+h}!T\+A\+I\+L\+L\+E\+B\+L\+OC@{T\+A\+I\+L\+L\+E\+B\+L\+OC}}
+\index{T\+A\+I\+L\+L\+E\+B\+L\+OC@{T\+A\+I\+L\+L\+E\+B\+L\+OC}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{T\+A\+I\+L\+L\+E\+B\+L\+OC}{TAILLEBLOC}}
+{\footnotesize\ttfamily \#define T\+A\+I\+L\+L\+E\+B\+L\+OC~8}
+
+Taille en pixel des blocs \mbox{\Hypertarget{structs_8h_a252d76aa96596f6536b71713b8f2d895}\label{structs_8h_a252d76aa96596f6536b71713b8f2d895}} 
+\index{structs.\+h@{structs.\+h}!T\+A\+I\+L\+L\+E\+K\+O\+N\+A\+MI@{T\+A\+I\+L\+L\+E\+K\+O\+N\+A\+MI}}
+\index{T\+A\+I\+L\+L\+E\+K\+O\+N\+A\+MI@{T\+A\+I\+L\+L\+E\+K\+O\+N\+A\+MI}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{T\+A\+I\+L\+L\+E\+K\+O\+N\+A\+MI}{TAILLEKONAMI}}
+{\footnotesize\ttfamily \#define T\+A\+I\+L\+L\+E\+K\+O\+N\+A\+MI~11}
+
+NB d\textquotesingle{}inputs du Konami code \mbox{\Hypertarget{structs_8h_a26f26823c4957459884e9f8b8c7fd8e7}\label{structs_8h_a26f26823c4957459884e9f8b8c7fd8e7}} 
+\index{structs.\+h@{structs.\+h}!T\+A\+I\+L\+L\+E\+P\+A\+T\+H\+F\+I\+C\+H\+I\+ER@{T\+A\+I\+L\+L\+E\+P\+A\+T\+H\+F\+I\+C\+H\+I\+ER}}
+\index{T\+A\+I\+L\+L\+E\+P\+A\+T\+H\+F\+I\+C\+H\+I\+ER@{T\+A\+I\+L\+L\+E\+P\+A\+T\+H\+F\+I\+C\+H\+I\+ER}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{T\+A\+I\+L\+L\+E\+P\+A\+T\+H\+F\+I\+C\+H\+I\+ER}{TAILLEPATHFICHIER}}
+{\footnotesize\ttfamily \#define T\+A\+I\+L\+L\+E\+P\+A\+T\+H\+F\+I\+C\+H\+I\+ER~75}
+
+Taille maximale du path de chaque fichier \mbox{\Hypertarget{structs_8h_aff3e76c7173cd786015ab1108e5f2657}\label{structs_8h_aff3e76c7173cd786015ab1108e5f2657}} 
+\index{structs.\+h@{structs.\+h}!T\+E\+M\+P\+I\+NV@{T\+E\+M\+P\+I\+NV}}
+\index{T\+E\+M\+P\+I\+NV@{T\+E\+M\+P\+I\+NV}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{T\+E\+M\+P\+I\+NV}{TEMPINV}}
+{\footnotesize\ttfamily \#define T\+E\+M\+P\+I\+NV~60}
+
+Durée d\textquotesingle{}invincibilité du joueur après avoir été touché \mbox{\Hypertarget{structs_8h_ae61089395a1490a8242e41d55b720357}\label{structs_8h_ae61089395a1490a8242e41d55b720357}} 
+\index{structs.\+h@{structs.\+h}!V\+I\+T\+A\+T\+T\+A\+C\+K\+P\+E\+RS@{V\+I\+T\+A\+T\+T\+A\+C\+K\+P\+E\+RS}}
+\index{V\+I\+T\+A\+T\+T\+A\+C\+K\+P\+E\+RS@{V\+I\+T\+A\+T\+T\+A\+C\+K\+P\+E\+RS}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{V\+I\+T\+A\+T\+T\+A\+C\+K\+P\+E\+RS}{VITATTACKPERS}}
+{\footnotesize\ttfamily \#define V\+I\+T\+A\+T\+T\+A\+C\+K\+P\+E\+RS~30}
+
+Vitesse d\textquotesingle{}attaque\textquotesingle{} du personnage en pixel par tick \mbox{\Hypertarget{structs_8h_a51fffba4988e62b540adbeb5ce5d0993}\label{structs_8h_a51fffba4988e62b540adbeb5ce5d0993}} 
+\index{structs.\+h@{structs.\+h}!V\+I\+T\+C\+H\+U\+T\+E\+P\+E\+RS@{V\+I\+T\+C\+H\+U\+T\+E\+P\+E\+RS}}
+\index{V\+I\+T\+C\+H\+U\+T\+E\+P\+E\+RS@{V\+I\+T\+C\+H\+U\+T\+E\+P\+E\+RS}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{V\+I\+T\+C\+H\+U\+T\+E\+P\+E\+RS}{VITCHUTEPERS}}
+{\footnotesize\ttfamily \#define V\+I\+T\+C\+H\+U\+T\+E\+P\+E\+RS~1}
+
+Vitesse de chute du personnage en pixel par tick \mbox{\Hypertarget{structs_8h_a52280fbbe28eda3540ba23e3fc3195e2}\label{structs_8h_a52280fbbe28eda3540ba23e3fc3195e2}} 
+\index{structs.\+h@{structs.\+h}!V\+I\+T\+D\+E\+P\+P\+E\+RS@{V\+I\+T\+D\+E\+P\+P\+E\+RS}}
+\index{V\+I\+T\+D\+E\+P\+P\+E\+RS@{V\+I\+T\+D\+E\+P\+P\+E\+RS}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{V\+I\+T\+D\+E\+P\+P\+E\+RS}{VITDEPPERS}}
+{\footnotesize\ttfamily \#define V\+I\+T\+D\+E\+P\+P\+E\+RS~1}
+
+Vitesse de déplacement du personnage en pixel par tick \mbox{\Hypertarget{structs_8h_a246757ac96450448d775864c3f543e03}\label{structs_8h_a246757ac96450448d775864c3f543e03}} 
+\index{structs.\+h@{structs.\+h}!V\+I\+T\+S\+A\+U\+T\+P\+E\+RS@{V\+I\+T\+S\+A\+U\+T\+P\+E\+RS}}
+\index{V\+I\+T\+S\+A\+U\+T\+P\+E\+RS@{V\+I\+T\+S\+A\+U\+T\+P\+E\+RS}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{V\+I\+T\+S\+A\+U\+T\+P\+E\+RS}{VITSAUTPERS}}
+{\footnotesize\ttfamily \#define V\+I\+T\+S\+A\+U\+T\+P\+E\+RS~2}
+
+Vitesse de saut du personnage en pixel par tick \mbox{\Hypertarget{structs_8h_ad413eeeadfc5d9621c71cc52075c1550}\label{structs_8h_ad413eeeadfc5d9621c71cc52075c1550}} 
+\index{structs.\+h@{structs.\+h}!V\+O\+L\+U\+M\+E\+B\+O\+X\+S\+I\+ZE@{V\+O\+L\+U\+M\+E\+B\+O\+X\+S\+I\+ZE}}
+\index{V\+O\+L\+U\+M\+E\+B\+O\+X\+S\+I\+ZE@{V\+O\+L\+U\+M\+E\+B\+O\+X\+S\+I\+ZE}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{V\+O\+L\+U\+M\+E\+B\+O\+X\+S\+I\+ZE}{VOLUMEBOXSIZE}}
+{\footnotesize\ttfamily \#define V\+O\+L\+U\+M\+E\+B\+O\+X\+S\+I\+ZE~28}
+
+Taille du rectangle contenant le volume (en pixels) \mbox{\Hypertarget{structs_8h_aa0d0f8a2c7c78ac4381a5ea26487ac5b}\label{structs_8h_aa0d0f8a2c7c78ac4381a5ea26487ac5b}} 
+\index{structs.\+h@{structs.\+h}!V\+O\+L\+U\+M\+E\+T\+I\+ME@{V\+O\+L\+U\+M\+E\+T\+I\+ME}}
+\index{V\+O\+L\+U\+M\+E\+T\+I\+ME@{V\+O\+L\+U\+M\+E\+T\+I\+ME}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{V\+O\+L\+U\+M\+E\+T\+I\+ME}{VOLUMETIME}}
+{\footnotesize\ttfamily \#define V\+O\+L\+U\+M\+E\+T\+I\+ME~60}
+
+Temps d\textquotesingle{}affichage du volume après arrêt d\textquotesingle{}appui du bouton \mbox{\Hypertarget{structs_8h_aae845c1a50d8597e702fcc6fc4d08205}\label{structs_8h_aae845c1a50d8597e702fcc6fc4d08205}} 
+\index{structs.\+h@{structs.\+h}!Z\+O\+N\+E\+M\+O\+R\+TE@{Z\+O\+N\+E\+M\+O\+R\+TE}}
+\index{Z\+O\+N\+E\+M\+O\+R\+TE@{Z\+O\+N\+E\+M\+O\+R\+TE}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{Z\+O\+N\+E\+M\+O\+R\+TE}{ZONEMORTE}}
+{\footnotesize\ttfamily \#define Z\+O\+N\+E\+M\+O\+R\+TE~5000}
+
+Zone morte de la manette 
+
+\subsection{Documentation du type de l\textquotesingle{}énumération}
+\mbox{\Hypertarget{structs_8h_a74dcbee810ba5df4945e9b7c5f92e2e9}\label{structs_8h_a74dcbee810ba5df4945e9b7c5f92e2e9}} 
+\index{structs.\+h@{structs.\+h}!boolean\+\_\+e@{boolean\+\_\+e}}
+\index{boolean\+\_\+e@{boolean\+\_\+e}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{boolean\+\_\+e}{boolean\_e}}
+{\footnotesize\ttfamily enum \hyperlink{structs_8h_a74dcbee810ba5df4945e9b7c5f92e2e9}{boolean\+\_\+e}}
+
+
+
+Permet d\textquotesingle{}utiliser {\itshape T\+R\+UE} et {\itshape F\+A\+L\+SE}. 
+
+\begin{DoxyEnumFields}{Valeurs énumérées}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+A\+L\+SE@{F\+A\+L\+SE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!F\+A\+L\+SE@{F\+A\+L\+SE}}}\mbox{\Hypertarget{structs_8h_a74dcbee810ba5df4945e9b7c5f92e2e9aa1e095cc966dbecf6a0d8aad75348d1a}\label{structs_8h_a74dcbee810ba5df4945e9b7c5f92e2e9aa1e095cc966dbecf6a0d8aad75348d1a}} 
+F\+A\+L\+SE&Valeur de F\+A\+L\+SE\+: 0 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\+R\+UE@{T\+R\+UE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!T\+R\+UE@{T\+R\+UE}}}\mbox{\Hypertarget{structs_8h_a74dcbee810ba5df4945e9b7c5f92e2e9aa82764c3079aea4e60c80e45befbb839}\label{structs_8h_a74dcbee810ba5df4945e9b7c5f92e2e9aa82764c3079aea4e60c80e45befbb839}} 
+T\+R\+UE&Valeur de T\+R\+UE\+: 1 \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{structs_8h_a2bfd39097e1c768d485310d850b99457}\label{structs_8h_a2bfd39097e1c768d485310d850b99457}} 
+\index{structs.\+h@{structs.\+h}!boutonetat\+\_\+e@{boutonetat\+\_\+e}}
+\index{boutonetat\+\_\+e@{boutonetat\+\_\+e}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{boutonetat\+\_\+e}{boutonetat\_e}}
+{\footnotesize\ttfamily enum \hyperlink{structs_8h_a2bfd39097e1c768d485310d850b99457}{boutonetat\+\_\+e}}
+
+
+
+Id des états de boutons. 
+
+\begin{DoxyEnumFields}{Valeurs énumérées}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+L\+A\+X\+ED@{R\+E\+L\+A\+X\+ED}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!R\+E\+L\+A\+X\+ED@{R\+E\+L\+A\+X\+ED}}}\mbox{\Hypertarget{structs_8h_a2bfd39097e1c768d485310d850b99457a97496574afa27cde13dd9c3e16b1a6a3}\label{structs_8h_a2bfd39097e1c768d485310d850b99457a97496574afa27cde13dd9c3e16b1a6a3}} 
+R\+E\+L\+A\+X\+ED&Etat du bouton lorsqu\textquotesingle{}il n\textquotesingle{}est pas touché \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{H\+I\+G\+H\+L\+I\+G\+H\+T\+ED@{H\+I\+G\+H\+L\+I\+G\+H\+T\+ED}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!H\+I\+G\+H\+L\+I\+G\+H\+T\+ED@{H\+I\+G\+H\+L\+I\+G\+H\+T\+ED}}}\mbox{\Hypertarget{structs_8h_a2bfd39097e1c768d485310d850b99457a66246ffe5218e07c6088a32a4706a572}\label{structs_8h_a2bfd39097e1c768d485310d850b99457a66246ffe5218e07c6088a32a4706a572}} 
+H\+I\+G\+H\+L\+I\+G\+H\+T\+ED&Etat du bouton lorsqu\textquotesingle{}il est survolé \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+R\+E\+S\+S\+ED@{P\+R\+E\+S\+S\+ED}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!P\+R\+E\+S\+S\+ED@{P\+R\+E\+S\+S\+ED}}}\mbox{\Hypertarget{structs_8h_a2bfd39097e1c768d485310d850b99457a5ef9a100ac8b4b8d6dec477c377b7901}\label{structs_8h_a2bfd39097e1c768d485310d850b99457a5ef9a100ac8b4b8d6dec477c377b7901}} 
+P\+R\+E\+S\+S\+ED&Etat du bouton lorsqu\textquotesingle{}il est pressé \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{U\+N\+A\+V\+A\+I\+L\+A\+B\+LE@{U\+N\+A\+V\+A\+I\+L\+A\+B\+LE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!U\+N\+A\+V\+A\+I\+L\+A\+B\+LE@{U\+N\+A\+V\+A\+I\+L\+A\+B\+LE}}}\mbox{\Hypertarget{structs_8h_a2bfd39097e1c768d485310d850b99457a3fde93396dcd04d746a8cd3b6b5914bb}\label{structs_8h_a2bfd39097e1c768d485310d850b99457a3fde93396dcd04d746a8cd3b6b5914bb}} 
+U\+N\+A\+V\+A\+I\+L\+A\+B\+LE&Etat du bouton lorsqu\textquotesingle{}il n\textquotesingle{}est pas disponible \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{structs_8h_ac652084689fae43c9ede5782aedc0d2c}\label{structs_8h_ac652084689fae43c9ede5782aedc0d2c}} 
+\index{structs.\+h@{structs.\+h}!etat\+\_\+e@{etat\+\_\+e}}
+\index{etat\+\_\+e@{etat\+\_\+e}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{etat\+\_\+e}{etat\_e}}
+{\footnotesize\ttfamily enum \hyperlink{structs_8h_ac652084689fae43c9ede5782aedc0d2c}{etat\+\_\+e}}
+
+
+
+Nom des différents états possibles du personnage et des entités (utiles pour l\textquotesingle{}animation de sprites et la gestion des déplacements et des hitbox) 
+
+\begin{DoxyEnumFields}{Valeurs énumérées}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{I\+D\+LE@{I\+D\+LE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!I\+D\+LE@{I\+D\+LE}}}\mbox{\Hypertarget{structs_8h_ac652084689fae43c9ede5782aedc0d2cafd6a0e4343048b10646dd2976cc5ad18}\label{structs_8h_ac652084689fae43c9ede5782aedc0d2cafd6a0e4343048b10646dd2976cc5ad18}} 
+I\+D\+LE&Etat immobile \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+U\+N\+N\+I\+NG@{R\+U\+N\+N\+I\+NG}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!R\+U\+N\+N\+I\+NG@{R\+U\+N\+N\+I\+NG}}}\mbox{\Hypertarget{structs_8h_ac652084689fae43c9ede5782aedc0d2ca1061be6c3fb88d32829cba6f6b2be304}\label{structs_8h_ac652084689fae43c9ede5782aedc0d2ca1061be6c3fb88d32829cba6f6b2be304}} 
+R\+U\+N\+N\+I\+NG&Etat course \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{J\+U\+M\+P\+I\+NG@{J\+U\+M\+P\+I\+NG}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!J\+U\+M\+P\+I\+NG@{J\+U\+M\+P\+I\+NG}}}\mbox{\Hypertarget{structs_8h_ac652084689fae43c9ede5782aedc0d2cab8cd32180a1d5897df8369b127256ad1}\label{structs_8h_ac652084689fae43c9ede5782aedc0d2cab8cd32180a1d5897df8369b127256ad1}} 
+J\+U\+M\+P\+I\+NG&Etat saut \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{A\+T\+T\+A\+C\+K\+I\+NG@{A\+T\+T\+A\+C\+K\+I\+NG}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!A\+T\+T\+A\+C\+K\+I\+NG@{A\+T\+T\+A\+C\+K\+I\+NG}}}\mbox{\Hypertarget{structs_8h_ac652084689fae43c9ede5782aedc0d2ca05f520974a8946a4b11907b698557a8b}\label{structs_8h_ac652084689fae43c9ede5782aedc0d2ca05f520974a8946a4b11907b698557a8b}} 
+A\+T\+T\+A\+C\+K\+I\+NG&Etat attaque \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+A\+L\+L\+I\+NG@{F\+A\+L\+L\+I\+NG}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!F\+A\+L\+L\+I\+NG@{F\+A\+L\+L\+I\+NG}}}\mbox{\Hypertarget{structs_8h_ac652084689fae43c9ede5782aedc0d2cad24712a6a30c1d431b927d1ba2f84b66}\label{structs_8h_ac652084689fae43c9ede5782aedc0d2cad24712a6a30c1d431b927d1ba2f84b66}} 
+F\+A\+L\+L\+I\+NG&Etat chute \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5}} 
+\index{structs.\+h@{structs.\+h}!id\+Ent\+\_\+e@{id\+Ent\+\_\+e}}
+\index{id\+Ent\+\_\+e@{id\+Ent\+\_\+e}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{id\+Ent\+\_\+e}{idEnt\_e}}
+{\footnotesize\ttfamily enum \hyperlink{structs_8h_a92c2c7c38ee9d924447e622fff8800c5}{id\+Ent\+\_\+e}}
+
+
+
+Id des entités présentes dans les fichiers de salle. 
+
+\begin{DoxyEnumFields}{Valeurs énumérées}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\+E\+N\+IN@{V\+E\+N\+IN}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!V\+E\+N\+IN@{V\+E\+N\+IN}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac139e0aad6e312681a90847f2e13b828}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac139e0aad6e312681a90847f2e13b828}} 
+V\+E\+N\+IN&venin = -\/24 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+L\+E\+C\+H\+E\+F\+EU@{F\+L\+E\+C\+H\+E\+F\+EU}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!F\+L\+E\+C\+H\+E\+F\+EU@{F\+L\+E\+C\+H\+E\+F\+EU}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aebd0b7c7a3b6e7facc7a93fee9ec1641}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aebd0b7c7a3b6e7facc7a93fee9ec1641}} 
+F\+L\+E\+C\+H\+E\+F\+EU&une fleche de feu = -\/23 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+L\+E\+C\+HE@{F\+L\+E\+C\+HE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!F\+L\+E\+C\+HE@{F\+L\+E\+C\+HE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a2984c611e9964f24ac74b0a91fb5cb45}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a2984c611e9964f24ac74b0a91fb5cb45}} 
+F\+L\+E\+C\+HE&une flèche = -\/22 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+O\+E\+UR@{C\+O\+E\+UR}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!C\+O\+E\+UR@{C\+O\+E\+UR}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5afe25ae4ef5c689f46e1c4c972243d4db}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5afe25ae4ef5c689f46e1c4c972243d4db}} 
+C\+O\+E\+UR&un coeur = -\/21 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\+I\+F\+P\+L\+U\+ME@{V\+I\+F\+P\+L\+U\+ME}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!V\+I\+F\+P\+L\+U\+ME@{V\+I\+F\+P\+L\+U\+ME}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ab92b8e5f224ad27c30347209ffe26687}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ab92b8e5f224ad27c30347209ffe26687}} 
+V\+I\+F\+P\+L\+U\+ME&vifplume = -\/20 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{V\+E\+R\+S\+G\+E\+A\+NT@{V\+E\+R\+S\+G\+E\+A\+NT}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!V\+E\+R\+S\+G\+E\+A\+NT@{V\+E\+R\+S\+G\+E\+A\+NT}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a71860692dd9b2f5908ed978e304de87a}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a71860692dd9b2f5908ed978e304de87a}} 
+V\+E\+R\+S\+G\+E\+A\+NT&vers géant = -\/19 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+I\+N\+G\+E\+G\+R\+O\+T\+TE@{S\+I\+N\+G\+E\+G\+R\+O\+T\+TE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+I\+N\+G\+E\+G\+R\+O\+T\+TE@{S\+I\+N\+G\+E\+G\+R\+O\+T\+TE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a5a0aa92fee7e6c6860b8389edc866bf4}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a5a0aa92fee7e6c6860b8389edc866bf4}} 
+S\+I\+N\+G\+E\+G\+R\+O\+T\+TE&singe grotte = -\/18 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+E\+R\+P\+E\+N\+T\+V\+E\+RT@{S\+E\+R\+P\+E\+N\+T\+V\+E\+RT}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+E\+R\+P\+E\+N\+T\+V\+E\+RT@{S\+E\+R\+P\+E\+N\+T\+V\+E\+RT}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aa70533c2c411342b3903b427bb50a93b}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aa70533c2c411342b3903b427bb50a93b}} 
+S\+E\+R\+P\+E\+N\+T\+V\+E\+RT&serpent vert = -\/17 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+E\+R\+P\+E\+N\+T\+R\+O\+SE@{S\+E\+R\+P\+E\+N\+T\+R\+O\+SE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+E\+R\+P\+E\+N\+T\+R\+O\+SE@{S\+E\+R\+P\+E\+N\+T\+R\+O\+SE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac8d1edaf018012ebc8d6d829b1e707a0}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac8d1edaf018012ebc8d6d829b1e707a0}} 
+S\+E\+R\+P\+E\+N\+T\+R\+O\+SE&serpent rose = -\/16 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+E\+R\+P\+E\+N\+T\+B\+L\+EU@{S\+E\+R\+P\+E\+N\+T\+B\+L\+EU}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+E\+R\+P\+E\+N\+T\+B\+L\+EU@{S\+E\+R\+P\+E\+N\+T\+B\+L\+EU}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a79e0e40f549fda70c5c622354b91d6c3}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a79e0e40f549fda70c5c622354b91d6c3}} 
+S\+E\+R\+P\+E\+N\+T\+B\+L\+EU&serpent bleu = -\/15 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+O\+I\+VP@{R\+O\+I\+VP}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!R\+O\+I\+VP@{R\+O\+I\+VP}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aed5b0a078a8d93f5c60b4d0b665e22f4}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5aed5b0a078a8d93f5c60b4d0b665e22f4}} 
+R\+O\+I\+VP&roi vifplume = -\/14 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R\+E\+N\+A\+RD@{R\+E\+N\+A\+RD}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!R\+E\+N\+A\+RD@{R\+E\+N\+A\+RD}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a927f3d50ac911f37c529bc0116c3b6e3}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a927f3d50ac911f37c529bc0116c3b6e3}} 
+R\+E\+N\+A\+RD&renard = -\/13 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+O\+R\+T\+EV@{P\+O\+R\+T\+EV}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!P\+O\+R\+T\+EV@{P\+O\+R\+T\+EV}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a54c6830bfc0b06ff5260d5af19e0b34b}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a54c6830bfc0b06ff5260d5af19e0b34b}} 
+P\+O\+R\+T\+EV&porte verte = -\/12 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+O\+R\+T\+E\+RL@{P\+O\+R\+T\+E\+RL}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!P\+O\+R\+T\+E\+RL@{P\+O\+R\+T\+E\+RL}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a95dfec1f079a334cae5886216ffac6d4}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a95dfec1f079a334cae5886216ffac6d4}} 
+P\+O\+R\+T\+E\+RL&porte rouillée = -\/11 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+O\+R\+T\+E\+RG@{P\+O\+R\+T\+E\+RG}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!P\+O\+R\+T\+E\+RG@{P\+O\+R\+T\+E\+RG}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac293f0dcd058f51b8aadc0f184111d94}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5ac293f0dcd058f51b8aadc0f184111d94}} 
+P\+O\+R\+T\+E\+RG&porte rouge = -\/10 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+O\+R\+T\+EB@{P\+O\+R\+T\+EB}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!P\+O\+R\+T\+EB@{P\+O\+R\+T\+EB}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a71e347ee608d3904de54985aafa1b133}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a71e347ee608d3904de54985aafa1b133}} 
+P\+O\+R\+T\+EB&porte bleue = -\/9 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{M\+U\+R\+G\+L\+A\+CE@{M\+U\+R\+G\+L\+A\+CE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!M\+U\+R\+G\+L\+A\+CE@{M\+U\+R\+G\+L\+A\+CE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3f1f96f2ec84a3f00d77f8751d0b5b3e}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3f1f96f2ec84a3f00d77f8751d0b5b3e}} 
+M\+U\+R\+G\+L\+A\+CE&mur de glace = -\/8 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F\+L\+A\+C\+O\+N\+H\+U\+I\+LE@{F\+L\+A\+C\+O\+N\+H\+U\+I\+LE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!F\+L\+A\+C\+O\+N\+H\+U\+I\+LE@{F\+L\+A\+C\+O\+N\+H\+U\+I\+LE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3333bfa12cc7fdfb6b6d47c291fc384b}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3333bfa12cc7fdfb6b6d47c291fc384b}} 
+F\+L\+A\+C\+O\+N\+H\+U\+I\+LE&fleches de feu = -\/7 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+O\+U\+B\+L\+E\+S\+A\+UT@{D\+O\+U\+B\+L\+E\+S\+A\+UT}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!D\+O\+U\+B\+L\+E\+S\+A\+UT@{D\+O\+U\+B\+L\+E\+S\+A\+UT}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a68e3a4024ca3e6b42204e5a4b39ce580}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a68e3a4024ca3e6b42204e5a4b39ce580}} 
+D\+O\+U\+B\+L\+E\+S\+A\+UT&double saut = -\/6 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{D\+I\+S\+C\+O\+S\+H\+R\+O\+OM@{D\+I\+S\+C\+O\+S\+H\+R\+O\+OM}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!D\+I\+S\+C\+O\+S\+H\+R\+O\+OM@{D\+I\+S\+C\+O\+S\+H\+R\+O\+OM}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5acf73dabb3771f89f873fd5979dc41598}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5acf73dabb3771f89f873fd5979dc41598}} 
+D\+I\+S\+C\+O\+S\+H\+R\+O\+OM&discoshroom = -\/5 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+L\+E\+V\+E\+R\+TE@{C\+L\+E\+V\+E\+R\+TE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!C\+L\+E\+V\+E\+R\+TE@{C\+L\+E\+V\+E\+R\+TE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3c2efd0602739861adf5b9ea06c675d5}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a3c2efd0602739861adf5b9ea06c675d5}} 
+C\+L\+E\+V\+E\+R\+TE&clé verte = -\/4 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+L\+E\+R\+O\+U\+I\+L\+LE@{C\+L\+E\+R\+O\+U\+I\+L\+LE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!C\+L\+E\+R\+O\+U\+I\+L\+LE@{C\+L\+E\+R\+O\+U\+I\+L\+LE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a77669c33af1a2b8cf921344d1b33e7b5}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a77669c33af1a2b8cf921344d1b33e7b5}} 
+C\+L\+E\+R\+O\+U\+I\+L\+LE&clé rouillée = -\/3 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+L\+E\+R\+O\+U\+GE@{C\+L\+E\+R\+O\+U\+GE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!C\+L\+E\+R\+O\+U\+GE@{C\+L\+E\+R\+O\+U\+GE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a5bf706cb85963f20f6fdb3316b1417b5}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5a5bf706cb85963f20f6fdb3316b1417b5}} 
+C\+L\+E\+R\+O\+U\+GE&clé rouge = -\/2 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+L\+E\+B\+L\+E\+UE@{C\+L\+E\+B\+L\+E\+UE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!C\+L\+E\+B\+L\+E\+UE@{C\+L\+E\+B\+L\+E\+UE}}}\mbox{\Hypertarget{structs_8h_a92c2c7c38ee9d924447e622fff8800c5abca7a780ec24304cec32faed01133d50}\label{structs_8h_a92c2c7c38ee9d924447e622fff8800c5abca7a780ec24304cec32faed01133d50}} 
+C\+L\+E\+B\+L\+E\+UE&clé bleue = -\/1 \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{structs_8h_a26099d1d9a1ef474190622be823aa76c}\label{structs_8h_a26099d1d9a1ef474190622be823aa76c}} 
+\index{structs.\+h@{structs.\+h}!id\+Sounds\+\_\+e@{id\+Sounds\+\_\+e}}
+\index{id\+Sounds\+\_\+e@{id\+Sounds\+\_\+e}!structs.\+h@{structs.\+h}}
+\subsubsection{\texorpdfstring{id\+Sounds\+\_\+e}{idSounds\_e}}
+{\footnotesize\ttfamily enum \hyperlink{structs_8h_a26099d1d9a1ef474190622be823aa76c}{id\+Sounds\+\_\+e}}
+
+
+
+Id des sons produits par le jeu. 
+
+\begin{DoxyEnumFields}{Valeurs énumérées}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+O\+U\+N\+D\+\_\+\+T\+O\+U\+C\+HE@{S\+O\+U\+N\+D\+\_\+\+T\+O\+U\+C\+HE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+O\+U\+N\+D\+\_\+\+T\+O\+U\+C\+HE@{S\+O\+U\+N\+D\+\_\+\+T\+O\+U\+C\+HE}}}\mbox{\Hypertarget{structs_8h_a26099d1d9a1ef474190622be823aa76cafb8a21b2a6f9b3b3f6b39c931ee5a03e}\label{structs_8h_a26099d1d9a1ef474190622be823aa76cafb8a21b2a6f9b3b3f6b39c931ee5a03e}} 
+S\+O\+U\+N\+D\+\_\+\+T\+O\+U\+C\+HE&Son quand le personnage est touché \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+O\+U\+N\+D\+\_\+\+A\+RC@{S\+O\+U\+N\+D\+\_\+\+A\+RC}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+O\+U\+N\+D\+\_\+\+A\+RC@{S\+O\+U\+N\+D\+\_\+\+A\+RC}}}\mbox{\Hypertarget{structs_8h_a26099d1d9a1ef474190622be823aa76caefaba871e1cc71b60a76741bba672e59}\label{structs_8h_a26099d1d9a1ef474190622be823aa76caefaba871e1cc71b60a76741bba672e59}} 
+S\+O\+U\+N\+D\+\_\+\+A\+RC&Son quand le personnage tire à l\textquotesingle{}arc \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+O\+U\+N\+D\+\_\+\+S\+E\+R\+P\+E\+NT@{S\+O\+U\+N\+D\+\_\+\+S\+E\+R\+P\+E\+NT}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+O\+U\+N\+D\+\_\+\+S\+E\+R\+P\+E\+NT@{S\+O\+U\+N\+D\+\_\+\+S\+E\+R\+P\+E\+NT}}}\mbox{\Hypertarget{structs_8h_a26099d1d9a1ef474190622be823aa76ca2b98dca05192fcb8a6d1e6613dbf4ced}\label{structs_8h_a26099d1d9a1ef474190622be823aa76ca2b98dca05192fcb8a6d1e6613dbf4ced}} 
+S\+O\+U\+N\+D\+\_\+\+S\+E\+R\+P\+E\+NT&Son quand le serpent rose crache \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+O\+U\+N\+D\+\_\+\+S\+I\+N\+GE@{S\+O\+U\+N\+D\+\_\+\+S\+I\+N\+GE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+O\+U\+N\+D\+\_\+\+S\+I\+N\+GE@{S\+O\+U\+N\+D\+\_\+\+S\+I\+N\+GE}}}\mbox{\Hypertarget{structs_8h_a26099d1d9a1ef474190622be823aa76cab6745633088f499d4afa48c94a771f87}\label{structs_8h_a26099d1d9a1ef474190622be823aa76cab6745633088f499d4afa48c94a771f87}} 
+S\+O\+U\+N\+D\+\_\+\+S\+I\+N\+GE&Son quand le singe crie \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+O\+U\+N\+D\+\_\+\+V\+I\+F\+P\+L\+U\+ME@{S\+O\+U\+N\+D\+\_\+\+V\+I\+F\+P\+L\+U\+ME}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+O\+U\+N\+D\+\_\+\+V\+I\+F\+P\+L\+U\+ME@{S\+O\+U\+N\+D\+\_\+\+V\+I\+F\+P\+L\+U\+ME}}}\mbox{\Hypertarget{structs_8h_a26099d1d9a1ef474190622be823aa76caa864a6cca507d1b32b8f20f27b077e90}\label{structs_8h_a26099d1d9a1ef474190622be823aa76caa864a6cca507d1b32b8f20f27b077e90}} 
+S\+O\+U\+N\+D\+\_\+\+V\+I\+F\+P\+L\+U\+ME&Son quand le vifplume crie \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+O\+U\+N\+D\+\_\+\+M\+U\+R\+G\+L\+A\+CE@{S\+O\+U\+N\+D\+\_\+\+M\+U\+R\+G\+L\+A\+CE}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+O\+U\+N\+D\+\_\+\+M\+U\+R\+G\+L\+A\+CE@{S\+O\+U\+N\+D\+\_\+\+M\+U\+R\+G\+L\+A\+CE}}}\mbox{\Hypertarget{structs_8h_a26099d1d9a1ef474190622be823aa76ca08a540c146e737a6d9f4c71b1995e5df}\label{structs_8h_a26099d1d9a1ef474190622be823aa76ca08a540c146e737a6d9f4c71b1995e5df}} 
+S\+O\+U\+N\+D\+\_\+\+M\+U\+R\+G\+L\+A\+CE&Son quand le mur de glace fond \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+O\+U\+N\+D\+\_\+\+D\+O\+OR@{S\+O\+U\+N\+D\+\_\+\+D\+O\+OR}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+O\+U\+N\+D\+\_\+\+D\+O\+OR@{S\+O\+U\+N\+D\+\_\+\+D\+O\+OR}}}\mbox{\Hypertarget{structs_8h_a26099d1d9a1ef474190622be823aa76cab920e766bb262fe9d8d412cba5b5fad7}\label{structs_8h_a26099d1d9a1ef474190622be823aa76cab920e766bb262fe9d8d412cba5b5fad7}} 
+S\+O\+U\+N\+D\+\_\+\+D\+O\+OR&Son quand une porte s\textquotesingle{}ouvre \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+O\+U\+N\+D\+\_\+\+I\+T\+EM@{S\+O\+U\+N\+D\+\_\+\+I\+T\+EM}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+O\+U\+N\+D\+\_\+\+I\+T\+EM@{S\+O\+U\+N\+D\+\_\+\+I\+T\+EM}}}\mbox{\Hypertarget{structs_8h_a26099d1d9a1ef474190622be823aa76ca1c25c5530029523ec7ac169cea3865a3}\label{structs_8h_a26099d1d9a1ef474190622be823aa76ca1c25c5530029523ec7ac169cea3865a3}} 
+S\+O\+U\+N\+D\+\_\+\+I\+T\+EM&Son quand on ramasse un item \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+O\+U\+N\+D\+\_\+\+M\+E\+NU@{S\+O\+U\+N\+D\+\_\+\+M\+E\+NU}!structs.\+h@{structs.\+h}}\index{structs.\+h@{structs.\+h}!S\+O\+U\+N\+D\+\_\+\+M\+E\+NU@{S\+O\+U\+N\+D\+\_\+\+M\+E\+NU}}}\mbox{\Hypertarget{structs_8h_a26099d1d9a1ef474190622be823aa76cab47ef3a8edb9093fe3705533a754327d}\label{structs_8h_a26099d1d9a1ef474190622be823aa76cab47ef3a8edb9093fe3705533a754327d}} 
+S\+O\+U\+N\+D\+\_\+\+M\+E\+NU&Son quand on valide un bouton dans le menu \\
+\hline
+
+\end{DoxyEnumFields}

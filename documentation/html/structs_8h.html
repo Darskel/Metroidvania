@@ -1,0 +1,1267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Diskosieni - Metroidvania: Référence du fichier headers/structs.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Diskosieni - Metroidvania
+   </div>
+   <div id="projectbrief">Création d&#39;un Metroidvania nommé Diskosieni dans le cadre du cours nommé &#39;Projet&#39;</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_7f57b1e41c5acd0e859ae5f3a2b075a9.html">headers</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Définitions de type</a> &#124;
+<a href="#enum-members">Énumérations</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier structs.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Ensemble de structures utilisées dans le projets.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="liste_8h_source.html">liste.h</a>&quot;</code><br />
+<code>#include &lt;SDL.h&gt;</code><br />
+<code>#include &lt;SDL_ttf.h&gt;</code><br />
+<code>#include &lt;SDL_image.h&gt;</code><br />
+<code>#include &lt;SDL_mixer.h&gt;</code><br />
+</div>
+<p><a href="structs_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtaille__s.html">taille_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Taille avec hauteur et largeur.  <a href="structtaille__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structposition__s.html">position_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Une position représentée par deux valeurs entières.  <a href="structposition__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsalle__s.html">salle_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure représentant les salles et leur contenu.  <a href="structsalle__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpersonnage__s.html">personnage_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure représentant le personnage et ses caractéristques, contient également une variable de gestion des effets sonores du jeu.  <a href="structpersonnage__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtype__monstre__s.html">type_monstre_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure représentant le type d'un monstre.  <a href="structtype__monstre__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmonstre__s.html">monstre_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure représentant un monstre.  <a href="structmonstre__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbloc__s.html">bloc_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure représentant un bloc.  <a href="structbloc__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structporte__s.html">porte_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure représentant une porte.  <a href="structporte__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmenu__bouton__s.html">menu_bouton_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure représentant un bouton d'un menu.  <a href="structmenu__bouton__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmenu__texte__s.html">menu_texte_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure représentant un texte dans un menu.  <a href="structmenu__texte__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmenu__s.html">menu_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure représentant un menu.  <a href="structmenu__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a14862d1ea290aaf4ce47601ceb2830ad"><td class="memItemLeft" align="right" valign="top"><a id="a14862d1ea290aaf4ce47601ceb2830ad"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>STRUCTS_INCLUDED</b></td></tr>
+<tr class="separator:a14862d1ea290aaf4ce47601ceb2830ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a437ef08681e7210d6678427030446a54"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a437ef08681e7210d6678427030446a54">LEFT</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a437ef08681e7210d6678427030446a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80fb826a684cf3f0d306b22aa100ddac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a80fb826a684cf3f0d306b22aa100ddac">RIGHT</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a80fb826a684cf3f0d306b22aa100ddac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fdcc1659ee790f8bdd196e7745ab403"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a5fdcc1659ee790f8bdd196e7745ab403">TAILLE_INVENTAIRE</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:a5fdcc1659ee790f8bdd196e7745ab403"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af290d1b95e4e97332784455b2ecbdd93"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#af290d1b95e4e97332784455b2ecbdd93">INVENTAIRESIZE</a>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:af290d1b95e4e97332784455b2ecbdd93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e6bff97020f08860a615c8b674d4ec8"><td class="memItemLeft" align="right" valign="top"><a id="a5e6bff97020f08860a615c8b674d4ec8"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>INVENTAIREPATH</b>&#160;&#160;&#160;&quot;./sprites/inventaire/tileset.png&quot;</td></tr>
+<tr class="separator:a5e6bff97020f08860a615c8b674d4ec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0fe3a3886ace08abcc691cb18085ae9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#af0fe3a3886ace08abcc691cb18085ae9">INVENTAIRETIME</a>&#160;&#160;&#160;60</td></tr>
+<tr class="separator:af0fe3a3886ace08abcc691cb18085ae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad413eeeadfc5d9621c71cc52075c1550"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#ad413eeeadfc5d9621c71cc52075c1550">VOLUMEBOXSIZE</a>&#160;&#160;&#160;28</td></tr>
+<tr class="separator:ad413eeeadfc5d9621c71cc52075c1550"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0d0f8a2c7c78ac4381a5ea26487ac5b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#aa0d0f8a2c7c78ac4381a5ea26487ac5b">VOLUMETIME</a>&#160;&#160;&#160;60</td></tr>
+<tr class="separator:aa0d0f8a2c7c78ac4381a5ea26487ac5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73b3bbc51c65bf165939cc7b57e9eb4b"><td class="memItemLeft" align="right" valign="top"><a id="a73b3bbc51c65bf165939cc7b57e9eb4b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>NOM_JEU</b>&#160;&#160;&#160;&quot;Diskosieni&quot;</td></tr>
+<tr class="separator:a73b3bbc51c65bf165939cc7b57e9eb4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26f26823c4957459884e9f8b8c7fd8e7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a26f26823c4957459884e9f8b8c7fd8e7">TAILLEPATHFICHIER</a>&#160;&#160;&#160;75</td></tr>
+<tr class="separator:a26f26823c4957459884e9f8b8c7fd8e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67ef72cf4050f504bfafcf3e6503bb56"><td class="memItemLeft" align="right" valign="top"><a id="a67ef72cf4050f504bfafcf3e6503bb56"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PLAYERSPRITESPATH</b>&#160;&#160;&#160;&quot;./sprites/entite/joueur/tileset.png&quot;</td></tr>
+<tr class="separator:a67ef72cf4050f504bfafcf3e6503bb56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b651daa482ce6ce00423ffd2b298fdf"><td class="memItemLeft" align="right" valign="top"><a id="a4b651daa482ce6ce00423ffd2b298fdf"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>RENARDSPRITESPATH</b>&#160;&#160;&#160;&quot;./sprites/entite/renard/tileset.png&quot;</td></tr>
+<tr class="separator:a4b651daa482ce6ce00423ffd2b298fdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf4193200441b7a6e1f02ebff70ea2d9"><td class="memItemLeft" align="right" valign="top"><a id="abf4193200441b7a6e1f02ebff70ea2d9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TILESETPATH</b>&#160;&#160;&#160;&quot;./sprites/bloc/tileset.png&quot;</td></tr>
+<tr class="separator:abf4193200441b7a6e1f02ebff70ea2d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb631ee3c4f196aaae2d314dc3b72983"><td class="memItemLeft" align="right" valign="top"><a id="afb631ee3c4f196aaae2d314dc3b72983"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>DIRBG</b>&#160;&#160;&#160;&quot;./sprites/salles/&quot;</td></tr>
+<tr class="separator:afb631ee3c4f196aaae2d314dc3b72983"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f3f48a893d39a15c49bb4661352eff5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a1f3f48a893d39a15c49bb4661352eff5">TAILLEBLOC</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:a1f3f48a893d39a15c49bb4661352eff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adee98db21c24ed30e252c29fbcef08cb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#adee98db21c24ed30e252c29fbcef08cb">HAUTEURPORTE</a>&#160;&#160;&#160;36</td></tr>
+<tr class="separator:adee98db21c24ed30e252c29fbcef08cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20e7a98af95c2205f9daf298cc667008"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a20e7a98af95c2205f9daf298cc667008">LARGEURPORTE</a>&#160;&#160;&#160;13</td></tr>
+<tr class="separator:a20e7a98af95c2205f9daf298cc667008"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15e057920f27a957e81250085cc1e4e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a15e057920f27a957e81250085cc1e4e1">LARGEURSPRITERENARD</a>&#160;&#160;&#160;24</td></tr>
+<tr class="separator:a15e057920f27a957e81250085cc1e4e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51477305f6c144a480885eb73c383696"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a51477305f6c144a480885eb73c383696">HAUTEURSPRITERENARD</a>&#160;&#160;&#160;13</td></tr>
+<tr class="separator:a51477305f6c144a480885eb73c383696"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7423af0a1479f13d79cd0c49c79e5962"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a7423af0a1479f13d79cd0c49c79e5962">HAUTEURSPRITEPERS</a>&#160;&#160;&#160;33</td></tr>
+<tr class="separator:a7423af0a1479f13d79cd0c49c79e5962"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a23858655a03f63cb0b6052c986eae4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a4a23858655a03f63cb0b6052c986eae4">LARGEURSPRITEPERS</a>&#160;&#160;&#160;25</td></tr>
+<tr class="separator:a4a23858655a03f63cb0b6052c986eae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf2c88ec7d9ef42adfe6f37a67874ac5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#aaf2c88ec7d9ef42adfe6f37a67874ac5">LARGEURSPRITEPERSATTACK</a>&#160;&#160;&#160;30</td></tr>
+<tr class="separator:aaf2c88ec7d9ef42adfe6f37a67874ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad6128d7fab77d16eba9a5f25c0b19b1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#aad6128d7fab77d16eba9a5f25c0b19b1">HAUTEURHITBOXPERS</a>&#160;&#160;&#160;32</td></tr>
+<tr class="separator:aad6128d7fab77d16eba9a5f25c0b19b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12acd8af9860b9af2a26c52f756a338e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a12acd8af9860b9af2a26c52f756a338e">LARGEURHITBOXPERS</a>&#160;&#160;&#160;13</td></tr>
+<tr class="separator:a12acd8af9860b9af2a26c52f756a338e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fbeac5e29677c50600b60b27e344ea0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a6fbeac5e29677c50600b60b27e344ea0">HAUTEURHITBOXREN</a>&#160;&#160;&#160;12</td></tr>
+<tr class="separator:a6fbeac5e29677c50600b60b27e344ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac015d8c4e8a2d8bf1435ce955a604533"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#ac015d8c4e8a2d8bf1435ce955a604533">LARGEURHITBOXREN</a>&#160;&#160;&#160;24</td></tr>
+<tr class="separator:ac015d8c4e8a2d8bf1435ce955a604533"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a255df5df578ec4f5a3cc1a10d2ba90f6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a255df5df578ec4f5a3cc1a10d2ba90f6">OFFSETHITBOXH</a>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:a255df5df578ec4f5a3cc1a10d2ba90f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dcb8420dba97d657875e47d243f5306"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a6dcb8420dba97d657875e47d243f5306">OFFSETHITBOXR</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a6dcb8420dba97d657875e47d243f5306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52280fbbe28eda3540ba23e3fc3195e2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a52280fbbe28eda3540ba23e3fc3195e2">VITDEPPERS</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a52280fbbe28eda3540ba23e3fc3195e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a246757ac96450448d775864c3f543e03"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a246757ac96450448d775864c3f543e03">VITSAUTPERS</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a246757ac96450448d775864c3f543e03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51fffba4988e62b540adbeb5ce5d0993"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a51fffba4988e62b540adbeb5ce5d0993">VITCHUTEPERS</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a51fffba4988e62b540adbeb5ce5d0993"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae61089395a1490a8242e41d55b720357"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#ae61089395a1490a8242e41d55b720357">VITATTACKPERS</a>&#160;&#160;&#160;30</td></tr>
+<tr class="separator:ae61089395a1490a8242e41d55b720357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2326924fc935f7a3415c0e3894e2ddc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#aa2326924fc935f7a3415c0e3894e2ddc">JPCD</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:aa2326924fc935f7a3415c0e3894e2ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a130b65b0ce9f74f28ad552abf2d6cfac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a130b65b0ce9f74f28ad552abf2d6cfac">NBPXSAUT</a>&#160;&#160;&#160;5*<a class="el" href="structs_8h.html#a1f3f48a893d39a15c49bb4661352eff5">TAILLEBLOC</a></td></tr>
+<tr class="separator:a130b65b0ce9f74f28ad552abf2d6cfac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae845c1a50d8597e702fcc6fc4d08205"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#aae845c1a50d8597e702fcc6fc4d08205">ZONEMORTE</a>&#160;&#160;&#160;5000</td></tr>
+<tr class="separator:aae845c1a50d8597e702fcc6fc4d08205"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fd7da7c096dd160453b799184da9002"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a7fd7da7c096dd160453b799184da9002">NIVEAUTXT</a>&#160;&#160;&#160;&quot;salle_yourte.txt&quot;</td></tr>
+<tr class="separator:a7fd7da7c096dd160453b799184da9002"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd4b5f839f90f855c5f289c24667eea5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#abd4b5f839f90f855c5f289c24667eea5">FRAMEDELAY</a>&#160;&#160;&#160;17</td></tr>
+<tr class="separator:abd4b5f839f90f855c5f289c24667eea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a252d76aa96596f6536b71713b8f2d895"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a252d76aa96596f6536b71713b8f2d895">TAILLEKONAMI</a>&#160;&#160;&#160;11</td></tr>
+<tr class="separator:a252d76aa96596f6536b71713b8f2d895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fe6fd113bdaa732983693e5c6a2941c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a4fe6fd113bdaa732983693e5c6a2941c">KONAMICODE</a>&#160;&#160;&#160;&quot;uuddlrlrbas&quot;</td></tr>
+<tr class="separator:a4fe6fd113bdaa732983693e5c6a2941c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a313b7737f72ca3d3a6c3c600b7427419"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a313b7737f72ca3d3a6c3c600b7427419">NBBLOCSTILESET</a>&#160;&#160;&#160;60</td></tr>
+<tr class="separator:a313b7737f72ca3d3a6c3c600b7427419"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c729527445e513e9d31120e499be0c5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a4c729527445e513e9d31120e499be0c5">NBLOCERREUR</a>&#160;&#160;&#160;49</td></tr>
+<tr class="separator:a4c729527445e513e9d31120e499be0c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c69a254991c8be73f994c57220f1673"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a5c69a254991c8be73f994c57220f1673">COEURDROPRATE</a>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:a5c69a254991c8be73f994c57220f1673"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa488baa46cc1b381347107ae3ba0a68d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#aa488baa46cc1b381347107ae3ba0a68d">PVMAX</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:aa488baa46cc1b381347107ae3ba0a68d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff3e76c7173cd786015ab1108e5f2657"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#aff3e76c7173cd786015ab1108e5f2657">TEMPINV</a>&#160;&#160;&#160;60</td></tr>
+<tr class="separator:aff3e76c7173cd786015ab1108e5f2657"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af852ef65e0bf9575c401e7e695fdecdd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#af852ef65e0bf9575c401e7e695fdecdd">FREQCLIGN</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:af852ef65e0bf9575c401e7e695fdecdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace0a39e258e6332249e3accd966c1796"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#ace0a39e258e6332249e3accd966c1796">INVUDELAY</a>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:ace0a39e258e6332249e3accd966c1796"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d52eeb41a03aeda6974d60772531f96"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a5d52eeb41a03aeda6974d60772531f96">FONTSIZE</a>&#160;&#160;&#160;30</td></tr>
+<tr class="separator:a5d52eeb41a03aeda6974d60772531f96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fcf88944ac6de244b966d21cf4779c2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a2fcf88944ac6de244b966d21cf4779c2">NBETATSBOUTONS</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:a2fcf88944ac6de244b966d21cf4779c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40d5678ade5e6aee9b9876458fff6e84"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a40d5678ade5e6aee9b9876458fff6e84">NBETATS</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:a40d5678ade5e6aee9b9876458fff6e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c2efea2ebf5c931359388126361cc97"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a7c2efea2ebf5c931359388126361cc97">ANIMDELAYMENU</a>&#160;&#160;&#160;20</td></tr>
+<tr class="separator:a7c2efea2ebf5c931359388126361cc97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8db4d5cf0a595530436f0dda82cac0d1"><td class="memItemLeft" align="right" valign="top"><a id="a8db4d5cf0a595530436f0dda82cac0d1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PULSARWAV</b>&#160;&#160;&#160;&quot;audio/Pulsar.wav&quot;</td></tr>
+<tr class="separator:a8db4d5cf0a595530436f0dda82cac0d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a001afbbc3c399afc435d6d7d8267c658"><td class="memItemLeft" align="right" valign="top"><a id="a001afbbc3c399afc435d6d7d8267c658"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>BEGINWAV</b>&#160;&#160;&#160;&quot;audio/Begin.wav&quot;</td></tr>
+<tr class="separator:a001afbbc3c399afc435d6d7d8267c658"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae57412547c6bdd9425f7392b988f8a5a"><td class="memItemLeft" align="right" valign="top"><a id="ae57412547c6bdd9425f7392b988f8a5a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MYSTERIOUSWAV</b>&#160;&#160;&#160;&quot;audio/Mysterious.wav&quot;</td></tr>
+<tr class="separator:ae57412547c6bdd9425f7392b988f8a5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf3e8fada7f541d57b3fe270d66f9d1b"><td class="memItemLeft" align="right" valign="top"><a id="adf3e8fada7f541d57b3fe270d66f9d1b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>FUTURISTICWAV</b>&#160;&#160;&#160;&quot;audio/Futuristic.wav&quot;</td></tr>
+<tr class="separator:adf3e8fada7f541d57b3fe270d66f9d1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff6cd197e92677c05381a507e039450b"><td class="memItemLeft" align="right" valign="top"><a id="aff6cd197e92677c05381a507e039450b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ENDLESSPAINWAV</b>&#160;&#160;&#160;&quot;audio/EndlessPain.wav&quot;</td></tr>
+<tr class="separator:aff6cd197e92677c05381a507e039450b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80b6011879308cf7b3045316284bc269"><td class="memItemLeft" align="right" valign="top"><a id="a80b6011879308cf7b3045316284bc269"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LONGAWAYWAV</b>&#160;&#160;&#160;&quot;audio/LongAway.wav&quot;</td></tr>
+<tr class="separator:a80b6011879308cf7b3045316284bc269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7acbecd3c32fb1305b543d53d2f7a9cc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a7acbecd3c32fb1305b543d53d2f7a9cc">DEFAULTVOLUME</a>&#160;&#160;&#160;0.2</td></tr>
+<tr class="separator:a7acbecd3c32fb1305b543d53d2f7a9cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab86ead624339c976d05c0894bd35f54e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#ab86ead624339c976d05c0894bd35f54e">NBCHANNELS</a>&#160;&#160;&#160;20</td></tr>
+<tr class="separator:ab86ead624339c976d05c0894bd35f54e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Définitions de type</h2></td></tr>
+<tr class="memitem:a5edfa908c6d10e640e3b86305d67e920"><td class="memItemLeft" align="right" valign="top"><a id="a5edfa908c6d10e640e3b86305d67e920"></a>
+typedef enum <a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5">idEnt_e</a>&#160;</td><td class="memItemRight" valign="bottom"><b>idEnt_t</b></td></tr>
+<tr class="separator:a5edfa908c6d10e640e3b86305d67e920"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada0444d923e8de565429292eb333c3bd"><td class="memItemLeft" align="right" valign="top"><a id="ada0444d923e8de565429292eb333c3bd"></a>
+typedef enum <a class="el" href="structs_8h.html#a26099d1d9a1ef474190622be823aa76c">idSounds_e</a>&#160;</td><td class="memItemRight" valign="bottom"><b>idSounds_t</b></td></tr>
+<tr class="separator:ada0444d923e8de565429292eb333c3bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46dc52a35db08cf532828128f8cf47e7"><td class="memItemLeft" align="right" valign="top"><a id="a46dc52a35db08cf532828128f8cf47e7"></a>
+typedef struct <a class="el" href="structtaille__s.html">taille_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>taille_t</b></td></tr>
+<tr class="separator:a46dc52a35db08cf532828128f8cf47e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0edf461c60578ea071dc06a4b3a57b1"><td class="memItemLeft" align="right" valign="top"><a id="ad0edf461c60578ea071dc06a4b3a57b1"></a>
+typedef struct <a class="el" href="structposition__s.html">position_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>position_t</b></td></tr>
+<tr class="separator:ad0edf461c60578ea071dc06a4b3a57b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a02d96e075245599abe33736619ec15"><td class="memItemLeft" align="right" valign="top"><a id="a2a02d96e075245599abe33736619ec15"></a>
+typedef enum <a class="el" href="structs_8h.html#a74dcbee810ba5df4945e9b7c5f92e2e9">boolean_e</a>&#160;</td><td class="memItemRight" valign="bottom"><b>boolean_t</b></td></tr>
+<tr class="separator:a2a02d96e075245599abe33736619ec15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3095e9752f46c8a3dffac01c790d38b3"><td class="memItemLeft" align="right" valign="top"><a id="a3095e9752f46c8a3dffac01c790d38b3"></a>
+typedef enum <a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2c">etat_e</a>&#160;</td><td class="memItemRight" valign="bottom"><b>etat_t</b></td></tr>
+<tr class="separator:a3095e9752f46c8a3dffac01c790d38b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada6d98da4b79a612ca12f1778d890b4b"><td class="memItemLeft" align="right" valign="top"><a id="ada6d98da4b79a612ca12f1778d890b4b"></a>
+typedef struct <a class="el" href="structsalle__s.html">salle_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>salle_t</b></td></tr>
+<tr class="separator:ada6d98da4b79a612ca12f1778d890b4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeca7e7adc19e924d5fade8ea3c6937ac"><td class="memItemLeft" align="right" valign="top"><a id="aeca7e7adc19e924d5fade8ea3c6937ac"></a>
+typedef struct <a class="el" href="structpersonnage__s.html">personnage_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>personnage_t</b></td></tr>
+<tr class="separator:aeca7e7adc19e924d5fade8ea3c6937ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2475165f3195b53d2ffa1bbf1f5272b4"><td class="memItemLeft" align="right" valign="top"><a id="a2475165f3195b53d2ffa1bbf1f5272b4"></a>
+typedef struct <a class="el" href="structmonstre__s.html">monstre_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>monstre_t</b></td></tr>
+<tr class="separator:a2475165f3195b53d2ffa1bbf1f5272b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8de222b245924a766b375a60f04b3b8"><td class="memItemLeft" align="right" valign="top"><a id="af8de222b245924a766b375a60f04b3b8"></a>
+typedef struct <a class="el" href="structtype__monstre__s.html">type_monstre_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>type_monstre_t</b></td></tr>
+<tr class="separator:af8de222b245924a766b375a60f04b3b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e64a39dbfabc75ff76144f2cfaf28e5"><td class="memItemLeft" align="right" valign="top"><a id="a6e64a39dbfabc75ff76144f2cfaf28e5"></a>
+typedef struct <a class="el" href="structbloc__s.html">bloc_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>bloc_t</b></td></tr>
+<tr class="separator:a6e64a39dbfabc75ff76144f2cfaf28e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80cfff8fa904c28ac9883e5657918c3e"><td class="memItemLeft" align="right" valign="top"><a id="a80cfff8fa904c28ac9883e5657918c3e"></a>
+typedef struct <a class="el" href="structporte__s.html">porte_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>porte_t</b></td></tr>
+<tr class="separator:a80cfff8fa904c28ac9883e5657918c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e571caf67be3e74aa58a9402541b262"><td class="memItemLeft" align="right" valign="top"><a id="a4e571caf67be3e74aa58a9402541b262"></a>
+typedef enum <a class="el" href="structs_8h.html#a2bfd39097e1c768d485310d850b99457">boutonetat_e</a>&#160;</td><td class="memItemRight" valign="bottom"><b>boutonetat_t</b></td></tr>
+<tr class="separator:a4e571caf67be3e74aa58a9402541b262"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52de748056cdfc78499cb8036161028a"><td class="memItemLeft" align="right" valign="top"><a id="a52de748056cdfc78499cb8036161028a"></a>
+typedef struct <a class="el" href="structmenu__bouton__s.html">menu_bouton_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>menu_bouton_t</b></td></tr>
+<tr class="separator:a52de748056cdfc78499cb8036161028a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa176ebe7b46249416ebca13822a6f073"><td class="memItemLeft" align="right" valign="top"><a id="aa176ebe7b46249416ebca13822a6f073"></a>
+typedef struct <a class="el" href="structmenu__texte__s.html">menu_texte_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>menu_texte_t</b></td></tr>
+<tr class="separator:aa176ebe7b46249416ebca13822a6f073"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a370b4722ee857b85c5caa7ca00cb196d"><td class="memItemLeft" align="right" valign="top"><a id="a370b4722ee857b85c5caa7ca00cb196d"></a>
+typedef struct <a class="el" href="structmenu__s.html">menu_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>menu_t</b></td></tr>
+<tr class="separator:a370b4722ee857b85c5caa7ca00cb196d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Énumérations</h2></td></tr>
+<tr class="memitem:a92c2c7c38ee9d924447e622fff8800c5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5">idEnt_e</a> { <br />
+&#160;&#160;<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5ac139e0aad6e312681a90847f2e13b828">VENIN</a> = -24, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5aebd0b7c7a3b6e7facc7a93fee9ec1641">FLECHEFEU</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5a2984c611e9964f24ac74b0a91fb5cb45">FLECHE</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5afe25ae4ef5c689f46e1c4c972243d4db">COEUR</a>, 
+<br />
+&#160;&#160;<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5ab92b8e5f224ad27c30347209ffe26687">VIFPLUME</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5a71860692dd9b2f5908ed978e304de87a">VERSGEANT</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5a5a0aa92fee7e6c6860b8389edc866bf4">SINGEGROTTE</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5aa70533c2c411342b3903b427bb50a93b">SERPENTVERT</a>, 
+<br />
+&#160;&#160;<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5ac8d1edaf018012ebc8d6d829b1e707a0">SERPENTROSE</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5a79e0e40f549fda70c5c622354b91d6c3">SERPENTBLEU</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5aed5b0a078a8d93f5c60b4d0b665e22f4">ROIVP</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5a927f3d50ac911f37c529bc0116c3b6e3">RENARD</a>, 
+<br />
+&#160;&#160;<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5a54c6830bfc0b06ff5260d5af19e0b34b">PORTEV</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5a95dfec1f079a334cae5886216ffac6d4">PORTERL</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5ac293f0dcd058f51b8aadc0f184111d94">PORTERG</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5a71e347ee608d3904de54985aafa1b133">PORTEB</a>, 
+<br />
+&#160;&#160;<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5a3f1f96f2ec84a3f00d77f8751d0b5b3e">MURGLACE</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5a3333bfa12cc7fdfb6b6d47c291fc384b">FLACONHUILE</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5a68e3a4024ca3e6b42204e5a4b39ce580">DOUBLESAUT</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5acf73dabb3771f89f873fd5979dc41598">DISCOSHROOM</a>, 
+<br />
+&#160;&#160;<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5a3c2efd0602739861adf5b9ea06c675d5">CLEVERTE</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5a77669c33af1a2b8cf921344d1b33e7b5">CLEROUILLE</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5a5bf706cb85963f20f6fdb3316b1417b5">CLEROUGE</a>, 
+<a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5abca7a780ec24304cec32faed01133d50">CLEBLEUE</a>
+<br />
+ }<tr class="memdesc:a92c2c7c38ee9d924447e622fff8800c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Id des entités présentes dans les fichiers de salle.  <a href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5">Plus de détails...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a92c2c7c38ee9d924447e622fff8800c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26099d1d9a1ef474190622be823aa76c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a26099d1d9a1ef474190622be823aa76c">idSounds_e</a> { <br />
+&#160;&#160;<a class="el" href="structs_8h.html#a26099d1d9a1ef474190622be823aa76cafb8a21b2a6f9b3b3f6b39c931ee5a03e">SOUND_TOUCHE</a>, 
+<a class="el" href="structs_8h.html#a26099d1d9a1ef474190622be823aa76caefaba871e1cc71b60a76741bba672e59">SOUND_ARC</a>, 
+<a class="el" href="structs_8h.html#a26099d1d9a1ef474190622be823aa76ca2b98dca05192fcb8a6d1e6613dbf4ced">SOUND_SERPENT</a>, 
+<a class="el" href="structs_8h.html#a26099d1d9a1ef474190622be823aa76cab6745633088f499d4afa48c94a771f87">SOUND_SINGE</a>, 
+<br />
+&#160;&#160;<a class="el" href="structs_8h.html#a26099d1d9a1ef474190622be823aa76caa864a6cca507d1b32b8f20f27b077e90">SOUND_VIFPLUME</a>, 
+<a class="el" href="structs_8h.html#a26099d1d9a1ef474190622be823aa76ca08a540c146e737a6d9f4c71b1995e5df">SOUND_MURGLACE</a>, 
+<a class="el" href="structs_8h.html#a26099d1d9a1ef474190622be823aa76cab920e766bb262fe9d8d412cba5b5fad7">SOUND_DOOR</a>, 
+<a class="el" href="structs_8h.html#a26099d1d9a1ef474190622be823aa76ca1c25c5530029523ec7ac169cea3865a3">SOUND_ITEM</a>, 
+<br />
+&#160;&#160;<a class="el" href="structs_8h.html#a26099d1d9a1ef474190622be823aa76cab47ef3a8edb9093fe3705533a754327d">SOUND_MENU</a>
+<br />
+ }<tr class="memdesc:a26099d1d9a1ef474190622be823aa76c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Id des sons produits par le jeu.  <a href="structs_8h.html#a26099d1d9a1ef474190622be823aa76c">Plus de détails...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a26099d1d9a1ef474190622be823aa76c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74dcbee810ba5df4945e9b7c5f92e2e9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a74dcbee810ba5df4945e9b7c5f92e2e9">boolean_e</a> { <a class="el" href="structs_8h.html#a74dcbee810ba5df4945e9b7c5f92e2e9aa1e095cc966dbecf6a0d8aad75348d1a">FALSE</a>, 
+<a class="el" href="structs_8h.html#a74dcbee810ba5df4945e9b7c5f92e2e9aa82764c3079aea4e60c80e45befbb839">TRUE</a>
+ }<tr class="memdesc:a74dcbee810ba5df4945e9b7c5f92e2e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet d'utiliser <em>TRUE</em> et <em>FALSE</em>.  <a href="structs_8h.html#a74dcbee810ba5df4945e9b7c5f92e2e9">Plus de détails...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a74dcbee810ba5df4945e9b7c5f92e2e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac652084689fae43c9ede5782aedc0d2c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2c">etat_e</a> { <br />
+&#160;&#160;<a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2cafd6a0e4343048b10646dd2976cc5ad18">IDLE</a>, 
+<a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2ca1061be6c3fb88d32829cba6f6b2be304">RUNNING</a>, 
+<a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2cab8cd32180a1d5897df8369b127256ad1">JUMPING</a>, 
+<a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2ca05f520974a8946a4b11907b698557a8b">ATTACKING</a>, 
+<br />
+&#160;&#160;<a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2cad24712a6a30c1d431b927d1ba2f84b66">FALLING</a>
+<br />
+ }<tr class="memdesc:ac652084689fae43c9ede5782aedc0d2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nom des différents états possibles du personnage et des entités (utiles pour l'animation de sprites et la gestion des déplacements et des hitbox)  <a href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2c">Plus de détails...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:ac652084689fae43c9ede5782aedc0d2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bfd39097e1c768d485310d850b99457"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structs_8h.html#a2bfd39097e1c768d485310d850b99457">boutonetat_e</a> { <a class="el" href="structs_8h.html#a2bfd39097e1c768d485310d850b99457a97496574afa27cde13dd9c3e16b1a6a3">RELAXED</a>, 
+<a class="el" href="structs_8h.html#a2bfd39097e1c768d485310d850b99457a66246ffe5218e07c6088a32a4706a572">HIGHLIGHTED</a>, 
+<a class="el" href="structs_8h.html#a2bfd39097e1c768d485310d850b99457a5ef9a100ac8b4b8d6dec477c377b7901">PRESSED</a>, 
+<a class="el" href="structs_8h.html#a2bfd39097e1c768d485310d850b99457a3fde93396dcd04d746a8cd3b6b5914bb">UNAVAILABLE</a>
+ }<tr class="memdesc:a2bfd39097e1c768d485310d850b99457"><td class="mdescLeft">&#160;</td><td class="mdescRight">Id des états de boutons.  <a href="structs_8h.html#a2bfd39097e1c768d485310d850b99457">Plus de détails...</a><br /></td></tr>
+</td></tr>
+<tr class="separator:a2bfd39097e1c768d485310d850b99457"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Ensemble de structures utilisées dans le projets. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Marie-Nina MUNAR &amp; Thomas DIDIER L2 Info Le Mans </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>3.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>17/05/2020 </dd></dl>
+</div><h2 class="groupheader">Documentation des macros</h2>
+<a id="a7c2efea2ebf5c931359388126361cc97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c2efea2ebf5c931359388126361cc97">&#9670;&nbsp;</a></span>ANIMDELAYMENU</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ANIMDELAYMENU&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Delai de changement d'états pour les boutons </p>
+
+</div>
+</div>
+<a id="a5c69a254991c8be73f994c57220f1673"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c69a254991c8be73f994c57220f1673">&#9670;&nbsp;</a></span>COEURDROPRATE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define COEURDROPRATE&#160;&#160;&#160;10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pourcentage de probabilité de drop d'un coeur </p>
+
+</div>
+</div>
+<a id="a7acbecd3c32fb1305b543d53d2f7a9cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7acbecd3c32fb1305b543d53d2f7a9cc">&#9670;&nbsp;</a></span>DEFAULTVOLUME</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEFAULTVOLUME&#160;&#160;&#160;0.2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Volume par défaut de la musique </p>
+
+</div>
+</div>
+<a id="a5d52eeb41a03aeda6974d60772531f96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d52eeb41a03aeda6974d60772531f96">&#9670;&nbsp;</a></span>FONTSIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FONTSIZE&#160;&#160;&#160;30</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Taille de la police lors de la création du texte </p>
+
+</div>
+</div>
+<a id="abd4b5f839f90f855c5f289c24667eea5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd4b5f839f90f855c5f289c24667eea5">&#9670;&nbsp;</a></span>FRAMEDELAY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FRAMEDELAY&#160;&#160;&#160;17</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Correspond à du 59fps </p>
+
+</div>
+</div>
+<a id="af852ef65e0bf9575c401e7e695fdecdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af852ef65e0bf9575c401e7e695fdecdd">&#9670;&nbsp;</a></span>FREQCLIGN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FREQCLIGN&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fréquence de clignotement lors de l'invincibilité </p>
+
+</div>
+</div>
+<a id="aad6128d7fab77d16eba9a5f25c0b19b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad6128d7fab77d16eba9a5f25c0b19b1">&#9670;&nbsp;</a></span>HAUTEURHITBOXPERS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HAUTEURHITBOXPERS&#160;&#160;&#160;32</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Hauteur en pixel de la hitbox du personnage </p>
+
+</div>
+</div>
+<a id="a6fbeac5e29677c50600b60b27e344ea0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fbeac5e29677c50600b60b27e344ea0">&#9670;&nbsp;</a></span>HAUTEURHITBOXREN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HAUTEURHITBOXREN&#160;&#160;&#160;12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Hauteur en pixel de la hitbox du renard </p>
+
+</div>
+</div>
+<a id="adee98db21c24ed30e252c29fbcef08cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adee98db21c24ed30e252c29fbcef08cb">&#9670;&nbsp;</a></span>HAUTEURPORTE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HAUTEURPORTE&#160;&#160;&#160;36</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Hauteur en pixel d'une porte </p>
+
+</div>
+</div>
+<a id="a7423af0a1479f13d79cd0c49c79e5962"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7423af0a1479f13d79cd0c49c79e5962">&#9670;&nbsp;</a></span>HAUTEURSPRITEPERS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HAUTEURSPRITEPERS&#160;&#160;&#160;33</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Hauteur en pixel du personnage </p>
+
+</div>
+</div>
+<a id="a51477305f6c144a480885eb73c383696"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51477305f6c144a480885eb73c383696">&#9670;&nbsp;</a></span>HAUTEURSPRITERENARD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HAUTEURSPRITERENARD&#160;&#160;&#160;13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Hauteur en pixel du renard </p>
+
+</div>
+</div>
+<a id="af290d1b95e4e97332784455b2ecbdd93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af290d1b95e4e97332784455b2ecbdd93">&#9670;&nbsp;</a></span>INVENTAIRESIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define INVENTAIRESIZE&#160;&#160;&#160;10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Taille de l'inventaire (hauteur) en pixel </p>
+
+</div>
+</div>
+<a id="af0fe3a3886ace08abcc691cb18085ae9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0fe3a3886ace08abcc691cb18085ae9">&#9670;&nbsp;</a></span>INVENTAIRETIME</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define INVENTAIRETIME&#160;&#160;&#160;60</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Temps d'affichage de l'inventaire après arrêt d'appui du bouton </p>
+
+</div>
+</div>
+<a id="ace0a39e258e6332249e3accd966c1796"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace0a39e258e6332249e3accd966c1796">&#9670;&nbsp;</a></span>INVUDELAY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define INVUDELAY&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Delai de l'invulnérabilité </p>
+
+</div>
+</div>
+<a id="aa2326924fc935f7a3415c0e3894e2ddc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2326924fc935f7a3415c0e3894e2ddc">&#9670;&nbsp;</a></span>JPCD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define JPCD&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Délai avant de pouvoir de nouveau sauter </p>
+
+</div>
+</div>
+<a id="a4fe6fd113bdaa732983693e5c6a2941c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fe6fd113bdaa732983693e5c6a2941c">&#9670;&nbsp;</a></span>KONAMICODE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define KONAMICODE&#160;&#160;&#160;&quot;uuddlrlrbas&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Inputs du Konami code </p>
+
+</div>
+</div>
+<a id="a12acd8af9860b9af2a26c52f756a338e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12acd8af9860b9af2a26c52f756a338e">&#9670;&nbsp;</a></span>LARGEURHITBOXPERS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LARGEURHITBOXPERS&#160;&#160;&#160;13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Largeur en pixel de la hitbox du personnage </p>
+
+</div>
+</div>
+<a id="ac015d8c4e8a2d8bf1435ce955a604533"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac015d8c4e8a2d8bf1435ce955a604533">&#9670;&nbsp;</a></span>LARGEURHITBOXREN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LARGEURHITBOXREN&#160;&#160;&#160;24</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Largeur en pixel de la hitbox du renard </p>
+
+</div>
+</div>
+<a id="a20e7a98af95c2205f9daf298cc667008"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20e7a98af95c2205f9daf298cc667008">&#9670;&nbsp;</a></span>LARGEURPORTE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LARGEURPORTE&#160;&#160;&#160;13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Largeur en pixel d'une porte </p>
+
+</div>
+</div>
+<a id="a4a23858655a03f63cb0b6052c986eae4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a23858655a03f63cb0b6052c986eae4">&#9670;&nbsp;</a></span>LARGEURSPRITEPERS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LARGEURSPRITEPERS&#160;&#160;&#160;25</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Largeur en pixel du personnage </p>
+
+</div>
+</div>
+<a id="aaf2c88ec7d9ef42adfe6f37a67874ac5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf2c88ec7d9ef42adfe6f37a67874ac5">&#9670;&nbsp;</a></span>LARGEURSPRITEPERSATTACK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LARGEURSPRITEPERSATTACK&#160;&#160;&#160;30</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Largeur en pixel du personnage </p>
+
+</div>
+</div>
+<a id="a15e057920f27a957e81250085cc1e4e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15e057920f27a957e81250085cc1e4e1">&#9670;&nbsp;</a></span>LARGEURSPRITERENARD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LARGEURSPRITERENARD&#160;&#160;&#160;24</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Largeur en pixel du renard </p>
+
+</div>
+</div>
+<a id="a437ef08681e7210d6678427030446a54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a437ef08681e7210d6678427030446a54">&#9670;&nbsp;</a></span>LEFT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LEFT&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Valeur d'une direction à gauche </p>
+
+</div>
+</div>
+<a id="a313b7737f72ca3d3a6c3c600b7427419"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a313b7737f72ca3d3a6c3c600b7427419">&#9670;&nbsp;</a></span>NBBLOCSTILESET</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NBBLOCSTILESET&#160;&#160;&#160;60</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Nombre de blocs du tileset de blocs </p>
+
+</div>
+</div>
+<a id="ab86ead624339c976d05c0894bd35f54e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab86ead624339c976d05c0894bd35f54e">&#9670;&nbsp;</a></span>NBCHANNELS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NBCHANNELS&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Nombre de sons jouables en même temps </p>
+
+</div>
+</div>
+<a id="a40d5678ade5e6aee9b9876458fff6e84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40d5678ade5e6aee9b9876458fff6e84">&#9670;&nbsp;</a></span>NBETATS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NBETATS&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Nombre d'états différents des entités/joueurs </p>
+
+</div>
+</div>
+<a id="a2fcf88944ac6de244b966d21cf4779c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fcf88944ac6de244b966d21cf4779c2">&#9670;&nbsp;</a></span>NBETATSBOUTONS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NBETATSBOUTONS&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Nombre d'états différents des boutons de menu </p>
+
+</div>
+</div>
+<a id="a4c729527445e513e9d31120e499be0c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c729527445e513e9d31120e499be0c5">&#9670;&nbsp;</a></span>NBLOCERREUR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NBLOCERREUR&#160;&#160;&#160;49</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Indice du bloc d'erreur de la tileset </p>
+
+</div>
+</div>
+<a id="a130b65b0ce9f74f28ad552abf2d6cfac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a130b65b0ce9f74f28ad552abf2d6cfac">&#9670;&nbsp;</a></span>NBPXSAUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NBPXSAUT&#160;&#160;&#160;5*<a class="el" href="structs_8h.html#a1f3f48a893d39a15c49bb4661352eff5">TAILLEBLOC</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Taille d'un saut en pixel </p>
+
+</div>
+</div>
+<a id="a7fd7da7c096dd160453b799184da9002"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fd7da7c096dd160453b799184da9002">&#9670;&nbsp;</a></span>NIVEAUTXT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NIVEAUTXT&#160;&#160;&#160;&quot;salle_yourte.txt&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fichier du niveau de départ </p>
+
+</div>
+</div>
+<a id="a255df5df578ec4f5a3cc1a10d2ba90f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a255df5df578ec4f5a3cc1a10d2ba90f6">&#9670;&nbsp;</a></span>OFFSETHITBOXH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OFFSETHITBOXH&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Différence de x (en pixel) entre le début du sprite et le début de l'hitbox </p>
+
+</div>
+</div>
+<a id="a6dcb8420dba97d657875e47d243f5306"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dcb8420dba97d657875e47d243f5306">&#9670;&nbsp;</a></span>OFFSETHITBOXR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define OFFSETHITBOXR&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Différence de x (en pixel) entre le début du sprite et le début de l'hitbox du renard </p>
+
+</div>
+</div>
+<a id="aa488baa46cc1b381347107ae3ba0a68d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa488baa46cc1b381347107ae3ba0a68d">&#9670;&nbsp;</a></span>PVMAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PVMAX&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Points de vie maximum du joueur </p>
+
+</div>
+</div>
+<a id="a80fb826a684cf3f0d306b22aa100ddac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80fb826a684cf3f0d306b22aa100ddac">&#9670;&nbsp;</a></span>RIGHT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RIGHT&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Valeur d'une direction à droite </p>
+
+</div>
+</div>
+<a id="a5fdcc1659ee790f8bdd196e7745ab403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fdcc1659ee790f8bdd196e7745ab403">&#9670;&nbsp;</a></span>TAILLE_INVENTAIRE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TAILLE_INVENTAIRE&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Nombre d'item dans l'inventaire du joueur </p>
+
+</div>
+</div>
+<a id="a1f3f48a893d39a15c49bb4661352eff5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f3f48a893d39a15c49bb4661352eff5">&#9670;&nbsp;</a></span>TAILLEBLOC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TAILLEBLOC&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Taille en pixel des blocs </p>
+
+</div>
+</div>
+<a id="a252d76aa96596f6536b71713b8f2d895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a252d76aa96596f6536b71713b8f2d895">&#9670;&nbsp;</a></span>TAILLEKONAMI</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TAILLEKONAMI&#160;&#160;&#160;11</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>NB d'inputs du Konami code </p>
+
+</div>
+</div>
+<a id="a26f26823c4957459884e9f8b8c7fd8e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26f26823c4957459884e9f8b8c7fd8e7">&#9670;&nbsp;</a></span>TAILLEPATHFICHIER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TAILLEPATHFICHIER&#160;&#160;&#160;75</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Taille maximale du path de chaque fichier </p>
+
+</div>
+</div>
+<a id="aff3e76c7173cd786015ab1108e5f2657"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff3e76c7173cd786015ab1108e5f2657">&#9670;&nbsp;</a></span>TEMPINV</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TEMPINV&#160;&#160;&#160;60</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Durée d'invincibilité du joueur après avoir été touché </p>
+
+</div>
+</div>
+<a id="ae61089395a1490a8242e41d55b720357"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae61089395a1490a8242e41d55b720357">&#9670;&nbsp;</a></span>VITATTACKPERS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VITATTACKPERS&#160;&#160;&#160;30</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Vitesse d'attaque' du personnage en pixel par tick </p>
+
+</div>
+</div>
+<a id="a51fffba4988e62b540adbeb5ce5d0993"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51fffba4988e62b540adbeb5ce5d0993">&#9670;&nbsp;</a></span>VITCHUTEPERS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VITCHUTEPERS&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Vitesse de chute du personnage en pixel par tick </p>
+
+</div>
+</div>
+<a id="a52280fbbe28eda3540ba23e3fc3195e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52280fbbe28eda3540ba23e3fc3195e2">&#9670;&nbsp;</a></span>VITDEPPERS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VITDEPPERS&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Vitesse de déplacement du personnage en pixel par tick </p>
+
+</div>
+</div>
+<a id="a246757ac96450448d775864c3f543e03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a246757ac96450448d775864c3f543e03">&#9670;&nbsp;</a></span>VITSAUTPERS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VITSAUTPERS&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Vitesse de saut du personnage en pixel par tick </p>
+
+</div>
+</div>
+<a id="ad413eeeadfc5d9621c71cc52075c1550"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad413eeeadfc5d9621c71cc52075c1550">&#9670;&nbsp;</a></span>VOLUMEBOXSIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VOLUMEBOXSIZE&#160;&#160;&#160;28</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Taille du rectangle contenant le volume (en pixels) </p>
+
+</div>
+</div>
+<a id="aa0d0f8a2c7c78ac4381a5ea26487ac5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0d0f8a2c7c78ac4381a5ea26487ac5b">&#9670;&nbsp;</a></span>VOLUMETIME</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VOLUMETIME&#160;&#160;&#160;60</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Temps d'affichage du volume après arrêt d'appui du bouton </p>
+
+</div>
+</div>
+<a id="aae845c1a50d8597e702fcc6fc4d08205"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae845c1a50d8597e702fcc6fc4d08205">&#9670;&nbsp;</a></span>ZONEMORTE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ZONEMORTE&#160;&#160;&#160;5000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Zone morte de la manette </p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation du type de l'énumération</h2>
+<a id="a74dcbee810ba5df4945e9b7c5f92e2e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74dcbee810ba5df4945e9b7c5f92e2e9">&#9670;&nbsp;</a></span>boolean_e</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="structs_8h.html#a74dcbee810ba5df4945e9b7c5f92e2e9">boolean_e</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet d'utiliser <em>TRUE</em> et <em>FALSE</em>. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a74dcbee810ba5df4945e9b7c5f92e2e9aa1e095cc966dbecf6a0d8aad75348d1a"></a>FALSE&#160;</td><td class="fielddoc"><p>Valeur de FALSE: 0 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a74dcbee810ba5df4945e9b7c5f92e2e9aa82764c3079aea4e60c80e45befbb839"></a>TRUE&#160;</td><td class="fielddoc"><p>Valeur de TRUE: 1 </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="a2bfd39097e1c768d485310d850b99457"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bfd39097e1c768d485310d850b99457">&#9670;&nbsp;</a></span>boutonetat_e</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="structs_8h.html#a2bfd39097e1c768d485310d850b99457">boutonetat_e</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Id des états de boutons. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a2bfd39097e1c768d485310d850b99457a97496574afa27cde13dd9c3e16b1a6a3"></a>RELAXED&#160;</td><td class="fielddoc"><p>Etat du bouton lorsqu'il n'est pas touché </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2bfd39097e1c768d485310d850b99457a66246ffe5218e07c6088a32a4706a572"></a>HIGHLIGHTED&#160;</td><td class="fielddoc"><p>Etat du bouton lorsqu'il est survolé </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2bfd39097e1c768d485310d850b99457a5ef9a100ac8b4b8d6dec477c377b7901"></a>PRESSED&#160;</td><td class="fielddoc"><p>Etat du bouton lorsqu'il est pressé </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2bfd39097e1c768d485310d850b99457a3fde93396dcd04d746a8cd3b6b5914bb"></a>UNAVAILABLE&#160;</td><td class="fielddoc"><p>Etat du bouton lorsqu'il n'est pas disponible </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="ac652084689fae43c9ede5782aedc0d2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac652084689fae43c9ede5782aedc0d2c">&#9670;&nbsp;</a></span>etat_e</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="structs_8h.html#ac652084689fae43c9ede5782aedc0d2c">etat_e</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Nom des différents états possibles du personnage et des entités (utiles pour l'animation de sprites et la gestion des déplacements et des hitbox) </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="ac652084689fae43c9ede5782aedc0d2cafd6a0e4343048b10646dd2976cc5ad18"></a>IDLE&#160;</td><td class="fielddoc"><p>Etat immobile </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac652084689fae43c9ede5782aedc0d2ca1061be6c3fb88d32829cba6f6b2be304"></a>RUNNING&#160;</td><td class="fielddoc"><p>Etat course </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac652084689fae43c9ede5782aedc0d2cab8cd32180a1d5897df8369b127256ad1"></a>JUMPING&#160;</td><td class="fielddoc"><p>Etat saut </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac652084689fae43c9ede5782aedc0d2ca05f520974a8946a4b11907b698557a8b"></a>ATTACKING&#160;</td><td class="fielddoc"><p>Etat attaque </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac652084689fae43c9ede5782aedc0d2cad24712a6a30c1d431b927d1ba2f84b66"></a>FALLING&#160;</td><td class="fielddoc"><p>Etat chute </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="a92c2c7c38ee9d924447e622fff8800c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92c2c7c38ee9d924447e622fff8800c5">&#9670;&nbsp;</a></span>idEnt_e</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="structs_8h.html#a92c2c7c38ee9d924447e622fff8800c5">idEnt_e</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Id des entités présentes dans les fichiers de salle. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5ac139e0aad6e312681a90847f2e13b828"></a>VENIN&#160;</td><td class="fielddoc"><p>venin = -24 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5aebd0b7c7a3b6e7facc7a93fee9ec1641"></a>FLECHEFEU&#160;</td><td class="fielddoc"><p>une fleche de feu = -23 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5a2984c611e9964f24ac74b0a91fb5cb45"></a>FLECHE&#160;</td><td class="fielddoc"><p>une flèche = -22 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5afe25ae4ef5c689f46e1c4c972243d4db"></a>COEUR&#160;</td><td class="fielddoc"><p>un coeur = -21 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5ab92b8e5f224ad27c30347209ffe26687"></a>VIFPLUME&#160;</td><td class="fielddoc"><p>vifplume = -20 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5a71860692dd9b2f5908ed978e304de87a"></a>VERSGEANT&#160;</td><td class="fielddoc"><p>vers géant = -19 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5a5a0aa92fee7e6c6860b8389edc866bf4"></a>SINGEGROTTE&#160;</td><td class="fielddoc"><p>singe grotte = -18 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5aa70533c2c411342b3903b427bb50a93b"></a>SERPENTVERT&#160;</td><td class="fielddoc"><p>serpent vert = -17 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5ac8d1edaf018012ebc8d6d829b1e707a0"></a>SERPENTROSE&#160;</td><td class="fielddoc"><p>serpent rose = -16 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5a79e0e40f549fda70c5c622354b91d6c3"></a>SERPENTBLEU&#160;</td><td class="fielddoc"><p>serpent bleu = -15 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5aed5b0a078a8d93f5c60b4d0b665e22f4"></a>ROIVP&#160;</td><td class="fielddoc"><p>roi vifplume = -14 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5a927f3d50ac911f37c529bc0116c3b6e3"></a>RENARD&#160;</td><td class="fielddoc"><p>renard = -13 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5a54c6830bfc0b06ff5260d5af19e0b34b"></a>PORTEV&#160;</td><td class="fielddoc"><p>porte verte = -12 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5a95dfec1f079a334cae5886216ffac6d4"></a>PORTERL&#160;</td><td class="fielddoc"><p>porte rouillée = -11 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5ac293f0dcd058f51b8aadc0f184111d94"></a>PORTERG&#160;</td><td class="fielddoc"><p>porte rouge = -10 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5a71e347ee608d3904de54985aafa1b133"></a>PORTEB&#160;</td><td class="fielddoc"><p>porte bleue = -9 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5a3f1f96f2ec84a3f00d77f8751d0b5b3e"></a>MURGLACE&#160;</td><td class="fielddoc"><p>mur de glace = -8 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5a3333bfa12cc7fdfb6b6d47c291fc384b"></a>FLACONHUILE&#160;</td><td class="fielddoc"><p>fleches de feu = -7 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5a68e3a4024ca3e6b42204e5a4b39ce580"></a>DOUBLESAUT&#160;</td><td class="fielddoc"><p>double saut = -6 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5acf73dabb3771f89f873fd5979dc41598"></a>DISCOSHROOM&#160;</td><td class="fielddoc"><p>discoshroom = -5 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5a3c2efd0602739861adf5b9ea06c675d5"></a>CLEVERTE&#160;</td><td class="fielddoc"><p>clé verte = -4 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5a77669c33af1a2b8cf921344d1b33e7b5"></a>CLEROUILLE&#160;</td><td class="fielddoc"><p>clé rouillée = -3 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5a5bf706cb85963f20f6fdb3316b1417b5"></a>CLEROUGE&#160;</td><td class="fielddoc"><p>clé rouge = -2 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a92c2c7c38ee9d924447e622fff8800c5abca7a780ec24304cec32faed01133d50"></a>CLEBLEUE&#160;</td><td class="fielddoc"><p>clé bleue = -1 </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="a26099d1d9a1ef474190622be823aa76c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26099d1d9a1ef474190622be823aa76c">&#9670;&nbsp;</a></span>idSounds_e</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="structs_8h.html#a26099d1d9a1ef474190622be823aa76c">idSounds_e</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Id des sons produits par le jeu. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a26099d1d9a1ef474190622be823aa76cafb8a21b2a6f9b3b3f6b39c931ee5a03e"></a>SOUND_TOUCHE&#160;</td><td class="fielddoc"><p>Son quand le personnage est touché </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a26099d1d9a1ef474190622be823aa76caefaba871e1cc71b60a76741bba672e59"></a>SOUND_ARC&#160;</td><td class="fielddoc"><p>Son quand le personnage tire à l'arc </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a26099d1d9a1ef474190622be823aa76ca2b98dca05192fcb8a6d1e6613dbf4ced"></a>SOUND_SERPENT&#160;</td><td class="fielddoc"><p>Son quand le serpent rose crache </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a26099d1d9a1ef474190622be823aa76cab6745633088f499d4afa48c94a771f87"></a>SOUND_SINGE&#160;</td><td class="fielddoc"><p>Son quand le singe crie </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a26099d1d9a1ef474190622be823aa76caa864a6cca507d1b32b8f20f27b077e90"></a>SOUND_VIFPLUME&#160;</td><td class="fielddoc"><p>Son quand le vifplume crie </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a26099d1d9a1ef474190622be823aa76ca08a540c146e737a6d9f4c71b1995e5df"></a>SOUND_MURGLACE&#160;</td><td class="fielddoc"><p>Son quand le mur de glace fond </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a26099d1d9a1ef474190622be823aa76cab920e766bb262fe9d8d412cba5b5fad7"></a>SOUND_DOOR&#160;</td><td class="fielddoc"><p>Son quand une porte s'ouvre </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a26099d1d9a1ef474190622be823aa76ca1c25c5530029523ec7ac169cea3865a3"></a>SOUND_ITEM&#160;</td><td class="fielddoc"><p>Son quand on ramasse un item </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a26099d1d9a1ef474190622be823aa76cab47ef3a8edb9093fe3705533a754327d"></a>SOUND_MENU&#160;</td><td class="fielddoc"><p>Son quand on valide un bouton dans le menu </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

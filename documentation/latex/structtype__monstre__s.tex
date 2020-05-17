@@ -1,0 +1,153 @@
+\hypertarget{structtype__monstre__s}{}\section{Référence de la structure type\+\_\+monstre\+\_\+s}
+\label{structtype__monstre__s}\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+
+
+Structure représentant le type d\textquotesingle{}un monstre.  
+
+
+
+
+{\ttfamily \#include $<$structs.\+h$>$}
+
+\subsection*{Attributs publics}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{structtype__monstre__s_a37d1cae3dfb8de6ce15f2601a93cd1cc}{pv\+\_\+base}
+\item 
+int \hyperlink{structtype__monstre__s_a768470695da3d9377f1e7e97a3c45ed7}{vit\+\_\+dep}
+\item 
+int \hyperlink{structtype__monstre__s_a5bb66d5b722fc97f901c5eaf7d621fd4}{vit\+\_\+att}
+\item 
+char $\ast$ \hyperlink{structtype__monstre__s_a18520dadfa451022be8dd63b86a1943c}{nom}
+\item 
+char $\ast$ \hyperlink{structtype__monstre__s_ad507cb527c078d7a5c565b67d842e968}{path}
+\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{structtype__monstre__s_ac1a86f0c67aba51892c613210e3de1be}{sprites}
+\item 
+int $\ast$ \hyperlink{structtype__monstre__s_aecf18b6fa00e710fe27de2d1b738e62c}{nb\+Anim}
+\item 
+int \hyperlink{structtype__monstre__s_aa3e5568720dc977348e6929f3df5260c}{degat}
+\item 
+S\+D\+L\+\_\+\+Rect $\ast$ \hyperlink{structtype__monstre__s_aa29ee89bd23e0d9d025e61b831eef91e}{hitbox}
+\item 
+int \hyperlink{structtype__monstre__s_a5a14ba0498c9fdf7221d788171adafce}{nb\+Hitbox}
+\item 
+\hyperlink{structtaille__s}{taille\+\_\+t} \hyperlink{structtype__monstre__s_a2b2b4110520736e30d3a4853a9876469}{taille\+Sprite}
+\item 
+boolean\+\_\+t \hyperlink{structtype__monstre__s_a03f34ddaadae9f002130e70844f142f1}{passe\+Entites}
+\item 
+boolean\+\_\+t \hyperlink{structtype__monstre__s_a0f60370f9ae95fff9ab024fbf6485df6}{passe\+Blocs}
+\item 
+int \hyperlink{structtype__monstre__s_ac1709851cb02ee762447582a20aedb54}{radius}
+\item 
+int \hyperlink{structtype__monstre__s_a125257fd616cb7a0a4c82ae30f7d849e}{vitesse\+Anim}
+\item 
+void($\ast$ \hyperlink{structtype__monstre__s_a2ca7834d71e7589f5fefcbf503d1351d}{comportement} )(\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Structure représentant le type d\textquotesingle{}un monstre. 
+
+\subsection{Documentation des données membres}
+\mbox{\Hypertarget{structtype__monstre__s_a2ca7834d71e7589f5fefcbf503d1351d}\label{structtype__monstre__s_a2ca7834d71e7589f5fefcbf503d1351d}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!comportement@{comportement}}
+\index{comportement@{comportement}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{comportement}{comportement}}
+{\footnotesize\ttfamily void($\ast$ type\+\_\+monstre\+\_\+s\+::comportement) (\hyperlink{structmonstre__s}{monstre\+\_\+t} $\ast$entite, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)}
+
+Fonction de comportement (pointeur sur fonction) \mbox{\Hypertarget{structtype__monstre__s_aa3e5568720dc977348e6929f3df5260c}\label{structtype__monstre__s_aa3e5568720dc977348e6929f3df5260c}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!degat@{degat}}
+\index{degat@{degat}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{degat}{degat}}
+{\footnotesize\ttfamily int type\+\_\+monstre\+\_\+s\+::degat}
+
+Nombre de dégâts faits par le monstre \mbox{\Hypertarget{structtype__monstre__s_aa29ee89bd23e0d9d025e61b831eef91e}\label{structtype__monstre__s_aa29ee89bd23e0d9d025e61b831eef91e}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!hitbox@{hitbox}}
+\index{hitbox@{hitbox}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{hitbox}{hitbox}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect$\ast$ type\+\_\+monstre\+\_\+s\+::hitbox}
+
+Tableau de hitboxs de l\textquotesingle{}entite (décallage en x, en y, largeur de la hitbox, hauteur de la hitbox) \mbox{\Hypertarget{structtype__monstre__s_aecf18b6fa00e710fe27de2d1b738e62c}\label{structtype__monstre__s_aecf18b6fa00e710fe27de2d1b738e62c}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!nb\+Anim@{nb\+Anim}}
+\index{nb\+Anim@{nb\+Anim}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{nb\+Anim}{nbAnim}}
+{\footnotesize\ttfamily int$\ast$ type\+\_\+monstre\+\_\+s\+::nb\+Anim}
+
+Tableau qui contient le nombre de sprites d\textquotesingle{}animation pour chaque action du monstre \mbox{\Hypertarget{structtype__monstre__s_a5a14ba0498c9fdf7221d788171adafce}\label{structtype__monstre__s_a5a14ba0498c9fdf7221d788171adafce}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!nb\+Hitbox@{nb\+Hitbox}}
+\index{nb\+Hitbox@{nb\+Hitbox}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{nb\+Hitbox}{nbHitbox}}
+{\footnotesize\ttfamily int type\+\_\+monstre\+\_\+s\+::nb\+Hitbox}
+
+Nombre de rectangles d\textquotesingle{}hitbox différents pour l\textquotesingle{}entité \mbox{\Hypertarget{structtype__monstre__s_a18520dadfa451022be8dd63b86a1943c}\label{structtype__monstre__s_a18520dadfa451022be8dd63b86a1943c}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!nom@{nom}}
+\index{nom@{nom}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{nom}{nom}}
+{\footnotesize\ttfamily char$\ast$ type\+\_\+monstre\+\_\+s\+::nom}
+
+Nom de l\textquotesingle{}entité/monstre (permet de gérer l\textquotesingle{}inventaire lors du pick up) \mbox{\Hypertarget{structtype__monstre__s_a0f60370f9ae95fff9ab024fbf6485df6}\label{structtype__monstre__s_a0f60370f9ae95fff9ab024fbf6485df6}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!passe\+Blocs@{passe\+Blocs}}
+\index{passe\+Blocs@{passe\+Blocs}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{passe\+Blocs}{passeBlocs}}
+{\footnotesize\ttfamily boolean\+\_\+t type\+\_\+monstre\+\_\+s\+::passe\+Blocs}
+
+Indique si le monstre peut passer à travers les blocs \mbox{\Hypertarget{structtype__monstre__s_a03f34ddaadae9f002130e70844f142f1}\label{structtype__monstre__s_a03f34ddaadae9f002130e70844f142f1}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!passe\+Entites@{passe\+Entites}}
+\index{passe\+Entites@{passe\+Entites}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{passe\+Entites}{passeEntites}}
+{\footnotesize\ttfamily boolean\+\_\+t type\+\_\+monstre\+\_\+s\+::passe\+Entites}
+
+Indique si le monstre peut passer à travers les entités (autres monstres/joueur) \mbox{\Hypertarget{structtype__monstre__s_ad507cb527c078d7a5c565b67d842e968}\label{structtype__monstre__s_ad507cb527c078d7a5c565b67d842e968}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!path@{path}}
+\index{path@{path}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{path}{path}}
+{\footnotesize\ttfamily char$\ast$ type\+\_\+monstre\+\_\+s\+::path}
+
+Chemin d\textquotesingle{}accès à l\textquotesingle{}image qui contient les sprites \mbox{\Hypertarget{structtype__monstre__s_a37d1cae3dfb8de6ce15f2601a93cd1cc}\label{structtype__monstre__s_a37d1cae3dfb8de6ce15f2601a93cd1cc}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!pv\+\_\+base@{pv\+\_\+base}}
+\index{pv\+\_\+base@{pv\+\_\+base}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{pv\+\_\+base}{pv\_base}}
+{\footnotesize\ttfamily int type\+\_\+monstre\+\_\+s\+::pv\+\_\+base}
+
+PV de base du monstre \mbox{\Hypertarget{structtype__monstre__s_ac1709851cb02ee762447582a20aedb54}\label{structtype__monstre__s_ac1709851cb02ee762447582a20aedb54}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!radius@{radius}}
+\index{radius@{radius}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{radius}{radius}}
+{\footnotesize\ttfamily int type\+\_\+monstre\+\_\+s\+::radius}
+
+Nombre correspondant au champ de vision de l\textquotesingle{}entité \mbox{\Hypertarget{structtype__monstre__s_ac1a86f0c67aba51892c613210e3de1be}\label{structtype__monstre__s_ac1a86f0c67aba51892c613210e3de1be}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!sprites@{sprites}}
+\index{sprites@{sprites}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{sprites}{sprites}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ type\+\_\+monstre\+\_\+s\+::sprites}
+
+Pointeur vers la texture qui contient les sprites du monstre \mbox{\Hypertarget{structtype__monstre__s_a2b2b4110520736e30d3a4853a9876469}\label{structtype__monstre__s_a2b2b4110520736e30d3a4853a9876469}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!taille\+Sprite@{taille\+Sprite}}
+\index{taille\+Sprite@{taille\+Sprite}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{taille\+Sprite}{tailleSprite}}
+{\footnotesize\ttfamily \hyperlink{structtaille__s}{taille\+\_\+t} type\+\_\+monstre\+\_\+s\+::taille\+Sprite}
+
+Taille des sprites de monstre en pixel \mbox{\Hypertarget{structtype__monstre__s_a5bb66d5b722fc97f901c5eaf7d621fd4}\label{structtype__monstre__s_a5bb66d5b722fc97f901c5eaf7d621fd4}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!vit\+\_\+att@{vit\+\_\+att}}
+\index{vit\+\_\+att@{vit\+\_\+att}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{vit\+\_\+att}{vit\_att}}
+{\footnotesize\ttfamily int type\+\_\+monstre\+\_\+s\+::vit\+\_\+att}
+
+Vitesse d\textquotesingle{}attaque du monstre (en nombre de frame) \mbox{\Hypertarget{structtype__monstre__s_a768470695da3d9377f1e7e97a3c45ed7}\label{structtype__monstre__s_a768470695da3d9377f1e7e97a3c45ed7}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!vit\+\_\+dep@{vit\+\_\+dep}}
+\index{vit\+\_\+dep@{vit\+\_\+dep}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{vit\+\_\+dep}{vit\_dep}}
+{\footnotesize\ttfamily int type\+\_\+monstre\+\_\+s\+::vit\+\_\+dep}
+
+Vitesse de déplacement du monstre (facteur/indicateur) \mbox{\Hypertarget{structtype__monstre__s_a125257fd616cb7a0a4c82ae30f7d849e}\label{structtype__monstre__s_a125257fd616cb7a0a4c82ae30f7d849e}} 
+\index{type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}!vitesse\+Anim@{vitesse\+Anim}}
+\index{vitesse\+Anim@{vitesse\+Anim}!type\+\_\+monstre\+\_\+s@{type\+\_\+monstre\+\_\+s}}
+\subsubsection{\texorpdfstring{vitesse\+Anim}{vitesseAnim}}
+{\footnotesize\ttfamily int type\+\_\+monstre\+\_\+s\+::vitesse\+Anim}
+
+Vitesse de l\textquotesingle{}animation des sprites (plus ce nombre est grand, plus la vitesse est lente (sert à evo\+Sprite comme valeur avant décrémentation)) 
+
+La documentation de cette structure a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+headers/\hyperlink{structs_8h}{structs.\+h}\end{DoxyCompactItemize}

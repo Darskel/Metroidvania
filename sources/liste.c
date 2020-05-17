@@ -210,7 +210,7 @@ void supListe(liste_t **maListe, void (*delete)(void**)){
 /**
  * \brief Suppression d'une porte
  *
- * @param m pointeur sur une porte
+ * @param p pointeur sur une porte
 */
 static void delPorte(porte_t** p){
     free((*p)->salleSuivante);
@@ -222,7 +222,7 @@ static void delPorte(porte_t** p){
 /**
  * \brief Encapsulation de delPorte
  *
- * @param m adresse d'une porte
+ * @param p adresse d'une porte
 */
 void supPorte(void** p){
     delPorte((porte_t**)p);

@@ -1,0 +1,305 @@
+\hypertarget{structpersonnage__s}{}\section{Référence de la structure personnage\+\_\+s}
+\label{structpersonnage__s}\index{personnage\+\_\+s@{personnage\+\_\+s}}
+
+
+Structure représentant le personnage et ses caractéristques, contient également une variable de gestion des effets sonores du jeu.  
+
+
+
+
+{\ttfamily \#include $<$structs.\+h$>$}
+
+\subsection*{Attributs publics}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{structpersonnage__s_ab3090d9110756af454516f939e9f8a86}{pv}
+\item 
+boolean\+\_\+t \hyperlink{structpersonnage__s_a4e8b537e5d529d22745957acb499d00c}{hit}
+\item 
+int \hyperlink{structpersonnage__s_a0e58c8761de9044ce770f21aa9ada41a}{pv\+\_\+max}
+\item 
+boolean\+\_\+t \hyperlink{structpersonnage__s_aa492d3f9ab87bf03fcb94a65b77bcd34}{kb}
+\item 
+int \hyperlink{structpersonnage__s_a1d76a383232b764037a80a8b39b3c378}{inv}
+\item 
+int \hyperlink{structpersonnage__s_a219acff65d3b506a69408ca316efeeec}{clign}
+\item 
+int \hyperlink{structpersonnage__s_a47e8c34ccb98b49ca57baa55d4326ee3}{nb\+Px\+Saut}
+\item 
+int \hyperlink{structpersonnage__s_a9dc9cf38290d069f2bfbdfe1b19184ac}{nb\+Frame\+Atk}
+\item 
+int \hyperlink{structpersonnage__s_a1b5dac574e8ad57eaa9989699fbfb139}{nb\+Saut}
+\item 
+int \hyperlink{structpersonnage__s_a05d061a818efa6b7bfa5b3c76ba3b8dd}{jp\+Cd}
+\item 
+int \hyperlink{structpersonnage__s_a6d6791f61e66ee9ee1125c39bc99f164}{direction}
+\item 
+int \hyperlink{structpersonnage__s_a6899a0efdc3a3fccb060aaf06b4e4b8d}{vit\+\_\+dep}
+\item 
+int \hyperlink{structpersonnage__s_abf199b160e1ce327b7def1ed1ee00b39}{vit\+\_\+saut}
+\item 
+int \hyperlink{structpersonnage__s_a8e340f828bfffa2c47269e315609ed01}{vit\+\_\+chute}
+\item 
+int \hyperlink{structpersonnage__s_a0022973bab638a02774a19710cedcd17}{vit\+\_\+att}
+\item 
+\hyperlink{structposition__s}{position\+\_\+t} \hyperlink{structpersonnage__s_adea4789f8b55587ec092f3a32b7b1964}{pos}
+\item 
+\hyperlink{structposition__s}{position\+\_\+t} \hyperlink{structpersonnage__s_a09fb83af37953227050f9ced0410f032}{delta}
+\item 
+\hyperlink{structposition__s}{position\+\_\+t} \hyperlink{structpersonnage__s_a60ba887e657e6cdbdde28b63ade38709}{apparition}
+\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{structpersonnage__s_a97da32596524755cba3ba76782ab0205}{sprites}
+\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{structpersonnage__s_a15f9d1c9ce3e18fc10bb0ef94b38cc07}{spritesR}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{structpersonnage__s_afa75822afebdaf61725b7f87c86d5922}{sprite\+Actuel}
+\item 
+S\+D\+L\+\_\+\+Rect $\ast$ \hyperlink{structpersonnage__s_a2bb08ca974115a4394ffca5e7e6a3df6}{hitbox}
+\item 
+int \hyperlink{structpersonnage__s_adbf4ac9e2b3d716bd5fdc179c865cace}{hitbox\+Actuelle}
+\item 
+int \hyperlink{structpersonnage__s_a4f0dc729152bf8aaeefcb26ab6714aee}{nb\+Hitbox}
+\item 
+etat\+\_\+t \hyperlink{structpersonnage__s_a2d91f0a1a2e44164875be806c7a456cc}{etat}
+\item 
+boolean\+\_\+t \hyperlink{structpersonnage__s_ad9c2e07633c2a40855b169b4b677009f}{new\+Etat}
+\item 
+boolean\+\_\+t \hyperlink{structpersonnage__s_a3769403f861b056206cedf16e9e21b7d}{new\+Item}
+\item 
+int \hyperlink{structpersonnage__s_a47750ce89c5dcdb6844e0a98afd5fd75}{evo\+Sprite}
+\item 
+int $\ast$ \hyperlink{structpersonnage__s_a05aa3037a7469f58464094d2bd2d683a}{nb\+Anim}
+\item 
+int $\ast$ \hyperlink{structpersonnage__s_af44ce58e7c6ca78f9ceff803bb8bb931}{vit\+Anim}
+\item 
+char \hyperlink{structpersonnage__s_a1f1eb200420640259201a84300bccf7e}{forme}
+\item 
+int \hyperlink{structpersonnage__s_a0aefe070eb6c9c73fe6a40c909d2dc30}{inventaire} \mbox{[}\hyperlink{structs_8h_a5fdcc1659ee790f8bdd196e7745ab403}{T\+A\+I\+L\+L\+E\+\_\+\+I\+N\+V\+E\+N\+T\+A\+I\+RE}\mbox{]}
+\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{structpersonnage__s_a1fa7220d864d9cacc6a8ce191f9bcf29}{inventaire\+Tileset}
+\item 
+char $\ast$ \hyperlink{structpersonnage__s_a6fc3c82b6c4f407289aa55155876c867}{nom\+Obj} \mbox{[}\hyperlink{structs_8h_a5fdcc1659ee790f8bdd196e7745ab403}{T\+A\+I\+L\+L\+E\+\_\+\+I\+N\+V\+E\+N\+T\+A\+I\+RE}\mbox{]}
+\item 
+unsigned int \hyperlink{structpersonnage__s_ae3e2c166abcaaadff66047abb2594e05}{sounds}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Structure représentant le personnage et ses caractéristques, contient également une variable de gestion des effets sonores du jeu. 
+
+\subsection{Documentation des données membres}
+\mbox{\Hypertarget{structpersonnage__s_a60ba887e657e6cdbdde28b63ade38709}\label{structpersonnage__s_a60ba887e657e6cdbdde28b63ade38709}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!apparition@{apparition}}
+\index{apparition@{apparition}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{apparition}{apparition}}
+{\footnotesize\ttfamily \hyperlink{structposition__s}{position\+\_\+t} personnage\+\_\+s\+::apparition}
+
+Position d\textquotesingle{}apparition (utilisé pour les sauvegardes) \mbox{\Hypertarget{structpersonnage__s_a219acff65d3b506a69408ca316efeeec}\label{structpersonnage__s_a219acff65d3b506a69408ca316efeeec}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!clign@{clign}}
+\index{clign@{clign}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{clign}{clign}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::clign}
+
+Entier pour le clignotemment \mbox{\Hypertarget{structpersonnage__s_a09fb83af37953227050f9ced0410f032}\label{structpersonnage__s_a09fb83af37953227050f9ced0410f032}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!delta@{delta}}
+\index{delta@{delta}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{delta}{delta}}
+{\footnotesize\ttfamily \hyperlink{structposition__s}{position\+\_\+t} personnage\+\_\+s\+::delta}
+
+Position en pixel à l\textquotesingle{}intérieur de la case de matrice (entre 0 et T\+A\+I\+L\+L\+E\+B\+L\+O\+C-\/1) \mbox{\Hypertarget{structpersonnage__s_a6d6791f61e66ee9ee1125c39bc99f164}\label{structpersonnage__s_a6d6791f61e66ee9ee1125c39bc99f164}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!direction@{direction}}
+\index{direction@{direction}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{direction}{direction}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::direction}
+
+Vaut 1 si le personnage va à droite et 0 si il va à gauche \mbox{\Hypertarget{structpersonnage__s_a2d91f0a1a2e44164875be806c7a456cc}\label{structpersonnage__s_a2d91f0a1a2e44164875be806c7a456cc}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!etat@{etat}}
+\index{etat@{etat}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{etat}{etat}}
+{\footnotesize\ttfamily etat\+\_\+t personnage\+\_\+s\+::etat}
+
+Etat du personnage (idle/running/jumping/attacking/falling) \mbox{\Hypertarget{structpersonnage__s_a47750ce89c5dcdb6844e0a98afd5fd75}\label{structpersonnage__s_a47750ce89c5dcdb6844e0a98afd5fd75}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!evo\+Sprite@{evo\+Sprite}}
+\index{evo\+Sprite@{evo\+Sprite}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{evo\+Sprite}{evoSprite}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::evo\+Sprite}
+
+Entier qui décrémente, changement de sprite quand vaut 0 \mbox{\Hypertarget{structpersonnage__s_a1f1eb200420640259201a84300bccf7e}\label{structpersonnage__s_a1f1eb200420640259201a84300bccf7e}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!forme@{forme}}
+\index{forme@{forme}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{forme}{forme}}
+{\footnotesize\ttfamily char personnage\+\_\+s\+::forme}
+
+Forme du personnage h = humain, r = renard \mbox{\Hypertarget{structpersonnage__s_a4e8b537e5d529d22745957acb499d00c}\label{structpersonnage__s_a4e8b537e5d529d22745957acb499d00c}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!hit@{hit}}
+\index{hit@{hit}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{hit}{hit}}
+{\footnotesize\ttfamily boolean\+\_\+t personnage\+\_\+s\+::hit}
+
+Indique si le personnage a été touché lors de la frame actuelle \mbox{\Hypertarget{structpersonnage__s_a2bb08ca974115a4394ffca5e7e6a3df6}\label{structpersonnage__s_a2bb08ca974115a4394ffca5e7e6a3df6}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!hitbox@{hitbox}}
+\index{hitbox@{hitbox}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{hitbox}{hitbox}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect$\ast$ personnage\+\_\+s\+::hitbox}
+
+Taille de la hitbox du personnage en pixel \mbox{\Hypertarget{structpersonnage__s_adbf4ac9e2b3d716bd5fdc179c865cace}\label{structpersonnage__s_adbf4ac9e2b3d716bd5fdc179c865cace}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!hitbox\+Actuelle@{hitbox\+Actuelle}}
+\index{hitbox\+Actuelle@{hitbox\+Actuelle}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{hitbox\+Actuelle}{hitboxActuelle}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::hitbox\+Actuelle}
+
+Indice de la hitbox actuellement utilisée (0 pour le personnage et 1 pour le renard) \mbox{\Hypertarget{structpersonnage__s_a1d76a383232b764037a80a8b39b3c378}\label{structpersonnage__s_a1d76a383232b764037a80a8b39b3c378}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!inv@{inv}}
+\index{inv@{inv}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{inv}{inv}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::inv}
+
+Entier qui permet de décompter l\textquotesingle{}invulnérabilité du joueur \mbox{\Hypertarget{structpersonnage__s_a0aefe070eb6c9c73fe6a40c909d2dc30}\label{structpersonnage__s_a0aefe070eb6c9c73fe6a40c909d2dc30}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!inventaire@{inventaire}}
+\index{inventaire@{inventaire}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{inventaire}{inventaire}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::inventaire\mbox{[}\hyperlink{structs_8h_a5fdcc1659ee790f8bdd196e7745ab403}{T\+A\+I\+L\+L\+E\+\_\+\+I\+N\+V\+E\+N\+T\+A\+I\+RE}\mbox{]}}
+
+Tableau qui contient les informations sur l\textquotesingle{}inventaire actuel du personnage \mbox{\Hypertarget{structpersonnage__s_a1fa7220d864d9cacc6a8ce191f9bcf29}\label{structpersonnage__s_a1fa7220d864d9cacc6a8ce191f9bcf29}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!inventaire\+Tileset@{inventaire\+Tileset}}
+\index{inventaire\+Tileset@{inventaire\+Tileset}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{inventaire\+Tileset}{inventaireTileset}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ personnage\+\_\+s\+::inventaire\+Tileset}
+
+Tileset de l\textquotesingle{}inventaire \mbox{\Hypertarget{structpersonnage__s_a05d061a818efa6b7bfa5b3c76ba3b8dd}\label{structpersonnage__s_a05d061a818efa6b7bfa5b3c76ba3b8dd}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!jp\+Cd@{jp\+Cd}}
+\index{jp\+Cd@{jp\+Cd}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{jp\+Cd}{jpCd}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::jp\+Cd}
+
+Entier qui indique le nombre de frames restantes avant de pouvoir resauter \mbox{\Hypertarget{structpersonnage__s_aa492d3f9ab87bf03fcb94a65b77bcd34}\label{structpersonnage__s_aa492d3f9ab87bf03fcb94a65b77bcd34}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!kb@{kb}}
+\index{kb@{kb}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{kb}{kb}}
+{\footnotesize\ttfamily boolean\+\_\+t personnage\+\_\+s\+::kb}
+
+Indique si le joueur est en plein knockback \mbox{\Hypertarget{structpersonnage__s_a05aa3037a7469f58464094d2bd2d683a}\label{structpersonnage__s_a05aa3037a7469f58464094d2bd2d683a}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!nb\+Anim@{nb\+Anim}}
+\index{nb\+Anim@{nb\+Anim}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{nb\+Anim}{nbAnim}}
+{\footnotesize\ttfamily int$\ast$ personnage\+\_\+s\+::nb\+Anim}
+
+Tableau qui contient le nombre de sprites d\textquotesingle{}animation pour chaque action du personage \mbox{\Hypertarget{structpersonnage__s_a9dc9cf38290d069f2bfbdfe1b19184ac}\label{structpersonnage__s_a9dc9cf38290d069f2bfbdfe1b19184ac}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!nb\+Frame\+Atk@{nb\+Frame\+Atk}}
+\index{nb\+Frame\+Atk@{nb\+Frame\+Atk}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{nb\+Frame\+Atk}{nbFrameAtk}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::nb\+Frame\+Atk}
+
+Entier qui indique le nombre de frames qui a eu lieu depuis le début de l\textquotesingle{}attaque \mbox{\Hypertarget{structpersonnage__s_a4f0dc729152bf8aaeefcb26ab6714aee}\label{structpersonnage__s_a4f0dc729152bf8aaeefcb26ab6714aee}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!nb\+Hitbox@{nb\+Hitbox}}
+\index{nb\+Hitbox@{nb\+Hitbox}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{nb\+Hitbox}{nbHitbox}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::nb\+Hitbox}
+
+Nombre de hitbox du personnage \mbox{\Hypertarget{structpersonnage__s_a47e8c34ccb98b49ca57baa55d4326ee3}\label{structpersonnage__s_a47e8c34ccb98b49ca57baa55d4326ee3}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!nb\+Px\+Saut@{nb\+Px\+Saut}}
+\index{nb\+Px\+Saut@{nb\+Px\+Saut}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{nb\+Px\+Saut}{nbPxSaut}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::nb\+Px\+Saut}
+
+Entier qui indique le nombre de pixel qu\textquotesingle{}il a fait lors de son saut (ou deuxième saut) \mbox{\Hypertarget{structpersonnage__s_a1b5dac574e8ad57eaa9989699fbfb139}\label{structpersonnage__s_a1b5dac574e8ad57eaa9989699fbfb139}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!nb\+Saut@{nb\+Saut}}
+\index{nb\+Saut@{nb\+Saut}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{nb\+Saut}{nbSaut}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::nb\+Saut}
+
+Entier qui indique le nombre de saut que le personnage à fait avant de retoucher le sol \mbox{\Hypertarget{structpersonnage__s_ad9c2e07633c2a40855b169b4b677009f}\label{structpersonnage__s_ad9c2e07633c2a40855b169b4b677009f}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!new\+Etat@{new\+Etat}}
+\index{new\+Etat@{new\+Etat}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{new\+Etat}{newEtat}}
+{\footnotesize\ttfamily boolean\+\_\+t personnage\+\_\+s\+::new\+Etat}
+
+Booléen qui signifie qu\textquotesingle{}un changement d\textquotesingle{}état vient de s\textquotesingle{}effectuer \mbox{\Hypertarget{structpersonnage__s_a3769403f861b056206cedf16e9e21b7d}\label{structpersonnage__s_a3769403f861b056206cedf16e9e21b7d}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!new\+Item@{new\+Item}}
+\index{new\+Item@{new\+Item}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{new\+Item}{newItem}}
+{\footnotesize\ttfamily boolean\+\_\+t personnage\+\_\+s\+::new\+Item}
+
+Booléen qui signifie que l\textquotesingle{}on vient de récolter un item \mbox{\Hypertarget{structpersonnage__s_a6fc3c82b6c4f407289aa55155876c867}\label{structpersonnage__s_a6fc3c82b6c4f407289aa55155876c867}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!nom\+Obj@{nom\+Obj}}
+\index{nom\+Obj@{nom\+Obj}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{nom\+Obj}{nomObj}}
+{\footnotesize\ttfamily char$\ast$ personnage\+\_\+s\+::nom\+Obj\mbox{[}\hyperlink{structs_8h_a5fdcc1659ee790f8bdd196e7745ab403}{T\+A\+I\+L\+L\+E\+\_\+\+I\+N\+V\+E\+N\+T\+A\+I\+RE}\mbox{]}}
+
+Tableau qui contient les noms des objets de l\textquotesingle{}inventaire \mbox{\Hypertarget{structpersonnage__s_adea4789f8b55587ec092f3a32b7b1964}\label{structpersonnage__s_adea4789f8b55587ec092f3a32b7b1964}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!pos@{pos}}
+\index{pos@{pos}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{pos}{pos}}
+{\footnotesize\ttfamily \hyperlink{structposition__s}{position\+\_\+t} personnage\+\_\+s\+::pos}
+
+Position actuel du personnage (position entière en cases de matrice) \mbox{\Hypertarget{structpersonnage__s_ab3090d9110756af454516f939e9f8a86}\label{structpersonnage__s_ab3090d9110756af454516f939e9f8a86}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!pv@{pv}}
+\index{pv@{pv}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{pv}{pv}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::pv}
+
+PV (points de vie) actuel du personnage \mbox{\Hypertarget{structpersonnage__s_a0e58c8761de9044ce770f21aa9ada41a}\label{structpersonnage__s_a0e58c8761de9044ce770f21aa9ada41a}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!pv\+\_\+max@{pv\+\_\+max}}
+\index{pv\+\_\+max@{pv\+\_\+max}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{pv\+\_\+max}{pv\_max}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::pv\+\_\+max}
+
+PV max du personnage \mbox{\Hypertarget{structpersonnage__s_ae3e2c166abcaaadff66047abb2594e05}\label{structpersonnage__s_ae3e2c166abcaaadff66047abb2594e05}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!sounds@{sounds}}
+\index{sounds@{sounds}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{sounds}{sounds}}
+{\footnotesize\ttfamily unsigned int personnage\+\_\+s\+::sounds}
+
+Nombre binaire correspondant aux effets sonores à jouer pour la frame en cours \mbox{\Hypertarget{structpersonnage__s_afa75822afebdaf61725b7f87c86d5922}\label{structpersonnage__s_afa75822afebdaf61725b7f87c86d5922}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!sprite\+Actuel@{sprite\+Actuel}}
+\index{sprite\+Actuel@{sprite\+Actuel}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{sprite\+Actuel}{spriteActuel}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect personnage\+\_\+s\+::sprite\+Actuel}
+
+Indice du sprite actuel en x et y dans la texture \mbox{\Hypertarget{structpersonnage__s_a97da32596524755cba3ba76782ab0205}\label{structpersonnage__s_a97da32596524755cba3ba76782ab0205}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!sprites@{sprites}}
+\index{sprites@{sprites}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{sprites}{sprites}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ personnage\+\_\+s\+::sprites}
+
+Pointeur vers la texture qui contient les sprites du personnage \mbox{\Hypertarget{structpersonnage__s_a15f9d1c9ce3e18fc10bb0ef94b38cc07}\label{structpersonnage__s_a15f9d1c9ce3e18fc10bb0ef94b38cc07}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!spritesR@{spritesR}}
+\index{spritesR@{spritesR}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{spritesR}{spritesR}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ personnage\+\_\+s\+::spritesR}
+
+Pointeur vers la texture qui contient les sprites du renard \mbox{\Hypertarget{structpersonnage__s_a0022973bab638a02774a19710cedcd17}\label{structpersonnage__s_a0022973bab638a02774a19710cedcd17}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!vit\+\_\+att@{vit\+\_\+att}}
+\index{vit\+\_\+att@{vit\+\_\+att}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{vit\+\_\+att}{vit\_att}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::vit\+\_\+att}
+
+Vitesse d\textquotesingle{}attaque du personnage (en nombre de frame) \mbox{\Hypertarget{structpersonnage__s_a8e340f828bfffa2c47269e315609ed01}\label{structpersonnage__s_a8e340f828bfffa2c47269e315609ed01}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!vit\+\_\+chute@{vit\+\_\+chute}}
+\index{vit\+\_\+chute@{vit\+\_\+chute}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{vit\+\_\+chute}{vit\_chute}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::vit\+\_\+chute}
+
+Vitesse de chute du personnage (pixel par tick) \mbox{\Hypertarget{structpersonnage__s_a6899a0efdc3a3fccb060aaf06b4e4b8d}\label{structpersonnage__s_a6899a0efdc3a3fccb060aaf06b4e4b8d}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!vit\+\_\+dep@{vit\+\_\+dep}}
+\index{vit\+\_\+dep@{vit\+\_\+dep}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{vit\+\_\+dep}{vit\_dep}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::vit\+\_\+dep}
+
+Vitesse de déplacement du personnage (pixel par tick) \mbox{\Hypertarget{structpersonnage__s_abf199b160e1ce327b7def1ed1ee00b39}\label{structpersonnage__s_abf199b160e1ce327b7def1ed1ee00b39}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!vit\+\_\+saut@{vit\+\_\+saut}}
+\index{vit\+\_\+saut@{vit\+\_\+saut}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{vit\+\_\+saut}{vit\_saut}}
+{\footnotesize\ttfamily int personnage\+\_\+s\+::vit\+\_\+saut}
+
+Vitesse de saut du personnage (pixel par tick) \mbox{\Hypertarget{structpersonnage__s_af44ce58e7c6ca78f9ceff803bb8bb931}\label{structpersonnage__s_af44ce58e7c6ca78f9ceff803bb8bb931}} 
+\index{personnage\+\_\+s@{personnage\+\_\+s}!vit\+Anim@{vit\+Anim}}
+\index{vit\+Anim@{vit\+Anim}!personnage\+\_\+s@{personnage\+\_\+s}}
+\subsubsection{\texorpdfstring{vit\+Anim}{vitAnim}}
+{\footnotesize\ttfamily int$\ast$ personnage\+\_\+s\+::vit\+Anim}
+
+Tableau qui contient le delai de changement d\textquotesingle{}animation pour chaque action du personage 
+
+La documentation de cette structure a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+headers/\hyperlink{structs_8h}{structs.\+h}\end{DoxyCompactItemize}

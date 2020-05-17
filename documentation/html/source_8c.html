@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Diskosieni - Metroidvania: Référence du fichier sources/source.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Diskosieni - Metroidvania
+   </div>
+   <div id="projectbrief">Création d&#39;un Metroidvania nommé Diskosieni dans le cadre du cours nommé &#39;Projet&#39;</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_08d237fc27d4ecd563f71c5d52f2fecc.html">sources</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier source.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fonctions de lecture d'une salle.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;dirent.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="source_8h_source.html">../headers/source.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="liste_8h_source.html">../headers/liste.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="comportement_8h_source.html">../headers/comportement.h</a>&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a4b26824e6770c4252fb8cdbcd7af94bb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#a4b26824e6770c4252fb8cdbcd7af94bb">sauvegarder</a> (int numSauv, <a class="el" href="structpersonnage__s.html">personnage_t</a> *perso, char *salle)</td></tr>
+<tr class="memdesc:a4b26824e6770c4252fb8cdbcd7af94bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sauvegarde l'état de la partie.  <a href="#a4b26824e6770c4252fb8cdbcd7af94bb">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a4b26824e6770c4252fb8cdbcd7af94bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37c46e9a766d1755723c50775e96b93e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#a37c46e9a766d1755723c50775e96b93e">chargerSauvegarde</a> (int numSauv, <a class="el" href="structpersonnage__s.html">personnage_t</a> *perso, char *salle)</td></tr>
+<tr class="memdesc:a37c46e9a766d1755723c50775e96b93e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Charge l'état de la partie.  <a href="#a37c46e9a766d1755723c50775e96b93e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a37c46e9a766d1755723c50775e96b93e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9157f2db38ecc8aca230dbf3b21145c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#a9157f2db38ecc8aca230dbf3b21145c6">creerTypeEntite</a> ()</td></tr>
+<tr class="memdesc:a9157f2db38ecc8aca230dbf3b21145c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Créé le tableau de types d'entités.  <a href="#a9157f2db38ecc8aca230dbf3b21145c6">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9157f2db38ecc8aca230dbf3b21145c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb8eb0f3e06d01c57473af3b8a7e8499"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structtype__monstre__s.html">type_monstre_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#acb8eb0f3e06d01c57473af3b8a7e8499">obtenirTypesEntite</a> ()</td></tr>
+<tr class="memdesc:acb8eb0f3e06d01c57473af3b8a7e8499"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet d'obtenir le tableau des types d'entités.  <a href="#acb8eb0f3e06d01c57473af3b8a7e8499">Plus de détails...</a><br /></td></tr>
+<tr class="separator:acb8eb0f3e06d01c57473af3b8a7e8499"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5237d1625ec6ab16ef2c4f0690bbfb8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#ad5237d1625ec6ab16ef2c4f0690bbfb8">nettoyerSalle</a> (<a class="el" href="structsalle__s.html">salle_t</a> **salle)</td></tr>
+<tr class="memdesc:ad5237d1625ec6ab16ef2c4f0690bbfb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nettoie et supprime la structure salle donnée.  <a href="#ad5237d1625ec6ab16ef2c4f0690bbfb8">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad5237d1625ec6ab16ef2c4f0690bbfb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2f9321f8e58b86da53155dd56df56ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="source_8c.html#af2f9321f8e58b86da53155dd56df56ff">lireSalle</a> (char *nomFichier, <a class="el" href="structsalle__s.html">salle_t</a> **salle, <a class="el" href="structpersonnage__s.html">personnage_t</a> *perso)</td></tr>
+<tr class="memdesc:af2f9321f8e58b86da53155dd56df56ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie la structure salle pour la nouvelle salle.  <a href="#af2f9321f8e58b86da53155dd56df56ff">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af2f9321f8e58b86da53155dd56df56ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Fonctions de lecture d'une salle. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Thomas DIDIER &amp; Marie-Nina MUNAR L2 Info Le Mans </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>3.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>17/05/2020 </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a37c46e9a766d1755723c50775e96b93e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37c46e9a766d1755723c50775e96b93e">&#9670;&nbsp;</a></span>chargerSauvegarde()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int chargerSauvegarde </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numSauv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td>
+          <td class="paramname"><em>perso</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>salle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Charge l'état de la partie. </p>
+<p>Les paramètres numSauv et nomObjs doivent être définis avant, les autres paramètres seront remplis par cette fonction</p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numSauv</td><td>numéro de la sauvegarde (entre 1 et 3) </td></tr>
+    <tr><td class="paramname">perso</td><td>personnage (structure personnage_t) à remplir </td></tr>
+    <tr><td class="paramname">salle</td><td>nom de la salle à charger</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>un code erreur en fonction de l'erreur: -1 = Mauvais numéro de sauvegarde, -2 = impossible d'ouvrir ou créer le fichier; le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès), ou 0 si le fichier de sauvegarde est vide </dd></dl>
+
+</div>
+</div>
+<a id="a9157f2db38ecc8aca230dbf3b21145c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9157f2db38ecc8aca230dbf3b21145c6">&#9670;&nbsp;</a></span>creerTypeEntite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void creerTypeEntite </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Créé le tableau de types d'entités. </p>
+<p>chaque entité est créée en dur dans le code </p>
+
+</div>
+</div>
+<a id="af2f9321f8e58b86da53155dd56df56ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2f9321f8e58b86da53155dd56df56ff">&#9670;&nbsp;</a></span>lireSalle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int lireSalle </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>nomFichier</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structsalle__s.html">salle_t</a> **&#160;</td>
+          <td class="paramname"><em>salle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td>
+          <td class="paramname"><em>perso</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Modifie la structure salle pour la nouvelle salle. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nomFichier</td><td>chaîne de caractères correspondant au nom du fichier à lire </td></tr>
+    <tr><td class="paramname">salle</td><td>pointeur du pointeur de la structure salle à remplir avec la lecture </td></tr>
+    <tr><td class="paramname">perso</td><td>le personnage à inclure dans la salle</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>0 si tout s'est bien déroulé </dd></dl>
+
+</div>
+</div>
+<a id="ad5237d1625ec6ab16ef2c4f0690bbfb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5237d1625ec6ab16ef2c4f0690bbfb8">&#9670;&nbsp;</a></span>nettoyerSalle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int nettoyerSalle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsalle__s.html">salle_t</a> **&#160;</td>
+          <td class="paramname"><em>salle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Nettoie et supprime la structure salle donnée. </p>
+<p>libère toute la mémoire utiliser et prépare le pointeur à être de nouveau utilisé</p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">salle</td><td>pointeur sur le pointeur de la structure salle à nettoyer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>0 si tout s'est bien déroulé </dd></dl>
+
+</div>
+</div>
+<a id="acb8eb0f3e06d01c57473af3b8a7e8499"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb8eb0f3e06d01c57473af3b8a7e8499">&#9670;&nbsp;</a></span>obtenirTypesEntite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structtype__monstre__s.html">type_monstre_t</a>* obtenirTypesEntite </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet d'obtenir le tableau des types d'entités. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>le tableau de types d'entités </dd></dl>
+
+</div>
+</div>
+<a id="a4b26824e6770c4252fb8cdbcd7af94bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b26824e6770c4252fb8cdbcd7af94bb">&#9670;&nbsp;</a></span>sauvegarder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sauvegarder </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numSauv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpersonnage__s.html">personnage_t</a> *&#160;</td>
+          <td class="paramname"><em>perso</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>salle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sauvegarde l'état de la partie. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numSauv</td><td>numéro de la sauvegarde (entre 1 et 3) </td></tr>
+    <tr><td class="paramname">perso</td><td>pointeur vers le personnage (structure personnage) </td></tr>
+    <tr><td class="paramname">salle</td><td>nom de la dernière salle visité par le personnage principal</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>un code erreur en fonction de l'erreur: -1 = Mauvais numéro de sauvegarde, -2 = impossible d'ouvrir ou créer le fichier; ou le numéro de sauvegarde dans laquelle la sauvegarde a été effectuée (avec succès) </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

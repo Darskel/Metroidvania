@@ -1,0 +1,121 @@
+\hypertarget{structsalle__s}{}\section{Référence de la structure salle\+\_\+s}
+\label{structsalle__s}\index{salle\+\_\+s@{salle\+\_\+s}}
+
+
+Structure représentant les salles et leur contenu.  
+
+
+
+
+{\ttfamily \#include $<$structs.\+h$>$}
+
+\subsection*{Attributs publics}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{structsalle__s_a12e47589795f5ed60109cf2b073ec671}{nom\+Fichier}
+\item 
+int \hyperlink{structsalle__s_a2be13fedfc5f31bc7f02c65af7d95c7a}{hauteur}
+\item 
+int \hyperlink{structsalle__s_ac1273e8d176620c3b9130d2f1e741315}{largeur}
+\item 
+int $\ast$$\ast$ \hyperlink{structsalle__s_ad9934630b58b551f8f185dead2006ba6}{mat}
+\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{structsalle__s_a5ef73bdeb5f07b6c8b4978dcf265d0d2}{background}
+\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{structsalle__s_a44a7c08d109019af0e4877e488cef708}{tileset}
+\item 
+S\+D\+L\+\_\+\+Rect \hyperlink{structsalle__s_ad8bdafa725de50b0b00688980c362d74}{sprite\+Actuel}
+\item 
+int \hyperlink{structsalle__s_afd28b0ea2bb7eb7e8ad6b915fc8c59e7}{nbsprites}
+\item 
+int \hyperlink{structsalle__s_a3a3512a26fd8960cda702e9225937193}{anim\+Delay}
+\item 
+int \hyperlink{structsalle__s_a6ac170caff770f795abb7b6a79e84cc7}{etatanim}
+\item 
+\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ \hyperlink{structsalle__s_a8c3b513a26b2418863a37bfd91f86b11}{liste\+Porte}
+\item 
+\hyperlink{structliste__s}{liste\+\_\+t} $\ast$ \hyperlink{structsalle__s_a6c6c65ac4a856dbf75a104081e839b96}{liste\+Entite}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Structure représentant les salles et leur contenu. 
+
+\subsection{Documentation des données membres}
+\mbox{\Hypertarget{structsalle__s_a3a3512a26fd8960cda702e9225937193}\label{structsalle__s_a3a3512a26fd8960cda702e9225937193}} 
+\index{salle\+\_\+s@{salle\+\_\+s}!anim\+Delay@{anim\+Delay}}
+\index{anim\+Delay@{anim\+Delay}!salle\+\_\+s@{salle\+\_\+s}}
+\subsubsection{\texorpdfstring{anim\+Delay}{animDelay}}
+{\footnotesize\ttfamily int salle\+\_\+s\+::anim\+Delay}
+
+Delai avant le changement de sprites d\textquotesingle{}arrière plan (vitesse animation) \mbox{\Hypertarget{structsalle__s_a5ef73bdeb5f07b6c8b4978dcf265d0d2}\label{structsalle__s_a5ef73bdeb5f07b6c8b4978dcf265d0d2}} 
+\index{salle\+\_\+s@{salle\+\_\+s}!background@{background}}
+\index{background@{background}!salle\+\_\+s@{salle\+\_\+s}}
+\subsubsection{\texorpdfstring{background}{background}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ salle\+\_\+s\+::background}
+
+Image d\textquotesingle{}arrière-\/plan de la salle \mbox{\Hypertarget{structsalle__s_a6ac170caff770f795abb7b6a79e84cc7}\label{structsalle__s_a6ac170caff770f795abb7b6a79e84cc7}} 
+\index{salle\+\_\+s@{salle\+\_\+s}!etatanim@{etatanim}}
+\index{etatanim@{etatanim}!salle\+\_\+s@{salle\+\_\+s}}
+\subsubsection{\texorpdfstring{etatanim}{etatanim}}
+{\footnotesize\ttfamily int salle\+\_\+s\+::etatanim}
+
+Etat du delai de l\textquotesingle{}animation du bg (entre 0 et anim\+Delay) \mbox{\Hypertarget{structsalle__s_a2be13fedfc5f31bc7f02c65af7d95c7a}\label{structsalle__s_a2be13fedfc5f31bc7f02c65af7d95c7a}} 
+\index{salle\+\_\+s@{salle\+\_\+s}!hauteur@{hauteur}}
+\index{hauteur@{hauteur}!salle\+\_\+s@{salle\+\_\+s}}
+\subsubsection{\texorpdfstring{hauteur}{hauteur}}
+{\footnotesize\ttfamily int salle\+\_\+s\+::hauteur}
+
+Hauteur de la salle en blocs \mbox{\Hypertarget{structsalle__s_ac1273e8d176620c3b9130d2f1e741315}\label{structsalle__s_ac1273e8d176620c3b9130d2f1e741315}} 
+\index{salle\+\_\+s@{salle\+\_\+s}!largeur@{largeur}}
+\index{largeur@{largeur}!salle\+\_\+s@{salle\+\_\+s}}
+\subsubsection{\texorpdfstring{largeur}{largeur}}
+{\footnotesize\ttfamily int salle\+\_\+s\+::largeur}
+
+Longueur de la salle en blocs \mbox{\Hypertarget{structsalle__s_a6c6c65ac4a856dbf75a104081e839b96}\label{structsalle__s_a6c6c65ac4a856dbf75a104081e839b96}} 
+\index{salle\+\_\+s@{salle\+\_\+s}!liste\+Entite@{liste\+Entite}}
+\index{liste\+Entite@{liste\+Entite}!salle\+\_\+s@{salle\+\_\+s}}
+\subsubsection{\texorpdfstring{liste\+Entite}{listeEntite}}
+{\footnotesize\ttfamily \hyperlink{structliste__s}{liste\+\_\+t}$\ast$ salle\+\_\+s\+::liste\+Entite}
+
+Liste des entités de la salle \mbox{\Hypertarget{structsalle__s_a8c3b513a26b2418863a37bfd91f86b11}\label{structsalle__s_a8c3b513a26b2418863a37bfd91f86b11}} 
+\index{salle\+\_\+s@{salle\+\_\+s}!liste\+Porte@{liste\+Porte}}
+\index{liste\+Porte@{liste\+Porte}!salle\+\_\+s@{salle\+\_\+s}}
+\subsubsection{\texorpdfstring{liste\+Porte}{listePorte}}
+{\footnotesize\ttfamily \hyperlink{structliste__s}{liste\+\_\+t}$\ast$ salle\+\_\+s\+::liste\+Porte}
+
+Liste des portes de la salle \mbox{\Hypertarget{structsalle__s_ad9934630b58b551f8f185dead2006ba6}\label{structsalle__s_ad9934630b58b551f8f185dead2006ba6}} 
+\index{salle\+\_\+s@{salle\+\_\+s}!mat@{mat}}
+\index{mat@{mat}!salle\+\_\+s@{salle\+\_\+s}}
+\subsubsection{\texorpdfstring{mat}{mat}}
+{\footnotesize\ttfamily int$\ast$$\ast$ salle\+\_\+s\+::mat}
+
+Matrice de positionnement des objets \mbox{\Hypertarget{structsalle__s_afd28b0ea2bb7eb7e8ad6b915fc8c59e7}\label{structsalle__s_afd28b0ea2bb7eb7e8ad6b915fc8c59e7}} 
+\index{salle\+\_\+s@{salle\+\_\+s}!nbsprites@{nbsprites}}
+\index{nbsprites@{nbsprites}!salle\+\_\+s@{salle\+\_\+s}}
+\subsubsection{\texorpdfstring{nbsprites}{nbsprites}}
+{\footnotesize\ttfamily int salle\+\_\+s\+::nbsprites}
+
+Nombre de sprites de l\textquotesingle{}arrière plan \mbox{\Hypertarget{structsalle__s_a12e47589795f5ed60109cf2b073ec671}\label{structsalle__s_a12e47589795f5ed60109cf2b073ec671}} 
+\index{salle\+\_\+s@{salle\+\_\+s}!nom\+Fichier@{nom\+Fichier}}
+\index{nom\+Fichier@{nom\+Fichier}!salle\+\_\+s@{salle\+\_\+s}}
+\subsubsection{\texorpdfstring{nom\+Fichier}{nomFichier}}
+{\footnotesize\ttfamily char$\ast$ salle\+\_\+s\+::nom\+Fichier}
+
+Nom du fichier qui a généré la salle (utile pour les sauvegardes) \mbox{\Hypertarget{structsalle__s_ad8bdafa725de50b0b00688980c362d74}\label{structsalle__s_ad8bdafa725de50b0b00688980c362d74}} 
+\index{salle\+\_\+s@{salle\+\_\+s}!sprite\+Actuel@{sprite\+Actuel}}
+\index{sprite\+Actuel@{sprite\+Actuel}!salle\+\_\+s@{salle\+\_\+s}}
+\subsubsection{\texorpdfstring{sprite\+Actuel}{spriteActuel}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Rect salle\+\_\+s\+::sprite\+Actuel}
+
+Sprite d\textquotesingle{}arrière plan à afficher \mbox{\Hypertarget{structsalle__s_a44a7c08d109019af0e4877e488cef708}\label{structsalle__s_a44a7c08d109019af0e4877e488cef708}} 
+\index{salle\+\_\+s@{salle\+\_\+s}!tileset@{tileset}}
+\index{tileset@{tileset}!salle\+\_\+s@{salle\+\_\+s}}
+\subsubsection{\texorpdfstring{tileset}{tileset}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ salle\+\_\+s\+::tileset}
+
+Image qui contient tout les sprites de la tileset associée à la salle 
+
+La documentation de cette structure a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+headers/\hyperlink{structs_8h}{structs.\+h}\end{DoxyCompactItemize}

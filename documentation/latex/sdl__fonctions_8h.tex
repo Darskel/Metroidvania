@@ -1,0 +1,996 @@
+\hypertarget{sdl__fonctions_8h}{}\section{Référence du fichier headers/sdl\+\_\+fonctions.h}
+\label{sdl__fonctions_8h}\index{headers/sdl\+\_\+fonctions.\+h@{headers/sdl\+\_\+fonctions.\+h}}
+
+
+Header pour la librairie de fonctions et les constantes liées à l\textquotesingle{}usage de la S\+D\+L2.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L\+\_\+mixer.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../headers/structs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../headers/source.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../headers/comportement.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{sdl__fonctions_8h_a9972d60841b918e062b514d818704ed5}{N\+B\+S\+O\+U\+N\+DS}~9
+\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{sdl__fonctions_8h_a54d802a7a572c533c2e4bd7ad794fb32}\label{sdl__fonctions_8h_a54d802a7a572c533c2e4bd7ad794fb32}} 
+void \hyperlink{sdl__fonctions_8h_a54d802a7a572c533c2e4bd7ad794fb32}{initialiser\+Chunks} (void)
+\begin{DoxyCompactList}\small\item\em Initialise les effets sonores dans le tableau en variable globale. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sdl__fonctions_8h_a221e365c376888d8b614f77332692179}\label{sdl__fonctions_8h_a221e365c376888d8b614f77332692179}} 
+void \hyperlink{sdl__fonctions_8h_a221e365c376888d8b614f77332692179}{detruire\+Chunks} (void)
+\begin{DoxyCompactList}\small\item\em Detruit les effets sonores dans le tableau en variable globale. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_ac7a206e3c72f0892f43e2e1dae5daf06}{initialisation\+\_\+\+S\+DL} (S\+D\+L\+\_\+\+Window $\ast$$\ast$fenetre, S\+D\+L\+\_\+\+Renderer $\ast$$\ast$renderer, S\+D\+L\+\_\+\+Display\+Mode $\ast$mode, boolean\+\_\+t fullscreen)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}initalisation de la S\+DL et de création de la fenetre et du renderer ainsi que du remplissage du mode d\textquotesingle{}écran (en parametre) \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_af4ffdd61eb400c65a78258ee8ad1172a}{quitter\+\_\+\+S\+DL} (S\+D\+L\+\_\+\+Window $\ast$$\ast$fenetre, S\+D\+L\+\_\+\+Renderer $\ast$$\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet de détruire la fenetre et quitter la S\+DL. \end{DoxyCompactList}\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{sdl__fonctions_8h_a80026632ff5770fc7da3ed6a4b76e148}{initialiser\+\_\+texture} (char $\ast$path, S\+D\+L\+\_\+\+Renderer $\ast$renderer, boolean\+\_\+t est\+Target)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet d\textquotesingle{}initialiser une texture à partir d\textquotesingle{}une image. \end{DoxyCompactList}\item 
+\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$ \hyperlink{sdl__fonctions_8h_a9ffbbd8791b49989f9ee4716096d2b7b}{initialisation\+\_\+personnage} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, \hyperlink{structposition__s}{position\+\_\+t} position\+Depart, \hyperlink{structposition__s}{position\+\_\+t} position\+Depart\+Delta)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}initialisation de la structure personnage. \end{DoxyCompactList}\item 
+\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$ \hyperlink{sdl__fonctions_8h_a6c1464416b7688910f318a59982210d8}{initialiser\+\_\+salle} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, char $\ast$nom\+Fichier, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}initialisation de la salle. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a00dfdb88930d557dfba9cd4e3f847cfc}{afficher\+\_\+salle} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, S\+D\+L\+\_\+\+Texture $\ast$texture\+Salle)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}affichage de la salle (fait en coopération avec Yannis Allain) \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a73f7995c29a5bd9a4ec0097b9654d74d}{afficher\+\_\+personnage} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$personnage, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, S\+D\+L\+\_\+\+Texture $\ast$texture\+Salle)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}affichage du personnage. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a475b0b9786dcfb41679639fecf788207}{afficher\+\_\+entites} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, S\+D\+L\+\_\+\+Texture $\ast$texture\+Salle)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}affichage des entités. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a303cdd690802321ee779410bc3ceae4a}{affichage\+\_\+complet} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$personnage, int $\ast$inventaire\+Affiche)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}affichage complet (salle, personnage, etc) \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_ae8f09fb904a843140a83eb42debe73b4}{mise\+Ajour\+Sprites} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$personnage)
+\begin{DoxyCompactList}\small\item\em Fonction qui fait évoluer les sprites du personnage (animation) \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a62c08b78dfc29e87435d4feaa50e2f0d}{mise\+Ajour\+Sprites\+Entites} (\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
+\begin{DoxyCompactList}\small\item\em Fonction qui fait évoluer les sprites de l\textquotesingle{}entite (animation) \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a3bb24e50196af6088ec379249abe83ba}{evo\+Salle} (\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
+\begin{DoxyCompactList}\small\item\em Fonction qui fait évoluer la salle. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a178137e264817341b869df39374cd384}{destroy\+\_\+salle} (\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$salle)
+\begin{DoxyCompactList}\small\item\em Fonction de destruction de la structure salle. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a8754279fcd8693c28c3fc5c6f4624b31}{destroy\+\_\+personnage} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$$\ast$perso)
+\begin{DoxyCompactList}\small\item\em Fonction de destruction de la structure personnage. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_afb46b3ed18a1969155b218f8b0179308}{ecran\+Noir} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, int ms)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}affichage d\textquotesingle{}un écran noir d\textquotesingle{}une durée choisie. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a79c168095e834346bbaaf27c91cfddc2}{konamicode} (\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle, char $\ast$konami, int $\ast$ind\+Kon, boolean\+\_\+t $\ast$kon)
+\begin{DoxyCompactList}\small\item\em Fonction qui détecte si le Konami code a été rentré et qui applique le cheat code en conséquence. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sdl__fonctions_8h_a672ae3a027fee5a7fd52d27243a08572}\label{sdl__fonctions_8h_a672ae3a027fee5a7fd52d27243a08572}} 
+void \hyperlink{sdl__fonctions_8h_a672ae3a027fee5a7fd52d27243a08572}{destroy\+\_\+typeentites} (void)
+\begin{DoxyCompactList}\small\item\em Fonction de destruction des types de monstres. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_ae1d88b10b3071168e331039a28e8ecb7}{initialiser\+\_\+typeentites} (S\+D\+L\+\_\+\+Renderer $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}initialisation des types de monstres. \end{DoxyCompactList}\item 
+int \hyperlink{sdl__fonctions_8h_ae95c4a9b071ed53dcce78308e546e7d3}{charger\+Sauvegarde\+Menu} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, int num\+Sauv, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$$\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$salle)
+\begin{DoxyCompactList}\small\item\em Charge une sauvegarde. \end{DoxyCompactList}\item 
+int \hyperlink{sdl__fonctions_8h_abbc303ab096908ca65a0ee9d0c1be6ed}{sauvegarder\+Menu} (int num\+Sauv, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$perso, \hyperlink{structsalle__s}{salle\+\_\+t} $\ast$salle)
+\begin{DoxyCompactList}\small\item\em Sauvegarde dans un slot de sauvegarde. \end{DoxyCompactList}\item 
+boolean\+\_\+t \hyperlink{sdl__fonctions_8h_a6b26e56066f868312bf10a531452dd79}{jeu} (S\+D\+L\+\_\+\+Window $\ast$fenetre, S\+D\+L\+\_\+\+Renderer $\ast$$\ast$renderer, S\+D\+L\+\_\+\+Display\+Mode mode, S\+D\+L\+\_\+\+Joystick $\ast$p\+Joystick, int fullscreen)
+\begin{DoxyCompactList}\small\item\em Fonction qui lance le jeu et gère les inputs, lance les fonctions d\textquotesingle{}affichage. \end{DoxyCompactList}\item 
+\hyperlink{structmenu__s}{menu\+\_\+t} $\ast$ \hyperlink{sdl__fonctions_8h_a9559fbf6c398c258b61416f49d270eb6}{creer\+Menu\+Demarrage} (S\+D\+L\+\_\+\+Renderer $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Fonction qui créer le menu de démarrage du jeu. \end{DoxyCompactList}\item 
+\hyperlink{structmenu__s}{menu\+\_\+t} $\ast$ \hyperlink{sdl__fonctions_8h_af61c1f36adae27384ea6d99e9844edca}{creer\+Menu\+In\+Game} (S\+D\+L\+\_\+\+Renderer $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Fonction qui créer le menu in-\/game du jeu. \end{DoxyCompactList}\item 
+\hyperlink{structmenu__s}{menu\+\_\+t} $\ast$ \hyperlink{sdl__fonctions_8h_a4bbc930fae75bbf110ede7f89d728a62}{creer\+Menu\+Confirmation} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, char $\ast$question)
+\begin{DoxyCompactList}\small\item\em Fonction qui créer un menu de confirmation. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_aa8cb56fc0aafd3a2d9af5477f6823c3b}{detruire\+Menu} (\hyperlink{structmenu__s}{menu\+\_\+t} $\ast$$\ast$menu)
+\begin{DoxyCompactList}\small\item\em Fonction qui détruit un menu. \end{DoxyCompactList}\item 
+boolean\+\_\+t \hyperlink{sdl__fonctions_8h_a91cffe2cfb94aef79db0ededf3bc0d88}{menu\+Confirmation} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, char $\ast$question, int taille\+Texte, int taille\+Boutons)
+\begin{DoxyCompactList}\small\item\em Fonction qui lance un menu de confirmation. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a28469cec6f810fe8f142860fffb0917c}{afficher\+\_\+menu} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, \hyperlink{structmenu__s}{menu\+\_\+t} $\ast$menu, int taille\+Texte, int taille\+Boutons, boolean\+\_\+t sens)
+\begin{DoxyCompactList}\small\item\em Fonction qui affiche un menu. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a59b9e7efa825b397eac099f072462065}{Touches\+Menu} (int direction, S\+D\+L\+\_\+\+Point souris, boolean\+\_\+t bouge\+Souris, \hyperlink{structmenu__s}{menu\+\_\+t} $\ast$menu)
+\begin{DoxyCompactList}\small\item\em Fonction qui gère si il y a changement de boutons ou selection dans le menu. \end{DoxyCompactList}\item 
+int \hyperlink{sdl__fonctions_8h_a5ef01a630d1944e0d3801024b9a6b78a}{evo\+Menu} (\hyperlink{structmenu__s}{menu\+\_\+t} $\ast$menu, int clique)
+\begin{DoxyCompactList}\small\item\em Fonction qui gère si un bouton à été validé \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a94e33ae3646517c344ff00b785edfec9}{afficher\+Vie\+Jauge} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$personnage, S\+D\+L\+\_\+\+Texture $\ast$texture\+Salle)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}affichage de la vie sous forme de jauge. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a08c53cc40921e55828bdf8ca86e0a028}{afficher\+Vie\+Coeurs} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$personnage, S\+D\+L\+\_\+\+Texture $\ast$coeur\+Image, S\+D\+L\+\_\+\+Texture $\ast$texture\+Salle)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}affichage de la vie sous forme de coeurs. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a31f5e2ec7dd9c75d5f59ef2139ccd4d2}{afficher\+Inventaire} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, \hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$personnage, S\+D\+L\+\_\+\+Texture $\ast$texture\+Salle)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}affichage de l\textquotesingle{}inventaire. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a2fc6f14b6e9a769a578a5885c9a75d76}{afficher\+Volume} (S\+D\+L\+\_\+\+Renderer $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Fonction d\textquotesingle{}affichage du volume sonore. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a1912ff18815e32e97a54cbad8066c7bc}{gameover} (S\+D\+L\+\_\+\+Window $\ast$fenetre, S\+D\+L\+\_\+\+Renderer $\ast$renderer, S\+D\+L\+\_\+\+Display\+Mode mode, S\+D\+L\+\_\+\+Joystick $\ast$p\+Joystick, int fullscreen)
+\begin{DoxyCompactList}\small\item\em Fonction qui lance un gameover. \end{DoxyCompactList}\item 
+T\+T\+F\+\_\+\+Font $\ast$ \hyperlink{sdl__fonctions_8h_aab60eb43c14063dd5b58920fae6d8762}{creer\+Police} (char $\ast$path, int taille)
+\begin{DoxyCompactList}\small\item\em Fonction qui créé une police. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a20809382ac67dc2f005aeedf67c4dc36}{detruire\+Police} (T\+T\+F\+\_\+\+Font $\ast$$\ast$font)
+\begin{DoxyCompactList}\small\item\em Fonction qui détruit une police. \end{DoxyCompactList}\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{sdl__fonctions_8h_ac0a7a8472f3cb246ffcc25228d742c6f}{creer\+Texte} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, char $\ast$Fontpath, int taille, char $\ast$texte, int r, int g, int b)
+\begin{DoxyCompactList}\small\item\em Fonction qui créé un texte. \end{DoxyCompactList}\item 
+Mix\+\_\+\+Music $\ast$ \hyperlink{sdl__fonctions_8h_a3832de2405da428643b637a6bad134b8}{charger\+Musique} (char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Charge une musique à partir de son emplacement. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a0b5de16bf10565d14839539ce9b09421}{lancer\+Musique\+Infini} (Mix\+\_\+\+Music $\ast$musique)
+\begin{DoxyCompactList}\small\item\em Jouer une musique à l\textquotesingle{}infini. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a8374dc964f3a6270a41915a3a1823823}{lancer\+Musique\+N\+B\+Fois} (Mix\+\_\+\+Music $\ast$musique, int nb\+Fois)
+\begin{DoxyCompactList}\small\item\em Jouer une musique un nombre précis de fois. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sdl__fonctions_8h_ae9958e5153c984bfd82ddf91f87e477e}\label{sdl__fonctions_8h_ae9958e5153c984bfd82ddf91f87e477e}} 
+void \hyperlink{sdl__fonctions_8h_ae9958e5153c984bfd82ddf91f87e477e}{toggle\+Pause\+Musique} (void)
+\begin{DoxyCompactList}\small\item\em Passe de la pause au lancement de la musique. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sdl__fonctions_8h_af34e8415e8182fcf4602984c4faa7acf}\label{sdl__fonctions_8h_af34e8415e8182fcf4602984c4faa7acf}} 
+void \hyperlink{sdl__fonctions_8h_af34e8415e8182fcf4602984c4faa7acf}{Monter\+Son} (void)
+\begin{DoxyCompactList}\small\item\em Monte le son de la musique. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{sdl__fonctions_8h_a01aaf2573302fa682a52b8bdb19b8560}\label{sdl__fonctions_8h_a01aaf2573302fa682a52b8bdb19b8560}} 
+void \hyperlink{sdl__fonctions_8h_a01aaf2573302fa682a52b8bdb19b8560}{baisser\+Son} (void)
+\begin{DoxyCompactList}\small\item\em Baisse le son de la musique. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_ab2b5e87dc24bdc1398d7b2bcb1c0cb83}{Exploitation\+Binaire\+Sons} (unsigned int nb\+Binaire)
+\begin{DoxyCompactList}\small\item\em Permet de décoder un binaire pour récupérer les sons à jouer. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_a5ee6bb50de173b257e025743a456f048}{detruire\+Textures\+Menu} (\hyperlink{structmenu__s}{menu\+\_\+t} $\ast$menu)
+\begin{DoxyCompactList}\small\item\em Fonction qui détruit les textures d\textquotesingle{}un menu. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_ae897e48addd88fad05249dec3d890d7e}{creer\+Textures\+Menu\+Demarrage} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, \hyperlink{structmenu__s}{menu\+\_\+t} $\ast$menu)
+\begin{DoxyCompactList}\small\item\em Fonction qui créer les textures du menu de démarrage du jeu. \end{DoxyCompactList}\item 
+void \hyperlink{sdl__fonctions_8h_ad7ddf89003eab633450cb0100223dd61}{creer\+Textures\+Menu\+Confirmation} (S\+D\+L\+\_\+\+Renderer $\ast$renderer, \hyperlink{structmenu__s}{menu\+\_\+t} $\ast$menu)
+\begin{DoxyCompactList}\small\item\em Fonction qui créer les textures d\textquotesingle{}un menu de confirmation\textquotesingle{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Mix\+\_\+\+Chunk $\ast$ \hyperlink{sdl__fonctions_8h_ac6f39a15d648c44f7535d58d075b7385}{Effets\+Sonores} \mbox{[}\hyperlink{sdl__fonctions_8h_a9972d60841b918e062b514d818704ed5}{N\+B\+S\+O\+U\+N\+DS}\mbox{]}
+\item 
+float \hyperlink{sdl__fonctions_8h_a1b3a996665018cdf064654fc8e7c3b62}{pourcentage\+Vol}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Header pour la librairie de fonctions et les constantes liées à l\textquotesingle{}usage de la S\+D\+L2. 
+
+\begin{DoxyAuthor}{Auteur}
+Marie-\/\+Nina M\+U\+N\+AR L2 Info Le Mans 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+4.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+17/05/2020 
+\end{DoxyDate}
+
+
+\subsection{Documentation des macros}
+\mbox{\Hypertarget{sdl__fonctions_8h_a9972d60841b918e062b514d818704ed5}\label{sdl__fonctions_8h_a9972d60841b918e062b514d818704ed5}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!N\+B\+S\+O\+U\+N\+DS@{N\+B\+S\+O\+U\+N\+DS}}
+\index{N\+B\+S\+O\+U\+N\+DS@{N\+B\+S\+O\+U\+N\+DS}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{N\+B\+S\+O\+U\+N\+DS}{NBSOUNDS}}
+{\footnotesize\ttfamily \#define N\+B\+S\+O\+U\+N\+DS~9}
+
+Nombre de sons différents 
+
+\subsection{Documentation des fonctions}
+\mbox{\Hypertarget{sdl__fonctions_8h_a303cdd690802321ee779410bc3ceae4a}\label{sdl__fonctions_8h_a303cdd690802321ee779410bc3ceae4a}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!affichage\+\_\+complet@{affichage\+\_\+complet}}
+\index{affichage\+\_\+complet@{affichage\+\_\+complet}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{affichage\+\_\+complet()}{affichage\_complet()}}
+{\footnotesize\ttfamily void affichage\+\_\+complet (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$}]{salle,  }\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{personnage,  }\item[{int $\ast$}]{inventaire\+Affiche }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}affichage complet (salle, personnage, etc) 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur vers le S\+D\+L\+\_\+\+Renderer à utiliser \\
+\hline
+{\em salle} & le pointeur sur la salle où afficher le joueur et les entités \\
+\hline
+{\em personnage} & le pointeur sur la structure personnage à afficher \\
+\hline
+{\em inventaire\+Affiche} & un booleen pour savoir si on affiche ou non l\textquotesingle{}inventaire \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a475b0b9786dcfb41679639fecf788207}\label{sdl__fonctions_8h_a475b0b9786dcfb41679639fecf788207}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!afficher\+\_\+entites@{afficher\+\_\+entites}}
+\index{afficher\+\_\+entites@{afficher\+\_\+entites}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{afficher\+\_\+entites()}{afficher\_entites()}}
+{\footnotesize\ttfamily void afficher\+\_\+entites (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$}]{salle,  }\item[{S\+D\+L\+\_\+\+Texture $\ast$}]{texture\+Salle }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}affichage des entités. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur vers le S\+D\+L\+\_\+\+Renderer à utiliser \\
+\hline
+{\em salle} & le pointeur sur la salle où afficher l\textquotesingle{}entité \\
+\hline
+{\em texture\+Salle} & le pointeur sur la texture de cible \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a28469cec6f810fe8f142860fffb0917c}\label{sdl__fonctions_8h_a28469cec6f810fe8f142860fffb0917c}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!afficher\+\_\+menu@{afficher\+\_\+menu}}
+\index{afficher\+\_\+menu@{afficher\+\_\+menu}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{afficher\+\_\+menu()}{afficher\_menu()}}
+{\footnotesize\ttfamily void afficher\+\_\+menu (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{\hyperlink{structmenu__s}{menu\+\_\+t} $\ast$}]{menu,  }\item[{int}]{taille\+Texte,  }\item[{int}]{taille\+Boutons,  }\item[{boolean\+\_\+t}]{sens }\end{DoxyParamCaption})}
+
+
+
+Fonction qui affiche un menu. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le renderer utilisé \\
+\hline
+{\em menu} & le menu à afficher \\
+\hline
+{\em taille\+Texte} & la taille du texte (multiplicateur) \\
+\hline
+{\em taille\+Boutons} & la taille des boutons (multiplicateur) \\
+\hline
+{\em sens} & si les boutons du menu sont affichés verticalement (1) ou horizontalement (0) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a73f7995c29a5bd9a4ec0097b9654d74d}\label{sdl__fonctions_8h_a73f7995c29a5bd9a4ec0097b9654d74d}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!afficher\+\_\+personnage@{afficher\+\_\+personnage}}
+\index{afficher\+\_\+personnage@{afficher\+\_\+personnage}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{afficher\+\_\+personnage()}{afficher\_personnage()}}
+{\footnotesize\ttfamily void afficher\+\_\+personnage (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{personnage,  }\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$}]{salle,  }\item[{S\+D\+L\+\_\+\+Texture $\ast$}]{texture\+Salle }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}affichage du personnage. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur vers le S\+D\+L\+\_\+\+Renderer à utiliser \\
+\hline
+{\em personnage} & le pointeur sur la structure personnage à afficher \\
+\hline
+{\em salle} & le pointeur sur la salle où afficher le joueur \\
+\hline
+{\em texture\+Salle} & le pointeur sur la texture de cible \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a00dfdb88930d557dfba9cd4e3f847cfc}\label{sdl__fonctions_8h_a00dfdb88930d557dfba9cd4e3f847cfc}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!afficher\+\_\+salle@{afficher\+\_\+salle}}
+\index{afficher\+\_\+salle@{afficher\+\_\+salle}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{afficher\+\_\+salle()}{afficher\_salle()}}
+{\footnotesize\ttfamily void afficher\+\_\+salle (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$}]{salle,  }\item[{S\+D\+L\+\_\+\+Texture $\ast$}]{texture\+Salle }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}affichage de la salle (fait en coopération avec Yannis Allain) 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur vers le S\+D\+L\+\_\+\+Renderer à utiliser \\
+\hline
+{\em salle} & le pointeur sur la structure salle à afficher \\
+\hline
+{\em texture\+Salle} & le pointeur sur la texture de cible \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a31f5e2ec7dd9c75d5f59ef2139ccd4d2}\label{sdl__fonctions_8h_a31f5e2ec7dd9c75d5f59ef2139ccd4d2}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!afficher\+Inventaire@{afficher\+Inventaire}}
+\index{afficher\+Inventaire@{afficher\+Inventaire}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{afficher\+Inventaire()}{afficherInventaire()}}
+{\footnotesize\ttfamily void afficher\+Inventaire (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{personnage,  }\item[{S\+D\+L\+\_\+\+Texture $\ast$}]{texture\+Salle }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}affichage de l\textquotesingle{}inventaire. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le renderer utilisé \\
+\hline
+{\em personnage} & la structure personnage qui contient l\textquotesingle{}inventaire \\
+\hline
+{\em texture\+Salle} & la texture sur laquelle afficher l\textquotesingle{}inventaire \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a08c53cc40921e55828bdf8ca86e0a028}\label{sdl__fonctions_8h_a08c53cc40921e55828bdf8ca86e0a028}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!afficher\+Vie\+Coeurs@{afficher\+Vie\+Coeurs}}
+\index{afficher\+Vie\+Coeurs@{afficher\+Vie\+Coeurs}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{afficher\+Vie\+Coeurs()}{afficherVieCoeurs()}}
+{\footnotesize\ttfamily void afficher\+Vie\+Coeurs (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{personnage,  }\item[{S\+D\+L\+\_\+\+Texture $\ast$}]{coeur\+Image,  }\item[{S\+D\+L\+\_\+\+Texture $\ast$}]{texture\+Salle }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}affichage de la vie sous forme de coeurs. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur vers le S\+D\+L\+\_\+\+Renderer à utiliser \\
+\hline
+{\em personnage} & le pointeur sur le personnage (points de vie) \\
+\hline
+{\em coeur\+Image} & la texture de l\textquotesingle{}image d\textquotesingle{}un coeur \\
+\hline
+{\em texture\+Salle} & le pointeur sur la texture de cible \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a94e33ae3646517c344ff00b785edfec9}\label{sdl__fonctions_8h_a94e33ae3646517c344ff00b785edfec9}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!afficher\+Vie\+Jauge@{afficher\+Vie\+Jauge}}
+\index{afficher\+Vie\+Jauge@{afficher\+Vie\+Jauge}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{afficher\+Vie\+Jauge()}{afficherVieJauge()}}
+{\footnotesize\ttfamily void afficher\+Vie\+Jauge (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{personnage,  }\item[{S\+D\+L\+\_\+\+Texture $\ast$}]{texture\+Salle }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}affichage de la vie sous forme de jauge. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur vers le S\+D\+L\+\_\+\+Renderer à utiliser \\
+\hline
+{\em personnage} & le pointeur sur le personnage (points de vie) \\
+\hline
+{\em texture\+Salle} & le pointeur sur la texture de cible \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a2fc6f14b6e9a769a578a5885c9a75d76}\label{sdl__fonctions_8h_a2fc6f14b6e9a769a578a5885c9a75d76}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!afficher\+Volume@{afficher\+Volume}}
+\index{afficher\+Volume@{afficher\+Volume}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{afficher\+Volume()}{afficherVolume()}}
+{\footnotesize\ttfamily void afficher\+Volume (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}affichage du volume sonore. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le renderer utilisé \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a3832de2405da428643b637a6bad134b8}\label{sdl__fonctions_8h_a3832de2405da428643b637a6bad134b8}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!charger\+Musique@{charger\+Musique}}
+\index{charger\+Musique@{charger\+Musique}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{charger\+Musique()}{chargerMusique()}}
+{\footnotesize\ttfamily Mix\+\_\+\+Music$\ast$ charger\+Musique (\begin{DoxyParamCaption}\item[{char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Charge une musique à partir de son emplacement. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em path} & l\textquotesingle{}emplacement de la musique à charger \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+le pointeur sur la musique chargée 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_ae95c4a9b071ed53dcce78308e546e7d3}\label{sdl__fonctions_8h_ae95c4a9b071ed53dcce78308e546e7d3}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!charger\+Sauvegarde\+Menu@{charger\+Sauvegarde\+Menu}}
+\index{charger\+Sauvegarde\+Menu@{charger\+Sauvegarde\+Menu}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{charger\+Sauvegarde\+Menu()}{chargerSauvegardeMenu()}}
+{\footnotesize\ttfamily int charger\+Sauvegarde\+Menu (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{int}]{num\+Sauv,  }\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$$\ast$}]{perso,  }\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$}]{salle }\end{DoxyParamCaption})}
+
+
+
+Charge une sauvegarde. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le renderer à utiliser \\
+\hline
+{\em num\+Sauv} & la sauvegarde utilisée \\
+\hline
+{\em perso} & le personnage à remplir \\
+\hline
+{\em salle} & la salle à remplir \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+la sauvegarde chargée si réussite 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_a4bbc930fae75bbf110ede7f89d728a62}\label{sdl__fonctions_8h_a4bbc930fae75bbf110ede7f89d728a62}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!creer\+Menu\+Confirmation@{creer\+Menu\+Confirmation}}
+\index{creer\+Menu\+Confirmation@{creer\+Menu\+Confirmation}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{creer\+Menu\+Confirmation()}{creerMenuConfirmation()}}
+{\footnotesize\ttfamily \hyperlink{structmenu__s}{menu\+\_\+t}$\ast$ creer\+Menu\+Confirmation (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{char $\ast$}]{question }\end{DoxyParamCaption})}
+
+
+
+Fonction qui créer un menu de confirmation. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur sur le renderer utilisé \\
+\hline
+{\em question} & la question posée \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+le pointeur sur le menu créé 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_a9559fbf6c398c258b61416f49d270eb6}\label{sdl__fonctions_8h_a9559fbf6c398c258b61416f49d270eb6}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!creer\+Menu\+Demarrage@{creer\+Menu\+Demarrage}}
+\index{creer\+Menu\+Demarrage@{creer\+Menu\+Demarrage}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{creer\+Menu\+Demarrage()}{creerMenuDemarrage()}}
+{\footnotesize\ttfamily \hyperlink{structmenu__s}{menu\+\_\+t}$\ast$ creer\+Menu\+Demarrage (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Fonction qui créer le menu de démarrage du jeu. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur sur le renderer utilisé \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+le pointeur sur le menu créé 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_af61c1f36adae27384ea6d99e9844edca}\label{sdl__fonctions_8h_af61c1f36adae27384ea6d99e9844edca}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!creer\+Menu\+In\+Game@{creer\+Menu\+In\+Game}}
+\index{creer\+Menu\+In\+Game@{creer\+Menu\+In\+Game}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{creer\+Menu\+In\+Game()}{creerMenuInGame()}}
+{\footnotesize\ttfamily \hyperlink{structmenu__s}{menu\+\_\+t}$\ast$ creer\+Menu\+In\+Game (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Fonction qui créer le menu in-\/game du jeu. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur sur le renderer utilisé \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+le pointeur sur le menu créé 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_aab60eb43c14063dd5b58920fae6d8762}\label{sdl__fonctions_8h_aab60eb43c14063dd5b58920fae6d8762}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!creer\+Police@{creer\+Police}}
+\index{creer\+Police@{creer\+Police}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{creer\+Police()}{creerPolice()}}
+{\footnotesize\ttfamily T\+T\+F\+\_\+\+Font$\ast$ creer\+Police (\begin{DoxyParamCaption}\item[{char $\ast$}]{path,  }\item[{int}]{taille }\end{DoxyParamCaption})}
+
+
+
+Fonction qui créé une police. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em path} & de la police ttf \\
+\hline
+{\em taille} & la taille de la police \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+un pointeur sur la police créée 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_ac0a7a8472f3cb246ffcc25228d742c6f}\label{sdl__fonctions_8h_ac0a7a8472f3cb246ffcc25228d742c6f}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!creer\+Texte@{creer\+Texte}}
+\index{creer\+Texte@{creer\+Texte}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{creer\+Texte()}{creerTexte()}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ creer\+Texte (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{char $\ast$}]{Fontpath,  }\item[{int}]{taille,  }\item[{char $\ast$}]{texte,  }\item[{int}]{r,  }\item[{int}]{g,  }\item[{int}]{b }\end{DoxyParamCaption})}
+
+
+
+Fonction qui créé un texte. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le renderer utilisé \\
+\hline
+{\em Fontpath} & le chemin vers la police utilisée \\
+\hline
+{\em taille} & la taille de la police \\
+\hline
+{\em texte} & le texte à créer \\
+\hline
+{\em r} & la donnée entière du rouge \\
+\hline
+{\em g} & la donnée entière du vert \\
+\hline
+{\em b} & la donnée entière du bleu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+un pointeur sur la texture créée 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_ad7ddf89003eab633450cb0100223dd61}\label{sdl__fonctions_8h_ad7ddf89003eab633450cb0100223dd61}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!creer\+Textures\+Menu\+Confirmation@{creer\+Textures\+Menu\+Confirmation}}
+\index{creer\+Textures\+Menu\+Confirmation@{creer\+Textures\+Menu\+Confirmation}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{creer\+Textures\+Menu\+Confirmation()}{creerTexturesMenuConfirmation()}}
+{\footnotesize\ttfamily void creer\+Textures\+Menu\+Confirmation (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{\hyperlink{structmenu__s}{menu\+\_\+t} $\ast$}]{menu }\end{DoxyParamCaption})}
+
+
+
+Fonction qui créer les textures d\textquotesingle{}un menu de confirmation\textquotesingle{}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur sur le renderer utilisé \\
+\hline
+{\em menu} & le pointeur sur le menu qui va contenir les textures \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_ae897e48addd88fad05249dec3d890d7e}\label{sdl__fonctions_8h_ae897e48addd88fad05249dec3d890d7e}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!creer\+Textures\+Menu\+Demarrage@{creer\+Textures\+Menu\+Demarrage}}
+\index{creer\+Textures\+Menu\+Demarrage@{creer\+Textures\+Menu\+Demarrage}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{creer\+Textures\+Menu\+Demarrage()}{creerTexturesMenuDemarrage()}}
+{\footnotesize\ttfamily void creer\+Textures\+Menu\+Demarrage (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{\hyperlink{structmenu__s}{menu\+\_\+t} $\ast$}]{menu }\end{DoxyParamCaption})}
+
+
+
+Fonction qui créer les textures du menu de démarrage du jeu. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur sur le renderer utilisé \\
+\hline
+{\em menu} & le pointeur sur le menu qui va contenir les textures \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a8754279fcd8693c28c3fc5c6f4624b31}\label{sdl__fonctions_8h_a8754279fcd8693c28c3fc5c6f4624b31}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!destroy\+\_\+personnage@{destroy\+\_\+personnage}}
+\index{destroy\+\_\+personnage@{destroy\+\_\+personnage}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{destroy\+\_\+personnage()}{destroy\_personnage()}}
+{\footnotesize\ttfamily void destroy\+\_\+personnage (\begin{DoxyParamCaption}\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$$\ast$}]{personnage }\end{DoxyParamCaption})}
+
+
+
+Fonction de destruction de la structure personnage. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em personnage} & pointeur sur le pointeur de la structure à détruire \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a178137e264817341b869df39374cd384}\label{sdl__fonctions_8h_a178137e264817341b869df39374cd384}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!destroy\+\_\+salle@{destroy\+\_\+salle}}
+\index{destroy\+\_\+salle@{destroy\+\_\+salle}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{destroy\+\_\+salle()}{destroy\_salle()}}
+{\footnotesize\ttfamily void destroy\+\_\+salle (\begin{DoxyParamCaption}\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$$\ast$}]{salle }\end{DoxyParamCaption})}
+
+
+
+Fonction de destruction de la structure salle. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em salle} & pointeur sur le pointeur de la structure salle à détruire \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_aa8cb56fc0aafd3a2d9af5477f6823c3b}\label{sdl__fonctions_8h_aa8cb56fc0aafd3a2d9af5477f6823c3b}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!detruire\+Menu@{detruire\+Menu}}
+\index{detruire\+Menu@{detruire\+Menu}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{detruire\+Menu()}{detruireMenu()}}
+{\footnotesize\ttfamily void detruire\+Menu (\begin{DoxyParamCaption}\item[{\hyperlink{structmenu__s}{menu\+\_\+t} $\ast$$\ast$}]{menu }\end{DoxyParamCaption})}
+
+
+
+Fonction qui détruit un menu. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em menu} & le pointeur sur le pointeur sur le menu à detruire \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a20809382ac67dc2f005aeedf67c4dc36}\label{sdl__fonctions_8h_a20809382ac67dc2f005aeedf67c4dc36}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!detruire\+Police@{detruire\+Police}}
+\index{detruire\+Police@{detruire\+Police}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{detruire\+Police()}{detruirePolice()}}
+{\footnotesize\ttfamily void detruire\+Police (\begin{DoxyParamCaption}\item[{T\+T\+F\+\_\+\+Font $\ast$$\ast$}]{font }\end{DoxyParamCaption})}
+
+
+
+Fonction qui détruit une police. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em font} & le pointeur sur le pointeur de la police à detruire \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a5ee6bb50de173b257e025743a456f048}\label{sdl__fonctions_8h_a5ee6bb50de173b257e025743a456f048}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!detruire\+Textures\+Menu@{detruire\+Textures\+Menu}}
+\index{detruire\+Textures\+Menu@{detruire\+Textures\+Menu}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{detruire\+Textures\+Menu()}{detruireTexturesMenu()}}
+{\footnotesize\ttfamily void detruire\+Textures\+Menu (\begin{DoxyParamCaption}\item[{\hyperlink{structmenu__s}{menu\+\_\+t} $\ast$}]{menu }\end{DoxyParamCaption})}
+
+
+
+Fonction qui détruit les textures d\textquotesingle{}un menu. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em menu} & le pointeur sur le menu qui contient les textures \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_afb46b3ed18a1969155b218f8b0179308}\label{sdl__fonctions_8h_afb46b3ed18a1969155b218f8b0179308}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!ecran\+Noir@{ecran\+Noir}}
+\index{ecran\+Noir@{ecran\+Noir}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{ecran\+Noir()}{ecranNoir()}}
+{\footnotesize\ttfamily void ecran\+Noir (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{int}]{ms }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}affichage d\textquotesingle{}un écran noir d\textquotesingle{}une durée choisie. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur vers le S\+D\+L\+\_\+\+Renderer à utiliser \\
+\hline
+{\em ms} & un entier correspondant à la durée d\textquotesingle{}affichage de l\textquotesingle{}écran noir (en millisecondes) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a5ef01a630d1944e0d3801024b9a6b78a}\label{sdl__fonctions_8h_a5ef01a630d1944e0d3801024b9a6b78a}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!evo\+Menu@{evo\+Menu}}
+\index{evo\+Menu@{evo\+Menu}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{evo\+Menu()}{evoMenu()}}
+{\footnotesize\ttfamily int evo\+Menu (\begin{DoxyParamCaption}\item[{\hyperlink{structmenu__s}{menu\+\_\+t} $\ast$}]{menu,  }\item[{int}]{clique }\end{DoxyParamCaption})}
+
+
+
+Fonction qui gère si un bouton à été validé 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em menu} & le menu à faire évoluer \\
+\hline
+{\em clique} & qui indique si le bouton a été cliqué ou non \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+l\textquotesingle{}id du bouton validé ou 0 si aucun n\textquotesingle{}a été validé 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_a3bb24e50196af6088ec379249abe83ba}\label{sdl__fonctions_8h_a3bb24e50196af6088ec379249abe83ba}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!evo\+Salle@{evo\+Salle}}
+\index{evo\+Salle@{evo\+Salle}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{evo\+Salle()}{evoSalle()}}
+{\footnotesize\ttfamily void evo\+Salle (\begin{DoxyParamCaption}\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$}]{salle }\end{DoxyParamCaption})}
+
+
+
+Fonction qui fait évoluer la salle. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em salle} & pointeur sur la salle à faire évoluer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_ab2b5e87dc24bdc1398d7b2bcb1c0cb83}\label{sdl__fonctions_8h_ab2b5e87dc24bdc1398d7b2bcb1c0cb83}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!Exploitation\+Binaire\+Sons@{Exploitation\+Binaire\+Sons}}
+\index{Exploitation\+Binaire\+Sons@{Exploitation\+Binaire\+Sons}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{Exploitation\+Binaire\+Sons()}{ExploitationBinaireSons()}}
+{\footnotesize\ttfamily void Exploitation\+Binaire\+Sons (\begin{DoxyParamCaption}\item[{unsigned int}]{nb\+Binaire }\end{DoxyParamCaption})}
+
+
+
+Permet de décoder un binaire pour récupérer les sons à jouer. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em nb\+Binaire} & le binaire à décoder \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a1912ff18815e32e97a54cbad8066c7bc}\label{sdl__fonctions_8h_a1912ff18815e32e97a54cbad8066c7bc}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!gameover@{gameover}}
+\index{gameover@{gameover}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{gameover()}{gameover()}}
+{\footnotesize\ttfamily void gameover (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Window $\ast$}]{fenetre,  }\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{S\+D\+L\+\_\+\+Display\+Mode}]{mode,  }\item[{S\+D\+L\+\_\+\+Joystick $\ast$}]{p\+Joystick,  }\item[{int}]{fullscreen }\end{DoxyParamCaption})}
+
+
+
+Fonction qui lance un gameover. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em fenetre} & le pointeur vers fenetre utilisée \\
+\hline
+{\em renderer} & le pointeur vers le pointeur sur le renderer utilisé \\
+\hline
+{\em mode} & le mode qui contient des informations sur l\textquotesingle{}écran \\
+\hline
+{\em p\+Joystick} & contient les informations sur le joystick ou N\+U\+LL si aucun n\textquotesingle{}est utilisé \\
+\hline
+{\em fullscreen} & un entier qui indique si le jeu est en plein écran (1) ou non (0) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a9ffbbd8791b49989f9ee4716096d2b7b}\label{sdl__fonctions_8h_a9ffbbd8791b49989f9ee4716096d2b7b}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!initialisation\+\_\+personnage@{initialisation\+\_\+personnage}}
+\index{initialisation\+\_\+personnage@{initialisation\+\_\+personnage}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{initialisation\+\_\+personnage()}{initialisation\_personnage()}}
+{\footnotesize\ttfamily \hyperlink{structpersonnage__s}{personnage\+\_\+t}$\ast$ initialisation\+\_\+personnage (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{\hyperlink{structposition__s}{position\+\_\+t}}]{position\+Depart,  }\item[{\hyperlink{structposition__s}{position\+\_\+t}}]{position\+Depart\+Delta }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}initialisation de la structure personnage. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le renderer utilisé \\
+\hline
+{\em position\+Depart} & la position de depart du joueur (en blocs) \\
+\hline
+{\em position\+Depart\+Delta} & la position de depart du joueur (en pixels à ajouter) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+le pointeur sur la structure personnage initialisée 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_ac7a206e3c72f0892f43e2e1dae5daf06}\label{sdl__fonctions_8h_ac7a206e3c72f0892f43e2e1dae5daf06}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!initialisation\+\_\+\+S\+DL@{initialisation\+\_\+\+S\+DL}}
+\index{initialisation\+\_\+\+S\+DL@{initialisation\+\_\+\+S\+DL}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{initialisation\+\_\+\+S\+D\+L()}{initialisation\_SDL()}}
+{\footnotesize\ttfamily void initialisation\+\_\+\+S\+DL (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Window $\ast$$\ast$}]{fenetre,  }\item[{S\+D\+L\+\_\+\+Renderer $\ast$$\ast$}]{renderer,  }\item[{S\+D\+L\+\_\+\+Display\+Mode $\ast$}]{mode,  }\item[{boolean\+\_\+t}]{fullscreen }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}initalisation de la S\+DL et de création de la fenetre et du renderer ainsi que du remplissage du mode d\textquotesingle{}écran (en parametre) 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em fenetre} & pointeur sur un pointeur de S\+D\+L\+\_\+\+Window qui correspond à la fenêtre initialiser \\
+\hline
+{\em renderer} & pointeur sur un pointeur de S\+D\+L\+\_\+\+Renderer qui correspond au renderer à initialiser \\
+\hline
+{\em mode} & pointeur sur un S\+D\+L\+\_\+\+Display\+Mode qui va contenir les informations sur l\textquotesingle{}écran \\
+\hline
+{\em fullscreen} & entier qui vaut 0 si on souhaite créer une fenetre simple et 1 si on la veut en plein écran \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a6c1464416b7688910f318a59982210d8}\label{sdl__fonctions_8h_a6c1464416b7688910f318a59982210d8}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!initialiser\+\_\+salle@{initialiser\+\_\+salle}}
+\index{initialiser\+\_\+salle@{initialiser\+\_\+salle}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{initialiser\+\_\+salle()}{initialiser\_salle()}}
+{\footnotesize\ttfamily \hyperlink{structsalle__s}{salle\+\_\+t}$\ast$ initialiser\+\_\+salle (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{char $\ast$}]{nom\+Fichier,  }\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{perso }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}initialisation de la salle. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & pointeur vers le renderer utilisé \\
+\hline
+{\em nom\+Fichier} & une chaine de caracteres qui contient le nom du fichier de la salle \\
+\hline
+{\em perso} & le pointeur sur le personnage à mettre dans la salle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+un pointeur sur la structure salle initialisée 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_a80026632ff5770fc7da3ed6a4b76e148}\label{sdl__fonctions_8h_a80026632ff5770fc7da3ed6a4b76e148}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!initialiser\+\_\+texture@{initialiser\+\_\+texture}}
+\index{initialiser\+\_\+texture@{initialiser\+\_\+texture}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{initialiser\+\_\+texture()}{initialiser\_texture()}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Texture$\ast$ initialiser\+\_\+texture (\begin{DoxyParamCaption}\item[{char $\ast$}]{path,  }\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{boolean\+\_\+t}]{est\+Target }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet d\textquotesingle{}initialiser une texture à partir d\textquotesingle{}une image. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em path} & chaine de caracteres qui correspond au chemin de l\textquotesingle{}image \\
+\hline
+{\em renderer} & le pointeur sur S\+D\+L\+\_\+\+Renderer \\
+\hline
+{\em est\+Target} & precise si la texture sera utilisée en tant que cible (1) ou non (0) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+le pointeur sur la texture générée 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_ae1d88b10b3071168e331039a28e8ecb7}\label{sdl__fonctions_8h_ae1d88b10b3071168e331039a28e8ecb7}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!initialiser\+\_\+typeentites@{initialiser\+\_\+typeentites}}
+\index{initialiser\+\_\+typeentites@{initialiser\+\_\+typeentites}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{initialiser\+\_\+typeentites()}{initialiser\_typeentites()}}
+{\footnotesize\ttfamily void initialiser\+\_\+typeentites (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Fonction d\textquotesingle{}initialisation des types de monstres. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur vers le renderer utilisé par les textures \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a6b26e56066f868312bf10a531452dd79}\label{sdl__fonctions_8h_a6b26e56066f868312bf10a531452dd79}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!jeu@{jeu}}
+\index{jeu@{jeu}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{jeu()}{jeu()}}
+{\footnotesize\ttfamily boolean\+\_\+t jeu (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Window $\ast$}]{fenetre,  }\item[{S\+D\+L\+\_\+\+Renderer $\ast$$\ast$}]{renderer,  }\item[{S\+D\+L\+\_\+\+Display\+Mode}]{mode,  }\item[{S\+D\+L\+\_\+\+Joystick $\ast$}]{p\+Joystick,  }\item[{int}]{fullscreen }\end{DoxyParamCaption})}
+
+
+
+Fonction qui lance le jeu et gère les inputs, lance les fonctions d\textquotesingle{}affichage. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em fenetre} & le pointeur vers fenetre utilisée \\
+\hline
+{\em renderer} & le pointeur vers le pointeur sur le renderer utilisé \\
+\hline
+{\em mode} & le mode qui contient des informations sur l\textquotesingle{}écran \\
+\hline
+{\em p\+Joystick} & contient les informations sur le joystick ou N\+U\+LL si aucun n\textquotesingle{}est utilisé \\
+\hline
+{\em fullscreen} & un entier qui indique si le jeu est en plein écran (1) ou non (0) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+un booleen indiquant si on est sorti parceque le personnage est mort (1) ou non (0) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_a79c168095e834346bbaaf27c91cfddc2}\label{sdl__fonctions_8h_a79c168095e834346bbaaf27c91cfddc2}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!konamicode@{konamicode}}
+\index{konamicode@{konamicode}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{konamicode()}{konamicode()}}
+{\footnotesize\ttfamily void konamicode (\begin{DoxyParamCaption}\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{perso,  }\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$}]{salle,  }\item[{char $\ast$}]{konami,  }\item[{int $\ast$}]{ind\+Kon,  }\item[{boolean\+\_\+t $\ast$}]{kon }\end{DoxyParamCaption})}
+
+
+
+Fonction qui détecte si le Konami code a été rentré et qui applique le cheat code en conséquence. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em perso} & le pointeur vers la structure personnage \\
+\hline
+{\em salle} & le pointeur vers la structure salle \\
+\hline
+{\em konami} & le tableau de caractère correspondant au code en cours (inputs) \\
+\hline
+{\em ind\+Kon} & le pointeur vers l\textquotesingle{}entier qui correspond au nombre de caractères actuellement dans le code entré \\
+\hline
+{\em kon} & le pointeur vers un booléen qui vaut F\+A\+L\+SE si le Konami code n\textquotesingle{}a pas été entré et T\+R\+UE si c\textquotesingle{}est le cas \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a0b5de16bf10565d14839539ce9b09421}\label{sdl__fonctions_8h_a0b5de16bf10565d14839539ce9b09421}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!lancer\+Musique\+Infini@{lancer\+Musique\+Infini}}
+\index{lancer\+Musique\+Infini@{lancer\+Musique\+Infini}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{lancer\+Musique\+Infini()}{lancerMusiqueInfini()}}
+{\footnotesize\ttfamily void lancer\+Musique\+Infini (\begin{DoxyParamCaption}\item[{Mix\+\_\+\+Music $\ast$}]{musique }\end{DoxyParamCaption})}
+
+
+
+Jouer une musique à l\textquotesingle{}infini. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em musique} & le pointeur sur la musique à jouer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a8374dc964f3a6270a41915a3a1823823}\label{sdl__fonctions_8h_a8374dc964f3a6270a41915a3a1823823}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!lancer\+Musique\+N\+B\+Fois@{lancer\+Musique\+N\+B\+Fois}}
+\index{lancer\+Musique\+N\+B\+Fois@{lancer\+Musique\+N\+B\+Fois}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{lancer\+Musique\+N\+B\+Fois()}{lancerMusiqueNBFois()}}
+{\footnotesize\ttfamily void lancer\+Musique\+N\+B\+Fois (\begin{DoxyParamCaption}\item[{Mix\+\_\+\+Music $\ast$}]{musique,  }\item[{int}]{nb\+Fois }\end{DoxyParamCaption})}
+
+
+
+Jouer une musique un nombre précis de fois. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em musique} & le pointeur sur la musique à jouer \\
+\hline
+{\em nb\+Fois} & le nombre de fois que l\textquotesingle{}on joue la musique \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a91cffe2cfb94aef79db0ededf3bc0d88}\label{sdl__fonctions_8h_a91cffe2cfb94aef79db0ededf3bc0d88}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!menu\+Confirmation@{menu\+Confirmation}}
+\index{menu\+Confirmation@{menu\+Confirmation}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{menu\+Confirmation()}{menuConfirmation()}}
+{\footnotesize\ttfamily boolean\+\_\+t menu\+Confirmation (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{char $\ast$}]{question,  }\item[{int}]{taille\+Texte,  }\item[{int}]{taille\+Boutons }\end{DoxyParamCaption})}
+
+
+
+Fonction qui lance un menu de confirmation. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer} & le pointeur sur le renderer utilisé \\
+\hline
+{\em question} & la question posée au joueur \\
+\hline
+{\em taille\+Texte} & la taille du texte dans le menu (multiplicateur) \\
+\hline
+{\em taille\+Boutons} & la taille des boutons dans le menu (multiplicateur) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_ae8f09fb904a843140a83eb42debe73b4}\label{sdl__fonctions_8h_ae8f09fb904a843140a83eb42debe73b4}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!mise\+Ajour\+Sprites@{mise\+Ajour\+Sprites}}
+\index{mise\+Ajour\+Sprites@{mise\+Ajour\+Sprites}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{mise\+Ajour\+Sprites()}{miseAjourSprites()}}
+{\footnotesize\ttfamily void mise\+Ajour\+Sprites (\begin{DoxyParamCaption}\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{perso }\end{DoxyParamCaption})}
+
+
+
+Fonction qui fait évoluer les sprites du personnage (animation) 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em perso} & le pointeur sur la structure personnage à faire évoluer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_a62c08b78dfc29e87435d4feaa50e2f0d}\label{sdl__fonctions_8h_a62c08b78dfc29e87435d4feaa50e2f0d}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!mise\+Ajour\+Sprites\+Entites@{mise\+Ajour\+Sprites\+Entites}}
+\index{mise\+Ajour\+Sprites\+Entites@{mise\+Ajour\+Sprites\+Entites}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{mise\+Ajour\+Sprites\+Entites()}{miseAjourSpritesEntites()}}
+{\footnotesize\ttfamily void mise\+Ajour\+Sprites\+Entites (\begin{DoxyParamCaption}\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$}]{salle }\end{DoxyParamCaption})}
+
+
+
+Fonction qui fait évoluer les sprites de l\textquotesingle{}entite (animation) 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em salle} & le pointeur vers la salle où trouver la liste d\textquotesingle{}entités avec les sprites à mettre à jour \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_af4ffdd61eb400c65a78258ee8ad1172a}\label{sdl__fonctions_8h_af4ffdd61eb400c65a78258ee8ad1172a}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!quitter\+\_\+\+S\+DL@{quitter\+\_\+\+S\+DL}}
+\index{quitter\+\_\+\+S\+DL@{quitter\+\_\+\+S\+DL}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{quitter\+\_\+\+S\+D\+L()}{quitter\_SDL()}}
+{\footnotesize\ttfamily void quitter\+\_\+\+S\+DL (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Window $\ast$$\ast$}]{fenetre,  }\item[{S\+D\+L\+\_\+\+Renderer $\ast$$\ast$}]{renderer }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet de détruire la fenetre et quitter la S\+DL. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em fenetre} & le pointeur sur le pointeur de la fenetre S\+D\+L\+\_\+\+Window à détruire \\
+\hline
+{\em renderer} & le pointeur sur le pointeur de la renderer S\+D\+L\+\_\+\+Renderer à détruire \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{sdl__fonctions_8h_abbc303ab096908ca65a0ee9d0c1be6ed}\label{sdl__fonctions_8h_abbc303ab096908ca65a0ee9d0c1be6ed}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!sauvegarder\+Menu@{sauvegarder\+Menu}}
+\index{sauvegarder\+Menu@{sauvegarder\+Menu}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{sauvegarder\+Menu()}{sauvegarderMenu()}}
+{\footnotesize\ttfamily int sauvegarder\+Menu (\begin{DoxyParamCaption}\item[{int}]{num\+Sauv,  }\item[{\hyperlink{structpersonnage__s}{personnage\+\_\+t} $\ast$}]{perso,  }\item[{\hyperlink{structsalle__s}{salle\+\_\+t} $\ast$}]{salle }\end{DoxyParamCaption})}
+
+
+
+Sauvegarde dans un slot de sauvegarde. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em num\+Sauv} & le slot de la sauvegarde à utiliser \\
+\hline
+{\em perso} & le personnage à sauvegarder \\
+\hline
+{\em salle} & la salle à sauvegarder \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+la sauvegarde sauvegardée si réussite 
+\end{DoxyReturn}
+\mbox{\Hypertarget{sdl__fonctions_8h_a59b9e7efa825b397eac099f072462065}\label{sdl__fonctions_8h_a59b9e7efa825b397eac099f072462065}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!Touches\+Menu@{Touches\+Menu}}
+\index{Touches\+Menu@{Touches\+Menu}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{Touches\+Menu()}{TouchesMenu()}}
+{\footnotesize\ttfamily void Touches\+Menu (\begin{DoxyParamCaption}\item[{int}]{direction,  }\item[{S\+D\+L\+\_\+\+Point}]{souris,  }\item[{boolean\+\_\+t}]{bouge\+Souris,  }\item[{\hyperlink{structmenu__s}{menu\+\_\+t} $\ast$}]{menu }\end{DoxyParamCaption})}
+
+
+
+Fonction qui gère si il y a changement de boutons ou selection dans le menu. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em direction} & la direction du changement de bouton (gauche ou droite, haut ou bas, avancer ou reculer) \\
+\hline
+{\em souris} & le point qui correspond à la position du pointeur de la souris sur l\textquotesingle{}écran \\
+\hline
+{\em bouge\+Souris} & un booléenqui indique si la souris a bougé ou non \\
+\hline
+{\em menu} & le menu à faire évoluer \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Documentation des variables}
+\mbox{\Hypertarget{sdl__fonctions_8h_ac6f39a15d648c44f7535d58d075b7385}\label{sdl__fonctions_8h_ac6f39a15d648c44f7535d58d075b7385}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!Effets\+Sonores@{Effets\+Sonores}}
+\index{Effets\+Sonores@{Effets\+Sonores}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{Effets\+Sonores}{EffetsSonores}}
+{\footnotesize\ttfamily Mix\+\_\+\+Chunk$\ast$ Effets\+Sonores\mbox{[}\hyperlink{sdl__fonctions_8h_a9972d60841b918e062b514d818704ed5}{N\+B\+S\+O\+U\+N\+DS}\mbox{]}}
+
+Tableau en variable globale des effets sonores du jeu \mbox{\Hypertarget{sdl__fonctions_8h_a1b3a996665018cdf064654fc8e7c3b62}\label{sdl__fonctions_8h_a1b3a996665018cdf064654fc8e7c3b62}} 
+\index{sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}!pourcentage\+Vol@{pourcentage\+Vol}}
+\index{pourcentage\+Vol@{pourcentage\+Vol}!sdl\+\_\+fonctions.\+h@{sdl\+\_\+fonctions.\+h}}
+\subsubsection{\texorpdfstring{pourcentage\+Vol}{pourcentageVol}}
+{\footnotesize\ttfamily float pourcentage\+Vol}
+
+Pourcentage de volume de la musique (en variable globale) 

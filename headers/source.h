@@ -15,8 +15,8 @@
  * \date 17/05/2020
 */
 
-#define NBTYPEMONSTRE 24 /** Nombre de type de monstres */
-type_monstre_t typesMonstre[NBTYPEMONSTRE]; /** Tableau en variable globale des types de monstres*/
+#define NBTYPEMONSTRE 24 /**< Nombre de type de monstres */
+type_monstre_t typesMonstre[NBTYPEMONSTRE]; /**< Tableau en variable globale des types de monstres*/
 
 //char* chercherSprite(int, char*);
 

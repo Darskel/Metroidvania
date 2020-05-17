@@ -9,27 +9,18 @@
 /**
  * \file comportement.c
  * \brief Ensemble de fonctions pour le comportement des mobs et du personnage
- * \author Thomas DIDIER L2 Info Le Mans
- * \version 3.5
- * \date 23/04/2020
+ * \author Marie-Nina MUNAR & Thomas DIDIER L2 Info Le Mans
+ * \version 4.0
+ * \date 17/05/2020
 */
 
-/*static int toucher(monstre_t* e1, monstre_t* e2){
-    SDL_rect rect1, rect2;
-
-    rect1.x = TAILLE_BLOCK*e1->pos.x + e1->delta.x;
-    rect1.y = TAILLE_BLOCK*e1->pos.y + e1->delta.y;
-    rect1.w = e1->type->hitbox.w;
-    rect1.h = e1->type->hitbox.h;
-
-    rect2.x = TAILLE_BLOCK*e2->pos.x + e2->delta.x;
-    rect2.y = TAILLE_BLOCK*e2->pos.y + e2->delta.y;
-    rect2.w = e2->type->hitbox.w;
-    rect2.h = e2->type->hitbox.h;
-
-    return SDL_IntersectRect(&rect1,&rect2);
-}*/
-
+/**
+ * \brief Fonction qui calcule une puissance
+ *
+ * @param a le nombre à multiplier
+ * @param b le nombre de fois qu'il faut multiplier
+ * @return le résultat de l'opération
+*/
 static int puissance(int a, int b){
     int som = 1;
 
@@ -115,10 +106,10 @@ int hitE(monstre_t* e1, monstre_t* e2){
 }
 
 /**
- * \brief Vérifie si une entité touche une autre entité
+ * \brief Vérifie si une entité touche le personnage
  *
- * @param e1 pointeur vers la première entité
- * @param e2 pointeur vers la seconde entité
+ * @param m pointeur vers l'entité'
+ * @param p pointeur vers le personnage
  *
  * @return 1 (TRUE) si il y a contact, 0 (FALSE) sinon
 */
@@ -162,12 +153,12 @@ int hitP(monstre_t* m, personnage_t* p){
 
 
 /**
- * \brief Vérifie si le deplacement du personnage est valide
+ * \brief Vérifie si le personnage est dans un emplacement valide (sans collision avec des blocs)
  *
  * @param p pointeur vers le personnage
  * @param s pointeur vers la salle
  *
- * @return 1 (TRUE) si le déplacement est valide, 0 (FALSE) sinon
+ * @return 1 (TRUE) si tout va bien, 0 (FALSE) si il y a collision
 */
 int persValid(personnage_t* p, salle_t* s){
     SDL_Rect pH;
@@ -273,65 +264,6 @@ void depGauche(personnage_t* p, salle_t* s){
     }
 }
 
-/**
- * \brief Vérifie la case au dessus du personnage
- *
- * @param p pointeur vers le personnage
- * @param s pointeur vers la salle
- * @return 1 (TRUE) si le il y a un bloc, 0 (FALSE) sinon
-*/
-/*static int verifCaseUp(personnage_t* p, salle_t* s){
-    int leftP;
-    int rightP;
-    int topP;
-
-    leftP = p->pos.x*TAILLEBLOC + p->delta.x + p->hitbox.x;
-    rightP = leftP + p->hitbox.w;
-    topP = p->pos.y*TAILLEBLOC + p->hitbox.y + p->delta.y;
-
-    if(topP < 0)
-        return TRUE;
-
-    leftP /= TAILLEBLOC;
-    rightP = rightP/TAILLEBLOC;
-    topP = topP/TAILLEBLOC - (topP%TAILLEBLOC ? 1 : 0);
-
-    for(int i = leftP; i <= rightP; i++)
-        if(s->mat[topP][i])
-            return TRUE;
-
-    return FALSE;
-}*/
-
-/**
- * \brief Vérifie la case en dessous du personnage
- *
- * @param p pointeur vers le personnage
- * @param s pointeur vers la salle
- * @return 1 (TRUE) si le il y a un bloc, 0 (FALSE) sinon
-*/
-/*static int verifCaseDown(personnage_t* p, salle_t* s){
-    int leftP;
-    int rightP;
-    int bottomP;
-
-    leftP = p->pos.x*TAILLEBLOC + p->delta.x + p->hitbox.x;
-    rightP = leftP + p->hitbox.w;
-    bottomP = p->pos.y*TAILLEBLOC + p->delta.y + p->hitbox.y + p->hitbox.h;
-
-    leftP /= TAILLEBLOC;
-    rightP = rightP/TAILLEBLOC;
-    bottomP = bottomP/TAILLEBLOC + (bottomP%TAILLEBLOC ? 1 : 0);
-
-    if(bottomP >= s->hauteur )
-        return -1; //Le personnage est tombé dans un trou
-
-    for(int i = leftP; i <= rightP; i++)
-        if(s->mat[bottomP][i])
-            return TRUE;
-
-    return FALSE;
-}*/
 
 /**
  * \brief Gère le déplacement vertical du personnage quelque soit son état
@@ -520,6 +452,13 @@ void depVert(personnage_t* p, salle_t* s, int tryJump){
       }
 }
 
+/**
+ * \brief Fonction qui gère l'attaque du personnage
+ *
+ * @param p pointeur vers le personnage
+ * @param s pointeur vers la salle
+ * @param tryAtk booléen qui vaut TRUE(1) si le personnage essaie actuellement d'attaquer, FALSE(0) sinon
+*/
 void attaquer(personnage_t* p, salle_t* s, int tryAtk){
   SDL_Rect pH;
     if(p->forme == 'r')
@@ -609,6 +548,12 @@ void attaquer(personnage_t* p, salle_t* s, int tryAtk){
         }
 }
 
+/**
+ * \brief Fonction qui gère la transformation en renard/humain
+ *
+ * @param p pointeur vers le personnage
+ * @param s pointeur vers la salle
+*/
 void transformation(personnage_t* p, salle_t* s){
   SDL_Texture * temp=NULL;
   int deltaytmp=0;
@@ -723,7 +668,7 @@ char* prendPorte(personnage_t* p, liste_t* lPortes){
 }
 
 /**
- * \brief Vérifie si une entité est dans un bloc que la salle
+ * \brief Vérifie si une entité est dans un bloc
  *
  * @param e pointeur vers l'entité
  * @param s pointeur vers la salle
@@ -767,38 +712,7 @@ static int hitB(monstre_t* m, salle_t* s){
 }
 
 /**
- * \brief Vérifie si le monstre doit chuter
- *
- * @param m pointeur vers le monstre
- * @param s pointeur vers la salle
- * @return 1 (TRUE) si le monstre doit chuter, 0 (FALSE) sinon
-*/
-/*static int verifChuteMonstre(monstre_t* m, salle_t* s){
-    int leftM;
-    int rightM;
-    int bottomM;
-
-    leftM = m->pos.x*TAILLEBLOC + m->delta.x + m->type->hitbox.x;
-    rightM = leftM + m->type->hitbox.w;
-    bottomM = m->pos.y*TAILLEBLOC + m->delta.y + m->type->hitbox.y + m->type->hitbox.h;
-
-    leftM /= TAILLEBLOC;
-    rightM = rightM/TAILLEBLOC;
-    bottomM = bottomM/TAILLEBLOC - (bottomM%TAILLEBLOC ? 1 : 0);
-
-    if(bottomM >= s->hauteur)
-        return -1; //Le monstre est tombé dans le vide ?
-
-    for(int i = leftM; i <= rightM; i++){
-        if(!s->mat[bottomM][i])
-            return TRUE;
-    }
-
-    return FALSE;
-}*/
-
-/**
- * \brief Gère le déplacement d'une entite (monstre)
+ * \brief Gère le déplacement horizontal d'une entite (monstre)
  *
  * @param entite le pointeur vers la structure monstre à déplacer
  * @param salle le pointeur vers la structure salle où se trouve l'entite
@@ -832,6 +746,12 @@ static boolean_t depH(monstre_t* entite, salle_t* salle){
     return FALSE;
 }
 
+/**
+ * \brief Gère le déplacement vertical d'une entite (monstre)
+ *
+ * @param entite le pointeur vers la structure monstre à déplacer
+ * @param salle le pointeur vers la structure salle où se trouve l'entite
+*/
 static boolean_t depV(monstre_t* entite, salle_t* salle, boolean_t chute){
     int oldposy = entite->pos.y;
     int olddeltay = entite->delta.y;
@@ -866,6 +786,14 @@ static boolean_t depV(monstre_t* entite, salle_t* salle, boolean_t chute){
     return FALSE;
 }
 
+/**
+ * \brief Fonction qui gère le champ de vision d'une entite (si le personnage se trouve dans ce champ de vision)
+ *
+ * @param m pointeur vers le monstre
+ * @param perso pointeur vers le personnage
+ * @param salle pointeur vers la salle
+ * @param checkUpside booléen
+*/
 static int inRange(monstre_t* m, personnage_t* perso, salle_t* salle, boolean_t checkUpside){
     SDL_Rect pH;
     SDL_Rect mH;
@@ -917,12 +845,26 @@ static int inRange(monstre_t* m, personnage_t* perso, salle_t* salle, boolean_t 
     return FALSE;
 }
 
+/**
+ * \brief Fonction qui gère la récupération d'un récupérable
+ *
+ * @param entite pointeur vers l'entite'
+ * @param perso pointeur vers le personnage
+ * @param salle pointeur vers la salle
+*/
 void compRecuperable(monstre_t* entite, personnage_t* perso, salle_t* salle){
     entite->etat = IDLE;
     if(hitP(entite,perso))
         recupElem(entite,perso);
 }
 
+/**
+ * \brief Fonction qui gère le comportement du coeur
+ *
+ * @param e pointeur vers l'entite'
+ * @param p pointeur vers le personnage
+ * @param s pointeur vers la salle
+*/
 void compCoeur(monstre_t* e, personnage_t* p, salle_t* s){
     if(hitP(e,p)){
         p->pv += e->type->degat;
@@ -949,6 +891,13 @@ void compCoeur(monstre_t* e, personnage_t* p, salle_t* s){
     }
 }
 
+/**
+ * \brief Fonction qui gère le comportement des flèches
+ *
+ * @param entite pointeur vers l'entite'
+ * @param perso pointeur vers le personnage
+ * @param salle pointeur vers la salle
+*/
 void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle){
     monstre_t tmp;
 
@@ -976,6 +925,13 @@ void compFleches(monstre_t* entite, personnage_t* perso, salle_t* salle){
     }
 }
 
+/**
+ * \brief Fonction qui gère le comportement des portes
+ *
+ * @param e pointeur vers l'entite'
+ * @param p pointeur vers le personnage
+ * @param s pointeur vers la salle
+*/
 void compPortes(monstre_t* e, personnage_t* p, salle_t* s){
     if(!e->direction)
         e->direction = RIGHT;
@@ -1017,11 +973,25 @@ void compPortes(monstre_t* e, personnage_t* p, salle_t* s){
     }
 }
 
+/**
+ * \brief Fonction qui gère le comportement du mur de glace
+ *
+ * @param entite pointeur vers l'entite'
+ * @param perso pointeur vers le personnage
+ * @param salle pointeur vers la salle
+*/
 void compMurGlace(monstre_t* entite, personnage_t* perso, salle_t* salle){
     if(entite->pv)
         entite->pv = 2;
 }
 
+/**
+ * \brief Fonction qui gère le comportement du Roi vifplume (boss)
+ *
+ * @param entite pointeur vers l'entite'
+ * @param perso pointeur vers le personnage
+ * @param salle pointeur vers la salle
+*/
 void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
     //fonction en beta
     /*if(hitP(entite,perso)){
@@ -1032,6 +1002,13 @@ void compRoiVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
     }*/
 }
 
+/**
+ * \brief Fonction qui gère le comportement des serpents bleus et verts
+ *
+ * @param entite pointeur vers l'entite'
+ * @param perso pointeur vers le personnage
+ * @param salle pointeur vers la salle
+*/
 void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
     int dir = hitP(entite,perso);
     if(dir && !perso->hit){
@@ -1101,6 +1078,13 @@ void compSerpent(monstre_t* entite, personnage_t* perso, salle_t* salle){
     }
 }
 
+/**
+ * \brief Fonction qui gère le comportement des serpents roses
+ *
+ * @param entite pointeur vers l'entite'
+ * @param perso pointeur vers le personnage
+ * @param salle pointeur vers la salle
+*/
 void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
   SDL_Rect mH;
     int dir = hitP(entite,perso);
@@ -1233,6 +1217,13 @@ void compSerpentRose(monstre_t* entite, personnage_t* perso, salle_t* salle){
     }
 }
 
+/**
+ * \brief Fonction qui gère le comportement du singe de grotte
+ *
+ * @param entite pointeur vers l'entite'
+ * @param perso pointeur vers le personnage
+ * @param salle pointeur vers la salle
+*/
 void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle){
     int dir = hitP(entite,perso);
     int tmp;
@@ -1315,6 +1306,13 @@ void compSingeGrotte(monstre_t* entite, personnage_t* perso, salle_t* salle){
     }
 }
 
+/**
+ * \brief Fonction qui gère le comportement du venin (craché par le serpent rose)
+ *
+ * @param entite pointeur vers l'entite'
+ * @param perso pointeur vers le personnage
+ * @param salle pointeur vers la salle
+*/
 void compVenin(monstre_t* entite, personnage_t* perso, salle_t* salle){
     int dir = hitP(entite,perso);
     if(dir && !perso->hit){
@@ -1331,10 +1329,24 @@ void compVenin(monstre_t* entite, personnage_t* perso, salle_t* salle){
             entite->pv = 0;
 }
 
+/**
+ * \brief Fonction qui gère le comportement du vers géant
+ *
+ * @param entite pointeur vers l'entite'
+ * @param perso pointeur vers le personnage
+ * @param salle pointeur vers la salle
+*/
 void compVersGeant(monstre_t* entite, personnage_t* perso, salle_t* salle){
 
 }
 
+/**
+ * \brief Fonction qui gère le comportement des vifplumes
+ *
+ * @param entite pointeur vers l'entite'
+ * @param perso pointeur vers le personnage
+ * @param salle pointeur vers la salle
+*/
 void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
     int dir = hitP(entite,perso);
     int tmp;
@@ -1405,6 +1417,12 @@ void compVifplume(monstre_t* entite, personnage_t* perso, salle_t* salle){
     }
 }
 
+/**
+ * \brief Fonction qui créé un coeur à partir d'une entité tuée
+ *
+ * @param m pointeur vers l'entite'
+ * @param salle pointeur vers la salle
+*/
 static void creerCoeur(monstre_t* m, salle_t* s){
   SDL_Rect mH;
   monstre_t* c = malloc(sizeof(monstre_t));
@@ -1437,6 +1455,12 @@ static void creerCoeur(monstre_t* m, salle_t* s){
   ajoutDroit(s->listeEntite, c);
 }
 
+/**
+ * \brief Fonction qui gère l'évolution du personnage dans la salle
+ *
+ * @param p pointeur vers le personnage
+ * @param s pointeur vers la salle
+*/
 void evolution(personnage_t* p, salle_t* s){
     int r;
 

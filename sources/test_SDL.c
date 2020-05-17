@@ -4,12 +4,12 @@
  * \file test_SDL.c
  * \brief Fichier de test des fonctions de 'sdl_fonctions.c' (Actuellement le programme principal)
  * \author Marie-Nina MUNAR L2 Info Le Mans
- * \version 2.0
- * \date 07/04/2020
+ * \version 3.0
+ * \date 17/05/2020
 */
 
 /**
- * \brief Programme de test qui lance le jeu
+ * \brief Programme de test qui lance le jeu (menu principal)
  *
  * @param argc le nombre d'arguments du main (attendu : 0 ou 1)
  * @param argv le tableau des chaînes de caractères des arguments (attendu : rien ou "-fullscreen")

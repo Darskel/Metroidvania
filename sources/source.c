@@ -12,9 +12,9 @@
 /**
  * \file source.c
  * \brief Fonctions de lecture d'une salle
- * \author Thomas DIDIER L2 Info Le Mans
- * \version 2.0
- * \date 27/04/2020
+ * \author Thomas DIDIER & Marie-Nina MUNAR L2 Info Le Mans
+ * \version 3.0
+ * \date 17/05/2020
 */
 
 /**
@@ -114,8 +114,9 @@ int chargerSauvegarde(int numSauv, personnage_t* perso, char* salle){
         return 0; //Le fichier de sauvegarde est vide
     }
 
-    fscanf(file, "ealth Point:%d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", &(perso->pv), salle, &(perso->pos.x), &(perso->pos.y));
-
+    fscanf(file, "ealth Point:%d\nNom de la salle: %s\nPosition: %d %d\nInventaire:\n", &(perso->pv), salle, &(perso->apparition.x), &(perso->apparition.y));
+    perso->pos.x=perso->apparition.x;
+    perso->pos.y=perso->apparition.y;
     //printf("Path salle chargée : %s\n", salle);
 
     for(int i = 0; i < TAILLE_INVENTAIRE; i++){
@@ -137,6 +138,7 @@ int chargerSauvegarde(int numSauv, personnage_t* perso, char* salle){
 
 /**
  * \brief Créé le tableau de types d'entités
+ * \details chaque entité est créée en dur dans le code
  *
 */
 void creerTypeEntite(){
@@ -160,15 +162,15 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "cle bleue", //nom de l'entité
         "sprites/entite/cles/cle_bleue.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {10,11}, //taille sprites
         FALSE, //Passe à travers les entités
-        FALSE, //Passe à travers les blocs*
-        0,
+        FALSE, //Passe à travers les blocs
+        0, //Champ de vision
         0, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -192,15 +194,15 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "cle rouge", //nom de l'entité
         "sprites/entite/cles/cle_rouge.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {10,11}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
+        0, //Champ de vision
         0, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -224,15 +226,15 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "cle rouillee", //nom de l'entité
         "sprites/entite/cles/cle_rouille.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {10,11}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
+        0, //Champ de vision
         0, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -256,15 +258,15 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "cle verte", //nom de l'entité
         "sprites/entite/cles/cle_verte.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {10,11}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
+        0, //Champ de vision
         0, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -288,16 +290,16 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "discoshroom", //nom de l'entité
         "sprites/entite/discoshroom/tileset.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {16,16}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
-        18, //N'attend pas avant de changer d'animation
+        0, //Champ de vision
+        18, //Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -320,16 +322,16 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "double saut", //nom de l'entité
         "sprites/entite/double-saut/tileset.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {25,25}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
-        15, //N'attend pas avant de changer d'animation
+        0, //Champ de vision
+        15, //Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -352,15 +354,15 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "huile", //nom de l'entité
         "sprites/entite/flacon_huile/flacon.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {8,8}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
+        0, //Champ de vision
         0, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -384,15 +386,15 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "mur glace", //nom de l'entité
         "sprites/entite/mur_glace/tileset.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {32,16}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
+        0, //Champ de vision
         0, //N'attend pas avant de changer d'animation
         compMurGlace //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -416,15 +418,15 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "porte bleue", //nom de l'entité
         "sprites/entite/portes/porte_bleu.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {36,13}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
+        0, //Champ de vision
         0, //N'attend pas avant de changer d'animation
         compPortes //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -448,15 +450,15 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "porte rouge", //nom de l'entité
         "sprites/entite/portes/porte_rouge.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {36,13}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
+        0, //Champ de vision
         0, //N'attend pas avant de changer d'animation
         compPortes //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -480,15 +482,15 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "porte rouillee", //nom de l'entité
         "sprites/entite/portes/porte_rouillee.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {36,13}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
+        0, //Champ de vision
         0, //N'attend pas avant de changer d'animation
         compPortes //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -512,15 +514,15 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "porte verte", //nom de l'entité
         "sprites/entite/portes/porte_verte.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {36,13}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
+        0, //Champ de vision
         0, //N'attend pas avant de changer d'animation
         compPortes //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -544,15 +546,15 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "renard", //nom de l'entité
         "sprites/entite/renard/tileset.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {13,24}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
+        0, //Champ de vision
         0, //N'attend pas avant de changer d'animation
         compRecuperable //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -581,16 +583,16 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "roi vifplume", //nom de l'entité
         "sprites/entite/roi_vifplume/tileset.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        2,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        2, //Nombre de rectangles d'hitbox différents pour l'entité
         {57,50}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        25*TAILLEBLOC,
-        25, //Attend 25 frames avant de changer d'animation (plutôt lent)
+        25*TAILLEBLOC, //Champ de vision
+        25,//Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
         compRoiVifplume //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -616,18 +618,18 @@ void creerTypeEntite(){
         2, //pv de base
         VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
         0, //vitesse d'attaque
-        "serpent bleu",//nom, //nom de l'entité
-        "sprites/entite/serpent_bleu/tileset.png",//chemin, //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        "serpent bleu",//nom de l'entité
+        "sprites/entite/serpent_bleu/tileset.png",//chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        2,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        2, //Nombre de rectangles d'hitbox différents pour l'entité
         {30,51}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
-        25, //Attend 25 frames avant de changer d'animation (plutôt lent)
+        0, //Champ de vision
+        25,//Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
         compSerpent //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -653,18 +655,18 @@ void creerTypeEntite(){
         2, //pv de base
         VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
         100, //vitesse d'attaque
-        "serpent rose",//nom, //nom de l'entité
-        "sprites/entite/serpent_rose/tileset.png",//chemin, //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        "serpent rose",//nom de l'entité
+        "sprites/entite/serpent_rose/tileset.png",//chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         0, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        2,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        2, //Nombre de rectangles d'hitbox différents pour l'entité
         {30,51}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        25*TAILLEBLOC,
-        25, //Attend 25 frames avant de changer d'animation (plutôt lent)
+        25*TAILLEBLOC, //Champ de vision
+        25, //Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
         compSerpentRose //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -690,18 +692,18 @@ void creerTypeEntite(){
         3, //pv de base
         VITDEPPERS > 1 ? VITDEPPERS/2 : 1, //vit de deplacement
         0, //vitesse d'attaque
-        "serpent bleu",//nom, //nom de l'entité
-        "sprites/entite/serpent_vert/tileset.png",//chemin, //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        "serpent bleu",//nom de l'entité
+        "sprites/entite/serpent_vert/tileset.png",//chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        2,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        2, //Nombre de rectangles d'hitbox différents pour l'entité
         {30,51}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
-        25, //Attend 25 frames avant de changer d'animation (plutôt lent)
+        0, //Champ de vision
+        25, //Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
         compSerpent //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -724,18 +726,18 @@ void creerTypeEntite(){
         4, //pv de base
         1, //vit de deplacement
         0, //vitesse d'attaque
-        "singe grotte",//nom, //nom de l'entité
-        "sprites/entite/singe_grotte/tileset.png",//chemin, //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        "singe grotte",//nom de l'entité
+        "sprites/entite/singe_grotte/tileset.png",//chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur) {35,25}, {32,22}, {31,25}, {31,21} quand il saute !
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur) {35,25}, {32,22}, {31,25}, {31,21} quand il saute !
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {35,25}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        25*TAILLEBLOC,
-        10, //Attend 10 frames avant de changer d'animation (plutôt moyen)
+        25*TAILLEBLOC, //Champ de vision
+        10, //Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
         compSingeGrotte //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -756,18 +758,18 @@ void creerTypeEntite(){
         2, //pv de base
         0, //vit de deplacement
         0, //vitesse d'attaque
-        "vers geant",//nom, //nom de l'entité
-        "sprites/entite/vers_geant/tileset.png",//chemin, //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        "vers geant",//nom de l'entité
+        "sprites/entite/vers_geant/tileset.png",//chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur) {2,5}, {8,7}, {13,8}, {17,10}, {21,10}, {25,10}, {29,10} quand il attaque ! +4,+0 à partir de [4]
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur) {2,5}, {8,7}, {13,8}, {17,10}, {21,10}, {25,10}, {29,10} quand il attaque ! +4,+0 à partir de [4]
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {33,20}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
-        25, //Attend 25 frames avant de changer d'animation (plutôt lent)
+        0, //Champ de vision
+        25, //Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
         compVersGeant //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -790,16 +792,16 @@ void creerTypeEntite(){
         50, //vitesse d'attaque
         "vifplume", //nom de l'entité
         "sprites/entite/vifplume/tileset.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //{0,2,0,0} //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur) {26,32} quand il attaque !
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur) {26,32} quand il attaque !
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {31,37}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        25*TAILLEBLOC,
-        8, //Attend 25 frames avant de changer d'animation (plutôt lent)
+        25*TAILLEBLOC, //Champ de vision
+        8, //Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
         compVifplume //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -822,15 +824,15 @@ void creerTypeEntite(){
         0, //vitesse d'attaque
         "coeur", //nom de l'entité
         "sprites/entite/coeur/coeur.png", //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {8,8}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
+        0, //Champ de vision
         0, //N'attend pas avant de changer d'animation
         compCoeur //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -852,18 +854,18 @@ void creerTypeEntite(){
         1, //pv de base
         3, //vit de deplacement
         0, //vitesse d'attaque
-        "fleche",//nom, //nom de l'entité
-        "sprites/entite/fleche/tileset.png",//chemin, //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        "fleche",//nom de l'entité
+        "sprites/entite/fleche/tileset.png",//chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {9,19}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
-        5, //N'attend pas avant de changer d'animation
+        0, //Champ de vision
+        5, //Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
         compFleches //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -884,18 +886,18 @@ void creerTypeEntite(){
         1, //pv de base
         3, //vit de deplacement
         0, //vitesse d'attaque
-        "fleche feu",//nom, //nom de l'entité
-        "sprites/entite/fleche_feu/tileset.png",//chemin, //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        "fleche feu",//nom de l'entité
+        "sprites/entite/fleche_feu/tileset.png",//chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         2, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {8,19}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
-        5, //N'attend pas avant de changer d'animation
+        0, //Champ de vision
+        5, //Attend ce nombre de frame avant de changer d'animation (vitesse d'animation)
         compFleches //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
 
@@ -916,17 +918,17 @@ void creerTypeEntite(){
         1, //pv de base
         3, //vit de deplacement
         0, //vitesse d'attaque
-        "venin",//nom, //nom de l'entité
-        "sprites/entite/venin/crachat.png",//chemin, //chemin vers les sprites
-        NULL, //SDL_Texture* sprites non initialisé !!!
+        "venin",//nom de l'entité
+        "sprites/entite/venin/crachat.png",//chemin vers les sprites
+        NULL, //SDL_Texture* sprites non initialisé !
         tmp, //Tableau de nombre d'animations par etat
         1, //nombre de dégats qu'il inflige
-        hittmp, //hitbox de l'entité (hauteur,largeur)
-        1,
+        hittmp, //hitbox de l'entité (x,y,largeur,hauteur)
+        1, //Nombre de rectangles d'hitbox différents pour l'entité
         {6,7}, //taille sprites
         FALSE, //Passe à travers les entités
         FALSE, //Passe à travers les blocs*
-        0,
+        0, //Champ de vision
         0, //N'attend pas avant de changer d'animation
         compVenin //comportement à rajouter avec un la fonction (pointeur sur la fonction)
     };
@@ -947,6 +949,7 @@ type_monstre_t* obtenirTypesEntite(){
  * @param id id correspondant au type de l'entite
  * @param s pointeur sur la structure salle où trouver la liste
  * @param pos la position de l'entite (en cases)
+ * @param p personnage (utile pour contrôler l'inventaire)
 */
 static void creerEntite(idEnt_t id, salle_t* s, position_t pos, personnage_t* p){
     monstre_t* e = malloc(sizeof(monstre_t));
@@ -1034,6 +1037,8 @@ int nettoyerSalle(salle_t** salle){
  *
  * @param nomFichier chaîne de caractères correspondant au nom du fichier à lire
  * @param salle pointeur du pointeur de la structure salle à remplir avec la lecture
+ * @param perso le personnage à inclure dans la salle
+ *
  * @return 0 si tout s'est bien déroulé
 */
 int lireSalle(char* nomFichier, salle_t** salle, personnage_t* perso){
@@ -1081,7 +1086,7 @@ int lireSalle(char* nomFichier, salle_t** salle, personnage_t* perso){
     //Remplissage matrice
     for(int i = 0; i < lon*larg; i++){
         fscanf(monDoc, "%d", &val);
-        //gestion des entités !!!
+        //gestion des entités !
         if(val < 0 && val >= -NBTYPEMONSTRE){
             creerEntite(val,*salle, (position_t){i%lon,i/lon}, perso);
             (*salle)->mat[i/lon][i%lon] = 0;

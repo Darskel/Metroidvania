@@ -3,7 +3,7 @@
  * \brief Header pour la librairie de fonctions pour des listes de \a monstre_t ou \a porte_t
  * \author Thomas DIDIER L2 Info Le Mans
  * \version 2.0
- * \date 13/02/2020
+ * \date 17/05/2020
 */
 
 #ifndef LISTE_INCLUDED

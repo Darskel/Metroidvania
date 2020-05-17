@@ -7,7 +7,7 @@
  * \brief Librairie de fonctions pour des listes de \a monstre_t ou \a porte_t
  * \author Thomas DIDIER L2 Info Le Mans
  * \version 2.0
- * \date 13/02/2020
+ * \date 17/05/2020
 */
 
 /**
@@ -137,8 +137,9 @@ void modifElm(liste_t *maListe, void *v){
 /**
  * \brief Ote l'élément courant de la liste
  *
- * @param maListe liste dont il faut oter l'élément courant
-*/
+ * @param maListe adresse vers la liste où supprimer l'élément
+ * @param delete le pointeur sur la fonction utilisée pour supprimer l'élément de la liste
+*/'
 void oterElm(liste_t *maListe, void (*delete)(void**)){
     if(!horsListe(maListe)){
         maListe->ec->pred->succ = maListe->ec->succ;
@@ -194,6 +195,7 @@ void ajoutGauche(liste_t *maListe, void *v){
  * \details La fonction met aussi la valeur du pointeur de la liste à NULL
  *
  * @param maListe adresse vers la liste à supprimer
+ * @param delete le pointeur sur la fonction utilisée pour supprimer les éléments de la liste
 */
 void supListe(liste_t **maListe, void (*delete)(void**)){
     enQueue(*maListe);
@@ -205,6 +207,11 @@ void supListe(liste_t **maListe, void (*delete)(void**)){
     (*maListe) = NULL;
 }
 
+/**
+ * \brief Suppression d'une porte
+ *
+ * @param m pointeur sur une porte
+*/
 static void delPorte(porte_t** p){
     free((*p)->salleSuivante);
     free((*p)->listeSprites);
@@ -212,15 +219,30 @@ static void delPorte(porte_t** p){
     *p = NULL;
 }
 
+/**
+ * \brief Encapsulation de delPorte
+ *
+ * @param m adresse d'une porte
+*/
 void supPorte(void** p){
     delPorte((porte_t**)p);
 }
 
+/**
+ * \brief Suppression d'un monstre
+ *
+ * @param m pointeur sur un monstre
+*/
 static void delMonstre(monstre_t** m){
     free(*m);
     *m = NULL;
 }
 
+/**
+ * \brief Encapsulation de delMonstre
+ *
+ * @param m adresse d'un monstre
+*/
 void supMonstre(void** m){
     delMonstre((monstre_t**)m);
 }

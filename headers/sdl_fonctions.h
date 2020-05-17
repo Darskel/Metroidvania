@@ -21,12 +21,12 @@
  * \brief Header pour la librairie de fonctions et les constantes liées à l'usage de la SDL2
  * \author Marie-Nina MUNAR L2 Info Le Mans
  * \version 4.0
- * \date 06/04/2020
+ * \date 17/05/2020
 */
 
-#define NBSOUNDS 9
-Mix_Chunk * EffetsSonores[NBSOUNDS];
-float pourcentageVol;
+#define NBSOUNDS 9 /** Nombre de sons différents*/
+Mix_Chunk * EffetsSonores[NBSOUNDS]; /**Tableau en variable globale des effets sonores du jeu */
+float pourcentageVol; /** Pourcentage de volume de la musique (en variable globale)*/
 
 void initialiserChunks(void);
 void detruireChunks(void);

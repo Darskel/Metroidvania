@@ -10,13 +10,13 @@
 /**
  * \file source.h
  * \brief Header et constantes des fonctions de lecture d'une salle
- * \author Thomas DIDIER L2 Info Le Mans
- * \version 1.1
- * \date 06/04/2020
+ * \author Thomas DIDIER & Marie-Nina MUNAR L2 Info Le Mans
+ * \version 1.2
+ * \date 17/05/2020
 */
 
-#define NBTYPEMONSTRE 24
-type_monstre_t typesMonstre[NBTYPEMONSTRE];
+#define NBTYPEMONSTRE 24 /** Nombre de type de monstres */
+type_monstre_t typesMonstre[NBTYPEMONSTRE]; /** Tableau en variable globale des types de monstres*/
 
 //char* chercherSprite(int, char*);
 

@@ -11,28 +11,12 @@
 
 #endif
 
-#ifndef SYSTEM_INCLUDED
-#define SYSTEM_INCLUDED
-
-    #if defined(_WIN32)
-        #define PAUSE system("PAUSE");
-        #define CLEAR system("CLS");
-    #elif defined(__unix)
-        #define PAUSE system("read -rsp $'Press any key to continue...\n' -n 1"); //Peut ne pas fonctionner parfois (PC de l'université par exemple)
-        #define CLEAR system("clear");
-    #else
-        #define PAUSE
-        #define CLEAR
-    #endif
-
-#endif
-
 /**
  * \file structs.h
  * \brief Ensemble de structures utilisées dans le projets
- * \author Thomas DIDIER Marie-Nina MUNAR L2 Info Le Mans
- * \version 2.2
- * \date 07/04/2020
+ * \author  Marie-Nina MUNAR & Thomas DIDIER L2 Info Le Mans
+ * \version 3.0
+ * \date 17/05/2020
 */
 
 #ifndef STRUCTS_INCLUDED
@@ -41,84 +25,80 @@
 #define LEFT 0
 #define RIGHT 1
 
-#define TAILLE_INVENTAIRE 8
-#define INVENTAIRESIZE 10
+#define TAILLE_INVENTAIRE 8 /** Nombre d'item dans l'inventaire du joueur */
+#define INVENTAIRESIZE 10 /** Taille de l'inventaire (hauteur) en pixel */
 #define INVENTAIREPATH "./sprites/inventaire/tileset.png"
-#define INVENTAIRETIME 60
+#define INVENTAIRETIME 60 /**Temps d'affichage de l'inventaire après arrêt d'appui du bouton */
 
-#define VOLUMEBOXSIZE 28
-#define VOLUMETIME 60
+#define VOLUMEBOXSIZE 28 /**Taille du rectangle contenant le volume (en pixels) */
+#define VOLUMETIME 60 /**Temps d'affichage du volume après arrêt d'appui du bouton */
 
 #define NOM_JEU "Diskosieni"
 
 //Path :
-#define TAILLEPATHFICHIER 50
+#define TAILLEPATHFICHIER 75 /**Taille maximale du path de chaque fichier*/
 #define PLAYERSPRITESPATH "./sprites/entite/joueur/tileset.png"
 #define RENARDSPRITESPATH "./sprites/entite/renard/tileset.png"
 #define TILESETPATH "./sprites/bloc/tileset.png"
 #define DIRBG "./sprites/salles/"
 
 //Hauteur et largeur en pixels :
-#define TAILLEBLOC 8
-#define HAUTEURPORTE 36
-#define LARGEURPORTE 13
+#define TAILLEBLOC 8 /**Taille en pixel des blocs*/
+#define HAUTEURPORTE 36 /**Hauteur en pixel d'une porte*/
+#define LARGEURPORTE 13 /**Largeur en pixel d'une porte*/
 
-#define LARGEURSPRITERENARD 24
-#define HAUTEURSPRITERENARD 13
+#define LARGEURSPRITERENARD 24 /**Largeur en pixel du renard*/
+#define HAUTEURSPRITERENARD 13 /**Hauteur en pixel du renard*/
 
-#define HAUTEURSPRITEPERS 33
-#define LARGEURSPRITEPERS 25
+#define HAUTEURSPRITEPERS 33 /**Hauteur en pixel du personnage*/
+#define LARGEURSPRITEPERS 25 /**Largeur en pixel du personnage*/
 
-#define LARGEURSPRITEPERSATTACK 30
+#define LARGEURSPRITEPERSATTACK 30 /**Largeur en pixel du personnage*/
 
-#define HAUTEURHITBOXPERS 32
-#define LARGEURHITBOXPERS 13
+#define HAUTEURHITBOXPERS 32 /**Hauteur en pixel de la hitbox du personnage*/
+#define LARGEURHITBOXPERS 13 /**Largeur en pixel de la hitbox du personnage*/
 
-#define HAUTEURHITBOXREN 12
-#define LARGEURHITBOXREN 24
+#define HAUTEURHITBOXREN 12 /**Hauteur en pixel de la hitbox du renard*/
+#define LARGEURHITBOXREN 24 /**Largeur en pixel de la hitbox du renard*/
 
-#define OFFSETHITBOXH 6 //Différence de x (en pixel) entre le début du sprite et le début de l'hitbox
-#define OFFSETHITBOXR 0
+#define OFFSETHITBOXH 6 /**Différence de x (en pixel) entre le début du sprite et le début de l'hitbox */
+#define OFFSETHITBOXR 0 /**Différence de x (en pixel) entre le début du sprite et le début de l'hitbox du renard */
 
 //Vitesses en pixel par secondes :
-#define VITDEPPERS 1
-#define VITSAUTPERS 2
-#define VITCHUTEPERS 1
-#define VITATTACKPERS 30
+#define VITDEPPERS 1 /**Vitesse de déplacement du personnage en pixel par tick*/
+#define VITSAUTPERS 2 /**Vitesse de saut du personnage en pixel par tick*/
+#define VITCHUTEPERS 1 /**Vitesse de chute du personnage en pixel par tick*/
+#define VITATTACKPERS 30 /**Vitesse d'attaque' du personnage en pixel par tick*/
 
-#define JPCD 4 //Délai avant de pouvoir de nouveau sauter
+#define JPCD 4 /**Délai avant de pouvoir de nouveau sauter */
 
-#define NBPXSAUT 5*TAILLEBLOC //Taille d'un saut en pixel
+#define NBPXSAUT 5*TAILLEBLOC /**Taille d'un saut en pixel */
 
-#define ZONEMORTE 5000 //Zone morte de la manette
+#define ZONEMORTE 5000 /**Zone morte de la manette */
 
-//Fichier du niveau de départ :
-#define NIVEAUTXT "salle_yourte.txt"
+#define NIVEAUTXT "salle_yourte.txt" /**Fichier du niveau de départ*/
 
-#define FRAMEDELAY 17 //Correspond à du 59fps
+#define FRAMEDELAY 17 /**Correspond à du 59fps */
 
-#define TAILLEKONAMI 11 //NB d'inputs du Konami code
-#define KONAMICODE "uuddlrlrbas"
+#define TAILLEKONAMI 11 /**NB d'inputs du Konami code */
+#define KONAMICODE "uuddlrlrbas" /**Inputs du Konami code */
 
-#define NBBLOCSTILESET 60
-#define NBLOCERREUR 49
+#define NBBLOCSTILESET 60 /**Nombre de blocs du tileset de blocs*/
+#define NBLOCERREUR 49 /**Indice du bloc d'erreur de la tileset*/
 
-#define TAILLEBGMENUW 1920
-#define TAILLEBGMENUH 1080
+#define COEURDROPRATE 10 /**Pourcentage de probabilité de drop d'un coeur*/
 
-#define COEURDROPRATE 10
+#define PVMAX 4 /**Points de vie maximum du joueur*/
+#define TEMPINV 60 /**Durée d'invincibilité du joueur après avoir été touché*/
+#define FREQCLIGN 2 /**Fréquence de clignotement lors de l'invincibilité*/
+#define INVUDELAY 6 /**Delai de l'invulnérabilité*/
 
-#define PVMAX 5
-#define TEMPINV 60
-#define FREQCLIGN 2
-#define INVUDELAY 6
+#define FONTSIZE 30 /**Taille de la police lors de la création du texte*/
 
-#define FONTSIZE 30
+#define NBETATSBOUTONS 4 /**Nombre d'états différents des boutons de menu*/
+#define NBETATS 5 /**Nombre d'états différents des entités/joueurs */
 
-#define NBETATSBOUTONS 4
-#define NBETATS 5
-
-#define ANIMDELAYMENU 20
+#define ANIMDELAYMENU 20 /**Delai de changement d'états pour les boutons*/
 
 #define PULSARWAV "audio/Pulsar.wav"
 #define BEGINWAV "audio/Begin.wav"
@@ -126,8 +106,8 @@
 #define FUTURISTICWAV "audio/Futuristic.wav"
 #define ENDLESSPAINWAV "audio/EndlessPain.wav"
 #define LONGAWAYWAV "audio/LongAway.wav"
-#define DEFAULTVOLUME 0.2
-#define NBCHANNELS 20 //Nombre de sons jouables en même temps
+#define DEFAULTVOLUME 0.2 /**Volume par défaut de la musique*/
+#define NBCHANNELS 20 /**Nombre de sons jouables en même temps */
 
 
 /*
@@ -183,16 +163,20 @@ typedef enum idEnt_e{
     CLEBLEUE,       /**< clé bleue = -1 */
 } idEnt_t;
 
+/**
+ * \enum idSounds_e
+ * \brief Id des sons produits par le jeu
+*/
 typedef enum idSounds_e{
-  SOUND_TOUCHE, //Son quand le personnage est touché
-  SOUND_ARC, //Son quand le personnage tire à l'arc
-  SOUND_SERPENT, //Son quand le serpent rose crache
-  SOUND_SINGE, //Son quand le singe crie
-  SOUND_VIFPLUME, //Son quand le vifplume crie
-  SOUND_MURGLACE, //Son quand le mur de glace fond
-  SOUND_DOOR, //Son quand une porte s'ouvre
-  SOUND_ITEM, //Son quand on ramasse un item
-  SOUND_MENU //Son quand on valide un bouton dans le menu
+  SOUND_TOUCHE, /**Son quand le personnage est touché */
+  SOUND_ARC, /**Son quand le personnage tire à l'arc*/
+  SOUND_SERPENT, /**Son quand le serpent rose crache*/
+  SOUND_SINGE, /**Son quand le singe crie*/
+  SOUND_VIFPLUME, /**Son quand le vifplume crie*/
+  SOUND_MURGLACE, /**Son quand le mur de glace fond*/
+  SOUND_DOOR, /**Son quand une porte s'ouvre*/
+  SOUND_ITEM, /**Son quand on ramasse un item*/
+  SOUND_MENU /**Son quand on valide un bouton dans le menu*/
 } idSounds_t;
 
 
@@ -237,7 +221,7 @@ typedef enum boolean_e{
 
 /**
  * \enum etat_e
- * \brief Nom des différents états possibles du personnage (utiles pour l'animation de sprites)
+ * \brief Nom des différents états possibles du personnage et des entités (utiles pour l'animation de sprites et la gestion des déplacements et des hitbox)
 */
 typedef enum etat_e{
     IDLE, /**< Etat immobile */
@@ -249,13 +233,12 @@ typedef enum etat_e{
 
 /**
  * \struct salle_s
- * \brief Structure représentant les salles
+ * \brief Structure représentant les salles et leur contenu
 */
 typedef struct salle_s{
     char * nomFichier; /**< Nom du fichier qui a généré la salle (utile pour les sauvegardes) */
-
-    int hauteur; /**< Hauteur de la salle en blocks */
-    int largeur; /**< Longueur de la salle en blocks */
+    int hauteur; /**< Hauteur de la salle en blocs */
+    int largeur; /**< Longueur de la salle en blocs */
     int ** mat; /**< Matrice de positionnement des objets */
     SDL_Texture * background; /**< Image d'arrière-plan de la salle */
     SDL_Texture * tileset; /**< Image qui contient tout les sprites de la tileset associée à la salle */
@@ -269,10 +252,10 @@ typedef struct salle_s{
 
 /**
  * \struct personnage_s
- * \brief Structure représentant le personnage
+ * \brief Structure représentant le personnage et ses caractéristques, contient également une variable de gestion des effets sonores du jeu
 */
 typedef struct personnage_s{
-    int pv; /**< PV(points de vie) actuel du personnage */
+    int pv; /**< PV (points de vie) actuel du personnage */
     boolean_t hit; /**< Indique si le personnage a été touché lors de la frame actuelle */
     int pv_max; /**< PV max du personnage */
     boolean_t kb; /**< Indique si le joueur est en plein knockback */
@@ -288,14 +271,14 @@ typedef struct personnage_s{
     int vit_chute; /**< Vitesse de chute du personnage (pixel par tick) */
     int vit_att; /**< Vitesse d'attaque du personnage (en nombre de frame) */
     position_t pos; /**< Position actuel du personnage (position entière en cases de matrice) */
-    position_t delta; /**< Position en pixel à l'intérieur de la case de matrice */
+    position_t delta; /**< Position en pixel à l'intérieur de la case de matrice (entre 0 et TAILLEBLOC-1) */
     position_t apparition; /**< Position d'apparition (utilisé pour les sauvegardes) */
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du personnage */
-    SDL_Texture * spritesR;
+    SDL_Texture * spritesR; /**Pointeur vers la texture qui contient les sprites du renard */
     SDL_Rect spriteActuel; /**< Indice du sprite actuel en x et y dans la texture */
     SDL_Rect * hitbox; /**< Taille de la hitbox du personnage en pixel */
-    int hitboxActuelle;
-    int nbHitbox;
+    int hitboxActuelle; /** Indice de la hitbox actuellement utilisée (0 pour le personnage et 1 pour le renard) */
+    int nbHitbox; /**Nombre de hitbox du personnage */
     etat_t etat; /**< Etat du personnage (idle/running/jumping/attacking/falling) */
     boolean_t newEtat; /**< Booléen qui signifie qu'un changement d'état vient de s'effectuer */
     boolean_t newItem; /**< Booléen qui signifie que l'on vient de récolter un item */
@@ -304,7 +287,7 @@ typedef struct personnage_s{
     int * vitAnim; /**< Tableau qui contient le delai de changement d'animation pour chaque action du personage */
     char forme; /**< Forme du personnage h = humain, r = renard */
     int inventaire[TAILLE_INVENTAIRE]; /**<Tableau qui contient les informations sur l'inventaire actuel du personnage */
-    SDL_Texture * inventaireTileset;
+    SDL_Texture * inventaireTileset; /**Tileset de l'inventaire*/
     char* nomObj[TAILLE_INVENTAIRE]; /**<Tableau qui contient les noms des objets de l'inventaire */
     unsigned int sounds; /**< Nombre binaire correspondant aux effets sonores à jouer pour la frame en cours */
 } personnage_t;
@@ -324,15 +307,14 @@ typedef struct type_monstre_s{
     SDL_Texture * sprites; /**Pointeur vers la texture qui contient les sprites du monstre */
     int * nbAnim; /**< Tableau qui contient le nombre de sprites d'animation pour chaque action du monstre */
     int degat; /**< Nombre de dégâts faits par le monstre */
-    SDL_Rect * hitbox; /**< Taille de la hitbox de monstre en pixel */
-    int nbHitbox;
+    SDL_Rect * hitbox; /**< Tableau de hitboxs de l'entite (décallage en x, en y, largeur de la hitbox, hauteur de la hitbox) */
+    int nbHitbox; /**Nombre de rectangles d'hitbox différents pour l'entité */
     taille_t tailleSprite; /**< Taille des sprites de monstre en pixel */
     boolean_t passeEntites; /**< Indique si le monstre peut passer à travers les entités (autres monstres/joueur) */
     boolean_t passeBlocs; /**< Indique si le monstre peut passer à travers les blocs */
-    int radius;
+    int radius; /**Nombre correspondant au champ de vision de l'entité */
     int vitesseAnim; /**< Vitesse de l'animation des sprites (plus ce nombre est grand, plus la vitesse est lente (sert à evoSprite comme valeur avant décrémentation)) */
-    //comportement (pointeur sur fonction)
-    void (*comportement)(monstre_t* entite, personnage_t* perso, salle_t* salle);
+    void (*comportement)(monstre_t* entite, personnage_t* perso, salle_t* salle); /** Fonction de comportement (pointeur sur fonction) */
 } type_monstre_t;
 
 /**
@@ -379,14 +361,14 @@ typedef struct porte_s{
 
 
 /**
- * \enum idEnt_e
- * \brief Id des entités présentes dans les fichiers de salle
+ * \enum boutonetat_e
+ * \brief Id des états de boutons
 */
 typedef enum boutonetat_e{
-  RELAXED,
-  HIGHLIGHTED,
-  PRESSED,
-  UNAVAILABLE
+  RELAXED, /**Etat du bouton lorsqu'il n'est pas touché*/
+  HIGHLIGHTED, /**Etat du bouton lorsqu'il est survolé*/
+  PRESSED, /**Etat du bouton lorsqu'il est pressé*/
+  UNAVAILABLE /**Etat du bouton lorsqu'il n'est pas disponible*/
 } boutonetat_t;
 
 
@@ -395,11 +377,11 @@ typedef enum boutonetat_e{
  * \brief Structure représentant un bouton d'un menu
 */
 typedef struct menu_bouton_s{
-  int id;
-  char * etiquette;
-  boutonetat_t etat;
-  SDL_Texture ** texture;
-  SDL_Rect emplacement;
+  int id; /** Id du bouton */
+  char * etiquette; /** Etiquette du bouton */
+  boutonetat_t etat; /** Etat du bouton */
+  SDL_Texture ** texture; /** Texture du bouton */
+  SDL_Rect emplacement; /** Emplacement du bouton */
 } menu_bouton_t;
 
 /**
@@ -407,10 +389,10 @@ typedef struct menu_bouton_s{
  * \brief Structure représentant un texte dans un menu
 */
 typedef struct menu_texte_s{
-  int id;
-  char * etiquette;
-  SDL_Texture * texture;
-  SDL_Rect emplacement;
+  int id; /** Id du texte */
+  char * etiquette; /** Etiquette du texte */
+  SDL_Texture * texture; /** Texture du texte */
+  SDL_Rect emplacement; /** Emplacement du texte */
 } menu_texte_t;
 
 /**
@@ -418,18 +400,18 @@ typedef struct menu_texte_s{
  * \brief Structure représentant un menu
 */
 typedef struct menu_s{
-  char * etiquette;
-  menu_bouton_t * tabBoutons;
-  int nbBoutons;
-  int idBoutonChoisi;
-  int idBoutonValide;
-  SDL_Texture * fond;
-  int nbSprites;
-  SDL_Rect spriteActuel;
-  int animDelay;
-  int etatanim;
-  menu_texte_t * tabTextes;
-  int nbTextes;
+  char * etiquette; /** Etiquette du menu */
+  menu_bouton_t * tabBoutons; /** Tableau de boutons */
+  int nbBoutons; /** Nombre de boutons dans le menu */
+  int idBoutonChoisi; /** Id du bouton actuellement choisi */
+  int idBoutonValide; /** id du bouton actuellement validé */
+  SDL_Texture * fond; /** Texture du fond du menu */
+  int nbSprites; /** Nombre de sprites du fond du menu */
+  SDL_Rect spriteActuel; /** Sprite actuellement affiché au fond du menu */
+  int animDelay; /** Delai entre le changement d'animation du menu */
+  int etatanim; /** Nombre qui va de 0 à animDelay */
+  menu_texte_t * tabTextes; /** Tableau des textes du menu */
+  int nbTextes; /** Nombre de textes du menu*/
 } menu_t;
 
 #endif

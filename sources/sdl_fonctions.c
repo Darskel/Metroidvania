@@ -1133,10 +1133,12 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
             case SDLK_a:
               inventaireAffiche=INVENTAIRETIME;
               break;
+            case SDLK_PAGEUP:
             case SDLK_KP_PLUS:
               MonterSon();
               volumeAffiche=VOLUMETIME;
               break;
+            case SDLK_PAGEDOWN:
             case SDLK_KP_MINUS:
               baisserSon();
               volumeAffiche=VOLUMETIME;
@@ -1170,6 +1172,13 @@ boolean_t jeu(SDL_Window * fenetre, SDL_Renderer ** renderer, SDL_DisplayMode mo
               if(inventaireAffiche==INVENTAIRETIME)
                 inventaireAffiche--;
               break;
+            case 2 : //bouton X manette XBOX
+              transformationR=TRUE;
+              break;
+            case 6 : //bouton select manette XBOX
+              quitter=TRUE;
+              break;
+
           }
           break;
         case SDL_JOYAXISMOTION :
@@ -1669,10 +1678,12 @@ boolean_t menuConfirmation(SDL_Renderer * renderer, char * question, int tailleT
               break;
             case SDLK_e:
               break;
+            case SDLK_PAGEUP:
             case SDLK_KP_PLUS:
               MonterSon();
               volumeAffiche = VOLUMETIME;
               break;
+            case SDLK_PAGEDOWN:
             case SDLK_KP_MINUS:
               baisserSon();
               volumeAffiche = VOLUMETIME;
@@ -1704,6 +1715,10 @@ boolean_t menuConfirmation(SDL_Renderer * renderer, char * question, int tailleT
             case 0 : //bouton A manette XBOX
             case 7 : //bouton Start manette XBOX
               clique=2;
+              break;
+            case 6 : //bouton Select manette XBOX
+              quitter=FALSE;
+              fin=TRUE;
               break;
             }
           break;
@@ -1882,10 +1897,12 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
           break;
         case SDL_KEYDOWN :
           switch(event.key.keysym.sym){
+            case SDLK_PAGEUP:
             case SDLK_KP_PLUS:
               MonterSon();
               volumeAffiche=VOLUMETIME;
               break;
+            case SDLK_PAGEDOWN:
             case SDLK_KP_MINUS:
               baisserSon();
               volumeAffiche=VOLUMETIME;
@@ -1894,6 +1911,7 @@ void gameover(SDL_Window * fenetre, SDL_Renderer * renderer, SDL_DisplayMode mod
         case SDL_JOYBUTTONUP:
           switch(event.jbutton.button){
             case 0 : //bouton A manette XBOX
+            case 6 : //bouton Select de la manette XBOX
             case 7 : //bouton Start manette XBOX
               fin = TRUE;
               break;

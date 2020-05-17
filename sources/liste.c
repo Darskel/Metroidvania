@@ -139,7 +139,7 @@ void modifElm(liste_t *maListe, void *v){
  *
  * @param maListe adresse vers la liste où supprimer l'élément
  * @param delete le pointeur sur la fonction utilisée pour supprimer l'élément de la liste
-*/'
+*/
 void oterElm(liste_t *maListe, void (*delete)(void**)){
     if(!horsListe(maListe)){
         maListe->ec->pred->succ = maListe->ec->succ;
